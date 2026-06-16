@@ -1,6 +1,13 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Datta Sable",
+  description: "Privacy Policy for dattasable.com — how we collect, use, and protect your personal data, including Google AdSense cookie disclosure.",
+  alternates: { canonical: 'https://dattasable.com/privacy' },
+};
 
 export default function PrivacyPage() {
   const lastUpdated = "April 29, 2026";
@@ -62,9 +69,16 @@ export default function PrivacyPage() {
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>6. Advertising & Cookies</h2>
-              <p>This website may use Google AdSense to serve advertisements. Google, as a third-party vendor, uses cookies to serve ads on our site. Google&apos;s use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our site and/or other sites on the Internet.</p>
-              <p style={{ marginTop: '1rem' }}>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google Ads Settings</a>. Alternatively, you can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>www.aboutads.info</a>.</p>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>6. Advertising & Cookies (Google AdSense)</h2>
+              <p>This website uses Google AdSense, a third-party advertising service provided by Google LLC. Google AdSense uses cookies, including the DoubleClick DART cookie, to serve advertisements to visitors based on their visit to this site and other websites on the Internet.</p>
+              <p style={{ marginTop: '1rem' }}>Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visit to our site and/or other sites on the Internet. These cookies allow Google and its partners to show you relevant ads across the web.</p>
+              <p style={{ marginTop: '1rem' }}>You may opt out of personalized advertising in the following ways:</p>
+              <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
+                <li>Visit <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google Ads Settings</a></li>
+                <li>Visit <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>www.aboutads.info</a></li>
+                <li>Visit <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google&apos;s Privacy Policy</a></li>
+              </ul>
+              <p style={{ marginTop: '1rem' }}>By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.</p>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>

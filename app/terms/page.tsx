@@ -1,6 +1,13 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Datta Sable",
+  description: "Terms of Service for dattasable.com — rules governing use of this website, dashboards, and content.",
+  alternates: { canonical: 'https://dattasable.com/terms' },
+};
 
 export default function TermsPage() {
   const lastUpdated = "April 29, 2026";

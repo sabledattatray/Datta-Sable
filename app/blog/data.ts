@@ -1,5 +1,141 @@
 export const posts = [
   {
+    id: 'nextjs-vercel-cloudflare-free-stack-2026',
+    slug: 'nextjs-vercel-cloudflare-free-stack',
+    title: 'Hosting Next.js on Vercel behind Cloudflare: The Ultimate Zero-Dollar Production Stack',
+    category: 'Architecture',
+    excerpt: 'Learn how to architect a production-grade, zero-dollar hosting stack for Next.js using Vercel Free and Cloudflare Free. Master DNS caching, SSL configurations, and DDoS protection with ₹0/month.',
+    content: `
+      <div class="featured-snippet">
+        <p>For personal portfolios, blogs, and SaaS landing pages, paying for infrastructure is a thing of the past. By combining the serverless deployment velocity of <strong>Vercel Free</strong> with the enterprise-grade caching, security, and edge performance of <strong>Cloudflare Free</strong>, you can construct a resilient, high-speed <strong>zero-dollar production stack</strong> that comfortably handles tens of thousands of monthly visitors for exactly ₹0/month.</p>
+      </div>
+
+      <h2>The Architecture: Vercel and Cloudflare in Harmony</h2>
+      <p>A common mistake developers make when deploying Next.js is choosing between Vercel and Cloudflare. The truth is, they are not mutually exclusive—they work best when combined. Vercel acts as your <strong>application backend and deployment orchestrator</strong>, while Cloudflare serves as your <strong>global edge protection and caching layer</strong>.</p>
+      
+      <p>This is the request routing topology for this architecture:</p>
+
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+        <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+          flowchart LR
+            User([Visitor Browser]) -->|HTTPS Request| CF{Cloudflare Edge}
+            
+            subgraph Cloudflare [Cloudflare Free Layer]
+              CF -->|1. DNS Resolution| DNS[Cloudflare DNS]
+              CF -->|2. Threat Shield| Security[WAF / DDoS / Bot Shield]
+              CF -->|3. Edge Cache Check| Cache{Cache Hit?}
+            end
+            
+            subgraph Vercel [Vercel Free Origin]
+              Origin[Vercel Serverless / Edge Runtime]
+            end
+            
+            Cache -->|Yes &lt; 20ms| User
+            Cache -->|No / Bypass| Origin
+            Origin -->|SSR / ISR / Assets| Cache
+            Origin <--> DB[(Neon / Supabase)]
+            
+            style CF fill:#f38020,stroke:#000000,color:#ffffff
+            style Origin fill:#000000,stroke:#000000,color:#ffffff
+            style DB fill:#111111,stroke:#00e599,stroke-width:2px,color:#ffffff
+        </pre>
+      </div>
+
+      <h2>Why Vercel for Next.js?</h2>
+      <p>While you can run Next.js entirely on Cloudflare Pages/Workers, deploying to Vercel offers distinct advantages:</p>
+      <ul>
+        <li><strong>Native Compatibility:</strong> Next.js is maintained by Vercel. New features, server components, and performance upgrades work instantly without edge compatibility layers or custom configuration.</li>
+        <li><strong>One-Click Git Workflows:</strong> Push to GitHub and get immediate production deployments.</li>
+        <li><strong>High-Fidelity Preview Environments:</strong> Every pull request generates a unique preview URL, enabling seamless testing before publishing.</li>
+        <li><strong>Less Troubleshooting:</strong> Bypassing the Edge Runtime limitations (such as missing Node.js APIs) avoids debugging edge polyfill errors during builds.</li>
+      </ul>
+
+      <h2>The Cloudflare Edge Layer</h2>
+      <p>By putting Cloudflare in front of Vercel, you unlock enterprise security and caching capabilities on Vercel's free tier:</p>
+      <ul>
+        <li><strong>DNS Resolution:</strong> Cloudflare runs the fastest global DNS network, reducing time-to-first-byte (TTFB).</li>
+        <li><strong>DDoS & Bot Shield:</strong> Instantly blocks layer 7 attacks, scraping scripts, and spam bots before they hit Vercel, protecting your serverless execution limits.</li>
+        <li><strong>Edge Caching:</strong> Cache static HTML pages and images closer to your visitors, meaning Vercel serverless functions are only called on cache misses.</li>
+      </ul>
+
+      <h2>The Recommended Free Stack</h2>
+      <p>For a developer website or high-authority blog like <strong>dattasable.com</strong>, this setup handles traffic spikes gracefully:</p>
+      
+      <div style="overflow-x: auto; margin: 2rem 0;">
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border);">
+          <thead>
+            <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
+              <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Layer</th>
+              <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Service Provider</th>
+              <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Free Tier Capacity</th>
+              <th style="padding: 12px; text-align: left;">Key Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Domain DNS & CDN</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Cloudflare (Free)</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Unlimited queries & bandwidth</td>
+              <td style="padding: 12px;">DNS resolution, DDoS protection, edge caching, and SSL termination.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Hosting & Serverless</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Vercel (Hobby)</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">100 GB bandwidth / month</td>
+              <td style="padding: 12px;">Next.js serverless orchestration, preview builds, and ISR generation.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Database</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Neon / Supabase (Free)</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">500 MB - 1 GB storage</td>
+              <td style="padding: 12px;">Serverless PostgreSQL storage for CMS content, users, and logs.</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Source Control</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">GitHub (Free)</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Unlimited private repositories</td>
+              <td style="padding: 12px;">Version control and automated Vercel CI/CD triggers.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Step-by-Step Configuration Blueprint</h2>
+      
+      <h3>1. Point Domain to Cloudflare</h3>
+      <p>Sign up for a free Cloudflare account, add your domain, and copy the assigned nameservers. Head to your domain registrar (e.g., Namecheap, GoDaddy) and replace the default nameservers with Cloudflare's.</p>
+
+      <h3>2. Configure Vercel Integration</h3>
+      <p>In your Vercel project, go to <strong>Settings > Domains</strong>. Add your custom domain (e.g., <code>dattasable.com</code>). Vercel will give you a CNAME target (e.g., <code>cname.vercel-dns.com</code>) or an A record IP address.</p>
+
+      <h3>3. Configure Cloudflare DNS Rules</h3>
+      <p>Inside the Cloudflare dashboard under **DNS**, create a **CNAME record** pointing your subdomain (or root) to Vercel's target:</p>
+      <ul>
+        <li><strong>Type:</strong> CNAME</li>
+        <li><strong>Name:</strong> @ (or www)</li>
+        <li><strong>Target:</strong> cname.vercel-dns.com</li>
+        <li><strong>Proxy Status:</strong> Proxied (Orange Cloud enabled)</li>
+      </ul>
+
+      <div style="background: var(--surface2); padding: 1.2rem; border-left: 4px solid var(--accent); margin: 1.5rem 0; border-radius: 0 4px 4px 0;">
+        <strong>⚠️ CRITICAL SSL SETTING (Redirect Loop Warning):</strong>
+        <p>In Cloudflare under <strong>SSL/TLS</strong>, ensure your encryption mode is set to <strong>Full</strong> or <strong>Full (Strict)</strong>. If it is set to "Flexible," Cloudflare will request your Vercel origin using HTTP. Vercel redirects HTTP to HTTPS automatically, creating an infinite redirect loop (ERR_TOO_MANY_REDIRECTS).</p>
+      </div>
+
+      <h3>4. Setup Cache Rules to Save Vercel Bandwidth</h3>
+      <p>To ensure Cloudflare caches your content effectively and stays within Vercel's 100 GB free limit, navigate to <strong>Caching > Cache Rules</strong> on Cloudflare and create a rule to cache static resources (like images, CSS, and JS) and pages with cache-control headers.</p>
+
+      <h2>Conclusion: Enterprise Capabilities, Zero Cost</h2>
+      <p>By routing your traffic through Cloudflare before it hits Vercel, you get the absolute best of both worlds. Vercel manages Next.js server actions, API routes, and builds smoothly, while Cloudflare intercepts and caches requests at the edge. For a personal brand, agency, or high-performance blog, this setup represents the gold standard of architectural value.</p>
+    `,
+    readTime: 8,
+    date: 'June 16, 2026',
+    color: 'var(--accent)',
+    icon: '⚡',
+    image: '/images/blog/vercel-cloudflare-free-stack.webp',
+    tags: ['Vercel', 'Cloudflare', 'Next.js', 'Web Architecture', 'DevOps']
+  },
+  {
     id: 'microsoft-fabric-architectural-guide-2026',
     slug: 'microsoft-fabric-architectural-guide',
     title: 'The Fabric Architect’s Manifesto: What Microsoft Documentation Won\'t Tell You About Direct Lake, V-Order, and Multi-Engine Conflict Resolution',

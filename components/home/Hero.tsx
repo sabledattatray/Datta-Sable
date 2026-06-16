@@ -1,14 +1,6 @@
-import { Table, Database, BarChart3, Layers, Code2 } from 'lucide-react';
+import { Pen, Code2, BarChart3, Globe, Cpu, Search } from 'lucide-react';
 import HeroInteraction from './HeroInteraction';
 import Image from 'next/image';
-
-function TechLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-4 mb-6" style={{ minHeight: '32px' }}>
-      <div className="label-tech">{children}</div>
-    </div>
-  );
-}
 
 export default function Hero() {
   return (
@@ -25,7 +17,7 @@ export default function Hero() {
         backgroundColor: 'var(--bg)',
       }}
     >
-      {/* Layer 1: Right-Side Visual - Optimized for Server Rendering */}
+      {/* Right-side visual */}
       <div
         id="hero-visual-container"
         className="hidden lg:block absolute top-[45%] right-[1px] -translate-y-1/2 w-[55%] z-0 pointer-events-none overflow-hidden lg:h-[80vh] hero-visual-container"
@@ -33,7 +25,7 @@ export default function Hero() {
         <div className="relative w-full h-full">
           <Image
             src="/hero-bg.webp"
-            alt="Surgical AI Workspace | Creator Intelligence Infrastructure"
+            alt="Datta Sable — Content Creator, Web Developer & Digital Marketing Professional"
             fill
             priority
             quality={60}
@@ -43,84 +35,108 @@ export default function Hero() {
             style={{ objectPosition: 'center top' }}
           />
         </div>
-        <div
-          className="absolute inset-0 z-10 pointer-events-none hero-gradient-overlay"
-        />
-        
+        <div className="absolute inset-0 z-10 pointer-events-none hero-gradient-overlay" />
         <div className="block lg:hidden hero-mobile-fade" />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
-          <div className="mb-8 opacity-60 flex items-center gap-4">
-            <div className="h-[1px] w-8 bg-[var(--accent)]" />
-            <span className="mono text-[11px] uppercase tracking-[0.3em] text-[var(--accent)]">
-              Surgical AI Workspace
+
+          {/* Eyebrow — who I am */}
+          <div className="mb-6 flex items-center gap-3">
+            <div className="h-[1px] w-6 bg-[var(--accent)] flex-shrink-0" />
+            <span className="mono text-[11px] uppercase tracking-[0.2em] text-[var(--accent)] whitespace-nowrap">
+              <span className="lg:hidden">Creator · Dev · Marketing</span>
+              <span className="hidden lg:inline">Content Creator · Web Developer · Digital Marketing</span>
             </span>
           </div>
+
+          {/* H1 — crystal clear identity, passes 5-second test */}
           <h1
-            className="hero-title-inline lg:mt-6"
+            className="hero-title-inline"
             style={{
-              fontSize: 'clamp(2.5rem, 8vw, 64px)',
-              marginBottom: '2rem',
-              display: 'block'
+              fontSize: 'clamp(2.4rem, 7.5vw, 62px)',
+              marginBottom: '1.5rem',
+              display: 'block',
             }}
           >
-            AI Workflow Infrastructure <span className="text-[var(--muted)]">for</span> <span className="hero-title-inline">Creators & Builders</span>
+            Hi, I&apos;m Datta Sable
           </h1>
-          <p style={{ color: 'var(--text)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: 1.6, opacity: 0.8 }}>
-            Build scalable <strong>AI-powered workflows</strong> using structured prompts, system logic, and automation frameworks.
+
+          {/* Sub-headline — what visitors get */}
+          <p style={{
+            color: 'var(--text)',
+            fontSize: 'clamp(1rem, 2.5vw, 1.15rem)',
+            marginBottom: '1.25rem',
+            lineHeight: 1.7,
+            opacity: 0.85,
+          }}>
+            I write tutorials on <strong>AI tools</strong>, <strong>Next.js</strong>,{' '}
+            <strong>SEO</strong>, and <strong>Digital Marketing</strong> — practical guides
+            for creators and developers who want to grow online.
           </p>
-          
-          <div className="p-4 border-l-2 border-[var(--accent)] bg-[var(--surface2)] opacity-80" style={{ marginBottom: '2.625rem' }}>
+
+          {/* Quote block — trust signal */}
+          <div
+            className="border-l-2 border-[var(--accent)] bg-[var(--surface2)]"
+            style={{ padding: '0.875rem 1rem', marginBottom: '2.25rem', opacity: 0.85 }}
+          >
             <p className="mono text-[12px] leading-relaxed">
-              Independent AI workflow architect specializing in automation systems, BI infrastructure, and reliable execution design.
+              Web developer · Data &amp; BI consultant · Based in Mumbai, India —
+              sharing everything I learn about building and growing on the web.
             </p>
           </div>
-          
+
           <HeroInteraction />
 
           <div style={{ height: '2rem' }} />
 
-          {/* Tool Icons */}
+          {/* Topic icons — reflects actual content */}
           <div className="relative w-full overflow-hidden no-scrollbar py-4">
-            <div className="hidden lg:flex items-center gap-x-12">
+            <div className="hidden lg:flex items-center gap-x-10">
               {[
-                { icon: <Table size={18} />, label: 'Excel' },
-                { icon: <Database size={18} />, label: 'SQL' },
-                { icon: <BarChart3 size={18} />, label: 'Power BI' },
-                { icon: <Layers size={18} />, label: 'Tableau' },
-                { icon: <Code2 size={18} />, label: 'Python' },
-              ].map((tool) => (
-                <div key={tool.label} className="flex items-center gap-2">
-                  <div style={{ color: 'var(--accent)' }}>{tool.icon}</div>
-                  <span className="mono text-[12px] text-[var(--text)] uppercase tracking-[0.2em]">{tool.label}</span>
+                { icon: <Pen size={16} />, label: 'AI Tutorials' },
+                { icon: <Code2 size={16} />, label: 'Next.js' },
+                { icon: <Search size={16} />, label: 'SEO' },
+                { icon: <Globe size={16} />, label: 'WordPress' },
+                { icon: <BarChart3 size={16} />, label: 'Power BI' },
+                { icon: <Cpu size={16} />, label: 'Automation' },
+              ].map((topic) => (
+                <div key={topic.label} className="flex items-center gap-2 flex-shrink-0">
+                  <div style={{ color: 'var(--accent)' }}>{topic.icon}</div>
+                  <span className="mono text-[11px] text-[var(--muted)] uppercase tracking-[0.15em]">
+                    {topic.label}
+                  </span>
                 </div>
               ))}
             </div>
 
+            {/* Mobile marquee */}
             <div className="flex lg:hidden overflow-hidden">
               <div className="animate-marquee flex items-center gap-x-8 pr-8">
                 {[
-                  { icon: <Table size={18} />, label: 'Excel' },
-                  { icon: <Database size={18} />, label: 'SQL' },
-                  { icon: <BarChart3 size={18} />, label: 'Power BI' },
-                  { icon: <Layers size={18} />, label: 'Tableau' },
-                  { icon: <Code2 size={18} />, label: 'Python' },
-                  { icon: <Table size={18} />, label: 'Excel' },
-                  { icon: <Database size={18} />, label: 'SQL' },
-                  { icon: <BarChart3 size={18} />, label: 'Power BI' },
-                  { icon: <Layers size={18} />, label: 'Tableau' },
-                  { icon: <Code2 size={18} />, label: 'Python' },
-                ].map((tool, idx) => (
-                  <div key={`${tool.label}-${idx}`} className="flex items-center gap-2 flex-shrink-0">
-                    <div style={{ color: 'var(--accent)' }}>{tool.icon}</div>
-                    <span className="mono text-[12px] text-[var(--text)] uppercase tracking-[0.2em] whitespace-nowrap">{tool.label}</span>
+                  { icon: <Pen size={16} />, label: 'AI Tutorials' },
+                  { icon: <Code2 size={16} />, label: 'Next.js' },
+                  { icon: <Search size={16} />, label: 'SEO' },
+                  { icon: <Globe size={16} />, label: 'WordPress' },
+                  { icon: <BarChart3 size={16} />, label: 'Power BI' },
+                  { icon: <Cpu size={16} />, label: 'Automation' },
+                  { icon: <Pen size={16} />, label: 'AI Tutorials' },
+                  { icon: <Code2 size={16} />, label: 'Next.js' },
+                  { icon: <Search size={16} />, label: 'SEO' },
+                  { icon: <Globe size={16} />, label: 'WordPress' },
+                ].map((topic, idx) => (
+                  <div key={`${topic.label}-${idx}`} className="flex items-center gap-2 flex-shrink-0">
+                    <div style={{ color: 'var(--accent)' }}>{topic.icon}</div>
+                    <span className="mono text-[11px] text-[var(--muted)] uppercase tracking-[0.15em] whitespace-nowrap">
+                      {topic.label}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

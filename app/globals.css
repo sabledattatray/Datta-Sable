@@ -103,39 +103,39 @@ input:-webkit-autofill:active {
 }
 
 :root {
-  --bg: #000000;
-  --surface: #000000;
-  --surface2: #000000;
-  --cta-bg: #070707;
-  --border: #1a1a1a;
+  --bg: #050508;
+  --surface: #0d0d12;
+  --surface2: #14141c;
+  --cta-bg: #09090d;
+  --border: #1f1f2e;
   --accent: #c9f31d;
   --accent2: #b5da1a;
   --accent3: #9fb817;
   --text: #ffffff;
   --muted: #a1a1aa;
-  --tag-bg: #111111;
-  --navbar-bg: rgba(0, 0, 0, 0.98);
-  --hero-overlay-start: #000000;
-  --hero-overlay-mid: rgba(0, 0, 0, 0.75);
-  --hero-overlay-end: rgba(0, 0, 0, 0.3);
-  --grid-color: #111111;
-  --radius: 0px;
+  --tag-bg: #161622;
+  --navbar-bg: rgba(5, 5, 8, 0.85);
+  --hero-overlay-start: #050508;
+  --hero-overlay-mid: rgba(5, 5, 8, 0.85);
+  --hero-overlay-end: rgba(5, 5, 8, 0.4);
+  --grid-color: #12121a;
+  --radius: 12px;
   --grid-size: 100px;
   --crosshair-offset: -20px;
-  --hero-title-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 20%, #00d4ff 40%);
+  --hero-title-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 30%, #00f0ff 70%);
   --hero-title-color: transparent;
-  --btn-primary-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 100%);
+  --btn-primary-bg: linear-gradient(135deg, var(--accent) 0%, #d8ff24 100%);
   --btn-primary-text: #000;
   --hero-img-overlay: transparent; /* Completely clear for all themes */
-  --hero-gradient-color: #000000; /* Black for dark mode */
-  --hero-gradient-solid: 20%;     /* Strong for dark mode */
-  --hero-gradient-end: 85%;       /* Long for dark mode */
-  --hero-mobile-opacity: 0.3;     /* Visible for dark mode */
-  --footer-bg: #000000;
-  --footer-card-bg: #070707;
-  --footer-bottom-bg: #000000;
+  --hero-gradient-color: #050508; /* Dark base color */
+  --hero-gradient-solid: 25%;     /* Solid core */
+  --hero-gradient-end: 90%;       /* Extended gradient */
+  --hero-mobile-opacity: 0.35;    /* Opacity adjustment */
+  --footer-bg: #030305;
+  --footer-card-bg: #08080c;
+  --footer-bottom-bg: #020203;
   --footer-shapes-display: none;                    /* Remove shapes in dark mode */
-  --playstore-bg: #000000;
+  --playstore-bg: #050508;
   --playstore-border: var(--border);
   --playstore-text: #ffffff;
   --footer-ring-1-from: rgba(201, 243, 29, 0.35);   /* Deep dark neon lime glow */
@@ -349,21 +349,36 @@ body {
 
 /* Technical Cards */
 .card {
-  background: var(--bg);
+  background: var(--surface);
   border: 1px solid var(--border);
   position: relative;
-  padding: 2rem;
+  padding: 2.25rem 2rem;
+  border-radius: var(--radius);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: rgba(201, 243, 29, 0.25);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 20px rgba(201, 243, 29, 0.03);
+  transform: translateY(-4px);
 }
 
 .light .card {
   border-color: var(--border) !important;
   border-image: none !important;
   background: #ffffff !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+}
+
+.light .card:hover {
+  border-color: rgba(0, 89, 179, 0.25) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 89, 179, 0.06) !important;
 }
 
 @media (max-width: 640px) {
   .card {
-    padding: 1.25rem 1rem;
+    padding: 1.5rem 1.25rem;
   }
 }
 
@@ -816,6 +831,25 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+/* ── Premium Floating Navbar ── */
+.navbar-scrolled {
+  background: var(--navbar-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 0 0 1px rgba(201, 243, 29, 0.04),
+    0 4px 24px -4px rgba(0, 0, 0, 0.5),
+    0 24px 48px -12px rgba(0, 0, 0, 0.4);
+}
+
+.light .navbar-scrolled {
+  box-shadow:
+    0 4px 24px -4px rgba(0, 0, 0, 0.08),
+    0 2px 8px -2px rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 /* Premium Glossy Header Utility */

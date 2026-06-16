@@ -26,24 +26,21 @@ export default function HeroInteraction() {
       )}
 
       <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4">
-        <Link href="/tools" className="btn-primary w-full sm:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
-           START BUILDING WORKFLOWS
+        <Link href="/blog" className="btn-primary w-full sm:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
+          READ ARTICLES
         </Link>
-        <Link href="/tools/demo" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
-          EXPLORE SYSTEM DEMO
+        <Link href="/about" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
+          ABOUT ME
         </Link>
-        <Link href="/knowledge/architecture" className="btn-minimal w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
-          VIEW ARCHITECTURE →
+        <Link href="/tools" className="btn-minimal w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
+          EXPLORE TOOLS →
         </Link>
       </div>
 
-      {/* Forced Spacing Layer: Ensuring clear separation between CTA and Substance Metrics */}
       <div className="flex items-center gap-3 opacity-60" style={{ marginTop: '3.5rem' }}>
-        <div className="flex -space-x-2">
-          <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-        </div>
+        <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse flex-shrink-0" />
         <p className="text-[10px] mono uppercase tracking-widest">
-          50+ Workflow Experiments • AI Systems Across Content & Analytics • Structured Execution Design
+          AI Tutorials · Next.js · SEO · Digital Marketing · Power BI · Web Dev
         </p>
       </div>
     </>

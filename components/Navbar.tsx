@@ -47,16 +47,20 @@ export default function Navbar() {
       <header 
         className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 flex justify-center ${
           scrolled 
-            ? 'top-4 w-[95%] max-w-[1400px] bg-[var(--navbar-bg)] backdrop-blur-xl py-0 border border-[var(--border)] rounded-2xl' 
-            : 'top-0 w-full bg-transparent py-4 border-b border-transparent'
+            ? 'top-3 w-[calc(100%-2rem)] max-w-[1200px] navbar-scrolled rounded-2xl' 
+            : 'top-0 w-full bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="w-full max-w-[1448px] lg:px-12 relative z-10" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-          <div className="flex items-center justify-between h-14 lg:h-16">
+        {/* Glossy top highlight when scrolled */}
+        {scrolled && (
+          <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+        )}
+        <div className="w-full max-w-[1200px] lg:px-10 relative z-10" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+          <div className="flex items-center justify-between h-14 lg:h-[60px]">
             {/* Logo */}
             <Link href="/" aria-label="Datta Sable - Home" className="flex items-center gap-2 group whitespace-nowrap flex-shrink-0" style={{ textDecoration: 'none' }}>
               <LogoIcon color="var(--accent)" className="w-8 h-8 lg:w-7 lg:h-7 group-hover:rotate-[30deg] transition-transform duration-500" />
-              <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.2rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>
+              <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '1.15rem', color: 'var(--text)', letterSpacing: '-0.02em' }}>
                 Datta Sable
               </span>
             </Link>
@@ -65,15 +69,15 @@ export default function Navbar() {
             {isDesktop && <DesktopNav />}
 
             {/* Mobile Actions */}
-            <div className="xl:hidden flex items-center gap-1">
+            <div className="xl:hidden flex items-center gap-1.5">
               <ThemeToggle />
               {!mobileMenuOpen && (
                 <button
-                  className="text-[var(--text)] p-2 hover:bg-white/5 transition-colors"
+                  className="flex items-center justify-center w-9 h-9 rounded-xl text-[var(--text)] hover:bg-white/5 border border-transparent hover:border-[var(--border)] transition-all duration-300"
                   onClick={() => setMobileMenuOpen(true)}
                   aria-label="Open mobile menu"
                 >
-                  <Menu size={24} />
+                  <Menu size={20} />
                 </button>
               )}
             </div>

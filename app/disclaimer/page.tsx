@@ -1,6 +1,13 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: "Disclaimer | Datta Sable",
+  description: "Legal disclaimer for dattasable.com — professional, external links, and results disclaimers.",
+  alternates: { canonical: 'https://dattasable.com/disclaimer' },
+};
 
 export default function DisclaimerPage() {
   const lastUpdated = "April 30, 2026";
