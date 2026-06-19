@@ -52,11 +52,6 @@ const PRIORITY_READING_LINKS = [
     title: 'Next.js Performance Manifesto',
     href: '/blog/nextjs-15-react-19-performance-manifesto-2026',
     context: 'Web performance'
-  },
-  {
-    title: 'Deep Work Protocol',
-    href: '/blog/deep-work-protocol-technical-focus-2026',
-    context: 'Technical focus'
   }
 ];
 
