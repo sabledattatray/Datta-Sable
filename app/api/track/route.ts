@@ -14,25 +14,29 @@ export async function POST(req: NextRequest) {
     const ipHash = crypto.createHash('sha256').update(ip).digest('hex').substring(0, 16);
 
     // Try to save to database using model or raw SQL fallback
-    if ((prisma as any).pageView) {
-      await (prisma as any).pageView.create({
-        data: {
-          url,
-          referrer,
-          userAgent,
-          ipHash,
-        }
-      });
-    } else {
-      // Fallback: Use raw SQL because the Prisma client is out of sync with the schema
-      const id = 'pv_' + Math.random().toString(36).substring(2, 15);
-      const refVal = referrer || null;
-      await prisma.$executeRaw`INSERT INTO "PageView" (id, url, referrer, "userAgent", "ipHash", "createdAt") VALUES (${id}, ${url}, ${refVal}, ${userAgent}, ${ipHash}, NOW())`;
+    try {
+      if ((prisma as any).pageView) {
+        await (prisma as any).pageView.create({
+          data: {
+            url,
+            referrer,
+            userAgent,
+            ipHash,
+          }
+        });
+      } else {
+        // Fallback: Use raw SQL because the Prisma client is out of sync with the schema
+        const id = 'pv_' + Math.random().toString(36).substring(2, 15);
+        const refVal = referrer || null;
+        await prisma.$executeRaw`INSERT INTO "PageView" (id, url, referrer, "userAgent", "ipHash", "createdAt") VALUES (${id}, ${url}, ${refVal}, ${userAgent}, ${ipHash}, NOW())`;
+      }
+    } catch (dbError) {
+      console.warn('Tracking database write failed (silent fallback):', dbError);
     }
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error('Tracking error:', error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    console.error('Tracking endpoint exception:', error);
+    return NextResponse.json({ success: false, error: error.message }, { status: 200 });
   }
 }
