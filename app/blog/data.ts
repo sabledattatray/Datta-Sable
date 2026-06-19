@@ -151,6 +151,10 @@ export const posts = [
         <li>The <strong>SQL AI Developer (DP-800)</strong> integrates natural language search capabilities using vector embeddings in Azure SQL DB, builds intelligent database agents to alert engineers of supply chain anomalies, and exposes database models to corporate AI applications.</li>
       </ol>
 
+      <div style="background: rgba(201, 243, 29, 0.05); padding: 1.25rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;">
+        <strong>💡 Architect's Insight:</strong> To see how these engineering roles and components align inside a real-world enterprise infrastructure, read our comprehensive guide on the <a href="/blog/microsoft-fabric-medallion-architecture-guide">Microsoft Fabric Medallion Architecture framework</a>.
+      </div>
+
       <h2>Which Certification Should You Choose First?</h2>
       <p>If you are deciding which certification path to embark on, use this step-by-step decision framework to maximize your return on investment:</p>
 
@@ -182,6 +186,10 @@ export const posts = [
     content: `
       <div class="featured-snippet">
         <p>The enterprise data landscape is undergoing a massive shift. With Microsoft Fabric, Power BI, and cloud-native AI integrations dominating modern data stacks, certified expertise has never been in higher demand. Fortunately, Microsoft has just announced a limited-time opportunity to earn a <strong>100% free certification voucher</strong> for their core data, engineering, and AI exams through the <strong>Fabric Data Days 2026</strong> campaign. Here is your step-by-step roadmap to qualify and claim yours before the August deadline.</p>
+      </div>
+
+      <div style="background: rgba(201, 243, 29, 0.05); padding: 1.25rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;">
+        <strong>💡 Path Selection:</strong> Not sure which exam is right for you? Read our detailed, side-by-side <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">DP-600 vs DP-700 vs DP-800 comparative guide</a> to make the right choice before requesting your voucher.
       </div>
 
       <h2>The Opportunity: Why This Campaign Matters</h2>
