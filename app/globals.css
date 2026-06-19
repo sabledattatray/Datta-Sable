@@ -989,6 +989,29 @@ body:has(.admin-layout-root) {
   line-height: 1.8;
 }
 
+/* ── Blog inline links — make them look like real hyperlinks ── */
+.blog-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  cursor: pointer;
+}
+.blog-content a:hover {
+  color: #fff;
+  text-decoration-color: var(--accent);
+}
+.light .blog-content a {
+  color: #0070f3;
+  text-decoration-color: rgba(0, 112, 243, 0.4);
+}
+.light .blog-content a:hover {
+  color: #0050c8;
+  text-decoration-color: #0050c8;
+}
+
 /* Callout Box styling helper */
 .blog-content .callout-box {
   background: rgba(99, 102, 241, 0.06);
