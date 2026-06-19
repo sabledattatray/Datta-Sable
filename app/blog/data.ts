@@ -1371,7 +1371,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
     date: 'May 15, 2026',
     color: 'var(--accent)',
     icon: '🧩',
-    image: '/images/blog/modular_ai_hero.png',
+    image: '/images/blog/modular_ai_hero.webp',
     tags: ['Modular AI', 'Workflow Systems', 'System Architecture', 'Scalability']
   },
   {
@@ -1654,7 +1654,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
     date: 'May 08, 2026',
     color: 'var(--accent)',
     icon: '🌐',
-    image: '/images/blog/web_dev_2026_future.png',
+    image: '/images/blog/web_dev_2026_future.webp',
     tags: ['Next.js 15', 'React 19', 'Server Components', 'Edge Computing', 'AI Agents', 'Performance']
   },
   {
@@ -1691,7 +1691,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
     date: 'May 08, 2026',
     color: 'var(--accent)',
     icon: '🎨',
-    image: '/images/blog/surgical_ui_mastery.png',
+    image: '/images/blog/surgical_ui_mastery.webp',
     tags: ['UI/UX Design', 'Dashboard Engineering', 'Obsidian Theme', 'Data Visualization', 'Framer Motion']
   },
   {
@@ -1800,7 +1800,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
     date: 'May 06, 2026',
     color: 'var(--accent)',
     icon: '🚀',
-    image: '/images/blog/psi_desk_100.png',
+    image: '/images/blog/psi_desk_100.webp',
     tags: ['Website Performance', 'Core Web Vitals', 'Next.js Optimization', 'GTmetrix Guide', 'PageSpeed Insights', 'LCP Optimization', 'TBT Reduction']
   },
   {
@@ -3086,7 +3086,7 @@ FROM production_sales;</code></pre>
     date: 'May 06, 2026',
     color: 'var(--accent)',
     icon: '💾',
-    image: '/images/blog/sql_mastery_hero.png',
+    image: '/images/blog/sql_mastery_hero.webp',
     tags: ['SQL', 'Advanced Analytics', 'Query Optimization', 'Data Architecture']
   },
   {
@@ -3125,7 +3125,7 @@ FROM production_sales;</code></pre>
     date: 'May 06, 2026',
     color: '#00C9F2',
     icon: '🧠',
-    image: '/images/blog/dashboard_psychology_hero.png',
+    image: '/images/blog/dashboard_psychology_hero.webp',
     tags: ['UI/UX', 'Dashboard Design', 'Psychology', 'Data Viz']
   },
   {
@@ -3165,7 +3165,7 @@ def audit_dataset(file_path):
     date: 'May 06, 2026',
     color: '#00d4ff',
     icon: '🐍',
-    image: '/images/blog/python_engineering_hero.png',
+    image: '/images/blog/python_engineering_hero.webp',
     tags: ['Python', 'Data Engineering', 'ETL', 'Automation', 'Big Data']
   },
   {
@@ -3198,7 +3198,7 @@ def audit_dataset(file_path):
     date: 'May 10, 2026',
     color: '#a855f7',
     icon: '🧠',
-    image: '/images/blog/ai_bi_convergence_2026.png',
+    image: '/images/blog/ai_bi_convergence_2026.webp',
     tags: ['Generative AI', 'BI 2026', 'LLMs', 'Conversational Analytics', 'Data Strategy']
   },
   {
@@ -3229,7 +3229,7 @@ def audit_dataset(file_path):
     date: 'May 10, 2026',
     color: '#ef4444',
     icon: '🛡️',
-    image: '/images/blog/cybersecurity_data_vault.png',
+    image: '/images/blog/cybersecurity_data_vault.webp',
     tags: ['Cybersecurity', 'Data Privacy', 'Enterprise Security', 'RLS', 'Encryption']
   },
   {
@@ -3260,7 +3260,7 @@ def audit_dataset(file_path):
     date: 'May 10, 2026',
     color: '#f59e0b',
     icon: '📊',
-    image: '/images/blog/product_manager_roi.png',
+    image: '/images/blog/product_manager_roi.webp',
     tags: ['Product Management', 'ROI', 'Data Strategy', 'KPIs', 'Agile']
   },
   {
@@ -3322,7 +3322,7 @@ def audit_dataset(file_path):
     date: 'May 10, 2026',
     color: '#06b6d4',
     icon: '🎯',
-    image: '/images/blog/growth_marketing_cdp.png',
+    image: '/images/blog/growth_marketing_cdp.webp',
     tags: ['Growth Marketing', 'CDP', 'Personalization', 'SaaS Growth', 'Data-Driven Marketing']
   },
   {
