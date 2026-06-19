@@ -16,7 +16,8 @@ export const posts = [
       <h2>Eligible Certifications: Which Path is Right for You?</h2>
       <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals:</p>
 
-      <div style="overflow-x: auto; margin: 2rem 0;">
+      <!-- Desktop Table View -->
+      <div class="hidden md:block overflow-x-auto my-8">
         <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border);">
           <thead>
             <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
@@ -47,6 +48,48 @@ export const posts = [
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Mobile Card View -->
+      <div class="block md:hidden space-y-4 my-8">
+        <div style="padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(201, 243, 29, 0.1); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid rgba(201, 243, 29, 0.2);">DP-600</span>
+            <span style="font-size: 11px; color: var(--muted); font-family: var(--font-mono);">Analytics Engineer</span>
+          </div>
+          <h4 style="font-family: var(--font-syne); font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem;">Fabric Analytics Engineer Associate</h4>
+          <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.5;"><strong>Target:</strong> Data Analysts, Power BI Developers, Analytics Engineers</p>
+          <div style="border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.75rem;">
+            <strong style="font-size: 0.8rem; color: var(--text);">Core Competencies:</strong>
+            <p style="margin-top: 0.25rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Ingesting and transforming data, implementing lakehouses, data warehousing, semantic modeling (Direct Lake), and optimizing Power BI reports.</p>
+          </div>
+        </div>
+
+        <div style="padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(201, 243, 29, 0.1); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid rgba(201, 243, 29, 0.2);">DP-700</span>
+            <span style="font-size: 11px; color: var(--muted); font-family: var(--font-mono);">Data Engineer</span>
+          </div>
+          <h4 style="font-family: var(--font-syne); font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem;">Fabric Data Engineer Associate</h4>
+          <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.5;"><strong>Target:</strong> Data Engineers, Cloud Architects, ETL Developers</p>
+          <div style="border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.75rem;">
+            <strong style="font-size: 0.8rem; color: var(--text);">Core Competencies:</strong>
+            <p style="margin-top: 0.25rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Designing and building scalable data pipelines, managing compute capacity, scheduling complex notebooks (Spark/SQL), and configuring enterprise security.</p>
+          </div>
+        </div>
+
+        <div style="padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(201, 243, 29, 0.1); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid rgba(201, 243, 29, 0.2);">DP-800</span>
+            <span style="font-size: 11px; color: var(--muted); font-family: var(--font-mono);">SQL AI Developer</span>
+          </div>
+          <h4 style="font-family: var(--font-syne); font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.5rem;">SQL AI Developer Associate</h4>
+          <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.5;"><strong>Target:</strong> SQL Developers, AI Engineers, Database Administrators</p>
+          <div style="border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.75rem;">
+            <strong style="font-size: 0.8rem; color: var(--text);">Core Competencies:</strong>
+            <p style="margin-top: 0.25rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Integrating AI functions inside SQL databases, writing vector queries, configuring semantic search indexes, and deploying intelligent DB agents.</p>
+          </div>
+        </div>
       </div>
 
       <h2>Step-by-Step Registration & Qualification Guide</h2>
