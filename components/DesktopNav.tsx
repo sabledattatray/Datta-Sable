@@ -18,7 +18,7 @@ export default function DesktopNav() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
-    <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
+    <nav className="hidden xl:flex items-center gap-1.5 xl:gap-2.5 2xl:gap-4">
       {navLinks.map((link) => (
         <div 
           key={link.label}
@@ -28,10 +28,10 @@ export default function DesktopNav() {
         >
           <Link
             href={link.href}
-            className={`px-4 py-3 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1.5 ${
+            className={`px-2.5 py-2 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-1 rounded-lg ${
               pathname === link.href || (hovered === link.label && link.mega)
                 ? 'text-[var(--accent)]' 
-                : 'text-[var(--text)] opacity-75 hover:opacity-100'
+                : 'text-[var(--text)] opacity-75 hover:opacity-100 hover:bg-white/[0.03]'
             }`}
             style={{ fontFamily: 'Syne, sans-serif' }}
           >
@@ -102,43 +102,34 @@ export default function DesktopNav() {
         </div>
       ))}
       
-      <div className="ml-4 pl-4 border-l border-[var(--border)] flex items-center gap-4">
+      <div className="ml-2.5 pl-2.5 border-l border-[var(--border)] flex items-center gap-2 xl:gap-3">
         <ThemeToggle />
         {session ? (
-          <div className="flex items-center">
-            <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 group hover:border-[var(--accent)]/20 transition-all">
-              <div className="flex flex-col items-end">
-                <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider leading-none mb-1">{session.user?.name}</span>
-                <span className="text-[7px] text-[var(--accent)] font-mono uppercase opacity-60">
-                  {(session.user as any)?.role || 'USER'}
-                </span>
-              </div>
-              <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[var(--accent)] font-bold text-[10px]">
-                {session.user?.name?.charAt(0).toUpperCase()}
-              </div>
-              <button 
-                onClick={() => signOut()}
-                className="ml-2 p-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors border-l border-white/10 pl-3"
-                title="Sign Out"
-              >
-                <LogOut size={14} />
-              </button>
+          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--accent)]/20 transition-all h-9">
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] font-bold text-[var(--text)] uppercase tracking-wider leading-none mb-0.5">{session.user?.name}</span>
+              <span className="text-[7px] text-[var(--accent)] font-mono uppercase opacity-60">
+                {(session.user as any)?.role || 'USER'}
+              </span>
             </div>
+            <div className="w-6 h-6 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)] font-bold text-[10px]">
+              {session.user?.name?.charAt(0).toUpperCase()}
+            </div>
+            <button 
+              onClick={() => signOut()}
+              className="p-1.5 text-[var(--muted)] hover:text-[var(--accent)] transition-colors border-l border-white/10 pl-2.5"
+              title="Sign Out"
+            >
+              <LogOut size={13} />
+            </button>
           </div>
         ) : (
           <button 
             onClick={() => setIsLoginOpen(true)}
-            className="btn-primary"
-            style={{ 
-              textDecoration: 'none', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px',
-              padding: '0.5rem 1.25rem',
-              fontSize: '12px'
-            }}
+            className="flex items-center gap-1.5 h-9 px-4 rounded-xl bg-[var(--accent)] text-black font-bold text-[11px] tracking-widest uppercase transition-all duration-300 hover:brightness-110 hover:scale-[1.02] active:scale-[0.98]"
+            style={{ fontFamily: 'Syne, sans-serif' }}
           >
-            <User size={12} /> SIGN IN
+            <User size={12} /> Sign In
           </button>
         )}
       </div>
