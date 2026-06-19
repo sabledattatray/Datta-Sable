@@ -196,7 +196,7 @@ export const posts = [
       <p>Professional certifications like the DP-600 or DP-700 typically cost hundreds of dollars in registration fees alone. For data analysts, business intelligence developers, and aspiring data engineers, this campaign removes the financial barrier, allowing you to validate your skills on cutting-edge platforms for exactly ₹0/month. The certifications offered are not entry-level fundamentals; they are high-value associate-level credentials targeting enterprise data engineering, analytics orchestration, and SQL AI integration.</p>
 
       <h2>Eligible Certifications: Which Path is Right for You?</h2>
-      <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals (read our full <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">DP-600 vs DP-700 vs DP-800 comparison guide</a> for a detailed analysis):</p>
+      <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals (see also our <a href="/blog/microsoft-fabric-medallion-architecture-guide">Microsoft Fabric Medallion Architecture guide</a> to understand the core framework tested in these exams):</p>
 
       <!-- Desktop Table View -->
       <div class="hidden md:block overflow-x-auto my-8">
