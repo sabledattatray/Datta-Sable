@@ -26,7 +26,7 @@ export const posts = [
       <ul>
         <li><strong>Target Audience:</strong> Data Engineers, Cloud Architects, and ETL Developers.</li>
         <li><strong>Core Technologies:</strong> Apache Spark (PySpark/Scala), Lakehouses, Delta Lake tables, Fabric Pipelines, and Fabric Notebooks.</li>
-        <li><strong>Key Focus Areas:</strong> Designing medallion architectures (Bronze-Silver-Gold), configuring security policies, scheduling complex pipelines, writing high-performance Spark code, and managing compute capacities.</li>
+        <li><strong>Key Focus Areas:</strong> Designing <a href="/blog/microsoft-fabric-medallion-architecture-guide">medallion architectures</a> (Bronze-Silver-Gold), configuring security policies, scheduling complex pipelines, writing high-performance Spark code, and managing compute capacities.</li>
       </ul>
 
       <h3>3. DP-800: SQL AI Developer Associate</h3>
@@ -170,7 +170,7 @@ export const posts = [
     date: 'June 19, 2026',
     color: 'var(--accent)',
     icon: '📊',
-    image: '/images/blog/microsoft-fabric-ultimate-guide.webp',
+    image: '/images/blog/dp-600-vs-dp-700-vs-dp-800-comparative-guide.webp',
     tags: ['Microsoft Fabric', 'Data Engineering', 'BI Strategy', 'Certifications', 'DP-600', 'DP-700', 'DP-800']
   },
   {
@@ -188,7 +188,7 @@ export const posts = [
       <p>Professional certifications like the DP-600 or DP-700 typically cost hundreds of dollars in registration fees alone. For data analysts, business intelligence developers, and aspiring data engineers, this campaign removes the financial barrier, allowing you to validate your skills on cutting-edge platforms for exactly ₹0/month. The certifications offered are not entry-level fundamentals; they are high-value associate-level credentials targeting enterprise data engineering, analytics orchestration, and SQL AI integration.</p>
 
       <h2>Eligible Certifications: Which Path is Right for You?</h2>
-      <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals:</p>
+      <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals (read our full <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">DP-600 vs DP-700 vs DP-800 comparison guide</a> for a detailed analysis):</p>
 
       <!-- Desktop Table View -->
       <div class="hidden md:block overflow-x-auto my-8">
@@ -1189,6 +1189,10 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
       <p>The missing organizing principle that binds the entire Fabric ecosystem together is the <strong>Medallion Architecture</strong> (also known as the Bronze, Silver, and Gold data layers).</p>
 
       <p>Understanding this architectural philosophy is the difference between building a fragile, ad-hoc data pipeline that breaks at the first schema change and engineering an elite, scalable, governance-hardened Modern Data Platform Architecture. This comprehensive guide will dissect how the components of Microsoft Fabric align under the Medallion framework, providing a clear roadmap from raw data ingestion to executive-level business intelligence.</p>
+
+      <p style="background: rgba(201, 243, 29, 0.05); padding: 1.25rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;">
+        <strong>💡 Validating Your Skills:</strong> If you are looking to certify your knowledge in these architectural principles, Microsoft is currently offering 100% free vouchers for Fabric Analytics and Data Engineering. Check out our <a href="/blog/free-microsoft-certifications-fabric-data-days-2026">Fabric Data Days 2026 voucher guide</a> to secure a free voucher, and read our comparative breakdown of the <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">DP-600 vs DP-700 vs DP-800 exams</a> to pick your path.
+      </p>
 
       <h2>What is Microsoft Fabric? The SaaS Data Revolution</h2>
       <p>Before mapping the architecture, we must establish a baseline understanding of Microsoft Fabric. At its core, Microsoft Fabric is a unified SaaS analytics platform that consolidates data movement, data lake storage, data engineering, data science, real-time analytics, and business intelligence into a single, managed workspace.</p>
