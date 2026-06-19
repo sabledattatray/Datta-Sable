@@ -152,7 +152,7 @@ export const posts = [
       </ol>
 
       <div style="background: rgba(201, 243, 29, 0.05); padding: 1.25rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;">
-        <strong>💡 Architect's Insight:</strong> To see how these engineering roles and components align inside a real-world enterprise infrastructure, read our comprehensive guide on the <a href="/blog/microsoft-fabric-medallion-architecture-guide">Microsoft Fabric Medallion Architecture framework</a>.
+        <strong>💡 Architect's Insight:</strong> To see how these engineering roles align inside a production Fabric tenant, read our deep-dive <a href="/blog/microsoft-fabric-architectural-guide">Microsoft Fabric Architectural guide</a> on Direct Lake, V-Order, and multi-engine conflict resolution.
       </div>
 
       <h2>Which Certification Should You Choose First?</h2>
@@ -168,7 +168,7 @@ export const posts = [
       <p><strong>Recommendation: Start with DP-800.</strong> If you love writing complex SQL queries, stored procedures, and trigger architectures, the DP-800 will teach you how to embed vector query syntax, configure semantic indexes, and deploy intelligent agents directly within the database engine.</p>
 
       <h2>Conclusion: Get Certified for Free</h2>
-      <p>Regardless of the path you choose, validating your expertise with a Microsoft Associate certification is a proven career accelerator. With the ongoing <strong>Fabric Data Days 2026</strong> campaign, there has never been a better time to upskill. If you haven’t secured your free exam voucher yet, follow our detailed <a href="/blog/free-microsoft-certifications-fabric-data-days-2026">Fabric Data Days voucher guide</a> to complete your milestones and claim your 100% discount code before August 2026.</p>
+      <p>Regardless of the path you choose, validating your expertise with a Microsoft Associate certification is a proven career accelerator. With the ongoing <strong>Fabric Data Days 2026</strong> campaign, there has never been a better time to upskill — follow the milestones, complete the required learn modules, and claim your 100% discount code before August 2026.</p>
     `,
     readTime: 9,
     date: 'June 19, 2026',
@@ -196,7 +196,7 @@ export const posts = [
       <p>Professional certifications like the DP-600 or DP-700 typically cost hundreds of dollars in registration fees alone. For data analysts, business intelligence developers, and aspiring data engineers, this campaign removes the financial barrier, allowing you to validate your skills on cutting-edge platforms for exactly ₹0/month. The certifications offered are not entry-level fundamentals; they are high-value associate-level credentials targeting enterprise data engineering, analytics orchestration, and SQL AI integration.</p>
 
       <h2>Eligible Certifications: Which Path is Right for You?</h2>
-      <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals (see also our <a href="/blog/microsoft-fabric-medallion-architecture-guide">Microsoft Fabric Medallion Architecture guide</a> to understand the core framework tested in these exams):</p>
+      <p>The campaign allows you to request one free exam voucher for one of the following three certifications. Choose the one that aligns with your current role or immediate career transition goals (see also our <a href="/blog/microsoft-fabric-architectural-guide">Microsoft Fabric Architectural guide</a> to understand the platform's core internals tested in these exams):</p>
 
       <!-- Desktop Table View -->
       <div class="hidden md:block overflow-x-auto my-8">
@@ -3109,7 +3109,7 @@ FROM production_sales;</code></pre>
       <p>In professional reporting, color is a diagnostic tool, not a decorative one. We use high-contrast <strong>Neon Accents</strong> for anomalies and muted <strong>Obsidian Tones</strong> for background context. This creates a "Visual Alarm" system where the user's eye is naturally drawn to what needs attention—a technique I use extensively in my <a href="/blog/building-analytics-war-room" style="color: var(--accent); text-decoration: underline;">Live Intelligence Dashboards</a>.</p>
 
       <h2>3. The "Z-Pattern" of Executive Scanning</h2>
-      <p>Most executives scan a dashboard in a 'Z' shape: Top-Left to Top-Right, then diagonal to Bottom-Left. By placing the most critical KPIs in the "Primary Optical Area" (Top-Left), we ensure that the most important information is consumed first. This is a core tenet of <a href="/blog/the-surgical-cockpit-bi-ux-design" style="color: var(--accent); text-decoration: underline;">Surgical Cockpit Design</a>.</p>
+      <p>Most executives scan a dashboard in a 'Z' shape: Top-Left to Top-Right, then diagonal to Bottom-Left. By placing the most critical KPIs in the "Primary Optical Area" (Top-Left), we ensure that the most important information is consumed first. Understanding <a href="/blog/psychology-of-high-fidelity-dashboard-design" style="color: var(--accent); text-decoration: underline;">the psychology of high-fidelity dashboard design</a> is what separates good BI developers from elite ones.</p>
 
       <h3>Key UI/UX Milestones:</h3>
       <ul>
