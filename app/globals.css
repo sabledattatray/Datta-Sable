@@ -1021,3 +1021,10 @@ body:has(.admin-layout-root) {
   margin: 2rem 0;
 }
 
+/* ── Priority Reading Paths — hover accent bar ── */
+.group:hover .priority-bar {
+  transform: scaleX(1);
+}
+.group:hover [style*="color: var(--text)"] {
+  color: var(--accent);
+}

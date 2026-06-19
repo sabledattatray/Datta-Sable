@@ -97,25 +97,158 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
       </motion.div>
 
       {activeCategory === 'All' && !search && (
-        <div className="mb-16 border border-[var(--border)] bg-[var(--surface2)] p-6">
-          <div className="label-tech mb-5 text-[var(--accent)]">Priority Reading Paths</div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {PRIORITY_READING_LINKS.map((item) => (
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          style={{ marginBottom: '4.5rem' }}
+        >
+          {/* Header row */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '1.25rem',
+            flexWrap: 'wrap',
+            gap: '0.5rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span className="label-tech" style={{ color: 'var(--accent)', letterSpacing: '0.25em' }}>
+                PRIORITY READING PATHS
+              </span>
+              <span style={{
+                background: 'rgba(201,243,29,0.1)',
+                border: '1px solid rgba(201,243,29,0.25)',
+                color: 'var(--accent)',
+                fontSize: '9px',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 700,
+                padding: '2px 8px',
+                borderRadius: '2px',
+                letterSpacing: '0.08em'
+              }}>
+                {PRIORITY_READING_LINKS.length} CURATED
+              </span>
+            </div>
+            <span style={{ fontSize: '10px', color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>
+              HANDPICKED · START HERE
+            </span>
+          </div>
+
+          {/* Cards grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+            gap: '1px',
+            background: 'var(--border)',
+            border: '1px solid var(--border)',
+            overflow: 'hidden'
+          }}>
+            {PRIORITY_READING_LINKS.map((item, idx) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
+                style={{ textDecoration: 'none', display: 'block' }}
               >
-                <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.context}</span>
-                <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
-                  <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
-                  <ArrowRight size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.06, duration: 0.35 }}
+                  className="group"
+                  style={{
+                    background: 'var(--surface2)',
+                    padding: '1.25rem 1.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem',
+                    minHeight: '100px',
+                    position: 'relative',
+                    transition: 'background 0.2s ease',
+                    cursor: 'pointer',
+                    overflow: 'hidden'
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.background = 'var(--bg)';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.background = 'var(--surface2)';
+                  }}
+                >
+                  {/* Accent bar — slides in on hover */}
+                  <span style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '2px',
+                    background: 'linear-gradient(90deg, var(--accent), #00C9F2)',
+                    transform: 'scaleX(0)',
+                    transformOrigin: 'left',
+                    transition: 'transform 0.25s ease'
+                  }} className="priority-bar" />
+
+                  {/* Top row: index badge + context label */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '9px',
+                      fontWeight: 700,
+                      color: 'var(--accent)',
+                      background: 'rgba(201,243,29,0.08)',
+                      border: '1px solid rgba(201,243,29,0.15)',
+                      padding: '2px 7px',
+                      borderRadius: '2px',
+                      letterSpacing: '0.05em',
+                      flexShrink: 0,
+                      lineHeight: 1.6
+                    }}>
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '9px',
+                      color: 'var(--muted)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.12em',
+                      textAlign: 'right',
+                      lineHeight: 1.4,
+                      opacity: 0.8
+                    }}>
+                      {item.context}
+                    </span>
+                  </div>
+
+                  {/* Title + Arrow */}
+                  <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '0.75rem', marginTop: '0.25rem' }}>
+                    <span style={{
+                      fontSize: '0.9rem',
+                      fontWeight: 700,
+                      color: 'var(--text)',
+                      lineHeight: 1.35,
+                      letterSpacing: '-0.01em',
+                      transition: 'color 0.2s ease',
+                      flex: 1
+                    }} className="group-hover:text-[var(--accent)]">
+                      {item.title}
+                    </span>
+                    <ArrowRight
+                      size={14}
+                      style={{
+                        color: 'var(--accent)',
+                        flexShrink: 0,
+                        transition: 'transform 0.2s ease',
+                        marginBottom: '1px'
+                      }}
+                      className="group-hover:translate-x-1"
+                    />
+                  </div>
+                </motion.div>
               </Link>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
+
 
       {/* Featured Log Highlight */}
       {initialPosts.length > 0 && activeCategory === 'All' && !search && (
