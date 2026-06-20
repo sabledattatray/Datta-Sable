@@ -458,7 +458,7 @@ export const posts = [
     date: "June 16, 2026",
     color: "var(--accent)",
     icon: "⚡",
-    image: "/images/blog/vercel-cloudflare-free-stack.webp",
+    image: "/images/blog/Hosting Next.js on Vercel behind Cloudflare The Ultimate Zero-Dollar Production Stack.webp",
     tags: ["Vercel","Cloudflare","Next.js","Web Architecture","DevOps"]
   },
   {
