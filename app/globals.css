@@ -1028,3 +1028,124 @@ body:has(.admin-layout-root) {
 .group:hover [style*="color: var(--text)"] {
   color: var(--accent);
 }
+
+/* ── Premium Cyberpunk Table of Contents (TOC) ── */
+.blog-toc {
+  position: relative;
+  background: linear-gradient(135deg, rgba(20, 20, 28, 0.7) 0%, rgba(13, 13, 18, 0.8) 100%) !important;
+  border: 1px solid rgba(201, 243, 29, 0.15) !important;
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 1.75rem 2rem !important;
+  margin-bottom: 2.5rem !important;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.blog-toc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent) 0%, var(--accent2) 100%);
+}
+
+.blog-toc h4 {
+  font-family: var(--font-syne);
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.15em !important;
+  color: var(--accent) !important;
+  margin-bottom: 1.25rem !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blog-toc h4::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(201, 243, 29, 0.3), transparent);
+}
+
+.blog-toc ol {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem !important;
+}
+
+.blog-toc li {
+  position: relative;
+  padding-left: 1.5rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+}
+
+.blog-toc li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px);
+  font-family: var(--font-syne);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-toc li:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.blog-toc a {
+  color: var(--muted) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-block;
+}
+
+.blog-toc a:hover {
+  color: #ffffff !important;
+  transform: translateX(4px);
+}
+
+.light .blog-toc {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(244, 244, 245, 0.95) 100%) !important;
+  border: 1px solid rgba(0, 89, 179, 0.15) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05), inset 0 1px 0 #ffffff;
+}
+
+.light .blog-toc::before {
+  background: linear-gradient(to bottom, var(--accent) 0%, var(--accent2) 100%);
+}
+
+.light .blog-toc h4 {
+  color: var(--accent) !important;
+}
+
+.light .blog-toc h4::after {
+  background: linear-gradient(to right, rgba(0, 89, 179, 0.3), transparent);
+}
+
+.light .blog-toc li::before {
+  color: var(--accent);
+}
+
+.light .blog-toc a {
+  color: #3f3f46 !important;
+}
+
+.light .blog-toc a:hover {
+  color: var(--accent) !important;
+}

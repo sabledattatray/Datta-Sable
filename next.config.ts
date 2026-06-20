@@ -30,6 +30,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/blog/python-engineering-2026',
+        destination: '/blog/scaling-the-forge-python-data-engineering',
+        permanent: true,
+      },
+      {
         source: '/what-is-seo-in-digital-marketing-and-how-does-it-work-for-beginners',
         destination: '/blog/what-is-seo-digital-marketing-guide',
         permanent: true,

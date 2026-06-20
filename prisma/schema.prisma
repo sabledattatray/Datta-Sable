@@ -86,11 +86,11 @@ model Post {
   id        String   @id @default(cuid())
   title     String
   slug      String   @unique
-  category  String
+  category  String   @default("General")
   excerpt   String   @db.Text
   content   String   @db.Text
-  readTime  Int
-  date      String
+  readTime  Int      @default(5)
+  date      String   @default("")
   color     String?
   icon      String?
   image     String?

@@ -8,33 +8,71 @@ import { ChevronLeft, Share2, Clock } from 'lucide-react';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 import { sanitizeHtml } from '@/lib/sanitize';
 
-const parseSafeDate = (dateStr: any): string => {
-  if (!dateStr) return new Date().toISOString();
+const parseSafeDate = (dateStr: any, fallbackStr?: any): string => {
+  const fallbackDate = "2026-01-01T00:00:00.000Z";
   
-  const dateObj = new Date(dateStr);
-  if (!isNaN(dateObj.getTime())) {
-    return dateObj.toISOString();
+  // Choose the best available date string
+  const rawTarget = (dateStr && String(dateStr).trim()) || (fallbackStr && String(fallbackStr).trim()) || "";
+  if (!rawTarget) return fallbackDate;
+
+  // 1. If it's already a full ISO string (contains 'T' and 'Z'), or ends with 'Z'
+  if (rawTarget.includes('T') || rawTarget.endsWith('Z')) {
+    const d = new Date(rawTarget);
+    if (!isNaN(d.getTime())) {
+      return d.toISOString();
+    }
   }
 
+  // 2. Parse text date format like "Jun 20, 2026" or "20 Jun 2026"
   try {
-    const parts = dateStr.split(/[\s,]+/);
+    const parts = rawTarget.split(/[\s,]+/);
     if (parts.length >= 3) {
       const months: Record<string, number> = {
         jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
-        jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+        jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+        january: 0, february: 1, march: 2, april: 3, june: 5,
+        july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
       };
-      const monthStr = parts[0].toLowerCase().substring(0, 3);
-      const day = parseInt(parts[1], 10);
-      const year = parseInt(parts[2], 10);
-      if (monthStr in months && !isNaN(day) && !isNaN(year)) {
-        return new Date(year, months[monthStr], day).toISOString();
+      
+      let monthIndex = -1;
+      let day = -1;
+      let year = -1;
+      
+      for (const part of parts) {
+        const lowerPart = part.toLowerCase();
+        if (lowerPart in months) {
+          monthIndex = months[lowerPart];
+        } else if (/^\d{4}$/.test(part)) {
+          year = parseInt(part, 10);
+        } else if (/^\d{1,2}$/.test(part.replace(/(st|nd|rd|th)$/i, ''))) {
+          day = parseInt(part.replace(/(st|nd|rd|th)$/i, ''), 10);
+        }
+      }
+      
+      if (monthIndex !== -1 && day !== -1 && year !== -1) {
+        return new Date(Date.UTC(year, monthIndex, day)).toISOString();
       }
     }
   } catch (e) {
     // ignore
   }
 
-  return new Date().toISOString();
+  // 3. Match standard numeric formats like YYYY-MM-DD or YYYY/MM/DD
+  const match = rawTarget.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+  if (match) {
+    const year = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10) - 1; // 0-based index
+    const day = parseInt(match[3], 10);
+    return new Date(Date.UTC(year, month, day)).toISOString();
+  }
+
+  // Fallback to standard JS parsing
+  const d = new Date(rawTarget);
+  if (!isNaN(d.getTime())) {
+    return d.toISOString();
+  }
+
+  return fallbackDate;
 };
 
 interface Post {
@@ -48,6 +86,8 @@ interface Post {
   color: string | null;
   image: string | null;
   blocks?: any[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export default function BlogPostContent({ post }: { post: Post }) {
@@ -294,8 +334,8 @@ export default function BlogPostContent({ post }: { post: Post }) {
               "headline": post.title,
               "description": post.excerpt,
               "image": post.image ? `https://dattasable.com${post.image}` : `https://dattasable.com/images/og-main.png`,
-              "datePublished": parseSafeDate(post.date),
-              "dateModified": parseSafeDate(post.date),
+              "datePublished": parseSafeDate(post.date, post.createdAt),
+              "dateModified": parseSafeDate(post.date, post.updatedAt || post.createdAt),
               "author": {
                 "@type": "Person",
                 "name": "Datta Sable",
@@ -387,7 +427,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
                     `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`
                   ]
                 : [getAbsoluteUrl(post.image || "/images/og-main.png")],
-              "uploadDate": parseSafeDate(post.date),
+              "uploadDate": parseSafeDate(post.date, post.createdAt),
               "embedUrl": youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : getAbsoluteUrl(localVideoUrl || ''),
               "contentUrl": localVideoUrl ? getAbsoluteUrl(localVideoUrl) : undefined,
               "duration": "PT5M", // Default duration for SEO richness
