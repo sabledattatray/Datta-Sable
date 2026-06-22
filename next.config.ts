@@ -30,6 +30,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/fabric-roadmap',
+        destination: '/blog/microsoft-fabric-career-roadmap-2026',
+        statusCode: 301,
+      },
+      {
         source: '/fabric2026',
         destination: '/blog/free-microsoft-certifications-fabric-data-days-2026',
         statusCode: 301,
