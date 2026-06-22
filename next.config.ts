@@ -30,6 +30,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/fabric2026',
+        destination: '/blog/free-microsoft-certifications-fabric-data-days-2026',
+        statusCode: 301,
+      },
+      {
         source: '/blog/python-engineering-2026',
         destination: '/blog/scaling-the-forge-python-data-engineering',
         permanent: true,
