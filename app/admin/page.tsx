@@ -380,7 +380,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* ═══════════ CONTENT AREA ═══════════ */}
-      <div style={{ padding: '0 28px 40px', marginTop: -52, position: 'relative', zIndex: 2 }}>
+      <div className="admin-content-area" style={{ marginTop: -52, position: 'relative', zIndex: 2 }}>
 
         {/* ── KPI STAT CARDS ── */}
         <div
@@ -521,7 +521,7 @@ export default function AdminDashboardPage() {
               minHeight: 320,
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>
                   Visitor Analytics
@@ -1004,6 +1004,9 @@ export default function AdminDashboardPage() {
         .admin-dashboard-root * {
           font-family: ${fontFamilyValue} !important;
         }
+        .admin-content-area {
+          padding: 0 28px 40px;
+        }
         @keyframes shimmer {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.4; }
@@ -1013,8 +1016,14 @@ export default function AdminDashboardPage() {
           .admin-dash-bottom-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 600px) {
+          .admin-content-area {
+            padding: 0 16px 32px;
+          }
           .admin-dash-main-grid { grid-template-columns: 1fr !important; }
           .admin-dash-bottom-grid { grid-template-columns: 1fr !important; }
+          .admin-dash-quick-actions { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 400px) {
           .admin-dash-quick-actions { grid-template-columns: 1fr !important; }
         }
       `}</style>

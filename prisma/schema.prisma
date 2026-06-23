@@ -166,3 +166,62 @@ model Service {
   updatedAt DateTime @updatedAt
 }
 
+model Job {
+  id               String      @id @default(cuid())
+  title            String
+  department       String
+  location         String
+  salary           String      // Salary Range
+  experience       String      // Experience Required
+  description      String      @db.Text
+  requirements     String      @db.Text
+  responsibilities String      @db.Text
+  skillsRequired   String      // comma-separated or stored as string
+  benefits         String      @db.Text
+  status           String      @default("OPEN") // OPEN, CLOSED
+  applicants       Applicant[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model Applicant {
+  id                 String   @id @default(cuid())
+  applicationId      String   @unique // DS-2026-XXXX format
+  jobId              String
+  fullName           String
+  email              String
+  mobile             String
+  alternateMobile    String?
+  currentLocation    String
+  preferredLocation  String?
+  currentCompany     String?
+  currentDesignation String?
+  totalExperience    String
+  relevantExperience String
+  currentSalary      String?
+  expectedSalary     String
+  noticePeriod       String
+  availableFrom      String?
+  skills             String   // Comma-separated or JSON string of tags
+  highestQualification String
+  university         String
+  passingYear        String
+  cgpa               String
+  linkedin           String?
+  github             String?
+  portfolio          String?
+  kaggle             String?
+  whyJoin            String   @db.Text
+  achievement        String   @db.Text
+  resumeUrl          String
+  portfolioFileUrl   String?
+  status             String   @default("New") // New, Under Review, Shortlisted, Interview Scheduled, Selected, Rejected
+  matchScore         Int      @default(0) // 0-100 score
+  job                Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([email, mobile]) // For duplicate prevention
+}
+
+

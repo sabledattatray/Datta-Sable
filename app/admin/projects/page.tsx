@@ -133,7 +133,7 @@ export default function ProjectsManager() {
       </div>
 
       {/* Table */}
-      <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+      <div className="desktop-only" style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', minWidth: 780, borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
@@ -190,7 +190,95 @@ export default function ProjectsManager() {
           </table>
         </div>
       </div>
+
+      {/* Projects Mobile Cards */}
+      <div className="mobile-only" style={{ flexDirection: 'column', gap: 14, marginBottom: 20 }}>
+        {filtered.length === 0 ? (
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+            No projects found.
+          </div>
+        ) : (
+          filtered.map((p) => {
+            const tool = toolColors[p.tool] || { bg: 'rgba(100,116,139,0.1)', color: '#64748b' };
+            return (
+              <div
+                key={p.id}
+                style={{
+                  background: css.surface,
+                  border: `1px solid ${css.border}`,
+                  borderRadius: 16,
+                  padding: 16,
+                  boxShadow: css.shadow,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 12,
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: css.text, lineHeight: 1.45 }}>
+                      {p.title}
+                    </div>
+                    <div style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 4 }}>
+                      {p.category}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+                    {[
+                      { Icon: Edit2, action: () => openEdit(p), title: 'Edit', hoverColor: css.accent },
+                      { Icon: Trash2, action: () => handleDelete(p.id), title: 'Delete', hoverColor: '#ef4444' },
+                    ].map(({ Icon, action, title }) => (
+                      <button
+                        key={title}
+                        onClick={action}
+                        title={title}
+                        style={{
+                          background: 'none', border: `1px solid ${css.border}`,
+                          borderRadius: 8, padding: 6, cursor: 'pointer',
+                          color: css.muted, display: 'flex', alignItems: 'center',
+                        }}
+                      >
+                        <Icon size={13} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+                  <span style={{ display: 'inline-block', fontSize: 9.5, fontWeight: 700, background: tool.bg, color: tool.color, border: `1px solid ${tool.color}30`, padding: '2px 8px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    {p.tool}
+                  </span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 9.5, fontWeight: 700, background: p.status === 'Published' ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', color: p.status === 'Published' ? '#10b981' : '#f59e0b', border: `1px solid ${p.status === 'Published' ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, padding: '2px 8px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: p.status === 'Published' ? '#10b981' : '#f59e0b' }} />
+                    {p.status}
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: `1px solid ${css.border}`, paddingTop: 10, fontSize: 11, color: css.muted }}>
+                  <span>Client: <strong>{p.client}</strong></span>
+                  <span style={{ fontWeight: 700, color: css.text }}>👁️ {p.views} views</span>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+
       <style>{`
+        .desktop-only {
+          display: block !important;
+        }
+        .mobile-only {
+          display: none !important;
+        }
+        @media (max-width: 768px) {
+          .desktop-only {
+            display: none !important;
+          }
+          .mobile-only {
+            display: flex !important;
+          }
+        }
         @media (max-width: 600px) {
           .projects-modal-grid {
             grid-template-columns: 1fr !important;

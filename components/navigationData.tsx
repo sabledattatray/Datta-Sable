@@ -13,6 +13,7 @@ export const navLinks = [
   { label: 'Dashboards', href: '/dashboards',            mega: true },
   { label: 'Tools',      href: '/tools',                 mega: true },
   { label: 'Knowledge',  href: '/knowledge/architecture', mega: true },
+  { label: 'Careers',    href: '/careers' },
   { label: 'Templates',  href: '/templates' },
 ];
 

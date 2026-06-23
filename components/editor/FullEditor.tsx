@@ -472,8 +472,9 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
       {/* Editor Content */}
       <div style={{
-        border: `1px solid ${css.border}`,
-        borderBottom: 'none',
+        borderTop: `1px solid ${css.border}`,
+        borderLeft: `1px solid ${css.border}`,
+        borderRight: `1px solid ${css.border}`,
         borderRadius: '12px 12px 0 0',
         padding: isSourceMode ? '16px' : '24px 32px',
         minHeight: 500,

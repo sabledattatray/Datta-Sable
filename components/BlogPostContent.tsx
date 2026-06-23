@@ -280,13 +280,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
         ) : (
           <div
             className="blog-content"
-            style={{ color: 'var(--muted)', lineHeight: 1.9, fontSize: '1rem' }}
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content)
-              .replace(/<h3>/g, `<h3 style="color:var(--text);font-size:1.15rem;margin:1.75rem 0 0.75rem;font-family:Inter,sans-serif;">`)
-              .replace(/<p>/g, `<p style="margin-bottom:1rem;">`)
-              .replace(/<pre><code([^>]*)>/g, `<pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;overflow-x:auto;margin:1rem 0;"><code$1 style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);">`)
-              .replace(/<\/code><\/pre>/g, `</code></pre>`)
-            }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
           />
         )}
 
@@ -362,6 +356,8 @@ export default function BlogPostContent({ post }: { post: Post }) {
                 ? "Microsoft Fabric, Compound AI Systems, OneLake Vector Search, LangGraph Python, Enterprise RAG Architecture, Synapse Serverless SQL, Semantic Caching Redis, Multi-Agent Workflows"
                 : post.title.includes("Medallion") 
                 ? "Microsoft Fabric, Medallion Architecture, Bronze Silver Gold Lakehouse, OneLake, Synapse Data Engineering, Direct Lake Power BI, Data Governance"
+                : post.title.includes("Fabric Skills") || post.title.includes("Fabric Career")
+                ? "Microsoft Fabric skills, DP-600 certification, DP-700 data engineer, DP-800 database AI, Analytics Engineer salary 2026, Microsoft OneLake, Direct Lake mode Power BI, Delta Parquet performance, Microsoft Fabric career roadmap"
                 : "BI Strategy, Data Architecture, Analytics, Power BI, Python"
             })
           }}

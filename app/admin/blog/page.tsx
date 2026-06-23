@@ -29,114 +29,134 @@ const initialPosts = mainPosts.map((p, idx) => ({
 function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string) {
   if (!keyword) return { score: 0, checks: [] };
 
-  const checks = [];
-  let score = 0;
+  const checks: any[] = [];
+  let earnedPoints = 0;
+  let maxPoints = 0;
+  
   const kw = keyword.toLowerCase().trim();
   const cleanTitle = title.toLowerCase();
   const cleanSlug = slug.toLowerCase();
   
-  // Extract text content from TipTap HTML
+  // Extract plain text from TipTap HTML
   let textContent = '';
   if (typeof document !== 'undefined') {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = content;
     textContent = tempDiv.textContent || tempDiv.innerText || '';
   } else {
-    // Basic fallback for server rendering
     textContent = content.replace(/<[^>]*>/g, '');
   }
   const cleanContent = textContent.toLowerCase();
   const cleanExcerpt = excerpt.toLowerCase();
+  
+  const addCheck = (id: string, label: string, passed: boolean, pts: number) => {
+    checks.push({ id, label, passed, pts });
+    maxPoints += pts;
+    if (passed) earnedPoints += pts;
+  };
 
-  // 1. Keyword in Title (20 pts)
+  // 1. Focus Keyword in Title (15 pts)
   const kwInTitle = cleanTitle.includes(kw);
-  checks.push({
-    id: 'title',
-    label: 'Focus keyword in title',
-    passed: kwInTitle,
-    pts: 20
-  });
-  if (kwInTitle) score += 20;
+  addCheck('title_kw', 'Focus keyword in title', kwInTitle, 15);
 
-  // 2. Keyword in Slug (15 pts)
-  const kwInSlug = cleanSlug.includes(kw.replace(/\s+/g, '-'));
-  checks.push({
-    id: 'slug',
-    label: 'Focus keyword in URL slug',
-    passed: kwInSlug,
-    pts: 15
-  });
-  if (kwInSlug) score += 15;
+  // 2. Focus Keyword at the Beginning of Title (5 pts)
+  const kwStartsTitle = cleanTitle.startsWith(kw) || cleanTitle.indexOf(kw) < 15;
+  addCheck('title_start', 'Focus keyword at the beginning of title', kwInTitle && kwStartsTitle, 5);
 
-  // 3. Keyword in Content (20 pts)
-  const kwInContent = cleanContent.includes(kw);
-  checks.push({
-    id: 'content',
-    label: 'Focus keyword in content',
-    passed: kwInContent,
-    pts: 20
-  });
-  if (kwInContent) score += 20;
+  // 3. Focus Keyword in URL Slug (10 pts)
+  const formattedKwSlug = kw.replace(/\s+/g, '-');
+  const kwInSlug = cleanSlug.includes(formattedKwSlug);
+  addCheck('slug_kw', 'Focus keyword in URL slug', kwInSlug, 10);
 
-  // 4. Keyword in Excerpt (15 pts)
+  // 4. Focus Keyword in Excerpt (10 pts)
   const kwInExcerpt = cleanExcerpt.includes(kw);
-  checks.push({
-    id: 'excerpt',
-    label: 'Focus keyword in excerpt',
-    passed: kwInExcerpt,
-    pts: 15
-  });
-  if (kwInExcerpt) score += 15;
+  addCheck('excerpt_kw', 'Focus keyword in excerpt (meta description)', kwInExcerpt, 10);
 
-  // 5. Title Length (10 pts)
+  // 5. Focus Keyword in First Paragraph/Beginning (15 pts)
+  const cleanText = textContent.trim();
+  const firstParagraph = cleanText.split('\n')[0] || '';
+  const first300Chars = cleanText.slice(0, 300);
+  const kwInBeginning = firstParagraph.toLowerCase().includes(kw) || first300Chars.toLowerCase().includes(kw);
+  addCheck('beginning_kw', 'Focus keyword in first paragraph / beginning of content', kwInBeginning, 15);
+
+  // 6. Focus Keyword in Subheading H2/H3 (10 pts)
+  const subheadingRegex = /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi;
+  let matches;
+  let kwInSubheading = false;
+  while ((matches = subheadingRegex.exec(content)) !== null) {
+    const text = matches[1].replace(/<[^>]*>/g, '').toLowerCase();
+    if (text.includes(kw)) {
+      kwInSubheading = true;
+      break;
+    }
+  }
+  addCheck('subheading_kw', 'Focus keyword in H2/H3 subheadings', kwInSubheading, 10);
+
+  // 7. Title Length check (5 pts)
   const titleLen = title.length;
   const titleLenOk = titleLen >= 40 && titleLen <= 70;
-  checks.push({
-    id: 'title_length',
-    label: `Title length (${titleLen} chars, ideal 40-70)`,
-    passed: titleLenOk,
-    pts: 10
-  });
-  if (titleLenOk) score += 10;
+  addCheck('title_length', `Title length (${titleLen} chars, ideal 40-70)`, titleLenOk, 5);
 
-  // 6. Content Length (10 pts)
+  // 8. Excerpt Length check (5 pts)
+  const excerptLen = excerpt.length;
+  const excerptLenOk = excerptLen >= 120 && excerptLen <= 160;
+  addCheck('excerpt_length', `Excerpt length (${excerptLen} chars, ideal 120-160)`, excerptLenOk, 5);
+
+  // 9. Slug Format and Length Check (5 pts)
+  const slugLen = slug.length;
+  const isSlugClean = !/[A-Z_\s]/.test(slug) && slugLen <= 75;
+  addCheck('slug_format', `Slug quality (< 75 chars, lowercase and clean)`, isSlugClean && slugLen > 0, 5);
+
+  // 10. Content Length (10 pts)
   const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
-  const wordCountOk = wordCount >= 300;
-  checks.push({
-    id: 'word_count',
-    label: `Content length (${wordCount} words, min 300)`,
-    passed: wordCountOk,
-    pts: 10
-  });
-  if (wordCountOk) score += 10;
+  const wordCountOk = wordCount >= 600;
+  addCheck('word_count', `Content length (${wordCount} words, ideal min 600)`, wordCountOk, 10);
 
-  // 7. Keyword Density (5 pts)
+  // 11. Keyword Density (5 pts)
   let densityOk = false;
   let densityMsg = 'Keyword density (ideal 0.5% - 2.5%)';
-  if (wordCount > 0 && kwInContent) {
-    const matches = cleanContent.split(kw).length - 1;
-    const density = (matches / wordCount) * 100;
+  if (wordCount > 0 && cleanContent.includes(kw)) {
+    const matchesCount = cleanContent.split(kw).length - 1;
+    const density = (matchesCount / wordCount) * 100;
     densityOk = density >= 0.5 && density <= 2.5;
     densityMsg = `Keyword density: ${density.toFixed(1)}% (ideal 0.5%-2.5%)`;
   }
-  checks.push({
-    id: 'density',
-    label: densityMsg,
-    passed: densityOk,
-    pts: 5
-  });
-  if (densityOk) score += 5;
+  addCheck('density', densityMsg, densityOk, 5);
 
-  // 8. Images and Links (5 pts)
-  const hasImages = content.includes('<img');
-  const hasLinks = content.includes('<a') || content.includes('href=');
-  checks.push({
-    id: 'media',
-    label: 'Contains images & links',
-    passed: hasImages && hasLinks,
-    pts: 5
-  });
-  if (hasImages && hasLinks) score += 5;
+  // 12. Internal & External Links (10 pts)
+  const linkRegex = /href=["']([^"']*)["']/gi;
+  let hasInternalLink = false;
+  let hasExternalLink = false;
+  let linkMatch;
+  while ((linkMatch = linkRegex.exec(content)) !== null) {
+    const url = linkMatch[1];
+    if (url.startsWith('/') || url.includes('dattasable.com')) {
+      hasInternalLink = true;
+    } else if (url.startsWith('http://') || url.startsWith('https://')) {
+      hasExternalLink = true;
+    }
+  }
+  addCheck('internal_link', 'Contains internal links', hasInternalLink, 5);
+  addCheck('external_link', 'Contains external outbound links', hasExternalLink, 5);
+
+  // 13. Image Alt Attributes Check (5 pts)
+  const imgMatches = content.match(/<img([^>]*)\/?>/gi) || [];
+  const hasImages = imgMatches.length > 0;
+  let allImagesHaveAlt = hasImages;
+  if (hasImages) {
+    for (const imgTag of imgMatches) {
+      if (!imgTag.includes('alt=') || /alt=["']\s*["']/i.test(imgTag)) {
+        allImagesHaveAlt = false;
+        break;
+      }
+    }
+  }
+  addCheck('image_alt', hasImages 
+    ? (allImagesHaveAlt ? 'All images contain descriptive ALT text' : 'Some images are missing ALT text') 
+    : 'Image SEO (add images with descriptive ALT attributes)', allImagesHaveAlt, 5);
+
+  // Normalize final score to a 0-100 scale
+  const score = maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0;
 
   return { score, checks };
 }
@@ -332,19 +352,8 @@ export default function AdminBlog() {
         {/* Content Renderer */}
         <div
           className="blog-content"
-          style={{ color: css.muted, lineHeight: 1.9, fontSize: '1.05rem', fontFamily: 'inherit' }}
           dangerouslySetInnerHTML={{
-            __html: (formData.content || '<p style="color:var(--muted)">Write some content to preview it.</p>')
-              .replace(/<h3>/g, `<h3 style="color:${css.text};font-size:1.4rem;margin:2rem 0 1rem;font-weight:700;font-family:inherit;">`)
-              .replace(/<h2>/g, `<h2 style="color:${css.text};font-size:1.75rem;margin:2.25rem 0 1.25rem;font-weight:800;font-family:inherit;">`)
-              .replace(/<h1>/g, `<h1 style="color:${css.text};font-size:2.1rem;margin:2.5rem 0 1.5rem;font-weight:900;font-family:inherit;">`)
-              .replace(/<p>/g, `<p style="margin-bottom:1.2rem;font-family:inherit;">`)
-              .replace(/<pre><code([^>]*)>/g, `<pre style="background:${css.surface2};border:1px solid ${css.border};border-radius:12px;padding:1.2rem;overflow-x:auto;margin:1.5rem 0;"><code$1 style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:${css.accent};">`)
-              .replace(/<\/code><\/pre>/g, `</code></pre>`)
-              .replace(/<ul>/g, `<ul style="list-style-type:disc;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
-              .replace(/<ol>/g, `<ol style="list-style-type:decimal;padding-left:1.5rem;margin-bottom:1.2rem;display:flex;flex-direction:column;gap:0.4rem;font-family:inherit;">`)
-              .replace(/<li>/g, `<li style="line-height:1.7;font-family:inherit;">`)
-              .replace(/<blockquote>/g, `<blockquote style="border-left:4px solid ${css.accent};padding-left:1rem;color:${css.text};font-style:italic;margin:1.5rem 0;font-family:inherit;">`)
+            __html: formData.content || '<p style="color:var(--muted)">Write some content to preview it.</p>'
           }}
         />
 
@@ -1101,6 +1110,7 @@ export default function AdminBlog() {
 
         {/* Articles Table */}
         <div
+          className="desktop-only"
           style={{
             background: css.surface, border: `1px solid ${css.border}`,
             borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow,
@@ -1269,6 +1279,112 @@ export default function AdminBlog() {
             </table>
           </div>
         </div>
+
+        {/* Articles Mobile Cards */}
+        <div className="mobile-only" style={{ flexDirection: 'column', gap: 14 }}>
+          {filtered.length === 0 ? (
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+              No articles found.
+            </div>
+          ) : (
+            filtered.map((post) => (
+              <div
+                key={post.id}
+                style={{
+                  background: css.surface,
+                  border: `1px solid ${css.border}`,
+                  borderRadius: 16,
+                  padding: 16,
+                  boxShadow: css.shadow,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 12,
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: css.text, lineHeight: 1.45 }}>
+                    {post.title}
+                  </div>
+                  <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+                    <button
+                      onClick={() => handleOpenEditor(post)}
+                      title="Edit"
+                      style={{
+                        background: 'none', border: `1px solid ${css.border}`,
+                        borderRadius: 8, padding: 6, cursor: 'pointer',
+                        color: css.muted, display: 'flex', alignItems: 'center',
+                      }}
+                    >
+                      <Edit2 size={13} />
+                    </button>
+                    <button
+                      onClick={() => { setDeleteId(post.id); setShowDeleteModal(true); }}
+                      title="Delete"
+                      style={{
+                        background: 'none', border: `1px solid ${css.border}`,
+                        borderRadius: 8, padding: 6, cursor: 'pointer',
+                        color: css.muted, display: 'flex', alignItems: 'center',
+                      }}
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+                  <span
+                    style={{
+                      fontSize: 9.5, fontWeight: 700,
+                      background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)',
+                      color: css.accent,
+                      border: `1px solid ${css.accent}30`,
+                      padding: '2px 8px', borderRadius: 999,
+                      textTransform: 'uppercase', letterSpacing: '0.05em',
+                    }}
+                  >
+                    {post.category}
+                  </span>
+                  <span
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 5,
+                      fontSize: 9.5, fontWeight: 700,
+                      background: post.status === 'Published'
+                        ? 'rgba(16,185,129,0.1)' : 'rgba(59,130,246,0.1)',
+                      color: post.status === 'Published' ? '#10b981' : '#3b82f6',
+                      border: `1px solid ${post.status === 'Published' ? '#10b98130' : '#3b82f630'}`,
+                      padding: '2px 8px', borderRadius: 999,
+                      textTransform: 'uppercase', letterSpacing: '0.05em',
+                    }}
+                  >
+                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: post.status === 'Published' ? '#10b981' : '#3b82f6' }} />
+                    {post.status}
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: `1px solid ${css.border}`, paddingTop: 10, fontSize: 11, color: css.muted }}>
+                  <span>{post.date}</span>
+                  <span style={{ fontWeight: 700, color: css.text }}>👁️ {parseInt(post.views || '0').toLocaleString()} views</span>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+        <style>{`
+          .desktop-only {
+            display: block !important;
+          }
+          .mobile-only {
+            display: none !important;
+          }
+          @media (max-width: 768px) {
+            .desktop-only {
+              display: none !important;
+            }
+            .mobile-only {
+              display: flex !important;
+            }
+          }
+        `}</style>
       </div>
     );
   }
@@ -2127,6 +2243,20 @@ export default function AdminBlog() {
         )}
       </div>
       <style>{`
+        .desktop-only {
+          display: block !important;
+        }
+        .mobile-only {
+          display: none !important;
+        }
+        @media (max-width: 768px) {
+          .desktop-only {
+            display: none !important;
+          }
+          .mobile-only {
+            display: flex !important;
+          }
+        }
         @media (max-width: 900px) {
           .blog-editor-main {
             flex-direction: column !important;

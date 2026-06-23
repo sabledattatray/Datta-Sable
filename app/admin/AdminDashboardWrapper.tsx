@@ -124,6 +124,12 @@ const navItems = [
           { name: 'Services', href: '/admin/services', exact: false },
         ]
       },
+      {
+        name: 'Careers (ATS)',
+        href: '/admin/careers',
+        icon: Briefcase,
+        exact: false
+      },
     ]
   },
   {
@@ -359,33 +365,11 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
             position: 'fixed', inset: 0,
             background: 'rgba(0,0,0,0.5)',
             backdropFilter: 'blur(4px)',
-            zIndex: 40,
+            zIndex: 65,
           }}
         />
       )}
 
-      {/* ══════════ SIDEBAR ══════════ */}
-      <aside
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          height: '100vh',
-          width: sidebarW,
-          background: css.sidebarBg,
-          borderRight: `1px solid ${css.border}`,
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 50,
-          transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1)',
-          transform: isMobileOpen ? 'translateX(0)' : undefined,
-          boxShadow: isDark
-            ? '4px 0 24px rgba(0,0,0,0.3)'
-            : '4px 0 24px rgba(0,0,0,0.06)',
-          overflowX: 'hidden',
-        }}
-        className="hidden md:flex"
-      />
 
       {/* Mobile sidebar */}
       <aside
@@ -397,15 +381,13 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
           width: 260,
           background: css.sidebarBg,
           borderRight: `1px solid ${css.border}`,
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 50,
+          zIndex: 70,
           transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
           transform: isMobileOpen ? 'translateX(0)' : 'translateX(-100%)',
           boxShadow: isDark ? '4px 0 24px rgba(0,0,0,0.4)' : '4px 0 24px rgba(0,0,0,0.1)',
           overflowX: 'hidden',
         }}
-        className="md:hidden"
+        className="flex flex-col md:hidden"
       >
         <SidebarContent
           isCollapsed={false}
@@ -434,14 +416,12 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
           width: sidebarW,
           background: css.sidebarBg,
           borderRight: `1px solid ${css.border}`,
-          display: 'flex',
-          flexDirection: 'column',
           zIndex: 50,
           transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1)',
           boxShadow: isDark ? '4px 0 24px rgba(0,0,0,0.3)' : '4px 0 24px rgba(0,0,0,0.05)',
           overflowX: 'hidden',
         }}
-        className="hidden md:flex"
+        className="hidden md:flex md:flex-col"
       >
         <SidebarContent
           isCollapsed={isCollapsed}
@@ -512,11 +492,9 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
                 color: css.muted,
                 padding: 8,
                 borderRadius: 10,
-                display: 'flex',
-                alignItems: 'center',
                 transition: 'background 0.15s, color 0.15s',
               }}
-              className="md:hidden"
+              className="flex items-center md:hidden"
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.background = css.hoverBg;
                 (e.currentTarget as HTMLElement).style.color = css.text;
@@ -532,16 +510,13 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
             {/* Search bar */}
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
                 background: css.surface2,
                 border: `1px solid ${css.border}`,
                 borderRadius: 12,
                 padding: '8px 14px',
                 width: 260,
               }}
-              className="hidden md:flex"
+              className="hidden md:flex md:items-center md:gap-2"
             >
               <Search size={14} color={css.muted} />
               <span style={{ fontSize: 13, color: css.muted, userSelect: 'none' }}>
@@ -569,15 +544,12 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
             {/* System live pill */}
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
                 padding: '5px 12px',
                 background: isDark ? 'rgba(16,185,129,0.08)' : 'rgba(16,185,129,0.06)',
                 border: '1px solid rgba(16,185,129,0.2)',
                 borderRadius: 999,
               }}
-              className="hidden sm:flex"
+              className="hidden sm:flex sm:items-center sm:gap-1.5"
             >
               <span style={{ position: 'relative', display: 'inline-flex', width: 8, height: 8 }}>
                 <span

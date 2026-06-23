@@ -323,7 +323,7 @@ export default function AdminServices() {
 
       {/* Loading skeleton */}
       {loading && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 20 }}>
           {[1, 2, 3].map(i => (
             <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, height: 220, animation: 'pulse 1.6s ease-in-out infinite' }}>
               <div style={{ width: 48, height: 48, borderRadius: 14, background: css.surface2, marginBottom: 18 }} />
@@ -351,7 +351,7 @@ export default function AdminServices() {
 
       {/* Cards grid */}
       {!loading && services.length > 0 && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 20 }}>
           {services.map((s, i) => (
             <div
               key={s.id}
