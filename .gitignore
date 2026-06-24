@@ -49,4 +49,5 @@ surgical-forge-lab/public/staging/*.csv
 /scratch/
 
 # User uploads
-/public/uploads/
+/public/uploads/
+/storage/
