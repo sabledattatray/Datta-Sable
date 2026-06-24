@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Fetch DB blog posts (if any)
   const dbPosts = await prisma.post.findMany({
     where: { published: true },
-    select: { slug: true, updatedAt: true }
+    select: { slug: true, category: true, updatedAt: true }
   }).catch(() => []);
 
   const dbBlogUrls = dbPosts.map((post) => ({
@@ -24,12 +24,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // 1b. Fetch DB custom pages (if any)
+  const dbPages = await prisma.page.findMany({
+    where: { published: true },
+    select: { slug: true, updatedAt: true }
+  }).catch(() => []);
+
+  const dbCustomPageUrls = dbPages.map((page) => ({
+    url: `${baseUrl}/p/${page.slug}`,
+    lastModified: page.updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
   // 2. Fetch Static blog posts from data.ts
   const staticBlogUrls = staticBlogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
+  }));
+
+  // 2b. Extract unique categories dynamically from DB and Static posts
+  const allPostsForCategories = [
+    ...dbPosts.map(p => ({ category: p.category || 'General' })),
+    ...staticBlogPosts
+  ];
+  const uniqueCategories = new Set<string>();
+  allPostsForCategories.forEach(post => {
+    const cat = post.category || 'General';
+    uniqueCategories.add(cat.trim().toLowerCase().replace(/\s+/g, '-'));
+  });
+
+  const categoryUrls = Array.from(uniqueCategories).map(catSlug => ({
+    url: `${baseUrl}/category/${catSlug}`,
+    lastModified: baselineDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
   }));
 
   // 3. Static main pages
@@ -44,6 +75,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/privacy',
     '/terms',
     '/disclaimer',
+    '/cookies',
+    '/faq',
+    '/careers',
     '/start-here',
     '/analytics-live',
     '/data-forge',
@@ -53,6 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/chains',
     '/knowledge',
     '/knowledge/architecture',
+    '/knowledge/data-engineering',
     '/glossary',
     '/tools/linkedin-formatter',
     '/tools/ai-prompt-generator',
@@ -62,6 +97,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/word-counter',
     '/tools/schema-generator',
     '/tools/mermaid-forge',
+    '/tools/bi-roi-calculator',
+    '/tools/prompt-auditor',
     '/tools/demo',
     '/infrastructure',
     '/knowledge/taxonomy',
@@ -131,6 +168,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticUrls, 
     ...dbBlogUrls, 
     ...staticBlogUrls, 
+    ...dbCustomPageUrls,
+    ...categoryUrls,
     ...chainUrls, 
     ...templateUrls, 
     ...knowledgeUrls,
