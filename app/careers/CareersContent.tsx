@@ -407,11 +407,11 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                 ⚡ Immediate Joiners Preferred
               </div>
 
-              <h1 style={{ fontSize: 'clamp(2.3rem, 6vw, 54px)', fontWeight: 800, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
+              <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 38px)', fontWeight: 700, lineHeight: 1.2, marginBottom: '1.5rem', letterSpacing: '-0.015em' }}>
                 Urgent Hiring: <span className="hero-title">Collection Officers</span> & Team Leaders
               </h1>
               
-              <p style={{ color: 'var(--muted)', maxWidth: 680, margin: '0 auto 2.5rem', lineHeight: 1.8, fontSize: '1.1rem' }}>
+              <p style={{ color: 'var(--muted)', maxWidth: 680, margin: '0 auto 2.5rem', lineHeight: 1.8, fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)' }}>
                 Join our fast-growing collections operation in Mumbai and surrounding regions. Freshers welcome, excellent commission structures, and fixed salaries for team leaders. Immediate joining roles available now.
               </p>
               
@@ -424,22 +424,22 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
             </div>
 
             {/* Statistics Row */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
-              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface)' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)', marginBottom: '0.25rem' }}>40+</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>FOS Openings</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
+              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>40+</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>FOS Openings</div>
               </div>
-              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface)' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)', marginBottom: '0.25rem' }}>10</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team Leader Openings</div>
+              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>10</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team Leader Openings</div>
               </div>
-              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface)' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)', marginBottom: '0.25rem' }}>10th Pass</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Minimum Qualification</div>
+              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>10th Pass</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Minimum Qualification</div>
               </div>
-              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface)' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)', marginBottom: '0.25rem' }}>Immediate</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Joining Available</div>
+              <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>Immediate</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Joining Available</div>
               </div>
             </div>
           </div>
@@ -448,7 +448,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
         {/* Job Description Cards */}
         <section id="roles" className="section" style={{ paddingBottom: '5rem' }}>
           <div className="container">
-            <h2 style={{ fontSize: '2rem', fontWeight: 700, textAlign: 'center', marginBottom: '3rem', textTransform: 'uppercase' }}>Urgent Job Openings</h2>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.8rem)', fontWeight: 700, textAlign: 'center', marginBottom: '2.5rem', letterSpacing: '-0.015em' }}>Urgent Job Openings</h2>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
               
@@ -460,7 +460,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                     <span style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 700 }}>🔥 40 Positions</span>
                   </div>
                   
-                  <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text)', marginBottom: '1rem' }}>{collectionsJobOfficer.title}</h3>
+                  <h3 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 700, color: 'var(--text)', marginBottom: '0.75rem', letterSpacing: '-0.015em' }}>{collectionsJobOfficer.title}</h3>
                   <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <div><strong>📍 Location:</strong> {collectionsJobOfficer.location}</div>
                     <div><strong>💼 Compensation:</strong> {collectionsJobOfficer.salary}</div>
@@ -469,31 +469,27 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </div>
 
                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', color: 'var(--text)' }}>Commission Structure</h4>
+                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Commission Structure</h4>
                     <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{collectionsJobOfficer.commission}</p>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
+                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
-                      <li>Visit customers for collection activities</li>
-                      <li>Follow up on overdue accounts</li>
-                      <li>Maintain daily collection records</li>
-                      <li>Submit collection reports</li>
-                      <li>Ensure customer interaction remains professional</li>
-                      <li>Meet assigned collection targets</li>
+                      <li>Field operations (FOS) for debt collection in assigned locations</li>
+                      <li>Visit customer locations to collect outstanding dues</li>
+                      <li>Maintain clean records and daily collection reports</li>
                     </ul>
                   </div>
 
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', color: 'var(--text)' }}>Eligibility</h4>
+                  <div style={{ marginBottom: '2rem' }}>
+                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Eligibility</h4>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
                       <li>Minimum 10th Pass</li>
                       <li>Freshers Can Apply</li>
                       <li>Collection Experience Preferred</li>
                       <li>Good Communication Skills</li>
                       <li>Two-Wheeler Preferred</li>
-                      <li>Local Area Knowledge Preferred</li>
                     </ul>
                   </div>
                 </div>
@@ -521,7 +517,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                     <span style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 700 }}>🔥 10 Positions</span>
                   </div>
                   
-                  <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text)', marginBottom: '1rem' }}>{collectionsJobLeader.title}</h3>
+                  <h3 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 700, color: 'var(--text)', marginBottom: '0.75rem', letterSpacing: '-0.015em' }}>{collectionsJobLeader.title}</h3>
                   <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <div><strong>📍 Location:</strong> {collectionsJobLeader.location}</div>
                     <div><strong>💼 Salary:</strong> {collectionsJobLeader.salary}</div>
@@ -530,25 +526,21 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </div>
 
                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', color: 'var(--text)' }}>Additional Benefits</h4>
+                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Additional Benefits</h4>
                     <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{collectionsJobLeader.bonus}</p>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
+                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
-                      <li>Manage and mentor collection executives</li>
-                      <li>Monitor daily productivity</li>
-                      <li>Drive collection targets</li>
-                      <li>Conduct field reviews</li>
-                      <li>Prepare performance reports</li>
-                      <li>Train new joiners</li>
-                      <li>Coordinate with management</li>
+                      <li>Manage a team of 15-20 field collection officers (FOS)</li>
+                      <li>Monitor and drive daily collection targets</li>
+                      <li>Handle critical escalations and agency reports</li>
                     </ul>
                   </div>
 
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', color: 'var(--text)' }}>Eligibility</h4>
+                  <div style={{ marginBottom: '2rem' }}>
+                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Eligibility</h4>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
                       <li>2–5 Years Collections Experience</li>
                       <li>Team Handling Experience</li>
@@ -585,8 +577,8 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
             
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <div className="label-tech mb-3" style={{ letterSpacing: '0.2em', justifyContent: 'center' }}>ATS-APPLICATION-PORTAL</div>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: 800, textTransform: 'uppercase' }}>Quick Apply Form</h2>
-              <p style={{ color: 'var(--muted)', fontSize: '0.95rem' }}>Fill in the details below. Immediate joining opportunities available.</p>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 1.8rem)', fontWeight: 700, letterSpacing: '-0.015em', marginBottom: '0.5rem' }}>Quick Apply Form</h2>
+              <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.5 }}>Fill in the details below. Immediate joining opportunities available.</p>
             </div>
 
             <div className="card" style={{ padding: 'clamp(1.5rem, 5vw, 3rem)', background: 'var(--bg)' }}>
@@ -596,7 +588,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
                     <CheckCircle size={32} />
                   </div>
-                  <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '1rem' }}>Application Submitted Successfully</h3>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.015em' }}>Application Submitted Successfully</h3>
                   <p style={{ color: 'var(--muted)', maxWidth: '480px', margin: '0 auto 2rem', lineHeight: 1.6 }}>
                     Thank you for applying. An automated confirmation message has been triggered to your WhatsApp number. Our recruitment team will review your details and contact you within 48 hours.
                   </p>
@@ -948,8 +940,8 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
         <section id="tracking" className="section" style={{ padding: '5rem 0' }}>
           <div className="container" style={{ maxWidth: '640px' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 style={{ fontSize: '1.8rem', fontWeight: 800, textTransform: 'uppercase' }}>Track Application Status</h2>
-              <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>Enter your Application ID and Email to view your hiring workflow status.</p>
+              <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.6rem)', fontWeight: 700, letterSpacing: '-0.015em', marginBottom: '0.5rem' }}>Track Application Status</h2>
+              <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>Enter your Application ID and Email to view your hiring workflow status.</p>
             </div>
 
             <div className="card" style={{ padding: '2rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}>
