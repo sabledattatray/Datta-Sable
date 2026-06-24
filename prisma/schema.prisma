@@ -60,6 +60,13 @@ model Project {
   tools       String[] // Array of tools used
   color       String?  @default("#c9f31d")
   imageUrl    String?
+  client      String?
+  problem     String?  @db.Text
+  solution    String?  @db.Text
+  github      String?
+  live        String?
+  published   Boolean  @default(true)
+  views       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

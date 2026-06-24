@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 import { posts as originalPosts } from '../app/blog/data';
+import { projects as originalProjects } from '../app/portfolio/data';
 
 async function main() {
   const email = process.env.ADMIN_EMAIL || 'admin@dattasable.com';
@@ -48,6 +49,47 @@ async function main() {
         color: post.color,
         icon: post.icon,
         image: post.image,
+        published: true,
+      },
+    });
+  }
+
+  // 3. Seed original projects
+  console.log(`Seeding ${originalProjects.length} original projects...`);
+  for (const proj of originalProjects) {
+    // Map data structure properties to Prisma schema fields
+    const projectDbId = String(proj.id);
+    await prisma.project.upsert({
+      where: { id: projectDbId },
+      update: {
+        title: proj.title,
+        category: proj.category,
+        description: proj.desc,
+        impact: proj.impact,
+        tools: proj.tools,
+        color: proj.color,
+        imageUrl: proj.image,
+        client: proj.client,
+        problem: proj.problem,
+        solution: proj.solution,
+        github: proj.github,
+        live: proj.live,
+        published: true,
+      },
+      create: {
+        id: projectDbId,
+        title: proj.title,
+        category: proj.category,
+        description: proj.desc,
+        impact: proj.impact,
+        tools: proj.tools,
+        color: proj.color,
+        imageUrl: proj.image,
+        client: proj.client,
+        problem: proj.problem,
+        solution: proj.solution,
+        github: proj.github,
+        live: proj.live,
         published: true,
       },
     });
