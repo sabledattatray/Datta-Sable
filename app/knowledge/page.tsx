@@ -15,6 +15,14 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: "Surgical Knowledge Hub | Technical AI & Creator Guides",
   description: "Expert-grade educational resources for high-performance AI engineering, LinkedIn authority systems, and SEO infrastructure.",
+  alternates: { canonical: 'https://dattasable.com/knowledge' },
+  openGraph: {
+    title: 'Surgical Knowledge Hub | Technical AI & Creator Guides | Datta Sable',
+    description: 'Expert-grade educational resources for high-performance AI engineering, LinkedIn authority systems, and SEO infrastructure.',
+    url: 'https://dattasable.com/knowledge',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Knowledge Hub — Datta Sable' }],
+  },
 };
 
 const PRIORITY_KNOWLEDGE_PATHS = [
@@ -77,6 +85,41 @@ const PRIORITY_KNOWLEDGE_PATHS = [
     title: 'Deep Work Protocol',
     href: '/blog/deep-work-protocol-technical-focus-2026',
     label: 'FOCUS'
+  },
+  {
+    title: 'AI Engineering Standards',
+    href: '/knowledge/standards',
+    label: 'STANDARDS'
+  },
+  {
+    title: 'Communication Protocols',
+    href: '/knowledge/protocols',
+    label: 'PROTOCOLS'
+  },
+  {
+    title: 'Execution Patterns',
+    href: '/knowledge/patterns',
+    label: 'PATTERNS'
+  },
+  {
+    title: 'Topical Taxonomy',
+    href: '/knowledge/taxonomy',
+    label: 'TAXONOMY'
+  },
+  {
+    title: 'RFC-001: Prompt Hardening',
+    href: '/knowledge/rfc/001-prompt-hardening',
+    label: 'RFC'
+  },
+  {
+    title: 'RFC-002: Execution Chains',
+    href: '/knowledge/rfc/002-execution-chains',
+    label: 'RFC'
+  },
+  {
+    title: 'RFC-003: Intent Mapping',
+    href: '/knowledge/rfc/003-intent-mapping',
+    label: 'RFC'
   }
 ];
 

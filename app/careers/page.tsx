@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import CareersContent from './CareersContent';
 
 export const metadata: Metadata = {
@@ -16,5 +17,15 @@ export const metadata: Metadata = {
 };
 
 export default function CareersPage() {
-  return <CareersContent />;
+  return (
+    <>
+      {/* Crawlable job listing links for SEO — resolves orphan page issues */}
+      <nav aria-label="Job Listings" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>
+        <Link href="/careers/collection-officer-mumbai">Field Collection Officer Jobs Mumbai</Link>
+        <Link href="/careers/collection-team-leader-mumbai">Collection Team Leader Jobs Mumbai</Link>
+      </nav>
+      <CareersContent />
+    </>
+  );
 }
+

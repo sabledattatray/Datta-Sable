@@ -74,16 +74,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
   const headerList = await headers();
   const nonce = headerList.get('x-nonce') || undefined;
-  const pathname = headerList.get('x-pathname') || '/';
-  const cleanPathname = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
-  const canonicalUrl = `https://dattasable.com${cleanPathname}`;
 
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
-        <link rel="canonical" href={canonicalUrl} />
         <link rel="preload" href="/fonts/syne-latin-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 

@@ -66,7 +66,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const finalTitle = post.title.length > 50 ? post.title : `${post.title} | Datta Sable`;
+  // " | Datta Sable" = 14 chars. Google truncates titles > 60 chars total.
+  // Only append suffix if the combined result will be ≤ 60 chars.
+  const finalTitle = post.title.length > 46 ? post.title : `${post.title} | Datta Sable`;
   let seoDesc = post.excerpt || '';
   if (seoDesc.length < 120) {
     seoDesc = `${seoDesc} Read the full technical breakdown, system architecture benchmarks, and implementation strategies.`.slice(0, 155);
