@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 import fs from 'fs';
 import path from 'path';
 
@@ -23,7 +24,67 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Missing file parameter" }, { status: 400 });
     }
 
-    // Sanitize path to prevent Directory Traversal
+    // 1. Try to find the document in the database first
+    const applicant = await prisma.applicant.findFirst({
+      where: {
+        OR: [
+          { resumeUrl: fileParam },
+          { aadhaarUrl: fileParam },
+          { photoUrl: fileParam },
+          { portfolioFileUrl: fileParam }
+        ]
+      }
+    });
+
+    if (applicant) {
+      let base64Data: string | null = null;
+      let targetRelativePath = '';
+
+      if (applicant.resumeUrl === fileParam) {
+        base64Data = applicant.resumeBase64;
+        targetRelativePath = applicant.resumeUrl;
+      } else if (applicant.aadhaarUrl === fileParam) {
+        base64Data = applicant.aadhaarBase64;
+        targetRelativePath = applicant.aadhaarUrl;
+      } else if (applicant.photoUrl === fileParam) {
+        base64Data = applicant.photoBase64;
+        targetRelativePath = applicant.photoUrl;
+      } else if (applicant.portfolioFileUrl === fileParam) {
+        base64Data = applicant.portfolioBase64;
+        targetRelativePath = applicant.portfolioFileUrl;
+      }
+
+      if (base64Data) {
+        const fileBuffer = Buffer.from(base64Data.split(',')[1] || base64Data, 'base64');
+        const filename = path.basename(targetRelativePath);
+        
+        let contentType = 'application/octet-stream';
+        const ext = path.extname(filename).toLowerCase();
+        if (ext === '.pdf') {
+          contentType = 'application/pdf';
+        } else if (ext === '.jpg' || ext === '.jpeg') {
+          contentType = 'image/jpeg';
+        } else if (ext === '.png') {
+          contentType = 'image/png';
+        } else if (ext === '.webp') {
+          contentType = 'image/webp';
+        } else if (ext === '.doc') {
+          contentType = 'application/msword';
+        } else if (ext === '.docx') {
+          contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        }
+
+        return new Response(fileBuffer, {
+          status: 200,
+          headers: {
+            'Content-Type': contentType,
+            'Content-Disposition': `inline; filename="${filename}"`,
+          },
+        });
+      }
+    }
+
+    // 2. Fallback to Disk Storage
     const sanitizedFileParam = fileParam.replace(/\.\./g, '').replace(/^\/+/g, '');
     const storageRoot = path.join(process.cwd(), 'storage');
     const fullPath = path.join(storageRoot, sanitizedFileParam);

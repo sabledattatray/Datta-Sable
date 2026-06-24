@@ -191,14 +191,22 @@ export async function POST(req: NextRequest) {
 
     // Secure Document Save: Store files inside root project folder 'storage/'
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+
+    const tryWriteFile = (filePath: string, buffer: Buffer) => {
+      try {
+        ensureDirectoryExistence(filePath);
+        fs.writeFileSync(filePath, buffer);
+      } catch (err) {
+        console.warn("Disk write failed (expected on read-only serverless environment):", err);
+      }
+    };
     
     // 1. Save Resume
     const resumeBuffer = Buffer.from(validatedData.resumeBase64.split(',')[1] || validatedData.resumeBase64, 'base64');
     const resumeFileName = `${uniqueSuffix}-${validatedData.resumeName.replace(/\s+/g, '_')}`;
     const resumeRelativePath = `/uploads/resumes/${resumeFileName}`;
     const resumeFullPath = path.join(process.cwd(), 'storage', 'uploads', 'resumes', resumeFileName);
-    ensureDirectoryExistence(resumeFullPath);
-    fs.writeFileSync(resumeFullPath, resumeBuffer);
+    tryWriteFile(resumeFullPath, resumeBuffer);
 
     // 2. Save Aadhaar (optional for backward compatibility)
     let aadhaarRelativePath: string | null = null;
@@ -207,8 +215,7 @@ export async function POST(req: NextRequest) {
       const aadhaarFileName = `${uniqueSuffix}-${validatedData.aadhaarName.replace(/\s+/g, '_')}`;
       aadhaarRelativePath = `/uploads/aadhaar/${aadhaarFileName}`;
       const aadhaarFullPath = path.join(process.cwd(), 'storage', 'uploads', 'aadhaar', aadhaarFileName);
-      ensureDirectoryExistence(aadhaarFullPath);
-      fs.writeFileSync(aadhaarFullPath, aadhaarBuffer);
+      tryWriteFile(aadhaarFullPath, aadhaarBuffer);
     }
 
     // 3. Save Photo (optional for backward compatibility)
@@ -218,8 +225,7 @@ export async function POST(req: NextRequest) {
       const photoFileName = `${uniqueSuffix}-${validatedData.photoName.replace(/\s+/g, '_')}`;
       photoRelativePath = `/uploads/photos/${photoFileName}`;
       const photoFullPath = path.join(process.cwd(), 'storage', 'uploads', 'photos', photoFileName);
-      ensureDirectoryExistence(photoFullPath);
-      fs.writeFileSync(photoFullPath, photoBuffer);
+      tryWriteFile(photoFullPath, photoBuffer);
     }
 
     // 4. Save Portfolio (if uploaded)
@@ -229,8 +235,7 @@ export async function POST(req: NextRequest) {
       const portFileName = `${uniqueSuffix}-${validatedData.portfolioFileName.replace(/\s+/g, '_')}`;
       portfolioRelativePath = `/uploads/portfolios/${portFileName}`;
       const portFullPath = path.join(process.cwd(), 'storage', 'uploads', 'portfolios', portFileName);
-      ensureDirectoryExistence(portFullPath);
-      fs.writeFileSync(portFullPath, portBuffer);
+      tryWriteFile(portFullPath, portBuffer);
     }
 
     // Generate Application ID: DS-2026-XXXX format
@@ -309,6 +314,12 @@ export async function POST(req: NextRequest) {
         recruitmentStatus: "Application Received",
         candidateSource: validatedData.candidateSource || null,
         applicationScore: calculatedScore,
+
+        // Base64 storage
+        resumeBase64: validatedData.resumeBase64,
+        aadhaarBase64: validatedData.aadhaarBase64 || null,
+        photoBase64: validatedData.photoBase64 || null,
+        portfolioBase64: validatedData.portfolioBase64 || null,
       }
     });
 

@@ -238,6 +238,10 @@ model Applicant {
   remarks                  String?   @db.Text
   candidateSource          String?
   applicationScore         Int?
+  resumeBase64             String?   @db.Text
+  aadhaarBase64            String?   @db.Text
+  photoBase64              String?   @db.Text
+  portfolioBase64          String?   @db.Text
 
   job                Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
   createdAt          DateTime @default(now())
