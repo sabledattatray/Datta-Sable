@@ -266,6 +266,8 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                   src={initialPosts[0].image || ''} 
                   alt={initialPosts[0].title}
                   fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover' }}
                 />
 

@@ -13,35 +13,43 @@ async function main() {
 
   for (const post of staticPosts) {
     try {
+      const postData = {
+        title: post.title,
+        category: post.category || 'General',
+        excerpt: post.excerpt || '',
+        content: post.content,
+        readTime: Number(post.readTime) || 5,
+        date: post.date || '',
+        color: post.color || null,
+        icon: post.icon || null,
+        image: post.image || null,
+        published: true,
+      };
+
       const existing = await prisma.post.findUnique({
         where: { slug: post.slug },
       });
 
       if (existing) {
+        await prisma.post.update({
+          where: { slug: post.slug },
+          data: postData,
+        });
         skippedCount++;
-        continue;
-      }
-
-      await prisma.post.create({
-        data: {
-          title: post.title,
-          slug: post.slug,
-          category: post.category || 'General',
-          excerpt: post.excerpt || '',
-          content: post.content,
-          readTime: Number(post.readTime) || 5,
-          date: post.date || '',
-          color: post.color || null,
-          icon: post.icon || null,
-          image: post.image || null,
-          published: true,
-          blocks: {
-            focusedKeyword: '',
+        console.log(`Successfully updated existing post: ${post.title} (${post.slug})`);
+      } else {
+        await prisma.post.create({
+          data: {
+            slug: post.slug,
+            ...postData,
+            blocks: {
+              focusedKeyword: '',
+            },
           },
-        },
-      });
-      createdCount++;
-      console.log(`Successfully synced: ${post.title} (${post.slug})`);
+        });
+        createdCount++;
+        console.log(`Successfully created new post: ${post.title} (${post.slug})`);
+      }
     } catch (err) {
       errorCount++;
       console.error(`Failed to sync post "${post.title}":`, err);

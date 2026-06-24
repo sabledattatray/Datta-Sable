@@ -84,6 +84,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
         <link rel="canonical" href={canonicalUrl} />
+        <link rel="preload" href="/fonts/syne-latin-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
         <Script
           nonce={nonce}
