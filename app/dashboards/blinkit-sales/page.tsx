@@ -35,6 +35,41 @@ export default function BlinkitSalesDashboardPage() {
             allowFullScreen
           />
         </div>
+
+        {/* Case Study Technical Breakdown */}
+        <section className="mt-12 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 max-w-5xl" style={{ borderLeft: '4px solid var(--accent2)' }}>
+          <h2 className="text-2xl font-bold font-['Rajdhani'] mb-6 tracking-wider text-[var(--text)] uppercase">Technical Case Study: Quick Commerce Sales Intelligence</h2>
+          
+          <div className="space-y-6 text-sm text-[var(--muted)] leading-relaxed">
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">1. Executive Summary & Objective</h3>
+              <p>
+                In the quick-commerce (q-commerce) landscape, delivery latency, stock availability, and regional demand shifts drive profitability. This dashboard parses simulated and historical sales records from a Blinkit-inspired mock dataset to monitor transaction velocity, channel distribution, and outlet performance. By isolating regional bottlenecks, category demand, and discount trends, it provides operational teams with real-time insight to manage delivery loops and optimize shelf stock.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">2. Data Modeling & Database Pipeline</h3>
+              <p>
+                The underlying data pipeline utilizes a star schema optimized for fast, analytical aggregate queries. Raw transaction logs, inventory tallies, and customer feedback are cleaned and structured into a central Fact Table joined with four Dimension Tables: Outlets (location, type, size), Items (category, price, brand tier), Time (date, shift, day-of-week), and Delivery (distance, duration, status). This normalized layout minimizes join latency and allows the Power BI desktop workspace to execute swift calculations.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">3. Visual Hierarchy & Business Intelligence UX</h3>
+              <p>
+                The visual layout adheres to strict corporate dashboard design guidelines, prioritizing high-priority KPIs at the top (Total Sales, Average Ticket Value, Customer Satisfaction Ratings, and Item Count). The middle section details sales performance segmented by outlet type (e.g., Tier 1 vs Tier 3 locations, Supermarkets vs Grocery stores) and brand tier. Finally, the bottom section visualizes delivery metrics and item category breakdowns, allowing analysts to drill down into specific product performance across regional dark stores.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">4. Core Analytical Metrics & DAX Formulas</h3>
+              <p>
+                Key metrics visualized include Sales Growth Year-over-Year (YoY), Average Sales per Transaction (AOV), and Out-of-Stock (OOS) percentages. Complex time-intelligence measures are calculated using native DAX queries, comparing Year-to-Date (YTD) performance with Previous Year-to-Date (PYTD) metrics. This ensures that executive stakeholders can track moving targets and make informed decisions on inventory distribution and supply-chain logistics.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />

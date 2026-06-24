@@ -209,6 +209,33 @@ function LinkedInFormatterContent() {
               </div>
             </div>
           </div>
+
+          {/* Technical Documentation Section */}
+          <div className="mt-16 border-t border-[var(--border)] pt-12 max-w-4xl">
+            <h3 className="text-xl font-bold font-['Rajdhani'] mb-6 tracking-wider text-[var(--text)] uppercase">Technical Specifications & Spacing Framework</h3>
+            <div className="space-y-6 text-xs text-[var(--muted)] leading-relaxed">
+              <div>
+                <strong className="text-[var(--text)] text-sm block mb-1">1. The Psychology of Mobile Readability</strong>
+                <p>
+                  Social media algorithms (specifically LinkedIn's feed indexer) heavily weight dwell time—the duration a user spends reading an expanded post. Traditional block paragraphs trigger high bounce rates on mobile viewports due to visual fatigue. "Surgical Spacing" breaks up dense text into isolated, single-sentence blocks separated by blank lines, doubling mobile retention rates and encouraging readers to tap the "see more" button.
+                </p>
+              </div>
+
+              <div>
+                <strong className="text-[var(--text)] text-sm block mb-1">2. Adaptive Hook Mechanics</strong>
+                <p>
+                  The first 140 characters of a post (the "Hook") determine CTR. This tool programmatically prepends tailored, high-visibility icons corresponding to your active Operator Persona (e.g., 🏢 for Founders, ⚙️ for Technical Experts, and 📊 for Data Strategists). This aligns your visual branding with your target audience's domain expectations instantly.
+                </p>
+              </div>
+
+              <div>
+                <strong className="text-[var(--text)] text-sm block mb-1">3. Bullet Formatting Logic</strong>
+                <p>
+                  The Bullet optimization utility parses line-breaks and maps lines containing text to structured list items. Based on your profile persona, the script swaps default characters with precision delimiters (e.g. ▹ for engineering documentation or • for standard copywriting), ensuring clean and consistent formatting without manual copy-pasting.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

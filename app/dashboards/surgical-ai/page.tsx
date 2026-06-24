@@ -35,6 +35,41 @@ export default function SurgicalAIDashboardPage() {
             allowFullScreen
           />
         </div>
+
+        {/* Case Study Technical Breakdown */}
+        <section className="mt-12 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 max-w-5xl" style={{ borderLeft: '4px solid #6ee7ff' }}>
+          <h2 className="text-2xl font-bold font-['Rajdhani'] mb-6 tracking-wider text-[var(--text)] uppercase">Technical Case Study: Surgical AI Workspace Telemetry</h2>
+          
+          <div className="space-y-6 text-sm text-[var(--muted)] leading-relaxed">
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">1. Executive Summary & Objective</h3>
+              <p>
+                As corporate agentic workflows scale, managing token overhead, request latencies, and execution costs becomes a central engineering challenge. This dashboard acts as a live monitoring console for the Surgical AI orchestration engine, tracking execution success rates, active context usage, and direct token consumption curves. By organizing these telemetry metrics in a single interface, operations managers can identify pipeline inefficiencies and refine system prompt profiles.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">2. Architecture & Multi-Node Orchestration</h3>
+              <p>
+                The underlying architecture is built around decoupled LLM execution blocks (Intent Mapping, Prompt Hardening, Node Execution, output Validation). The telemetry dashboard queries live logs stored in PostgreSQL via a Redis caching layer to avoid querying transaction logs directly. This separation keeps dashboard latency under 80ms while rendering live streaming updates from regional execution nodes.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">3. Visual Interface & Telemetry UX</h3>
+              <p>
+                The interface features real-time statistics (such as overall run success rate, total tokens processed, current cost margins, and active session counts). Underneath these cards, interactive time-series charts track CPU and memory load of the AI host server, while the bottom section renders active execution step states. This visual hierarchy guides developers straight to failing nodes or runaway processes.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">4. Context Optimization & Cost Control</h3>
+              <p>
+                A core feature tracked by the dashboard is Context Compression efficiency. Large prompts are programmatically pruned to remove conversational padding and repetitive logs before reaching LLM API endpoints. By visualizing compressed vs raw token counts, developers can verify that their prompt schemas are optimal, leading to direct savings in operational API bills.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />

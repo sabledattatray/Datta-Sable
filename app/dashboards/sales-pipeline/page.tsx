@@ -35,6 +35,41 @@ export default function SalesPipelineDashboardPage() {
             allowFullScreen
           />
         </div>
+
+        {/* Case Study Technical Breakdown */}
+        <section className="mt-12 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 max-w-5xl" style={{ borderLeft: '4px solid var(--accent)' }}>
+          <h2 className="text-2xl font-bold font-['Rajdhani'] mb-6 tracking-wider text-[var(--text)] uppercase">Technical Case Study: Sales Pipeline Velocity</h2>
+          
+          <div className="space-y-6 text-sm text-[var(--muted)] leading-relaxed">
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">1. Executive Summary & Objective</h3>
+              <p>
+                In enterprise B2B sales operations, understanding funnel leakage and pipeline velocity is crucial to hitting quarterly revenue forecasts. This dashboard tracks simulated deal flows, deal sizes, historical win rates, and pipeline aging buckets. By identifying sales bottlenecks and predicting closure probabilities, the platform allows sales leadership to allocate resources efficiently and adjust sales targets dynamically.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">2. Analytical Pipeline & Data Architecture</h3>
+              <p>
+                The backend utilizes PostgreSQL database queries mapped via Prisma ORM to retrieve transaction and sales progression histories. Raw CRM exports are cleaned, normalized, and loaded into an optimized database instance. The client-side dashboard consumes these records to calculate velocity metrics (e.g. stage-to-stage transition duration, overall deal cycle duration, and conversion ratios) across regional divisions and sales representatives.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">3. Visual Interface & User Experience (UX)</h3>
+              <p>
+                Designed for C-suite decision making, the dashboard features a dark, modern theme that highlights critical performance metrics. High-level summaries (Total Pipeline Value, Weighted Target Achievement, Funnel Velocity, and Win Ratios) sit at the top. The middle grid uses interactive charts to break down deal distribution across regional stages (Prospecting, Qualification, Proposal, Negotiation, Closed-Won/Lost). A detailed, drilldown list at the bottom allows managers to review individual high-value accounts.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">4. Pipeline Calculations & Forecasting Logic</h3>
+              <p>
+                The forecasting engine calculates both Unweighted Pipeline (total contract value of all open deals) and Weighted Pipeline (contract value multiplied by the historical win-probability of the active sales stage). Average sales cycle duration is calculated programmatically by measuring the date differential between opportunity creation and final closure, giving teams an objective view of their actual pipeline velocity.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />

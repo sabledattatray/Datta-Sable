@@ -18,6 +18,12 @@ function serializeDbPost(dbPost: any) {
   };
 }
 
+function isPlaceholderPost(post: any) {
+  if (!post) return true;
+  const content = post.content || '';
+  return content.includes('In the rapidly evolving world of digital infrastructure and technology');
+}
+
 export async function getPublishedBlogPosts() {
   let dbPosts: any[] = [];
 
@@ -32,8 +38,16 @@ export async function getPublishedBlogPosts() {
   }
 
   const postsBySlug = new Map<string, BlogPost>();
-  staticPosts.forEach((post) => postsBySlug.set(post.slug, post));
-  dbPosts.forEach((post) => postsBySlug.set(post.slug, post));
+  staticPosts.forEach((post) => {
+    if (!isPlaceholderPost(post)) {
+      postsBySlug.set(post.slug, post);
+    }
+  });
+  dbPosts.forEach((post) => {
+    if (!isPlaceholderPost(post)) {
+      postsBySlug.set(post.slug, post);
+    }
+  });
 
   return Array.from(postsBySlug.values()).sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
 }
@@ -44,14 +58,18 @@ export async function getPublishedBlogPost(slug: string) {
       where: { slug },
     });
 
-    if (dbPost?.published) {
+    if (dbPost?.published && !isPlaceholderPost(dbPost)) {
       return serializeDbPost(dbPost);
     }
   } catch (error) {
     console.warn(`Database unavailable for blog post "${slug}"; checking static posts.`, error);
   }
 
-  return staticPosts.find((post) => post.slug === slug) || null;
+  const staticPost = staticPosts.find((post) => post.slug === slug);
+  if (staticPost && !isPlaceholderPost(staticPost)) {
+    return staticPost;
+  }
+  return null;
 }
 
 export async function getPublishedBlogSlugs() {
@@ -59,15 +77,21 @@ export async function getPublishedBlogSlugs() {
 
   try {
     const dbPosts = await prisma.post.findMany({
-      select: { slug: true },
+      select: { slug: true, content: true },
       where: { published: true },
     });
-    dbSlugs = dbPosts.map((post) => post.slug);
+    dbSlugs = dbPosts
+      .filter((post) => !isPlaceholderPost(post))
+      .map((post) => post.slug);
   } catch (error) {
     console.warn('Database unavailable for blog slugs; using static slugs only.', error);
   }
 
-  return Array.from(new Set([...staticPosts.map((post) => post.slug), ...dbSlugs]));
+  const filteredStaticSlugs = staticPosts
+    .filter((post) => !isPlaceholderPost(post))
+    .map((post) => post.slug);
+
+  return Array.from(new Set([...filteredStaticSlugs, ...dbSlugs]));
 }
 
 export function filterPostsByCategory(posts: BlogPost[], categoryName: string, slug: string) {

@@ -294,6 +294,33 @@ function PromptGeneratorContent() {
               </div>
             </div>
           </div>
+
+          {/* Prompt Engineering Guide Section */}
+          <div className="mt-16 border-t border-[var(--border)] pt-12 max-w-4xl">
+            <h3 className="text-xl font-bold font-['Rajdhani'] mb-6 tracking-wider text-[var(--text)] uppercase">Advanced Prompt Engineering & Neural Orchestration Guide</h3>
+            <div className="space-y-6 text-xs text-[var(--muted)] leading-relaxed">
+              <div>
+                <strong className="text-[var(--text)] text-sm block mb-1">1. The Structural Prompt Blueprint</strong>
+                <p>
+                  To get consistent, high-fidelity outputs from large language models (LLMs), prompts must be engineered with clear separation of concerns. This tool automatically compiles your input topic into a structured "Mega-Prompt" composed of four primary blocks: **Target Persona** (establishing context and expertise), **System Intent & Style** (defining formatting guidelines and tone), **Core Concept** (your raw input), and **Hard Constraints** (preventing common failures like conversational filler).
+                </p>
+              </div>
+
+              <div>
+                <strong className="text-[var(--text)] text-sm block mb-1">2. Model-Specific Optimization</strong>
+                <p>
+                  Different frontier models have varying engineering requirements. Google Gemini responds best to explicit instructions concerning its logical reasoning paths, while Anthropic's Claude prioritizes XML-like structure and strict markdown parsing. This generator automatically appends specialized instructions targeting your selected platform's neural behavior, maximizing response consistency.
+                </p>
+              </div>
+
+              <div>
+                <strong className="text-[var(--text)] text-sm block mb-1">3. Token Economy & Constraint Enforcement</strong>
+                <p>
+                  Every conversational filler word (such as "Certainly, I can help with that!") wastes context tokens and degrades model reasoning efficiency. By enforcing a strict "Surgical Precision / No Fluff" constraint in the generated system block, this tool instructs the model to omit conversational padding and start directly with the answer, preserving token space and ensuring programmatic stability.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

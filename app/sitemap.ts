@@ -7,6 +7,12 @@ import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
 import { LANDING_PAGES } from '@/data/landing-pages';
 import { GLOSSARY_TERMS } from '@/data/glossary';
 
+function isPlaceholderPost(post: { content?: string }) {
+  if (!post) return true;
+  const content = post.content || '';
+  return content.includes('In the rapidly evolving world of digital infrastructure and technology');
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
   const baselineDate = new Date('2026-05-18');
@@ -14,10 +20,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Fetch DB blog posts (if any)
   const dbPosts = await prisma.post.findMany({
     where: { published: true },
-    select: { slug: true, category: true, updatedAt: true }
+    select: { slug: true, category: true, updatedAt: true, content: true }
   }).catch(() => []);
 
-  const dbBlogUrls = dbPosts.map((post) => ({
+  const filteredDbPosts = dbPosts.filter(post => !isPlaceholderPost(post as any));
+
+  const dbBlogUrls = filteredDbPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: post.updatedAt,
     changeFrequency: 'weekly' as const,
@@ -38,7 +46,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // 2. Fetch Static blog posts from data.ts
-  const staticBlogUrls = staticBlogPosts.map((post) => ({
+  const filteredStaticBlogPosts = staticBlogPosts.filter(post => !isPlaceholderPost(post));
+
+  const staticBlogUrls = filteredStaticBlogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date || baselineDate),
     changeFrequency: 'weekly' as const,
@@ -47,8 +57,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 2b. Extract unique categories dynamically from DB and Static posts
   const allPostsForCategories = [
-    ...dbPosts.map(p => ({ category: p.category || 'General' })),
-    ...staticBlogPosts
+    ...filteredDbPosts.map(p => ({ category: p.category || 'General' })),
+    ...filteredStaticBlogPosts
   ];
   const uniqueCategories = new Set<string>();
   allPostsForCategories.forEach(post => {
@@ -84,7 +94,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/analytics-live',
     '/data-forge',
     '/tools',
-    '/tools/workspace',
     '/templates',
     '/chains',
     '/knowledge',
@@ -101,7 +110,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/mermaid-forge',
     '/tools/bi-roi-calculator',
     '/tools/prompt-auditor',
-    '/tools/demo',
     '/infrastructure',
     '/knowledge/taxonomy',
     '/knowledge/standards',
