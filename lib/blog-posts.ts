@@ -73,6 +73,9 @@ export async function getPublishedBlogSlugs() {
 export function filterPostsByCategory(posts: BlogPost[], categoryName: string, slug: string) {
   return posts.filter((post) => {
     const category = ((post as any).category || '').toLowerCase();
-    return category === categoryName.toLowerCase() || category.replace(/\s+/g, '-') === slug.toLowerCase();
+    const cleanCategorySlug = category.replace(/\s+/g, '-').replace(/&/g, 'and');
+    return category === categoryName.toLowerCase() || 
+           category.replace(/\s+/g, '-') === slug.toLowerCase() ||
+           cleanCategorySlug === slug.toLowerCase();
   });
 }

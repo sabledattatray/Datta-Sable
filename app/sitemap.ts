@@ -53,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const uniqueCategories = new Set<string>();
   allPostsForCategories.forEach(post => {
     const cat = post.category || 'General';
-    uniqueCategories.add(cat.trim().toLowerCase().replace(/\s+/g, '-'));
+    uniqueCategories.add(cat.trim().toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and'));
   });
 
   const categoryUrls = Array.from(uniqueCategories).map(catSlug => ({
