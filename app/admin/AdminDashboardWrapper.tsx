@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { useTheme } from '@/components/ThemeProvider';
+import { getCompanyProfile } from './org-actions';
 import {
   LayoutDashboard,
   FileText,
@@ -188,12 +189,45 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [companyName, setCompanyName] = useState('dattasable.');
   const [typography, setTypography] = useState({
     fontFamily: 'Inter',
     fontSize: '14px',
     color: '',
     fontWeight: '500',
   });
+
+  useEffect(() => {
+    const loadCompanyName = async () => {
+      if (typeof window !== 'undefined') {
+        const cached = localStorage.getItem('company_name');
+        if (cached) setCompanyName(cached);
+      }
+
+      const profile = await getCompanyProfile();
+      if (profile && profile.company_name) {
+        setCompanyName(profile.company_name);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('company_name', profile.company_name);
+        }
+      }
+    };
+
+    loadCompanyName();
+
+    const handleProfileChange = () => {
+      if (typeof window !== 'undefined') {
+        const cached = localStorage.getItem('company_name');
+        if (cached) setCompanyName(cached);
+      }
+    };
+
+    window.addEventListener('company_profile_changed', handleProfileChange);
+    return () => {
+      window.removeEventListener('company_profile_changed', handleProfileChange);
+    };
+  }, []);
+
 
   const isDark = theme === 'dark';
 
@@ -403,7 +437,9 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
           onToggleCollapse={toggleCollapse}
           onSignOut={() => signOut({ callbackUrl: '/' })}
           isMobile={true}
+          companyName={companyName}
         />
+
       </aside>
 
       {/* Desktop sidebar */}
@@ -437,7 +473,9 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
           onToggleCollapse={toggleCollapse}
           onSignOut={() => signOut({ callbackUrl: '/' })}
           isMobile={false}
+          companyName={companyName}
         />
+
       </aside>
 
       {/* ══════════ MAIN AREA ══════════ */}
@@ -896,6 +934,7 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
 function SidebarContent({
   isCollapsed, isDark, css, pathname, isActive, navItems,
   userName, userEmail, userInitial, onClose, onToggleCollapse, onSignOut, isMobile,
+  companyName,
 }: {
   isCollapsed: boolean;
   isDark: boolean;
@@ -910,6 +949,7 @@ function SidebarContent({
   onToggleCollapse: () => void;
   onSignOut: () => void;
   isMobile: boolean;
+  companyName: string;
 }) {
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
 
@@ -977,7 +1017,7 @@ function SidebarContent({
               boxShadow: `0 4px 12px ${css.accent}40`,
             }}
           >
-            d
+            {companyName ? companyName.charAt(0).toUpperCase() : 'D'}
           </div>
           {!isCollapsed && (
             <span
@@ -990,9 +1030,17 @@ function SidebarContent({
                 overflow: 'hidden',
               }}
             >
-              dattasable<span style={{ color: css.accent }}>.</span>
+              {companyName.endsWith('.') ? (
+                <>
+                  {companyName.slice(0, -1)}
+                  <span style={{ color: css.accent }}>.</span>
+                </>
+              ) : (
+                companyName
+              )}
             </span>
           )}
+
         </Link>
         {isMobile && (
           <button

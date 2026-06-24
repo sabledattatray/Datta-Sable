@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
 import Link from 'next/link';
+import { getCompanyProfile, saveCompanyProfile } from '../org-actions';
 import { 
   Users, Building, CreditCard, ShoppingBag, BarChart3, Megaphone, 
   Layers, Settings, Bell, Terminal, LifeBuoy, Plus, Search, 
@@ -73,17 +74,52 @@ export default function AdminCatchAllPage() {
       if (savedTax !== null) setTaxId(savedTax);
       if (savedAddress !== null) setOfficeAddress(savedAddress);
     }
-  }, []);
 
-  const handleSaveCompanyProfile = () => {
+    const fetchDbProfile = async () => {
+      const profile = await getCompanyProfile();
+      if (profile) {
+        setCompanyName(profile.company_name);
+        setSupportEmail(profile.company_email);
+        setTaxId(profile.company_tax_id);
+        setOfficeAddress(profile.company_address);
+        
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('company_name', profile.company_name);
+          localStorage.setItem('company_email', profile.company_email);
+          localStorage.setItem('company_tax_id', profile.company_tax_id);
+          localStorage.setItem('company_address', profile.company_address);
+          window.dispatchEvent(new Event('company_profile_changed'));
+        }
+      }
+    };
+
+    if (path === 'org/profile') {
+      fetchDbProfile();
+    }
+  }, [path]);
+
+  const handleSaveCompanyProfile = async () => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('company_name', companyName);
       localStorage.setItem('company_email', supportEmail);
       localStorage.setItem('company_tax_id', taxId);
       localStorage.setItem('company_address', officeAddress);
       
+      window.dispatchEvent(new Event('company_profile_changed'));
+    }
+    
+    const res = await saveCompanyProfile({
+      companyName,
+      supportEmail,
+      taxId,
+      officeAddress
+    });
+
+    if (res?.success) {
       setSaveStatus('success');
       setTimeout(() => setSaveStatus(null), 3000);
+    } else {
+      alert(res?.error || 'Failed to save company profile settings.');
     }
   };
 

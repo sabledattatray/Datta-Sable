@@ -250,4 +250,11 @@ model Applicant {
   @@unique([email, mobile]) // For duplicate prevention
 }
 
+model SystemSetting {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+
 
