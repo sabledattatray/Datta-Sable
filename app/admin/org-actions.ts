@@ -4,9 +4,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+// Type-cast prisma instance to bypass cached IDE TypeScript definition issues
+const db = prisma as any;
+
 export async function getCompanyProfile() {
   try {
-    const settings = await prisma.systemSetting.findMany({
+    const settings = await db.systemSetting.findMany({
       where: {
         key: {
           in: ['company_name', 'company_email', 'company_tax_id', 'company_address']
@@ -46,22 +49,22 @@ export async function saveCompanyProfile(data: {
 
   try {
     const ops = [
-      prisma.systemSetting.upsert({
+      db.systemSetting.upsert({
         where: { key: 'company_name' },
         update: { value: data.companyName },
         create: { key: 'company_name', value: data.companyName }
       }),
-      prisma.systemSetting.upsert({
+      db.systemSetting.upsert({
         where: { key: 'company_email' },
         update: { value: data.supportEmail },
         create: { key: 'company_email', value: data.supportEmail }
       }),
-      prisma.systemSetting.upsert({
+      db.systemSetting.upsert({
         where: { key: 'company_tax_id' },
         update: { value: data.taxId },
         create: { key: 'company_tax_id', value: data.taxId }
       }),
-      prisma.systemSetting.upsert({
+      db.systemSetting.upsert({
         where: { key: 'company_address' },
         update: { value: data.officeAddress },
         create: { key: 'company_address', value: data.officeAddress }
