@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Fetch Static blog posts from data.ts
   const staticBlogUrls = staticBlogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: new Date(post.date || baselineDate),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));

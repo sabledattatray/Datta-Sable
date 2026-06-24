@@ -924,23 +924,24 @@ body:has(.admin-layout-root) {
 
 .blog-content {
   color: var(--muted);
-  line-height: 1.9;
+  line-height: 1.85;
   font-size: 1.05rem;
+  font-weight: 400;
   font-family: 'Inter', sans-serif;
 }
 
 .blog-content h1 {
   color: var(--text);
-  font-size: 2.1rem;
+  font-size: 2.25rem;
   margin: 2.5rem 0 1.5rem;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
 
 .blog-content h2 {
   color: var(--text);
-  font-size: 1.75rem;
+  font-size: 1.8rem;
   margin: 2.25rem 0 1.25rem;
   font-weight: 800;
   letter-spacing: -0.015em;
@@ -949,7 +950,7 @@ body:has(.admin-layout-root) {
 
 .blog-content h3 {
   color: var(--text);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   margin: 2rem 0 1rem;
   font-weight: 700;
   line-height: 1.35;
@@ -964,6 +965,29 @@ body:has(.admin-layout-root) {
 
 .blog-content p {
   margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .blog-content {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .blog-content h1 {
+    font-size: 1.75rem;
+    margin: 2rem 0 1.25rem;
+  }
+  .blog-content h2 {
+    font-size: 1.45rem;
+    margin: 1.8rem 0 1rem;
+  }
+  .blog-content h3 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0 0.85rem;
+  }
+  .blog-content h4 {
+    font-size: 1.1rem;
+  }
 }
 
 .blog-content strong,
