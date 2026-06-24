@@ -217,6 +217,28 @@ model Applicant {
   portfolioFileUrl   String?
   status             String   @default("New") // New, Under Review, Shortlisted, Interview Scheduled, Selected, Rejected
   matchScore         Int      @default(0) // 0-100 score
+  
+  // New Recruitment Portal Fields
+  whatsappNumber            String?
+  dateOfBirth              String?
+  gender                   String?
+  currentAddress           String?
+  is10thPass               Boolean?  @default(false)
+  hasCollectionExperience   Boolean?  @default(false)
+  hasTeamHandlingExperience Boolean?  @default(false)
+  areaFamiliarity          String?
+  hasTwoWheeler            Boolean?  @default(false)
+  hasDrivingLicense        Boolean?  @default(false)
+  aadhaarUrl               String?
+  photoUrl                 String?
+  isImmediateJoiner        Boolean?  @default(false)
+  recruitmentStatus        String    @default("Application Received")
+  interviewDate            String?
+  joiningDate              String?
+  remarks                  String?   @db.Text
+  candidateSource          String?
+  applicationScore         Int?
+
   job                Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt

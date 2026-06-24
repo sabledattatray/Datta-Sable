@@ -76,20 +76,44 @@ export async function PUT(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { id, status } = body;
+    const { id, status, recruitmentStatus, interviewDate, joiningDate, remarks } = body;
 
-    if (!id || !status) {
-      return NextResponse.json({ message: "Missing applicant ID or status." }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ message: "Missing applicant ID." }, { status: 400 });
     }
 
-    const allowedStatuses = ["New", "Under Review", "Shortlisted", "Interview Scheduled", "Selected", "Rejected"];
-    if (!allowedStatuses.includes(status)) {
-      return NextResponse.json({ message: "Invalid status value." }, { status: 400 });
+    const updateData: any = {};
+    if (status) {
+      const allowedStatuses = ["New", "Under Review", "Shortlisted", "Interview Scheduled", "Selected", "Rejected"];
+      if (!allowedStatuses.includes(status)) {
+        return NextResponse.json({ message: "Invalid status value." }, { status: 400 });
+      }
+      updateData.status = status;
     }
+
+    if (recruitmentStatus) {
+      const allowedRecruitmentStatuses = [
+        "Application Received",
+        "Screening Pending",
+        "Interview Scheduled",
+        "Selected",
+        "Document Verification",
+        "Joined",
+        "Rejected"
+      ];
+      if (!allowedRecruitmentStatuses.includes(recruitmentStatus)) {
+        return NextResponse.json({ message: "Invalid recruitment workflow status value." }, { status: 400 });
+      }
+      updateData.recruitmentStatus = recruitmentStatus;
+    }
+
+    if (interviewDate !== undefined) updateData.interviewDate = interviewDate;
+    if (joiningDate !== undefined) updateData.joiningDate = joiningDate;
+    if (remarks !== undefined) updateData.remarks = remarks;
 
     const updatedApplicant = await prisma.applicant.update({
       where: { id },
-      data: { status },
+      data: updateData,
       include: {
         job: {
           select: { title: true }
@@ -100,14 +124,15 @@ export async function PUT(req: NextRequest) {
     await logAudit({
       action: 'CAREER_APPLICATION_STATUS_UPDATE',
       status: 'SUCCESS',
-      details: `Status of application ${updatedApplicant.applicationId} updated to ${status}`,
+      details: `Application ${updatedApplicant.applicationId} status updated: ${JSON.stringify(updateData)}`,
       req
     });
 
     return NextResponse.json({
-      message: "Status updated successfully",
+      message: "Application updated successfully",
       applicantId: updatedApplicant.applicationId,
-      status: updatedApplicant.status
+      status: updatedApplicant.status,
+      recruitmentStatus: updatedApplicant.recruitmentStatus
     }, { status: 200 });
 
   } catch (error) {

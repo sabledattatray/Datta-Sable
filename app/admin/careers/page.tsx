@@ -52,6 +52,25 @@ interface Applicant {
     title: string;
     department: string;
   };
+  whatsappNumber?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  currentAddress?: string;
+  is10thPass?: boolean;
+  hasCollectionExperience?: boolean;
+  hasTeamHandlingExperience?: boolean;
+  areaFamiliarity?: string;
+  hasTwoWheeler?: boolean;
+  hasDrivingLicense?: boolean;
+  aadhaarUrl?: string;
+  photoUrl?: string;
+  isImmediateJoiner?: boolean;
+  recruitmentStatus?: string;
+  interviewDate?: string;
+  joiningDate?: string;
+  remarks?: string;
+  candidateSource?: string;
+  applicationScore?: number;
 }
 
 export default function AdminCareersPage() {
@@ -140,13 +159,48 @@ export default function AdminCareersPage() {
     }
   };
 
+  // Update Applicant Recruitment Details
+  const handleUpdateWorkflowField = async (id: string, fields: {
+    recruitmentStatus?: string;
+    interviewDate?: string;
+    joiningDate?: string;
+    remarks?: string;
+    status?: string;
+  }) => {
+    setUpdatingStatus(true);
+    try {
+      const res = await fetch('/api/admin/careers', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, ...fields })
+      });
+
+      if (res.ok) {
+        setApplicants(prev => prev.map(a => a.id === id ? { ...a, ...fields } : a));
+        if (selectedApplicant && selectedApplicant.id === id) {
+          setSelectedApplicant(prev => prev ? { ...prev, ...fields } : null);
+        }
+      } else {
+        const data = await res.json();
+        alert(data.message || "Failed to update recruitment details.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error updating recruitment details.");
+    } finally {
+      setUpdatingStatus(false);
+    }
+  };
+
   // Export to Excel (CSV)
   const handleExportExcel = () => {
     if (applicants.length === 0) return;
 
     const headers = [
-      "Application ID", "Name", "Email", "Phone", "Position", "Experience", 
-      "Skills", "Current Salary", "Expected Salary", "Notice Period", "Status", "Date Applied", "Match Score"
+      "Application ID", "Name", "Email", "Phone", "WhatsApp", "DOB", "Gender", "Address",
+      "10th Pass", "Collection Exp", "Team Handling", "Area Familiarity", "Two Wheeler", "Driving License",
+      "Source", "Immediate Joiner", "Recruitment Status", "Interview Date", "Joining Date", "Remarks",
+      "Position", "Experience", "Skills", "Current Salary", "Expected Salary", "Notice Period", "Date Applied", "Match Score"
     ];
 
     const csvRows = [headers.join(",")];
@@ -157,13 +211,28 @@ export default function AdminCareersPage() {
         `"${app.fullName.replace(/"/g, '""')}"`,
         app.email,
         app.mobile,
+        app.whatsappNumber || "",
+        app.dateOfBirth || "",
+        app.gender || "",
+        `"${(app.currentAddress || "").replace(/"/g, '""')}"`,
+        app.is10thPass ? "Yes" : "No",
+        app.hasCollectionExperience ? "Yes" : "No",
+        app.hasTeamHandlingExperience ? "Yes" : "No",
+        `"${(app.areaFamiliarity || "").replace(/"/g, '""')}"`,
+        app.hasTwoWheeler ? "Yes" : "No",
+        app.hasDrivingLicense ? "Yes" : "No",
+        app.candidateSource || "",
+        app.isImmediateJoiner ? "Yes" : "No",
+        app.recruitmentStatus || "Application Received",
+        app.interviewDate || "",
+        app.joiningDate || "",
+        `"${(app.remarks || "").replace(/"/g, '""')}"`,
         `"${(app.job?.title || 'Unknown').replace(/"/g, '""')}"`,
         app.totalExperience,
         `"${app.skills.replace(/"/g, '""')}"`,
         app.currentSalary || "",
         app.expectedSalary,
         app.noticePeriod,
-        app.status,
         new Date(app.createdAt).toLocaleDateString(),
         app.matchScore
       ];
@@ -504,23 +573,72 @@ export default function AdminCareersPage() {
                 <button onClick={() => setSelectedApplicant(null)} style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer' }}><X size={20} /></button>
               </div>
 
-              {/* Status Update Dropdown */}
-              <div style={{ padding: '1rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Applicant Application Status</label>
-                <div className="flex gap-2">
+              {/* Recruiter Workflow Status Card */}
+              <div style={{ padding: '1rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div>
+                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Recruiter Workflow Status</label>
                   <select 
-                    value={selectedApplicant.status} 
+                    value={selectedApplicant.recruitmentStatus || "Application Received"} 
                     disabled={updatingStatus}
-                    onChange={(e) => handleUpdateStatus(selectedApplicant.id, e.target.value)}
-                    style={{ flex: 1, padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      let syncStatus = selectedApplicant.status;
+                      if (val === 'Application Received') syncStatus = 'New';
+                      else if (val === 'Screening Pending') syncStatus = 'Under Review';
+                      else if (val === 'Interview Scheduled') syncStatus = 'Interview Scheduled';
+                      else if (val === 'Selected') syncStatus = 'Shortlisted';
+                      else if (val === 'Document Verification') syncStatus = 'Under Review';
+                      else if (val === 'Joined') syncStatus = 'Selected';
+                      else if (val === 'Rejected') syncStatus = 'Rejected';
+                      
+                      handleUpdateWorkflowField(selectedApplicant.id, { 
+                        recruitmentStatus: val, 
+                        status: syncStatus 
+                      });
+                    }}
+                    style={{ width: '100%', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }}
                   >
-                    <option value="New">New</option>
-                    <option value="Under Review">Under Review</option>
-                    <option value="Shortlisted">Shortlisted</option>
+                    <option value="Application Received">Application Received</option>
+                    <option value="Screening Pending">Screening Pending</option>
                     <option value="Interview Scheduled">Interview Scheduled</option>
                     <option value="Selected">Selected</option>
+                    <option value="Document Verification">Document Verification</option>
+                    <option value="Joined">Joined</option>
                     <option value="Rejected">Rejected</option>
                   </select>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                  <div>
+                    <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Interview Date</label>
+                    <input 
+                      type="date"
+                      value={selectedApplicant.interviewDate || ""}
+                      onChange={(e) => handleUpdateWorkflowField(selectedApplicant.id, { interviewDate: e.target.value })}
+                      style={{ width: '100%', padding: '0.4rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.85rem' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Joining Date</label>
+                    <input 
+                      type="date"
+                      value={selectedApplicant.joiningDate || ""}
+                      onChange={(e) => handleUpdateWorkflowField(selectedApplicant.id, { joiningDate: e.target.value })}
+                      style={{ width: '100%', padding: '0.4rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.85rem' }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Recruiter Remarks</label>
+                  <textarea 
+                    value={selectedApplicant.remarks || ""}
+                    placeholder="Enter candidate notes here..."
+                    onBlur={(e) => handleUpdateWorkflowField(selectedApplicant.id, { remarks: e.target.value })}
+                    onChange={(e) => setApplicants(prev => prev.map(a => a.id === selectedApplicant.id ? { ...a, remarks: e.target.value } : a))}
+                    style={{ width: '100%', minHeight: '60px', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.85rem', resize: 'vertical' }}
+                  />
+                  <div style={{ fontSize: '0.7rem', color: 'var(--muted)', textAlign: 'right', marginTop: '2px' }}>Autosaves on blur</div>
                 </div>
               </div>
 
@@ -529,7 +647,7 @@ export default function AdminCareersPage() {
                 
                 {/* Score */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1rem', background: 'rgba(201,243,29,0.03)', border: '1px solid rgba(201,243,29,0.15)', borderRadius: '8px' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>AI Match Rating Score</span>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Candidate Match Rating Score</span>
                   <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)' }}>{selectedApplicant.matchScore}%</span>
                 </div>
 
@@ -539,27 +657,62 @@ export default function AdminCareersPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div><strong>Email:</strong> {selectedApplicant.email}</div>
                     <div><strong>Phone:</strong> {selectedApplicant.mobile}</div>
+                    <div><strong>WhatsApp:</strong> {selectedApplicant.whatsappNumber || 'N/A'}</div>
+                    <div><strong>Date of Birth:</strong> {selectedApplicant.dateOfBirth || 'N/A'}</div>
+                    <div><strong>Gender:</strong> {selectedApplicant.gender || 'N/A'}</div>
                     <div><strong>Location:</strong> {selectedApplicant.currentLocation}</div>
+                    <div><strong>Address:</strong> {selectedApplicant.currentAddress || 'N/A'}</div>
                     <div><strong>Pref Location:</strong> {selectedApplicant.preferredLocation || 'None Specified'}</div>
                   </div>
                 </div>
 
-                {/* Resume preview links */}
+                {/* Collections Specific Fields */}
                 <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Candidate Uploads</h3>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Collections Eligibility & Details</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div><strong>10th Pass Confirmed:</strong> {selectedApplicant.is10thPass ? 'Yes' : 'No'}</div>
+                    <div><strong>Collection Exp:</strong> {selectedApplicant.hasCollectionExperience ? 'Yes' : 'No'}</div>
+                    <div><strong>Team Handling Exp:</strong> {selectedApplicant.hasTeamHandlingExperience ? 'Yes' : 'No'}</div>
+                    <div><strong>Area Familiarity:</strong> {selectedApplicant.areaFamiliarity || 'N/A'}</div>
+                    <div><strong>Two Wheeler Available:</strong> {selectedApplicant.hasTwoWheeler ? 'Yes' : 'No'}</div>
+                    <div><strong>Driving License Available:</strong> {selectedApplicant.hasDrivingLicense ? 'Yes' : 'No'}</div>
+                    <div><strong>Immediate Joiner:</strong> {selectedApplicant.isImmediateJoiner ? 'Yes' : 'No'}</div>
+                    <div><strong>Candidate Source:</strong> <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{selectedApplicant.candidateSource || 'Direct'}</span></div>
+                  </div>
+                </div>
+
+                {/* Secure Documents Links */}
+                <div>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Candidate Uploads (Secure Storage)</h3>
                   <div className="flex flex-col gap-2">
                     <a 
-                      href={selectedApplicant.resumeUrl} target="_blank" rel="noopener noreferrer"
+                      href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.resumeUrl)}`} target="_blank" rel="noopener noreferrer"
                       className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
                     >
-                      <FileText size={14} /> Open Resume PDF/Doc <ArrowUpRight size={12} />
+                      <FileText size={14} /> Open Candidate Resume <ArrowUpRight size={12} />
                     </a>
-                    {selectedApplicant.portfolioFileUrl && (
+                    {selectedApplicant.aadhaarUrl && (
                       <a 
-                        href={selectedApplicant.portfolioFileUrl} target="_blank" rel="noopener noreferrer"
+                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.aadhaarUrl)}`} target="_blank" rel="noopener noreferrer"
                         className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
                       >
-                        <FileSpreadsheet size={14} /> Open Portfolio ZIP <ArrowUpRight size={12} />
+                        <FileText size={14} /> Open Aadhaar Card <ArrowUpRight size={12} />
+                      </a>
+                    )}
+                    {selectedApplicant.photoUrl && (
+                      <a 
+                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.photoUrl)}`} target="_blank" rel="noopener noreferrer"
+                        className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
+                      >
+                        <FileText size={14} /> Open Candidate Photo <ArrowUpRight size={12} />
+                      </a>
+                    )}
+                    {selectedApplicant.portfolioFileUrl && (
+                      <a 
+                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.portfolioFileUrl)}`} target="_blank" rel="noopener noreferrer"
+                        className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
+                      >
+                        <FileSpreadsheet size={14} /> Open Portfolio Archive <ArrowUpRight size={12} />
                       </a>
                     )}
                   </div>
@@ -615,15 +768,19 @@ export default function AdminCareersPage() {
                 </div>
 
                 {/* Short answers */}
-                <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem' }}>Q: Why join us?</h3>
-                  <p style={{ color: 'var(--muted)', background: 'var(--surface2)', padding: '0.75rem 1rem', borderRadius: '6px', fontSize: '0.85rem' }}>{selectedApplicant.whyJoin}</p>
-                </div>
+                {selectedApplicant.whyJoin && (
+                  <div>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem' }}>Q: Why join us?</h3>
+                    <p style={{ color: 'var(--muted)', background: 'var(--surface2)', padding: '0.75rem 1rem', borderRadius: '6px', fontSize: '0.85rem' }}>{selectedApplicant.whyJoin}</p>
+                  </div>
+                )}
 
-                <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem' }}>Q: Strongest Achievement</h3>
-                  <p style={{ color: 'var(--muted)', background: 'var(--surface2)', padding: '0.75rem 1rem', borderRadius: '6px', fontSize: '0.85rem' }}>{selectedApplicant.achievement}</p>
-                </div>
+                {selectedApplicant.achievement && (
+                  <div>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem' }}>Q: Strongest Achievement</h3>
+                    <p style={{ color: 'var(--muted)', background: 'var(--surface2)', padding: '0.75rem 1rem', borderRadius: '6px', fontSize: '0.85rem' }}>{selectedApplicant.achievement}</p>
+                  </div>
+                )}
 
               </div>
             </motion.div>

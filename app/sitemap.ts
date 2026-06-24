@@ -78,6 +78,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/cookies',
     '/faq',
     '/careers',
+    '/careers/collection-officer-mumbai',
+    '/careers/collection-team-leader-mumbai',
     '/start-here',
     '/analytics-live',
     '/data-forge',

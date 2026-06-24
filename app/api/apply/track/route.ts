@@ -39,6 +39,10 @@ export async function GET(req: NextRequest) {
       position: applicant.job.title,
       department: applicant.job.department,
       status: applicant.status,
+      recruitmentStatus: applicant.recruitmentStatus || "Application Received",
+      interviewDate: applicant.interviewDate || null,
+      joiningDate: applicant.joiningDate || null,
+      remarks: applicant.remarks || null,
       appliedAt: applicant.createdAt.toISOString()
     }, { status: 200 });
 
