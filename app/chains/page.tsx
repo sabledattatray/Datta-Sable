@@ -14,9 +14,24 @@ import {
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "Surgical Execution Chains™ | Automated AI Orchestration",
-  description: "One input, multiple high-authority outputs. Deploy automated AI orchestration pipelines for LinkedIn, technical SEO, and deep research.",
+  title: 'Surgical Execution Chains™ | Automated AI Orchestration | Datta Sable',
+  description: 'One input, multiple high-authority outputs. Deploy automated AI orchestration pipelines for LinkedIn, technical SEO, and deep research.',
+  openGraph: {
+    title: 'Surgical Execution Chains™ | Automated AI Orchestration',
+    description: 'One input, multiple high-authority outputs. Automated AI pipelines for LinkedIn, SEO, and deep research.',
+    url: 'https://dattasable.com/chains',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Surgical Execution Chains \u2014 Datta Sable' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Surgical Execution Chains™ | Automated AI Orchestration',
+    description: 'Automated AI pipelines for LinkedIn, SEO, and deep research. One input, multiple outputs.',
+    images: ['/images/dattasable.com.webp'],
+  },
+  alternates: { canonical: 'https://dattasable.com/chains' },
 };
+
 
 export default function ChainHub() {
   return (

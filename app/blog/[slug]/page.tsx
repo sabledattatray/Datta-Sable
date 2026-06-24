@@ -31,8 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: 'Post Not Found' };
 
-  const ogImage = (post as any).image 
-    ? `${baseUrl}${(post as any).image}`
+  const rawImage = (post as any).image;
+  const ogImage = rawImage
+    ? rawImage.startsWith('http://') || rawImage.startsWith('https://')
+      ? rawImage
+      : `${baseUrl}${rawImage}`
     : `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date || '')}`;
     
   let publishDate = new Date().toISOString();

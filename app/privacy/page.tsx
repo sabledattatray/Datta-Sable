@@ -4,8 +4,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Datta Sable",
-  description: "Privacy Policy for dattasable.com — how we collect, use, and protect your personal data, including Google AdSense cookie disclosure.",
+  title: 'Privacy Policy | Datta Sable',
+  description: 'Privacy Policy for dattasable.com — how we collect, use, and protect your personal data, including Google AdSense cookie disclosure.',
+  openGraph: {
+    title: 'Privacy Policy | Datta Sable',
+    description: 'Privacy Policy for dattasable.com — data collection, usage, and protection practices.',
+    url: 'https://dattasable.com/privacy',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Datta Sable' }],
+  },
+  twitter: { card: 'summary', title: 'Privacy Policy | Datta Sable', description: 'Privacy Policy for dattasable.com.', images: ['/images/dattasable.com.webp'] },
   alternates: { canonical: 'https://dattasable.com/privacy' },
 };
 

@@ -1,7 +1,27 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogList from '@/components/BlogList';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
+
+export const metadata: Metadata = {
+  title: 'Blog — Power BI, SQL, AI & Data Engineering Articles',
+  description: 'In-depth articles on Power BI, Tableau, SQL, Microsoft Fabric, Python data engineering, and AI workflows. Technical breakdowns for data professionals.',
+  openGraph: {
+    title: 'Blog — Power BI, SQL, AI & Data Engineering Articles | Datta Sable',
+    description: 'In-depth articles on Power BI, Tableau, SQL, Microsoft Fabric, Python data engineering, and AI workflows.',
+    url: 'https://dattasable.com/blog',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Datta Sable Blog — BI & Data Engineering' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog — Power BI, SQL, AI & Data Engineering | Datta Sable',
+    description: 'Technical articles on Power BI, Tableau, SQL, Microsoft Fabric, Python & AI.',
+    images: ['/images/dattasable.com.webp'],
+  },
+  alternates: { canonical: 'https://dattasable.com/blog' },
+};
 
 export const revalidate = 3600; // Revalidate every hour
 

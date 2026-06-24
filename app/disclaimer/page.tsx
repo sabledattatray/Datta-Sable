@@ -4,8 +4,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: "Disclaimer | Datta Sable",
-  description: "Legal disclaimer for dattasable.com — professional, external links, and results disclaimers.",
+  title: 'Disclaimer | Datta Sable',
+  description: 'Legal disclaimer for dattasable.com — professional, external links, and results disclaimers.',
+  openGraph: {
+    title: 'Disclaimer | Datta Sable',
+    description: 'Legal disclaimer for dattasable.com.',
+    url: 'https://dattasable.com/disclaimer',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Datta Sable' }],
+  },
+  twitter: { card: 'summary', title: 'Disclaimer | Datta Sable', description: 'Legal disclaimer for dattasable.com.', images: ['/images/dattasable.com.webp'] },
   alternates: { canonical: 'https://dattasable.com/disclaimer' },
 };
 

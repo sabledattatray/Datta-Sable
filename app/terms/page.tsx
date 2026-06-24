@@ -4,8 +4,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Datta Sable",
-  description: "Terms of Service for dattasable.com — rules governing use of this website, dashboards, and content.",
+  title: 'Terms of Service | Datta Sable',
+  description: 'Terms of Service for dattasable.com — rules governing use of this website, dashboards, and content.',
+  openGraph: {
+    title: 'Terms of Service | Datta Sable',
+    description: 'Terms of Service for dattasable.com.',
+    url: 'https://dattasable.com/terms',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Datta Sable' }],
+  },
+  twitter: { card: 'summary', title: 'Terms of Service | Datta Sable', description: 'Terms of Service for dattasable.com.', images: ['/images/dattasable.com.webp'] },
   alternates: { canonical: 'https://dattasable.com/terms' },
 };
 

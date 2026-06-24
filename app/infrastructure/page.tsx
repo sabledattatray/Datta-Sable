@@ -5,9 +5,24 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Creator Infrastructure Hub | Surgical AI Systems',
+  title: 'Creator Infrastructure Hub | Surgical AI Systems | Datta Sable',
   description: 'The definitive hub for automation systems, AI content pipelines, and execution chains for modern technical creators.',
+  openGraph: {
+    title: 'Creator Infrastructure Hub | Surgical AI Systems',
+    description: 'Automation systems, AI content pipelines, and execution chains for modern technical creators.',
+    url: 'https://dattasable.com/infrastructure',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Creator Infrastructure Hub \u2014 Datta Sable' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Creator Infrastructure Hub | Surgical AI Systems',
+    description: 'Automation systems, AI pipelines, and execution chains for technical creators.',
+    images: ['/images/dattasable.com.webp'],
+  },
+  alternates: { canonical: 'https://dattasable.com/infrastructure' },
 };
+
 
 const INFRA_SECTIONS = [
   {

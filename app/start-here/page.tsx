@@ -6,17 +6,24 @@ import { Metadata } from 'next';
 import { BookOpen, Target, Zap, BarChart3, Database, BrainCircuit, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: "Start Your Data Journey | BI & Analytics Knowledge Hub",
-  description: "A structured learning pathway from data fundamentals to advanced enterprise orchestration. Explore modern BI stacks, automation pipelines, and executive dashboards.",
+  title: 'Start Your Data Journey | BI & Analytics Knowledge Hub | Datta Sable',
+  description: 'A structured learning pathway from data fundamentals to advanced enterprise orchestration. Explore modern BI stacks, automation pipelines, and executive dashboards.',
   openGraph: {
-    title: "Start Your Data Journey | Datta Sable Hub",
-    description: "Your roadmap to mastering Business Intelligence, Automation, and Data Architecture.",
-    images: ["/images/blog/bi_performance_hero_1777410226286.webp"],
+    title: 'Start Your Data Journey | BI & Analytics Knowledge Hub',
+    description: 'Your roadmap to mastering Business Intelligence, Automation, and Data Architecture.',
+    url: 'https://dattasable.com/start-here',
+    type: 'website',
+    images: [{ url: '/images/blog/bi_performance_hero_1777410226286.webp', width: 1200, height: 630, alt: 'Start Your Data Journey \u2014 Datta Sable' }],
   },
-  alternates: {
-    canonical: '/start-here',
-  }
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Start Your Data Journey | BI & Analytics Knowledge Hub',
+    description: 'Your roadmap to mastering Business Intelligence, Automation, and Data Architecture.',
+    images: ['/images/blog/bi_performance_hero_1777410226286.webp'],
+  },
+  alternates: { canonical: 'https://dattasable.com/start-here' },
 };
+
 
 export default function StartHerePage() {
   const paths = [

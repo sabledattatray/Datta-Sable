@@ -16,8 +16,22 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: { absolute: "Surgical AI Workspace | AI Workflows" },
-  description: "A precision-engineered AI workspace for creators, developers, and strategists — built to streamline content workflows, SEO execution, and technical optimization.",
+  title: { absolute: 'Surgical AI Workspace | AI Tools for Creators & Developers' },
+  description: 'A precision-engineered AI workspace for creators, developers, and strategists — built to streamline content workflows, SEO execution, and technical optimization.',
+  openGraph: {
+    title: 'Surgical AI Workspace | AI Tools for Creators & Developers',
+    description: 'Precision-engineered AI tools for creators, developers, and strategists. Streamline content workflows, SEO, and technical optimization.',
+    url: 'https://dattasable.com/tools',
+    type: 'website',
+    images: [{ url: '/images/dattasable.com.webp', width: 1200, height: 630, alt: 'Surgical AI Workspace — Datta Sable' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Surgical AI Workspace | AI Tools for Creators & Developers',
+    description: 'AI-powered tools for content workflows, SEO execution, and technical optimization.',
+    images: ['/images/dattasable.com.webp'],
+  },
+  alternates: { canonical: 'https://dattasable.com/tools' },
 };
 
 const TOOLS = [
