@@ -54,6 +54,39 @@ export default function AdminCatchAllPage() {
     setTimeout(() => setCopiedText(null), 2000);
   };
 
+  // Company Profile State
+  const [companyName, setCompanyName] = useState('dattasable.');
+  const [supportEmail, setSupportEmail] = useState('support@dattasable.com');
+  const [taxId, setTaxId] = useState('27AABCU1234F1Z5');
+  const [officeAddress, setOfficeAddress] = useState('Sable Heights, Senapati Bapat Road, Pune, Maharashtra, 411016');
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedName = localStorage.getItem('company_name');
+      const savedEmail = localStorage.getItem('company_email');
+      const savedTax = localStorage.getItem('company_tax_id');
+      const savedAddress = localStorage.getItem('company_address');
+      
+      if (savedName !== null) setCompanyName(savedName);
+      if (savedEmail !== null) setSupportEmail(savedEmail);
+      if (savedTax !== null) setTaxId(savedTax);
+      if (savedAddress !== null) setOfficeAddress(savedAddress);
+    }
+  }, []);
+
+  const handleSaveCompanyProfile = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('company_name', companyName);
+      localStorage.setItem('company_email', supportEmail);
+      localStorage.setItem('company_tax_id', taxId);
+      localStorage.setItem('company_address', officeAddress);
+      
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus(null), 3000);
+    }
+  };
+
   // State for dynamically added mock data
   const [mediaList, setMediaList] = useState([
     { id: 1, name: 'hero-banner.jpg', size: '245 KB', type: 'image', date: '2 hours ago', url: '/images/blog/bi-career.webp' },
@@ -247,21 +280,26 @@ export default function AdminCatchAllPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Company Name</label>
-                  <input type="text" defaultValue="dattasable." style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
+                  <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Support Email</label>
-                  <input type="email" defaultValue="support@dattasable.com" style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
+                  <input type="email" value={supportEmail} onChange={e => setSupportEmail(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Tax ID / GSTIN</label>
-                  <input type="text" defaultValue="27AABCU1234F1Z5" style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
+                  <input type="text" value={taxId} onChange={e => setTaxId(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Office Address</label>
-                  <textarea defaultValue="Sable Heights, Senapati Bapat Road, Pune, Maharashtra, 411016" rows={3} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none', resize: 'none' }} />
+                  <textarea value={officeAddress} onChange={e => setOfficeAddress(e.target.value)} rows={3} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none', resize: 'none' }} />
                 </div>
-                <button style={{ padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', width: 'fit-content' }}>Save Company Profile</button>
+                {saveStatus === 'success' && (
+                  <div style={{ padding: '10px 14px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 10, color: '#10b981', fontSize: 12.5, fontWeight: 600 }}>
+                    ✓ Profile settings saved successfully!
+                  </div>
+                )}
+                <button onClick={handleSaveCompanyProfile} style={{ padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', width: 'fit-content' }}>Save Company Profile</button>
               </div>
             </div>
           </div>
