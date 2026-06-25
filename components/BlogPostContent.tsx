@@ -244,7 +244,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
         <div className="flex items-center gap-3 mb-8 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
           <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent)', flexShrink: 0, position: 'relative' }}>
             <Image 
-              src="/images/datta.webp" 
+              src="/images/author.webp" 
               alt="Datta Sable" 
               width={40}
               height={40}
@@ -297,7 +297,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
             <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--accent)', flexShrink: 0, position: 'relative' }}>
               <Image 
-                src="/images/datta.webp" 
+                src="/images/author.webp" 
                 alt="Datta Sable" 
                 width={80}
                 height={80}

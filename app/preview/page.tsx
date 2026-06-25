@@ -71,7 +71,7 @@ export default function OGPreviewPage() {
             position: 'relative'
           }}>
             <Image 
-              src="/images/datta.webp" 
+              src="/images/author.webp" 
               alt="Datta Sable" 
               fill
               style={{ objectFit: 'cover' }}
