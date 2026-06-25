@@ -83,6 +83,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preload" href="/fonts/syne-latin-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
+        {/* ✅ Google AdSense Auto-Ads — required for AdSense crawlers to detect ad slots */}
+        <Script
+          id="adsense-auto-ads"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         <Script
           nonce={nonce}
           id="json-ld"
@@ -124,7 +133,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 "name": "Datta Sable BI & Analytics Consulting",
                 "url": "https://dattasable.com",
                 "logo": "https://dattasable.com/favicon.svg",
-                "image": "https://dattasable.com/images/datta.webp",
+                "image": "https://dattasable.com/images/author.webp",
                 "description": "Independent Business Intelligence and Data Strategy consulting practice operated by Datta Sable in Mumbai, India. Providing custom dashboard development, SQL automation, and Python ETL pipelines.",
                 "address": {
                   "@type": "PostalAddress",

@@ -15,7 +15,7 @@ function isPlaceholderPost(post: { content?: string }) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
-  const baselineDate = new Date('2026-05-18');
+  const baselineDate = new Date('2026-06-25');
 
   // 1. Fetch DB blog posts (if any)
   const dbPosts = await prisma.post.findMany({

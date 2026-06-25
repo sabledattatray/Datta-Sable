@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Datta Sable',
-  description: 'Privacy Policy for dattasable.com — how we collect, use, and protect your personal data, including Google AdSense cookie disclosure.',
+  description: 'Privacy Policy for dattasable.com — how we collect, use, and protect your personal data, including Google AdSense advertising disclosure and cookie policy.',
   openGraph: {
     title: 'Privacy Policy | Datta Sable',
     description: 'Privacy Policy for dattasable.com — data collection, usage, and protection practices.',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const lastUpdated = "April 29, 2026";
+  const lastUpdated = "June 25, 2026";
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
@@ -78,15 +78,26 @@ export default function PrivacyPage() {
 
             <section style={{ marginBottom: '2.5rem' }}>
               <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>6. Advertising & Cookies (Google AdSense)</h2>
+
+              {/* AdSense disclosure banner — required by AdSense programme policies */}
+              <div style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderRadius: '8px', padding: '1rem 1.25rem', marginBottom: '1.25rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>📢</span>
+                <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text)', lineHeight: 1.7 }}>
+                  <strong>Advertising Disclosure:</strong> This website, <strong>dattasable.com</strong>, participates in the <strong>Google AdSense programme</strong>. Google, as a third-party vendor, uses cookies to serve ads on this site. Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your prior visits to this and other websites.
+                </p>
+              </div>
+
               <p>This website uses Google AdSense, a third-party advertising service provided by Google LLC. Google AdSense uses cookies, including the DoubleClick DART cookie, to serve advertisements to visitors based on their visit to this site and other websites on the Internet.</p>
               <p style={{ marginTop: '1rem' }}>Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visit to our site and/or other sites on the Internet. These cookies allow Google and its partners to show you relevant ads across the web.</p>
+              <p style={{ marginTop: '1rem' }}>Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites. Google&apos;s advertising cookies enable Google and its partners to serve ads based on visits to this site and/or other sites on the Internet.</p>
               <p style={{ marginTop: '1rem' }}>You may opt out of personalized advertising in the following ways:</p>
               <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
                 <li>Visit <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google Ads Settings</a></li>
-                <li>Visit <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>www.aboutads.info</a></li>
+                <li>Visit <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>www.aboutads.info</a></li>
                 <li>Visit <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google&apos;s Privacy Policy</a></li>
+                <li>Visit <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google&apos;s Advertising Policies</a></li>
               </ul>
-              <p style={{ marginTop: '1rem' }}>By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.</p>
+              <p style={{ marginTop: '1rem' }}>By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above. If you do not want Google to use information based on your site activity for personalizing ads, you may opt out by visiting Ads Settings.</p>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
