@@ -6074,7 +6074,7 @@ services:
 import { Suspense } from 'react';
 
 async function DataFeed() {
-  const res = await fetch('https://api.dattasable.com/feed', { next: { revalidate: 3600 } });
+  const res = await fetch('https://api.example.com/feed', { next: { revalidate: 3600 } });
   const data = await res.json();
   return <ul>{data.map(item => <li key={item.id}>{item.name}</li>)}</ul>;
 }
@@ -6544,7 +6544,7 @@ services:
 import { Suspense } from 'react';
 
 async function DataFeed() {
-  const res = await fetch('https://api.dattasable.com/feed', { next: { revalidate: 3600 } });
+  const res = await fetch('https://api.example.com/feed', { next: { revalidate: 3600 } });
   const data = await res.json();
   return <ul>{data.map(item => <li key={item.id}>{item.name}</li>)}</ul>;
 }
@@ -9988,7 +9988,7 @@ services:
 import { Suspense } from 'react';
 
 async function DataFeed() {
-  const res = await fetch('https://api.dattasable.com/feed', { next: { revalidate: 3600 } });
+  const res = await fetch('https://api.example.com/feed', { next: { revalidate: 3600 } });
   const data = await res.json();
   return <ul>{data.map(item => <li key={item.id}>{item.name}</li>)}</ul>;
 }
@@ -11392,7 +11392,7 @@ services:
 import { Suspense } from 'react';
 
 async function DataFeed() {
-  const res = await fetch('https://api.dattasable.com/feed', { next: { revalidate: 3600 } });
+  const res = await fetch('https://api.example.com/feed', { next: { revalidate: 3600 } });
   const data = await res.json();
   return <ul>{data.map(item => <li key={item.id}>{item.name}</li>)}</ul>;
 }
