@@ -41,6 +41,10 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/dashboard/', '/admin/', '/preview'],
       },
     ],
-    sitemap: 'https://dattasable.com/sitemap.xml',
+    sitemap: [
+      'https://dattasable.com/sitemap.xml',
+      'https://dattasable.com/image-sitemap.xml',
+      'https://dattasable.com/news-sitemap.xml',
+    ],
   };
 }
