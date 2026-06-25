@@ -13,7 +13,7 @@ export async function GET() {
       id: isNaN(Number(p.id)) ? p.id : Number(p.id),
       title: p.title,
       category: p.category,
-      image: p.imageUrl || '/images/portfolio/surgical_forge.png',
+      image: p.imageUrl || '/images/portfolio/surgical_forge.webp',
       color: p.color || 'var(--accent)',
       tools: p.tools,
       client: p.client || '',

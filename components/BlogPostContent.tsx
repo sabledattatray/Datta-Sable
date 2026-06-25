@@ -327,7 +327,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
               "@type": "TechArticle",
               "headline": post.title,
               "description": post.excerpt,
-              "image": post.image ? `https://dattasable.com${post.image}` : `https://dattasable.com/images/og-main.png`,
+              "image": post.image ? `https://dattasable.com${post.image}` : `https://dattasable.com/images/og-main.webp`,
               "datePublished": parseSafeDate(post.date, post.createdAt),
               "dateModified": parseSafeDate(post.date, post.updatedAt || post.createdAt),
               "author": {
@@ -345,7 +345,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
                 "name": "Datta Sable | BI & Analytics Consulting",
                 "logo": {
                   "@type": "ImageObject",
-                  "url": "https://dattasable.com/images/logo.png"
+                  "url": "https://dattasable.com/images/logo.webp"
                 }
               },
               "mainEntityOfPage": {
@@ -422,7 +422,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
                     `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg`,
                     `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`
                   ]
-                : [getAbsoluteUrl(post.image || "/images/og-main.png")],
+                : [getAbsoluteUrl(post.image || "/images/og-main.webp")],
               "uploadDate": parseSafeDate(post.date, post.createdAt),
               "embedUrl": youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : getAbsoluteUrl(localVideoUrl || ''),
               "contentUrl": localVideoUrl ? getAbsoluteUrl(localVideoUrl) : undefined,

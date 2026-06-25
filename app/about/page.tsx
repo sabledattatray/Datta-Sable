@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'profile',
     images: [
       {
-        url: "/images/og-main.png",
+        url: "/images/og-main.webp",
         width: 1200,
         height: 630,
         alt: "Datta Sable | BI & Data Strategy Expert",

@@ -4624,7 +4624,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
     date: "May 17, 2026",
     color: "var(--accent)",
     icon: "💎",
-    image: "/images/blog/fabric_medallion_architecture.png",
+    image: "/images/blog/fabric_medallion_architecture.webp",
     tags: ["Microsoft Fabric","Medallion Architecture","Data Engineering","Power BI"]
   },
   {
@@ -4739,7 +4739,7 @@ services:
     date: "May 15, 2026",
     color: "var(--accent)",
     icon: "🔗",
-    image: "/images/blog/execution_chains_hero.png",
+    image: "/images/blog/execution_chains_hero.webp",
     tags: ["Execution Chains","AI Infrastructure","Workflow Engineering","Deterministic AI"]
   },
   {
@@ -12177,7 +12177,7 @@ WHERE rg.object_id = OBJECT_ID('fact_sales');</code></pre>
     date: "June 25, 2026",
     color: "#ff9f1c",
     icon: "Database",
-    image: "/images/blog/sql-server-columnstore-indexes-optimization-guide.png",
+    image: "/images/blog/sql-server-columnstore-indexes-optimization-guide.webp",
     tags: ["SQL Server","Columnstore Index","Data Warehousing","Performance Tuning","Database Administration"]
   }
 ];

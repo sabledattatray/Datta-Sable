@@ -49,14 +49,14 @@ This platform is a comprehensive **Digital Enterprise Hub**. It bridges the gap 
 ### 🪐 The Experience (Hero Section)
 The landing page establishes immediate authority with a high-fidelity technical visualization and a clear value proposition for data-driven enterprises.
 
-![Hero Section](./public/images/readme/hero_preview.png)
+![Hero Section](./public/images/readme/hero_preview.webp)
 
 ### 📊 Admin Command Center
 A clean, enterprise-grade interface for managing the entire ecosystem. Designed for efficiency and high-stakes data management.
 
 | **Admin Portal (Light Mode)** | **Analytics Showcase** |
 | :--- | :--- |
-| ![Admin Login](./public/images/readme/admin_preview.png) | ![Dashboard Showcase](./public/images/readme/dashboard_preview.png) |
+| ![Admin Login](./public/images/readme/admin_preview.webp) | ![Dashboard Showcase](./public/images/readme/dashboard_preview.webp) |
 
 ---
 

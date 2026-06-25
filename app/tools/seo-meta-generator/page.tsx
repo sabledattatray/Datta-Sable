@@ -59,7 +59,7 @@ export default function SEOMetaGenerator() {
         "name": "Datta Sable",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://dattasable.com/logo.png"
+          "url": "https://dattasable.com/logo.webp"
         }
       },
       "datePublished": new Date().toISOString()

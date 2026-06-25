@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Surgical AI Workspace (Interactive Prototype)",
     description: "Monitor live AI agent execution chains and optimize automation fidelity in this technical prototype.",
-    images: ["/images/dashboards/surgical_ai_preview.png"],
+    images: ["/images/dashboards/surgical_ai_preview.webp"],
     url: "https://dattasable.com/dashboards/surgical-ai",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Surgical AI Workspace (Interactive Prototype)",
-    images: ["/images/dashboards/surgical_ai_preview.png"],
+    images: ["/images/dashboards/surgical_ai_preview.webp"],
   },
   alternates: {
     canonical: "/dashboards/surgical-ai",
