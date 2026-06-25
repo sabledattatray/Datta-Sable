@@ -125,6 +125,7 @@ I am currently open to high-impact BI consulting and Data Engineering roles.
 - **Live Website**: [dattasable.com](https://dattasable.com)
 - **LinkedIn**: [Datta Sable](https://linkedin.com/in/dattasable)
 - **Email**: [contact@dattasable.com](mailto:contact@dattasable.com)
+- **About.me**: [Datta Sable](https://about.me/dattasable)
 
 ---
 

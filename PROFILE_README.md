@@ -10,6 +10,9 @@
   <a href="https://linkedin.com/in/dattasable" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn" />
   </a>
+  <a href="https://about.me/dattasable" target="_blank">
+    <img src="https://img.shields.io/badge/about.me-dattasable-005CFF?style=for-the-badge&logo=aboutdotme&logoColor=white" alt="about.me" />
+  </a>
 </p>
 
 Results-driven MIS & BI Manager with **10+ years of experience** in BFSI and risk portfolio management. I am uniquely positioned as a "Full-Stack Analyst" — highly capable of analyzing complex datasets via SQL/Power BI, and architecting the full-stack web and mobile platforms (Next.js/Capacitor) needed to deploy those insights at enterprise scale.
