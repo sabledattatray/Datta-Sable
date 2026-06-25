@@ -4,7 +4,7 @@ import {
   FileText, Plus, Search, Trash2, Edit2,
   ChevronLeft, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
   Type, Highlighter, Save, Settings, Image as ImageIcon,
-  Eye, EyeOff, Columns
+  Eye, EyeOff, Columns, Globe, Laptop, Smartphone, CheckCircle2, XCircle, AlertCircle, Sparkles
 } from 'lucide-react';
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
@@ -26,10 +26,22 @@ const initialPosts = mainPosts.map((p, idx) => ({
   image: p.image,
 }));
 
-function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string) {
-  if (!keyword) return { score: 0, checks: [] };
+function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, otherPosts: any[] = []) {
+  if (!keyword) return {
+    score: 0,
+    categories: {
+      basic: [],
+      additional: [],
+      title: [],
+      content: []
+    }
+  };
 
-  const checks: any[] = [];
+  const basicChecks: any[] = [];
+  const additionalChecks: any[] = [];
+  const titleChecks: any[] = [];
+  const contentChecks: any[] = [];
+  
   let earnedPoints = 0;
   let maxPoints = 0;
   
@@ -48,38 +60,46 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
   }
   const cleanContent = textContent.toLowerCase();
   const cleanExcerpt = excerpt.toLowerCase();
+  const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
   
-  const addCheck = (id: string, label: string, passed: boolean, pts: number) => {
-    checks.push({ id, label, passed, pts });
+  const addCheck = (category: 'basic' | 'additional' | 'title' | 'content', id: string, label: string, passed: boolean, pts: number) => {
+    const checkItem = { id, label, passed, pts };
+    if (category === 'basic') basicChecks.push(checkItem);
+    else if (category === 'additional') additionalChecks.push(checkItem);
+    else if (category === 'title') titleChecks.push(checkItem);
+    else if (category === 'content') contentChecks.push(checkItem);
+    
     maxPoints += pts;
     if (passed) earnedPoints += pts;
   };
 
-  // 1. Focus Keyword in Title (15 pts)
+  // 1. BASIC SEO CATEGORY (60 pts)
+  // A. Focus Keyword in Title (15 pts)
   const kwInTitle = cleanTitle.includes(kw);
-  addCheck('title_kw', 'Focus keyword in title', kwInTitle, 15);
+  addCheck('basic', 'title_kw', 'Focus keyword in SEO title', kwInTitle, 15);
 
-  // 2. Focus Keyword at the Beginning of Title (5 pts)
-  const kwStartsTitle = cleanTitle.startsWith(kw) || cleanTitle.indexOf(kw) < 15;
-  addCheck('title_start', 'Focus keyword at the beginning of title', kwInTitle && kwStartsTitle, 5);
-
-  // 3. Focus Keyword in URL Slug (10 pts)
+  // B. Focus Keyword in URL Slug (10 pts)
   const formattedKwSlug = kw.replace(/\s+/g, '-');
   const kwInSlug = cleanSlug.includes(formattedKwSlug);
-  addCheck('slug_kw', 'Focus keyword in URL slug', kwInSlug, 10);
+  addCheck('basic', 'slug_kw', 'Focus keyword in URL slug', kwInSlug, 10);
 
-  // 4. Focus Keyword in Excerpt (10 pts)
+  // C. Focus Keyword in Excerpt / Meta Description (10 pts)
   const kwInExcerpt = cleanExcerpt.includes(kw);
-  addCheck('excerpt_kw', 'Focus keyword in excerpt (meta description)', kwInExcerpt, 10);
+  addCheck('basic', 'excerpt_kw', 'Focus keyword in meta description', kwInExcerpt, 10);
 
-  // 5. Focus Keyword in First Paragraph/Beginning (15 pts)
+  // D. Focus Keyword in First 10% / Beginning of Content (15 pts)
   const cleanText = textContent.trim();
   const firstParagraph = cleanText.split('\n')[0] || '';
   const first300Chars = cleanText.slice(0, 300);
   const kwInBeginning = firstParagraph.toLowerCase().includes(kw) || first300Chars.toLowerCase().includes(kw);
-  addCheck('beginning_kw', 'Focus keyword in first paragraph / beginning of content', kwInBeginning, 15);
+  addCheck('basic', 'beginning_kw', 'Focus keyword at beginning of content', kwInBeginning, 15);
 
-  // 6. Focus Keyword in Subheading H2/H3 (10 pts)
+  // E. Content Length check (10 pts)
+  const wordCountOk = wordCount >= 600;
+  addCheck('basic', 'word_count', `Content length (${wordCount} words, ideal 600+)`, wordCountOk, 10);
+
+  // 2. ADDITIONAL CATEGORY (35 pts)
+  // A. Focus Keyword in H2/H3 subheadings (10 pts)
   const subheadingRegex = /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi;
   let matches;
   let kwInSubheading = false;
@@ -90,75 +110,136 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
       break;
     }
   }
-  addCheck('subheading_kw', 'Focus keyword in H2/H3 subheadings', kwInSubheading, 10);
+  addCheck('additional', 'subheading_kw', 'Focus keyword in H2/H3 subheadings', kwInSubheading, 10);
 
-  // 7. Title Length check (5 pts)
-  const titleLen = title.length;
-  const titleLenOk = titleLen >= 40 && titleLen <= 70;
-  addCheck('title_length', `Title length (${titleLen} chars, ideal 40-70)`, titleLenOk, 5);
+  // B. Image Alt Text contains keyword (5 pts)
+  const imgRegex = /<img([^>]+)>/gi;
+  let imgMatch;
+  let hasImages = false;
+  let kwInAlt = false;
+  while ((imgMatch = imgRegex.exec(content)) !== null) {
+    hasImages = true;
+    const attributes = imgMatch[1];
+    const altMatch = /alt=["']([^"']*)["']/i.exec(attributes);
+    if (altMatch && altMatch[1].toLowerCase().includes(kw)) {
+      kwInAlt = true;
+    }
+  }
+  addCheck('additional', 'image_alt_kw', hasImages ? 'Focus keyword found in image ALT attributes' : 'Add images with focus keyword in ALT text', hasImages && kwInAlt, 5);
 
-  // 8. Excerpt Length check (5 pts)
-  const excerptLen = excerpt.length;
-  const excerptLenOk = excerptLen >= 120 && excerptLen <= 160;
-  addCheck('excerpt_length', `Excerpt length (${excerptLen} chars, ideal 120-160)`, excerptLenOk, 5);
-
-  // 9. Slug Format and Length Check (5 pts)
-  const slugLen = slug.length;
-  const isSlugClean = !/[A-Z_\s]/.test(slug) && slugLen <= 75;
-  addCheck('slug_format', `Slug quality (< 75 chars, lowercase and clean)`, isSlugClean && slugLen > 0, 5);
-
-  // 10. Content Length (10 pts)
-  const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
-  const wordCountOk = wordCount >= 600;
-  addCheck('word_count', `Content length (${wordCount} words, ideal min 600)`, wordCountOk, 10);
-
-  // 11. Keyword Density (5 pts)
+  // C. Keyword Density (5 pts)
   let densityOk = false;
   let densityMsg = 'Keyword density (ideal 0.5% - 2.5%)';
   if (wordCount > 0 && cleanContent.includes(kw)) {
     const matchesCount = cleanContent.split(kw).length - 1;
     const density = (matchesCount / wordCount) * 100;
     densityOk = density >= 0.5 && density <= 2.5;
-    densityMsg = `Keyword density: ${density.toFixed(1)}% (ideal 0.5%-2.5%)`;
+    densityMsg = `Keyword density: ${density.toFixed(2)}% (ideal 0.5% - 2.5%)`;
   }
-  addCheck('density', densityMsg, densityOk, 5);
+  addCheck('additional', 'density', densityMsg, densityOk, 5);
 
-  // 12. Internal & External Links (10 pts)
+  // D. Internal Links (5 pts)
+  // E. External Links (5 pts)
   const linkRegex = /href=["']([^"']*)["']/gi;
   let hasInternalLink = false;
   let hasExternalLink = false;
   let linkMatch;
   while ((linkMatch = linkRegex.exec(content)) !== null) {
     const url = linkMatch[1];
-    if (url.startsWith('/') || url.includes('dattasable.com')) {
-      hasInternalLink = true;
+    if (url.startsWith('/') || url.includes('dattasable.com') || url.startsWith('#')) {
+      if (!url.startsWith('#')) {
+        hasInternalLink = true;
+      }
     } else if (url.startsWith('http://') || url.startsWith('https://')) {
       hasExternalLink = true;
     }
   }
-  addCheck('internal_link', 'Contains internal links', hasInternalLink, 5);
-  addCheck('external_link', 'Contains external outbound links', hasExternalLink, 5);
+  addCheck('additional', 'internal_link', 'Contains at least one internal link', hasInternalLink, 5);
+  addCheck('additional', 'external_link', 'Contains at least one external outbound link', hasExternalLink, 5);
 
-  // 13. Image Alt Attributes Check (5 pts)
-  const imgMatches = content.match(/<img([^>]*)\/?>/gi) || [];
-  const hasImages = imgMatches.length > 0;
-  let allImagesHaveAlt = hasImages;
-  if (hasImages) {
-    for (const imgTag of imgMatches) {
-      if (!imgTag.includes('alt=') || /alt=["']\s*["']/i.test(imgTag)) {
-        allImagesHaveAlt = false;
-        break;
-      }
+  // F. Unique Keyword Check (5 pts)
+  const isUnique = !otherPosts.some(p => {
+    let otherKwStr = '';
+    if (p.blocks && typeof p.blocks === 'object') {
+      otherKwStr = (p.blocks as any).focusedKeyword || '';
+    } else if (typeof p.blocks === 'string') {
+      try {
+        const parsed = JSON.parse(p.blocks);
+        otherKwStr = parsed.focusedKeyword || '';
+      } catch (e) {}
+    }
+    return otherKwStr.toLowerCase().split(',').map((s: string) => s.trim()).includes(kw);
+  });
+  addCheck('additional', 'unique_kw', 'Keyword is unique (not used in other posts)', isUnique, 5);
+
+  // 3. TITLE READABILITY CATEGORY (20 pts)
+  // A. Focus Keyword at beginning of title (5 pts)
+  const kwStartsTitle = cleanTitle.startsWith(kw) || cleanTitle.indexOf(kw) < 15;
+  addCheck('title', 'title_start', 'Focus keyword at beginning of title', kwInTitle && kwStartsTitle, 5);
+
+  // B. Sentiment checking (5 pts)
+  const sentimentWords = [
+    'best', 'great', 'easy', 'simple', 'ultimate', 'perfect', 'top', 'amazing', 'awesome', 'guide',
+    'master', 'successful', 'build', 'high', 'performance', 'smart', 'clean', 'power', 'premium',
+    'worst', 'bad', 'fix', 'avoid', 'mistake', 'error', 'warning', 'problem', 'fail', 'critical',
+    'failure', 'issue', 'bottleneck', 'threat', 'risky', 'hard', 'difficult', 'troubleshooting',
+    'tuning'
+  ];
+  const hasSentiment = sentimentWords.some(word => cleanTitle.includes(word));
+  addCheck('title', 'title_sentiment', 'Title has positive or negative sentiment', hasSentiment, 5);
+
+  // C. Power words presence (5 pts)
+  const powerWords = [
+    'proven', 'guaranteed', 'powerful', 'secret', 'hack', 'ultimate', 'expert', 'advanced',
+    'breakthrough', 'shocking', 'magic', 'instant', 'free', 'today', 'now', 'masterclass',
+    'professional', 'enterprise', 'production-grade', 'architecting', 'reliability', 'troubleshooting',
+    'tuning'
+  ];
+  const hasPowerWord = powerWords.some(word => cleanTitle.includes(word));
+  addCheck('title', 'title_power_word', 'Title contains at least one power word', hasPowerWord, 5);
+
+  // D. Number in the title (5 pts)
+  const hasNumber = /\d+/.test(title);
+  addCheck('title', 'title_number', 'Title contains a number', hasNumber, 5);
+
+  // 4. CONTENT READABILITY CATEGORY (15 pts)
+  // A. Table of Contents (TOC) presence (5 pts)
+  const hasTocLabel = cleanContent.includes('table of contents') || cleanContent.includes('toc') || cleanContent.includes('what we will cover');
+  const hasAnchorLinks = /href=["']#[a-z0-9-_]+["']/i.test(content);
+  const hasToc = hasTocLabel || (hasAnchorLinks && (content.includes('<ul>') || content.includes('<ol>')));
+  addCheck('content', 'content_toc', 'Content includes a Table of Contents', hasToc, 5);
+
+  // B. Short paragraphs check (5 pts)
+  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
+  let pMatch;
+  let paragraphCount = 0;
+  let longParagraphCount = 0;
+  while ((pMatch = pRegex.exec(content)) !== null) {
+    paragraphCount++;
+    const text = pMatch[1].replace(/<[^>]*>/g, '').trim();
+    const words = text.split(/\s+/).filter(Boolean).length;
+    if (words > 120) {
+      longParagraphCount++;
     }
   }
-  addCheck('image_alt', hasImages 
-    ? (allImagesHaveAlt ? 'All images contain descriptive ALT text' : 'Some images are missing ALT text') 
-    : 'Image SEO (add images with descriptive ALT attributes)', allImagesHaveAlt, 5);
+  const shortParagraphsOk = paragraphCount === 0 || (longParagraphCount / paragraphCount) <= 0.2;
+  addCheck('content', 'content_short_paragraphs', 'Content uses short paragraphs (< 120 words)', shortParagraphsOk, 5);
 
-  // Normalize final score to a 0-100 scale
+  // C. Presence of images/videos (5 pts)
+  const hasMedia = content.includes('<img') || content.includes('<video') || content.includes('<iframe');
+  addCheck('content', 'content_media', 'Content contains images, videos or interactive frames', hasMedia, 5);
+
   const score = maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0;
 
-  return { score, checks };
+  return {
+    score,
+    categories: {
+      basic: basicChecks,
+      additional: additionalChecks,
+      title: titleChecks,
+      content: contentChecks
+    }
+  };
 }
 
 function calculateReadTime(content: string): number {
@@ -215,6 +296,11 @@ export default function AdminBlog() {
   const [isDraggingImage, setIsDraggingImage] = useState(false);
   const [showRecoveryModal, setShowRecoveryModal] = useState(false);
   const triggerAutosaveRef = useRef<(() => void) | null>(null);
+
+  // Rank Math SEO states
+  const [activeKeywordIndex, setActiveKeywordIndex] = useState(0);
+  const [seoTab, setSeoTab] = useState<'basic' | 'additional' | 'title' | 'content'>('basic');
+  const [snippetDevice, setSnippetDevice] = useState<'desktop' | 'mobile'>('desktop');
 
 
   // Theme-aware CSS variables
@@ -2120,18 +2206,23 @@ export default function AdminBlog() {
             </div>
           ) : (
             <div style={{ padding: '20px 20px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
-                SEO Analyzer
-              </p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
+                  SEO Analyzer
+                </p>
+                <span style={{ fontSize: 10, fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <Globe size={11} /> PRO Enabled
+                </span>
+              </div>
 
-              {/* Focus Keyword */}
+              {/* Focus Keyword Input */}
               <div>
                 <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Focus Keyword
+                  Focus Keyword(s)
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter focus keyword..."
+                  placeholder="Enter keywords (comma separated)..."
                   value={formData.focusedKeyword}
                   onChange={e => setFormData(f => ({ ...f, focusedKeyword: e.target.value }))}
                   style={{
@@ -2141,64 +2232,381 @@ export default function AdminBlog() {
                     fontWeight: 600,
                   }}
                 />
+                <span style={{ fontSize: 9.5, color: css.muted, marginTop: 4, display: 'block', fontWeight: 500 }}>
+                  First keyword acts as the primary focus keyword.
+                </span>
               </div>
 
-              {formData.focusedKeyword ? (() => {
-                const seo = calculateSeoScore(
-                  formData.title,
-                  formData.slug,
-                  formData.content,
-                  formData.excerpt,
-                  formData.focusedKeyword
-                );
-                
+              {(() => {
+                const keywords = formData.focusedKeyword
+                  ? formData.focusedKeyword.split(',').map((k: string) => k.trim()).filter(Boolean)
+                  : [];
+
+                if (keywords.length === 0) {
+                  return (
+                    <div style={{
+                      padding: '30px 20px', textAlign: 'center', border: `1px dashed ${css.border}`,
+                      borderRadius: 16, color: css.muted, fontSize: 12, lineHeight: 1.6
+                    }}>
+                      Enter a focus keyword to see your SEO score and analyze content in real-time.
+                    </div>
+                  );
+                }
+
+                const otherPosts = posts.filter((p: any) => p.id !== editingPost?.id);
+                const keywordAnalyses = keywords.map((kw: string) => {
+                  return {
+                    keyword: kw,
+                    analysis: calculateSeoScore(
+                      formData.title,
+                      formData.slug,
+                      formData.content,
+                      formData.excerpt,
+                      kw,
+                      otherPosts
+                    )
+                  };
+                });
+
+                const activeIdx = activeKeywordIndex >= keywords.length ? 0 : activeKeywordIndex;
+                const activeAnalysis = keywordAnalyses[activeIdx];
+                if (!activeAnalysis) return null;
+
                 const radius = 26;
                 const circumference = 2 * Math.PI * radius;
-                const strokeDashoffset = circumference - (seo.score / 100) * circumference;
-                const scoreColor = seo.score >= 80 ? '#10b981' : seo.score >= 50 ? '#f59e0b' : '#ef4444';
+                const strokeDashoffset = circumference - (activeAnalysis.analysis.score / 100) * circumference;
+                const scoreColor = activeAnalysis.analysis.score >= 80 ? '#10b981' : activeAnalysis.analysis.score >= 50 ? '#f59e0b' : '#ef4444';
+
+                const googleBg = isDark ? '#171717' : '#ffffff';
+                const googleTitleColor = isDark ? '#8ab4f8' : '#1a0dab';
+                const googleUrlColor = isDark ? '#bdc1c6' : '#202124';
+                const googleSnippetColor = isDark ? '#bdc1c6' : '#4d5156';
+
+                const getLengthColor = (len: number, min: number, max: number) => {
+                  if (len >= min && len <= max) return '#10b981';
+                  if (len > 0 && (len >= min - 10 && len <= max + 10)) return '#f59e0b';
+                  return '#ef4444';
+                };
 
                 return (
                   <>
-                    {/* Visual Score Meter */}
+                    {/* Keyword Tags Switcher */}
+                    <div>
+                      <label style={{ display: 'block', fontSize: 10, color: css.muted, fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                        Selected Keywords & Scores
+                      </label>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                        {keywordAnalyses.map((item, idx) => {
+                          const isActive = idx === activeIdx;
+                          const score = item.analysis.score;
+                          const tagScoreColor = score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
+                          const tagBg = isActive ? `${tagScoreColor}20` : css.surface2;
+                          const tagBorder = `1px solid ${isActive ? tagScoreColor : css.border}`;
+                          return (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => setActiveKeywordIndex(idx)}
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 6,
+                                padding: '5px 10px',
+                                borderRadius: 20,
+                                background: tagBg,
+                                border: tagBorder,
+                                color: isActive ? css.text : css.muted,
+                                fontSize: 11,
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                                transition: 'all 0.15s',
+                              }}
+                            >
+                              {idx === 0 && <Sparkles size={11} style={{ color: '#f59e0b' }} />}
+                              <span>{item.keyword}</span>
+                              <span style={{
+                                background: tagScoreColor,
+                                color: '#fff',
+                                borderRadius: 99,
+                                padding: '1px 5px',
+                                fontSize: 9,
+                                fontWeight: 800,
+                              }}>{score}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Google Snippet Editor Accordion */}
+                    <div style={{ borderTop: `1px solid ${css.border}`, paddingTop: 16 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                        <span style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                          Google Snippet Preview
+                        </span>
+                        <div style={{ display: 'flex', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 8, padding: 2, gap: 2 }}>
+                          <button
+                            type="button"
+                            onClick={() => setSnippetDevice('desktop')}
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6,
+                              fontSize: 10, fontWeight: 600, border: 'none', cursor: 'pointer',
+                              background: snippetDevice === 'desktop' ? css.surface : 'transparent',
+                              color: snippetDevice === 'desktop' ? css.accent : css.muted,
+                            }}
+                          >
+                            <Laptop size={11} /> Desktop
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setSnippetDevice('mobile')}
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6,
+                              fontSize: 10, fontWeight: 600, border: 'none', cursor: 'pointer',
+                              background: snippetDevice === 'mobile' ? css.surface : 'transparent',
+                              color: snippetDevice === 'mobile' ? css.accent : css.muted,
+                            }}
+                          >
+                            <Smartphone size={11} /> Mobile
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Mock Card */}
+                      {(() => {
+                        const displayTitle = formData.title || 'Untitled Story';
+                        const displaySlug = formData.slug || 'untitled-story';
+                        const displayExcerpt = formData.excerpt || 'Please write a meta description (excerpt) for this article to display here in Google search results.';
+                        const isMobile = snippetDevice === 'mobile';
+
+                        return (
+                          <div style={{
+                            background: googleBg,
+                            border: `1px solid ${css.border}`,
+                            borderRadius: 12,
+                            padding: 14,
+                            boxShadow: css.shadow,
+                            fontFamily: 'arial, sans-serif',
+                            marginBottom: 16,
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            maxWidth: isMobile ? 280 : '100%',
+                            margin: isMobile ? '0 auto 16px' : '0 0 16px',
+                            textAlign: 'left',
+                          }}>
+                            {/* Favicon & Breadcrumb */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                              <div style={{
+                                width: 14, height: 14, borderRadius: '50%', background: css.accent,
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                color: '#fff', fontSize: 8, fontWeight: 800,
+                              }}>
+                                D
+                              </div>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                <span style={{ fontSize: 11, color: isDark ? '#bdc1c6' : '#202124', fontWeight: 500, lineHeight: 1 }}>
+                                  dattasable.com
+                                </span>
+                                <span style={{ fontSize: 9, color: isDark ? '#9aa0a6' : '#4d5156', lineHeight: 1 }}>
+                                  blog › {displaySlug}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Title */}
+                            <h4 style={{
+                              fontSize: isMobile ? 15 : 17,
+                              fontWeight: 400,
+                              color: googleTitleColor,
+                              margin: '4px 0',
+                              lineHeight: 1.3,
+                              textDecoration: 'none',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                              cursor: 'pointer',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+                            onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
+                            >
+                              {displayTitle}
+                            </h4>
+
+                            {/* Excerpt */}
+                            <p style={{
+                              fontSize: 12.5,
+                              color: googleSnippetColor,
+                              margin: '4px 0 0',
+                              lineHeight: 1.4,
+                              display: '-webkit-box',
+                              WebkitLineClamp: isMobile ? 3 : 2,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                            }}>
+                              {displayExcerpt}
+                            </p>
+                          </div>
+                        );
+                      })()}
+
+                      {/* Interactive Snippet Inputs */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, borderTop: `1px dashed ${css.border}`, paddingTop: 14 }}>
+                        {/* SEO Title Input */}
+                        <div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                            <label style={{ fontSize: 10.5, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>SEO Title</label>
+                            <span style={{ fontSize: 10, fontWeight: 700, color: getLengthColor(formData.title.length, 40, 70) }}>
+                              {formData.title.length} / 70
+                            </span>
+                          </div>
+                          <input
+                            type="text"
+                            value={formData.title}
+                            onChange={e => {
+                              const newTitle = e.target.value;
+                              setFormData(f => {
+                                const updated = { ...f, title: newTitle };
+                                if (!isSlugManual) {
+                                  updated.slug = generateSlug(newTitle);
+                                }
+                                return updated;
+                              });
+                            }}
+                            style={{
+                              width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
+                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12, fontWeight: 600,
+                            }}
+                          />
+                        </div>
+
+                        {/* URL Slug Input */}
+                        <div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                            <label style={{ fontSize: 10.5, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>URL Slug</label>
+                            <span style={{ fontSize: 10, fontWeight: 700, color: getLengthColor(formData.slug.length, 1, 75) }}>
+                              {formData.slug.length} / 75
+                            </span>
+                          </div>
+                          <input
+                            type="text"
+                            value={formData.slug}
+                            onChange={e => {
+                              setIsSlugManual(true);
+                              setFormData(f => ({ ...f, slug: e.target.value }));
+                            }}
+                            style={{
+                              width: '100%', background: css.inputBg, border: `1px solid ${slugError ? '#ef4444' : css.border}`, color: css.text,
+                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12, fontWeight: 600,
+                            }}
+                          />
+                        </div>
+
+                        {/* Meta Description Input */}
+                        <div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                            <label style={{ fontSize: 10.5, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Meta Description</label>
+                            <span style={{ fontSize: 10, fontWeight: 700, color: getLengthColor(formData.excerpt.length, 120, 160) }}>
+                              {formData.excerpt.length} / 160
+                            </span>
+                          </div>
+                          <textarea
+                            value={formData.excerpt}
+                            onChange={e => setFormData(f => ({ ...f, excerpt: e.target.value }))}
+                            rows={3}
+                            style={{
+                              width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
+                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12, fontWeight: 600,
+                              resize: 'none', lineHeight: 1.5, fontFamily: 'inherit',
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Circular Score Progress */}
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: 16,
-                      background: css.surface2, padding: '16px 20px', borderRadius: 16,
+                      background: css.surface2, padding: '12px 16px', borderRadius: 16,
                       border: `1px solid ${css.border}`
                     }}>
-                      <div style={{ position: 'relative', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <svg width="64" height="64" viewBox="0 0 64 64" style={{ transform: 'rotate(-90deg)', position: 'absolute', top: 0, left: 0 }}>
-                          <circle cx="32" cy="32" r={radius} fill="transparent" stroke={isDark ? '#334155' : '#e2e8f0'} strokeWidth="6" />
+                      <div style={{ position: 'relative', width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <svg width="56" height="56" viewBox="0 0 56 56" style={{ transform: 'rotate(-90deg)', position: 'absolute', top: 0, left: 0 }}>
+                          <circle cx="28" cy="28" r="23" fill="transparent" stroke={isDark ? '#334155' : '#e2e8f0'} strokeWidth="5" />
                           <circle
-                            cx="32" cy="32" r={radius} fill="transparent"
+                            cx="28" cy="28" r="23" fill="transparent"
                             stroke={scoreColor}
-                            strokeWidth="6"
-                            strokeDasharray={circumference}
-                            strokeDashoffset={strokeDashoffset}
+                            strokeWidth="5"
+                            strokeDasharray={2 * Math.PI * 23}
+                            strokeDashoffset={2 * Math.PI * 23 - (activeAnalysis.analysis.score / 100) * (2 * Math.PI * 23)}
                             strokeLinecap="round"
                             style={{ transition: 'stroke-dashoffset 0.35s' }}
                           />
                         </svg>
-                        <span style={{ fontSize: 14, fontWeight: 900, color: scoreColor }}>
-                          {seo.score}
+                        <span style={{ fontSize: 12.5, fontWeight: 900, color: scoreColor }}>
+                          {activeAnalysis.analysis.score}
                         </span>
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ fontSize: 16, fontWeight: 800, color: scoreColor }}>
-                          Score
+                        <span style={{ fontSize: 14, fontWeight: 800, color: scoreColor }}>
+                          {activeAnalysis.analysis.score >= 80 ? 'Great SEO' : activeAnalysis.analysis.score >= 50 ? 'Needs Work' : 'Poor SEO'}
                         </span>
-                        <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: css.muted }}>
-                          {seo.score >= 80 ? 'Good' : seo.score >= 50 ? 'Needs Work' : 'Poor'}
+                        <span style={{ fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: css.muted }}>
+                          Keyword: "{activeAnalysis.keyword}"
                         </span>
                       </div>
                     </div>
 
-                    {/* SEO Checklist */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                      <span style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                        Analysis Checklist
+                    {/* Categorized Diagnostic Tabs */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                      <span style={{ fontSize: 10.5, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                        Analysis Diagnostics
                       </span>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                        {seo.checks.map((check: any) => (
+
+                      {/* Sub-tab Selector */}
+                      <div style={{
+                        display: 'flex',
+                        background: css.surface2,
+                        border: `1px solid ${css.border}`,
+                        borderRadius: 10,
+                        padding: 2,
+                        gap: 2,
+                      }}>
+                        {[
+                          { id: 'basic', label: 'Basic' },
+                          { id: 'additional', label: 'Additional' },
+                          { id: 'title', label: 'Title' },
+                          { id: 'content', label: 'Content' }
+                        ].map(t => {
+                          const active = seoTab === t.id;
+                          return (
+                            <button
+                              key={t.id}
+                              type="button"
+                              onClick={() => setSeoTab(t.id as any)}
+                              style={{
+                                flex: 1,
+                                padding: '6px 2px',
+                                borderRadius: 8,
+                                fontSize: 10.5,
+                                fontWeight: active ? 700 : 500,
+                                background: active ? css.surface : 'transparent',
+                                border: 'none',
+                                color: active ? css.accent : css.muted,
+                                cursor: 'pointer',
+                                textAlign: 'center',
+                                transition: 'all 0.15s',
+                              }}
+                            >
+                              {t.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Checklist */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
+                        {(activeAnalysis.analysis.categories[seoTab] || []).map((check: any) => (
                           <div
                             key={check.id}
                             style={{
@@ -2207,17 +2615,18 @@ export default function AdminBlog() {
                             }}
                           >
                             <span style={{
-                              color: check.passed ? '#10b981' : '#ef4444',
-                              fontWeight: 900,
-                              fontSize: check.passed ? 15 : 13,
-                              marginTop: check.passed ? -2 : -1,
+                              marginTop: 1,
                               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                              width: 14, height: 14, flexShrink: 0
+                              flexShrink: 0
                             }}>
-                              {check.passed ? '✓' : '✗'}
+                              {check.passed ? (
+                                <CheckCircle2 size={14.5} style={{ color: '#10b981' }} />
+                              ) : (
+                                <XCircle size={14.5} style={{ color: '#ef4444' }} />
+                              )}
                             </span>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                              <span style={{ lineHeight: 1.2 }}>{check.label}</span>
+                              <span style={{ lineHeight: 1.25 }}>{check.label}</span>
                               <span style={{ fontSize: 9.5, color: css.muted, fontWeight: 600 }}>
                                 {check.passed ? `Passed (+${check.pts} pts)` : `Missing (-${check.pts} pts)`}
                               </span>
@@ -2228,14 +2637,7 @@ export default function AdminBlog() {
                     </div>
                   </>
                 );
-              })() : (
-                <div style={{
-                  padding: '30px 20px', textAlign: 'center', border: `1px dashed ${css.border}`,
-                  borderRadius: 16, color: css.muted, fontSize: 12, lineHeight: 1.6
-                }}>
-                  Enter a focus keyword to see your SEO score and analyze content in real-time.
-                </div>
-              )}
+              })()}
             </div>
           )}
         </aside>
