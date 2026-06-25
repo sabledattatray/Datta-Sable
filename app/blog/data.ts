@@ -558,7 +558,7 @@ Correct Product Sales Column = CALCULATE(SUM(fact_sales[SalesAmount]))</code></p
   "@type": "TechArticle",
   "headline": "DP-600 Fabric Analytics Engineer Study Companion Notebook – Lakehouse, Warehouse, Direct Lake & Semantic Models",
   "description": "Prepare for the DP-600 certification with this master-class study companion notebook. Covers OneLake, Lakehouse architecture, Fabric Warehouse, Direct Lake mode, Semantic Models, DAX patterns, security, and capacity monitoring.",
-  "image": "https://dattasable.com/images/blog/DP-600 Fabric Analytics Engineer Study Companion Notebook.webp",
+  "image": "https://dattasable.com/images/blog/dp-600-fabric-analytics-engineer-study-companion-notebook.webp",
   "author": {
     "@type": "Person",
     "name": "Datta Sable"
@@ -601,7 +601,7 @@ Correct Product Sales Column = CALCULATE(SUM(fact_sales[SalesAmount]))</code></p
     date: "June 25, 2026",
     color: "var(--accent)",
     icon: "📖",
-    image: "/images/blog/DP-600 Fabric Analytics Engineer Study Companion Notebook.webp",
+    image: "/images/blog/dp-600-fabric-analytics-engineer-study-companion-notebook.webp",
     tags: ["Microsoft Fabric", "DP-600", "Analytics Engineering", "Direct Lake", "Power BI", "Data Warehouse", "Lakehouse", "DAX", "Data Modeling", "OneLake", "Study Guide"]
   },
 
