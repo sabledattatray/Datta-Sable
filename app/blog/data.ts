@@ -11953,7 +11953,7 @@ spark.sql("VACUUM gold_sales_reporting RETAIN 168 HOURS")</code></pre>
     date: "June 25, 2026",
     color: "#c9f31d",
     icon: "Database",
-    image: null,
+    image: "/images/blog/Advanced Power BI Direct Lake Performance Tuning & Troubleshooting in Microsoft Fabric.webp",
     tags: ["Microsoft Fabric","Power BI","Direct Lake","Performance","Data Architecture"]
   },
   {
@@ -12064,7 +12064,7 @@ class AgentState(TypedDict):
     date: "June 25, 2026",
     color: "#00f0ff",
     icon: "Cpu",
-    image: null,
+    image: "/images/blog/Architecting Production-Grade Multi-Agent AI Systems State Management, Orchestration & Reliability.webp",
     tags: ["AI Agents","State Management","Orchestration","System Design","LLM Ops"]
   }
 ];
