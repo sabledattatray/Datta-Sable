@@ -1,5 +1,611 @@
 export const posts = [
   {
+    id: "dp-600-fabric-analytics-engineer-study-companion-notebook",
+    slug: "dp-600-fabric-analytics-engineer-study-companion-notebook",
+    title: "DP-600 Fabric Analytics Engineer Study Companion Notebook – Lakehouse, Warehouse, Direct Lake & Semantic Models",
+    category: "Architecture & BI",
+    excerpt: "Prepare for the DP-600: Implementing Analytics Solutions Using Microsoft Fabric exam with this in-depth study companion. Master OneLake, Direct Lake mode, relational warehousing, semantic modeling, and advanced DAX optimization.",
+    content: `<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
+  <p><strong>Microsoft Fabric represents the most significant shift in Microsoft's data platform strategy in a decade.</strong> As I prepare for the <strong>DP-600: Implementing Analytics Solutions Using Microsoft Fabric</strong> certification, I created this notebook as a consolidated study companion covering the concepts that appear most frequently across Microsoft Learn modules, hands-on labs, and practice assessments. This companion is not just a study guide, but also a production-grade reference guide for analytics engineers navigating the nuances of OneLake, Lakehouse tables, Warehouse engines, and Power BI's revolutionary Direct Lake mode.</p>
+</div>
+
+<p>For more than 10 years working in Business Intelligence, Power BI, SQL, reporting automation, and analytics engineering, I noticed that many professionals understand Power BI very well but struggle to connect the broader Microsoft Fabric ecosystem together. This notebook serves as a practical bridge between the storage layers, execution engines, and the semantic tier.</p>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="toc" style="color: var(--text); font-size: 1.5rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Table of Contents</h2>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><a href="#onelake-fundamentals" style="color: var(--accent); text-decoration: none;">1. OneLake Fundamentals & SaaS Storage</a></li>
+  <li><a href="#lakehouse-architecture" style="color: var(--accent); text-decoration: none;">2. Lakehouse Architecture: Files vs Tables</a></li>
+  <li><a href="#warehouse-concepts" style="color: var(--accent); text-decoration: none;">3. Data Warehouse Architecture & Decision Matrix</a></li>
+  <li><a href="#direct-lake" style="color: var(--accent); text-decoration: none;">4. Direct Lake Mode: Paging & Fallback Analysis</a></li>
+  <li><a href="#semantic-models" style="color: var(--accent); text-decoration: none;">5. Semantic Models & Enterprise Star Schemas</a></li>
+  <li><a href="#dax-reference" style="color: var(--accent); text-decoration: none;">6. Practical DAX Reference & Context Transitions</a></li>
+  <li><a href="#security-governance" style="color: var(--accent); text-decoration: none;">7. Workspace Security, Roles & Lineage</a></li>
+  <li><a href="#monitoring-admin" style="color: var(--accent); text-decoration: none;">8. Capacity Monitoring & Lifecycle Management</a></li>
+  <li><a href="#faq" style="color: var(--accent); text-decoration: none;">9. Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="onelake-fundamentals" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">1. OneLake Fundamentals & SaaS Storage</h2>
+<p>OneLake is the 'OneDrive for data.' It is a single, unified, logical data lake for your entire organization, provisioned automatically with every Microsoft Fabric tenant. It is built on top of Azure Data Lake Storage (ADLS) Gen2 and supports the same APIs and SDKs.</p>
+
+<div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+  <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+    flowchart TD
+      subgraph Tenant [Microsoft Fabric Tenant]
+          subgraph OneLake [OneLake - Unified SaaS Storage ADLS Gen2]
+              direction TB
+              WorkspaceA[Workspace: Sales]
+              WorkspaceB[Workspace: Finance]
+              WorkspaceC[Workspace: Marketing]
+          end
+          
+          subgraph Compute [Multi-Engine Compute Layer]
+              Spark[Synapse Spark]
+              SQL[Synapse SQL DW / SQL Endpoint]
+              PBI[Power BI Analysis Services]
+              KQL[Real-Time Intelligence]
+          end
+      end
+      
+      WorkspaceA & WorkspaceB & WorkspaceC <--> Compute
+      
+      subgraph ExternalSources [External Data Sources]
+          AWS[Amazon S3]
+          ADLS[ADLS Gen2]
+          GCS[Google Cloud Storage]
+      end
+      
+      ExternalSources -.->|OneLake Shortcuts| OneLake
+  </pre>
+</div>
+
+<h3>The Three Core Pillars of OneLake Architecture:</h3>
+<ol style="line-height: 1.8; padding-left: 1.5rem; list-style-type: decimal; margin-bottom: 2rem;">
+  <li><strong>Single Copy Concept</strong>: Data is stored once in OneLake in an open-source standard format (Delta Parquet) and accessed by multiple computing engines (Spark, SQL, Power BI) without copying or transforming it.</li>
+  <li><strong>Shortcuts</strong>: Virtual files that reference data stored in other locations (external ADLS Gen2, Amazon S3, Google Cloud Storage, or other Fabric workspaces) without moving it. This enables a distributed data mesh architecture.</li>
+  <li><strong>SaaS Integration</strong>: No infrastructure to provision. Security, compliance, performance, and scaling are managed entirely by Fabric.</li>
+</ol>
+
+<h3>Data Organization & Governance Concepts</h3>
+<p>Within OneLake, data is organized hierarchically: Tenant, Workspaces, and Items (like Lakehouses, Warehouses, Semantic Models, and Reports).</p>
+<p>To govern this architecture, Microsoft Fabric uses <strong>Domains</strong> and <strong>Sub-domains</strong>. You can group workspaces into logical domains (e.g., 'Finance', 'Operations', 'Sales') and assign Domain Contributors and Admins. This allows centralized IT to delegate domain management to business departments while maintaining overall control.</p>
+
+<h3>Workspace Strategy Recommendations</h3>
+<p>When planning your Fabric workspace strategy, consider these guidelines:</p>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><strong>Separate by Environment</strong>: Create separate workspaces for development, testing, and production (e.g., <code>Sales_Dev</code>, <code>Sales_Test</code>, <code>Sales_Prod</code>).</li>
+  <li><strong>Separate by Domain & Team Boundary</strong>: Group items by data ownership. Do not mix Finance and HR data in the same workspace unless they share identical security boundaries.</li>
+  <li><strong>Leverage Shortcuts</strong>: Instead of copying data across workspaces, create a shortcut in the destination workspace pointing to the source Lakehouse.</li>
+</ul>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="lakehouse-architecture" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">2. Lakehouse Architecture: Files vs Tables</h2>
+<p>A Fabric Lakehouse consists of two distinct areas in OneLake storage:</p>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><strong>Files (Unmanaged/External)</strong>: A landing zone for raw, unstructured, semi-structured, or structured files (CSV, JSON, XML, images, Parquet). These files can be read by Spark notebooks, but do not automatically expose a SQL relational schema.</li>
+  <li><strong>Tables (Managed)</strong>: Structured tables stored in Delta Parquet format. Any table created here is automatically registered in the Fabric Metastore and becomes instantly queryable using the SQL Endpoint and Spark SQL.</li>
+</ul>
+
+<div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+  <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+    flowchart LR
+        subgraph Lakehouse [Fabric Lakehouse]
+            subgraph FilesSection [Files Area]
+                csv[raw_sales.csv]
+                json[log_events.json]
+            end
+            subgraph TablesSection [Tables Area]
+                delta[sales_fact Table Delta Parquet]
+                dim[customer_dim Table Delta Parquet]
+            end
+        end
+        
+        csv -.->|PySpark ETL / Write as Delta| delta
+        json -.->|PySpark ETL / Write as Delta| dim
+  </pre>
+</div>
+
+<h3>Delta Lake Fundamentals</h3>
+<p>Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark and big data workloads. Under the hood, a Delta Table consists of Parquet files containing the actual table records, and a transaction log (<code>_delta_log/</code>) containing JSON files that record every action taken on the table (inserts, updates, deletes, schema changes).</p>
+<p>This allows ACID properties (Atomicity, Consistency, Isolation, Durability) to be enforced on top of standard file-based cloud storage.</p>
+
+<h3>Medallion Architecture Implementation Patterns</h3>
+<p>The Medallion architecture (Bronze, Silver, Gold) is the standard pattern for data curation in Microsoft Fabric:</p>
+
+<div class="overflow-x-auto my-8">
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
+    <thead>
+      <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 20%;">Layer</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 25%;">Purpose</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 15%;">Format</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 15%;">Fabric Tool</th>
+        <th style="padding: 12px; text-align: left; width: 25%;">Optimization Heuristics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Bronze (Raw)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Land source data as-is, retaining all history and schema anomalies.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Files (CSV, JSON, etc.)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Data Factory / Spark</td>
+        <td style="padding: 12px;">Append-only, partitioned by date of ingestion.</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Silver (Cleaned)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">De-duplicated, schema-validated, cleaned, and enriched data.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Delta Tables</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Spark Notebooks</td>
+        <td style="padding: 12px;">Upsert (Merge), V-Order enabled, partitioned by business keys.</td>
+      </tr>
+      <tr>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Gold (Curated)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Highly aggregated, dimensional model (Star Schema) ready for BI reports.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Delta Tables</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Spark / Data Factory</td>
+        <td style="padding: 12px;">V-Order optimized, Z-Order by query filter columns, Liquid Clustering.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h4>PySpark Code: Implementing Medallion Transformation</h4>
+<p>Here is how you ingest raw files from Bronze, transform them, and write them into Silver/Gold Delta tables with V-Order enabled:</p>
+
+<pre><code class="language-python"># 1. Read raw CSV from Files (Bronze)
+df_raw = spark.read.format("csv") \\
+    .option("header", "true") \\
+    .option("inferSchema", "true") \\
+    .load("Files/Bronze/sales_raw.csv")
+
+# 2. Perform transformations, renaming, and cleaning (Silver)
+from pyspark.sql.functions import col, to_date, trim
+
+df_silver = df_raw.select(
+    col("SalesOrderNumber").alias("order_id"),
+    to_date(col("OrderDate"), "yyyy-MM-dd").alias("order_date"),
+    trim(col("CustomerEmail")).alias("customer_email"),
+    col("UnitPrice").cast("double").alias("unit_price"),
+    col("Quantity").cast("integer").alias("quantity")
+).filter(col("order_id").isNotNull())
+
+# 3. Write to Managed Tables (Silver) with V-Order optimization enabled by default in Fabric
+df_silver.write.format("delta") \\
+    .mode("overwrite") \\
+    .saveAsTable("silver_sales")
+
+# 4. Optimize the Silver table (Time Travel maintenance / Z-Order compaction)
+spark.sql("OPTIMIZE silver_sales ZORDER BY (order_date)")</code></pre>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="warehouse-concepts" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">3. Data Warehouse Architecture & Decision Matrix</h2>
+<p>Fabric Data Warehouse is a fully relational, transactionally consistent SQL database that stores its underlying data as Delta Parquet files in OneLake. Unlike the Lakehouse, which relies primarily on Spark for write operations, the Warehouse relies entirely on a SQL query engine (Polaris) to run DDL, DML, and queries using standard T-SQL.</p>
+
+<div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+  <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+    flowchart TD
+        subgraph LakehouseCompute [Lakehouse - Spark SQL / PySpark]
+            LH_Tables[(Lakehouse Delta Tables)]
+        end
+
+        subgraph SQL_Endpoint [SQL Analytics Endpoint]
+            ReadEngine[Read-Only SQL Query Engine]
+        end
+
+        subgraph WarehouseCompute [Warehouse - T-SQL Engine]
+            WH_Tables[(Warehouse Delta Tables)]
+        end
+
+        LH_Tables -->|Auto-metadata Sync| SQL_Endpoint
+        ReadEngine -.->|ReadOnly Queries| LH_Tables
+        WarehouseCompute -->|DDL, DML, Read/Write| WH_Tables
+  </pre>
+</div>
+
+<h3>SQL Endpoint vs Warehouse Decision Framework</h3>
+<p>Every Lakehouse automatically provisions a <strong>SQL Analytics Endpoint</strong>. This is a read-only SQL connection that allows you to query the Lakehouse tables using T-SQL, write views, and build semantic models. However, you cannot write standard <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> statements against it. Here is the decision matrix to choose between them:</p>
+
+<div class="overflow-x-auto my-8">
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
+    <thead>
+      <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 25%;">Capability</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 35%;">Lakehouse SQL Endpoint</th>
+        <th style="padding: 12px; text-align: left; width: 40%;">Fabric Data Warehouse</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Write Operations</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Read-Only from SQL. Write must be done via Spark, Pipelines, or Dataflow Gen2.</td>
+        <td style="padding: 12px;">Read-Write. Full support for T-SQL DDL/DML (INSERT, UPDATE, DELETE, MERGE).</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Primary Persona</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Data Engineers, Data Scientists, Analytics Engineers.</td>
+        <td style="padding: 12px;">Relational Database Developers, BI Developers, SQL Analysts.</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Asset Support</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Supports both files (unstructured) and tables (structured).</td>
+        <td style="padding: 12px;">Supports tables, views, schemas, functions, procedures. No direct file access.</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Security Surface</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">SQL-based security (RLS/OLS/Column-Level) at SQL endpoint level only.</td>
+        <td style="padding: 12px;">Complete schema, table, column, and row-level security natively inside SQL.</td>
+      </tr>
+      <tr>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Transaction Boundary</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Determined by Delta log of individual tables.</td>
+        <td style="padding: 12px;">Multi-table transactions, full transactional isolation (ACID).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Query Performance Considerations</h3>
+<p>To optimize query performance in the SQL Endpoint or Warehouse:</p>
+<ol style="line-height: 1.8; padding-left: 1.5rem; list-style-type: decimal; margin-bottom: 2rem;">
+  <li><strong>Analyze Statistics</strong>: The SQL engine automatically generates and updates statistics. If queries degrade, manually trigger statistics collection using:
+    <pre><code class="language-sql">CREATE STATISTICS stat_sales_date ON dbo.fact_sales(order_date);</code></pre>
+  </li>
+  <li><strong>Partition Pruning</strong>: Ensure your queries filter on partitioned columns. If a table is partitioned by Year/Month, filtering by <code>OrderYear = 2026</code> allows the query planner to skip scanning files for other years.</li>
+  <li><strong>Avoid Complex Views on Views</strong>: Nested views prevent the query optimizer from generating efficient execution plans. Materialize complex intermediate joins in upstream Delta tables instead.</li>
+</ol>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="direct-lake" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">4. Direct Lake Mode: Paging & Fallback Analysis</h2>
+<p>Direct Lake is a path-breaking technology in Microsoft Fabric that connects Power BI directly to OneLake Delta Parquet tables without copying data.</p>
+<p>Historically, developers had to choose between Import Mode (loads data into Power BI memory cache; ultra-fast but requires scheduled refreshes) and DirectQuery Mode (translates DAX queries to SQL queries at runtime; avoids copy but suffers from latency). Direct Lake mode bypasses the SQL database engine entirely. When a visual requests data, the Power BI AS engine loads columns of the Delta Parquet files directly from OneLake storage into RAM on-demand.</p>
+
+<div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+  <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+    sequenceDiagram
+        autonumber
+        actor User as Business User
+        participant Report as Power BI Report Visual
+        participant AS as Analysis Services (RAM Cache)
+        participant Lake as OneLake (Delta Parquet Storage)
+        participant SQLEnd as SQL Endpoint (Fallback Engine)
+
+        User->>Report: Filters chart (e.g., Year = 2026)
+        Report->>AS: Submits DAX Query
+        
+        alt Column is already in RAM cache
+            AS->>Report: Returns aggregated data instantly (<50ms)
+        else Column is NOT in RAM cache (On-Demand Paging)
+            AS->>Lake: Pages column arrays directly from Delta Parquet files to RAM
+            Lake-->>AS: Column loaded into memory
+            AS->>Report: Returns aggregated data (<200ms)
+        
+        else fallback_scenario [FALLBACK: Memory limit exceeded OR SQL RLS enforced]
+            Note over AS, SQLEnd: SILENT FALLBACK TRIGGERED!
+            AS->>SQLEnd: Generates and submits T-SQL query
+            SQLEnd->>Lake: Runs table scan on Parquet files
+            SQLEnd-->>AS: Returns query results cursor
+            AS->>Report: Displays visual with high latency (>3s)
+        end
+  </pre>
+</div>
+
+<h3>Direct Lake Fallback Analysis</h3>
+<p>Under certain conditions, Power BI cannot query OneLake Parquet files directly and silently falls back to <strong>DirectQuery mode</strong>. This degrades report performance significantly.</p>
+
+<div class="overflow-x-auto my-8">
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
+    <thead>
+      <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 25%;">Trigger Condition</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 35%;">Cause</th>
+        <th style="padding: 12px; text-align: left; width: 40%;">Mitigation Strategy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Capacity Limit Exceeded</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">The memory size of the semantic model columns loaded into RAM exceeds the threshold allocated to the Fabric Capacity (e.g., F2 vs F64).</td>
+        <td style="padding: 12px;">1. Implement vertical partitioning (remove unused columns).<br/>2. Reduce cardinality of key columns.<br/>3. Upgrade Capacity Unit (CU) size.</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Database-Level RLS / OLS</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Row-Level Security (RLS) or Object-Level Security (OLS) is defined inside the Lakehouse SQL Endpoint or Warehouse database, rather than the Semantic Model.</td>
+        <td style="padding: 12px;">Define all RLS/OLS configurations <strong>directly in the Power BI Semantic Model</strong> using DAX, keeping database permissions open for the Power BI identity.</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Schema Changes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">The schema of the underlying Delta table changed (e.g., column renamed or deleted) without updating the Semantic Model.</td>
+        <td style="padding: 12px;">Keep the Semantic Model synchronized with the Delta table, and trigger model schema sync through the Web modeler.</td>
+      </tr>
+      <tr>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Views Usage</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">The semantic model points to a SQL View instead of a physical Delta Table in the Lakehouse/Warehouse.</td>
+        <td style="padding: 12px;">Point your Semantic Model directly to physical Delta tables. Avoid modeling on top of views if you want pure Direct Lake speed.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="semantic-models" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">5. Semantic Models & Enterprise Star Schemas</h2>
+<p>For maximum performance in Fabric Semantic Models (especially in Direct Lake mode), you must design a clean **Star Schema** consisting of Fact and Dimension tables:</p>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><strong>Fact Tables</strong>: Contain quantitative metrics (Sales Amount, Quantity, Temperature) and foreign keys referencing dimensions.</li>
+  <li><strong>Dimension Tables</strong>: Contain descriptive attributes (Customer Name, Product Category, Store Region) used to filter and group data.</li>
+</ul>
+<p>Avoid Snowflake schemas (where dimension tables join to other dimension tables). Snowflakes create complex join paths that force Analysis Services to scan more memory arrays and can trigger fallbacks in Direct Lake.</p>
+
+<h3>Relationship Design Best Practices</h3>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><strong>One-to-Many (1:*)</strong>: The gold standard. The "one" side must always reside in the Dimension table, and the "many" side in the Fact table.</li>
+  <li><strong>Single Cross-Filter Direction</strong>: Ensure the cross-filter direction is set to <strong>Single</strong> (Dimension filters Fact). Avoid bidirectional filters because they introduce ambiguity, circular reference risks, and severely degrade performance.</li>
+  <li><strong>Use Inactive Relationships with <code>USERELATIONSHIP</code></strong>: If a Fact table has multiple date columns (e.g., <code>OrderDate</code>, <code>ShipDate</code>), create one active relationship (e.g., to <code>OrderDate</code>) and inactive relationships to the others. In your DAX measures, use <code>USERELATIONSHIP</code> to activate the ship date calculation.</li>
+</ul>
+
+<pre><code class="language-sql">Shipped Sales = 
+CALCULATE(
+    [Total Sales],
+    USERELATIONSHIP(fact_sales[ShipDateKey], dim_date[DateKey])
+)</code></pre>
+
+<h3>Model Optimization Techniques</h3>
+<p>To minimize memory footprint and ensure Direct Lake operations stay within capacity limits:</p>
+<ol style="line-height: 1.8; padding-left: 1.5rem; list-style-type: decimal; margin-bottom: 2rem;">
+  <li><strong>Disable Auto Date/Time</strong>: Go to Options -> Data Load -> and uncheck 'Auto date/time for new files'. This prevents Power BI from generating hidden local date tables for every datetime column, which wastes massive amounts of memory.</li>
+  <li><strong>Cardinality Reduction</strong>: Cardinality refers to the number of unique values in a column. Avoid importing high-cardinality columns (like GUIDs, transactional timestamps, or notes fields) into the semantic model unless strictly necessary.</li>
+  <li><strong>Optimize Data Types</strong>: Cast high-precision floats to fixed decimals (currency) or integers if the precision isn't required. Analysis Services compresses integers much better than floats.</li>
+</ol>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="dax-reference" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">6. Practical DAX Reference & Context Transitions</h2>
+<p>This reference guide contains the foundational patterns required to pass the DAX portion of the DP-600 exam.</p>
+
+<h3>CALCULATE</h3>
+<p><code>CALCULATE</code> is the most important function in DAX. It evaluates an expression in a modified filter context.</p>
+
+<pre><code class="language-sql">-- Pattern: Basic CALCULATE modifying context
+US Sales = 
+CALCULATE(
+    [Total Sales],
+    dim_customer[Country] = "United States"
+)</code></pre>
+
+<h4>Under the Hood Evaluation Steps:</h4>
+<ol style="line-height: 1.8; padding-left: 1.5rem; list-style-type: decimal; margin-bottom: 2rem;">
+  <li><code>CALCULATE</code> takes the current filter context.</li>
+  <li>It evaluates its filter arguments.</li>
+  <li>If a filter argument is defined on a column that already has a filter, the new filter replaces the old one. If not, the new filter is added.</li>
+  <li>It executes the calculation under this new filter context.</li>
+</ol>
+
+<h3>FILTER</h3>
+<p><code>FILTER</code> is an iterator function that returns a table. It should only be used when filtering a table expression by a condition that cannot be evaluated using simple column filters (e.g., comparing a measure value).</p>
+
+<pre><code class="language-sql">-- Pattern: Using FILTER to scan aggregated measure values
+High Value Customers Sales = 
+CALCULATE(
+    [Total Sales],
+    FILTER(
+        VALUES(dim_customer[CustomerKey]),
+        [Total Sales] > 10000
+    )
+)</code></pre>
+
+<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
+  <p><strong>Performance Warning</strong>: Do not write <code>FILTER(dim_customer, dim_customer[Country] = "USA")</code>. Since <code>FILTER</code> scans every row of the table parameter, passing the entire table degrades performance. Use simple filters inside <code>CALCULATE</code> or filter a specific column using <code>KEEPFILTERS</code>.</p>
+</div>
+
+<h3>Time Intelligence</h3>
+<p>To write time intelligence measures, you MUST have a dedicated <code>dim_date</code> table marked as a Date table in your model.</p>
+
+<pre><code class="language-sql">-- 1. Year-to-Date (YTD) Sales
+Sales YTD = 
+TOTALYTD(
+    [Total Sales],
+    dim_date[Date]
+)
+
+-- 2. Sales Same Period Last Year (SPLY)
+Sales SPLY = 
+CALCULATE(
+    [Total Sales],
+    SAMEPERIODLASTYEAR(dim_date[Date])
+)
+
+-- 3. Running Total (Custom Time Intelligence)
+Running Total Sales = 
+CALCULATE(
+    [Total Sales],
+    FILTER(
+        ALLSELECTED(dim_date),
+        dim_date[Date] <= MAX(dim_date[Date])
+    )
+)</code></pre>
+
+<h3>Context Transition Examples</h3>
+<p><strong>Context Transition</strong> occurs when a row context is transformed into a filter context. This happens automatically when a measure is referenced inside an iterator function (like <code>SUMX</code>, <code>AVERAGEX</code>, <code>FILTER</code>), or when an explicit <code>CALCULATE</code> is called within a row context.</p>
+<p>Imagine we have a calculated column in the <code>dim_product</code> table:</p>
+
+<pre><code class="language-sql">-- WITHOUT CALCULATE: Row Context only. 
+-- Evaluates the sum of all sales in the entire table, repeated for every product.
+Bad Product Sales Column = SUM(fact_sales[SalesAmount])
+
+-- WITH CALCULATE (Context Transition triggered):
+-- The product key in the row context is converted into a filter context.
+-- Evaluates the sum of sales for THAT specific product.
+Correct Product Sales Column = CALCULATE(SUM(fact_sales[SalesAmount]))</code></pre>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="security-governance" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">7. Workspace Security, Roles & Lineage</h2>
+<p>Workspace permissions control what items users can see and modify. Here is the role definition layout:</p>
+
+<div class="overflow-x-auto my-8">
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
+    <thead>
+      <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); width: 20%;">Role</th>
+        <th style="padding: 12px; text-align: center; border-right: 1px solid var(--border); width: 20%;">Publish Items</th>
+        <th style="padding: 12px; text-align: center; border-right: 1px solid var(--border); width: 20%;">Edit/Delete Items</th>
+        <th style="padding: 12px; text-align: center; border-right: 1px solid var(--border); width: 20%;">Modify Members</th>
+        <th style="padding: 12px; text-align: center; width: 20%;">Share Items</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Admin</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; text-align: center;">Yes</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Member</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">No (Optional)</td>
+        <td style="padding: 12px; text-align: center;">Yes</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Contributor</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">Yes</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">No</td>
+        <td style="padding: 12px; text-align: center;">No</td>
+      </tr>
+      <tr>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Viewer</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">No</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">No</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); text-align: center;">No</td>
+        <td style="padding: 12px; text-align: center;">No</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p><em>Important for DP-600</em>: Contributor role is ideal for developers who write code but shouldn't manage membership. Viewers can only view report visuals and cannot access underlying Lakehouse files directly unless SQL permissions are granted.</p>
+
+<h3>Row-Level Security (RLS) & Object-Level Security (OLS)</h3>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><strong>Row-Level Security (RLS)</strong>: Filters the rows of a table based on user credentials (using <code>USERPRINCIPALNAME()</code>). RLS should be defined in the Power BI Semantic Model for Direct Lake configurations to avoid database-level silent fallback.</li>
+  <li><strong>Object-Level Security (OLS)</strong>: Restricts access to entire tables or columns. If a column is secured via OLS, users without permission cannot see it or write queries referencing it (queries will return an error).</li>
+</ul>
+
+<h3>Data Lineage & Endorsements</h3>
+<p>Fabric provides end-to-end <strong>Lineage View</strong>, showing the entire lifecycle of data from the source (e.g., ADLS Gen2 shortcut) through Lakehouse, SQL Warehouse, Semantic Model, to the final Power BI Report. To help users find trusted data, items can be tagged with Endorsements: <strong>Promoted</strong> (done by workspace members) or <strong>Certified</strong> (authorized by tenant administrators; the highest level of validation).</p>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="monitoring-admin" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">8. Capacity Monitoring & Lifecycle Management</h2>
+<p>Fabric runs on allocated **Capacity Units (CUs)**. To track usage, you must install the **Microsoft Fabric Capacity Metrics App**.</p>
+<p>Key concepts measured in the metrics app include:</p>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
+  <li><strong>Interactive Operations</strong>: Short-duration queries (e.g., a user filtering a report visual). These are processed instantly and charged against the capacity.</li>
+  <li><strong>Background Operations</strong>: Long-running background processes (e.g., data pipeline runs, Spark notebook execution, Semantic Model refreshes).</li>
+  <li><strong>Smoothing</strong>: Fabric averages capacity consumption over a 24-hour window for background operations, and over a 10-minute window for interactive operations. This prevents momentary query spikes from throttling your tenant.</li>
+  <li><strong>Throttling</strong>: If consumption exceeds 100% of capacity limits after smoothing, Fabric implements progressive throttling (delays interactive queries first, then blocks background runs).</li>
+</ul>
+
+<div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
+  <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
+    graph TD
+        subgraph Capacity Management
+            CU[Fabric Capacity Units - e.g. F64]
+            MetricsApp[Capacity Metrics App]
+            Smoothing[Smoothing Algorithm]
+            Throttling[Throttling Engine]
+        end
+        
+        Operations[Interactive & Background Operations] --> MetricsApp
+        MetricsApp --> Smoothing
+        Smoothing -->|Exceeds limit?| Throttling
+        Throttling -->|Delay| Interactive[Interactive: Slow report loading]
+        Throttling -->|Reject| Background[Background: Pipelines fail]
+  </pre>
+</div>
+
+<h3>Deployment Pipelines</h3>
+<p>Fabric deployment pipelines automate release management across Development, Test, and Production phases. Supported items include Lakehouses (structure only, not the underlying Parquet data files), Warehouses, Semantic Models, and Reports. You can define rules to dynamically modify source database connections, SQL parameters, and semantic model connections as metadata transitions between environments.</p>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<h2 id="faq" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">9. Frequently Asked Questions (FAQ)</h2>
+
+<h3>What is the difference between V-Order and Z-Order in Microsoft Fabric?</h3>
+<p><strong>V-Order</strong> is a proprietary write optimization technology in Microsoft Fabric that rearranges data inside Parquet files to enable extremely fast sorting and filtering for the Power BI Analysis Services engine. It is applied by default to all tables written by Fabric Spark and Warehouse engines.</p>
+<p><strong>Z-Order</strong> is an open-source multidimensional clustering technique that organizes data based on specified columns to reduce the volume of data scanned by Spark and SQL engines. V-Order and Z-Order can be used together on the same table.</p>
+
+<h3>How do I check if my Power BI report has fallen back to DirectQuery mode?</h3>
+<p>You can connect to the Semantic Model XMLA endpoint using DAX Studio and run a DMV query on <code>\$System.DISCOVER_MDC_DETAILS</code> or check the <code>DirectLakeActive</code> column in SQL Profiler trace events. If the value is <code>0</code> or <code>False</code>, fallback has occurred.</p>
+
+<h3>Can I enforce Row-Level Security (RLS) in OneLake files directly?</h3>
+<p>No. Security on OneLake files is managed via Workspace Roles or Share permissions. RLS is enforced at the computing engine level—either in the SQL Endpoint / Warehouse engine or inside the Power BI Semantic Model. For Direct Lake mode, RLS must be defined in the Semantic Model.</p>
+
+<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "DP-600 Fabric Analytics Engineer Study Companion Notebook – Lakehouse, Warehouse, Direct Lake & Semantic Models",
+  "description": "Prepare for the DP-600 certification with this master-class study companion notebook. Covers OneLake, Lakehouse architecture, Fabric Warehouse, Direct Lake mode, Semantic Models, DAX patterns, security, and capacity monitoring.",
+  "image": "https://dattasable.com/images/blog/DP-600 Fabric Analytics Engineer Study Companion Notebook.webp",
+  "author": {
+    "@type": "Person",
+    "name": "Datta Sable"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Datta Sable",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dattasable.com/images/dattasable.com.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dattasable.com/blog/dp-600-fabric-analytics-engineer-study-companion-notebook"
+  },
+  "datePublished": "2026-06-25",
+  "dateModified": "2026-06-25",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between V-Order and Z-Order in Microsoft Fabric?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "V-Order is a proprietary write optimization technology in Microsoft Fabric that rearranges data inside Parquet files to enable fast sorting for Power BI. Z-Order is an open-source multidimensional clustering technique that organizes data to reduce data scanned by Spark and SQL engines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I check if my Power BI report has fallen back to DirectQuery mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can connect to the Semantic Model XMLA endpoint using DAX Studio and run a DMV query on $System.DISCOVER_MDC_DETAILS or check the DirectLakeActive column in SQL Profiler trace events."
+      }
+    }
+  ]
+}
+</script>`,
+    readTime: 15,
+    date: "June 25, 2026",
+    color: "var(--accent)",
+    icon: "📖",
+    image: "/images/blog/DP-600 Fabric Analytics Engineer Study Companion Notebook.webp",
+    tags: ["Microsoft Fabric", "DP-600", "Analytics Engineering", "Direct Lake", "Power BI", "Data Warehouse", "Lakehouse", "DAX", "Data Modeling", "OneLake", "Study Guide"]
+  },
+
+  {
     id: "dp-800-study-guide",
     slug: "dp-800-study-guide",
     title: "The Ultimate DP-800 Study Guide: How to Pass Microsoft's SQL AI Developer Associate Certification",
