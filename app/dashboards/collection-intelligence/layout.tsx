@@ -1,20 +1,20 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'EMI Collection Intelligence | Surgical BI' },
-  description: 'Advanced fintech analytics dashboard for real-time EMI collection monitoring, overdue aging analysis, and portfolio risk management.',
-  keywords: ['EMI Analytics', 'Fintech Dashboard', 'Collection Intelligence', 'Loan Portfolio Management', 'BI Dashboard', 'Next.js Analytics'],
+  title: 'Collection Intelligence Dashboard — EMI & Debt Recovery Analytics | Datta Sable',
+  description:
+    'Interactive EMI collection and debt recovery analytics dashboard. Track collection efficiency, recovery rates, agent performance, bucket-wise analysis, and delinquency trends across loan portfolios.',
+  keywords: ['collection intelligence dashboard', 'EMI analytics', 'debt recovery dashboard', 'loan portfolio analytics', 'collection efficiency BI', 'NBFC analytics'],
+  alternates: { canonical: 'https://dattasable.com/dashboards/collection-intelligence' },
   openGraph: {
-    title: 'EMI Collection Intelligence | Surgical BI Dashboard',
-    description: 'High-performance fintech analytics for real-time portfolio oversight.',
+    title: 'Collection Intelligence Dashboard — EMI & Debt Recovery Analytics',
+    description: 'Track EMI collection efficiency, recovery rates, agent performance, and delinquency trends in this interactive analytics dashboard.',
+    url: 'https://dattasable.com/dashboards/collection-intelligence',
+    siteName: 'Datta Sable',
     type: 'website',
-  }
+  },
 };
 
-export default function EMILayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <>{children}</>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
 }

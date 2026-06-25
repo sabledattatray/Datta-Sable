@@ -1,5 +1,21 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Sales Pipeline Velocity Dashboard — B2B Revenue Analytics Case Study | Datta Sable',
+  description:
+    'Interactive B2B sales pipeline dashboard built with Power BI. Track deal velocity, pipeline stages, win/loss rates, revenue forecasting, and team performance metrics in a live analytics showcase.',
+  keywords: ['sales pipeline dashboard', 'B2B revenue analytics', 'Power BI sales dashboard', 'pipeline velocity', 'CRM analytics', 'sales performance BI'],
+  alternates: { canonical: 'https://dattasable.com/dashboards/sales-pipeline' },
+  openGraph: {
+    title: 'Sales Pipeline Velocity Dashboard — B2B Revenue Analytics Case Study',
+    description: 'Interactive Power BI showcase: B2B pipeline velocity, deal stages, win/loss rates, and revenue forecasting.',
+    url: 'https://dattasable.com/dashboards/sales-pipeline',
+    siteName: 'Datta Sable',
+    type: 'website',
+  },
+};
 
 export default function SalesPipelineDashboardPage() {
   return (

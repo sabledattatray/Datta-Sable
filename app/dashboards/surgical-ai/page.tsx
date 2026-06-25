@@ -1,5 +1,21 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Surgical AI Dashboard — Enterprise Workflow Intelligence Prototype | Datta Sable',
+  description:
+    'Interactive enterprise AI workflow intelligence dashboard. Explore AI-powered process automation, operational metrics, real-time system monitoring, and intelligent workflow orchestration in this live prototype.',
+  keywords: ['AI workflow dashboard', 'enterprise AI analytics', 'workflow intelligence', 'AI operations dashboard', 'process automation BI', 'enterprise AI prototype'],
+  alternates: { canonical: 'https://dattasable.com/dashboards/surgical-ai' },
+  openGraph: {
+    title: 'Surgical AI Dashboard — Enterprise Workflow Intelligence Prototype',
+    description: 'Live interactive prototype: AI-powered enterprise workflow intelligence with real-time operational metrics and automation tracking.',
+    url: 'https://dattasable.com/dashboards/surgical-ai',
+    siteName: 'Datta Sable',
+    type: 'website',
+  },
+};
 
 export default function SurgicalAIDashboardPage() {
   return (

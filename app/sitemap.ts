@@ -130,8 +130,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: baselineDate,
-    changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1.0 : route === '/tools' ? 0.9 : 0.7,
+    changeFrequency: route.startsWith('/dashboards/') || route.startsWith('/tools/') ? 'weekly' as const : 'monthly' as const,
+    priority: route === '' ? 1.0
+      : route === '/tools' ? 0.9
+      : route.startsWith('/dashboards/') ? 0.85
+      : route.startsWith('/tools/') ? 0.85
+      : 0.7,
   }));
 
   // 4. Execution Chains
@@ -170,8 +174,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const glossaryUrls = GLOSSARY_TERMS.map((term) => ({
     url: `${baseUrl}/glossary/${term.slug}`,
     lastModified: baselineDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
   }));
 
   const allUrls = [

@@ -1,5 +1,21 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Blinkit Sales Intelligence Dashboard — Quick Commerce Analytics Case Study | Datta Sable',
+  description:
+    'Interactive Power BI dashboard analysing Blinkit quick-commerce sales data. Explore transaction velocity, regional outlet performance, category demand, discount trends, and DAX-powered time-intelligence metrics.',
+  keywords: ['Blinkit dashboard', 'quick commerce analytics', 'Power BI case study', 'q-commerce sales intelligence', 'DAX dashboard', 'Blinkit sales data'],
+  alternates: { canonical: 'https://dattasable.com/dashboards/blinkit-sales' },
+  openGraph: {
+    title: 'Blinkit Sales Intelligence Dashboard — Quick Commerce Analytics Case Study',
+    description: 'Interactive Power BI case study: Blinkit q-commerce transaction velocity, outlet performance, and DAX time-intelligence metrics.',
+    url: 'https://dattasable.com/dashboards/blinkit-sales',
+    siteName: 'Datta Sable',
+    type: 'website',
+  },
+};
 
 export default function BlinkitSalesDashboardPage() {
   return (
