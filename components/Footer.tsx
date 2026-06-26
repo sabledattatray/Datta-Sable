@@ -211,7 +211,7 @@ export default function Footer() {
                     </svg>
                     <div className="flex flex-col text-left">
                       <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
-                        1,077 Followers
+                        1,500+ Followers
                       </span>
                       <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
                         Follow
@@ -239,7 +239,7 @@ export default function Footer() {
                     </svg>
                     <div className="flex flex-col text-left">
                       <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
-                        Subscribe on
+                        1K+ Subscribers
                       </span>
                       <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
                         YouTube
