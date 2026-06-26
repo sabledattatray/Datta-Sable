@@ -38,10 +38,10 @@ export async function getPublishedBlogPosts() {
   }
 
   const postsBySlug = new Map<string, BlogPost>();
+  // Static posts in data.ts are always included — they are manually curated
+  // and must never be filtered by the placeholder guard (which targets DB drafts only).
   staticPosts.forEach((post) => {
-    if (!isPlaceholderPost(post)) {
-      postsBySlug.set(post.slug, post);
-    }
+    postsBySlug.set(post.slug, post);
   });
   dbPosts.forEach((post) => {
     if (!isPlaceholderPost(post)) {
@@ -65,11 +65,9 @@ export async function getPublishedBlogPost(slug: string) {
     console.warn(`Database unavailable for blog post "${slug}"; checking static posts.`, error);
   }
 
+  // Static posts are always returned — placeholder guard is DB-only.
   const staticPost = staticPosts.find((post) => post.slug === slug);
-  if (staticPost && !isPlaceholderPost(staticPost)) {
-    return staticPost;
-  }
-  return null;
+  return staticPost ?? null;
 }
 
 export async function getPublishedBlogSlugs() {
@@ -87,9 +85,8 @@ export async function getPublishedBlogSlugs() {
     console.warn('Database unavailable for blog slugs; using static slugs only.', error);
   }
 
-  const filteredStaticSlugs = staticPosts
-    .filter((post) => !isPlaceholderPost(post))
-    .map((post) => post.slug);
+  // All static slugs are valid — only DB posts need the placeholder filter.
+  const filteredStaticSlugs = staticPosts.map((post) => post.slug);
 
   return Array.from(new Set([...filteredStaticSlugs, ...dbSlugs]));
 }
