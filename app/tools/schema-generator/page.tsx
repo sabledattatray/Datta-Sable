@@ -105,13 +105,13 @@ export default function SchemaForge() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Configuration Panel */}
               <div className="flex flex-col gap-8">
                 <div className="card p-8" style={{ background: 'var(--surface2)' }}>
                   <div className="flex items-center gap-2 mb-8">
                     <Settings size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Schema_Configuration</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Schema_Configuration</h4>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mb-8">
@@ -122,14 +122,14 @@ export default function SchemaForge() {
                         className={`flex items-center gap-3 p-4 border transition-all text-left ${type === s.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)]'}`}
                       >
                         <span className="text-xl">{s.icon}</span>
-                        <span className={`text-[10px] mono font-bold uppercase ${type === s.id ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}`}>{s.label}</span>
+                        <span className={`text-xs mono font-bold uppercase ${type === s.id ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}`}>{s.label}</span>
                       </button>
                     ))}
                   </div>
 
                   <div className="flex flex-col gap-6">
                     <div>
-                      <label className="text-[10px] mono uppercase text-[var(--muted)] block mb-2">Headline / Name</label>
+                      <label className="text-xs mono uppercase text-[var(--muted)] block mb-2">Headline / Name</label>
                       <input 
                         name="title"
                         value={formData.title}
@@ -138,7 +138,7 @@ export default function SchemaForge() {
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] mono uppercase text-[var(--muted)] block mb-2">Description</label>
+                      <label className="text-xs mono uppercase text-[var(--muted)] block mb-2">Description</label>
                       <textarea 
                         name="description"
                         value={formData.description}
@@ -147,7 +147,7 @@ export default function SchemaForge() {
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] mono uppercase text-[var(--muted)] block mb-2">Image URL</label>
+                      <label className="text-xs mono uppercase text-[var(--muted)] block mb-2">Image URL</label>
                       <input 
                         name="imageUrl"
                         value={formData.imageUrl}
@@ -165,11 +165,11 @@ export default function SchemaForge() {
                   <div className="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--surface)]">
                     <div className="flex items-center gap-2">
                       <Code size={16} className="text-[var(--accent)]" />
-                      <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">JSON-LD_Output</h4>
+                      <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">JSON-LD_Output</h4>
                     </div>
                     <button 
                       onClick={handleCopy}
-                      className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[10px]"
+                      className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-xs"
                     >
                       {copied ? <Check size={14} /> : <Copy size={14} />} COPY_SCRIPT_TAG
                     </button>
@@ -182,9 +182,9 @@ export default function SchemaForge() {
                 <div className="card p-6 border-dashed" style={{ background: 'var(--bg)' }}>
                   <div className="flex items-center gap-2 mb-4">
                     <Globe size={14} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Rich_Snippet_Impact</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]">Rich_Snippet_Impact</h4>
                   </div>
-                  <p className="text-[10px] mono text-[var(--muted)] leading-relaxed">
+                  <p className="text-xs mono text-[var(--muted)] leading-relaxed">
                     Structured data helps Google crawlers index your content with more context, often leading to visual enhancements (Rich Snippets) in search results which significantly improve Click-Through Rate.
                   </p>
                 </div>

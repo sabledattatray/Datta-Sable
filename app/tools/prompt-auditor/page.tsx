@@ -70,10 +70,10 @@ export default function PromptAuditorPage() {
 
             <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', padding: '2rem', borderRadius: '4px' }}>
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2 text-[10px] mono text-[#555] uppercase tracking-widest">
+                <div className="flex items-center gap-2 text-xs mono text-[#555] uppercase tracking-widest">
                   <TerminalIcon size={12} /> Input_Prompt_Buffer
                 </div>
-                <div className="text-[10px] mono text-[#555] uppercase tracking-widest">
+                <div className="text-xs mono text-[#555] uppercase tracking-widest">
                   {prompt.length} Tokens_Est
                 </div>
               </div>
@@ -114,15 +114,15 @@ export default function PromptAuditorPage() {
               <div className="mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                   <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', padding: '1.5rem', textAlign: 'center' }}>
-                    <div className="text-[10px] mono text-[#555] uppercase mb-2">Surgical_Score</div>
+                    <div className="text-xs mono text-[#555] uppercase mb-2">Surgical_Score</div>
                     <div style={{ fontSize: '32px', fontWeight: 700, color: result.score > 70 ? 'var(--accent)' : '#ff4444' }}>{result.score}%</div>
                   </div>
                   <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', padding: '1.5rem', textAlign: 'center' }}>
-                    <div className="text-[10px] mono text-[#555] uppercase mb-2">Audit_Status</div>
+                    <div className="text-xs mono text-[#555] uppercase mb-2">Audit_Status</div>
                     <div style={{ fontSize: '18px', fontWeight: 600, color: '#fff' }}>{result.status}</div>
                   </div>
                   <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', padding: '1.5rem', textAlign: 'center' }}>
-                    <div className="text-[10px] mono text-[#555] uppercase mb-2">Token_Efficiency</div>
+                    <div className="text-xs mono text-[#555] uppercase mb-2">Token_Efficiency</div>
                     <div style={{ fontSize: '32px', fontWeight: 700, color: 'var(--accent)' }}>{result.bloat}%</div>
                   </div>
                 </div>

@@ -153,14 +153,14 @@ function PromptGeneratorContent() {
 
           <OperatorPanel />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Configuration */}
             <div className="flex flex-col gap-6">
               <div className="card p-8" style={{ background: 'var(--surface2)' }}>
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-2">
                     <Cpu size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Model_Architecture</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Model_Architecture</h4>
                   </div>
                 </div>
 
@@ -169,7 +169,7 @@ function PromptGeneratorContent() {
                     <button
                       key={p.id}
                       onClick={() => setPlatform(p.id)}
-                      className={`p-3 text-[10px] mono border transition-all ${platform === p.id ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                      className={`p-3 text-xs mono border transition-all ${platform === p.id ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
                     >
                       {p.label}
                     </button>
@@ -178,7 +178,7 @@ function PromptGeneratorContent() {
 
                 <div className="flex items-center gap-2 mb-4">
                   <Target size={16} className="text-[var(--accent)]" />
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Target_Persona</h4>
+                  <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Target_Persona</h4>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {PERSONAS.map((p) => (
@@ -195,7 +195,7 @@ function PromptGeneratorContent() {
 
                 <div className="flex items-center gap-2 mb-4">
                   <ShieldCheck size={16} className="text-[var(--accent)]" />
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Constraints</h4>
+                  <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Constraints</h4>
                 </div>
                 <div className="flex flex-col gap-3">
                   <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
@@ -213,8 +213,8 @@ function PromptGeneratorContent() {
                   className="mt-8 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
                 >
                   <div>
-                    <h5 className="text-[10px] mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
-                    <p className="text-[9px] text-[var(--muted)] mono">Load deep research & agent blueprints</p>
+                    <h5 className="text-xs mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                    <p className="text-[11px] text-[var(--muted)] mono">Load deep research & agent blueprints</p>
                   </div>
                   <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
                 </Link>
@@ -225,7 +225,7 @@ function PromptGeneratorContent() {
             <div className="flex flex-col gap-6">
               <div className="card p-0 overflow-hidden" style={{ background: 'var(--surface2)' }}>
                 <div className="p-4 border-b border-[var(--border)] flex justify-between items-center">
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Core_Concept</h4>
+                  <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]">Core_Concept</h4>
                   <button onClick={() => setTopic('')} className="text-[var(--muted)] hover:text-red-500"><RotateCcw size={14} /></button>
                 </div>
                 <textarea
@@ -241,11 +241,11 @@ function PromptGeneratorContent() {
                 <div className="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--surface)]">
                   <div className="flex items-center gap-2">
                     <Sparkles size={14} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Surgical_Prompt_Output</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Surgical_Prompt_Output</h4>
                   </div>
                   <button 
                     onClick={handleCopy}
-                    className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[10px]"
+                    className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-xs"
                   >
                     {copied ? <Check size={14} /> : <Copy size={14} />} COPY_PROMPT
                   </button>
@@ -260,7 +260,7 @@ function PromptGeneratorContent() {
 
               {/* Export Node */}
               <div className="card p-6" style={{ background: 'var(--surface2)' }}>
-                <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">Export_Node</h4>
+                <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)] mb-4">Export_Node</h4>
                 <div className="flex gap-4">
                   <button 
                     onClick={() => {
@@ -271,7 +271,7 @@ function PromptGeneratorContent() {
                       a.download = 'surgical_prompt.md';
                       a.click();
                     }}
-                    className="btn-outline flex-1 py-2 text-[10px] mono"
+                    className="btn-outline flex-1 py-2 text-xs mono"
                     disabled={!generatedPrompt}
                   >
                     EXPORT_MD
@@ -285,7 +285,7 @@ function PromptGeneratorContent() {
                       a.download = 'surgical_prompt.json';
                       a.click();
                     }}
-                    className="btn-outline flex-1 py-2 text-[10px] mono"
+                    className="btn-outline flex-1 py-2 text-xs mono"
                     disabled={!generatedPrompt}
                   >
                     EXPORT_JSON

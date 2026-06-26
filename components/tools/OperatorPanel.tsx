@@ -13,9 +13,9 @@ export default function OperatorPanel() {
   const STYLES: OperatorStyle[] = ['Surgical', 'Executive', 'Analytical', 'Narrative', 'Minimalist'];
 
   return (
-    <div className="card mb-8 overflow-hidden" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderColor: 'rgba(201, 243, 29, 0.2)' }}>
+    <div className="card overflow-hidden" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderColor: 'rgba(201, 243, 29, 0.2)', marginBottom: '2rem' }}>
       <div 
-        className="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all"
+        className="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-3">
@@ -23,13 +23,13 @@ export default function OperatorPanel() {
             <Settings size={18} className={isOpen ? 'rotate-90 transition-all' : 'transition-all'} />
           </div>
           <div>
-            <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Operator_Mode_Active</h4>
-            <p className="text-[9px] mono text-[var(--muted)]">
+            <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Operator_Mode_Active</h4>
+            <p className="text-xs mono text-[var(--muted)]" style={{ marginTop: '4px' }}>
               {profile.persona} / {profile.intent} / {profile.style}
             </p>
           </div>
         </div>
-        <ChevronDown size={14} className={`text-[var(--muted)] transition-all ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown size={14} className="text-[var(--muted)] transition-all" style={{ transform: isOpen ? 'rotate(180deg)' : 'none' }} />
       </div>
 
       {isOpen && (
@@ -38,14 +38,14 @@ export default function OperatorPanel() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <User size={14} className="text-[var(--accent)]" />
-              <h5 className="mono text-[9px] uppercase tracking-widest">Persona</h5>
+              <h5 className="mono text-xs uppercase tracking-widest">Persona</h5>
             </div>
             <div className="flex flex-col gap-2">
               {PERSONAS.map(p => (
                 <button 
                   key={p}
                   onClick={() => updateProfile({ persona: p })}
-                  className={`text-left px-3 py-2 text-[10px] mono border transition-all flex justify-between items-center ${profile.persona === p ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                  className={`text-left px-3 py-2.5 text-xs mono border transition-all flex justify-between items-center cursor-pointer ${profile.persona === p ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)] bg-transparent'}`}
                 >
                   {p.toUpperCase()}
                   {profile.persona === p && <Check size={10} />}
@@ -58,14 +58,14 @@ export default function OperatorPanel() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Target size={14} className="text-[var(--accent)]" />
-              <h5 className="mono text-[9px] uppercase tracking-widest">Intent</h5>
+              <h5 className="mono text-xs uppercase tracking-widest">Intent</h5>
             </div>
             <div className="flex flex-col gap-2">
               {INTENTS.map(i => (
                 <button 
                   key={i}
                   onClick={() => updateProfile({ intent: i })}
-                  className={`text-left px-3 py-2 text-[10px] mono border transition-all flex justify-between items-center ${profile.intent === i ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                  className={`text-left px-3 py-2.5 text-xs mono border transition-all flex justify-between items-center cursor-pointer ${profile.intent === i ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)] bg-transparent'}`}
                 >
                   {i.toUpperCase()}
                   {profile.intent === i && <Check size={10} />}
@@ -78,14 +78,14 @@ export default function OperatorPanel() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Zap size={14} className="text-[var(--accent)]" />
-              <h5 className="mono text-[9px] uppercase tracking-widest">Style</h5>
+              <h5 className="mono text-xs uppercase tracking-widest">Style</h5>
             </div>
             <div className="flex flex-col gap-2">
               {STYLES.map(s => (
                 <button 
                   key={s}
                   onClick={() => updateProfile({ style: s })}
-                  className={`text-left px-3 py-2 text-[10px] mono border transition-all flex justify-between items-center ${profile.style === s ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                  className={`text-left px-3 py-2.5 text-xs mono border transition-all flex justify-between items-center cursor-pointer ${profile.style === s ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)] bg-transparent'}`}
                 >
                   {s.toUpperCase()}
                   {profile.style === s && <Check size={10} />}
@@ -97,16 +97,16 @@ export default function OperatorPanel() {
       )}
 
       {/* Founder Insight Layer - Human Signal */}
-      <div className="p-4 bg-[var(--accent)]/5 border-t border-[var(--border)] flex items-start gap-3">
-        <div className="w-8 h-8 rounded-full bg-[var(--surface2)] border border-[var(--accent)]/30 flex-shrink-0 flex items-center justify-center overflow-hidden">
-          <span className="text-[10px] mono font-bold text-[var(--accent)]">DS</span>
+      <div className="p-5 bg-[var(--accent)]/5 border-t border-[var(--border)] flex items-start gap-4">
+        <div className="w-9 h-9 rounded-full bg-[var(--surface2)] border border-[var(--accent)]/30 flex-shrink-0 flex items-center justify-center overflow-hidden">
+          <span className="text-xs mono font-bold text-[var(--accent)]">DS</span>
         </div>
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h5 className="mono text-[9px] uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Insight</h5>
-            <span className="text-[8px] mono text-[var(--muted)] px-1 border border-[var(--border)] rounded">VERIFIED_OPERATOR</span>
+          <div className="flex items-center gap-2 mb-2">
+            <h5 className="mono text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Insight</h5>
+            <span className="text-[11px] mono text-[var(--muted)] px-1.5 py-0.5 border border-[var(--border)] rounded">VERIFIED_OPERATOR</span>
           </div>
-          <p className="text-[10px] leading-relaxed text-[var(--muted)] italic">
+          <p className="text-xs leading-relaxed text-[var(--muted)] italic" style={{ fontSize: '0.84rem', lineHeight: 1.65 }}>
             "Precision is the only scalable advantage. Don't just generate—orchestrate. I built these settings to ensure your technical identity remains consistent across every node."
           </p>
         </div>

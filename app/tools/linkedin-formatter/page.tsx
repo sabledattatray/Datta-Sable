@@ -119,13 +119,13 @@ function LinkedInFormatterContent() {
                   <div className="flex items-center gap-4">
                     <button 
                       onClick={() => formatText('spacing')}
-                      className="btn-outline px-3 py-1.5 text-[10px] lowercase flex items-center gap-1"
+                      className="btn-outline px-3 py-1.5 text-xs lowercase flex items-center gap-1"
                     >
                       <Sparkles size={12} /> add_spacing
                     </button>
                     <button 
                       onClick={() => formatText('bullets')}
-                      className="btn-outline px-3 py-1.5 text-[10px] lowercase flex items-center gap-1"
+                      className="btn-outline px-3 py-1.5 text-xs lowercase flex items-center gap-1"
                     >
                       <Sparkles size={12} /> auto_bullets
                     </button>
@@ -149,13 +149,14 @@ function LinkedInFormatterContent() {
 
             {/* Sidebar Actions */}
             <div className="flex flex-col gap-6">
-              <div className="card" style={{ background: 'var(--bg)' }}>
-                <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-6">Execution_Panel</h4>
+              <div className="card" style={{ background: 'var(--bg)', padding: '2rem 1.5rem' }}>
+                <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]" style={{ marginBottom: '1.5rem' }}>Execution_Panel</h4>
                 
                 <button 
                   onClick={handleCopy}
                   disabled={!text}
-                  className="btn-primary w-full flex items-center justify-center gap-2 mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  style={{ marginBottom: '1rem' }}
                 >
                   {copied ? (
                     <><Check size={16} /> COPIED_TO_BUFFER</>
@@ -164,19 +165,20 @@ function LinkedInFormatterContent() {
                   )}
                 </button>
                 
-                <div style={{ padding: '1rem', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '4px' }}>
-                  <p className="text-[10px] mono text-[var(--muted)] leading-relaxed">
+                <div style={{ padding: '1rem', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px', marginBottom: '1rem' }}>
+                  <p className="text-xs mono text-[var(--muted)] leading-relaxed" style={{ fontSize: '0.78rem', lineHeight: 1.6 }}>
                     TIP: LinkedIn algorithms prioritize posts with clear vertical spacing and bulleted lists. Ensure your "Hook" (first 2 lines) is punchy.
                   </p>
                 </div>
 
                 <Link 
                   href="/templates" 
-                  className="mt-4 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
+                  className="p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
+                  style={{ marginTop: '1rem', display: 'flex' }}
                 >
                   <div>
-                    <h5 className="text-[10px] mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
-                    <p className="text-[9px] text-[var(--muted)] mono">Browse high-authority blueprints</p>
+                    <h5 className="text-xs mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                    <p className="text-xs text-[var(--muted)] mono" style={{ marginTop: '4px' }}>Browse high-authority blueprints</p>
                   </div>
                   <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
                 </Link>
@@ -186,19 +188,20 @@ function LinkedInFormatterContent() {
                     localStorage.setItem('surgical_context-optimizer-input', JSON.stringify(text));
                     window.location.href = '/tools/context-optimizer';
                   }}
-                  className="mt-4 w-full p-4 border border-[var(--border)] rounded flex items-center justify-between group no-underline bg-transparent cursor-pointer"
+                  className="w-full p-4 border border-[var(--border)] rounded flex items-center justify-between group no-underline bg-transparent cursor-pointer"
+                  style={{ marginTop: '1rem' }}
                 >
                   <div className="text-left">
-                    <h5 className="text-[10px] mono font-bold text-[var(--text)]">OPTIMIZE_FOR_AI</h5>
-                    <p className="text-[9px] text-[var(--muted)] mono">Reduce tokens for LLM prompts</p>
+                    <h5 className="text-xs mono font-bold text-[var(--text)]">OPTIMIZE_FOR_AI</h5>
+                    <p className="text-xs text-[var(--muted)] mono" style={{ marginTop: '4px' }}>Reduce tokens for LLM prompts</p>
                   </div>
                   <Minimize2 size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-all" />
                 </button>
               </div>
 
-              <div className="card" style={{ background: 'var(--bg)', borderStyle: 'dashed' }}>
-                <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">Post_Metrics</h4>
-                <div className="flex justify-between items-center mb-2">
+              <div className="card" style={{ background: 'var(--bg)', borderStyle: 'dashed', padding: '2rem 1.5rem' }}>
+                <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]" style={{ marginBottom: '1.25rem' }}>Post_Metrics</h4>
+                <div className="flex justify-between items-center mb-3">
                   <span className="text-xs text-[var(--muted)]">Characters:</span>
                   <span className="text-xs mono">{text.length}</span>
                 </div>

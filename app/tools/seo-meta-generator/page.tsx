@@ -108,12 +108,12 @@ export default function SEOMetaGenerator() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Configuration Panel */}
               <div className="flex flex-col gap-8">
                 <div className="card p-8" style={{ background: 'var(--surface2)' }}>
                   <div className="flex items-center justify-between mb-8">
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Input_Parameters</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]">Input_Parameters</h4>
                     <button onClick={clearAll} className="text-[var(--muted)] hover:text-red-500 transition-colors">
                       <Trash2 size={14} />
                     </button>
@@ -122,8 +122,8 @@ export default function SEOMetaGenerator() {
                   <div className="flex flex-col gap-6">
                     <div>
                       <div className="flex justify-between items-center mb-2">
-                        <label className="text-[10px] mono uppercase text-[var(--muted)]">Page_Title</label>
-                        <span className={`text-[10px] mono ${title.length > 60 ? 'text-red-400' : 'text-[var(--accent)]'}`}>
+                        <label className="text-xs mono uppercase text-[var(--muted)]">Page_Title</label>
+                        <span className={`text-xs mono ${title.length > 60 ? 'text-red-400' : 'text-[var(--accent)]'}`}>
                           {title.length}/60
                         </span>
                       </div>
@@ -138,8 +138,8 @@ export default function SEOMetaGenerator() {
 
                     <div>
                       <div className="flex justify-between items-center mb-2">
-                        <label className="text-[10px] mono uppercase text-[var(--muted)]">Meta_Description</label>
-                        <span className={`text-[10px] mono ${description.length > 160 ? 'text-red-400' : 'text-[var(--accent)]'}`}>
+                        <label className="text-xs mono uppercase text-[var(--muted)]">Meta_Description</label>
+                        <span className={`text-xs mono ${description.length > 160 ? 'text-red-400' : 'text-[var(--accent)]'}`}>
                           {description.length}/160
                         </span>
                       </div>
@@ -152,7 +152,7 @@ export default function SEOMetaGenerator() {
                     </div>
 
                     <div>
-                      <label className="text-[10px] mono uppercase text-[var(--muted)] block mb-2">Target_Keywords</label>
+                      <label className="text-xs mono uppercase text-[var(--muted)] block mb-2">Target_Keywords</label>
                       <input 
                         type="text"
                         value={keywords}
@@ -166,7 +166,7 @@ export default function SEOMetaGenerator() {
 
                 {/* Audit Panel */}
                 <div className="card p-6 border-dashed" style={{ background: 'var(--bg)' }}>
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">Surgical_Audit</h4>
+                  <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)] mb-4">Surgical_Audit</h4>
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-2 text-xs">
                       {title.length >= 40 && title.length <= 60 ? <Check size={14} className="text-green-500" /> : <AlertCircle size={14} className="text-amber-500" />}
@@ -186,7 +186,7 @@ export default function SEOMetaGenerator() {
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
                       <Eye size={16} className="text-[var(--accent)]" />
-                      <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Google_Preview</h4>
+                      <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Google_Preview</h4>
                     </div>
                   </div>
                   
@@ -205,7 +205,7 @@ export default function SEOMetaGenerator() {
                   <div className="mt-8">
                     <button 
                       onClick={shipToLinkedIn}
-                      className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-[10px] mono tracking-widest group"
+                      className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-xs mono tracking-widest group"
                     >
                       SHIP_TO_LINKEDIN_FORMATTER <ArrowRight size={14} className="group-hover:translate-x-1 transition-all" />
                     </button>
@@ -214,7 +214,7 @@ export default function SEOMetaGenerator() {
                         localStorage.setItem('surgical_context-optimizer-input', JSON.stringify(title));
                         router.push('/tools/context-optimizer');
                       }}
-                      className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-[10px] mono tracking-widest group mt-3"
+                      className="btn-outline w-full flex items-center justify-center gap-2 py-3 text-xs mono tracking-widest group mt-3"
                     >
                       CONDENSE_FOR_AI <Minimize2 size={14} />
                     </button>
@@ -225,7 +225,7 @@ export default function SEOMetaGenerator() {
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
                       <Code size={16} className="text-[var(--accent)]" />
-                      <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">JSON-LD_Schema</h4>
+                      <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">JSON-LD_Schema</h4>
                     </div>
                     <button 
                       onClick={() => handleCopy(schema, 'schema')}
@@ -234,7 +234,7 @@ export default function SEOMetaGenerator() {
                       {copiedType === 'schema' ? <Check size={16} /> : <Copy size={16} />}
                     </button>
                   </div>
-                  <pre className="p-4 bg-[var(--bg)] rounded border border-[var(--border)] overflow-x-auto text-[10px] mono text-[var(--muted)] leading-relaxed h-48">
+                  <pre className="p-4 bg-[var(--bg)] rounded border border-[var(--border)] overflow-x-auto text-xs mono text-[var(--muted)] leading-relaxed h-48">
                     {schema}
                   </pre>
                 </div>
