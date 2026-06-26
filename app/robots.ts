@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         // /lp/ is intentionally NOT blocked so SEO landing pages can rank
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/', '/preview'],
+        disallow: ['/api/', '/dashboards/', '/admin/', '/preview', '/tools/workspace'],
       },
 
       // ── Google crawlers ───────────────────────────────────────────────

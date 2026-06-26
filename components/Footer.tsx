@@ -60,11 +60,12 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Explore',
     links: [
-      { label: 'Live Feed',      href: '/analytics-live', icon: Activity },
-      { label: 'Technical Blog', href: '/blog',       icon: BookOpen },
-      { label: 'AI Glossary',    href: '/glossary',   icon: Search },
-      { label: 'Disclaimer',    href: '/disclaimer', icon: Shield },
-      { label: 'Sitemap',   href: '/sitemap.xml', icon: Globe, external: true },
+      { label: 'Live Feed',       href: '/analytics-live', icon: Activity },
+      { label: 'Technical Blog',  href: '/blog',           icon: BookOpen },
+      { label: 'AI Glossary',     href: '/glossary',       icon: Search },
+      { label: 'Privacy Policy',  href: '/privacy',        icon: Shield },
+      { label: 'Disclaimer',      href: '/disclaimer',     icon: Shield },
+      { label: 'Sitemap',         href: '/sitemap.xml',    icon: Globe, external: true },
     ],
   },
   {

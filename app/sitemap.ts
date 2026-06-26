@@ -79,7 +79,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services',
     '/portfolio',
     '/blog',
-    '/dashboards',
+    '/dashboards',        // Dashboard index — kept (editorial overview content)
+    // Individual dashboard sub-pages excluded: JS-rendered charts are thin content for crawlers
+    // They are blocked in robots.ts under /dashboards/
     '/about',
     '/contact',
     '/privacy',
@@ -110,6 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/mermaid-forge',
     '/tools/bi-roi-calculator',
     '/tools/prompt-auditor',
+    // /tools/workspace excluded — app interface, blocked in robots.ts
     '/infrastructure',
     '/knowledge/taxonomy',
     '/knowledge/standards',
@@ -120,20 +123,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/knowledge/rfc/002-execution-chains',
     '/knowledge/rfc/003-intent-mapping',
     '/knowledge/comparisons',
-    '/dashboards/global-sales-intelligence',
-    '/dashboards/collection-intelligence',
-    '/dashboards/revenue-intelligence',
-    '/dashboards/interactive',
-    '/dashboards/blinkit-sales',
-    '/dashboards/sales-pipeline',
-    '/dashboards/surgical-ai',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: baselineDate,
-    changeFrequency: route.startsWith('/dashboards/') || route.startsWith('/tools/') ? 'weekly' as const : 'monthly' as const,
+    changeFrequency: route.startsWith('/tools/') ? 'weekly' as const : 'monthly' as const,
     priority: route === '' ? 1.0
       : route === '/tools' ? 0.9
-      : route.startsWith('/dashboards/') ? 0.85
       : route.startsWith('/tools/') ? 0.85
       : 0.7,
   }));
