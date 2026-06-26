@@ -1,0 +1,44 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboards/
+Disallow: /admin/
+Disallow: /preview
+Disallow: /tools/workspace
+
+User-Agent: Mediapartners-Google
+Allow: /
+
+User-Agent: Google-Display-Ads-Bot
+Allow: /
+
+User-Agent: AdsBot-Google
+Allow: /
+
+User-Agent: AdsBot-Google-Mobile
+Allow: /
+
+User-Agent: Googlebot-Image
+Allow: /
+
+User-Agent: Bingbot
+Allow: /
+
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Applebot
+Allow: /
+
+Sitemap: https://dattasable.com/sitemap.xml
+Sitemap: https://dattasable.com/image-sitemap.xml
+Sitemap: https://dattasable.com/news-sitemap.xml
