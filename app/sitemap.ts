@@ -73,15 +73,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // 3. Static main pages
+  // 3. Static main pages — thin utility/tool pages excluded for content quality
   const staticUrls = [
     '',
     '/services',
     '/portfolio',
     '/blog',
-    '/dashboards',        // Dashboard index — kept (editorial overview content)
-    // Individual dashboard sub-pages excluded: JS-rendered charts are thin content for crawlers
-    // They are blocked in robots.ts under /dashboards/
     '/about',
     '/contact',
     '/privacy',
@@ -93,43 +90,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/careers/collection-officer-mumbai',
     '/careers/collection-team-leader-mumbai',
     '/start-here',
-    '/analytics-live',
-    '/data-forge',
     '/tools',
-    '/templates',
-    '/chains',
     '/knowledge',
     '/knowledge/architecture',
     '/knowledge/data-engineering',
     '/glossary',
-    '/tools/linkedin-formatter',
-    '/tools/ai-prompt-generator',
-    '/tools/seo-meta-generator',
-    '/tools/image-blade',
-    '/tools/context-optimizer',
-    '/tools/word-counter',
-    '/tools/schema-generator',
-    '/tools/mermaid-forge',
-    '/tools/bi-roi-calculator',
-    '/tools/prompt-auditor',
-    // /tools/workspace excluded — app interface, blocked in robots.ts
-    '/infrastructure',
-    '/knowledge/taxonomy',
-    '/knowledge/standards',
-    '/knowledge/protocols',
-    '/knowledge/patterns',
-    '/knowledge/rfc',
-    '/knowledge/rfc/001-prompt-hardening',
-    '/knowledge/rfc/002-execution-chains',
-    '/knowledge/rfc/003-intent-mapping',
-    '/knowledge/comparisons',
+    // Individual tool pages, chains, templates, rfc, knowledge sub-pages excluded
+    // — these are utility/thin pages; noindex applied at page level
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: baselineDate,
-    changeFrequency: route.startsWith('/tools/') ? 'weekly' as const : 'monthly' as const,
+    changeFrequency: 'monthly' as const,
     priority: route === '' ? 1.0
-      : route === '/tools' ? 0.9
-      : route.startsWith('/tools/') ? 0.85
+      : route === '/tools' ? 0.8
       : 0.7,
   }));
 
@@ -174,16 +147,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const allUrls = [
-    ...staticUrls, 
-    ...dbBlogUrls, 
-    ...staticBlogUrls, 
+    ...staticUrls,
+    ...dbBlogUrls,
+    ...staticBlogUrls,
     ...dbCustomPageUrls,
     ...categoryUrls,
-    ...chainUrls, 
-    ...templateUrls, 
-    ...knowledgeUrls,
-    ...landingPageUrls,
-    ...glossaryUrls
+    ...glossaryUrls,
+    // chainUrls, templateUrls, knowledgeUrls, landingPageUrls excluded — utility/thin pages
   ];
 
   // De-duplicate by URL to prevent crawler warnings in Search Console

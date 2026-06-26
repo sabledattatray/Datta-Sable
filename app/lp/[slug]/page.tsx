@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: { absolute: finalTitle },
     description: lp.description,
+    robots: { index: false, follow: true },
   };
 }
 

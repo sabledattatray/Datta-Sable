@@ -1,6 +1,6 @@
 # ============================================================
 # robots.txt — dattasable.com
-# Last updated: 2026-06-26
+# Last updated: 2026-06-27
 # ============================================================
 
 # --- Default: Allow all well-behaved bots ---
@@ -31,6 +31,30 @@ Disallow: /preview/
 Disallow: /tools/workspace
 Disallow: /live-dashboard/
 Disallow: /analytics-live/
+
+# Utility / thin-content pages (excluded from AdSense indexing)
+Disallow: /tools/linkedin-formatter
+Disallow: /tools/ai-prompt-generator
+Disallow: /tools/seo-meta-generator
+Disallow: /tools/image-blade
+Disallow: /tools/context-optimizer
+Disallow: /tools/word-counter
+Disallow: /tools/schema-generator
+Disallow: /tools/mermaid-forge
+Disallow: /tools/bi-roi-calculator
+Disallow: /tools/prompt-auditor
+Disallow: /tools/demo
+Disallow: /chains/
+Disallow: /templates/
+Disallow: /lp/
+Disallow: /infrastructure
+Disallow: /data-forge
+Disallow: /knowledge/rfc/
+Disallow: /knowledge/taxonomy
+Disallow: /knowledge/standards
+Disallow: /knowledge/protocols
+Disallow: /knowledge/patterns
+Disallow: /knowledge/comparisons
 
 # --- Google AdSense crawlers ---
 User-agent: Mediapartners-Google

@@ -16,6 +16,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Surgical Execution Chains™ | Automated AI Orchestration | Datta Sable',
   description: 'One input, multiple high-authority outputs. Deploy automated AI orchestration pipelines for LinkedIn, technical SEO, and deep research.',
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Surgical Execution Chains™ | Automated AI Orchestration',
     description: 'One input, multiple high-authority outputs. Automated AI pipelines for LinkedIn, SEO, and deep research.',
