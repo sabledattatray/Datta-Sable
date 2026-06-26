@@ -93,7 +93,7 @@ export default function StartHerePage() {
                   </div>
                   <div style={{ width: '1px', height: '30px', background: 'var(--border)' }} />
                   <div>
-                    <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>319</div>
+                    <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>1K+</div>
                     <div className="mono" style={{ fontSize: '9px', color: 'var(--muted)', letterSpacing: '0.1em' }}>SUBSCRIBERS</div>
                   </div>
                 </div>
