@@ -55,6 +55,7 @@ const NAV_LINKS: NavSection[] = [
       { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/dattasable/',  icon: Users,          external: true },
       { label: 'Twitter / X', href: 'https://x.com/sabledattatray',             icon: MessageSquare,  external: true },
       { label: 'GitHub',      href: 'https://github.com/sabledattatray',        icon: Code2,          external: true },
+      { label: 'YouTube',     href: 'https://www.youtube.com/@sabledatttatray', icon: Globe,          external: true },
     ],
   },
   {
@@ -186,6 +187,35 @@ export default function Footer() {
                   <MapPin size={15} className="text-[var(--accent)] flex-shrink-0" />
                   Mumbai, Maharashtra, India
                 </span>
+
+                {/* YouTube Subscribe Button */}
+                <div style={{ marginTop: '1.5rem' }}>
+                  <a
+                    href="https://www.youtube.com/@sabledatttatray?sub_confirmation=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] group/yt"
+                    style={{
+                      background: '#FF0000',
+                      border: '1px solid rgba(255,0,0,0.4)',
+                      padding: '10px 20px',
+                      minWidth: '170px',
+                    }}
+                  >
+                    {/* YouTube Icon */}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 group-hover/yt:scale-110 transition-transform">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    <div className="flex flex-col text-left">
+                      <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
+                        Subscribe on
+                      </span>
+                      <span style={{ fontSize: '17px', fontFamily: 'Roboto, sans-serif', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
+                        YouTube
+                      </span>
+                    </div>
+                  </a>
+                </div>
 
                 {/* Official Theme-Aware Google Play Store Badge */}
                 <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
