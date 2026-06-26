@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp,
-  Activity, Layers, FileText, Sparkles, Pen,
-  PenTool, LayoutGrid, Scale, Book, Search, Cpu,
+  BarChart3, Database, Code2, Globe, Zap, TrendingUp,
+  Activity, Layers, FileText, Sparkles,
+  PenTool, LayoutGrid, Book, Search, Cpu,
   Monitor, Server, Palette, Megaphone, ShoppingCart, Workflow,
   HelpCircle, User, Mail, Users, MessageSquare, PhoneCall
 } from 'lucide-react';

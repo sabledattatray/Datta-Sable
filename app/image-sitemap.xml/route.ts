@@ -15,43 +15,50 @@ function extractFirstImage(content: string): string | null {
   return null;
 }
 
-// Extracts title from HTML for image caption
 function extractTitle(title: string): string {
   return title.replace(/[<>&"']/g, ' ').trim();
 }
 
+function isPlaceholderPost(content: string): boolean {
+  if (!content) return true;
+  return content.includes('In the rapidly evolving world of digital infrastructure and technology');
+}
+
 export async function GET() {
-  // Get DB posts
+  // Get DB posts — filter placeholders
   const dbPosts = await prisma.post.findMany({
     where: { published: true },
     select: { slug: true, title: true, image: true, content: true, updatedAt: true },
   }).catch(() => []);
 
-  // Merge static + db posts
+  // Merge static + db posts, static first (db overrides via dedup)
   const allPosts = [
-    ...staticPosts.map(p => ({
-      slug: p.slug,
-      title: p.title,
-      image: (p as any).image || null,
-      content: p.content || '',
-      updatedAt: new Date((p as any).date || '2026-06-25'),
-    })),
-    ...dbPosts.map(p => ({
-      slug: p.slug,
-      title: p.title,
-      image: p.image || null,
-      content: p.content || '',
-      updatedAt: p.updatedAt,
-    })),
+    ...staticPosts
+      .filter(p => !isPlaceholderPost(p.content || ''))
+      .map(p => ({
+        slug: p.slug,
+        title: p.title,
+        image: (p as any).image || null,
+        content: p.content || '',
+        updatedAt: new Date((p as any).date || '2026-06-25'),
+      })),
+    ...dbPosts
+      .filter(p => !isPlaceholderPost(p.content || ''))
+      .map(p => ({
+        slug: p.slug,
+        title: p.title,
+        image: p.image || null,
+        content: p.content || '',
+        updatedAt: p.updatedAt,
+      })),
   ];
 
-  // De-duplicate by slug
-  const seen = new Set<string>();
-  const uniquePosts = allPosts.filter(p => {
-    if (seen.has(p.slug)) return false;
-    seen.add(p.slug);
-    return true;
-  });
+  // De-duplicate by slug (db version wins — it's later in the array)
+  const seen = new Map<string, typeof allPosts[0]>();
+  for (const post of allPosts) {
+    seen.set(post.slug, post); // later entry overwrites — DB wins
+  }
+  const uniquePosts = Array.from(seen.values());
 
   const xmlEntries = uniquePosts.map(post => {
     // Use explicit image field first, then extract from content

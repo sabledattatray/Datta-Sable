@@ -24,6 +24,7 @@ async function main() {
   // 2. Seed original blogs with FULL content
   console.log(`Seeding ${originalPosts.length} original blog posts...`);
   for (const post of originalPosts) {
+    const p = post as any;
     await prisma.post.upsert({
       where: { slug: post.slug },
       update: {
@@ -31,10 +32,10 @@ async function main() {
         category: post.category,
         excerpt: post.excerpt,
         content: post.content,
-        readTime: post.readTime,
+        readTime: p.readTime,
         date: post.date,
-        color: post.color,
-        icon: post.icon,
+        color: p.color,
+        icon: p.icon,
         image: post.image,
         published: true,
       },
@@ -44,10 +45,10 @@ async function main() {
         category: post.category,
         excerpt: post.excerpt,
         content: post.content,
-        readTime: post.readTime,
+        readTime: p.readTime,
         date: post.date,
-        color: post.color,
-        icon: post.icon,
+        color: p.color,
+        icon: p.icon,
         image: post.image,
         published: true,
       },

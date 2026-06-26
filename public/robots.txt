@@ -1,44 +1,87 @@
-User-Agent: *
+# ============================================================
+# robots.txt — dattasable.com
+# Last updated: 2026-06-26
+# ============================================================
+
+# --- Default: Allow all well-behaved bots ---
+User-agent: *
 Allow: /
+Allow: /blog/
+Allow: /tools/
+Allow: /portfolio/
+Allow: /services/
+Allow: /about/
+Allow: /contact/
+Allow: /glossary/
+Allow: /knowledge/
+Allow: /chains/
+Allow: /templates/
+Allow: /lp/
+Allow: /careers/
+Allow: /faq/
+Allow: /category/
+Allow: /rss.xml
+
+# Private / thin-content paths
 Disallow: /api/
-Disallow: /dashboards/
 Disallow: /admin/
-Disallow: /preview
+Disallow: /dashboard/
+Disallow: /dashboards/
+Disallow: /preview/
 Disallow: /tools/workspace
+Disallow: /live-dashboard/
+Disallow: /analytics-live/
 
-User-Agent: Mediapartners-Google
+# --- Google AdSense crawlers ---
+User-agent: Mediapartners-Google
 Allow: /
 
-User-Agent: Google-Display-Ads-Bot
+User-agent: Google-Display-Ads-Bot
 Allow: /
 
-User-Agent: AdsBot-Google
+User-agent: AdsBot-Google
 Allow: /
 
-User-Agent: AdsBot-Google-Mobile
+User-agent: AdsBot-Google-Mobile
 Allow: /
 
-User-Agent: Googlebot-Image
+# --- Google Image crawler ---
+User-agent: Googlebot-Image
 Allow: /
 
-User-Agent: Bingbot
+# --- Bing ---
+User-agent: Bingbot
 Allow: /
 
-User-Agent: GPTBot
+# --- AI Training / RAG bots (allowed for discoverability) ---
+User-agent: GPTBot
 Allow: /
 
-User-Agent: OAI-SearchBot
+User-agent: OAI-SearchBot
 Allow: /
 
-User-Agent: ClaudeBot
+User-agent: ClaudeBot
 Allow: /
 
-User-Agent: PerplexityBot
+User-agent: PerplexityBot
 Allow: /
 
-User-Agent: Applebot
+User-agent: Applebot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+# ============================================================
+# Sitemaps
+# ============================================================
+Sitemap: https://dattasable.com/sitemap-index.xml
 Sitemap: https://dattasable.com/sitemap.xml
 Sitemap: https://dattasable.com/image-sitemap.xml
 Sitemap: https://dattasable.com/news-sitemap.xml

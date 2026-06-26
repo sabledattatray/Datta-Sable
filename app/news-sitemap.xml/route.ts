@@ -5,9 +5,6 @@ import { prisma } from '@/lib/prisma';
 const BASE_URL = 'https://dattasable.com';
 const PUBLICATION_NAME = 'Datta Sable';
 const PUBLICATION_LANG = 'en';
-
-// Google News sitemap only accepts posts from the LAST 2 DAYS for "news"
-// but for blog/how-to content, last 30 days is acceptable for Google Discover
 const DAYS_WINDOW = 30;
 
 function escapeXml(str: string): string {
@@ -19,34 +16,43 @@ function escapeXml(str: string): string {
     .replace(/'/g, '&apos;');
 }
 
+function isPlaceholderPost(content: string): boolean {
+  if (!content) return true;
+  return content.includes('In the rapidly evolving world of digital infrastructure and technology');
+}
+
 export async function GET() {
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - DAYS_WINDOW);
 
-  // Fetch DB posts
+  // Fetch DB posts — filter placeholders
   const dbPosts = await prisma.post.findMany({
     where: { published: true },
-    select: { slug: true, title: true, category: true, updatedAt: true, createdAt: true },
+    select: { slug: true, title: true, category: true, updatedAt: true, createdAt: true, content: true },
     orderBy: { updatedAt: 'desc' },
   }).catch(() => []);
 
   // Merge with static posts
   const allPosts = [
-    ...dbPosts.map(p => ({
-      slug: p.slug,
-      title: p.title,
-      category: p.category || 'Technology',
-      date: p.updatedAt,
-    })),
-    ...staticPosts.map(p => ({
-      slug: p.slug,
-      title: p.title,
-      category: (p as any).category || 'Technology',
-      date: new Date((p as any).date || '2026-06-25'),
-    })),
+    ...dbPosts
+      .filter(p => !isPlaceholderPost(p.content || ''))
+      .map(p => ({
+        slug: p.slug,
+        title: p.title,
+        category: p.category || 'Technology',
+        date: p.updatedAt,
+      })),
+    ...staticPosts
+      .filter(p => !isPlaceholderPost(p.content || ''))
+      .map(p => ({
+        slug: p.slug,
+        title: p.title,
+        category: (p as any).category || 'Technology',
+        date: new Date((p as any).date || '2026-06-25'),
+      })),
   ];
 
-  // De-duplicate + filter to recent posts
+  // De-duplicate + filter to recent posts only
   const seen = new Set<string>();
   const recentPosts = allPosts
     .filter(p => {
@@ -55,7 +61,7 @@ export async function GET() {
       return p.date >= cutoff;
     })
     .sort((a, b) => b.date.getTime() - a.date.getTime())
-    .slice(0, 1000); // Google News limit
+    .slice(0, 1000); // Google News hard limit
 
   const xmlEntries = recentPosts.map(post => {
     const pageUrl = `${BASE_URL}/blog/${post.slug}`;
