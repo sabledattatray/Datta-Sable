@@ -13,6 +13,18 @@ export const posts = [
 
 <p>For more than 10 years working in Business Intelligence, Power BI, SQL, reporting automation, and analytics engineering, I noticed that many professionals understand Power BI very well but struggle to connect the broader Microsoft Fabric ecosystem together. This notebook serves as a practical bridge between the storage layers, execution engines, and the semantic tier.</p>
 
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid var(--border); margin: 2rem 0;">
+  <iframe
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px;"
+    src="https://www.youtube-nocookie.com/embed/b1pCMDCFXIw?si=bjA0iJqnXMhllnv6"
+    title="DP-600 Fabric Analytics Engineer Study Guide Video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
 
 <h2 id="toc" style="color: var(--text); font-size: 1.5rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Table of Contents</h2>
