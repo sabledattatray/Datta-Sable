@@ -249,31 +249,37 @@ export default function LinkedInAuthorityFormatter() {
       <Suspense fallback={<div className="container py-20 mono text-xs animate-pulse">SYNCHRONIZING_SOCIAL_ENGINE...</div>}>
         <LinkedInFormatterContent />
       </Suspense>
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
-        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
-          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>LinkedIn Formatter — Write Posts That Stop the Scroll</h2>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '2rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+            <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
+            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
+            LinkedIn Formatter — Write Posts That Stop the Scroll
+          </h2>
+          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '1.25rem' }}>
             The LinkedIn Formatter by Datta Sable helps content creators, B2B marketers, consultants, and personal brand builders write LinkedIn posts that are optimally structured for the platform's algorithm and reading behavior. LinkedIn posts with strong visual formatting — short paragraphs, strategic line breaks, and purposeful emoji use — consistently outperform dense blocks of text in impressions and engagement.
           </p>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-            This tool formats your raw draft into LinkedIn-ready content: it adds proper line spacing (LinkedIn collapses multi-line text without explicit breaks), removes unnecessary whitespace, suggests optimal post length (150–300 words for high engagement), and previews exactly how your post will appear in the feed before you publish. Works directly with LinkedIn post templates from the Datta Sable Templates Hub.
+          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
+            This tool formats your raw draft into LinkedIn-ready content: it adds proper line spacing (LinkedIn collapses multi-line text without explicit breaks), removes unnecessary whitespace, suggests optimal post length (150–300 words for high engagement), and previews exactly how your post will appear in the feed before you publish.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1.25rem' }}>
             {[
               { label: 'Feed Preview', desc: 'See exactly how your post looks before publishing — no surprises' },
               { label: 'Smart Formatting', desc: 'Auto line-breaks, spacing, and hook optimization for the algorithm' },
               { label: 'Template Integration', desc: 'Inject pre-built LinkedIn post templates from the Templates Hub' },
               { label: 'Copy Ready', desc: 'One-click copy with formatting preserved for paste into LinkedIn' },
             ].map(f => (
-              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
+                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
       <Footer />
 
     </div>

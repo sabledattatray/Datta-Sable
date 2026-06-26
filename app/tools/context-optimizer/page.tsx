@@ -178,31 +178,37 @@ export default function ContextOptimizer() {
           </div>
         </section>
       </main>
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
-        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
-          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Context Optimizer — Maximize AI Prompt Efficiency</h2>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '2rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+            <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
+            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
+            Context Optimizer — Maximize AI Prompt Efficiency
+          </h2>
+          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '1.25rem' }}>
             The Context Optimizer is a prompt engineering tool designed to help AI operators, developers, and content creators make the most of their LLM context windows. Every large language model — whether GPT-4, Claude 3, or Google Gemini — has a finite context limit measured in tokens. When prompts waste tokens on redundant phrasing, unnecessary qualifiers, or repetitive instructions, the model has less capacity for the actual reasoning task.
           </p>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-            This tool analyzes your prompt for filler language, structural inefficiencies, and over-specified constraints, then suggests a leaner version that preserves full intent while reducing token overhead. Ideal for use with GPT-4 API calls, Claude Projects, Gemini System Instructions, and any LLM workflow where context efficiency directly impacts cost and response quality.
+          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
+            This tool analyzes your prompt for filler language, structural inefficiencies, and over-specified constraints, then suggests a leaner version that preserves full intent while reducing token overhead. Ideal for GPT-4 API calls, Claude Projects, Gemini System Instructions, and any LLM workflow where context efficiency directly impacts cost and response quality.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1.25rem' }}>
             {[
               { label: 'Token Reduction', desc: 'Identifies and removes filler words and redundant phrasing' },
               { label: 'Intent Preservation', desc: 'Keeps your core instructions fully intact after compression' },
               { label: 'Multi-Model Support', desc: 'Optimized for GPT-4, Claude 3, Gemini, and open-source LLMs' },
               { label: 'Cost Efficiency', desc: 'Fewer tokens = lower API costs on pay-per-token model pricing' },
             ].map(f => (
-              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
+                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
       <Footer />
 
     </div>
