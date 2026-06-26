@@ -167,8 +167,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 "description": "Independent Business Intelligence and Data Strategy consulting practice operated by Datta Sable in Mumbai, India. Providing custom dashboard development, SQL automation, and Python ETL pipelines.",
                 "address": {
                   "@type": "PostalAddress",
+                  "streetAddress": "Mumbai",
                   "addressLocality": "Mumbai",
                   "addressRegion": "Maharashtra",
+                  "postalCode": "400001",
                   "addressCountry": "IN"
                 },
                 "geo": {
