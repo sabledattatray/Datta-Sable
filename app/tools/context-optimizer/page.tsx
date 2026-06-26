@@ -178,7 +178,33 @@ export default function ContextOptimizer() {
           </div>
         </section>
       </main>
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Context Optimizer — Maximize AI Prompt Efficiency</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            The Context Optimizer is a prompt engineering tool designed to help AI operators, developers, and content creators make the most of their LLM context windows. Every large language model — whether GPT-4, Claude 3, or Google Gemini — has a finite context limit measured in tokens. When prompts waste tokens on redundant phrasing, unnecessary qualifiers, or repetitive instructions, the model has less capacity for the actual reasoning task.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            This tool analyzes your prompt for filler language, structural inefficiencies, and over-specified constraints, then suggests a leaner version that preserves full intent while reducing token overhead. Ideal for use with GPT-4 API calls, Claude Projects, Gemini System Instructions, and any LLM workflow where context efficiency directly impacts cost and response quality.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Token Reduction', desc: 'Identifies and removes filler words and redundant phrasing' },
+              { label: 'Intent Preservation', desc: 'Keeps your core instructions fully intact after compression' },
+              { label: 'Multi-Model Support', desc: 'Optimized for GPT-4, Claude 3, Gemini, and open-source LLMs' },
+              { label: 'Cost Efficiency', desc: 'Fewer tokens = lower API costs on pay-per-token model pricing' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
+
     </div>
   );
 }

@@ -155,7 +155,33 @@ export default function PromptAuditorPage() {
         </section>
       </main>
 
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Prompt Auditor — Diagnose and Strengthen Your AI Prompts</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            The Prompt Auditor evaluates AI prompts against a set of engineering best practices and returns a structured quality report covering clarity, specificity, context completeness, constraint definition, and output format specification. AI engineers, data scientists, product managers, and content teams use this tool to identify weak prompts before they get embedded into production workflows, LLM pipelines, or customer-facing applications.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            A weak prompt leads to inconsistent model outputs, hallucinations, off-topic responses, and formatting failures — all of which degrade the quality of AI-powered products. The Prompt Auditor applies a rubric based on the Chain-of-Thought, Role-Prompting, and Output-Specification frameworks used across production LLM deployments on GPT-4, Claude 3, and Gemini Advanced, giving you actionable scores and specific improvement suggestions rather than generic advice.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Clarity Score', desc: 'Measures how unambiguously the prompt communicates the task' },
+              { label: 'Specificity Check', desc: 'Flags vague instructions that lead to inconsistent model outputs' },
+              { label: 'Context Completeness', desc: 'Verifies that all required background context is provided' },
+              { label: 'Output Spec Audit', desc: 'Confirms format, length, and structure instructions are explicit' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
+
     </div>
   );
 }

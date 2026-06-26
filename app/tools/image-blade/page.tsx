@@ -211,7 +211,33 @@ export default function ImageBlade() {
         </section>
       </main>
 
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Image Blade — Browser-Side Image Compression Tool</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            Image Blade is a free, privacy-first image compression and optimization tool that runs entirely in your browser. No uploads, no servers, no data leaving your device. Web developers, UX designers, bloggers, and digital marketers use Image Blade to reduce image file sizes before publishing to websites, CMS platforms like WordPress, or static site generators like Next.js.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            Oversized images are the single largest contributor to poor web performance and high Core Web Vitals scores. Google's Largest Contentful Paint (LCP) metric is directly impacted by hero image weight. By compressing images to the optimal size and format (WebP, JPEG, PNG) before deployment, you can significantly improve page load times, reduce bandwidth costs, and achieve higher PageSpeed Insights scores without any server infrastructure.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Browser-Only Processing', desc: 'All compression happens on your device — zero server uploads' },
+              { label: 'WebP / JPEG / PNG', desc: 'Output in the format best suited for your deployment target' },
+              { label: 'Quality Control', desc: 'Adjustable compression quality slider from lossless to maximum savings' },
+              { label: 'Batch Compression', desc: 'Compress multiple images in one session without losing your queue' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
+
     </div>
   );
 }

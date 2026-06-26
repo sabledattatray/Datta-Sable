@@ -244,7 +244,33 @@ export default function SEOMetaGenerator() {
         </section>
       </main>
 
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>SEO Meta Generator — Write Title Tags and Meta Descriptions That Rank</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            The SEO Meta Generator is a free tool for bloggers, digital marketers, SEO specialists, and web developers who need to write optimized title tags and meta descriptions at scale. Enter your page topic, primary keyword, target audience, and tone, and the generator produces multiple title and meta description variants — each validated against Google's character limits (title: 50–60 characters, meta description: 150–160 characters) and click-through-rate best practices.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            A well-crafted title tag is the single most important on-page SEO element. It determines your click-through rate in search results, signals your primary keyword to Google's ranking algorithm, and sets user expectations before they land on your page. This generator applies proven copywriting formulas — including question-based hooks, number-driven titles, and benefit-first meta descriptions — to produce variants you can A/B test directly in Google Search Console.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Character Counter', desc: 'Live character count with green/amber/red status for both fields' },
+              { label: 'Keyword Integration', desc: 'Primary keyword placed in the optimal position for ranking' },
+              { label: 'CTR Optimization', desc: 'Applies power words, numbers, and emotional triggers that boost clicks' },
+              { label: 'Multiple Variants', desc: 'Generates several alternatives so you can pick the strongest option' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
+
     </div>
   );
 }

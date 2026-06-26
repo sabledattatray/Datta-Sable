@@ -171,7 +171,33 @@ export default function MermaidForge() {
           </div>
         </section>
       </main>
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Mermaid Forge — Text-to-Diagram Generator for Developers</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            Mermaid Forge is an online Mermaid.js diagram editor and renderer for software developers, technical writers, system architects, and data engineers. Mermaid is a JavaScript-based diagramming language that lets you create flowcharts, sequence diagrams, entity-relationship diagrams, Gantt charts, and more using plain text syntax — making diagrams versionable, diffable, and embeddable in Markdown documents and GitHub README files.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            Write your Mermaid syntax in the left panel and see a live rendered diagram on the right. Export the finished diagram as an SVG or PNG for use in architecture documentation, technical specifications, onboarding guides, API design documents, or slide decks. Supported diagram types include flowchart (LR/TD), sequenceDiagram, classDiagram, erDiagram, gantt, pie, and stateDiagram.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Live Preview', desc: 'Real-time diagram rendering as you type Mermaid syntax' },
+              { label: 'Multiple Diagram Types', desc: 'Flowcharts, sequence, ER, Gantt, class, state, and pie charts' },
+              { label: 'SVG / PNG Export', desc: 'Export diagrams in vector (SVG) or raster (PNG) formats' },
+              { label: 'GitHub Compatible', desc: 'Mermaid syntax renders natively in GitHub Markdown and GitLab' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
+
     </div>
   );
 }

@@ -136,7 +136,34 @@ export default function WordCounter() {
         </section>
       </main>
 
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Free Online Word Counter &amp; Text Analyzer</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            The Word Counter tool by Datta Sable is a free, instant text analysis utility for content creators, bloggers, SEO professionals, students, and technical writers. Paste or type any text to instantly see your word count, character count (with and without spaces), sentence count, and estimated reading time — all calculated in real time without sending your data to any server.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            Whether you are writing a LinkedIn post (optimal length: 150–300 words), a blog article (1,500–2,500 words for SEO), a college essay with a strict word limit, or a technical specification document, this tool gives you immediate feedback on your content length and readability metrics.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Word Count', desc: 'Accurate real-time word count for any length of text' },
+              { label: 'Character Count', desc: 'Total characters with and without spaces' },
+              { label: 'Sentence Count', desc: 'Counts full stops, exclamation marks, and question marks' },
+              { label: 'Reading Time', desc: 'Estimated at 225 words per minute (average adult reading speed)' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
+
     </div>
   );
 }

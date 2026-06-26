@@ -194,7 +194,33 @@ export default function SchemaForge() {
         </section>
       </main>
 
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
+        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
+          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', fontSize: '0.65rem' }}>ABOUT_THIS_TOOL</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--text)' }}>Schema Generator — Create JSON-LD Structured Data for Google Rich Results</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            The Schema Generator by Datta Sable creates valid JSON-LD structured data markup for SEO professionals, web developers, content managers, and bloggers who want their web pages to qualify for Google's rich results — including article star ratings, FAQ accordions, How-To cards, breadcrumbs, product prices, event listings, and local business panels in Google Search.
+          </p>
+          <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+            Structured data (schema.org markup in JSON-LD format) is the primary signal Google uses to understand the type of content on a page and decide whether to render it as a rich result. Without it, your content competes for standard blue-link rankings only. Supported schema types include Article, BlogPosting, TechArticle, FAQPage, HowTo, SoftwareApplication, Product, LocalBusiness, Person, and BreadcrumbList — validated against Google's Rich Results Test standards.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+            {[
+              { label: 'Article / BlogPosting', desc: 'Structured data for blog posts and technical articles' },
+              { label: 'FAQPage', desc: 'FAQ accordion schema that appears directly in Google search results' },
+              { label: 'SoftwareApplication', desc: 'App schema with ratings, pricing, and platform details' },
+              { label: 'LocalBusiness', desc: 'NAP (Name, Address, Phone) schema for local SEO visibility' },
+            ].map(f => (
+              <div key={f.label} style={{ padding: '1rem', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                <div style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>{f.label}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
+
     </div>
   );
 }
