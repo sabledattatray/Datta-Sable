@@ -73,13 +73,13 @@ export default function WordCounter() {
                   <div className="p-4 border-b border-[var(--border)] flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <BookOpen size={14} className="text-[var(--accent)]" />
-                      <span className="mono text-[10px] uppercase text-[var(--text)]">Editor_Draft</span>
+                      <span className="mono text-xs uppercase text-[var(--text)]">Editor_Draft</span>
                     </div>
                     <div className="flex items-center gap-4">
-                      <button onClick={handleCopy} className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
+                      <button onClick={handleCopy} className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors bg-transparent border-none cursor-pointer">
                         {copied ? <Check size={16} /> : <Copy size={16} />}
                       </button>
-                      <button onClick={() => setText('')} className="text-[var(--muted)] hover:text-red-500 transition-colors">
+                      <button onClick={() => setText('')} className="text-[var(--muted)] hover:text-red-500 transition-colors bg-transparent border-none cursor-pointer">
                         <Trash2 size={16} />
                       </button>
                     </div>
@@ -99,7 +99,7 @@ export default function WordCounter() {
                 <div className="card p-8" style={{ background: 'var(--bg)', borderLeft: '2px solid var(--accent)' }}>
                   <div className="flex items-center gap-2 mb-8">
                     <BarChart size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Telemetry_Report</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Telemetry_Report</h4>
                   </div>
 
                   <div className="flex flex-col gap-6">
@@ -125,10 +125,10 @@ export default function WordCounter() {
                 <div className="card p-8" style={{ background: 'var(--bg)' }}>
                   <div className="flex items-center gap-2 mb-4 text-[var(--accent)]">
                     <Clock size={16} />
-                    <h4 className="mono text-[10px] uppercase tracking-widest">Read_Speed</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest">Read_Speed</h4>
                   </div>
                   <div className="text-3xl font-bold mb-2">~{stats.readingTime} <span className="text-xs mono font-normal text-[var(--muted)]">MIN</span></div>
-                  <p className="text-[10px] mono text-[var(--muted)]">Based on average reading speed of 225 words per minute.</p>
+                  <p className="text-xs mono text-[var(--muted)]" style={{ fontSize: '0.78rem' }}>Based on average reading speed of 225 words per minute.</p>
                 </div>
               </div>
             </div>

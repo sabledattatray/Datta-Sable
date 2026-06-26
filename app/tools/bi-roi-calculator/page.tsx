@@ -134,29 +134,29 @@ export default function BiRoiCalculator() {
 
           {/* Output Section */}
           <div className="lg:col-span-7 space-y-6 p-12 bg-[var(--surface2)]/30">
-            <h3 className="text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] mb-8">Estimated Annual Impact</h3>
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--muted)] mb-8">Estimated Annual Impact</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-1">
-                <p className="text-[10px] mono uppercase text-[var(--muted)]">Total Manual Cost</p>
+                <p className="text-xs mono uppercase text-[var(--muted)]">Total Manual Cost</p>
                 <p className="text-3xl font-bold tracking-tighter">${results.annualCostManual.toLocaleString(undefined, {maximumFractionDigits: 0})}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] mono uppercase text-[var(--accent)]">Potential Annual Savings</p>
+                <p className="text-xs mono uppercase text-[var(--accent)]">Potential Annual Savings</p>
                 <p className="text-4xl font-bold tracking-tighter text-[var(--accent)]">${results.potentialSavings.toLocaleString(undefined, {maximumFractionDigits: 0})}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] mono uppercase text-[var(--muted)]">Hours Reclaimed / Year</p>
+                <p className="text-xs mono uppercase text-[var(--muted)]">Hours Reclaimed / Year</p>
                 <p className="text-3xl font-bold tracking-tighter">{results.hoursReclaimed.toLocaleString(undefined, {maximumFractionDigits: 0})}h</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] mono uppercase text-[var(--muted)]">Estimated Efficiency ROI</p>
+                <p className="text-xs mono uppercase text-[var(--muted)]">Estimated Efficiency ROI</p>
                 <p className="text-3xl font-bold tracking-tighter">{(results.roi / 10).toFixed(1)}x</p>
               </div>
             </div>
 
             <div className="mt-12 p-4 bg-black/40 border border-[var(--border)] flex items-start gap-4">
               <AlertCircle size={20} className="text-[var(--accent)] shrink-0 mt-1" />
-              <p className="text-[12px] text-[var(--muted)] leading-relaxed">
+              <p className="text-xs text-[var(--muted)] leading-relaxed" style={{ fontSize: '0.8rem' }}>
                 This estimation includes labor costs and the "hidden cost" of manual errors (calculated at 1.5x labor impact). Automating these workflows usually pays for itself within <span className="text-white font-bold">3–6 months</span>.
               </p>
             </div>
@@ -167,16 +167,16 @@ export default function BiRoiCalculator() {
                 className="bg-[var(--surface)] border border-[var(--border)] p-6 group hover:border-[var(--accent)]/50 transition-all cursor-pointer"
               >
                 <Share2 className="text-[var(--accent)] mb-4" size={20} />
-                <h4 className="font-bold uppercase text-[12px] mb-2">Share Results</h4>
-                <p className="text-[11px] text-[var(--muted)]">Copy a direct link to this calculation for your proposal.</p>
+                <h4 className="font-bold uppercase text-xs mb-2">Share Results</h4>
+                <p className="text-xs text-[var(--muted)]">Copy a direct link to this calculation for your proposal.</p>
               </div>
               <div 
                 onClick={handleDownload}
                 className="bg-[var(--accent)] text-black p-6 cursor-pointer hover:opacity-90 transition-opacity"
               >
                 <Download className="mb-4" size={20} />
-                <h4 className="font-bold uppercase text-[12px] mb-2">Download PDF Report</h4>
-                <p className="text-[11px] opacity-80">Get a detailed PDF breakdown of these savings.</p>
+                <h4 className="font-bold uppercase text-xs mb-2">Download PDF Report</h4>
+                <p className="text-xs opacity-80">Get a detailed PDF breakdown of these savings.</p>
               </div>
             </div>
           </div>

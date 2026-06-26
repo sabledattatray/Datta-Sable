@@ -137,17 +137,17 @@ export default function ImageBlade() {
                     <div className="p-4 border-b border-[var(--border)] flex justify-between items-center">
                       <div className="flex items-center gap-2">
                         <FileImage size={14} className="text-[var(--accent)]" />
-                        <span className="mono text-[10px] uppercase text-[var(--text)]">Optimization_Preview</span>
+                        <span className="mono text-xs uppercase text-[var(--text)]">Optimization_Preview</span>
                       </div>
-                      <button onClick={clearAll} className="text-[var(--muted)] hover:text-red-500"><Trash2 size={16} /></button>
+                      <button onClick={clearAll} className="text-[var(--muted)] hover:text-red-500 bg-transparent border-none cursor-pointer"><Trash2 size={16} /></button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2">
                       <div className="p-6 border-r border-[var(--border)]">
-                        <h5 className="text-[10px] mono uppercase text-[var(--muted)] mb-4 text-center">Original ({formatSize(originalSize)})</h5>
+                        <h5 className="text-xs mono uppercase text-[var(--muted)] mb-4 text-center">Original ({formatSize(originalSize)})</h5>
                         <img src={originalImage} alt="Original" className="w-full h-auto max-h-[300px] object-contain rounded" />
                       </div>
                       <div className="p-6">
-                        <h5 className="text-[10px] mono uppercase text-[var(--accent)] mb-4 text-center">Compressed ({formatSize(compressedSize)})</h5>
+                        <h5 className="text-xs mono uppercase text-[var(--accent)] mb-4 text-center">Compressed ({formatSize(compressedSize)})</h5>
                         {compressedImage && <img src={compressedImage} alt="Compressed" className="w-full h-auto max-h-[300px] object-contain rounded" />}
                       </div>
                     </div>
@@ -160,12 +160,12 @@ export default function ImageBlade() {
                 <div className="card p-8" style={{ background: 'var(--bg)' }}>
                   <div className="flex items-center gap-2 mb-6">
                     <Settings2 size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Compression_Logic</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Compression_Logic</h4>
                   </div>
                   
                   <div className="mb-8">
                     <div className="flex justify-between items-center mb-4">
-                      <label className="text-[10px] mono uppercase text-[var(--muted)]">Quality_Threshold</label>
+                      <label className="text-xs mono uppercase text-[var(--muted)]">Quality_Threshold</label>
                       <span className="text-[var(--accent)] mono text-xs">{quality}%</span>
                     </div>
                     <input 
@@ -180,7 +180,7 @@ export default function ImageBlade() {
 
                   <div className="p-4 bg-[var(--surface2)] border border-[var(--border)] rounded mb-6">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-[10px] mono text-[var(--muted)]">Reduction:</span>
+                      <span className="text-xs mono text-[var(--muted)]">Reduction:</span>
                       <span className="text-xs font-bold text-green-500">
                         {originalSize > 0 ? Math.round((1 - compressedSize / originalSize) * 100) : 0}%
                       </span>
@@ -190,7 +190,7 @@ export default function ImageBlade() {
                   <button 
                     onClick={downloadImage}
                     disabled={!compressedImage || isProcessing}
-                    className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                   >
                     <Download size={16} /> DOWNLOAD_WEBP
                   </button>
@@ -199,9 +199,9 @@ export default function ImageBlade() {
                 <div className="card p-6 border-dashed" style={{ background: 'var(--bg)' }}>
                   <div className="flex items-center gap-2 mb-4">
                     <Zap size={14} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Why_WebP?</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]">Why_WebP?</h4>
                   </div>
-                  <p className="text-[10px] mono text-[var(--muted)] leading-relaxed">
+                  <p className="text-xs mono text-[var(--muted)] leading-relaxed" style={{ fontSize: '0.78rem' }}>
                     WebP offers 26% smaller file sizes than PNGs and 25-34% smaller than JPEGs while maintaining similar quality. Essential for achieving a 90+ PageSpeed score.
                   </p>
                 </div>

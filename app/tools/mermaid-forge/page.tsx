@@ -102,9 +102,9 @@ export default function MermaidForge() {
                   <div className="flex items-center justify-between p-4 border-bottom" style={{ borderBottom: '1px solid var(--border)' }}>
                     <div className="flex items-center gap-2">
                        <Code2 size={14} className="text-[var(--muted)]" />
-                       <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Syntax_Editor</h4>
+                       <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]">Syntax_Editor</h4>
                     </div>
-                    <button onClick={() => setInput('')} className="text-[var(--muted)] hover:text-red-500 transition-colors">
+                    <button onClick={() => setInput('')} className="text-[var(--muted)] hover:text-red-500 transition-colors bg-transparent border-none cursor-pointer">
                       <Trash2 size={14} />
                     </button>
                   </div>
@@ -115,14 +115,14 @@ export default function MermaidForge() {
                     className="w-full h-[450px] p-6 bg-transparent border-none outline-none text-theme font-mono resize-none text-sm leading-relaxed"
                   />
                   <div className="p-4 bg-[var(--bg)] border-t border-[var(--border)] flex justify-between items-center">
-                    <div className="text-[10px] mono text-[var(--muted)] uppercase">Status: {error ? 'SYNTAX_ERROR' : 'VALID'}</div>
-                    <button onClick={handleCopy} className="btn-primary px-6 py-2 text-[10px] flex items-center gap-2">
+                    <div className="text-xs mono text-[var(--muted)] uppercase">Status: {error ? 'SYNTAX_ERROR' : 'VALID'}</div>
+                    <button onClick={handleCopy} className="btn-primary px-6 py-2 text-xs flex items-center gap-2 cursor-pointer">
                       {copied ? <Check size={12} /> : <Copy size={12} />} COPY_SYNTAX
                     </button>
                   </div>
                 </div>
                 {error && (
-                  <div className="mt-4 p-4 bg-red-500/10 border border-red-500/30 text-red-500 text-[10px] mono">
+                  <div className="mt-4 p-4 bg-red-500/10 border border-red-500/30 text-red-500 text-xs mono">
                     {error}
                   </div>
                 )}
@@ -134,7 +134,7 @@ export default function MermaidForge() {
                   <div className="flex items-center justify-between p-4 border-bottom" style={{ borderBottom: '1px solid var(--border)' }}>
                     <div className="flex items-center gap-2">
                        <Maximize2 size={14} className="text-[var(--accent)]" />
-                       <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)]">Visual_Architecture</h4>
+                       <h4 className="mono text-xs uppercase tracking-widest text-[var(--accent)]">Visual_Architecture</h4>
                     </div>
                   </div>
                   <div 
@@ -142,12 +142,12 @@ export default function MermaidForge() {
                     className="flex-1 min-h-[400px] p-8 overflow-auto flex items-center justify-center bg-[#0d1117]"
                   />
                   <div className="p-4 bg-[var(--bg)] border-t border-[var(--border)] flex justify-between items-center">
-                    <div className="flex items-center gap-4 text-[10px] mono text-[var(--muted)]">
+                    <div className="flex items-center gap-4 text-xs mono text-[var(--muted)]">
                        RENDERING_ENGINE: MERMAID_V10
                     </div>
                     <div className="flex items-center gap-2 text-[var(--muted)]">
                        <Sparkles size={12} />
-                       <span className="text-[9px] mono uppercase">High_Fidelity</span>
+                       <span className="text-[11px] mono uppercase">High_Fidelity</span>
                     </div>
                   </div>
                 </div>

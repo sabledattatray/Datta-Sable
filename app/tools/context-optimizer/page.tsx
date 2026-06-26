@@ -108,8 +108,8 @@ export default function ContextOptimizer() {
               <div>
                 <div className="card p-0 overflow-hidden" style={{ background: 'var(--surface2)' }}>
                   <div className="flex items-center justify-between p-4 border-bottom" style={{ borderBottom: '1px solid var(--border)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)]">Raw_Input</h4>
-                    <button onClick={() => setInput('')} className="text-[var(--muted)] hover:text-red-500 transition-colors">
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--muted)]">Raw_Input</h4>
+                    <button onClick={() => setInput('')} className="text-[var(--muted)] hover:text-red-500 transition-colors bg-transparent border-none cursor-pointer">
                       <Trash2 size={14} />
                     </button>
                   </div>
@@ -120,8 +120,8 @@ export default function ContextOptimizer() {
                     className="w-full h-[350px] p-6 bg-transparent border-none outline-none text-theme font-mono resize-none text-sm"
                   />
                   <div className="p-4 bg-[var(--bg)] border-t border-[var(--border)] flex justify-between items-center">
-                    <div className="text-[10px] mono text-[var(--muted)]">Chars: {input.length}</div>
-                    <button onClick={optimize} className="btn-primary px-6 py-2 text-[10px] flex items-center gap-2">
+                    <div className="text-xs mono text-[var(--muted)]">Chars: {input.length}</div>
+                    <button onClick={optimize} className="btn-primary px-6 py-2 text-xs flex items-center gap-2 cursor-pointer">
                       OPTIMIZE_CONTEXT <Scissors size={12} />
                     </button>
                   </div>
@@ -132,9 +132,9 @@ export default function ContextOptimizer() {
               <div>
                 <div className="card p-0 overflow-hidden" style={{ background: 'var(--surface2)', borderColor: output ? 'var(--accent)' : 'var(--border)' }}>
                   <div className="flex items-center justify-between p-4 border-bottom" style={{ borderBottom: '1px solid var(--border)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)]">Surgical_Output</h4>
+                    <h4 className="mono text-xs uppercase tracking-widest text-[var(--accent)]">Surgical_Output</h4>
                     {output && (
-                      <button onClick={handleCopy} className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[10px]">
+                      <button onClick={handleCopy} className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-xs bg-transparent border-none cursor-pointer">
                         {copied ? <Check size={14} /> : <Copy size={14} />} COPY_OPTIMIZED
                       </button>
                     )}
@@ -147,14 +147,14 @@ export default function ContextOptimizer() {
                   />
                   <div className="p-4 bg-[var(--bg)] border-t border-[var(--border)] flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                       <div className="text-[10px] mono text-[var(--muted)]">Chars: {output.length}</div>
+                       <div className="text-xs mono text-[var(--muted)]">Chars: {output.length}</div>
                        {savings > 0 && (
-                         <div className="text-[10px] mono text-[var(--accent)] font-bold">~{savings} TOKENS SAVED</div>
+                         <div className="text-xs mono text-[var(--accent)] font-bold">~{savings} TOKENS SAVED</div>
                        )}
                     </div>
                     <div className="flex items-center gap-2 text-[var(--muted)]">
                        <Minimize2 size={12} />
-                       <span className="text-[9px] mono uppercase">Lean_Mode</span>
+                       <span className="text-[11px] mono uppercase">Lean_Mode</span>
                     </div>
                   </div>
                 </div>
