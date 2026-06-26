@@ -80,7 +80,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
+        {/* Critical font preloads — removes all 4 fonts from the blocking chain */}
+        <link rel="preload" href="/fonts/syne-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/syne-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/syne-latin-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/jetbrains-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
         {/* ✅ Google AdSense Auto-Ads — required for AdSense crawlers to detect ad slots */}
@@ -96,7 +101,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           nonce={nonce}
           id="json-ld"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify([
               {

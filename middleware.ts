@@ -51,7 +51,7 @@ export function middleware(request: NextRequest) {
   // 1. Content Security Policy (CSP)
   const cspHeader = `
     default-src 'self';
-    connect-src 'self' https://*.google.com https://accounts.google.com https://*.tableau.com https://*.google-analytics.com https://*.adtrafficquality.google https://*.doubleclick.net https://*.google https://*.google.ad https://*.googlesyndication.com https://*.googleadservices.com https://cloud.umami.is https://api.umami.is;
+    connect-src 'self' https://*.google.com https://accounts.google.com https://*.tableau.com https://*.google-analytics.com https://*.adtrafficquality.google https://*.doubleclick.net https://*.google https://*.google.ad https://*.googlesyndication.com https://*.googleadservices.com https://cloud.umami.is https://api.umami.is https://gateway.umami.is;
     ${scriptCsp}
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://accounts.google.com https://*.google https://*.googlesyndication.com;
     img-src 'self' blob: data: https://*.public.blob.vercel-storage.com https://*.unsplash.com https://images.unsplash.com https://*.googleusercontent.com https://*.tableau.com https://lookerstudio.google.com https://datastudio.google.com https://*.google.com https://*.google-analytics.com https://*.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google https://*.googleadservices.com;
