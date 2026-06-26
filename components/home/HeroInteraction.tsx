@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { BookOpen } from 'lucide-react';
+
 
 export default function HeroInteraction() {
   const [isApp, setIsApp] = useState(false);

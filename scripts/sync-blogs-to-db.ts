@@ -13,15 +13,16 @@ async function main() {
 
   for (const post of staticPosts) {
     try {
+      const p = post as any;
       const postData = {
         title: post.title,
         category: post.category || 'General',
         excerpt: post.excerpt || '',
         content: post.content,
-        readTime: Number(post.readTime) || 5,
+        readTime: Number(p.readTime) || 5,
         date: post.date || '',
-        color: post.color || null,
-        icon: post.icon || null,
+        color: p.color || null,
+        icon: p.icon || null,
         image: post.image || null,
         published: true,
       };
