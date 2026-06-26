@@ -9,14 +9,12 @@ import {
 
 export const navLinks = [
   { label: 'Start Here', href: '/start-here' },
-  { label: 'Services',   href: '/services',              mega: true },
-  { label: 'Portfolio',  href: '/portfolio',             mega: true },
-  { label: 'Blog',       href: '/blog',                  mega: true },
-  { label: 'Dashboards', href: '/dashboards',            mega: true },
-  { label: 'Tools',      href: '/tools',                 mega: true },
-  { label: 'Knowledge',  href: '/knowledge/architecture', mega: true },
-  { label: 'Templates',  href: '/templates' },
-  { label: 'Connect',    href: '/contact',               mega: true },
+  { label: 'Services',   href: '/services',   mega: true },
+  { label: 'Portfolio',  href: '/portfolio',  mega: true },
+  { label: 'Dashboards', href: '/dashboards', mega: true },
+  { label: 'Workspace',  href: '/tools',      mega: true },
+  { label: 'Blog',       href: '/blog',       mega: true },
+  { label: 'Connect',    href: '/contact',    mega: true },
 ];
 
 export const megaMenuData: Record<string, any> = {
@@ -96,43 +94,23 @@ export const megaMenuData: Record<string, any> = {
     ]
   },
 
-  Tools: {
+  Workspace: {
     featured: {
-      title: 'AI Prompt & SEO Toolkit',
-      desc: 'Free browser-based tools for content creators, developers, and marketers.',
+      title: 'Surgical Tools & Templates',
+      desc: 'Free browser-based developer utilities, system blueprints, and automated execution chains.',
       href: '/tools',
-      tag: 'Free to Use',
+      tag: 'Workspace',
     },
     items: [
-      { title: 'AI Prompt Generator',    desc: 'Generate optimised LLM prompts.',   icon: <Sparkles size={18} />, href: '/tools/ai-prompt-generator',  color: '#c9f31d' },
-      { title: 'SEO Meta Generator',     desc: 'Craft click-worthy meta tags.',      icon: <Search size={18} />,   href: '/tools/seo-meta-generator',   color: '#34d399' },
-      { title: 'LinkedIn Formatter',     desc: 'Format posts for maximum reach.',    icon: <Pen size={18} />,      href: '/tools/linkedin-formatter',   color: '#60a5fa' },
-      { title: 'Schema Generator',       desc: 'JSON-LD structured data builder.',   icon: <Code2 size={18} />,    href: '/tools/schema-generator',     color: '#a78bfa' },
-      { title: 'Image Blade',            desc: 'Resize & optimise images fast.',     icon: <Palette size={18} />,  href: '/tools/image-blade',          color: '#fb923c' },
-      { title: 'Word Counter',           desc: 'Count, analyse & optimise text.',    icon: <FileText size={18} />, href: '/tools/word-counter',         color: '#f472b6' },
-      { title: 'Mermaid Forge',          desc: 'Visual diagram code generator.',     icon: <LayoutGrid size={18} />, href: '/tools/mermaid-forge',      color: '#00C9F2' },
-      { title: 'Data Forge',             desc: 'Synthetic dataset generation.',      icon: <Database size={18} />, href: '/data-forge',                 color: '#c9f31d' },
-      { title: 'Workflow Chains',        desc: 'Multi-node automated AI pipelines.', icon: <Workflow size={18} />,     href: '/chains',                     color: '#fb923c' },
-    ]
-  },
-
-  Knowledge: {
-    featured: {
-      title: 'Architecture Library',
-      desc: 'System blueprints, design patterns, and engineering standards for modern web development.',
-      href: '/knowledge/architecture',
-      tag: 'Reference',
-    },
-    items: [
-      { title: 'Architecture Library', desc: 'System blueprints & patterns.',     icon: <Layers size={18} />,    href: '/knowledge/architecture', color: '#c9f31d' },
-      { title: 'RFC Directory',        desc: 'Technical Requests for Comments.',  icon: <FileText size={18} />,  href: '/knowledge/rfc',          color: '#60a5fa' },
-      { title: 'Workflow Patterns',    desc: 'Canonical design frameworks.',      icon: <LayoutGrid size={18} />, href: '/knowledge/patterns',    color: '#00C9F2' },
-      { title: 'Standards & Audits',  desc: 'Prompt & code quality benchmarks.', icon: <Shield size={18} />,    href: '/knowledge/standards',    color: '#34d399' },
-      { title: 'System Glossary',      desc: 'Technical terminology index.',      icon: <Book size={18} />,      href: '/glossary',               color: '#a78bfa' },
-      { title: 'Comparisons',          desc: 'Framework & tool analysis.',        icon: <Scale size={18} />,     href: '/knowledge/comparisons',  color: '#fb923c' },
-      { title: 'Infrastructure Hub',  desc: 'Deployments, server logs & uptime.', icon: <Server size={18} />,    href: '/infrastructure',         color: '#60a5fa' },
-      { title: 'Live Analytics Feed',  desc: 'Real-time telemetry & visitor logs.', icon: <Activity size={18} />,  href: '/analytics-live',         color: '#c9f31d' },
-      { title: 'FAQ & Help',           desc: 'Find direct answers to common queries.', icon: <HelpCircle size={18} />, href: '/faq',                  color: '#fb923c' },
+      { title: 'Surgical Tools',     desc: 'Generators, formatting & counter tools.', icon: <Zap size={18} />,          href: '/tools',                      color: '#c9f31d' },
+      { title: 'Workflow Chains',    desc: 'Multi-node automated AI pipelines.',     icon: <Workflow size={18} />,     href: '/chains',                     color: '#fb923c' },
+      { title: 'Templates Hub',      desc: 'Downloadable BI & database templates.',  icon: <Layers size={18} />,       href: '/templates',                  color: '#60a5fa' },
+      { title: 'Architecture Library', desc: 'System blueprints & design patterns.',  icon: <Layers size={18} />,       href: '/knowledge/architecture',     color: '#a78bfa' },
+      { title: 'Infrastructure Hub',  desc: 'Deployments, server logs & uptime.',     icon: <Server size={18} />,       href: '/infrastructure',             color: '#00C9F2' },
+      { title: 'Live Analytics Feed',  desc: 'Real-time telemetry & visitor logs.',    icon: <Activity size={18} />,     href: '/analytics-live',             color: '#c9f31d' },
+      { title: 'FAQ & Help',           desc: 'Find direct answers to common queries.', icon: <HelpCircle size={18} />,   href: '/faq',                        color: '#fb923c' },
+      { title: 'RFC Directory',        desc: 'Technical Requests for Comments.',       icon: <FileText size={18} />,     href: '/knowledge/rfc',              color: '#60a5fa' },
+      { title: 'System Glossary',      desc: 'Technical terminology index.',           icon: <Book size={18} />,         href: '/glossary',                   color: '#a78bfa' },
     ]
   },
 
