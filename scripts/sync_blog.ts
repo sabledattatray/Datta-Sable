@@ -13,6 +13,7 @@ async function main() {
     const wordCount = post.content.split(/\s+/).length;
     console.log(`   Word count: ${wordCount}`);
 
+    const p = post as any;
     await prisma.post.upsert({
       where: { slug: post.slug },
       update: {
@@ -20,10 +21,10 @@ async function main() {
         category: post.category,
         excerpt: post.excerpt,
         content: post.content,
-        readTime: post.readTime,
+        readTime: p.readTime,
         date: post.date,
-        color: post.color,
-        icon: post.icon,
+        color: p.color,
+        icon: p.icon,
         image: post.image,
         published: true,
       },
@@ -33,10 +34,10 @@ async function main() {
         category: post.category,
         excerpt: post.excerpt,
         content: post.content,
-        readTime: post.readTime,
+        readTime: p.readTime,
         date: post.date,
-        color: post.color,
-        icon: post.icon,
+        color: p.color,
+        icon: p.icon,
         image: post.image,
         published: true,
       },
