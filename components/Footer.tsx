@@ -188,8 +188,10 @@ export default function Footer() {
                   Mumbai, Maharashtra, India
                 </span>
 
-                {/* YouTube Subscribe Button */}
-                <div style={{ marginTop: '1.5rem' }}>
+                {/* YouTube & Google Play Buttons */}
+                <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+
+                  {/* YouTube Subscribe */}
                   <a
                     href="https://www.youtube.com/@sabledatttatray?sub_confirmation=1"
                     target="_blank"
@@ -198,76 +200,56 @@ export default function Footer() {
                     style={{
                       background: '#FF0000',
                       border: '1px solid rgba(255,0,0,0.4)',
-                      padding: '10px 20px',
-                      minWidth: '170px',
+                      padding: '10px 18px',
+                      width: '190px',
+                      height: '56px',
+                      boxSizing: 'border-box',
                     }}
                   >
-                    {/* YouTube Icon */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 group-hover/yt:scale-110 transition-transform">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 group-hover/yt:scale-110 transition-transform">
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                     <div className="flex flex-col text-left">
                       <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
                         Subscribe on
                       </span>
-                      <span style={{ fontSize: '17px', fontFamily: 'Roboto, sans-serif', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
+                      <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
                         YouTube
                       </span>
                     </div>
                   </a>
-                </div>
 
-                {/* Official Theme-Aware Google Play Store Badge */}
-                <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+                  {/* Google Play */}
                   <a
                     href="https://play.google.com/store"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3.5 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5"
-                    style={{ 
+                    className="inline-flex items-center gap-3 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5"
+                    style={{
                       background: 'var(--playstore-bg)',
                       border: '1px solid var(--playstore-border)',
-                      minWidth: '170px',
-                      padding: '10px 18px'
+                      padding: '10px 18px',
+                      width: '190px',
+                      height: '56px',
+                      boxSizing: 'border-box',
                     }}
                   >
-                    {/* Official Google Play SVG Logo */}
-                    <svg className="w-8 h-8 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
                       <path d="M3.609 1.814C3.218 2.078 3 2.553 3 3.204v17.592c0 .651.218 1.126.609 1.39l.065.037L13.51 12.38 3.674 1.777l-.065.037z" fill="#00c853"/>
                       <path d="M17.411 16.142l-3.901-3.762 3.901-3.762.083.047 4.636 2.632c.66.375.66.985 0 1.36l-4.636 2.632-.083.053z" fill="#ffd54f"/>
                       <path d="M17.494 7.865L13.51 11.75 3.674 1.777C4.168 1.332 4.96.166 5.892.694l11.602 6.586.002.585z" fill="#2979ff"/>
                       <path d="M17.494 16.135l-.002.585-11.602 6.586c-.932.528-1.724-.638-2.218-1.083l9.836-9.973 3.986 3.885z" fill="#ff1744"/>
                     </svg>
-
                     <div className="flex flex-col text-left">
-                      <span 
-                        style={{ 
-                          fontSize: '10px', 
-                          fontFamily: 'Roboto, sans-serif', 
-                          fontWeight: 500,
-                          textTransform: 'uppercase', 
-                          letterSpacing: '0.5px', 
-                          color: 'var(--playstore-text)',
-                          lineHeight: '11px',
-                          marginBottom: '1px'
-                        }}
-                      >
+                      <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--playstore-text)', lineHeight: '11px', marginBottom: '1px' }}>
                         GET IT ON
                       </span>
-                      <span 
-                        style={{ 
-                          fontSize: '18px', 
-                          fontFamily: 'Roboto, sans-serif', 
-                          fontWeight: 600, 
-                          color: 'var(--playstore-text)',
-                          letterSpacing: '-0.3px',
-                          lineHeight: '19px'
-                        }}
-                      >
+                      <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: 'var(--playstore-text)', letterSpacing: '-0.3px', lineHeight: '19px' }}>
                         Google Play
                       </span>
                     </div>
                   </a>
+
                 </div>
               </div>
             </div>
