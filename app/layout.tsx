@@ -97,11 +97,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           strategy="afterInteractive"
         />
 
-        <Script
+        <script
           nonce={nonce}
           id="json-ld"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify([
               {
