@@ -325,45 +325,36 @@ export default function BlogPostContent({ post }: { post: Post }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TechArticle",
+              "@id": `https://dattasable.com/blog/${post.slug}#article`,
               "headline": post.title,
               "description": post.excerpt,
-              "image": post.image ? `https://dattasable.com${post.image}` : `https://dattasable.com/images/og-main.webp`,
+              "articleSection": post.category,
+              // keywords derived from category — no brittle title-match hacks
+              "keywords": post.category,
+              "image": {
+                "@type": "ImageObject",
+                "url": post.image
+                  ? (post.image.startsWith('http') ? post.image : `https://dattasable.com${post.image}`)
+                  : `https://dattasable.com/images/og-main.webp`,
+                "width": 1200,
+                "height": 630
+              },
               "datePublished": parseSafeDate(post.date, post.createdAt),
-              "dateModified": parseSafeDate(post.date, post.updatedAt || post.createdAt),
-              "author": {
-                "@type": "Person",
-                "name": "Datta Sable",
-                "url": "https://dattasable.com/about",
-                "jobTitle": "Senior BI Developer & Data Architect",
-                "sameAs": [
-                  "https://www.linkedin.com/in/dattatraysable/",
-                  "https://community.fabric.microsoft.com/t5/user/viewprofilepage/user-id/1594798"
-                ]
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "Datta Sable | BI & Analytics Consulting",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://dattasable.com/images/logo.webp"
-                }
-              },
+              "dateModified": parseSafeDate(post.updatedAt || post.date, post.createdAt),
+              // Reference shared Person node — defined once in root layout
+              "author": { "@id": "https://dattasable.com/#person" },
+              // Reference shared Organization node — defined once in root layout
+              "publisher": { "@id": "https://dattasable.com/#organization" },
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": `https://dattasable.com/blog/${post.slug}`
               },
-              "keywords": post.title.includes("Compound AI") 
-                ? "Microsoft Fabric, Compound AI Systems, OneLake Vector Search, LangGraph Python, Enterprise RAG Architecture, Synapse Serverless SQL, Semantic Caching Redis, Multi-Agent Workflows"
-                : post.title.includes("Medallion") 
-                ? "Microsoft Fabric, Medallion Architecture, Bronze Silver Gold Lakehouse, OneLake, Synapse Data Engineering, Direct Lake Power BI, Data Governance"
-                : post.title.includes("Fabric Skills") || post.title.includes("Fabric Career")
-                ? "Microsoft Fabric skills, DP-600 certification, DP-700 data engineer, DP-800 database AI, Analytics Engineer salary 2026, Microsoft OneLake, Direct Lake mode Power BI, Delta Parquet performance, Microsoft Fabric career roadmap"
-                : "BI Strategy, Data Architecture, Analytics, Power BI, Python"
+              "isPartOf": { "@id": "https://dattasable.com/#website" }
             })
           }}
         />
 
-        {/* ── Breadcrumb Schema (SEO) ── */}
+        {/* ── Breadcrumb Schema — 4-level: Home → Blog → Category → Post ── */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -386,6 +377,12 @@ export default function BlogPostContent({ post }: { post: Post }) {
                 {
                   "@type": "ListItem",
                   "position": 3,
+                  "name": post.category,
+                  "item": `https://dattasable.com/category/${post.category.trim().toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
                   "name": post.title,
                   "item": `https://dattasable.com/blog/${post.slug}`
                 }

@@ -1,10 +1,32 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogList from '@/components/BlogList';
+import SchemaScript from '@/components/SchemaScript';
 import { filterPostsByCategory, getPublishedBlogPosts } from '@/lib/blog-posts';
+import { Metadata } from 'next';
 
 interface Props {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const categoryName = slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  return {
+    title: `${categoryName} Articles | Datta Sable`,
+    description: `Browse all articles in the ${categoryName} category on Datta Sable. Expert guides on Microsoft Fabric, Power BI, SQL, data engineering, and AI workflows.`,
+    alternates: { canonical: `https://dattasable.com/category/${slug}` },
+    openGraph: {
+      title: `${categoryName} Articles | Datta Sable`,
+      description: `Browse all ${categoryName} articles by Datta Sable — BI Expert & Data Engineer.`,
+      url: `https://dattasable.com/category/${slug}`,
+      type: 'website',
+    },
+  };
 }
 
 export default async function CategoryPage({ params }: Props) {
@@ -38,6 +60,17 @@ export default async function CategoryPage({ params }: Props) {
         </section>
       </div>
       <Footer />
+      {/* CollectionPage schema — rendered server-side */}
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": `${categoryName} Articles`,
+        "description": `All articles in the ${categoryName} category on Datta Sable. Expert guides on Microsoft Fabric, Power BI, SQL, data engineering, and AI.`,
+        "url": `https://dattasable.com/category/${slug}`,
+        "author": { "@id": "https://dattasable.com/#person" },
+        "publisher": { "@id": "https://dattasable.com/#organization" },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
     </div>
   );
 }

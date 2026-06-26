@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SchemaScript from '@/components/SchemaScript';
 
 export const metadata: Metadata = {
   title: 'AI Prompt Generator — Engineer Perfect Prompts for Any AI | Datta Sable',
@@ -16,5 +17,30 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AI Prompt Generator",
+        "description": "Build precision-engineered prompts for ChatGPT, Claude, Gemini, and more. Choose persona, platform, tone, and style.",
+        "url": "https://dattasable.com/tools/ai-prompt-generator",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript",
+        "featureList": [
+          "AI Prompt Generation",
+          "Persona & Tone Selection",
+          "Multi-Platform Support (ChatGPT, Claude, Gemini)",
+          "Copy to Clipboard",
+          "Prompt Style Customization"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://dattasable.com/#person" },
+        "publisher": { "@id": "https://dattasable.com/#organization" },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
+      {children}
+    </>
+  );
 }

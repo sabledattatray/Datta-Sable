@@ -102,31 +102,61 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "Surgical AI Workspace | Datta Sable",
+                "@id": "https://dattasable.com/#website",
+                "name": "Datta Sable",
                 "url": "https://dattasable.com",
                 "potentialAction": {
                   "@type": "SearchAction",
                   "target": "https://dattasable.com/blog?q={search_term_string}",
                   "query-input": "required name=search_term_string"
-                }
+                },
+                "publisher": { "@id": "https://dattasable.com/#organization" }
               },
               {
+                // Canonical Person node — referenced by all blog post TechArticle schemas
+                // via { "@id": "https://dattasable.com/#person" }
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "@id": "https://dattasable.com/#person",
                 "name": "Datta Sable",
                 "url": "https://dattasable.com",
+                "image": "https://dattasable.com/images/author.webp",
                 "jobTitle": "Business Intelligence Expert & Data Strategy Consultant",
-                "description": "Premier Business Intelligence Expert and Data Strategy Consultant in India. Specializing in Tableau, Power BI, SQL automation, Python data engineering, and custom reporting solutions.",
-                "knowsAbout": ["Business Intelligence", "Data Analytics", "SQL Automation", "Python Data Engineering", "Power BI", "Tableau", "Data Strategy", "Microsoft Fabric"],
+                "description": "Senior BI Developer & Data Architect with over 10 years of experience. Specializing in Microsoft Fabric, Power BI, SQL, Python data engineering, and AI workflows.",
+                "knowsAbout": ["Microsoft Fabric", "Power BI", "Business Intelligence", "Data Analytics", "SQL", "Python Data Engineering", "Data Strategy", "DP-600", "DP-700", "DP-800"],
+                // Canonical sameAs — used consistently across all schema on this site
                 "sameAs": [
-                  "https://linkedin.com/in/dattasable",
+                  "https://www.linkedin.com/in/dattasable/",
                   "https://github.com/sabledattatray",
                   "https://x.com/sabledattatray",
-                  "https://dev.to/dattasable"
+                  "https://dev.to/dattasable",
+                  "https://community.fabric.microsoft.com/t5/user/viewprofilepage/user-id/1594798"
+                ],
+                "worksFor": { "@id": "https://dattasable.com/#organization" }
+              },
+              {
+                // Organization node — enables Google logo rich results
+                // Referenced by blog posts via { "@id": "https://dattasable.com/#organization" }
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "@id": "https://dattasable.com/#organization",
+                "name": "Datta Sable | BI & Analytics Consulting",
+                "url": "https://dattasable.com",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://dattasable.com/favicon.svg",
+                  "width": 512,
+                  "height": 512
+                },
+                "image": "https://dattasable.com/images/dattasable.com.webp",
+                "founder": { "@id": "https://dattasable.com/#person" },
+                "sameAs": [
+                  "https://www.linkedin.com/in/dattasable/",
+                  "https://github.com/sabledattatray"
                 ]
               },
               {
+                // ProfessionalService — retained for local/consulting rich results
                 "@context": "https://schema.org",
                 "@type": "ProfessionalService",
                 "@id": "https://dattasable.com/#service",
@@ -149,9 +179,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 "telephone": "+918010803756",
                 "email": "info@dattasable.com",
                 "priceRange": "$$$",
-                "founder": {
-                  "@id": "https://dattasable.com/#person"
-                },
+                "founder": { "@id": "https://dattasable.com/#person" },
                 "disambiguatingDescription": "Datta Sable is an independent Business Intelligence consulting practice and is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed 'Datta Able' admin dashboard template."
               }
             ])

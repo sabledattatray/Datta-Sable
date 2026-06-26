@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SchemaScript from '@/components/SchemaScript';
 
 export const metadata: Metadata = {
   title: 'LinkedIn Formatter — Write Viral LinkedIn Posts That Get Engagement | Datta Sable',
@@ -16,5 +17,31 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "LinkedIn Authority Formatter",
+        "description": "Format LinkedIn posts for maximum readability and engagement. Add hooks, line breaks, emojis, and CTAs using proven templates.",
+        "url": "https://dattasable.com/tools/linkedin-formatter",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript",
+        "featureList": [
+          "LinkedIn Post Formatting",
+          "Hook & CTA Templates",
+          "Emoji & Line Break Insertion",
+          "Engagement Optimization",
+          "Copy to Clipboard",
+          "Data & Tech Post Templates"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://dattasable.com/#person" },
+        "publisher": { "@id": "https://dattasable.com/#organization" },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
+      {children}
+    </>
+  );
 }

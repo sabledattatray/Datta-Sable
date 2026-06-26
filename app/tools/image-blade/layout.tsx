@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SchemaScript from '@/components/SchemaScript';
 
 export const metadata: Metadata = {
   title: 'Image Blade — AI-Powered Image Processing Tool | Datta Sable',
@@ -16,5 +17,31 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Image-Blade Compressor",
+        "description": "Process, compress, and optimize images for the web. Convert formats, resize, and enhance without losing quality.",
+        "url": "https://dattasable.com/tools/image-blade",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript",
+        "featureList": [
+          "Client-Side Image Compression",
+          "WebP & AVIF Conversion",
+          "Image Resize",
+          "Quality Control",
+          "Batch Processing",
+          "No Upload Required"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://dattasable.com/#person" },
+        "publisher": { "@id": "https://dattasable.com/#organization" },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
+      {children}
+    </>
+  );
 }

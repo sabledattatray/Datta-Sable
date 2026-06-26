@@ -4,11 +4,14 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        // Allow all bots to crawl all public content
+        // Allow all crawlers to index all public content
+        // /lp/ is intentionally NOT blocked so SEO landing pages can rank
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/', '/preview', '/lp/'],
+        disallow: ['/api/', '/dashboard/', '/admin/', '/preview'],
       },
+
+      // ── Google crawlers ───────────────────────────────────────────────
       {
         // Google AdSense content crawler — must be able to see all pages
         userAgent: 'Mediapartners-Google',
@@ -35,16 +38,41 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
       {
-        // Googlebot main crawler — explicit allow for all blog/content
-        userAgent: 'Googlebot',
+        // Bingbot — explicit allow ensures Bing indexes all public content
+        userAgent: 'Bingbot',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/', '/preview'],
+      },
+
+      // ── AI crawlers ───────────────────────────────────────────────────
+      // Explicitly allowing AI crawlers increases discoverability of
+      // technical content (Fabric, Power BI, SQL, AI) in AI-powered search.
+      {
+        userAgent: 'GPTBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'OAI-SearchBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'ClaudeBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Applebot',
+        allow: '/',
       },
     ],
     sitemap: [
       'https://dattasable.com/sitemap.xml',
       'https://dattasable.com/image-sitemap.xml',
       'https://dattasable.com/news-sitemap.xml',
+      // Add once you publish video content with a valid video sitemap:
+      // 'https://dattasable.com/video-sitemap.xml',
     ],
   };
 }

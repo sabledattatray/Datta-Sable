@@ -1,6 +1,7 @@
 import { GLOSSARY_TERMS } from '@/data/glossary';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SchemaScript from '@/components/SchemaScript';
 import { 
   ArrowLeft, 
   ChevronRight, 
@@ -27,8 +28,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!term) return { title: 'Term Not Found' };
   
   return {
-    title: `${term.term} | AI Workflow Glossary`,
+    title: `${term.term} | AI Workflow Glossary | Datta Sable`,
     description: term.definition,
+    alternates: { canonical: `https://dattasable.com/glossary/${term.slug}` },
+    openGraph: {
+      title: `${term.term} | AI Workflow Glossary`,
+      description: term.definition,
+      url: `https://dattasable.com/glossary/${term.slug}`,
+      type: 'article',
+    },
   };
 }
 
@@ -134,6 +142,21 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
         </section>
       </main>
       <Footer />
+      {/* DefinedTerm schema — rendered server-side, no hydration cost */}
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "DefinedTerm",
+        "name": term!.term,
+        "description": term!.definition,
+        "url": `https://dattasable.com/glossary/${term!.slug}`,
+        "inDefinedTermSet": {
+          "@type": "DefinedTermSet",
+          "name": "AI Workflow Glossary",
+          "url": "https://dattasable.com/glossary",
+          "publisher": { "@id": "https://dattasable.com/#organization" }
+        },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
     </div>
   );
 }

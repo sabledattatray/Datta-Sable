@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SchemaScript from '@/components/SchemaScript';
 
 export const metadata: Metadata = {
   title: 'BI ROI Calculator — Measure the Value of Business Intelligence | Datta Sable',
@@ -16,5 +17,30 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BI ROI Calculator",
+        "description": "Quantify the financial return of Business Intelligence investments. Calculate annual savings, hours reclaimed, and ROI percentage.",
+        "url": "https://dattasable.com/tools/bi-roi-calculator",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript",
+        "featureList": [
+          "ROI Percentage Calculation",
+          "Annual Savings Estimate",
+          "Hours Reclaimed Analysis",
+          "Team Size & Salary Inputs",
+          "Manual Hours & Error Rate Modelling"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://dattasable.com/#person" },
+        "publisher": { "@id": "https://dattasable.com/#organization" },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
+      {children}
+    </>
+  );
 }

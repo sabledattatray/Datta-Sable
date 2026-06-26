@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SchemaScript from '@/components/SchemaScript';
 
 export const metadata: Metadata = {
   title: 'Prompt Auditor — Score & Improve Your AI Prompts | Datta Sable',
@@ -16,5 +17,30 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <SchemaScript schema={{
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Prompt Auditor",
+        "description": "Analyse AI prompts for clarity, specificity, context, and structure. Get an instant quality score and actionable improvement suggestions.",
+        "url": "https://dattasable.com/tools/prompt-auditor",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript",
+        "featureList": [
+          "Prompt Quality Scoring",
+          "Clarity & Specificity Analysis",
+          "Structure Evaluation",
+          "Actionable Improvement Suggestions",
+          "Multi-Model Compatibility Check"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://dattasable.com/#person" },
+        "publisher": { "@id": "https://dattasable.com/#organization" },
+        "isPartOf": { "@id": "https://dattasable.com/#website" }
+      }} />
+      {children}
+    </>
+  );
 }
