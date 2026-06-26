@@ -562,15 +562,30 @@ export default function AdminBlog() {
       try {
         const mermaid = (await import('mermaid')).default;
         
+        const isLightTheme = theme === 'light';
+        
         mermaid.initialize({
           startOnLoad: false,
-          theme: 'dark',
+          theme: isLightTheme ? 'default' : 'dark',
           securityLevel: 'loose',
           flowchart: {
             useMaxWidth: true,
             htmlLabels: false
           },
-          themeVariables: {
+          themeVariables: isLightTheme ? {
+            background: 'transparent',
+            primaryColor: '#e0f2fe',
+            primaryTextColor: '#000000',
+            lineColor: '#cbd5e1',
+            primaryBorderColor: '#cbd5e1',
+            nodeBorder: '#cbd5e1',
+            mainBkg: '#ffffff',
+            textColor: '#000000',
+            actorTextColor: '#000000',
+            actorBkg: '#ffffff',
+            signalColor: '#0059B3',
+            signalLineColor: '#cbd5e1',
+          } : {
             background: '#0d1117',
             primaryColor: '#00e5ff',
             primaryTextColor: '#fff',
@@ -580,10 +595,15 @@ export default function AdminBlog() {
 
         for (let i = 0; i < mermaidElements.length; i++) {
           const element = mermaidElements[i] as HTMLElement;
-          const text = element.innerText || element.textContent || '';
-          if (!text.trim()) continue;
+          
+          let text = element.getAttribute('data-original-code');
+          if (!text) {
+            text = element.innerText || element.textContent || '';
+            if (!text.trim()) continue;
+            element.setAttribute('data-original-code', text);
+          }
 
-          const id = `mermaid-svg-preview-${i}`;
+          const id = `mermaid-svg-preview-${i}-${theme}`;
           try {
             const { svg } = await mermaid.render(id, text);
             element.innerHTML = svg;
@@ -610,7 +630,7 @@ export default function AdminBlog() {
     }, 150);
 
     return () => clearTimeout(timer);
-  }, [editorMode, formData.content]);
+  }, [editorMode, formData.content, theme]);
 
   // Window resize listener to automatically exit Split View on smaller screens
   useEffect(() => {

@@ -19,6 +19,7 @@ import {
 import Link from 'next/link';
 import { useSurgicalPersistence } from '@/lib/hooks/useSurgicalPersistence';
 import OperatorPanel from '@/components/tools/OperatorPanel';
+import { useTheme } from '@/components/ThemeProvider';
 
 // Mermaid CDN initialization
 const MERMAID_CDN = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -28,23 +29,11 @@ export default function MermaidForge() {
   const [copied, setCopied] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const initMermaid = async () => {
-      try {
-        const mermaid = (await import('mermaid')).default;
-        mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
-        renderDiagram();
-      } catch (err) {
-        console.error('Mermaid init failed:', err);
-      }
-    };
-    initMermaid();
-  }, []);
+  const { theme } = useTheme();
 
   useEffect(() => {
     renderDiagram();
-  }, [input]);
+  }, [input, theme]);
 
   const renderDiagram = async () => {
     if (!previewRef.current) return;
@@ -52,7 +41,39 @@ export default function MermaidForge() {
     
     try {
       const mermaid = (await import('mermaid')).default;
-      const { svg } = await mermaid.render('mermaid-svg', input);
+      const isLightTheme = theme === 'light';
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isLightTheme ? 'default' : 'dark',
+        securityLevel: 'loose',
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: false
+        },
+        themeVariables: isLightTheme ? {
+          background: 'transparent',
+          primaryColor: '#e0f2fe',
+          primaryTextColor: '#000000',
+          lineColor: '#cbd5e1',
+          primaryBorderColor: '#cbd5e1',
+          nodeBorder: '#cbd5e1',
+          mainBkg: '#ffffff',
+          textColor: '#000000',
+          actorTextColor: '#000000',
+          actorBkg: '#ffffff',
+          signalColor: '#0059B3',
+          signalLineColor: '#cbd5e1',
+        } : {
+          background: '#0d1117',
+          primaryColor: '#00e5ff',
+          primaryTextColor: '#fff',
+          lineColor: '#2f363d'
+        }
+      });
+
+      const id = `mermaid-forge-svg-${theme}`;
+      const { svg } = await mermaid.render(id, input);
       previewRef.current.innerHTML = svg;
     } catch (err: any) {
       setError('Invalid Mermaid Syntax. Check your structure.');
@@ -139,7 +160,8 @@ export default function MermaidForge() {
                   </div>
                   <div 
                     ref={previewRef}
-                    className="flex-1 min-h-[400px] p-8 overflow-auto flex items-center justify-center bg-[#0d1117]"
+                    className="flex-1 min-h-[400px] p-8 overflow-auto flex items-center justify-center transition-colors duration-200"
+                    style={{ backgroundColor: theme === 'light' ? '#f8f9fa' : '#0d1117' }}
                   />
                   <div className="p-4 bg-[var(--bg)] border-t border-[var(--border)] flex justify-between items-center">
                     <div className="flex items-center gap-4 text-xs mono text-[var(--muted)]">

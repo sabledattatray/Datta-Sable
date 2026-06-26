@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { ChevronLeft, Share2, Clock } from 'lucide-react';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 import { sanitizeHtml } from '@/lib/sanitize';
+import { useTheme } from '@/components/ThemeProvider';
 
 const parseSafeDate = (dateStr: any, fallbackStr?: any): string => {
   const fallbackDate = "2026-01-01T00:00:00.000Z";
@@ -92,6 +93,7 @@ interface Post {
 
 export default function BlogPostContent({ post }: { post: Post }) {
   const [copied, setCopied] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,15 +114,30 @@ export default function BlogPostContent({ post }: { post: Post }) {
       try {
         const mermaid = (await import('mermaid')).default;
         
+        const isLightTheme = theme === 'light';
+        
         mermaid.initialize({
           startOnLoad: false,
-          theme: 'dark',
+          theme: isLightTheme ? 'default' : 'dark',
           securityLevel: 'loose',
           flowchart: {
             useMaxWidth: true,
             htmlLabels: false
           },
-          themeVariables: {
+          themeVariables: isLightTheme ? {
+            background: 'transparent',
+            primaryColor: '#e0f2fe',
+            primaryTextColor: '#000000',
+            lineColor: '#cbd5e1',
+            primaryBorderColor: '#cbd5e1',
+            nodeBorder: '#cbd5e1',
+            mainBkg: '#ffffff',
+            textColor: '#000000',
+            actorTextColor: '#000000',
+            actorBkg: '#ffffff',
+            signalColor: '#0059B3',
+            signalLineColor: '#cbd5e1',
+          } : {
             background: '#0d1117',
             primaryColor: '#00e5ff',
             primaryTextColor: '#fff',
@@ -130,10 +147,15 @@ export default function BlogPostContent({ post }: { post: Post }) {
 
         for (let i = 0; i < mermaidElements.length; i++) {
           const element = mermaidElements[i] as HTMLElement;
-          const text = element.innerText || element.textContent || '';
-          if (!text.trim()) continue;
+          
+          let text = element.getAttribute('data-original-code');
+          if (!text) {
+            text = element.innerText || element.textContent || '';
+            if (!text.trim()) continue;
+            element.setAttribute('data-original-code', text);
+          }
 
-          const id = `mermaid-svg-${i}`;
+          const id = `mermaid-svg-${i}-${theme}`;
           try {
             const { svg } = await mermaid.render(id, text);
             element.innerHTML = svg;
@@ -163,7 +185,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(timer);
     };
-  }, [post]);
+  }, [post, theme]);
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
