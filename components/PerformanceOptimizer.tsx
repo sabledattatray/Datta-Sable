@@ -103,13 +103,7 @@ export default function PerformanceOptimizer({
             <AnalyticsTracker />
           </Suspense>
           <GoogleAnalytics id={googleAnalyticsId} />
-          {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
-            <Script 
-              src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || 'https://cloud.umami.is/script.js'}
-              data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-              strategy="lazyOnload"
-            />
-          )}
+
           <Script 
             src="https://accounts.google.com/gsi/client" 
             strategy="lazyOnload"
