@@ -3,18 +3,20 @@ import {
   BarChart3, Database, Code2, Globe, Shield, Zap, TrendingUp,
   Activity, Layers, FileText, Sparkles, Pen,
   PenTool, LayoutGrid, Scale, Book, Search, Cpu,
-  Monitor, Server, Palette, Megaphone, ShoppingCart, Workflow
+  Monitor, Server, Palette, Megaphone, ShoppingCart, Workflow,
+  HelpCircle, User, Mail, Users, MessageSquare, PhoneCall
 } from 'lucide-react';
 
 export const navLinks = [
+  { label: 'Start Here', href: '/start-here' },
   { label: 'Services',   href: '/services',              mega: true },
   { label: 'Portfolio',  href: '/portfolio',             mega: true },
   { label: 'Blog',       href: '/blog',                  mega: true },
   { label: 'Dashboards', href: '/dashboards',            mega: true },
   { label: 'Tools',      href: '/tools',                 mega: true },
   { label: 'Knowledge',  href: '/knowledge/architecture', mega: true },
-  { label: 'Careers',    href: '/careers' },
   { label: 'Templates',  href: '/templates' },
+  { label: 'Connect',    href: '/contact',               mega: true },
 ];
 
 export const megaMenuData: Record<string, any> = {
@@ -110,6 +112,7 @@ export const megaMenuData: Record<string, any> = {
       { title: 'Word Counter',           desc: 'Count, analyse & optimise text.',    icon: <FileText size={18} />, href: '/tools/word-counter',         color: '#f472b6' },
       { title: 'Mermaid Forge',          desc: 'Visual diagram code generator.',     icon: <LayoutGrid size={18} />, href: '/tools/mermaid-forge',      color: '#00C9F2' },
       { title: 'Data Forge',             desc: 'Synthetic dataset generation.',      icon: <Database size={18} />, href: '/data-forge',                 color: '#c9f31d' },
+      { title: 'Workflow Chains',        desc: 'Multi-node automated AI pipelines.', icon: <Workflow size={18} />,     href: '/chains',                     color: '#fb923c' },
     ]
   },
 
@@ -127,6 +130,28 @@ export const megaMenuData: Record<string, any> = {
       { title: 'Standards & Audits',  desc: 'Prompt & code quality benchmarks.', icon: <Shield size={18} />,    href: '/knowledge/standards',    color: '#34d399' },
       { title: 'System Glossary',      desc: 'Technical terminology index.',      icon: <Book size={18} />,      href: '/glossary',               color: '#a78bfa' },
       { title: 'Comparisons',          desc: 'Framework & tool analysis.',        icon: <Scale size={18} />,     href: '/knowledge/comparisons',  color: '#fb923c' },
+      { title: 'Infrastructure Hub',  desc: 'Deployments, server logs & uptime.', icon: <Server size={18} />,    href: '/infrastructure',         color: '#60a5fa' },
+      { title: 'Live Analytics Feed',  desc: 'Real-time telemetry & visitor logs.', icon: <Activity size={18} />,  href: '/analytics-live',         color: '#c9f31d' },
+      { title: 'FAQ & Help',           desc: 'Find direct answers to common queries.', icon: <HelpCircle size={18} />, href: '/faq',                  color: '#fb923c' },
+    ]
+  },
+
+  Connect: {
+    featured: {
+      title: 'Get in Touch',
+      desc: 'Collaborate with Datta Sable on enterprise data solutions, custom BI dashboards, and automation strategy.',
+      href: '/contact',
+      tag: 'Contact',
+    },
+    items: [
+      { title: 'About Datta',        desc: 'Learn about my background & BI philosophy.', icon: <User size={18} />,      href: '/about',                      color: '#c9f31d' },
+      { title: 'Contact Me',         desc: 'Start a project or consult with me.',        icon: <Mail size={18} />,      href: '/contact',                    color: '#60a5fa' },
+      { title: 'Careers',            desc: 'Join the team (hiring Collection Officers).', icon: <Users size={18} />,     href: '/careers',                    color: '#34d399' },
+      { title: 'WhatsApp Chat',      desc: 'Direct message on WhatsApp for fast replies.', icon: <PhoneCall size={18} />, href: 'https://wa.me/918010803756?text=Hi%20Datta,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.', color: '#25D366' },
+      { title: 'LinkedIn Profile',   desc: 'Professional network & updates.',            icon: <Users size={18} />,     href: 'https://www.linkedin.com/in/dattasable/', color: '#0A66C2' },
+      { title: 'Twitter / X',        desc: 'Real-time thoughts & tech updates.',         icon: <MessageSquare size={18} />, href: 'https://x.com/sabledattatray', color: '#1DA1F2' },
+      { title: 'GitHub Codebase',    desc: 'Explore open-source BI templates.',          icon: <Code2 size={18} />,     href: 'https://github.com/sabledattatray', color: '#a78bfa' },
+      { title: 'YouTube Channel',    desc: 'Watch technical tutorials & masterclasses.', icon: <Globe size={18} />,     href: 'https://www.youtube.com/@sabledatttatray', color: '#FF0000' },
     ]
   }
 };
