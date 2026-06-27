@@ -133,7 +133,7 @@ export function filterPostsByCategory(posts: BlogPost[], categoryName: string, s
       return matchesKeyword('next.js') || matchesKeyword('react') || matchesKeyword('web dev') || matchesKeyword('website') || matchesKeyword('nextjs');
     }
     if (targetSlug === 'seo') {
-      return matchesKeyword('seo') || matchesKeyword('google') || matchesKeyword('marketing') || matchesKeyword('adsense') || matchesKeyword('analytics');
+      return matchesKeyword('seo') || matchesKeyword('search engine') || matchesKeyword('adsense') || matchesKeyword('marketing') || matchesKeyword('pagespeed');
     }
     if (targetSlug === 'ai-automation') {
       return matchesKeyword('ai') || matchesKeyword('automation') || matchesKeyword('n8n') || matchesKeyword('prompt') || matchesKeyword('llm') || matchesKeyword('agent');
