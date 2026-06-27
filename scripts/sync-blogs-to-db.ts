@@ -25,6 +25,7 @@ async function main() {
         icon: p.icon || null,
         image: post.image || null,
         published: true,
+        blocks: p.blocks || { focusedKeyword: '' },
       };
 
       const existing = await prisma.post.findUnique({

@@ -11,6 +11,9 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
   image: "/images/blog/medallion-architecture.webp",
   tags: ["Microsoft Fabric", "Medallion Architecture", "Bronze-Silver-Gold", "Data Engineering"],
   published: true,
+  blocks: {
+    focusedKeyword: "Microsoft Fabric Medallion Architecture Guide"
+  },
   content: `<p>Open any tutorial on Microsoft Fabric, and you will immediately be bombarded with technical walkthroughs. You will learn how to build an ingestion pipeline, spin up a Spark notebook, construct an enterprise data warehouse, and model data inside Power BI.</p>
 
       <p>But if you learn Microsoft Fabric this way, you are missing the forest for the trees.</p>

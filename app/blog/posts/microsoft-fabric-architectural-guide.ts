@@ -11,6 +11,9 @@ export const microsoftFabricArchitecturalGuidePost = {
   image: "/images/blog/microsoft-fabric-ultimate-guide.webp",
   tags: ["Microsoft Fabric", "Direct Lake", "Architecture", "Delta Lake", "OneLake"],
   published: true,
+  blocks: {
+    focusedKeyword: "Microsoft Fabric Architectural Guide"
+  },
   content: `<p>For years, enterprise data architects faced a recurring nightmare: the "Data Copy tax."</p>
 
       <p>To build a modern analytics platform, you had to extract data from operational databases, land it in a raw storage lake, copy it to a cleaned lakehouse, copy it <em>again</em> to a relational data warehouse for business analysts, and finally import it into an in-memory database to make dashboards load in under two seconds. Five copies of the same transaction, five points of failure, and five distinct vendors to secure.</p>

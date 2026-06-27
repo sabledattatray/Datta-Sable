@@ -11,6 +11,9 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
   image: "/images/blog/compound-ai-systems.webp",
   tags: ["Microsoft Fabric", "Compound AI", "Generative AI", "Python", "RAG"],
   published: true,
+  blocks: {
+    focusedKeyword: "Compound AI Systems Microsoft Fabric"
+  },
   content: `<p>Over the last two years, almost every enterprise data team has fallen into the same architectural trap. The workflow looks something like this: you take a repository of company PDFs, slice them into 500-token chunks, dump them into a vector database, point a large language model at the index, and announce to your executive team that you have built an "Enterprise AI Assistant."</p>
 
       <p>For the first week, during the demo phase, it looks impressive. But when you deploy this system to production, the illusion shatters.</p>
