@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     'Free Context Optimizer tool by Datta Sable. Trim, structure, and prioritize your input to fit within AI model context limits. Get more out of ChatGPT, Claude, and Gemini by optimizing token usage without losing meaning.',
   keywords: ['context optimizer', 'AI context window', 'token optimizer', 'ChatGPT context', 'LLM token limit', 'AI prompt optimizer'],
   alternates: { canonical: 'https://dattasable.com/tools/context-optimizer' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Context Optimizer — Maximize Your AI Context Window',
     description: 'Trim and structure your AI input to fit context limits without losing meaning. Free tool by Datta Sable.',

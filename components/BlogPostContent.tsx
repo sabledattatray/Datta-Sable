@@ -91,33 +91,48 @@ interface Post {
   updatedAt?: string;
 }
 
-const getReferencesForCategory = (category: string) => {
-  const cat = category.toLowerCase();
-  if (cat.includes('fabric') || cat.includes('bi') || cat.includes('architecture') || cat.includes('sql') || cat.includes('data')) {
-    return [
-      { name: "Microsoft Fabric Documentation Hub", url: "https://learn.microsoft.com/en-us/fabric/" },
-      { name: "Power BI Guidance & Optimization Standards", url: "https://learn.microsoft.com/en-us/power-bi/guidance/" },
-      { name: "Delta Lake Table Format Technical Specification", url: "https://delta.io/" }
-    ];
+const extractOutboundLinks = (htmlContent: string) => {
+  const links: { name: string; url: string }[] = [];
+  const regex = /<a\s+(?:[^>]*?\s+)?href="([^"]+)"[^>]*>(.*?)<\/a>/gi;
+  let match;
+  while ((match = regex.exec(htmlContent)) !== null) {
+    const url = match[1];
+    const text = match[2].replace(/<[^>]+>/g, '').trim();
+    if (url.startsWith('http') && !url.includes('dattasable.com')) {
+      if (!links.some(l => l.url === url)) {
+        links.push({ name: text || url, url });
+      }
+    }
   }
-  if (cat.includes('seo') || cat.includes('web') || cat.includes('marketing')) {
-    return [
-      { name: "Google Search Essentials (Webmaster Guidelines)", url: "https://developers.google.com/search/docs/essentials" },
-      { name: "MDN Web Docs - Web Performance Guides", url: "https://developer.mozilla.org/en-US/docs/Web/Performance" },
-      { name: "Vercel Next.js Production & SEO Checklist", url: "https://nextjs.org/docs/app/building-your-application/deploying#production-checklist" }
-    ];
+  return links;
+};
+
+const getReferencesForPost = (title: string, content: string) => {
+  const extracted = extractOutboundLinks(content);
+  if (extracted.length > 0) {
+    return extracted.slice(0, 5);
   }
-  if (cat.includes('ai') || cat.includes('automation') || cat.includes('workflow')) {
-    return [
-      { name: "OpenAI API Prompt Engineering Best Practices", url: "https://platform.openai.com/docs/guides/prompt-engineering" },
-      { name: "n8n Advanced Workflow Orchestration Docs", url: "https://docs.n8n.io/" },
-      { name: "W3C Semantic Web and Linked Data Standards", url: "https://www.w3.org/standards/semanticweb/" }
-    ];
+
+  const text = (title + ' ' + content).toLowerCase();
+  const refs: { name: string; url: string }[] = [];
+
+  if (text.includes('dp-600') || text.includes('fabric')) {
+    refs.push({ name: "Microsoft Fabric Capacity Planning Guidelines", url: "https://learn.microsoft.com/en-us/fabric/enterprise/licenses" });
+    refs.push({ name: "DP-600 Study Companion Guide", url: "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-600" });
+  } else if (text.includes('power bi') || text.includes('dax')) {
+    refs.push({ name: "Power BI Performance Optimization Guide", url: "https://learn.microsoft.com/en-us/power-bi/guidance/power-bi-optimization" });
+    refs.push({ name: "DAX Formatter & Design Patterns", url: "https://www.daxpatterns.com/" });
+  } else if (text.includes('sql') || text.includes('database')) {
+    refs.push({ name: "Microsoft SQL Server Query Performance Tuning", url: "https://learn.microsoft.com/en-us/sql/relational-databases/performance/monitor-and-tune-for-performance" });
+  } else if (text.includes('n8n') || text.includes('automation')) {
+    refs.push({ name: "n8n Workflow Execution & Triggering Documentation", url: "https://docs.n8n.io/workflows/" });
   }
-  return [
-    { name: "Google Publisher Policies and Content Guidelines", url: "https://support.google.com/publisherpolicies/answer/10502938" },
-    { name: "W3C Web Design and Applications Guidelines", url: "https://www.w3.org/standards/" }
-  ];
+
+  if (refs.length === 0) {
+    refs.push({ name: "W3C Semantic Web and Design Standards", url: "https://www.w3.org/standards/" });
+  }
+  
+  return refs;
 };
 
 export default function BlogPostContent({ post, relatedPosts }: { post: Post; relatedPosts?: any[] }) {
@@ -342,7 +357,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
 
         {/* ── Technical References & Standards (E-E-A-T Outbound Links) ── */}
         {(() => {
-          const refs = getReferencesForCategory(post.category);
+          const refs = getReferencesForPost(post.title, post.content);
           return (
             <div style={{ 
               marginTop: '4rem', 

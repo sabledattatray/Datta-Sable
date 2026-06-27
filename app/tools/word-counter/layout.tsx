@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     'Free Word Counter by Datta Sable. Instantly count words, characters (with and without spaces), sentences, paragraphs, and estimated reading time. Perfect for blog posts, LinkedIn articles, essays, and SEO content.',
   keywords: ['word counter', 'character counter', 'reading time calculator', 'word count tool', 'text analyzer', 'free word counter'],
   alternates: { canonical: 'https://dattasable.com/tools/word-counter' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Word Counter — Count Words, Characters & Reading Time',
     description: 'Count words, characters, sentences and get estimated reading time instantly. Free tool by Datta Sable.',

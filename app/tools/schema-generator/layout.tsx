@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     'Free Schema Generator by Datta Sable. Generate valid JSON-LD structured data markup for Articles, FAQs, How-To guides, Breadcrumbs, and more. Improve your Google rich results and click-through rates instantly.',
   keywords: ['schema generator', 'JSON-LD generator', 'structured data tool', 'schema markup', 'rich results generator', 'SEO schema tool'],
   alternates: { canonical: 'https://dattasable.com/tools/schema-generator' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Schema Generator — Create JSON-LD Structured Data for SEO',
     description: 'Generate valid JSON-LD schema markup for Articles, FAQs, How-To guides and more. Free tool by Datta Sable.',

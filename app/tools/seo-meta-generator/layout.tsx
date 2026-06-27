@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     'Free SEO Meta Generator by Datta Sable. Generate SEO-optimized titles, meta descriptions, and JSON-LD schema in one click. Built for bloggers, developers, and content creators targeting Google rich results.',
   keywords: ['SEO meta generator', 'meta description generator', 'title tag generator', 'JSON-LD generator', 'SEO tool', 'structured data generator'],
   alternates: { canonical: 'https://dattasable.com/tools/seo-meta-generator' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'SEO Meta Generator — Create Titles, Descriptions & Schema',
     description: 'Generate SEO-optimized titles, meta descriptions, and JSON-LD schema in one click. Free tool by Datta Sable.',

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     'Free Prompt Auditor by Datta Sable. Analyse your AI prompts for clarity, specificity, context, and structure. Get an instant quality score and actionable suggestions to make your prompts more effective for ChatGPT, Claude, and Gemini.',
   keywords: ['prompt auditor', 'AI prompt quality checker', 'prompt analyzer', 'ChatGPT prompt scorer', 'prompt quality score', 'improve AI prompts'],
   alternates: { canonical: 'https://dattasable.com/tools/prompt-auditor' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Prompt Auditor — Score & Improve Your AI Prompts',
     description: 'Get an instant quality score and improvement tips for your AI prompts. Free tool by Datta Sable.',
