@@ -64,8 +64,9 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Live Feed',      href: '/analytics-live', icon: Activity },
       { label: 'Technical Blog', href: '/blog',           icon: BookOpen },
       { label: 'AI Glossary',    href: '/glossary',       icon: Search },
+      { label: 'Editorial Policy', href: '/editorial-policy', icon: Shield },
       { label: 'Disclaimer',     href: '/disclaimer',     icon: Shield },
-      { label: 'Sitemap',        href: '/sitemap.xml',    icon: Globe, external: true },
+      { label: 'HTML Sitemap',   href: '/sitemap',        icon: Globe },
     ],
   },
   {

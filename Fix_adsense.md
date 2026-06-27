@@ -387,3 +387,381 @@ My overall assessment
 From an SEO perspective, your site looks technically strong: you've invested in structure, sitemaps, performance, and organization.
 
 The AdSense issue is more about content quality and balance than technical implementation. Right now the site feels like a polished portfolio and agency website with some blog content mixed in. To AdSense, it needs to feel like an authoritative educational resource that happens to offer services—not the other way around.
+
+
+Urgently to fixed
+
+FULL AUDIT
+1. Homepage
+
+Score:
+
+6/10
+Current
+
+The homepage immediately shows
+
+AI Workspace
+Architecture
+Metrics
+Telemetry
+Services
+Portfolio
+Statistics
+
+This is impressive for clients.
+
+It is not ideal for AdSense.
+
+Google reviewers typically spend only a short time deciding what your site's primary purpose is.
+
+Recommendation
+
+The homepage should instead begin with something like:
+
+Latest Tutorials
+
+Microsoft Fabric
+
+Power BI
+
+SQL
+
+Python
+
+Azure
+
+Data Engineering
+
+AI Automation
+
+Most Popular Articles
+
+Then place your services further down.
+
+2. Blog
+Score 5/10
+
+This is your biggest weakness.
+
+You currently have articles, but not enough depth or volume.
+
+For AdSense, I would target:
+
+40–60 high-quality articles.
+2,000–3,500 words each where the topic justifies it.
+Original screenshots.
+Diagrams.
+FAQs.
+References.
+Related articles.
+
+Avoid publishing many short AI-generated pieces.
+
+3. Content-to-Service Ratio
+
+Current estimate:
+
+Services      45%
+
+Portfolio     20%
+
+Blog          35%
+
+For AdSense, aim for something closer to:
+
+Blog          70%
+
+Knowledge     15%
+
+Services      15%
+4. E-E-A-T
+Score 8/10
+
+Good:
+
+Real name.
+Portfolio.
+GitHub.
+LinkedIn.
+Projects.
+Contact.
+
+Missing:
+
+Editorial policy.
+Content update policy.
+Research methodology.
+Citation policy.
+"How we test" pages for technical tutorials.
+
+These aren't mandatory, but they help establish trust.
+
+5. Blog Categories
+
+Your categories are a little scattered.
+
+Instead, focus on a few strong topic clusters:
+
+Microsoft Fabric
+Power BI
+SQL
+Python
+Azure
+Data Engineering
+AI
+Next.js
+SEO
+
+Publish 10–20 articles under each over time.
+
+6. Knowledge Section
+
+This area has potential, but many pages risk being seen as "thin."
+
+A glossary entry should be more than a definition. Add:
+
+When to use it.
+Real-world examples.
+Code samples.
+Screenshots.
+Comparisons.
+FAQs.
+Links to related guides.
+7. Tools
+
+This is likely hurting your AdSense evaluation.
+
+Many tool pages provide little information beyond the tool itself.
+
+A better structure:
+
+ROI Calculator
+
+↓
+
+Explanation
+
+↓
+
+Formula
+
+↓
+
+Examples
+
+↓
+
+FAQs
+
+↓
+
+Tool
+
+If a tool page only contains the tool and a short intro, consider:
+
+adding substantial educational content, or
+using noindex until it's improved.
+8. Fabric Section
+
+This is your strongest area.
+
+Your Microsoft Fabric expertise is clear.
+
+Build a complete content hub:
+
+Fabric Guide
+
+Capacity
+
+Pricing
+
+OneLake
+
+Lakehouse
+
+Warehouse
+
+Data Factory
+
+Notebooks
+
+Real Examples
+
+Interview Questions
+
+Aim to become the go-to resource for this niche.
+
+9. Internal Linking
+
+I estimate only about 30–40% of your articles are well connected.
+
+Every article should link to:
+
+5–10 related articles.
+One pillar page.
+Relevant tools (when useful).
+Relevant glossary entries.
+10. Images
+
+You have many images indexed, which is good.
+
+Improve them by ensuring:
+
+descriptive filenames,
+meaningful alt text,
+captions where appropriate,
+original diagrams rather than stock images.
+11. Navigation
+
+Consider adding clearer educational entry points:
+
+Learn
+
+Tutorials
+
+Guides
+
+Documentation
+
+Blog
+
+Knowledge Base
+
+This reinforces that you're a publisher, not just a service provider.
+
+12. Thin Pages
+
+Potential candidates:
+
+/category
+some glossary pages
+some knowledge pages
+AI tool pages
+
+Anything under ~800 words without unique value should be expanded or temporarily noindexed.
+
+13. AI Content Signals
+
+Your writing is polished, but some sections use repetitive marketing language.
+
+Examples like:
+
+Revolutionary
+Surgical
+Production-grade
+Enterprise-ready
+
+are fine occasionally, but overuse can make content feel promotional.
+
+Use more practical explanations, examples, and evidence.
+
+14. User Experience
+
+Excellent overall.
+
+Your recent Core Web Vitals improvements are a big positive.
+
+Continue improving LCP and mobile performance.
+
+15. Crawl Budget
+
+Good.
+
+Your sitemap structure is healthy.
+
+Your robots.txt is organized and unlikely to be the cause of rejection.
+
+16. Pages That Help AdSense
+
+Ensure these are complete and easy to find:
+
+About
+Contact
+Privacy Policy
+Terms & Conditions
+Disclaimer
+Cookie Policy
+Editorial Policy
+Sitemap (HTML)
+17. Author Pages
+
+Each article should include:
+
+Author photo.
+Short bio.
+Expertise.
+Social links.
+Published date.
+Updated date.
+18. Content Freshness
+
+Publish consistently.
+
+A cadence of 2–3 high-quality articles per week is far better than publishing many at once and then going silent.
+
+19. Commercial Intent
+
+Reduce calls to action within informational articles.
+
+Most guides should educate first and only gently suggest your services if relevant.
+
+20. Originality
+
+This is where you can outperform many sites.
+
+For every major guide, include:
+
+original screenshots,
+benchmarks,
+your own experiments,
+code,
+downloadable templates,
+lessons learned from real projects.
+
+These are hard for competitors to copy.
+
+Priority Action Plan
+🔴 Critical (complete before reapplying)
+Publish 15–20 additional in-depth technical articles.
+Expand or noindex thin glossary and tool pages.
+Rework the homepage to emphasize educational content.
+Increase internal linking across all articles.
+Reduce promotional language in guides.
+🟡 High Priority
+Add Editorial Policy.
+Add "How We Test" page.
+Improve author boxes.
+Build strong topic clusters.
+Add comparison tables and FAQs.
+🟢 Nice to Have
+Add downloadable cheat sheets.
+Include embedded videos.
+Offer code repositories and sample files.
+Add interactive examples where relevant.
+My Recommended AdSense Strategy
+
+Instead of trying to monetize your entire site immediately:
+
+Build one exceptional content cluster around Microsoft Fabric with 20–30 comprehensive guides.
+Make those guides the most prominent content on your homepage.
+Keep service pages available but secondary.
+Delay reapplying until Google has crawled the new content (typically a couple of weeks after publishing).
+One thing I'd like to inspect before giving a final verdict
+
+The audit above is based on your description and the public site structure. To identify exactly why Google labeled the site as "Low value content," I'd want to review the site the way Google's crawler does.
+
+That means checking:
+
+Every indexable URL
+Word count and thin-content pages
+Duplicate titles and meta descriptions
+Canonical tags
+Structured data
+Internal linking depth
+Orphan pages
+Pages accidentally indexed that shouldn't be
+Crawl directives
+Pages with little unique value
+
+That level of audit can usually pinpoint the specific URLs most likely contributing to the rejection, allowing you to fix the highest-impact issues before your next review.
