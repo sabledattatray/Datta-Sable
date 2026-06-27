@@ -203,6 +203,8 @@ Every one of these workloads is included in a single Fabric capacity — you don
 
 **How it works.** Data engineers write PySpark, Scala, or Spark SQL in notebooks against Lakehouse tables, typically organized using medallion architecture: Bronze (raw, minimally transformed), Silver (cleaned, conformed, deduplicated), and Gold (business-ready, aggregated, dimensional). Each layer is its own set of Delta tables, often in separate Lakehouses or at minimum separate schemas, with lineage tracked as data moves between them. (Read our dedicated [Microsoft Fabric Medallion Architecture guide](https://dattasable.com/blog/microsoft-fabric-medallion-architecture-guide) for a full layer-by-layer breakdown with transformation patterns for each tier.)
 
+![Microsoft Fabric Medallion Architecture](/images/blog/fabric_medallion_architecture.webp)
+
 **Benefits.** Native Spark for complex transformation logic that's awkward to express in pure SQL; automatic SQL endpoint means BI tools and analysts get T-SQL access without a separate ETL hop; Delta's ACID transactions and time travel give you reliable upserts and the ability to query historical table state.
 
 **Limitations.** The SQL Analytics Endpoint is read-only — you cannot run INSERT/UPDATE/DELETE against it directly; write operations belong to Spark or pipeline activities. Very small, highly transactional workloads with frequent single-row writes are a poor fit for a Lakehouse and are better served by a Warehouse or a SQL database in Fabric.
@@ -296,6 +298,8 @@ This is the single most common architecture decision Fabric teams face, and gett
 | Direct Lake | Near real-time | Import-like speed | No | Fabric-native data needing both speed and freshness |
 
 **How Direct Lake works.** Direct Lake lets the VertiPaq engine read Delta Parquet files directly from OneLake into memory, mapping columns on demand rather than running a traditional import/refresh job and without pushing every query back to a source database the way DirectQuery does. The practical effect is Import-mode-like query speed against data that's as current as the underlying Delta table, with no scheduled refresh pipeline required for the semantic layer itself.
+
+![Power BI Direct Lake Performance Tuning](/images/blog/advanced-power-bi-direct-lake-performance-tuning.webp)
 
 **Benefits.** Eliminates the refresh-latency tradeoff that has defined Power BI architecture for a decade — you genuinely get speed and freshness in the same model for Fabric-native data; removes duplicate storage, since the semantic model doesn't hold its own copy.
 
@@ -648,6 +652,8 @@ Microsoft's data certification ladder around Fabric has grown into four distinct
 
 **DP-600 — Fabric Analytics Engineer Associate.** Squarely the certification this article maps to most closely. Likely exam objectives include designing and implementing semantic models, working with Lakehouse and Warehouse items, implementing Direct Lake, applying RLS/OLS, and lifecycle management via Git and deployment pipelines. Study recommendation: hands-on practice building a full medallion pipeline feeding a Direct Lake semantic model is more valuable than memorizing feature lists. (Read our [DP-600 Study Guide](https://dattasable.com/blog/dp-600-study-guide-2026) for a structured prep plan.)
 
+![DP-600 vs DP-700 vs DP-800 Comparison](/images/blog/dp-600-vs-dp-700-vs-dp-800-comparative-guide.webp)
+
 **DP-700 — Fabric Data Engineer Associate.** Heavier on Spark notebooks, pipeline orchestration, Real-Time Intelligence, and operational concerns like monitoring and CI/CD for engineering artifacts. Study recommendation: build and troubleshoot an actual Eventstream-to-Eventhouse pipeline and a parameterized Data Factory pipeline before sitting the exam — scenario questions reward hands-on familiarity over textbook knowledge. (See our [DP-700 Study Guide](https://dattasable.com/blog/dp-700-study-guide-2026).)
 
 **DP-800 — SQL AI Developer Associate.** Worth being precise about: unlike DP-600 and DP-700, which are entirely Fabric-scoped, DP-800 spans Microsoft's broader SQL platform family — SQL Server, Azure SQL Database, and SQL databases in Microsoft Fabric — with a primary focus on embedding AI capability (vector search, semantic indexing, Retrieval-Augmented Generation patterns) directly into T-SQL solutions rather than Fabric Warehouse administration specifically. It's the right next step for Warehouse-focused professionals whose roadmap is heading toward AI-enabled SQL development rather than pure BI serving. (See our [DP-800 Study Guide](https://dattasable.com/blog/dp-800-study-guide).)
@@ -681,6 +687,8 @@ Fabric architecture knowledge maps onto several distinct, increasingly well-defi
 - **Solution/Enterprise Architect** — owns capacity strategy, governance design, and migration planning across the entire platform, drawing on all of the above domains rather than specializing in one workload.
 
 These roles aren't strictly hierarchical — a BI Developer can move directly into either Analytics Engineering or specialize further into AI/SQL development depending on interest, and most mature Fabric teams have at least one person whose role spans Data Engineering and Analytics Engineering rather than treating them as fully separate functions. For a detailed breakdown of how these roles interact day to day, including typical reporting lines and how responsibilities shift as a Fabric platform matures from pilot to enterprise scale, see our full [Microsoft Fabric Career Roadmap](https://dattasable.com/blog/microsoft-fabric-career-roadmap-2026).
+
+![Microsoft Fabric Career Roadmap](/images/blog/microsoft-fabric-career-roadmap-2026.webp)
 
 ---
 

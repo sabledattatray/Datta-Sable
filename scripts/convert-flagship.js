@@ -538,6 +538,8 @@ function parseInlineMarkdown(text) {
     .replace(/&lt;code&gt;(.*?)&lt;\/code&gt;/gi, '<code>$1</code>')
     .replace(/&lt;span(.*?)&gt;(.*?)&lt;\/span&gt;/gi, '<span$1>$2</span>')
     .replace(/&lt;br\s*\/?&gt;/gi, '<br />')
+    // Markdown images: ![Alt Text](URL) -> <img src="URL" alt="Alt Text" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 1.5rem 0;" />
+    .replace(/!\[([^\]]+)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 1.5rem 0;" />')
     // Markdown links: [Text](URL) -> <a href="URL" class="text-[var(--accent)] hover:underline transition-colors">${text}</a>
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
       const isExternal = url.startsWith('http');
@@ -588,14 +590,31 @@ function convertMarkdownToHtml(markdownText) {
       continue;
     }
 
+    const trimmedLine = line.trim();
+
+    // Handle block-level images: ![Alt Text](URL)
+    if (trimmedLine.startsWith('![') && trimmedLine.endsWith(')')) {
+      if (inList) {
+        html += `</${listType}>\n`;
+        inList = false;
+        listType = null;
+      }
+      const imgMatch = trimmedLine.match(/^!\[([^\]]+)\]\(([^)]+)\)$/);
+      if (imgMatch) {
+        const alt = imgMatch[1];
+        const url = imgMatch[2];
+        html += `\n<div style="display: flex; flex-direction: column; align-items: center; margin: 2.5rem 0; width: 100%;">\n  <img src="${url}" alt="${alt}" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.25);" />\n  <span style="font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem; text-align: center; font-style: italic;">${alt}</span>\n</div>\n`;
+        continue;
+      }
+    }
+
     // Skip horizontal rules
-    if (line.trim() === '---') {
+    if (trimmedLine === '---') {
       html += `<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />\n`;
       continue;
     }
 
     // Handle HTML block placeholders that we substituted earlier
-    const trimmedLine = line.trim();
     if (trimmedLine.startsWith('<div') || trimmedLine.startsWith('<table') || trimmedLine.startsWith('<pre class="mermaid"')) {
       // Close list if open
       if (inList) {
