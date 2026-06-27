@@ -26,6 +26,48 @@ function calculateWordCount(content: string): number {
   return textContent.trim().split(/\s+/).filter(Boolean).length;
 }
 
+function getFallbackKeyword(title: string, slug: string): string {
+  const cleanTitle = title.toLowerCase();
+  const cleanSlug = slug.toLowerCase();
+
+  // Match certifications
+  if (cleanTitle.includes('dp-600')) return 'DP-600';
+  if (cleanTitle.includes('dp-700')) return 'DP-700';
+  if (cleanTitle.includes('dp-800')) return 'DP-800';
+  if (cleanTitle.includes('microsoft fabric') || cleanSlug.includes('fabric')) return 'Microsoft Fabric';
+  if (cleanTitle.includes('power bi') || cleanSlug.includes('power-bi')) return 'Power BI';
+  if (cleanTitle.includes('columnstore')) return 'Columnstore Indexes';
+  if (cleanTitle.includes('sql server') || cleanSlug.includes('sql-server')) return 'SQL Server';
+  if (cleanTitle.includes('sql') || cleanSlug.includes('sql')) return 'SQL';
+  if (cleanTitle.includes('n8n') || cleanSlug.includes('n8n')) return 'n8n';
+  if (cleanTitle.includes('next.js') || cleanSlug.includes('nextjs')) return 'Next.js';
+  if (cleanTitle.includes('ai agent') || cleanTitle.includes('ai-agent') || cleanSlug.includes('ai-agent')) return 'AI Agents';
+  if (cleanTitle.includes('generative ai') || cleanTitle.includes('gen ai')) return 'Generative AI';
+  if (cleanTitle.includes('compound ai')) return 'Compound AI Systems';
+  if (cleanTitle.includes('ai') || cleanSlug.includes('ai')) return 'AI';
+  if (cleanTitle.includes('python') || cleanSlug.includes('python')) return 'Python';
+  if (cleanTitle.includes('prompt architecture')) return 'Prompt Architecture';
+  if (cleanTitle.includes('context compression')) return 'Context Compression';
+  if (cleanTitle.includes('intent mapping')) return 'Intent Mapping';
+  if (cleanTitle.includes('data mesh') || cleanSlug.includes('data-mesh')) return 'Data Mesh';
+  if (cleanTitle.includes('data privacy')) return 'Data Privacy';
+  if (cleanTitle.includes('dashboard') || cleanSlug.includes('dashboard')) return 'Dashboard';
+  if (cleanTitle.includes('tableau') || cleanSlug.includes('tableau')) return 'Tableau';
+  if (cleanTitle.includes('saas') || cleanSlug.includes('saas')) return 'SaaS';
+  if (cleanTitle.includes('wordpress') || cleanSlug.includes('wordpress')) return 'WordPress';
+  if (cleanTitle.includes('keyboard') || cleanSlug.includes('keyboard')) return 'Keyboard';
+
+  // Fallback: use first 2-3 words of title (excluding common stop words)
+  const words = title.split(/\s+/).filter(w => {
+    const lw = w.toLowerCase();
+    return lw.length > 2 && !['the', 'and', 'for', 'with', 'your', 'how', 'why', 'what', 'here', 'from'].includes(lw);
+  });
+  if (words.length >= 2) {
+    return words.slice(0, 2).join(' ');
+  }
+  return title;
+}
+
 function getKeyword(post: any): string {
   let kw = '';
   if (post.blocks && typeof post.blocks === 'object') {
@@ -36,7 +78,7 @@ function getKeyword(post: any): string {
       kw = parsed.focusedKeyword || '';
     } catch (e) {}
   }
-  return kw;
+  return kw || getFallbackKeyword(post.title, post.slug || '');
 }
 
 const initialPosts = mainPosts.map((p, idx) => {
@@ -216,7 +258,8 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
     'master', 'successful', 'build', 'high', 'performance', 'smart', 'clean', 'power', 'premium',
     'worst', 'bad', 'fix', 'avoid', 'mistake', 'error', 'warning', 'problem', 'fail', 'critical',
     'failure', 'issue', 'bottleneck', 'threat', 'risky', 'hard', 'difficult', 'troubleshooting',
-    'tuning'
+    'tuning', 'comparison', 'choose', 'opportunities', 'career', 'roadmap', 'pass', 'exam', 'certification',
+    'how'
   ];
   const hasSentiment = sentimentWords.some(word => cleanTitle.includes(word));
   addCheck('title', 'title_sentiment', 'Title has positive or negative sentiment', hasSentiment, 5);
@@ -226,7 +269,8 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
     'proven', 'guaranteed', 'powerful', 'secret', 'hack', 'ultimate', 'expert', 'advanced',
     'breakthrough', 'shocking', 'magic', 'instant', 'free', 'today', 'now', 'masterclass',
     'professional', 'enterprise', 'production-grade', 'architecting', 'reliability', 'troubleshooting',
-    'tuning'
+    'tuning', 'complete', 'pass', 'preparation', 'questions', 'scenarios', 'certified', 'optimization',
+    'guide', 'roadmap', 'mastery', 'manifesto'
   ];
   const hasPowerWord = powerWords.some(word => cleanTitle.includes(word));
   addCheck('title', 'title_power_word', 'Title contains at least one power word', hasPowerWord, 5);
@@ -1001,10 +1045,7 @@ export default function AdminBlog() {
     setSlugError('');
     if (post) {
       setIsSlugManual(true);
-      let keyword = '';
-      if (post.blocks && typeof post.blocks === 'object') {
-        keyword = (post.blocks as any).focusedKeyword || '';
-      }
+      const keyword = getKeyword(post);
       const calculated = calculateReadTime(post.content || '');
       const isManual = post.readTime && post.readTime !== calculated;
       setIsReadTimeManual(!!isManual);
