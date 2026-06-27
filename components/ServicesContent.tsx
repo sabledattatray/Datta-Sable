@@ -303,10 +303,58 @@ export default function ServicesContent() {
           </motion.div>
         </div>
       </section>
+
+      {/* Editorial Section */}
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+            <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
+            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>SERVICES_INTELLIGENCE</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', fontWeight: 700, marginBottom: '2rem', color: 'var(--text)', lineHeight: 1.25 }}>
+            Why Professional BI Services Deliver Compounding Returns on Investment
+          </h2>
+          <div style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.85 }}>
+            <p style={{ marginBottom: '1.5rem' }}>
+              Business Intelligence is not a cost center — it is the infrastructure that makes every other business function more effective. When your sales team has a live pipeline dashboard that updates every 15 minutes, they close deals faster. When your finance team has an automated variance report instead of a 4-hour Excel consolidation exercise, they catch anomalies before they become write-offs. When your operations team has an OEE dashboard instead of a weekly email from the plant manager, they make decisions on Tuesday instead of waiting for Friday's meeting.
+            </p>
+            <p style={{ marginBottom: '1.5rem' }}>
+              The measurable ROI of professional BI implementation is well-documented. Organizations that move from manual Excel reporting to automated BI dashboards consistently report 40-60% reductions in report preparation time, 25-35% improvements in forecast accuracy (due to better data quality and consistency), and significant reductions in decision lag — the time between a business event occurring and leadership becoming aware of it and responding.
+            </p>
+
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '0.85rem' }}>
+              Dashboard Development: Beyond Visualization
+            </h3>
+            <p style={{ marginBottom: '1.25rem' }}>
+              A professionally built Power BI or Tableau dashboard is much more than a set of charts. It is a data product with a defined architecture: a star-schema data model optimized for fast aggregation, a semantic layer of DAX measures or Tableau calculated fields that enforce consistent business logic, row-level security that ensures each user sees only the data they are authorized to access, and a refresh schedule that keeps every metric current without any manual intervention. When these four layers are built correctly, the dashboard becomes a trusted system of record that reduces the need for ad-hoc analysis requests and frees your analysts for higher-value strategic work.
+            </p>
+
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '0.85rem' }}>
+              Data Automation: Eliminating the Manual Reporting Tax
+            </h3>
+            <p style={{ marginBottom: '1.25rem' }}>
+              Every organization has what I call a "manual reporting tax" — the cumulative hours per week that skilled analysts spend on tasks that should be automated. Copying data from ERP systems into Excel, running the same SQL query every Monday morning, formatting and emailing the same PDF report to 12 stakeholders every Friday. These tasks are not analysis — they are data plumbing. My automation service identifies this manual reporting tax, quantifies it (typically ₹5-15 lakh per year in analyst time for a team of 3-5), and eliminates it with Python ETL pipelines and scheduled reporting workflows that run without human intervention.
+            </p>
+
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '0.85rem' }}>
+              Enterprise Web Solutions for Data-Heavy Organizations
+            </h3>
+            <p style={{ marginBottom: '1.25rem' }}>
+              Data organizations have unique web requirements that generic web developers cannot meet: embedded interactive dashboards (Tableau Public, Power BI Embedded), large dataset visualizations using D3.js or Chart.js, API integrations with data platforms, and performance optimization for pages that load complex analytics components. My enterprise web service bridges the gap between data engineering and web development — building platforms that are not just fast and well-designed, but capable of rendering the complex data visualizations that make a data-first organization's web presence distinctive and authoritative.
+            </p>
+
+            <p style={{ fontSize: '0.95rem', fontStyle: 'italic', borderLeft: '4px solid var(--border)', paddingLeft: '1rem', marginTop: '2.5rem', color: 'var(--text)' }}>
+              "The organizations that win the next decade are not those with the most data — they are those with the shortest path from data to decision." — Datta Sable
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
         <Crosshair position="br" />
       </div>
-
       <Footer />
     </div>
   );
 }
+

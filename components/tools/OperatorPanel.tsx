@@ -45,7 +45,7 @@ export default function OperatorPanel() {
                 <button 
                   key={p}
                   onClick={() => updateProfile({ persona: p })}
-                  className={`text-left px-3 py-2.5 text-xs mono border transition-all flex justify-between items-center cursor-pointer ${profile.persona === p ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)] bg-transparent'}`}
+                  className={`text-left px-3.5 py-2 text-xs mono border transition-all flex justify-between items-center cursor-pointer rounded-sm ${profile.persona === p ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5 font-semibold' : 'border-transparent text-[var(--muted)] bg-transparent hover:bg-white/5 hover:text-[var(--text)]'}`}
                 >
                   {p.toUpperCase()}
                   {profile.persona === p && <Check size={10} />}
@@ -65,7 +65,7 @@ export default function OperatorPanel() {
                 <button 
                   key={i}
                   onClick={() => updateProfile({ intent: i })}
-                  className={`text-left px-3 py-2.5 text-xs mono border transition-all flex justify-between items-center cursor-pointer ${profile.intent === i ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)] bg-transparent'}`}
+                  className={`text-left px-3.5 py-2 text-xs mono border transition-all flex justify-between items-center cursor-pointer rounded-sm ${profile.intent === i ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5 font-semibold' : 'border-transparent text-[var(--muted)] bg-transparent hover:bg-white/5 hover:text-[var(--text)]'}`}
                 >
                   {i.toUpperCase()}
                   {profile.intent === i && <Check size={10} />}
@@ -85,7 +85,7 @@ export default function OperatorPanel() {
                 <button 
                   key={s}
                   onClick={() => updateProfile({ style: s })}
-                  className={`text-left px-3 py-2.5 text-xs mono border transition-all flex justify-between items-center cursor-pointer ${profile.style === s ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)] bg-transparent'}`}
+                  className={`text-left px-3.5 py-2 text-xs mono border transition-all flex justify-between items-center cursor-pointer rounded-sm ${profile.style === s ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5 font-semibold' : 'border-transparent text-[var(--muted)] bg-transparent hover:bg-white/5 hover:text-[var(--text)]'}`}
                 >
                   {s.toUpperCase()}
                   {profile.style === s && <Check size={10} />}

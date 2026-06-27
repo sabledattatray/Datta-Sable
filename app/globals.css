@@ -237,6 +237,10 @@ input:-webkit-autofill:active {
   padding: 0;
 }
 
+button, input, select, textarea {
+  font-family: inherit;
+}
+
 
 body {
   background-color: var(--bg);

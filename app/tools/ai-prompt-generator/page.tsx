@@ -14,7 +14,7 @@ import {
   Target,
   ShieldCheck,
   RotateCcw,
-  Library
+  ArrowUpRight
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -169,7 +169,7 @@ function PromptGeneratorContent() {
                     <button
                       key={p.id}
                       onClick={() => setPlatform(p.id)}
-                      className={`p-3 text-xs mono border transition-all ${platform === p.id ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)] text-[var(--muted)]'}`}
+                      className={`p-3 text-xs font-mono border transition-all cursor-pointer rounded-sm ${platform === p.id ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5 font-semibold' : 'border-transparent text-[var(--muted)] bg-white/5 hover:bg-white/10 hover:text-[var(--text)]'}`}
                     >
                       {p.label}
                     </button>
@@ -178,14 +178,14 @@ function PromptGeneratorContent() {
 
                 <div className="flex items-center gap-2 mb-4">
                   <Target size={16} className="text-[var(--accent)]" />
-                  <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Target_Persona</h4>
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-[var(--text)]">Target_Persona</h4>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {PERSONAS.map((p) => (
                     <button
                       key={p.id}
                       onClick={() => setPersona(p.id)}
-                      className={`flex items-center gap-3 p-4 border transition-all text-left ${persona === p.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)]'}`}
+                      className={`flex items-center gap-3 p-4 border transition-all text-left cursor-pointer rounded-sm ${persona === p.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-transparent bg-white/5 hover:bg-white/10'}`}
                     >
                       <span className="text-xl">{p.icon}</span>
                       <span className={`text-xs font-bold ${persona === p.id ? 'text-[var(--accent)]' : 'text-[var(--text)]'}`}>{p.label}</span>
@@ -195,14 +195,14 @@ function PromptGeneratorContent() {
 
                 <div className="flex items-center gap-2 mb-4">
                   <ShieldCheck size={16} className="text-[var(--accent)]" />
-                  <h4 className="mono text-xs uppercase tracking-widest text-[var(--text)]">Constraints</h4>
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-[var(--text)]">Constraints</h4>
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
+                  <label className="flex items-center justify-between p-3 border border-transparent bg-white/5 rounded-sm cursor-pointer hover:bg-white/10 transition-all">
                     <span className="text-xs">Surgical Precision (No Fluff)</span>
                     <input type="checkbox" checked={noFluff} onChange={(e) => setNoFluff(e.target.checked)} className="accent-[var(--accent)]" />
                   </label>
-                  <label className="flex items-center justify-between p-3 border border-[var(--border)] cursor-pointer hover:bg-white/5 transition-all">
+                  <label className="flex items-center justify-between p-3 border border-transparent bg-white/5 rounded-sm cursor-pointer hover:bg-white/10 transition-all">
                     <span className="text-xs">Actionable Steps</span>
                     <input type="checkbox" checked={includeSteps} onChange={(e) => setIncludeSteps(e.target.checked)} className="accent-[var(--accent)]" />
                   </label>
@@ -213,10 +213,10 @@ function PromptGeneratorContent() {
                   className="mt-8 p-4 border border-[var(--accent)]/30 rounded flex items-center justify-between group no-underline"
                 >
                   <div>
-                    <h5 className="text-xs mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
-                    <p className="text-[11px] text-[var(--muted)] mono">Load deep research & agent blueprints</p>
+                    <h5 className="text-xs font-mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                    <p className="text-[11px] text-[var(--muted)] font-mono">Load deep research & agent blueprints</p>
                   </div>
-                  <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
+                  <ArrowUpRight size={14} className="text-[var(--accent)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -334,6 +334,86 @@ export default function AIPromptGenerator() {
       <Suspense fallback={<div className="container py-20 mono text-xs animate-pulse">INITIATING_NEURAL_ENGINE...</div>}>
         <PromptGeneratorContent />
       </Suspense>
+      
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '3rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+            <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
+            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>DEEP_DIVE_GUIDE</span>
+          </div>
+
+          <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '2rem', color: 'var(--text)', lineHeight: 1.2, fontFamily: "'Syne', sans-serif" }}>
+            The Science of Advanced Prompt Engineering: Eliminating Neural Noise for Production AI
+          </h2>
+
+          <div style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.85 }}>
+            <p style={{ marginBottom: '1.5rem' }}>
+              Most professionals interact with Large Language Models (LLMs) like Gemini, GPT-4, and Claude using casual, conversational queries. While this works for simple lookups, it fails completely in production environments. Conversational inputs introduce "neural noise"—unnecessary words, ambiguous phrasing, and lack of context boundaries that lead to unpredictable outputs, hallucinations, and high token costs.
+            </p>
+            
+            <p style={{ marginBottom: '1.5rem' }}>
+              This <strong>Advanced AI Prompt Generator</strong> bridges the gap between conversational ideas and production-grade system prompts. It uses a structured prompt architecture designed to enforce strict logical boundaries, define precise expert roles, adjust output styles dynamically based on your platform, and programmatically eliminate token waste.
+            </p>
+
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
+              Why Structured System Prompts Outperform Casual Chat
+            </h3>
+            
+            <p style={{ marginBottom: '1.5rem' }}>
+              LLMs are probabilistic engines that predict the next logical token based on the input context. When you provide a structured prompt, you constrain the model's probability distribution. By defining a specific <strong>Persona</strong> (such as a Product Engineer or Data Scientist) and enforcing <strong>Hard Constraints</strong> (like banning introductory filler phrases), you guide the attention mechanisms of the model to prioritize functional logic over conversational politeness.
+            </p>
+
+            <ul style={{ listStyleType: 'none', paddingLeft: 0, marginBottom: '2rem' }}>
+              {[
+                { title: 'Deterministic Personas', desc: 'Instead of saying "write a script," we define the persona\'s professional constraints, ensuring the model adopts the exact formatting standards, coding patterns, and jargon of the target industry.' },
+                { title: 'Neural Response Envelopes', desc: 'By setting boundary parameters (such as instructing Gemini to outline its reasoning or demanding that Claude use XML tags for input separation), you create a predictable structure for downstream parsing.' },
+                { title: 'Token-Efficient Pruning', desc: 'Removing conversational fluff (e.g., "Sure, here is the information you requested:") is not just about aesthetics—it directly reduces latency and lowers API costs by keeping the prompt density high.' }
+              ].map((item, index) => (
+                <li key={index} style={{ marginBottom: '1.25rem', paddingLeft: '1.5rem', borderLeft: '2px solid var(--accent)' }}>
+                  <strong style={{ color: 'var(--text)', display: 'block', marginBottom: '0.25rem' }}>{item.title}</strong>
+                  <span style={{ fontSize: '0.95rem' }}>{item.desc}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
+              Optimizing Prompts for Google Gemini vs. Claude vs. GPT-4
+            </h3>
+
+            <p style={{ marginBottom: '1.5rem' }}>
+              Different models are trained on different datasets and reinforcement patterns, meaning a prompt that works for one model might fail on another:
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '1.5rem', marginBottom: '2.5rem' }}>
+              <div style={{ padding: '1.5rem', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '6px' }}>
+                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Google Gemini</h4>
+                <p style={{ fontSize: '0.9rem', margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  Gemini excels at reasoning when prompts are explicitly divided into structural sections using markdown headings. Appending explicit logical instructions (like "Verify each step before displaying the output") helps direct its massive context processing capability.
+                </p>
+              </div>
+              <div style={{ padding: '1.5rem', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '6px' }}>
+                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Anthropic Claude</h4>
+                <p style={{ fontSize: '0.9rem', margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  Claude is trained to respond extremely well to XML tags (e.g., <code>&lt;rules&gt;...&lt;/rules&gt;</code>) to isolate system instructions, inputs, and output schemas, preventing instructions from bleeding into the target content.
+                </p>
+              </div>
+              <div style={{ padding: '1.5rem', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '6px' }}>
+                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>OpenAI GPT-4</h4>
+                <p style={{ fontSize: '0.9rem', margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  GPT-4 requires clear task hierarchy. Putting rules in the system prompt and using delimiters like triple backticks (```) to separate data sections ensures it respects the absolute priority of system guidelines.
+                </p>
+              </div>
+            </div>
+
+            <p style={{ fontSize: '0.95rem', fontStyle: 'italic', borderLeft: '4px solid var(--border)', paddingLeft: '1rem', marginTop: '2rem' }}>
+              "The quality of your output is a direct reflection of the constraints you build into your instructions. A perfect prompt does not request creativity; it maps a sandbox." — Datta Sable
+            </p>
+
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

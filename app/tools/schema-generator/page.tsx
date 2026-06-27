@@ -119,10 +119,10 @@ export default function SchemaForge() {
                       <button
                         key={s.id}
                         onClick={() => setType(s.id)}
-                        className={`flex items-center gap-3 p-4 border transition-all text-left ${type === s.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-[var(--border)]'}`}
+                        className={`flex items-center gap-3 p-4 border transition-all text-left cursor-pointer rounded-sm ${type === s.id ? 'border-[var(--accent)] bg-[var(--accent)]/5' : 'border-transparent bg-white/5 hover:bg-white/10'}`}
                       >
                         <span className="text-xl">{s.icon}</span>
-                        <span className={`text-xs mono font-bold uppercase ${type === s.id ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}`}>{s.label}</span>
+                        <span className={`text-xs font-mono font-bold uppercase ${type === s.id ? 'text-[var(--accent)]' : 'text-[var(--text)]'}`}>{s.label}</span>
                       </button>
                     ))}
                   </div>

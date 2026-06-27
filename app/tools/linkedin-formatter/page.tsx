@@ -10,7 +10,7 @@ import {
   Trash2, 
   Sparkles, 
   ArrowLeft,
-  Library,
+  ArrowUpRight,
   Minimize2
 } from 'lucide-react';
 import Link from 'next/link';
@@ -177,10 +177,10 @@ function LinkedInFormatterContent() {
                   style={{ marginTop: '1rem', display: 'flex' }}
                 >
                   <div>
-                    <h5 className="text-xs mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
-                    <p className="text-xs text-[var(--muted)] mono" style={{ marginTop: '4px' }}>Browse high-authority blueprints</p>
+                    <h5 className="text-xs font-mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
+                    <p className="text-xs text-[var(--muted)] font-mono" style={{ marginTop: '4px' }}>Browse high-authority blueprints</p>
                   </div>
-                  <Library size={14} className="text-[var(--accent)] group-hover:scale-110 transition-all" />
+                  <ArrowUpRight size={14} className="text-[var(--accent)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Link>
 
                 <button 
@@ -188,12 +188,12 @@ function LinkedInFormatterContent() {
                     localStorage.setItem('surgical_context-optimizer-input', JSON.stringify(text));
                     window.location.href = '/tools/context-optimizer';
                   }}
-                  className="w-full p-4 border border-[var(--border)] rounded flex items-center justify-between group no-underline bg-transparent cursor-pointer"
+                  className="w-full p-4 border border-transparent bg-white/5 rounded flex items-center justify-between group no-underline bg-transparent cursor-pointer hover:bg-white/10 transition-all"
                   style={{ marginTop: '1rem' }}
                 >
                   <div className="text-left">
-                    <h5 className="text-xs mono font-bold text-[var(--text)]">OPTIMIZE_FOR_AI</h5>
-                    <p className="text-xs text-[var(--muted)] mono" style={{ marginTop: '4px' }}>Reduce tokens for LLM prompts</p>
+                    <h5 className="text-xs font-mono font-bold text-[var(--text)]">OPTIMIZE_FOR_AI</h5>
+                    <p className="text-xs text-[var(--muted)] font-mono" style={{ marginTop: '4px' }}>Reduce tokens for LLM prompts</p>
                   </div>
                   <Minimize2 size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-all" />
                 </button>
