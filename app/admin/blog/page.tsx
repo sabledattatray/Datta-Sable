@@ -13,18 +13,51 @@ import { useTheme } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
 import FullEditor from '@/components/editor/FullEditor';
 
-const initialPosts = mainPosts.map((p, idx) => ({
-  id: idx + 1,
-  title: p.title,
-  slug: p.slug,
-  category: p.category,
-  status: 'Published',
-  date: p.date,
-  views: Math.floor(Math.random() * 2000).toString(),
-  excerpt: p.excerpt,
-  content: p.content,
-  image: p.image,
-}));
+function calculateWordCount(content: string): number {
+  if (!content) return 0;
+  let textContent = '';
+  if (typeof document !== 'undefined') {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    textContent = tempDiv.textContent || tempDiv.innerText || '';
+  } else {
+    textContent = content.replace(/<[^>]*>/g, ' ');
+  }
+  return textContent.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function getKeyword(post: any): string {
+  let kw = '';
+  if (post.blocks && typeof post.blocks === 'object') {
+    kw = (post.blocks as any).focusedKeyword || '';
+  } else if (typeof post.blocks === 'string') {
+    try {
+      const parsed = JSON.parse(post.blocks);
+      kw = parsed.focusedKeyword || '';
+    } catch (e) {}
+  }
+  return kw;
+}
+
+const initialPosts = mainPosts.map((p, idx) => {
+  const content = p.content || '';
+  const wordCount = calculateWordCount(content);
+
+  return {
+    id: idx + 1,
+    title: p.title,
+    slug: p.slug,
+    category: p.category,
+    status: 'Published',
+    date: p.date,
+    views: Math.floor(Math.random() * 2000).toString(),
+    excerpt: p.excerpt,
+    content: p.content,
+    image: p.image,
+    wordCount,
+    seoScore: 85,
+  };
+});
 
 function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, otherPosts: any[] = []) {
   if (!keyword) return {
@@ -263,6 +296,8 @@ export default function AdminBlog() {
   const [categories, setCategories] = useState(['Tech Trends', 'Tutorials', 'Technical', 'BI Tools', 'SQL']);
   const [newCat, setNewCat] = useState('');
   const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState<'title' | 'date' | 'status' | 'reach' | 'wordCount' | 'seoScore'>('date');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [isEditing, setIsEditing] = useState(false);
   const [editorMode, setEditorMode] = useState<'edit' | 'split' | 'preview'>('edit');
   const [editingPost, setEditingPost] = useState<any>(null);
@@ -520,11 +555,18 @@ export default function AdminBlog() {
       const res = await fetch('/api/admin/blog');
       if (!res.ok) throw new Error('Failed to fetch posts');
       const data = await res.json();
-      const mapped = data.map((p: any) => ({
-        ...p,
-        status: p.published ? 'Published' : 'Draft',
-        views: p.views || '0',
-      }));
+      const mapped = data.map((p: any) => {
+        const kw = getKeyword(p);
+        const seoResult = calculateSeoScore(p.title, p.slug || '', p.content || '', p.excerpt || '', kw, data);
+        const wCount = calculateWordCount(p.content || '');
+        return {
+          ...p,
+          status: p.published ? 'Published' : 'Draft',
+          views: p.views || '0',
+          wordCount: wCount,
+          seoScore: seoResult.score,
+        };
+      });
       setPosts(mapped);
     } catch (err: any) {
       console.error(err);
@@ -839,7 +881,47 @@ export default function AdminBlog() {
     }
   }, [isEditing]);
 
-  const filtered = posts.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
+  const handleSort = (field: 'title' | 'date' | 'status' | 'reach' | 'wordCount' | 'seoScore') => {
+    if (sortBy === field) {
+      setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(field);
+      setSortOrder('desc');
+    }
+  };
+
+  const filtered = posts
+    .filter(p => p.title.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => {
+      let fieldA: any = a[sortBy];
+      let fieldB: any = b[sortBy];
+
+      if (sortBy === 'date') {
+        const dateA = new Date(a.date || a.createdAt || 0).getTime();
+        const dateB = new Date(b.date || b.createdAt || 0).getTime();
+        return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+      }
+      if (sortBy === 'status') {
+        fieldA = a.status || '';
+        fieldB = b.status || '';
+      }
+      if (sortBy === 'reach') {
+        fieldA = parseInt(a.views || '0');
+        fieldB = parseInt(b.views || '0');
+      }
+      if (sortBy === 'wordCount') {
+        fieldA = a.wordCount || 0;
+        fieldB = b.wordCount || 0;
+      }
+      if (sortBy === 'seoScore') {
+        fieldA = a.seoScore || 0;
+        fieldB = b.seoScore || 0;
+      }
+
+      if (fieldA < fieldB) return sortOrder === 'desc' ? 1 : -1;
+      if (fieldA > fieldB) return sortOrder === 'desc' ? -1 : 1;
+      return 0;
+    });
 
   const handleAddCategory = () => {
     if (newCat && !categories.includes(newCat)) {
@@ -1181,37 +1263,80 @@ export default function AdminBlog() {
           </button>
         </div>
 
-        {/* Search Bar */}
-        <div
-          style={{
-            background: css.surface, border: `1px solid ${css.border}`,
-            borderRadius: 16, padding: '14px 20px',
-            display: 'flex', alignItems: 'center', gap: 12,
-            boxShadow: css.shadow,
-          }}
-        >
-          <Search size={16} color={css.muted} style={{ flexShrink: 0 }} />
-          <input
-            type="text"
-            placeholder="Search articles by title..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
+        {/* Search & Sort Controls */}
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          {/* Search Bar */}
+          <div
             style={{
-              flex: 1, background: 'none', border: 'none', outline: 'none',
-              fontSize: 14, color: css.text, fontWeight: 500,
+              flex: 1,
+              minWidth: 280,
+              background: css.surface, border: `1px solid ${css.border}`,
+              borderRadius: 16, padding: '14px 20px',
+              display: 'flex', alignItems: 'center', gap: 12,
+              boxShadow: css.shadow,
             }}
-          />
-          {search && (
-            <button
-              onClick={() => setSearch('')}
+          >
+            <Search size={16} color={css.muted} style={{ flexShrink: 0 }} />
+            <input
+              type="text"
+              placeholder="Search articles by title..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
               style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                color: css.muted, fontSize: 13, fontWeight: 600,
+                flex: 1, background: 'none', border: 'none', outline: 'none',
+                fontSize: 14, color: css.text, fontWeight: 500,
+              }}
+            />
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  color: css.muted, fontSize: 13, fontWeight: 600,
+                }}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
+          {/* Sort Controls */}
+          <div
+            style={{
+              background: css.surface, border: `1px solid ${css.border}`,
+              borderRadius: 16, padding: '10px 16px',
+              display: 'flex', alignItems: 'center', gap: 8,
+              boxShadow: css.shadow,
+            }}
+          >
+            <span style={{ fontSize: 11, fontWeight: 800, color: css.muted, whiteSpace: 'nowrap', letterSpacing: '0.05em' }}>SORT BY:</span>
+            <select
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value as any)}
+              style={{
+                background: 'none', border: 'none', outline: 'none',
+                fontSize: 13, color: css.text, fontWeight: 700,
+                cursor: 'pointer',
               }}
             >
-              Clear
+              <option value="date">Date Created</option>
+              <option value="status">Status</option>
+              <option value="reach">Reach (Real Views)</option>
+              <option value="wordCount">Word Count</option>
+              <option value="seoScore">SEO Score</option>
+            </select>
+            <button
+              onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: css.accent, fontSize: 12, fontWeight: 800,
+                padding: '4px 8px', borderRadius: 8,
+                transition: 'background 0.15s',
+              }}
+            >
+              {sortOrder === 'desc' ? '▼ DESC' : '▲ ASC'}
             </button>
-          )}
+          </div>
         </div>
 
         {/* Articles Table */}
@@ -1231,17 +1356,35 @@ export default function AdminBlog() {
                     borderBottom: `1px solid ${css.border}`,
                   }}
                 >
-                  {['STORY', 'CATEGORY', 'VISIBILITY', 'REACH', 'ACTIONS'].map(h => (
+                  {[
+                    { key: 'date', label: 'STORY' },
+                    { key: 'wordCount', label: 'WORD COUNT' },
+                    { key: 'seoScore', label: 'SEO SCORE' },
+                    { key: 'category', label: 'CATEGORY' },
+                    { key: 'status', label: 'STATUS' },
+                    { key: 'reach', label: 'REACH' },
+                    { key: 'actions', label: 'ACTIONS', sortable: false }
+                  ].map(h => (
                     <th
-                      key={h}
+                      key={h.label}
+                      onClick={() => h.sortable !== false && handleSort(h.key as any)}
                       style={{
                         padding: '14px 20px',
                         fontSize: 10, fontWeight: 800,
                         color: css.muted, letterSpacing: '0.1em',
                         whiteSpace: 'nowrap',
+                        cursor: h.sortable !== false ? 'pointer' : 'default',
+                        userSelect: 'none',
                       }}
                     >
-                      {h}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        {h.label}
+                        {h.sortable !== false && sortBy === h.key && (
+                          <span style={{ color: css.accent }}>
+                            {sortOrder === 'desc' ? '▼' : '▲'}
+                          </span>
+                        )}
+                      </div>
                     </th>
                   ))}
                 </tr>
@@ -1249,7 +1392,7 @@ export default function AdminBlog() {
               <tbody>
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan={5} style={{ padding: '48px 20px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+                    <td colSpan={7} style={{ padding: '48px 20px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
                       No articles found.
                     </td>
                   </tr>
@@ -1282,6 +1425,32 @@ export default function AdminBlog() {
                       <div style={{ fontSize: 11, color: css.muted, marginTop: 4, fontWeight: 500 }}>
                         {post.date} &bull; /blog/{post.slug}
                       </div>
+                    </td>
+
+                    {/* Word Count */}
+                    <td style={{ padding: '16px 20px', fontSize: 13, color: css.text, whiteSpace: 'nowrap' }}>
+                      <span style={{ fontWeight: 600 }}>{(post.wordCount || 0).toLocaleString()}</span>
+                      <span style={{ color: css.muted, fontSize: 11, marginLeft: 4 }}>words</span>
+                    </td>
+
+                    {/* SEO Score */}
+                    <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 4,
+                          fontSize: 11,
+                          fontWeight: 800,
+                          color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
+                          background: post.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
+                          border: `1px solid ${post.seoScore >= 80 ? '#10b98130' : post.seoScore >= 50 ? '#f59e0b30' : '#ef444430'}`,
+                          padding: '4px 10px',
+                          borderRadius: '6px',
+                        }}
+                      >
+                        <Sparkles size={11} /> {post.seoScore || 0}/100
+                      </span>
                     </td>
 
                     {/* Category */}
@@ -1464,6 +1633,29 @@ export default function AdminBlog() {
                   >
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: post.status === 'Published' ? '#10b981' : '#3b82f6' }} />
                     {post.status}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 9.5, fontWeight: 700,
+                      background: 'rgba(100, 116, 139, 0.08)',
+                      color: css.muted,
+                      border: `1px solid ${css.border}`,
+                      padding: '2px 8px', borderRadius: 999,
+                    }}
+                  >
+                    📝 {post.wordCount || 0} words
+                  </span>
+                  <span
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 3,
+                      fontSize: 9.5, fontWeight: 700,
+                      color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
+                      background: post.seoScore >= 80 ? 'rgba(16,185,129,0.08)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.08)' : 'rgba(239,68,68,0.08)',
+                      border: `1px solid ${post.seoScore >= 80 ? '#10b98125' : post.seoScore >= 50 ? '#f59e0b25' : '#ef444425'}`,
+                      padding: '2px 8px', borderRadius: 999,
+                    }}
+                  >
+                    ⚡ SEO: {post.seoScore || 0}/100
                   </span>
                 </div>
 

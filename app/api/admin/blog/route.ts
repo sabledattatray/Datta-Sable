@@ -14,7 +14,33 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
     });
 
-    return NextResponse.json(posts);
+    // Group page views by URL to get real REACH/view counts
+    const pageViews = await prisma.pageView.groupBy({
+      by: ['url'],
+      _count: {
+        id: true,
+      },
+    });
+
+    // Build URL view counts map (lowercased)
+    const viewMap: Record<string, number> = {};
+    pageViews.forEach((pv) => {
+      if (pv.url) {
+        viewMap[pv.url.toLowerCase()] = pv._count.id;
+      }
+    });
+
+    // Enrich each post with the real view count
+    const postsWithViews = posts.map((post) => {
+      const blogUrl = `/blog/${post.slug}`.toLowerCase();
+      const count = viewMap[blogUrl] || 0;
+      return {
+        ...post,
+        views: count.toString(),
+      };
+    });
+
+    return NextResponse.json(postsWithViews);
   } catch (error) {
     console.error('API Blog GET error:', error);
     return NextResponse.json(
