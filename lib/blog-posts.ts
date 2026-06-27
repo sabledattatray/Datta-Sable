@@ -92,11 +92,53 @@ export async function getPublishedBlogSlugs() {
 }
 
 export function filterPostsByCategory(posts: BlogPost[], categoryName: string, slug: string) {
+  const targetSlug = slug.toLowerCase();
+  
   return posts.filter((post) => {
+    // 1. Exact match on category
     const category = ((post as any).category || '').toLowerCase();
     const cleanCategorySlug = category.replace(/\s+/g, '-').replace(/&/g, 'and');
-    return category === categoryName.toLowerCase() || 
-           category.replace(/\s+/g, '-') === slug.toLowerCase() ||
-           cleanCategorySlug === slug.toLowerCase();
+    if (category === categoryName.toLowerCase() || 
+        category.replace(/\s+/g, '-') === targetSlug ||
+        cleanCategorySlug === targetSlug) {
+      return true;
+    }
+
+    // 2. Keyword fallback matching for broader content clusters
+    const title = ((post as any).title || '').toLowerCase();
+    const excerpt = ((post as any).excerpt || '').toLowerCase();
+    const tags = Array.isArray((post as any).tags) 
+      ? (post as any).tags.map((t: string) => t.toLowerCase()) 
+      : [];
+    
+    const matchesKeyword = (kw: string) => 
+      title.includes(kw) || 
+      excerpt.includes(kw) || 
+      tags.some((t: string) => t.includes(kw)) ||
+      category.includes(kw);
+
+    if (targetSlug === 'microsoft-fabric') {
+      return matchesKeyword('fabric') || matchesKeyword('onelake') || matchesKeyword('dp-600') || matchesKeyword('dp-700');
+    }
+    if (targetSlug === 'power-bi') {
+      return matchesKeyword('power bi') || matchesKeyword('dax') || matchesKeyword('dashboard') || matchesKeyword('report');
+    }
+    if (targetSlug === 'sql') {
+      return matchesKeyword('sql') || matchesKeyword('database') || matchesKeyword('query') || matchesKeyword('postgres') || matchesKeyword('mysql');
+    }
+    if (targetSlug === 'python') {
+      return matchesKeyword('python') || matchesKeyword('pandas') || matchesKeyword('numpy') || matchesKeyword('data engineering') || matchesKeyword('etl');
+    }
+    if (targetSlug === 'nextjs') {
+      return matchesKeyword('next.js') || matchesKeyword('react') || matchesKeyword('web dev') || matchesKeyword('website') || matchesKeyword('nextjs');
+    }
+    if (targetSlug === 'seo') {
+      return matchesKeyword('seo') || matchesKeyword('google') || matchesKeyword('marketing') || matchesKeyword('adsense') || matchesKeyword('analytics');
+    }
+    if (targetSlug === 'ai-automation') {
+      return matchesKeyword('ai') || matchesKeyword('automation') || matchesKeyword('n8n') || matchesKeyword('prompt') || matchesKeyword('llm') || matchesKeyword('agent');
+    }
+
+    return false;
   });
 }

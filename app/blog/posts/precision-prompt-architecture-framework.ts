@@ -1,13 +1,13 @@
-export const surgicalPromptArchitectureFrameworkPost = {
+export const precisionPromptArchitectureFrameworkPost = {
   id: "surgical-prompt-architecture-v1",
-  slug: "surgical-prompt-architecture-framework",
-  title: "Surgical Prompt Architecture™: The Blueprint for Precision AI Outputs",
+  slug: "precision-prompt-architecture-framework",
+  title: "Precision Prompt Architecture™: The Blueprint for Precision AI Outputs",
   category: "Framework",
-  excerpt: "Master the core technical structure for high-fidelity LLM outputs. Learn how to eliminate hallucination through structural precision and operator intent mapping.",
+  excerpt: "Master the core technical structure for reliable LLM outputs. Learn how to eliminate hallucination through structured prompt design.",
   date: "May 14, 2026",
   icon: "⚡",
   image: "/images/blog/surgical_prompt_hero.webp",
-  tags: ["Surgical Prompt Architecture", "AI Framework", "Prompt Engineering", "Precision AI"],
+  tags: ["Precision Prompt Architecture", "AI Framework", "Prompt Engineering", "Reliable AI"],
   content: `<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
         <p>Surgical Prompt Architecture™ is an engineering framework designed to treat LLM prompts as structured code. By utilizing rigid syntactic dividers, typed interfaces, and validation schemas, it ensures consistent outputs.</p>
       </div>

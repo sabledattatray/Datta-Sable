@@ -1,10 +1,10 @@
 import { executionChainInfrastructureExplainedPost } from "./posts/execution-chain-infrastructure-explained";
 import { buildingModularAiWorkflowSystemsPost } from "./posts/building-modular-ai-workflow-systems";
 import { caseStudyN8nAutomatedAuthorityScalingPost } from "./posts/case-study-n8n-automated-authority-scaling";
-import { caseStudySurgicalPromptArchitectureConsistencyPost } from "./posts/case-study-surgical-prompt-architecture-consistency";
+import { caseStudyPrecisionPromptArchitectureConsistencyPost } from "./posts/case-study-precision-prompt-architecture-consistency";
 import { caseStudyContextCompressionTokenWastePost } from "./posts/case-study-context-compression-token-waste";
 import { caseStudyWorkflowAutomationRoiPost } from "./posts/case-study-workflow-automation-roi";
-import { surgicalPromptArchitectureFrameworkPost } from "./posts/surgical-prompt-architecture-framework";
+import { precisionPromptArchitectureFrameworkPost } from "./posts/precision-prompt-architecture-framework";
 import { operatorIntentMappingFrameworkPost } from "./posts/operator-intent-mapping-framework";
 import { contextCompressionFrameworkBenchmarksPost } from "./posts/context-compression-framework-benchmarks";
 import { masteringSurgicalUiDashboardEngineeringPost } from "./posts/mastering-surgical-ui-dashboard-engineering";
@@ -2886,10 +2886,10 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
   executionChainInfrastructureExplainedPost,
   buildingModularAiWorkflowSystemsPost,
   caseStudyN8nAutomatedAuthorityScalingPost,
-  caseStudySurgicalPromptArchitectureConsistencyPost,
+  caseStudyPrecisionPromptArchitectureConsistencyPost,
   caseStudyContextCompressionTokenWastePost,
   caseStudyWorkflowAutomationRoiPost,
-  surgicalPromptArchitectureFrameworkPost,
+  precisionPromptArchitectureFrameworkPost,
   operatorIntentMappingFrameworkPost,
   contextCompressionFrameworkBenchmarksPost,
   {

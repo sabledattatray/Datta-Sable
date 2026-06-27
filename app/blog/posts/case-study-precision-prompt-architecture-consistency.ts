@@ -1,7 +1,7 @@
-export const caseStudySurgicalPromptArchitectureConsistencyPost = {
+export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
   id: "case-study-prompt-precision-2026",
-  slug: "case-study-surgical-prompt-architecture-consistency",
-  title: "Case Study: Achieving 99.8% Output Consistency via Surgical Prompt Architecture™",
+  slug: "case-study-precision-prompt-architecture-consistency",
+  title: "Case Study: Achieving 99.8% Output Consistency via Precision Prompt Architecture™",
   category: "Case Study",
   excerpt: "How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline using proprietary structural constraints.",
   date: "May 14, 2026",
