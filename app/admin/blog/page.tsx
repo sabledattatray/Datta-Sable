@@ -1430,27 +1430,47 @@ export default function AdminBlog() {
                     {/* Word Count */}
                     <td style={{ padding: '16px 20px', fontSize: 13, color: css.text, whiteSpace: 'nowrap' }}>
                       <span style={{ fontWeight: 600 }}>{(post.wordCount || 0).toLocaleString()}</span>
-                      <span style={{ color: css.muted, fontSize: 11, marginLeft: 4 }}>words</span>
+                      <span style={{ color: css.muted, fontSize: 11 }}> words</span>
                     </td>
 
                     {/* SEO Score */}
                     <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
-                      <span
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 4,
-                          fontSize: 11,
-                          fontWeight: 800,
-                          color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
-                          background: post.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
-                          border: `1px solid ${post.seoScore >= 80 ? '#10b98130' : post.seoScore >= 50 ? '#f59e0b30' : '#ef444430'}`,
-                          padding: '4px 10px',
-                          borderRadius: '6px',
-                        }}
-                      >
-                        <Sparkles size={11} /> {post.seoScore || 0}/100
-                      </span>
+                      {getKeyword(post) ? (
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4,
+                            fontSize: 11,
+                            fontWeight: 800,
+                            color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
+                            background: post.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
+                            border: `1px solid ${post.seoScore >= 80 ? '#10b98130' : post.seoScore >= 50 ? '#f59e0b30' : '#ef444430'}`,
+                            padding: '4px 10px',
+                            borderRadius: '6px',
+                          }}
+                        >
+                          <Sparkles size={11} /> {post.seoScore || 0}/100
+                        </span>
+                      ) : (
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4,
+                            fontSize: 11,
+                            fontWeight: 600,
+                            color: css.muted,
+                            background: css.hoverBg,
+                            border: `1px solid ${css.border}`,
+                            padding: '4px 10px',
+                            borderRadius: '6px',
+                          }}
+                          title="No focus keyword set"
+                        >
+                          --
+                        </span>
+                      )}
                     </td>
 
                     {/* Category */}
@@ -1645,18 +1665,33 @@ export default function AdminBlog() {
                   >
                     📝 {post.wordCount || 0} words
                   </span>
-                  <span
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 3,
-                      fontSize: 9.5, fontWeight: 700,
-                      color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
-                      background: post.seoScore >= 80 ? 'rgba(16,185,129,0.08)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.08)' : 'rgba(239,68,68,0.08)',
-                      border: `1px solid ${post.seoScore >= 80 ? '#10b98125' : post.seoScore >= 50 ? '#f59e0b25' : '#ef444425'}`,
-                      padding: '2px 8px', borderRadius: 999,
-                    }}
-                  >
-                    ⚡ SEO: {post.seoScore || 0}/100
-                  </span>
+                  {getKeyword(post) ? (
+                    <span
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 3,
+                        fontSize: 9.5, fontWeight: 700,
+                        color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
+                        background: post.seoScore >= 80 ? 'rgba(16,185,129,0.08)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.08)' : 'rgba(239,68,68,0.08)',
+                        border: `1px solid ${post.seoScore >= 80 ? '#10b98125' : post.seoScore >= 50 ? '#f59e0b25' : '#ef444425'}`,
+                        padding: '2px 8px', borderRadius: 999,
+                      }}
+                    >
+                      ⚡ SEO: {post.seoScore || 0}/100
+                    </span>
+                  ) : (
+                    <span
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 3,
+                        fontSize: 9.5, fontWeight: 700,
+                        color: css.muted,
+                        background: css.hoverBg,
+                        border: `1px solid ${css.border}`,
+                        padding: '2px 8px', borderRadius: 999,
+                      }}
+                    >
+                      ⚡ SEO: --
+                    </span>
+                  )}
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: `1px solid ${css.border}`, paddingTop: 10, fontSize: 11, color: css.muted }}>
