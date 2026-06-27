@@ -78,7 +78,7 @@ export default function Hero() {
           {/* Core metrics grid — replaces quote block */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4" style={{ marginBottom: '2.25rem' }}>
             {[
-              { value: "190+", label: "Technical Articles" },
+              { value: "180+", label: "Technical Articles" },
               { value: "25+", label: "Interactive Tools" },
               { value: "300+", label: "Published Resources" },
               { value: "Weekly", label: "Updated" }
