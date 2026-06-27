@@ -15,11 +15,11 @@ export default function AboutAuthor() {
   ];
 
   const resources = [
-    { title: "Microsoft Fabric Roadmap (PDF)", desc: "Step-by-step master plan for capacity provisioning and OneLake architectures.", file: "/sitemap" },
-    { title: "DP-600 Analytics Engineer Checklist", desc: "Detailed study guide & test preparation topics for Microsoft certification.", file: "/sitemap" },
-    { title: "Enterprise SQL Tuning Cheat Sheet", desc: "Top 10 index optimizations & execution plan analysis commands.", file: "/sitemap" },
-    { title: "Power BI DAX Performance Patterns", desc: "Standard formulas for lightning-fast incremental refreshes.", file: "/sitemap" },
-    { title: "Next.js 15 SEO Production Checklist", desc: "Core Web Vitals auditing steps & schema structured markup guide.", file: "/sitemap" }
+    { title: "Microsoft Fabric Roadmap Guide", desc: "Step-by-step master plan for capacity provisioning and OneLake architectures.", file: "/blog/microsoft-fabric-certification-roadmap-2026" },
+    { title: "DP-600 Analytics Study Guide", desc: "Detailed study guide & test preparation topics for Microsoft certification.", file: "/blog/dp-600-study-guide-2026" },
+    { title: "Enterprise SQL Tuning Guide", desc: "Top 10 index optimizations & execution plan analysis commands.", file: "/blog/beyond-the-select-advanced-sql-for-bi" },
+    { title: "Power BI DAX Performance Patterns", desc: "Standard formulas for lightning-fast incremental refreshes.", file: "/blog/mastering-dax-patterns-2026" },
+    { title: "Next.js 15 SEO Production Guide", desc: "Core Web Vitals auditing steps & schema structured markup guide.", file: "/blog/nextjs-15-react-19-performance-manifesto-2026" }
   ];
 
   return (
@@ -78,7 +78,7 @@ export default function AboutAuthor() {
               <FileText size={20} className="text-[var(--accent)]" /> Featured Resources
             </h3>
             <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '2rem', lineHeight: 1.5 }}>
-              Download our curated roadmap checklists and cheat sheets to optimize your engineering processes.
+              Access our curated technical roadmap checklists, cheat sheets, and deep-dive optimization tutorials.
             </p>
 
             <div className="flex flex-col gap-4">
@@ -89,7 +89,7 @@ export default function AboutAuthor() {
                   className="group flex items-start gap-4 p-4 border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] transition-all duration-300 rounded-sm no-underline"
                 >
                   <div className="p-2 bg-[var(--surface2)] text-[var(--muted)] group-hover:text-[var(--accent)] rounded transition-colors mt-0.5">
-                    <Download size={15} />
+                    <BookOpen size={15} />
                   </div>
                   <div>
                     <h4 style={{ fontSize: '13px', fontWeight: 700, margin: '0 0 0.25rem 0', color: 'var(--text)' }}>
@@ -99,7 +99,7 @@ export default function AboutAuthor() {
                       {res.desc}
                     </p>
                     <div className="inline-flex items-center gap-1 text-[9px] mono uppercase font-bold text-[var(--accent)]">
-                      <Download size={10} /> Download Free PDF
+                      <BookOpen size={10} /> Read Free Guide
                     </div>
                   </div>
                 </Link>
