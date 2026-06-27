@@ -116,3 +116,4 @@ Sitemap: https://dattasable.com/sitemap-index.xml
 Sitemap: https://dattasable.com/sitemap.xml
 Sitemap: https://dattasable.com/image-sitemap.xml
 Sitemap: https://dattasable.com/news-sitemap.xml
+Sitemap: https://dattasable.com/video-sitemap.xml

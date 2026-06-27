@@ -81,6 +81,99 @@ function getDbKeyword(post: any): string {
   return kw;
 }
 
+function injectTableOfContents(content: string): string {
+  if (!content) return content;
+
+  // 1. Remove existing TOC block if any
+  let cleanContent = content.replace(/<div class="blog-toc"[\s\S]*?<\/div>/gi, '');
+  cleanContent = cleanContent.replace(/<div class="toc"[\s\S]*?<\/div>/gi, '');
+
+  // 2. Parse H2/H3 elements
+  const headingRegex = /<(h[23])([^>]*)>([\s\S]*?)<\/h[23]>/gi;
+  const headings: { tag: string; text: string; id: string }[] = [];
+  
+  let match;
+  let updatedContent = cleanContent;
+  
+  const usedIds = new Set<string>();
+  const slugify = (text: string) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  };
+
+  const matches: { full: string; tag: string; attrs: string; text: string; index: number }[] = [];
+  headingRegex.lastIndex = 0;
+  while ((match = headingRegex.exec(cleanContent)) !== null) {
+    matches.push({
+      full: match[0],
+      tag: match[1],
+      attrs: match[2],
+      text: match[3].replace(/<[^>]*>/g, '').trim(),
+      index: match.index
+    });
+  }
+
+  if (matches.length === 0) {
+    return content;
+  }
+
+  let headingOffset = 0;
+  matches.forEach(m => {
+    let idAttr = '';
+    const idMatch = /id=["']([^"']*)["']/i.exec(m.attrs);
+    if (idMatch) {
+      idAttr = idMatch[1];
+    } else {
+      idAttr = slugify(m.text);
+      if (!idAttr) idAttr = 'heading';
+      let uniqueId = idAttr;
+      let counter = 1;
+      while (usedIds.has(uniqueId)) {
+        uniqueId = `${idAttr}-${counter}`;
+        counter++;
+      }
+      idAttr = uniqueId;
+    }
+    usedIds.add(idAttr);
+    headings.push({ tag: m.tag, text: m.text, id: idAttr });
+
+    if (!idMatch) {
+      const newHeading = `<${m.tag} id="${idAttr}"${m.attrs}>${m.text}</${m.tag}>`;
+      const before = updatedContent.slice(0, m.index + headingOffset);
+      const after = updatedContent.slice(m.index + headingOffset + m.full.length);
+      updatedContent = before + newHeading + after;
+      headingOffset += newHeading.length - m.full.length;
+    }
+  });
+
+  let tocHtml = `<div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
+  <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text);">Table of Contents</h4>
+  <ul style="list-style-type: none; padding-left: 0; margin: 0; font-size: 0.85rem; line-height: 1.6; display: flex; flex-direction: column; gap: 6px;">`;
+
+  headings.forEach(h => {
+    const isH3 = h.tag.toLowerCase() === 'h3';
+    const paddingLeft = isH3 ? '1.25rem' : '0';
+    const bullet = isH3 ? '• ' : '';
+    tocHtml += `    <li style="padding-left: ${paddingLeft};"><a href="#${h.id}" style="color: var(--accent); text-decoration: none; font-weight: ${isH3 ? '500' : '600'};">${bullet}${h.text}</a></li>\n`;
+  });
+
+  tocHtml += `  </ul>\n</div>\n`;
+
+  const snippetEndIndex = updatedContent.indexOf('</div>');
+  const hasSnippet = updatedContent.includes('class="featured-snippet"') && snippetEndIndex !== -1;
+  
+  if (hasSnippet) {
+    const insertPos = snippetEndIndex + 6;
+    return updatedContent.slice(0, insertPos) + '\n\n' + tocHtml + '\n' + updatedContent.slice(insertPos);
+  } else {
+    return tocHtml + '\n' + updatedContent;
+  }
+}
+
 function getKeyword(post: any): string {
   return getDbKeyword(post) || getFallbackKeyword(post.title, post.slug || '');
 }
@@ -808,7 +901,7 @@ export default function AdminBlog() {
         slug: formData.slug || generateSlug(formData.title),
         category: formData.category,
         excerpt: formData.excerpt,
-        content: formData.content,
+        content: injectTableOfContents(formData.content),
         image: formData.image || null,
         date: formData.date,
         published: editingPost ? editingPost.published : false, // defaults to draft
@@ -1103,7 +1196,7 @@ export default function AdminBlog() {
         slug: formData.slug || formData.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
         category: formData.category,
         excerpt: formData.excerpt,
-        content: formData.content,
+        content: injectTableOfContents(formData.content),
         image: formData.image || null,
         date: formData.date,
         published: statusToSave === 'Published',

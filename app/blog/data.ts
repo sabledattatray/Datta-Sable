@@ -37,8 +37,10 @@ import { dataDrivenProductManagementRoiPost } from "./posts/data-driven-product-
 import { masteringAutonomousAiAgentsWorkflows2026Post } from "./posts/mastering-autonomous-ai-agents-workflows-2026";
 import { nextjs15React19PerformanceManifesto2026Post } from "./posts/nextjs-15-react-19-performance-manifesto-2026";
 import { deepWorkProtocolTechnicalFocus2026Post } from "./posts/deep-work-protocol-technical-focus-2026";
+import { microsoftFabricArchitectureExplained2026Post } from "./posts/microsoft-fabric-architecture-explained-2026";
 import { newCertificationPosts } from "./certificationPosts";
 export const posts = [
+  microsoftFabricArchitectureExplained2026Post,
   ...newCertificationPosts,
   {
     id: "dp-600-fabric-analytics-engineer-study-companion-notebook",
