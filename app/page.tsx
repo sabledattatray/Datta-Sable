@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import Hero from '@/components/home/Hero';
 import BelowTheFold from '@/components/home/BelowTheFold';
+import { getPublishedBlogPosts } from '@/lib/blog-posts';
 
 export const metadata: Metadata = {
   title: 'Datta Sable — BI Expert, Data Engineer & Content Creator',
@@ -24,7 +25,10 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://dattasable.com' },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await getPublishedBlogPosts().catch(() => []);
+  const recentPosts = posts.slice(0, 6);
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
@@ -36,7 +40,7 @@ export default function HomePage() {
         <Hero />
 
         {/* ── 2. BELOW THE FOLD COMPONENTS (DEFERRED HYDRATION) ── */}
-        <BelowTheFold />
+        <BelowTheFold posts={recentPosts} />
 
         <Crosshair position="br" />
       </div>

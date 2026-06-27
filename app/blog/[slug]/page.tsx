@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostContent from '@/components/BlogPostContent';
-import { getPublishedBlogPost, getPublishedBlogSlugs } from '@/lib/blog-posts';
+import { getPublishedBlogPost, getPublishedBlogSlugs, getPublishedBlogPosts } from '@/lib/blog-posts';
 
 export const revalidate = 3600; // Revalidate every 1 hour
 
@@ -110,6 +110,22 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  // Fetch related posts (same category, slice first 3, fallback to other posts if less than 3)
+  let relatedPosts: any[] = [];
+  try {
+    const allPosts = await getPublishedBlogPosts();
+    relatedPosts = allPosts
+      .filter((p) => p.slug !== slug && p.category === post.category)
+      .slice(0, 3);
+      
+    if (relatedPosts.length < 3) {
+      const extra = allPosts.filter((p) => p.slug !== slug && !relatedPosts.some(r => r.slug === p.slug));
+      relatedPosts.push(...extra.slice(0, 3 - relatedPosts.length));
+    }
+  } catch (e) {
+    console.error('Failed to fetch related posts:', e);
+  }
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
@@ -123,7 +139,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
-          <BlogPostContent post={post as any} />
+          <BlogPostContent post={post as any} relatedPosts={relatedPosts} />
         </section>
 
         {/* ── Bottom-right Precision Crosshair ── */}

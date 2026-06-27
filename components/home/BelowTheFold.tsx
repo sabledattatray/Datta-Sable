@@ -13,10 +13,11 @@ import FAQ from '@/components/home/FAQ';
 import LatestInsights from '@/components/home/LatestInsights';
 import FinalCTA from '@/components/home/FinalCTA';
 
-export default function BelowTheFold() {
+export default function BelowTheFold({ posts }: { posts: any[] }) {
   return (
     <>
       <ProblemHook />
+      <LatestInsights posts={posts} />
       <Solution />
       <ArchitectureViz />
       <StatsGrid />
@@ -25,7 +26,6 @@ export default function BelowTheFold() {
       <Testimonials />
       <UseCases />
       <ProductValue />
-      <LatestInsights />
       <FinalCTA />
       <FAQ />
     </>

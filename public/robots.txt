@@ -53,106 +53,10 @@ Disallow: /knowledge/protocols
 Disallow: /knowledge/patterns
 Disallow: /knowledge/comparisons
 
-# --- Google AdSense crawlers ---
+# --- Google AdSense and Ads crawlers ---
 User-agent: Mediapartners-Google
-Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /dashboard/
-Disallow: /dashboards/
-Disallow: /preview/
-Disallow: /tools/workspace
-Disallow: /live-dashboard/
-Disallow: /analytics-live/
-Disallow: /tools/linkedin-formatter
-Disallow: /tools/ai-prompt-generator
-Disallow: /tools/seo-meta-generator
-Disallow: /tools/image-blade
-Disallow: /tools/context-optimizer
-Disallow: /tools/word-counter
-Disallow: /tools/schema-generator
-Disallow: /tools/mermaid-forge
-Disallow: /tools/bi-roi-calculator
-Disallow: /tools/prompt-auditor
-Disallow: /tools/demo
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /data-forge
-Disallow: /knowledge/rfc/
-Disallow: /knowledge/taxonomy
-Disallow: /knowledge/standards
-Disallow: /knowledge/protocols
-Disallow: /knowledge/patterns
-Disallow: /knowledge/comparisons
-
 User-agent: Google-Display-Ads-Bot
-Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /dashboard/
-Disallow: /dashboards/
-Disallow: /preview/
-Disallow: /tools/workspace
-Disallow: /live-dashboard/
-Disallow: /analytics-live/
-Disallow: /tools/linkedin-formatter
-Disallow: /tools/ai-prompt-generator
-Disallow: /tools/seo-meta-generator
-Disallow: /tools/image-blade
-Disallow: /tools/context-optimizer
-Disallow: /tools/word-counter
-Disallow: /tools/schema-generator
-Disallow: /tools/mermaid-forge
-Disallow: /tools/bi-roi-calculator
-Disallow: /tools/prompt-auditor
-Disallow: /tools/demo
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /data-forge
-Disallow: /knowledge/rfc/
-Disallow: /knowledge/taxonomy
-Disallow: /knowledge/standards
-Disallow: /knowledge/protocols
-Disallow: /knowledge/patterns
-Disallow: /knowledge/comparisons
-
 User-agent: AdsBot-Google
-Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /dashboard/
-Disallow: /dashboards/
-Disallow: /preview/
-Disallow: /tools/workspace
-Disallow: /live-dashboard/
-Disallow: /analytics-live/
-Disallow: /tools/linkedin-formatter
-Disallow: /tools/ai-prompt-generator
-Disallow: /tools/seo-meta-generator
-Disallow: /tools/image-blade
-Disallow: /tools/context-optimizer
-Disallow: /tools/word-counter
-Disallow: /tools/schema-generator
-Disallow: /tools/mermaid-forge
-Disallow: /tools/bi-roi-calculator
-Disallow: /tools/prompt-auditor
-Disallow: /tools/demo
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /data-forge
-Disallow: /knowledge/rfc/
-Disallow: /knowledge/taxonomy
-Disallow: /knowledge/standards
-Disallow: /knowledge/protocols
-Disallow: /knowledge/patterns
-Disallow: /knowledge/comparisons
-
 User-agent: AdsBot-Google-Mobile
 Allow: /
 Disallow: /api/
@@ -196,26 +100,12 @@ Allow: /
 
 # --- AI Training / RAG bots (allowed for discoverability) ---
 User-agent: GPTBot
-Allow: /
-
 User-agent: OAI-SearchBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: PerplexityBot
-Allow: /
-
 User-agent: Applebot
-Allow: /
-
 User-agent: anthropic-ai
-Allow: /
-
 User-agent: cohere-ai
-Allow: /
-
 User-agent: Googlebot-Extended
 Allow: /
 

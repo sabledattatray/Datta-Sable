@@ -91,7 +91,36 @@ interface Post {
   updatedAt?: string;
 }
 
-export default function BlogPostContent({ post }: { post: Post }) {
+const getReferencesForCategory = (category: string) => {
+  const cat = category.toLowerCase();
+  if (cat.includes('fabric') || cat.includes('bi') || cat.includes('architecture') || cat.includes('sql') || cat.includes('data')) {
+    return [
+      { name: "Microsoft Fabric Documentation Hub", url: "https://learn.microsoft.com/en-us/fabric/" },
+      { name: "Power BI Guidance & Optimization Standards", url: "https://learn.microsoft.com/en-us/power-bi/guidance/" },
+      { name: "Delta Lake Table Format Technical Specification", url: "https://delta.io/" }
+    ];
+  }
+  if (cat.includes('seo') || cat.includes('web') || cat.includes('marketing')) {
+    return [
+      { name: "Google Search Essentials (Webmaster Guidelines)", url: "https://developers.google.com/search/docs/essentials" },
+      { name: "MDN Web Docs - Web Performance Guides", url: "https://developer.mozilla.org/en-US/docs/Web/Performance" },
+      { name: "Vercel Next.js Production & SEO Checklist", url: "https://nextjs.org/docs/app/building-your-application/deploying#production-checklist" }
+    ];
+  }
+  if (cat.includes('ai') || cat.includes('automation') || cat.includes('workflow')) {
+    return [
+      { name: "OpenAI API Prompt Engineering Best Practices", url: "https://platform.openai.com/docs/guides/prompt-engineering" },
+      { name: "n8n Advanced Workflow Orchestration Docs", url: "https://docs.n8n.io/" },
+      { name: "W3C Semantic Web and Linked Data Standards", url: "https://www.w3.org/standards/semanticweb/" }
+    ];
+  }
+  return [
+    { name: "Google Publisher Policies and Content Guidelines", url: "https://support.google.com/publisherpolicies/answer/10502938" },
+    { name: "W3C Web Design and Applications Guidelines", url: "https://www.w3.org/standards/" }
+  ];
+};
+
+export default function BlogPostContent({ post, relatedPosts }: { post: Post; relatedPosts?: any[] }) {
   const [copied, setCopied] = useState(false);
   const { theme } = useTheme();
 
@@ -231,12 +260,17 @@ export default function BlogPostContent({ post }: { post: Post }) {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-4 flex-wrap mb-4">
           <span className="tag" style={{ color: post.color || 'var(--accent)', borderColor: `${post.color || 'var(--accent)'}44` }}>{post.category}</span>
-          <span className="flex items-center gap-1" style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>
-            <Clock size={12} /> {post.readTime || '5'} min read
+          <span className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mono">
+            <Clock size={12} className="text-[var(--accent)]" /> {post.readTime || '5'} min read
           </span>
-          <span style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>{post.date}</span>
+          <span className="text-[var(--muted)] text-[11px] mono uppercase tracking-wider">Published: {post.date}</span>
+          {post.updatedAt && (
+            <span className="text-[var(--muted)] text-[11px] mono uppercase tracking-wider">
+              • Updated: {new Date(post.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+          )}
         </div>
 
         <h1 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', lineHeight: 1.2, marginBottom: '2rem' }}>{post.title}</h1>
@@ -306,6 +340,37 @@ export default function BlogPostContent({ post }: { post: Post }) {
           />
         )}
 
+        {/* ── Technical References & Standards (E-E-A-T Outbound Links) ── */}
+        {(() => {
+          const refs = getReferencesForCategory(post.category);
+          return (
+            <div style={{ 
+              marginTop: '4rem', 
+              padding: '2rem', 
+              background: 'var(--surface2)', 
+              borderLeft: '2px solid var(--accent)', 
+              borderRadius: '0 4px 4px 0' 
+            }}>
+              <h4 className="mono text-[11px] uppercase tracking-wider text-[var(--accent)] mb-3">Technical References &amp; Standards</h4>
+              <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }} className="flex flex-col gap-2.5">
+                {refs.map(ref => (
+                  <li key={ref.url} className="text-[13px] flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                    <a 
+                      href={ref.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-[var(--text)] hover:text-[var(--accent)] underline transition-colors"
+                    >
+                      {ref.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })()}
+
         {/* ── Author Box (E-E-A-T) ── */}
         <div style={{ 
           marginTop: '5rem', 
@@ -339,6 +404,34 @@ export default function BlogPostContent({ post }: { post: Post }) {
             </div>
           </div>
         </div>
+
+        {/* ── Related Articles Section (EEAT Contextual Clustering) ── */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <div style={{ marginTop: '5rem', borderTop: '1px solid var(--border)', paddingTop: '4rem' }}>
+            <h3 style={{ fontSize: '1.75rem', marginBottom: '2rem', fontFamily: "'Syne', sans-serif" }}>Related <span className="hero-title">Reading</span></h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedPosts.map(p => (
+                <Link key={p.slug} href={`/blog/${p.slug}`} className="group no-underline block">
+                  <div className="card h-full flex flex-col" style={{ padding: '1.25rem', borderLeft: '2px solid var(--border)', background: 'var(--surface2)' }}>
+                    <div className="relative aspect-video mb-4 overflow-hidden">
+                      <Image 
+                        src={p.image || '/images/dattasable.com.webp'} 
+                        alt={p.title} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                    </div>
+                    <span className="text-[10px] text-[var(--muted)] mono opacity-50 uppercase tracking-widest mb-2 block">{p.category}</span>
+                    <h4 style={{ fontSize: '1rem', lineHeight: 1.3, color: 'var(--text)', marginBottom: '0.5rem' }}>{p.title}</h4>
+                    <p style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+                      {p.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* ── Article Schema (SEO E-E-A-T) ── */}
         <script
