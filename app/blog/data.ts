@@ -4019,6 +4019,8 @@ SUM([Sales]) / SUM({ EXCLUDE [Product Name] : SUM([Sales]) })</code></pre>
       <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">10. Related Resources & Internal Links</h2>
       <p>Continue your analytics learning path with these advanced BI guides:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
+        <li><a href="/blog/cybersecurity-bi-data-vault-hardening" style="color: var(--accent); text-decoration: none; font-weight: 600;">Hardening the Data Vault: Security Protocols for Enterprise BI Infrastructure</a></li>
+        <li><a href="/blog/dp-800-study-guide" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Ultimate DP-800 Study Guide 2026: Passing Microsoft's SQL AI Developer Exam</a></li>
         <li><a href="/blog/bi-performance-tuning" style="color: var(--accent); text-decoration: none; font-weight: 600;">Performance Tuning: How to Make Your Power BI Reports 10x Faster</a></li>
         <li><a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: none; font-weight: 600;">PostgreSQL vs Snowflake: When to Scale Your BI Database</a></li>
         <li><a href="/blog/first-party-data-strategy-privacy-marketing-2026" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Sovereign Consumer: Architecting First-Party Data Ecosystems in the Age of Consent</a></li>

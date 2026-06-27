@@ -228,6 +228,8 @@ function parseAndValidateResponse(rawLlmOutput: string): SentimentResponse {
       <p>Explore more architectural designs for enterprise AI workflows:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
         <li><a href="/blog/case-study-precision-prompt-architecture-consistency" style="color: var(--accent); text-decoration: none; font-weight: 600;">Case Study: Achieving 99.8% Output Consistency via Precision Prompt Architecture™</a></li>
+        <li><a href="/blog/dp-800-study-guide" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Ultimate DP-800 Study Guide 2026: Passing Microsoft's SQL AI Developer Exam</a></li>
+        <li><a href="/blog/cybersecurity-bi-data-vault-hardening" style="color: var(--accent); text-decoration: none; font-weight: 600;">Hardening the Data Vault: Security Protocols for Enterprise BI Infrastructure</a></li>
         <li><a href="/blog/architecting-production-multi-agent-ai-systems" style="color: var(--accent); text-decoration: none; font-weight: 600;">Architecting Production-Grade Multi-Agent AI Systems: State Management, Orchestration & Reliability</a></li>
         <li><a href="/blog/building-modular-ai-workflow-systems" style="color: var(--accent); text-decoration: none; font-weight: 600;">Building Modular AI Workflow Systems for Scale</a></li>
       </ul>

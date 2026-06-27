@@ -223,6 +223,8 @@ COMMIT;</code></pre>
       <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">12. Related Resources & Internal Links</h2>
       <p>To further harden and optimize your enterprise analytical environments, explore these architectural guides:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
+        <li><a href="/blog/dp-800-study-guide" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Ultimate DP-800 Study Guide 2026: Passing Microsoft's SQL AI Developer Exam</a></li>
+        <li><a href="/blog/precision-prompt-architecture-framework" style="color: var(--accent); text-decoration: none; font-weight: 600;">Precision Prompt Architecture™: The Blueprint for Precision AI Outputs</a></li>
         <li><a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: none; font-weight: 600;">PostgreSQL vs Snowflake: When to Scale Your BI Database</a></li>
         <li><a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--accent); text-decoration: none; font-weight: 600;">Microsoft Fabric Architecture Explained: The Complete 2026 Guide</a></li>
         <li><a href="/blog/data-quality-frameworks" style="color: var(--accent); text-decoration: none; font-weight: 600;">Building a "Zero-Trust" Data Quality Framework for BI</a></li>

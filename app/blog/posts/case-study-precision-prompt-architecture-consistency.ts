@@ -236,6 +236,8 @@ def evaluate_prompt_version(client, test_dataset, prompt_compiler_func) -> dict:
       <p>To further scale and secure your enterprise AI application architectures, explore these related technical write-ups:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
         <li><a href="/blog/precision-prompt-architecture-framework" style="color: var(--accent); text-decoration: none; font-weight: 600;">Precision Prompt Architecture™: The Blueprint for Precision AI Outputs</a></li>
+        <li><a href="/blog/dp-800-study-guide" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Ultimate DP-800 Study Guide 2026: Passing Microsoft's SQL AI Developer Exam</a></li>
+        <li><a href="/blog/cybersecurity-bi-data-vault-hardening" style="color: var(--accent); text-decoration: none; font-weight: 600;">Hardening the Data Vault: Security Protocols for Enterprise BI Infrastructure</a></li>
         <li><a href="/blog/mastering-autonomous-ai-agents-workflows-2026" style="color: var(--accent); text-decoration: none; font-weight: 600;">Mastering Autonomous Intelligence and the Evolution of Agentic Workflows in 2026</a></li>
         <li><a href="/blog/python-automation-pipelines" style="color: var(--accent); text-decoration: none; font-weight: 600;">Building Robust Data Pipelines with Python and Prefect</a></li>
       </ul>
