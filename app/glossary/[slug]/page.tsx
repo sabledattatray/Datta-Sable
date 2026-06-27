@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${term.term} | AI Workflow Glossary | Datta Sable`,
     description: term.definition,
+    robots: { index: false, follow: true },
     alternates: { canonical: `https://dattasable.com/glossary/${term.slug}` },
     openGraph: {
       title: `${term.term} | AI Workflow Glossary`,

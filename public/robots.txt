@@ -14,9 +14,6 @@ Allow: /about/
 Allow: /contact/
 Allow: /glossary/
 Allow: /knowledge/
-Allow: /chains/
-Allow: /templates/
-Allow: /lp/
 Allow: /careers/
 Allow: /faq/
 Allow: /category/

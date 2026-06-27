@@ -148,7 +148,3 @@ export default function FAQPage() {
     </div>
   );
 }
-
-
-const faqs = [
-  {
