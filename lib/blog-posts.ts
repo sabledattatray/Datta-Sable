@@ -111,26 +111,33 @@ export function filterPostsByCategory(posts: BlogPost[], categoryName: string, s
       ? (post as any).tags.map((t: string) => t.toLowerCase()) 
       : [];
     
-    const matchesKeyword = (kw: string) => 
-      title.includes(kw) || 
-      excerpt.includes(kw) || 
-      tags.some((t: string) => t.includes(kw)) ||
-      category.includes(kw);
+    const matchesKeyword = (kw: string) => {
+      const escapedKw = kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      // Use boundaries with optional trailing 's' for short keywords
+      const useBoundary = kw.length <= 4 || kw === 'power bi' || kw === 'next.js';
+      const pattern = useBoundary ? `\\b${escapedKw}s?\\b` : escapedKw;
+      const regex = new RegExp(pattern, 'i');
+
+      return regex.test(title) || 
+             regex.test(excerpt) || 
+             tags.some((t: string) => regex.test(t)) ||
+             regex.test(category);
+    };
 
     if (targetSlug === 'microsoft-fabric') {
       return matchesKeyword('fabric') || matchesKeyword('onelake') || matchesKeyword('dp-600') || matchesKeyword('dp-700');
     }
     if (targetSlug === 'power-bi') {
-      return matchesKeyword('power bi') || matchesKeyword('dax') || matchesKeyword('dashboard') || matchesKeyword('report');
+      return matchesKeyword('power bi') || matchesKeyword('dax') || matchesKeyword('powerquery');
     }
     if (targetSlug === 'sql') {
-      return matchesKeyword('sql') || matchesKeyword('database') || matchesKeyword('query') || matchesKeyword('postgres') || matchesKeyword('mysql');
+      return matchesKeyword('sql') || matchesKeyword('database') || matchesKeyword('postgres') || matchesKeyword('mysql') || matchesKeyword('sqlite') || matchesKeyword('duckdb') || matchesKeyword('rdbms') || matchesKeyword('query tuning') || matchesKeyword('query optimization') || matchesKeyword('joins') || matchesKeyword('window functions') || matchesKeyword('deadlock') || matchesKeyword('columnstore') || matchesKeyword('snowflake') || matchesKeyword('nosql');
     }
     if (targetSlug === 'python') {
       return matchesKeyword('python') || matchesKeyword('pandas') || matchesKeyword('numpy') || matchesKeyword('data engineering') || matchesKeyword('etl');
     }
     if (targetSlug === 'nextjs') {
-      return matchesKeyword('next.js') || matchesKeyword('react') || matchesKeyword('web dev') || matchesKeyword('website') || matchesKeyword('nextjs');
+      return matchesKeyword('next.js') || matchesKeyword('react') || matchesKeyword('vercel') || matchesKeyword('tailwind') || matchesKeyword('typescript') || matchesKeyword('server components') || matchesKeyword('rsc') || matchesKeyword('frontend engineering') || matchesKeyword('web performance') || matchesKeyword('spa') || matchesKeyword('nextjs');
     }
     if (targetSlug === 'seo') {
       return matchesKeyword('seo') || matchesKeyword('search engine') || matchesKeyword('adsense') || matchesKeyword('marketing') || matchesKeyword('pagespeed');
