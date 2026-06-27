@@ -60,7 +60,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    quote: "Datta helped us set up a complete digital marketing infrastructure — landing pages in Next.js, Google Tag Manager, conversion tracking, and a CRM integration. Everything worked on day one. He's one of those rare developers who understands marketing too.",
+    quote: "Datta helped us set up complete digital marketing pipelines — landing pages in Next.js, Google Tag Manager, conversion tracking, and a CRM integration. Everything worked on day one. He's one of those rare developers who understands marketing too.",
     author: "Riya Kapoor",
     initials: "RK",
     role: "Growth Lead",

@@ -15,7 +15,7 @@ interface Stat {
 const stats: Stat[] = [
   { value: 120, suffix: '+', label: 'Technical Articles', code: 'ART-CNT', icon: BookOpen },
   { value: 25, suffix: '+', label: 'Interactive Tools', code: 'TOL-CNT', icon: Zap },
-  { value: 300, suffix: '+', label: 'Indexed Pages', code: 'IDX-CNT', icon: Database },
+  { value: 300, suffix: '+', label: 'Published Resources', code: 'PUB-CNT', icon: Database },
   { value: 15, suffix: '', label: 'Technical Categories', code: 'CAT-CNT', icon: BarChart3 },
 ];
 
@@ -56,14 +56,14 @@ export default function StatsGrid() {
 
       <div className="container relative z-10">
         <div className="flex flex-col gap-8 mb-20">
-          <TechLabel>PUBLICATIONMETRICS // TELEMETRY</TechLabel>
+          <TechLabel>PUBLICATION METRICS</TechLabel>
           
           <div className="max-w-2xl">
             <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
               By the <span style={{ color: 'var(--accent)' }}>Numbers.</span>
             </h2>
             <p className="mt-4" style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-              Tracking index reach, tool catalog growth, and editorial tutorials published weekly.
+              Tracking article coverage, tool catalog growth, and educational tutorials published weekly.
             </p>
           </div>
         </div>

@@ -34,7 +34,7 @@ export default function AboutAuthor() {
               What You&apos;ll <span className="hero-title">Learn Here</span>
             </h2>
             <p style={{ color: 'var(--muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2.5rem' }}>
-              This platform serves as a production-grade documentation hub. We write for data engineers, BI developers, and technical creators who want to build reliable, high-performance systems.
+              A growing collection of practical tutorials, architecture guides, certification resources, and real-world implementation examples.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -49,12 +49,26 @@ export default function AboutAuthor() {
             </div>
 
             <div className="mt-12 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm max-w-xl">
-              <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Award size={16} className="text-[var(--accent)]" /> Rooted in Experience
               </h3>
-              <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
-                Every tutorial, blueprint, and query plan published here is derived from actual enterprise consulting assignments and production implementations managed by Datta Sable.
+              <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '1rem' }}>
+                Everything published on this website comes from:
               </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                {[
+                  "✔ client implementations",
+                  "✔ personal experiments",
+                  "✔ certification studies",
+                  "✔ production projects",
+                  "✔ documented benchmarks"
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-[12px] text-[var(--text)] font-semibold mono">
+                    <span className="text-[var(--accent)] font-bold">{item.split(' ')[0]}</span>
+                    <span>{item.substring(2)}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -81,9 +95,12 @@ export default function AboutAuthor() {
                     <h4 style={{ fontSize: '13px', fontWeight: 700, margin: '0 0 0.25rem 0', color: 'var(--text)' }}>
                       {res.title}
                     </h4>
-                    <p style={{ fontSize: '11px', color: 'var(--muted)', margin: 0, lineHeight: 1.4 }}>
+                    <p style={{ fontSize: '11px', color: 'var(--muted)', margin: '0 0 0.5rem 0', lineHeight: 1.4 }}>
                       {res.desc}
                     </p>
+                    <div className="inline-flex items-center gap-1 text-[9px] mono uppercase font-bold text-[var(--accent)]">
+                      <Download size={10} /> Download Free PDF
+                    </div>
                   </div>
                 </Link>
               ))}

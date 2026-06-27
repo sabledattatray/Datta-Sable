@@ -67,24 +67,27 @@ export default function Hero() {
           <p style={{
             color: 'var(--text)',
             fontSize: 'clamp(1rem, 2.5vw, 1.15rem)',
-            marginBottom: '1.25rem',
+            marginBottom: '1.75rem',
             lineHeight: 1.7,
             opacity: 0.85,
           }}>
-            I write tutorials on <strong>AI tools</strong>, <strong>Next.js</strong>,{' '}
-            <strong>SEO</strong>, and <strong>Digital Marketing</strong> — practical guides
-            for creators and developers who want to grow online.
+            I publish practical tutorials on <strong>Microsoft Fabric</strong>, <strong>Power BI</strong>,{' '}
+            <strong>SQL</strong>, <strong>Next.js</strong>, and <strong>AI Automation</strong>—helping developers and data professionals build faster, more reliable systems.
           </p>
 
-          {/* Quote block — trust signal */}
-          <div
-            className="border-l-2 border-[var(--accent)] bg-[var(--surface2)]"
-            style={{ padding: '0.875rem 1rem', marginBottom: '2.25rem', opacity: 0.85 }}
-          >
-            <p className="mono text-[12px] leading-relaxed">
-              Web developer · Data &amp; BI consultant · Based in Mumbai, India —
-              sharing everything I learn about building and growing on the web.
-            </p>
+          {/* Core metrics grid — replaces quote block */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4" style={{ marginBottom: '2.25rem' }}>
+            {[
+              { value: "190+", label: "Technical Articles" },
+              { value: "25+", label: "Interactive Tools" },
+              { value: "300+", label: "Published Resources" },
+              { value: "Weekly", label: "Updated" }
+            ].map(metric => (
+              <div key={metric.label} className="p-3 bg-[var(--surface2)] border border-[var(--border)] rounded-sm text-center">
+                <div className="mono text-[16px] font-bold text-[var(--accent)]">{metric.value}</div>
+                <div className="mono text-[9px] uppercase tracking-wider text-[var(--muted)] mt-1">{metric.label}</div>
+              </div>
+            ))}
           </div>
 
           <HeroInteraction />

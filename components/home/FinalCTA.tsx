@@ -25,7 +25,7 @@ export default function FinalCTA() {
             <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)] font-bold">Newsletter // Active</span>
           </div>
           <div className="absolute -bottom-3 -right-3 flex items-center gap-2">
-            <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)] font-bold">NodeID: Editorial</span>
+            <span className="mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)] font-bold">Format: Email / RSS</span>
             <div className="w-2 h-2 border border-[var(--accent)]" />
           </div>
 
@@ -40,12 +40,12 @@ export default function FinalCTA() {
               </h2>
               
               <p style={{ color: 'var(--muted)', fontSize: '1.15rem', marginBottom: '3rem', lineHeight: 1.6, maxWidth: '580px', margin: '0 auto 3rem' }}>
-                Join engineers and BI developers. Get weekly, high-fidelity guides on <strong>Microsoft Fabric, Power BI, SQL Optimization, and Next.js SEO</strong> delivered directly to your inbox.
+                Join 7,000+ engineers and BI developers. Get weekly guides on <strong>Microsoft Fabric, Power BI, SQL Optimization, and Next.js SEO</strong> delivered directly to your inbox.
               </p>
 
               {subscribed ? (
                 <div className="flex items-center gap-2 bg-[var(--surface2)] border border-[var(--accent)] px-8 py-4 text-[var(--accent)] font-bold mono text-[13px] rounded-sm">
-                  <CheckCircle size={18} /> YOU ARE SUBSCRIBED TO INTEL LOGS!
+                  <CheckCircle size={18} /> YOU ARE SUBSCRIBED TO TECHNICAL INSIGHTS!
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">

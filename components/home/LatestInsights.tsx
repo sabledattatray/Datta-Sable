@@ -30,7 +30,7 @@ const LATEST_POSTS: Post[] = [
     slug: 'precision-prompt-architecture-framework',
     title: 'Precision Prompt Architecture™: The Blueprint for Precision AI',
     category: 'Framework',
-    excerpt: 'Master the core technical structure for production-grade LLM outputs. Learn how to eliminate hallucination through structural precision.',
+    excerpt: 'Master the core technical structure for reliable LLM outputs. Learn how to eliminate hallucination through structured prompt design.',
     readTime: 15,
     date: 'May 14, 2026',
     image: '/images/blog/surgical_prompt_hero.webp'
@@ -114,9 +114,9 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
         {/* Tab Filters */}
         <div className="flex gap-6 mb-8 border-b border-[var(--border)] pb-2 overflow-x-auto no-scrollbar" style={{ borderBottomWidth: '1px' }}>
           {[
-            { id: 'latest', label: '🆕 Latest Articles' },
-            { id: 'featured', label: '🔥 Featured Guides' },
-            { id: 'trending', label: '📈 Trending & Frameworks' }
+            { id: 'latest', label: '🆕 Latest' },
+            { id: 'featured', label: '🔥 Popular' },
+            { id: 'trending', label: '⭐ Editor\'s Picks' }
           ].map(tab => (
             <button
               key={tab.id}

@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 import { Database, Zap, BookOpen, Layers, Code, Search, Cpu } from 'lucide-react';
 
 const CATEGORIES = [
-  { slug: 'microsoft-fabric', name: 'Microsoft Fabric', count: 18, icon: <Layers size={20} />, color: '#00C9F2' },
-  { slug: 'power-bi', name: 'Power BI', count: 24, icon: <Zap size={20} />, color: 'var(--accent)' },
-  { slug: 'sql', name: 'SQL & Databases', count: 15, icon: <Database size={20} />, color: '#00d4ff' },
-  { slug: 'python', name: 'Python Engineering', count: 20, icon: <Cpu size={20} />, color: '#ffd54f' },
-  { slug: 'nextjs', name: 'Next.js 15', count: 17, icon: <Code size={20} />, color: '#ff1744' },
-  { slug: 'seo', name: 'SEO Strategy', count: 14, icon: <Search size={20} />, color: '#00c853' },
-  { slug: 'ai-automation', name: 'AI & Automation', count: 19, icon: <BookOpen size={20} />, color: '#a855f7' }
+  { slug: 'microsoft-fabric', name: 'Microsoft Fabric', breakdown: '18 Articles · 4 Tools', icon: <Layers size={20} />, color: '#00C9F2' },
+  { slug: 'power-bi', name: 'Power BI', breakdown: '24 Articles · 6 Tools', icon: <Zap size={20} />, color: 'var(--accent)' },
+  { slug: 'sql', name: 'SQL & Databases', breakdown: '15 Articles · 2 Tools', icon: <Database size={20} />, color: '#00d4ff' },
+  { slug: 'python', name: 'Python Engineering', breakdown: '20 Articles · 3 Tools', icon: <Cpu size={20} />, color: '#ffd54f' },
+  { slug: 'nextjs', name: 'Next.js 15', breakdown: '17 Articles · 3 Tools', icon: <Code size={20} />, color: '#ff1744' },
+  { slug: 'seo', name: 'SEO Strategy', breakdown: '14 Articles · 4 Tools', icon: <Search size={20} />, color: '#00c853' },
+  { slug: 'ai-automation', name: 'AI & Automation', breakdown: '19 Articles · 3 Tools', icon: <BookOpen size={20} />, color: '#a855f7' }
 ];
 
 export default function BrowseCategories() {
@@ -73,10 +73,10 @@ export default function BrowseCategories() {
                       {cat.name}
                     </h3>
                     <span 
-                      className="mono text-[10px] uppercase font-bold"
+                      className="mono text-[9px] uppercase font-bold"
                       style={{ color: 'var(--muted)' }}
                     >
-                      {cat.count} Guides
+                      {cat.breakdown}
                     </span>
                   </div>
                 </div>
