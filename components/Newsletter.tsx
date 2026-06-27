@@ -38,9 +38,31 @@ export default function Newsletter() {
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
         <div className="label-tech mb-4" style={{ justifyContent: 'center' }}>KNOWLEDGE-STREAM</div>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Get One Practical Tutorial Every Week</h2>
-        <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2.5rem' }}>
+        <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
           Join 7,000+ data engineers and BI professionals. Practical guides, study roadmaps, and cheat sheets delivered once a week.
         </p>
+
+        {/* Weekly Preview List */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.5rem',
+          marginBottom: '2rem',
+          color: 'var(--muted)',
+          fontSize: '0.85rem',
+          textAlign: 'left'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One technical tutorial
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One practical tip
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One new resource
+          </div>
+        </div>
 
         {status === 'success' ? (
           <motion.div 

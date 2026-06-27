@@ -105,18 +105,28 @@ export default function ProjectsGrid() {
                   </span>
                 ))}
               </div>
-              <div className="flex items-center justify-between border-t border-[var(--border)] pt-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-[var(--border)] pt-6 gap-3">
                 <div className="flex items-center gap-2">
                   <Target size={14} style={{ color: 'var(--accent)' }} />
                   <span className="mono text-[11px] font-normal" style={{ color: 'var(--accent)' }}>{p.impact}</span>
                 </div>
-                <Link 
-                  href={p.href || "/portfolio"} 
-                  className="mono text-[11px] font-bold text-[var(--accent)] hover:underline flex items-center gap-1.5 no-underline"
-                  aria-label={`View details for ${p.title}`}
-                >
-                  READ CASE STUDY <ArrowRight size={14} />
-                </Link>
+                <div className="flex items-center gap-3">
+                  <Link 
+                    href={p.href || "/portfolio"} 
+                    className="mono text-[10px] font-medium text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline uppercase"
+                    aria-label={`View architecture for ${p.title}`}
+                  >
+                    View Architecture
+                  </Link>
+                  <span style={{ color: 'var(--border)', fontSize: '10px' }}>|</span>
+                  <Link 
+                    href={p.href || "/portfolio"} 
+                    className="mono text-[10px] font-bold text-[var(--accent)] hover:underline flex items-center gap-1 no-underline uppercase"
+                    aria-label={`Read case study for ${p.title}`}
+                  >
+                    Read Case Study <ArrowRight size={12} className="flex-shrink-0" />
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}

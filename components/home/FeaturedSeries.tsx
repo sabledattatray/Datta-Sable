@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, Award, Layers } from 'lucide-react';
 const SERIES = [
   {
     title: 'Learn Microsoft Fabric',
-    parts: '15-Part Series',
+    parts: '15 / 20 Guides',
     desc: 'Master Microsoft Fabric. Walk through OneLake architecture, capacity optimization, Direct Lake mode, and data pipelines.',
     color: '#00C9F2',
     icon: <Layers size={20} />,
@@ -15,7 +15,7 @@ const SERIES = [
   },
   {
     title: 'Master Power BI',
-    parts: '22-Part Series',
+    parts: '22 Tutorials · Updated Weekly',
     desc: 'Advanced DAX modeling, query folding optimizations, incremental refreshes, and enterprise scale architectures.',
     color: 'var(--accent)',
     icon: <Award size={20} />,
@@ -23,7 +23,7 @@ const SERIES = [
   },
   {
     title: 'Next.js 15 SEO & Performance',
-    parts: '18-Part Series',
+    parts: '18 Guides · Updated Weekly',
     desc: 'Complete developer guide to React Server Components, metadata management, fast indexing, and PageSpeed optimizations.',
     color: '#ff1744',
     icon: <BookOpen size={20} />,

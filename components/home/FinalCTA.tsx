@@ -39,9 +39,34 @@ export default function FinalCTA() {
                 Get One Practical <span style={{ color: 'var(--accent)' }}>Tutorial Every Week</span>
               </h2>
               
-              <p style={{ color: 'var(--muted)', fontSize: '1.15rem', marginBottom: '3rem', lineHeight: 1.6, maxWidth: '580px', margin: '0 auto 3rem' }}>
+              <p style={{ color: 'var(--muted)', fontSize: '1.15rem', marginBottom: '2rem', lineHeight: 1.6, maxWidth: '580px', margin: '0 auto 2rem' }}>
                 Join 7,000+ developers and BI professionals. Get actionable, high-quality guides on <strong>Microsoft Fabric, Power BI, SQL, and Next.js</strong> delivered directly to your inbox.
               </p>
+
+              {/* Weekly Preview List */}
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.6rem',
+                marginBottom: '3rem',
+                color: 'var(--muted)',
+                fontSize: '0.95rem',
+                textAlign: 'left'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One technical tutorial
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One practical tip
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One new resource
+                </div>
+                <div style={{ fontSize: '11px', opacity: 0.6, marginTop: '0.25rem', fontFamily: 'var(--mono)' }}>
+                  No spam · Unsubscribe anytime
+                </div>
+              </div>
 
               {subscribed ? (
                 <div className="flex items-center gap-2 bg-[var(--surface2)] border border-[var(--accent)] px-8 py-4 text-[var(--accent)] font-bold mono text-[13px] rounded-sm">

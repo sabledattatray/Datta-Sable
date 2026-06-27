@@ -7,6 +7,7 @@ import { ArrowRight, Layers, BarChart3, Code2, Cpu } from 'lucide-react';
 const TRACKS = [
   {
     title: 'New to Microsoft Fabric?',
+    commitment: 'Beginner · 18 Articles · 4 Hours',
     action: 'Read the Fundamentals Guide',
     desc: 'Deep-dive into OneLake architecture, Direct Lake mode, capacity provisioning, and DP-600 study tracks.',
     href: '/blog/microsoft-fabric-certification-roadmap-2026',
@@ -16,6 +17,7 @@ const TRACKS = [
   },
   {
     title: 'Learning Power BI?',
+    commitment: 'Intermediate · 24 Articles · 6 Hours',
     action: 'Start with the Beginner Series',
     desc: 'Master dashboard psychology, advanced DAX performance models, query folding, and enterprise architecture.',
     href: '/blog/psychology-of-high-fidelity-dashboard-design',
@@ -25,6 +27,7 @@ const TRACKS = [
   },
   {
     title: 'Interested in Next.js SEO?',
+    commitment: 'Intermediate · 17 Articles · 5 Hours',
     action: 'Follow the 12-part Guide',
     desc: 'Learn React Server Components, metadata optimization, crawler indexing, and Core Web Vitals profiling.',
     href: '/blog/nextjs-15-react-19-performance-manifesto-2026',
@@ -34,6 +37,7 @@ const TRACKS = [
   },
   {
     title: 'Exploring AI Automation?',
+    commitment: 'Advanced · 19 Articles · 8 Hours',
     action: 'Begin with MCP & n8n Tutorials',
     desc: 'Build self-healing n8n orchestrators, custom Model Context Protocol (MCP) servers, and autonomous agent workflows.',
     href: '/blog/case-study-n8n-automated-authority-scaling',
@@ -102,9 +106,13 @@ export default function StartHere() {
                       </span>
                     </div>
                     
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)', lineHeight: 1.4 }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--text)', lineHeight: 1.4 }}>
                       {t.title}
                     </h3>
+
+                    <div className="mono text-[9px] uppercase tracking-wider mb-3" style={{ color: t.color, opacity: 0.85 }}>
+                      {t.commitment}
+                    </div>
                     
                     <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '2rem', minHeight: '4.8rem' }}>
                       {t.desc}
