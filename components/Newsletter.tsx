@@ -37,9 +37,9 @@ export default function Newsletter() {
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
         <div className="label-tech mb-4" style={{ justifyContent: 'center' }}>KNOWLEDGE-STREAM</div>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Get the Weekly BI Log</h2>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>Get One Practical Tutorial Every Week</h2>
         <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2.5rem' }}>
-          Deep-dives into data engineering, BI architecture, and technical automation. No fluff, just surgical insights.
+          Join 7,000+ data engineers and BI professionals. Practical guides, study roadmaps, and cheat sheets delivered once a week.
         </p>
 
         {status === 'success' ? (
@@ -86,7 +86,7 @@ export default function Newsletter() {
               }}
             >
               {status === 'loading' ? 'PROCESSING...' : (
-                <>SUBSCRIBE <Send size={14} /></>
+                <>GET WEEKLY TUTORIAL <Send size={14} /></>
               )}
             </button>
           </form>

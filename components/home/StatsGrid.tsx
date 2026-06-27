@@ -15,7 +15,7 @@ interface Stat {
 const stats: Stat[] = [
   { value: 180, suffix: '+', label: 'Technical Articles', code: 'ART-CNT', icon: BookOpen },
   { value: 25, suffix: '+', label: 'Interactive Tools', code: 'TOL-CNT', icon: Zap },
-  { value: 300, suffix: '+', label: 'Published Resources', code: 'PUB-CNT', icon: Database },
+  { value: 300, suffix: '+', label: 'Learning Resources', code: 'PUB-CNT', icon: Database },
   { value: 15, suffix: '', label: 'Technical Categories', code: 'CAT-CNT', icon: BarChart3 },
 ];
 

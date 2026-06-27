@@ -122,7 +122,7 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonials Grid — 3 columns on desktop, 2 on tablet, 1 on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {testimonials.map((t, i) => {
             const Icon = t.icon;
             return (
@@ -135,69 +135,69 @@ export default function Testimonials() {
                 viewport={{ once: true }}
                 className="group flex flex-col justify-between relative overflow-hidden"
                 style={{
-                  padding: '1.75rem',
+                  padding: '1.25rem 1.5rem',
                   background: 'var(--surface)',
                   border: '1px solid var(--border)',
-                  borderRadius: '14px',
+                  borderRadius: '10px',
                   transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
                 }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.borderColor = t.color + '55';
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 32px rgba(0,0,0,0.3), 0 0 0 1px ${t.color}22`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 10px 24px rgba(0,0,0,0.25), 0 0 0 1px ${t.color}22`;
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.18)';
+                  (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
                 }}
               >
                 {/* Top glow line on hover */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-[14px]"
+                  className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-[10px]"
                   style={{ background: `linear-gradient(90deg, transparent, ${t.color}, transparent)` }}
                 />
-
+ 
                 {/* Card Header */}
-                <div className="flex items-start justify-between mb-5">
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
                     {/* Company Icon */}
                     <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-110"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-110"
                       style={{
                         background: `linear-gradient(135deg, ${t.color}22, ${t.color}0a)`,
                         border: `1px solid ${t.color}44`,
                       }}
                     >
-                      <Icon size={17} style={{ color: t.color }} />
+                      <Icon size={15} style={{ color: t.color }} />
                     </div>
                     <div>
-                      <div className="mono text-[11px] font-bold text-[var(--text)] tracking-wider leading-none">{t.company}</div>
+                      <div className="mono text-[10px] font-bold text-[var(--text)] tracking-wider leading-none">{t.company}</div>
                       <div className="flex items-center gap-1 mt-1">
-                        <CheckCircle2 size={10} className="text-emerald-400 flex-shrink-0" />
-                        <span className="text-[10px] text-[var(--muted)]">Verified Client</span>
+                        <CheckCircle2 size={9} className="text-emerald-400 flex-shrink-0" />
+                        <span className="text-[9px] text-[var(--muted)]">Verified Client</span>
                       </div>
                     </div>
                   </div>
                   {/* Stars */}
                   <div className="flex gap-0.5 flex-shrink-0">
                     {[...Array(t.rating)].map((_, s) => (
-                      <Star key={s} size={12} className="text-amber-400 fill-amber-400" />
+                      <Star key={s} size={11} className="text-amber-400 fill-amber-400" />
                     ))}
                   </div>
                 </div>
-
+ 
                 {/* Quote */}
                 <p
                   className="text-[var(--muted)] group-hover:text-[var(--text)] transition-colors duration-300"
-                  style={{ fontSize: '0.9rem', lineHeight: 1.75, fontStyle: 'italic', flexGrow: 1, marginBottom: '1.25rem' }}
+                  style={{ fontSize: '0.85rem', lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: '1rem' }}
                 >
                   &ldquo;{t.quote}&rdquo;
                 </p>
-
+ 
                 {/* Tag pill */}
-                <div className="mb-4">
+                <div className="mb-3.5">
                   <span
-                    className="mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                    className="mono text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
                     style={{
                       color: t.color,
                       background: `${t.color}14`,
@@ -207,11 +207,11 @@ export default function Testimonials() {
                     {t.tag}
                   </span>
                 </div>
-
+ 
                 {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-[var(--border)]">
+                <div className="flex items-center gap-2.5 pt-3.5 border-t border-[var(--border)]">
                   <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[11px] font-mono flex-shrink-0"
+                    className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[10px] font-mono flex-shrink-0"
                     style={{
                       background: `linear-gradient(135deg, ${t.color}33, ${t.color}11)`,
                       border: `1px solid ${t.color}44`,
@@ -221,8 +221,8 @@ export default function Testimonials() {
                     {t.initials}
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-[var(--text)]">{t.author}</div>
-                    <div className="text-[11px] font-mono tracking-wide" style={{ color: t.color }}>{t.role}</div>
+                    <div className="text-[13px] font-bold text-[var(--text)]">{t.author}</div>
+                    <div className="text-[10px] font-mono tracking-wide" style={{ color: t.color }}>{t.role}</div>
                   </div>
                 </div>
               </motion.div>

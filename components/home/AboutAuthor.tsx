@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 export default function AboutAuthor() {
   const learningTracks = [
-    "Microsoft Fabric architecture & scaling",
-    "Power BI performance optimization & DAX modeling",
-    "SQL database tuning & logical query profiling",
-    "Next.js 15 production deployments & App Router SEO",
-    "n8n cloud workflow automation systems",
-    "Real-world data engineering case studies"
+    "Microsoft Fabric: architecture & scaling",
+    "Power BI: performance optimization & DAX",
+    "SQL & Databases: logical query profiling",
+    "Next.js 15: production deployments & SEO",
+    "AI Automation: cloud workflow systems",
+    "Data Engineering: real-world case studies"
   ];
 
   const resources = [

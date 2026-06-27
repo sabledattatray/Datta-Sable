@@ -36,16 +36,16 @@ export default function FinalCTA() {
             
             <div className="relative z-10 px-8 py-16 flex flex-col items-center justify-center text-center max-w-3xl mx-auto w-full">
               <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, lineHeight: 1.1, marginBottom: '2rem', letterSpacing: '-0.03em', color: 'var(--text)' }}>
-                Subscribe to <span style={{ color: 'var(--accent)' }}>Technical Insights</span>
+                Get One Practical <span style={{ color: 'var(--accent)' }}>Tutorial Every Week</span>
               </h2>
               
               <p style={{ color: 'var(--muted)', fontSize: '1.15rem', marginBottom: '3rem', lineHeight: 1.6, maxWidth: '580px', margin: '0 auto 3rem' }}>
-                Join 7,000+ engineers and BI developers. Get weekly guides on <strong>Microsoft Fabric, Power BI, SQL Optimization, and Next.js SEO</strong> delivered directly to your inbox.
+                Join 7,000+ developers and BI professionals. Get actionable, high-quality guides on <strong>Microsoft Fabric, Power BI, SQL, and Next.js</strong> delivered directly to your inbox.
               </p>
 
               {subscribed ? (
                 <div className="flex items-center gap-2 bg-[var(--surface2)] border border-[var(--accent)] px-8 py-4 text-[var(--accent)] font-bold mono text-[13px] rounded-sm">
-                  <CheckCircle size={18} /> YOU ARE SUBSCRIBED TO TECHNICAL INSIGHTS!
+                  <CheckCircle size={18} /> YOU ARE SUBSCRIBED TO THE WEEKLY TUTORIAL!
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
@@ -71,7 +71,7 @@ export default function FinalCTA() {
                     type="submit"
                     className="btn-primary flex items-center justify-center gap-3 py-4 px-8"
                   >
-                    SUBSCRIBE <Send size={16} />
+                    GET WEEKLY TUTORIAL <Send size={16} />
                   </button>
                 </form>
               )}

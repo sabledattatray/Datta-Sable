@@ -27,10 +27,10 @@ export default function HeroInteraction() {
 
       <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4">
         <Link href="/blog" className="btn-primary w-full sm:w-auto text-center flex items-center justify-center gap-2" style={{ textDecoration: 'none' }}>
-          READ ARTICLES
+          START LEARNING
         </Link>
-        <Link href="/about" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
-          ABOUT ME
+        <Link href="/blog" className="btn-outline w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
+          BROWSE TUTORIALS
         </Link>
         <Link href="/tools" className="btn-minimal w-full sm:w-auto text-center" style={{ textDecoration: 'none' }}>
           EXPLORE TOOLS →

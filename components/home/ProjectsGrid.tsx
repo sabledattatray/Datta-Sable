@@ -6,45 +6,48 @@ import { BarChart3, Database, Target, Activity, ArrowRight, Shield } from 'lucid
 
 const projects = [
   {
-    title: 'Precision Prompt Auditor™',
-    category: 'Developer Tool',
-    desc: 'Open-source interactive developer tool for auditing LLM prompt fidelity, context limits, and entropy metrics.',
-    tools: ['Next.js', 'AI Logic', 'Analysis'],
-    impact: 'Audit in < 1.5s',
+    title: 'Case Study: Power BI Sales Dashboard',
+    category: 'Case Study',
+    desc: 'Designed a multi-source sales analytics dashboard with high-performance DAX modeling and OneLake integration.',
+    tools: ['Power BI', 'DAX', 'Fabric'],
+    impact: '80% Reporting Time Saved',
+    color: 'var(--accent)',
+    color2: '#00C9F2',
+    icon: <BarChart3 size={20} />,
+    href: '/blog/sales-performance-ecosystem-2026'
+  },
+  {
+    title: 'Case Study: 99.8% Prompt Output Consistency',
+    category: 'Case Study',
+    desc: 'Eliminated LLM hallucinations and stabilized schema outputs for content automation pipelines using Zod and XML scaffolding.',
+    tools: ['Next.js', 'AI Logic', 'Zod'],
+    impact: '99.8% Schema Consistency',
     color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Shield size={20} />,
-    href: '/tools/prompt-auditor'
+    href: '/blog/case-study-precision-prompt-architecture-consistency'
   },
   {
-    title: 'Case Study: Reduced Reporting Cycle by 97%',
+    title: 'Case Study: Enterprise SQL Warehousing',
     category: 'Case Study',
-    desc: 'Re-engineered manual Excel processes into an automated Python + Tableau analytics pipeline for an enterprise workgroup.',
-    tools: ['Python', 'Excel', 'Tableau'],
-    impact: '97% Process Time Saved',
-    color: 'var(--accent)',
-    color2: '#00C9F2',
-    icon: <Target size={20} />,
-  },
-  {
-    title: 'Case Study: 80% Close Cycle Optimization',
-    category: 'Case Study',
-    desc: 'Architected an automated SQL + Python ETL pipeline that reduced monthly close processes from 5 days to 4 hours.',
-    tools: ['Python', 'SQL', 'Automation'],
-    impact: '80% Close Cycle Reduced',
-    color: 'var(--accent)',
-    color2: '#00C9F2',
-    icon: <Activity size={20} />,
-  },
-  {
-    title: 'Case Study: 18% Inventory Cost Reduction',
-    category: 'Case Study',
-    desc: 'Built a star-schema database model linked to Power BI predictive dashboards to optimize inventory supply lines.',
-    tools: ['SQL', 'Power BI', 'DAX'],
-    impact: '18% Cost Reduction',
+    desc: 'Re-engineered transactional reporting tables into partition-pruned columnstore indexes for sub-second query execution.',
+    tools: ['SQL Server', 'ETL', 'T-SQL'],
+    impact: '97% Query Time Reduction',
     color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Database size={20} />,
+    href: '/blog/sql-server-columnstore-indexes-optimization-guide'
+  },
+  {
+    title: 'Case Study: n8n Automated Authority Scaling',
+    category: 'Case Study',
+    desc: 'Architected a self-healing automation pipeline that aggregates technical content and posts to marketing channels.',
+    tools: ['Python', 'n8n', 'AI Agents'],
+    impact: '400+ MIS Hours Saved',
+    color: 'var(--accent)',
+    color2: '#00C9F2',
+    icon: <Activity size={20} />,
+    href: '/blog/case-study-n8n-automated-authority-scaling'
   },
 ];
 
@@ -112,7 +115,7 @@ export default function ProjectsGrid() {
                   className="mono text-[11px] font-bold text-[var(--accent)] hover:underline flex items-center gap-1.5 no-underline"
                   aria-label={`View details for ${p.title}`}
                 >
-                  READ ARCHITECTURE <ArrowRight size={14} />
+                  READ CASE STUDY <ArrowRight size={14} />
                 </Link>
               </div>
             </motion.div>

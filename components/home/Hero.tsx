@@ -71,8 +71,8 @@ export default function Hero() {
             lineHeight: 1.7,
             opacity: 0.85,
           }}>
-            I publish practical tutorials on <strong>Microsoft Fabric</strong>, <strong>Power BI</strong>,{' '}
-            <strong>SQL</strong>, <strong>Next.js</strong>, and <strong>AI Automation</strong>—helping developers and data professionals build faster, more reliable systems.
+            Helping developers and data professionals master <strong>Microsoft Fabric</strong>, <strong>Power BI</strong>,{' '}
+            <strong>SQL</strong>, <strong>Next.js</strong>, <strong>AI Automation</strong>, and modern data engineering through practical tutorials and real-world projects.
           </p>
 
           {/* Core metrics grid — replaces quote block */}
