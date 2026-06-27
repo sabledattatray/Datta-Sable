@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
@@ -26,8 +27,8 @@ const LATEST_POSTS: Post[] = [
     image: '/images/blog/case_study_n8n_automation.webp'
   },
   {
-    slug: 'surgical-prompt-architecture-framework',
-    title: 'Surgical Prompt Architecture™: The Blueprint for Precision AI',
+    slug: 'precision-prompt-architecture-framework',
+    title: 'Precision Prompt Architecture™: The Blueprint for Precision AI',
     category: 'Framework',
     excerpt: 'Master the core technical structure for production-grade LLM outputs. Learn how to eliminate hallucination through structural precision.',
     readTime: 15,
@@ -35,8 +36,8 @@ const LATEST_POSTS: Post[] = [
     image: '/images/blog/surgical_prompt_hero.webp'
   },
   {
-    slug: 'case-study-surgical-prompt-architecture-consistency',
-    title: 'Case Study: Achieving 99.8% Output Consistency via Surgical Architecture™',
+    slug: 'case-study-precision-prompt-architecture-consistency',
+    title: 'Case Study: Achieving 99.8% Output Consistency via Precision Architecture™',
     category: 'Case Study',
     excerpt: 'How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline.',
     readTime: 12,
@@ -61,7 +62,35 @@ const formatDisplayDate = (dateStr: string) => {
 };
 
 export default function LatestInsights({ posts }: { posts?: any[] }) {
-  const displayPosts = posts && posts.length > 0 ? posts.slice(0, 6) : LATEST_POSTS;
+  const [activeTab, setActiveTab] = useState<'latest' | 'featured' | 'trending'>('latest');
+
+  const getFilteredPosts = () => {
+    const rawPosts = posts && posts.length > 0 ? posts : LATEST_POSTS;
+    if (activeTab === 'latest') {
+      return rawPosts.slice(0, 6);
+    }
+    if (activeTab === 'featured') {
+      const featured = rawPosts.filter(p => 
+        p.title.toLowerCase().includes('fabric') || 
+        p.title.toLowerCase().includes('dp-') || 
+        p.title.toLowerCase().includes('guide') ||
+        p.category.toLowerCase().includes('guide')
+      );
+      return featured.length > 0 ? featured.slice(0, 6) : rawPosts.slice(0, 6);
+    }
+    if (activeTab === 'trending') {
+      const trending = rawPosts.filter(p => 
+        p.title.toLowerCase().includes('architecture') || 
+        p.title.toLowerCase().includes('n8n') || 
+        p.title.toLowerCase().includes('workflow') || 
+        p.title.toLowerCase().includes('performance')
+      );
+      return trending.length > 0 ? trending.slice(0, 6) : rawPosts.slice(3, 9);
+    }
+    return rawPosts.slice(0, 6);
+  };
+
+  const displayPosts = getFilteredPosts();
 
   return (
     <section className="section" style={{ borderTop: '1px solid var(--border)', paddingBottom: '6rem', paddingTop: '5rem' }}>
@@ -80,6 +109,32 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
           <Link href="/blog" className="flex items-center gap-2 group no-underline" style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.1em' }}>
             VIEW ALL ARTICLES <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
+        </div>
+
+        {/* Tab Filters */}
+        <div className="flex gap-6 mb-8 border-b border-[var(--border)] pb-2 overflow-x-auto no-scrollbar" style={{ borderBottomWidth: '1px' }}>
+          {[
+            { id: 'latest', label: '🆕 Latest Articles' },
+            { id: 'featured', label: '🔥 Featured Guides' },
+            { id: 'trending', label: '📈 Trending & Frameworks' }
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className="mono text-[11px] uppercase tracking-wider font-bold transition-all duration-300"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: activeTab === tab.id ? 'var(--accent)' : 'var(--muted)',
+                borderBottom: activeTab === tab.id ? '2px solid var(--accent)' : '2px solid transparent',
+                paddingBottom: '0.75rem',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

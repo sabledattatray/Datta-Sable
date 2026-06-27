@@ -6,9 +6,9 @@ import { BarChart3, Database, Target, Activity, ArrowRight, Shield } from 'lucid
 
 const projects = [
   {
-    title: 'Surgical Prompt Auditor™',
+    title: 'Precision Prompt Auditor™',
     category: 'Interactive Tool',
-    desc: 'Live technical auditor for LLM prompts. Evaluates Fidelity, Entropy, and Context Bloat with surgical precision.',
+    desc: 'Live technical auditor for LLM prompts. Evaluates Fidelity, Entropy, and Context Bloat with maximum accuracy.',
     tools: ['Next.js', 'AI Logic', 'Telemetry'],
     impact: 'Audit in < 1.5s',
     color: 'var(--accent)',
@@ -17,7 +17,7 @@ const projects = [
     href: '/tools/prompt-auditor'
   },
   {
-    title: 'Surgical Analytics Forge',
+    title: 'Precision Analytics Forge',
     category: 'Big Data Engine',
     desc: 'Autonomous BI infrastructure capable of auditing 1M+ records in real-time with optimized query engines.',
     tools: ['Python', 'DuckDB', 'Next.js'],

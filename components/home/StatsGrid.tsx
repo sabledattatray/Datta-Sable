@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { BarChart3, Users, Clock, Database, LucideIcon } from 'lucide-react';
+import { BarChart3, Clock, Database, BookOpen, Zap, LucideIcon } from 'lucide-react';
 
 interface Stat {
   value: number;
@@ -13,10 +13,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 50, suffix: '+', label: 'Projects Delivered', code: 'PRJ-OK', icon: BarChart3 },
-  { value: 35, suffix: 'm+', label: 'Avg Reader Engagement', code: 'ENG-TIME', icon: Clock },
-  { value: 13, suffix: '.9K+', label: 'Monthly Key Events', code: 'TEL-EVT', icon: Database },
-  { value: 1240, suffix: '%', label: 'Active User Growth', code: 'USR-GRW', icon: Users },
+  { value: 120, suffix: '+', label: 'Technical Articles', code: 'ART-CNT', icon: BookOpen },
+  { value: 25, suffix: '+', label: 'Interactive Tools', code: 'TOL-CNT', icon: Zap },
+  { value: 300, suffix: '+', label: 'Indexed Pages', code: 'IDX-CNT', icon: Database },
+  { value: 15, suffix: '', label: 'Technical Categories', code: 'CAT-CNT', icon: BarChart3 },
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -56,14 +56,14 @@ export default function StatsGrid() {
 
       <div className="container relative z-10">
         <div className="flex flex-col gap-8 mb-20">
-          <TechLabel>Live Platform Telemetry</TechLabel>
+          <TechLabel>PUBLICATIONMETRICS // TELEMETRY</TechLabel>
           
           <div className="max-w-2xl">
             <h2 style={{ fontSize: '2.25rem', lineHeight: 1.2, fontFamily: "'Syne', sans-serif", fontWeight: 600, letterSpacing: '-0.01em' }}>
-              Verified <span style={{ color: 'var(--accent)' }}>Impact.</span>
+              By the <span style={{ color: 'var(--accent)' }}>Numbers.</span>
             </h2>
             <p className="mt-4" style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
-              Live Google Analytics telemetry tracking enterprise decision-maker engagement and global platform reach.
+              Tracking index reach, tool catalog growth, and editorial tutorials published weekly.
             </p>
           </div>
         </div>
