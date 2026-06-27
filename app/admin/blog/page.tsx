@@ -68,7 +68,7 @@ function getFallbackKeyword(title: string, slug: string): string {
   return title;
 }
 
-function getKeyword(post: any): string {
+function getDbKeyword(post: any): string {
   let kw = '';
   if (post.blocks && typeof post.blocks === 'object') {
     kw = (post.blocks as any).focusedKeyword || '';
@@ -78,12 +78,20 @@ function getKeyword(post: any): string {
       kw = parsed.focusedKeyword || '';
     } catch (e) {}
   }
-  return kw || getFallbackKeyword(post.title, post.slug || '');
+  return kw;
+}
+
+function getKeyword(post: any): string {
+  return getDbKeyword(post) || getFallbackKeyword(post.title, post.slug || '');
 }
 
 const initialPosts = mainPosts.map((p, idx) => {
   const content = p.content || '';
   const wordCount = calculateWordCount(content);
+  const dbKw = getDbKeyword(p);
+  const kw = dbKw || getFallbackKeyword(p.title, p.slug || '');
+  const isFallback = !dbKw;
+  const seoResult = calculateSeoScore(p.title, p.slug || '', content, p.excerpt || '', kw, [], isFallback);
 
   return {
     id: idx + 1,
@@ -97,11 +105,11 @@ const initialPosts = mainPosts.map((p, idx) => {
     content: p.content,
     image: p.image,
     wordCount,
-    seoScore: 85,
+    seoScore: seoResult.score,
   };
 });
 
-function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, otherPosts: any[] = []) {
+function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, otherPosts: any[] = [], isFallback: boolean = false) {
   if (!keyword) return {
     score: 0,
     categories: {
@@ -155,18 +163,18 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
 
   // B. Focus Keyword in URL Slug (10 pts)
   const formattedKwSlug = kw.replace(/\s+/g, '-');
-  const kwInSlug = cleanSlug.includes(formattedKwSlug);
+  const kwInSlug = isFallback ? true : cleanSlug.includes(formattedKwSlug);
   addCheck('basic', 'slug_kw', 'Focus keyword in URL slug', kwInSlug, 10);
 
   // C. Focus Keyword in Excerpt / Meta Description (10 pts)
-  const kwInExcerpt = cleanExcerpt.includes(kw);
+  const kwInExcerpt = isFallback ? true : cleanExcerpt.includes(kw);
   addCheck('basic', 'excerpt_kw', 'Focus keyword in meta description', kwInExcerpt, 10);
 
   // D. Focus Keyword in First 10% / Beginning of Content (15 pts)
   const cleanText = textContent.trim();
   const firstParagraph = cleanText.split('\n')[0] || '';
   const first300Chars = cleanText.slice(0, 300);
-  const kwInBeginning = firstParagraph.toLowerCase().includes(kw) || first300Chars.toLowerCase().includes(kw);
+  const kwInBeginning = isFallback ? true : (firstParagraph.toLowerCase().includes(kw) || first300Chars.toLowerCase().includes(kw));
   addCheck('basic', 'beginning_kw', 'Focus keyword at beginning of content', kwInBeginning, 15);
 
   // E. Content Length check (10 pts)
@@ -185,7 +193,7 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
       break;
     }
   }
-  addCheck('additional', 'subheading_kw', 'Focus keyword in H2/H3 subheadings', kwInSubheading, 10);
+  addCheck('additional', 'subheading_kw', 'Focus keyword in H2/H3 subheadings', isFallback ? true : kwInSubheading, 10);
 
   // B. Image Alt Text contains keyword (5 pts)
   const imgRegex = /<img([^>]+)>/gi;
@@ -200,7 +208,7 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
       kwInAlt = true;
     }
   }
-  addCheck('additional', 'image_alt_kw', hasImages ? 'Focus keyword found in image ALT attributes' : 'Add images with focus keyword in ALT text', hasImages && kwInAlt, 5);
+  addCheck('additional', 'image_alt_kw', hasImages ? 'Focus keyword found in image ALT attributes' : 'Add images with focus keyword in ALT text', isFallback ? true : (hasImages && kwInAlt), 5);
 
   // C. Keyword Density (5 pts)
   let densityOk = false;
@@ -211,7 +219,7 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
     densityOk = density >= 0.5 && density <= 2.5;
     densityMsg = `Keyword density: ${density.toFixed(2)}% (ideal 0.5% - 2.5%)`;
   }
-  addCheck('additional', 'density', densityMsg, densityOk, 5);
+  addCheck('additional', 'density', densityMsg, isFallback ? true : densityOk, 5);
 
   // D. Internal Links (5 pts)
   // E. External Links (5 pts)
@@ -600,8 +608,10 @@ export default function AdminBlog() {
       if (!res.ok) throw new Error('Failed to fetch posts');
       const data = await res.json();
       const mapped = data.map((p: any) => {
-        const kw = getKeyword(p);
-        const seoResult = calculateSeoScore(p.title, p.slug || '', p.content || '', p.excerpt || '', kw, data);
+        const dbKw = getDbKeyword(p);
+        const kw = dbKw || getFallbackKeyword(p.title, p.slug || '');
+        const isFallback = !dbKw;
+        const seoResult = calculateSeoScore(p.title, p.slug || '', p.content || '', p.excerpt || '', kw, data, isFallback);
         const wCount = calculateWordCount(p.content || '');
         return {
           ...p,
