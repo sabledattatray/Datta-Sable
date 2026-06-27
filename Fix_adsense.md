@@ -723,22 +723,22 @@ These are hard for competitors to copy.
 
 Priority Action Plan
 🔴 Critical (complete before reapplying)
-Publish 15–20 additional in-depth technical articles.
-Expand or noindex thin glossary and tool pages.
-Rework the homepage to emphasize educational content.
-Increase internal linking across all articles.
-Reduce promotional language in guides.
+- [x] Expand or noindex thin glossary and tool pages (Glossary detail pages are noindexed, tools are disallowed/noindexed)
+- [x] Rework the homepage to emphasize educational content (Shuffled Latest Articles to top of page)
+- [x] Increase internal linking across all articles (Added dynamic contextual Related Reading block to all blog posts)
+- [ ] Publish 15–20 additional in-depth technical articles (100+ articles exist; continue publishing consistently over time)
+- [ ] Reduce promotional language in guides (Keep guides educational, place CTAs at footer)
 🟡 High Priority
-Add Editorial Policy.
-Add "How We Test" page.
-Improve author boxes.
-Build strong topic clusters.
-Add comparison tables and FAQs.
+- [x] Add Editorial Policy (Page created at /editorial-policy)
+- [x] Add "How We Test" page (Incorporated into Editorial Policy & Research Methodology at /editorial-policy)
+- [x] Improve author boxes (Added verified author boxes to all blog posts)
+- [ ] Build strong topic clusters (In progress)
+- [ ] Add comparison tables and FAQs
 🟢 Nice to Have
-Add downloadable cheat sheets.
-Include embedded videos.
-Offer code repositories and sample files.
-Add interactive examples where relevant.
+- [x] Include embedded videos (Supported inside block schema and dynamically generated VideoObject structured schemas)
+- [ ] Add downloadable cheat sheets
+- [ ] Offer code repositories and sample files
+- [ ] Add interactive examples where relevant
 My Recommended AdSense Strategy
 
 Instead of trying to monetize your entire site immediately:
