@@ -343,8 +343,8 @@ export const newCertificationPosts = [
 
 <p>The <strong>DP-800 Study Guide 2026</strong> represents a major career opportunity for database professionals. Traditionally, database administrators configured indexes while AI engineers wrote Python scripts. With DP-800, database engines natively run vector search and execute RAG (Retrieval-Augmented Generation) patterns via T-SQL.</p>
 
-<h2 id="quick-answer">Quick Answer: What is the DP-800 Exam?</h2>
-<ul>
+<h2 id="quick-answer" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Quick Answer: What is the DP-800 Exam?</h2>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem; color: var(--muted);">
   <li><strong>Credential Name:</strong> Microsoft Certified: SQL AI Developer Associate</li>
   <li><strong>Exam Duration:</strong> 120 minutes</li>
   <li><strong>Number of Questions:</strong> 40-48 questions</li>
@@ -353,128 +353,196 @@ export const newCertificationPosts = [
   <li><strong>Study Time:</strong> 4-6 weeks (6-10 hours/week)</li>
 </ul>
 
-<h2 id="why-dp800-matters-2026">Why This Certification Matters in 2026</h2>
-<p>Enterprise applications require low-latency access to vectorized data. By integrating AI functions natively within Azure SQL and SQL Server databases, businesses can build smart agents without the complex pipeline costs of copying data to standalone vector stores.</p>
+<h2 id="why-dp800-matters-2026" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Why This Certification Matters in 2026</h2>
+<p>Enterprise applications require low-latency access to vectorized data. By integrating AI functions natively within Azure SQL and SQL Server databases, businesses can build smart agents without the complex pipeline costs of copying data to standalone vector stores. Building AI applications directly on the relational database eliminates the need for expensive ETL synchronization, reduces cloud data transport fees, and preserves existing database compliance models (such as Row-Level Security, backups, and audit logs).</p>
+<p>As organizations move away from simple chat systems and toward autonomous, database-connected AI agents, the demand for developers who can bridge the gap between structured SQL tables and unstructured LLM contexts is soaring. The DP-800 credential validates this exact specialized skillset.</p>
 
-<h2 id="skills-measured">Skills Measured & Exam Weight</h2>
+<h2 id="skills-measured" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Skills Measured & Exam Weight</h2>
 <div class="overflow-x-auto my-8">
   <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
     <thead>
       <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Exam Domain</th>
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Weight</th>
-        <th style="padding: 12px; text-align: left;">Key Sub-topics</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">Exam Domain</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">Weight</th>
+        <th style="padding: 12px; text-align: left; color: var(--text); font-weight: 600;">Key Sub-topics</th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Design and Develop Database Solutions</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Design and Develop Database Solutions</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">35-40%</td>
-        <td style="padding: 12px;">Relational database schemas, vector types, index optimization, stored procedures.</td>
+        <td style="padding: 12px; color: var(--muted);">Relational database schemas, vector types, index optimization, stored procedures.</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Secure, Optimize, and Deploy Database Solutions</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Secure, Optimize, and Deploy Database Solutions</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">35-40%</td>
-        <td style="padding: 12px;">Database security, CI/CD with dacpac, monitoring execution times, auditing.</td>
+        <td style="padding: 12px; color: var(--muted);">Database security, CI/CD with dacpac, monitoring execution times, auditing.</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Implement AI Capabilities in Database Solutions</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Implement AI Capabilities in Database Solutions</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">25-30%</td>
-        <td style="padding: 12px;">AI_GENERATE_EMBEDDINGS, vector distance functions, REST procedure integrations, Azure OpenAI.</td>
+        <td style="padding: 12px; color: var(--muted);">AI_GENERATE_EMBEDDINGS, vector distance functions, REST procedure integrations, Azure OpenAI.</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<h2 id="real-world-scenarios">Real-World Scenario: Enterprise RAG Setup on Azure SQL Database</h2>
-<p>An insurance provider wants to query customer policy files. Historically, their app retrieved the entire PDF, chunked it, converted chunks to vectors, and queried a vector store. You are tasked with migrating this system to a native Azure SQL AI database.</p>
-<p><strong>T-SQL Implementation Code:</strong></p>
-<pre><code class="language-sql">-- Create table with vector column
-CREATE TABLE PolicyChunks (
-    ChunkId INT IDENTITY(1,1) PRIMARY KEY,
-    PolicyNumber VARCHAR(50),
-    ChunkText NVARCHAR(MAX),
-    ChunkVector VECTOR(1536) -- 1536 dimensions for text-embedding-3-small
-);
-
--- Generate embeddings dynamically using Azure OpenAI connection
-DECLARE @inputText NVARCHAR(MAX) = 'What is the policy limit for flood damage?';
-DECLARE @inputVector VECTOR(1536);
-
-SELECT @inputVector = CAST(
-    sp_invoke_external_rest_endpoint
-        -- Dynamic connection parameters referencing Azure OpenAI service
-        ...
-) AS VECTOR(1536);
-
--- Query the table using Cosine Distance
-SELECT TOP 3 ChunkText, VECTOR_DISTANCE('cosine', ChunkVector, @inputVector) AS Distance
-FROM PolicyChunks
-ORDER BY Distance ASC;</code></pre>
-
-<h2 id="roadmap">Step-by-Step 6-Week Study Roadmap</h2>
-<ul>
-  <li><strong>Week 1: Vector Basics & Azure SQL Architecture</strong> - Learn how vector types work in SQL, and study the architecture of AI-integrated relational systems.</li>
-  <li><strong>Week 2: Inline Embeddings & OpenAI Service</strong> - Learn the <code>AI_GENERATE_EMBEDDINGS</code> syntax and how to connect to Azure OpenAI models.</li>
-  <li><strong>Week 3: Indexing Vectors in SQL</strong> - Study indexing structures, and measure performance gains of vector searches.</li>
-  <li><strong>Week 4: REST Integrations & Database Pipelines</strong> - Learn \`sp_invoke_external_rest_endpoint\` and how to trigger API calls directly from stored procedures. Read our guide on <a href="/blog/dp-800-career-path-opportunities">DP-800 Career Paths</a>.</li>
-  <li><strong>Week 5: CI/CD & dacpac Deployment</strong> - Understand how to automate deployments of SQL databases with schema modifications.</li>
-  <li><strong>Week 6: Review & Final Prep</strong> - Work through mock scenario cases, review vector syntax, and take practice assessments.</li>
+<h2 id="vector-search-deepdive" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Deep Dive: Vector Storage and Native Distance Functions</h2>
+<p>Azure SQL Database and SQL Server 2026 introduce native support for the <code>VECTOR</code> data type. Vectors are represented as arrays of floating-point numbers. When designing schemas, you must define the vector dimension count based on your embedding model. For example, OpenAI's <code>text-embedding-3-small</code> outputs 1,536 dimensions, whereas Cohere's <code>embed-english-v3.0</code> outputs 1,024 dimensions.</p>
+<p>To compare vector similarities, Microsoft provides the <code>VECTOR_DISTANCE</code> system function. The DP-800 curriculum expects you to know when to use the three supported distance metrics:</p>
+<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem; color: var(--muted);">
+  <li><strong>Cosine Distance (<code>cosine</code>)</strong>: Measures the angle between two vectors, ignoring magnitude. Best for natural language queries and semantic document search.</li>
+  <li><strong>Euclidean Distance (<code>euclidean</code> / L2)</strong>: Measures the straight-line distance between two points in a multi-dimensional space. Typically used when vector magnitudes are normalized.</li>
+  <li><strong>Dot Product (<code>dot</code>)</strong>: Multiplies corresponding coordinates. Extremely fast to calculate, but only recommended when vectors are normalized (magnitude equals 1).</li>
 </ul>
 
-<h2 id="exam-questions">Sample Exam Questions</h2>
-<p><strong>Question 1:</strong> Which function should you use to call an Azure OpenAI text embeddings model directly from a SELECT statement in Azure SQL Database?<br />
-<em>Answer:</em> **AI_GENERATE_EMBEDDINGS**. This system function allows you to pass an OpenAI model connection and a block of text to retrieve the vector representation inline.</p>
+<h2 id="real-world-scenarios" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Real-World Scenario: Enterprise RAG Setup on Azure SQL Database</h2>
+<p>An insurance provider wants to query customer policy files using natural language. Historically, their application retrieved the entire PDF, chunked it, converted chunks to vectors using a Python API, and queried a standalone vector store. You are tasked with migrating this complex, multi-hop pipeline to a native Azure SQL AI database.</p>
+<p><strong>Step-by-Step T-SQL Implementation Blueprint:</strong></p>
+<p>First, create the table structure. We use the native <code>VECTOR(1536)</code> data type to match our OpenAI model:</p>
+<pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">-- Create table with vector column for text chunks
+CREATE TABLE PolicyChunks (
+    ChunkId INT IDENTITY(1,1) PRIMARY KEY,
+    PolicyNumber VARCHAR(50) NOT NULL,
+    ChunkText NVARCHAR(MAX) NOT NULL,
+    ChunkVector VECTOR(1536) NOT NULL -- 1536 dimensions for text-embedding-3-small
+);
 
-<h2 id="careers">Careers & Salaries</h2>
+-- Index the vector column for performance optimization under load
+CREATE SPATIAL INDEX ix_policy_chunks_vector ON PolicyChunks(ChunkVector);</code></pre>
+
+<p>Next, we write a stored procedure that handles the outbound REST call to Azure OpenAI to retrieve embeddings for a user's natural language query, and queries the database using Cosine Similarity:</p>
+<pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">CREATE PROCEDURE SearchPolicyChunks
+    @SearchQuery NVARCHAR(MAX),
+    @PolicyFilter VARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Define parameters for outbound API request
+    DECLARE @responseJSON NVARCHAR(MAX);
+    DECLARE @payload NVARCHAR(MAX);
+    DECLARE @targetUri NVARCHAR(2000) = 'https://your-openai-service.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15';
+    
+    SET @payload = JSON_OBJECT('input': @SearchQuery);
+
+    -- Execute outbound HTTP POST request directly from the database engine
+    EXEC sp_invoke_external_rest_endpoint
+        @url = @targetUri,
+        @method = 'POST',
+        @headers = '{"api-key":"YOUR_AZURE_OPENAI_KEY","Content-Type":"application/json"}',
+        @payload = @payload,
+        @response = @responseJSON OUTPUT;
+
+    -- Extract vector array from API response JSON using OPENJSON
+    DECLARE @queryVector VECTOR(1536);
+    
+    SELECT @queryVector = CAST(value AS VECTOR(1536))
+    FROM OPENJSON(@responseJSON, '$.data[0].embedding');
+
+    -- Retrieve top matches using Cosine Distance
+    SELECT TOP 3 
+        ChunkId,
+        ChunkText, 
+        VECTOR_DISTANCE('cosine', ChunkVector, @queryVector) AS SimilarityDistance
+    FROM PolicyChunks
+    WHERE PolicyNumber = @PolicyFilter
+    ORDER BY SimilarityDistance ASC;
+END;</code></pre>
+
+<h2 id="security-hardening" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Security and Governance for SQL AI Implementations</h2>
+<p>Allowing database engines to perform outbound REST calls (<code>sp_invoke_external_rest_endpoint</code>) requires strict security controls. Under the DP-800 curriculum, you must configure **outbound firewall rules** and credentials securely. The database engine should authenticate against Azure OpenAI using a **Managed Identity** rather than exposing raw API keys in stored procedure strings.</p>
+<p>To implement secure access:</p>
+<ol style="line-height: 1.8; padding-left: 1.5rem; list-style-type: decimal; margin-bottom: 2rem; color: var(--muted);">
+  <li>Create a database-scoped credential referencing your Azure Key Vault secret wrapper.</li>
+  <li>Restrict the database's external networking endpoint configurations so that it can only connect to pre-authorized API URLs.</li>
+  <li>Grant database permissions (<code>EXECUTE</code>) on the REST endpoint procedure exclusively to database roles that require it, enforcing Least Privilege.</li>
+</ol>
+
+<h2 id="roadmap" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Step-by-Step 6-Week Study Roadmap</h2>
+<div style="margin-top: 1.5rem; space-y-4;">
+  <div style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Week 1: Vector Basics & Azure SQL Architecture</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">Objectives: Understand native vector column storage, data types, and differences between Azure SQL Database, Managed Instances, and SQL Server 2026. Practice creating tables with dimensions.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Week 2: Embeddings Generation & Azure OpenAI Integrations</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">Objectives: Connect databases to Azure OpenAI endpoints. Master <code>AI_GENERATE_EMBEDDINGS</code>, configure network authorization filters, and manage Key Vault database secrets.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Week 3: Indexing and Search Optimization</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">Objectives: Learn how to optimize query execution times. Study spatial and IVFFlat indexing styles, balance recall rates vs. index construction overhead, and profile execution plans.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Week 4: Advanced REST Handlers & Data Pipelines</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">Objectives: Master outbound HTTPS orchestration. Map <code>sp_invoke_external_rest_endpoint</code> to external cognitive REST APIs. Parse results with <code>OPENJSON</code>. Read our <a href="/blog/dp-800-career-path-opportunities">DP-800 Career Paths</a> guide.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Week 5: CI/CD Databases & dacpac Automations</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">Objectives: Deploy AI database changes using Git. Wrap vector schemas into Data-Tier Application Packages (dacpac) and configure automated release pipelines in GitHub Actions.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Week 6: Case Studies Review & Mock Exams</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6;">Objectives: Practice scenario questions. Solve exam cases regarding security, role boundaries, and vector performance optimization under strict concurrent loads.</p>
+  </div>
+</div>
+
+<h2 id="exam-questions" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Sample Exam Questions & Scenarios</h2>
+<p><strong>Scenario:</strong> You are building an analytics query that retrieves customer support tickets similar to a newly entered ticket. The query must match the ticket's semantic meaning, regardless of exact keyword matches. The system must support sub-second execution speeds under a high concurrency of 200 requests per minute.</p>
+<p><strong>Question 1:</strong> Which vector distance algorithm should you configure inside your <code>VECTOR_DISTANCE</code> call to evaluate semantic textual similarity? Why?<br />
+<em>Answer:</em> **Cosine Distance (<code>cosine</code>)**. Cosine distance measures the angle difference between vectors rather than Euclidean magnitude, making it the industry standard for mapping textual relationships and semantic similarity.</p>
+<p><strong>Question 2:</strong> To ensure the query completes under the sub-second threshold, what optimization should you apply to the vector database column?<br />
+<em>Answer:</em> You must build an optimized database index (such as a spatial index or specialized vector index) on the vector column. In addition, you must recycle connection threads using a shared connection pool to avoid the expensive connection-establishment overhead of TLS handshakes.</p>
+
+<h2 id="careers" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Careers & Salaries</h2>
 <div class="overflow-x-auto my-8">
   <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
     <thead>
       <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Role</th>
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">USA Salary</th>
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">India Salary</th>
-        <th style="padding: 12px; text-align: left;">Europe Salary</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">Role</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">USA Salary</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">India Salary</th>
+        <th style="padding: 12px; text-align: left; color: var(--text); font-weight: 600;">Europe Salary</th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">SQL AI Developer</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">$125,000 - $165,000</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">₹18L - ₹35L</td>
-        <td style="padding: 12px;">€85,000 - €115,000</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">SQL AI Developer</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">$125,000 - $165,000</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">₹18L - ₹35L</td>
+        <td style="padding: 12px; color: var(--muted);">€85,000 - €115,000</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Database Agent Engineer</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">$145,000 - $190,000</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">₹24L - ₹48L</td>
-        <td style="padding: 12px;">€95,000 - €135,000</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Database Agent Engineer</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">$145,000 - $190,000</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">₹24L - ₹48L</td>
+        <td style="padding: 12px; color: var(--muted);">€95,000 - €135,000</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<h2 id="faq">Frequently Asked Questions (FAQ)</h2>
-<ol>
-  <li><strong>What is the DP-800 exam?</strong> The DP-800 exam is Microsoft's certification for the SQL AI Developer Associate, validating skills in SQL vector search, Azure OpenAI database integrations, and intelligent agent designs.</li>
-  <li><strong>Does DP-800 focus on Python or SQL?</strong> Unlike standard AI credentials, the DP-800 focuses heavily on database engine architectures, writing T-SQL, vector queries, and database deployments.</li>
-  <li><strong>What is VECTOR_DISTANCE in SQL?</strong> It is a system function that measures the distance between two vectors using algorithms like cosine similarity, dot product, or Euclidean distance.</li>
-  <li><strong>How many vector dimensions are supported in Azure SQL?</strong> Azure SQL supports up to 2000 dimensions for vector columns, matching models like Ada-002 and text-embedding-3-small/large.</li>
-  <li><strong>What is RAG?</strong> Retrieval-Augmented Generation is a pattern that retrieves context from a database using vector search and injects it into an LLM prompt to generate an accurate response.</li>
-  <li><strong>Can I run vector search on SQL Server on-premises?</strong> Yes, starting with SQL Server 2026+, Microsoft supports native vector types and vector distance operators on-premises.</li>
-  <li><strong>What is sp_invoke_external_rest_endpoint?</strong> It is a system stored procedure that makes outbound HTTP REST requests directly from database engines, commonly used to query cognitive APIs.</li>
-  <li><strong>What is a dacpac file?</strong> A dacpac is a compiled database schema deployment file used in CI/CD pipelines to apply schema updates safely.</li>
-  <li><strong>Is the exam open-book?</strong> Yes. Microsoft allows access to Microsoft Learn documentation during associate-level certification exams.</li>
-  <li><strong>What is the passing score?</strong> The passing score is a scaled score of 700 out of 1000.</li>
-  <li><strong>Are there case studies on the DP-800 exam?</strong> Yes. Most SQL certification exams feature case study scenarios outlining business objectives and security guidelines.</li>
-  <li><strong>How much does the DP-800 cost?</strong> The cost is $165 USD, with localized currency pricing depending on the country where the exam is scheduled.</li>
-  <li><strong>What is the difference between semantic search and vector search?</strong> Vector search compares vector representations of text. Semantic search uses metadata, synonyms, and natural language models to match queries.</li>
-  <li><strong>Is DP-800 a database administrator certification?</strong> No. It is specialized for database developers who integrate AI, although DBAs looking to expand their skills will benefit.</li>
-  <li><strong>Is DP-800 worth it in 2026?</strong> Yes. Relational databases remain the source of truth for business data, and SQL AI developers are in high demand to build AI agents on top of them.</li>
+<h2 id="faq" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Frequently Asked Questions (FAQ)</h2>
+<ol style="line-height: 1.8; padding-left: 1.5rem; list-style-type: decimal; margin-bottom: 2rem; color: var(--muted);">
+  <li style="margin-bottom: 0.75rem;"><strong>What is the DP-800 exam?</strong> The DP-800 exam is Microsoft's certification for the SQL AI Developer Associate, validating skills in SQL vector search, Azure OpenAI database integrations, and intelligent agent designs.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>Does DP-800 focus on Python or SQL?</strong> Unlike standard AI credentials, the DP-800 focuses heavily on database engine architectures, writing T-SQL, vector queries, database security, and dacpac schema deployments.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>What is VECTOR_DISTANCE in SQL?</strong> It is a system function that measures the distance between two vectors using algorithms like cosine similarity, dot product, or Euclidean distance.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>How many vector dimensions are supported in Azure SQL?</strong> Azure SQL supports up to 2000 dimensions for vector columns, matching models like Ada-002 and text-embedding-3-small/large.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>What is RAG?</strong> Retrieval-Augmented Generation is a pattern that retrieves context from a database using vector search and injects it into an LLM prompt to generate an accurate response.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>Can I run vector search on SQL Server on-premises?</strong> Yes, starting with SQL Server 2026+, Microsoft supports native vector types and vector distance operators on-premises.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>What is sp_invoke_external_rest_endpoint?</strong> It is a system stored procedure that makes outbound HTTP REST requests directly from database engines, commonly used to query cognitive APIs.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>What is a dacpac file?</strong> A dacpac is a compiled database schema deployment file used in CI/CD pipelines to apply schema updates safely.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>Is the exam open-book?</strong> Yes. Microsoft allows access to Microsoft Learn documentation during associate-level certification exams.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>What is the passing score?</strong> The passing score is a scaled score of 700 out of 1000.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>Are there case studies on the DP-800 exam?</strong> Yes. Most SQL certification exams feature case study scenarios outlining business objectives and security guidelines.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>How much does the DP-800 cost?</strong> The cost is $165 USD, with localized currency pricing depending on the country where the exam is scheduled.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>What is the difference between semantic search and vector search?</strong> Vector search compares vector representations of text. Semantic search uses metadata, synonyms, and natural language models to match queries.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>Is DP-800 a database administrator certification?</strong> No. It is specialized for database developers who integrate AI, although DBAs looking to expand their skills will benefit.</li>
+  <li style="margin-bottom: 0.75rem;"><strong>Is DP-800 worth it in 2026?</strong> Yes. Relational databases remain the source of truth for business data, and SQL AI developers are in high demand to build AI agents on top of them.</li>
 </ol>
 
-<h2 id="conclusion">Conclusion</h2>
-<p>Passing the DP-800 exam confirms your capability to build modern, AI-integrated database applications. By studying native vector capabilities, referring to our <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">Microsoft Fabric Certification Comparison</a>, and practicing T-SQL AI queries, you will pass on your first attempt.</p>
+<h2 id="conclusion" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Conclusion</h2>
+<p>Passing the DP-800 exam confirms your capability to build modern, AI-integrated database applications. By studying native vector capabilities, referring to our <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="text-[var(--accent)] hover:underline transition-colors">Microsoft Fabric Certification Comparison</a>, and practicing T-SQL AI queries, you will pass on your first attempt.</p>
 
 <script type="application/ld+json">
 {

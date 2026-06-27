@@ -3856,98 +3856,175 @@ WHERE rn <= 3;</code></pre>
     content: `<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
         <p>In the modern business intelligence landscape, data visualization is the bridge between raw data and actionable corporate decisions. <strong>Mastering Tableau Level of Detail (LOD) Expressions for Complex KPIs</strong> represents a key competency for data analysts and business intelligence developers in 2026. As corporate datasets grow larger and more complex, building dashboards that load instantly while providing deep analytical flexibility has become a critical requirement. This guide outlines how to leverage Tableau's architecture to achieve maximum fidelity and speed.</p>
       </div>
-
+ 
       <div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
         <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text);">Table of Contents</h4>
         <ul style="list-style-type: decimal; padding-left: 1.25rem; font-size: 0.85rem; line-height: 1.6; color: var(--muted);">
-          <li><a href="#understanding-core" style="color: var(--muted); text-decoration: none;">1. Understanding the Core Mechanics of Tableau Analytics</a></li>
-          <li><a href="#implementation-blueprint" style="color: var(--muted); text-decoration: none;">2. Step-by-Step Implementation Blueprint</a></li>
-          <li><a href="#comparison-metrics" style="color: var(--muted); text-decoration: none;">3. Core Comparison and Metrics</a></li>
-          <li><a href="#best-practices-ops" style="color: var(--muted); text-decoration: none;">4. Production Best Practices</a></li>
-          <li><a href="#expert-view" style="color: var(--muted); text-decoration: none;">5. Architectural Insight</a></li>
-          <li><a href="#frequently-asked" style="color: var(--muted); text-decoration: none;">6. Frequently Asked Questions (FAQ)</a></li>
-          <li><a href="#final-takeaway" style="color: var(--muted); text-decoration: none;">7. Conclusion & Summary</a></li>
+          <li><a href="#understanding-core" style="color: var(--muted); text-decoration: none;">1. Tableau's Calculation Architecture: Row vs. View vs. LOD</a></li>
+          <li><a href="#order-of-operations" style="color: var(--muted); text-decoration: none;">2. The Tableau Order of Operations (Query Pipeline)</a></li>
+          <li><a href="#fixed-lod-deepdive" style="color: var(--muted); text-decoration: none;">3. Deep Dive: FIXED Level of Detail Expressions</a></li>
+          <li><a href="#include-exclude-deepdive" style="color: var(--muted); text-decoration: none;">4. Deep Dive: INCLUDE & EXCLUDE LOD Expressions</a></li>
+          <li><a href="#performance-optimization" style="color: var(--muted); text-decoration: none;">5. Performance Tuning LOD Expressions for Enterprise Scale</a></li>
+          <li><a href="#comparison-metrics" style="color: var(--muted); text-decoration: none;">6. Core Comparison and Calculation Granularity Metrics</a></li>
+          <li><a href="#best-practices-ops" style="color: var(--muted); text-decoration: none;">7. Production Best Practices for Tableau Developers</a></li>
+          <li><a href="#expert-view" style="color: var(--muted); text-decoration: none;">8. Architectural Insight</a></li>
+          <li><a href="#frequently-asked" style="color: var(--muted); text-decoration: none;">9. Frequently Asked Questions (FAQ)</a></li>
+          <li><a href="#related-reading" style="color: var(--muted); text-decoration: none;">10. Related Resources & Internal Links</a></li>
+          <li><a href="#final-takeaway" style="color: var(--muted); text-decoration: none;">11. Conclusion & Summary</a></li>
         </ul>
       </div>
-
-      <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. Understanding the Core Mechanics of Tableau Analytics</h2>
+ 
+      <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. Tableau's Calculation Architecture: Row vs. View vs. LOD</h2>
+      <p>Tableau's calculation engine operates on three distinct levels: row-level, view-level (aggregations), and Level of Detail (LOD) expressions. Understanding when to use each is the hallmark of a senior analytics engineer. Row-level calculations execute for every single record in the source data. For example, multiplying <code>[Quantity] * [Unit Price]</code> to calculate revenue evaluates on every row in the database before any aggregation occurs. These are computationally cheap but limited in scope because they cannot compare rows to one another.</p>
+      <p>View-level aggregations (such as <code>SUM([Sales])</code> or <code>AVG([Profit])</code>) depend entirely on the dimensions dragged into the rows, columns, or detail shelves of the sheet. If you drag <code>[Region]</code> into the view, Tableau groups sales by region. If you drag <code>[Category]</code> in next, the granularity shifts dynamically. LOD expressions (FIXED, INCLUDE, and EXCLUDE) break this paradigm by allowing you to calculate values at a specific granularity, independent of the view's current dimensionality. This is essential for cohort analysis, finding first-purchase dates, or comparing individual performance metrics against regional averages.</p>
+ 
+      <h2 id="order-of-operations" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. The Tableau Order of Operations (Query Pipeline)</h2>
+      <p>To avoid rendering bugs and incorrect numbers, developers must understand Tableau's **Order of Operations** (the query pipeline). This pipeline determines the order in which database queries are executed, filters are applied, and calculations are computed. If you filter a dimension without knowing where it sits in relation to your LOD expression, your dashboard will display incorrect results.</p>
       
-      <p>Tableau's calculation engine operates on three distinct levels: row-level, view-level (aggregations), and Level of Detail (LOD) expressions. Understanding when to use each is the hallmark of a senior analytics engineer. Row-level calculations execute for every single record in the source data, whereas view-level aggregations depend entirely on the dimensions dragged into the rows, columns, or detail shelves of the sheet.</p>
-      <p>LOD expressions (FIXED, INCLUDE, and EXCLUDE) break this paradigm by allowing you to calculate values at a specific granularity, independent of the view's current dimensionality. This is essential for cohort analysis, finding first-purchase dates, or comparing individual performance metrics against regional averages.</p>
-    
-
-      <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Step-by-Step Implementation Blueprint</h2>
-      <p>To successfully deploy these capabilities in a production environment, engineering teams must execute a structured pipeline. The code snippet below demonstrates how a professional-grade configuration is structured:</p>
-      
-      <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">// Example Tableau FIXED LOD Expression
-{ FIXED [Region], [Segment] : SUM([Sales]) }
-
-// Example INCLUDE LOD Expression to find average daily sales by region
-{ INCLUDE [Order Date] : SUM([Sales]) }</code></pre>
-
-      <h2 id="comparison-metrics" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">3. Core Comparison and Metrics</h2>
-      <p>Here is an operational breakdown illustrating how various approaches behave under different system constraints:</p>
-      
-      <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); margin: 1.5rem 0;">
-        <thead>
-          <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
-            <th style="padding: 10px; border-right: 1px solid var(--border);">Calculation Type</th>
-            <th style="padding: 10px; border-right: 1px solid var(--border);">Granularity</th>
-            <th style="padding: 10px;">Best Use Case</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom: 1px solid var(--border);">
-            <td style="padding: 10px; border-right: 1px solid var(--border); font-weight: bold;">FIXED LOD</td>
-            <td style="padding: 10px; border-right: 1px solid var(--border);">Independent of View</td>
-            <td style="padding: 10px;">Cohort analysis and base-metric comparisons.</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--border);">
-            <td style="padding: 10px; border-right: 1px solid var(--border); font-weight: bold;">INCLUDE LOD</td>
-            <td style="padding: 10px; border-right: 1px solid var(--border);">Lower than View</td>
-            <td style="padding: 10px;">Calculating averages across unrepresented dimensions.</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border-right: 1px solid var(--border); font-weight: bold;">EXCLUDE LOD</td>
-            <td style="padding: 10px; border-right: 1px solid var(--border);">Higher than View</td>
-            <td style="padding: 10px;">Percentage-of-total calculations without filters.</td>
-          </tr>
-        </tbody>
-      </table>
-    
-
-      <h2 id="best-practices-ops" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">4. Production Best Practices</h2>
-      <p>When implementing these methods in live environments, make sure your team adheres to the following checklist:</p>
+      <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; margin: 2rem 0; overflow-x: auto;">
+        <pre style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; font-family: monospace; color: var(--text); white-space: pre;">
+1. [Extract Filters]
+      │
+2. [Data Source Filters]
+      │
+3. [Context Filters]
+      │
+4. ===> [FIXED LOD Expressions] (Evaluated BEFORE Dimension Filters)
+      │
+5. [Dimension Filters]
+      │
+6. ===> [INCLUDE & EXCLUDE LODs] (Evaluated AFTER Dimension Filters)
+      │
+7. [Measure Filters]
+      │
+8. [Table Calculation Filters]
+        </pre>
+      </div>
+      <p>Because **FIXED LODs** are calculated *before* Dimension Filters, any standard dimension filter you add to your sheet will not affect the FIXED calculation. If you want the filter to apply, you must right-click it and select **Add to Context**, raising it above the FIXED calculation in the pipeline. Conversely, **INCLUDE and EXCLUDE LODs** are evaluated *after* Dimension Filters, meaning they respond to standard filters automatically.</p>
+ 
+      <h2 id="fixed-lod-deepdive" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">3. Deep Dive: FIXED Level of Detail Expressions</h2>
+      <p>A FIXED LOD expression computes values using only the specified dimensions, completely ignoring the dimensions represented in the visualization. This is highly useful for cohort analysis and benchmark tracking.</p>
+      <p>For example, if you want to find the first purchase date for every customer in a database to build an acquisition cohort, a row-level or view-level calculation cannot help. You must isolate each customer and find their minimum order date. The FIXED syntax does exactly this:</p>
+      <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">// Customer Acquisition Cohort Date
+{ FIXED [Customer ID] : MIN([Order Date]) }</code></pre>
+      <p>Once compiled, Tableau attaches this cohort date to every corresponding customer row, allowing you to drag the date into the view and analyze cohort sales growth over time. Another common pattern is comparing individual store sales to regional averages:</p>
+      <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">// Compare individual sales to regional average
+SUM([Sales]) / SUM({ FIXED [Region] : AVG([Sales]) })</code></pre>
+ 
+      <h2 id="include-exclude-deepdive" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">4. Deep Dive: INCLUDE & EXCLUDE LOD Expressions</h2>
+      <p>INCLUDE and EXCLUDE expressions compute values at a lower or higher granularity than the view, responding dynamically to dimension filters.</p>
+      <p><strong>INCLUDE LOD</strong>: Instructs Tableau to calculate an aggregation using the specified dimension *in addition* to the dimensions present in the view. For example, if you want to calculate the average daily sales by region, you want the database to aggregate sales to the day level first, and then take the average of those daily aggregates in the view:</p>
+      <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">// Calculate average daily sales across regions
+AVG({ INCLUDE [Order Date] : SUM([Sales]) })</code></pre>
+      <p><strong>EXCLUDE LOD</strong>: Instructs Tableau to omit specific dimensions from the calculation granularity. This is commonly used to calculate percentage-of-total metrics when dimensions like <code>Product Name</code> are present in the row shelf, ensuring the denominator remains aggregated at the category or regional level:</p>
+      <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">// Calculate percent contribution of product within category
+SUM([Sales]) / SUM({ EXCLUDE [Product Name] : SUM([Sales]) })</code></pre>
+ 
+      <h2 id="performance-optimization" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">5. Performance Tuning LOD Expressions for Enterprise Scale</h2>
+      <p>LOD expressions are incredibly powerful but computationally expensive. When using a FIXED LOD, Tableau compiles the expression into a subquery (specifically an inner join or correlated subquery) that is executed in the database. If you have nested FIXED calculations over a live database connection with 10M+ rows, your dashboard will experience severe latency.</p>
+      <p>To optimize execution times:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
-        <li><strong>Minimize the</strong> number of filters in the view to reduce query planning overhead.</li>
-        <li><strong>Use context</strong> filters wisely to ensure LOD expressions execute on subsetted datasets.</li>
-        <li><strong>Extract data</strong> into Hyper format rather than relying on live connections for large schemas.</li>
-        <li><strong>Reduce the</strong> number of marks in dashboards to keep rendering speeds under 2 seconds.</li>
+        <li><strong>Extract Data</strong>: Always convert live database connections into Tableau Hyper extracts. Hyper is an in-memory database engine optimized for subqueries, making LOD execution up to 10x faster than live queries.</li>
+        <li><strong>Replace FIXED with INCLUDE/EXCLUDE</strong>: Where possible, write INCLUDE or EXCLUDE expressions. Because they inherit view-level dimensions, the database can run them using simpler aggregation grouping rather than full nested subqueries.</li>
+        <li><strong>Reduce Nesting</strong>: Avoid writing nested LODs (e.g., <code>{ FIXED A : SUM({ FIXED B : ... }) }</code>). Instead, pre-calculate aggregates in the data preparation layer (using DBT or Spark) before loading the tables into Tableau.</li>
       </ul>
-
-      <h2 id="expert-view" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">5. Architectural Insight</h2>
+      <p>For a detailed breakdown on optimizing BI queries and managing database performance benchmarks, explore <a href="/blog/postgres-vs-snowflake-speed" class="text-[var(--accent)] hover:underline transition-colors">PostgreSQL vs Snowflake: When to Scale Your BI Database</a>.</p>
+ 
+      <h2 id="comparison-metrics" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">6. Core Comparison and Calculation Granularity Metrics</h2>
+      <p>This table summarizes how different calculation types behave in relation to the visualization dimensions and filters:</p>
+      <div class="overflow-x-auto my-8">
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
+          <thead>
+            <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
+              <th style="padding: 12px; border-right: 1px solid var(--border); text-align: left; color: var(--text); font-weight: 600;">Calculation Class</th>
+              <th style="padding: 12px; border-right: 1px solid var(--border); text-align: left; color: var(--text); font-weight: 600;">Granularity Focus</th>
+              <th style="padding: 12px; border-right: 1px solid var(--border); text-align: left; color: var(--text); font-weight: 600;">Pipeline Execution Order</th>
+              <th style="padding: 12px; text-align: left; color: var(--text); font-weight: 600;">Dimension Filter Response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Row-Level Calc</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Evaluates per-record in database</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Initial load (database fetch)</td>
+              <td style="padding: 12px;">Responsive (records are filtered out first)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">FIXED LOD</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Independent of the view dimensions</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Before dimension filters</td>
+              <td style="padding: 12px; color: var(--text); font-weight: 600;">No (unless filter is added to Context)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">INCLUDE LOD</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Finer granularity than view details</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">After dimension filters</td>
+              <td style="padding: 12px; color: var(--text); font-weight: 600;">Yes (responds automatically)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">EXCLUDE LOD</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Coarser granularity than view details</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">After dimension filters</td>
+              <td style="padding: 12px; color: var(--text); font-weight: 600;">Yes (responds automatically)</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Table Calculation</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">View-level caching (local rendering)</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Final step (client-side render)</td>
+              <td style="padding: 12px;">Yes (re-computes on visible marks only)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <h2 id="best-practices-ops" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">7. Production Best Practices for Tableau Developers</h2>
+      <p>When implementing LOD expressions in enterprise analytics dashboards, ensure your development team adheres to the following guidelines:</p>
+      <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
+        <li><strong>Enforce context filters</strong> on any dimensions that are meant to restrict dataset size *before* calculating FIXED LOD benchmarks.</li>
+        <li><strong>Avoid nesting</strong> LOD expressions inside conditional logical blocks (e.g., <code>IF [Condition] THEN { FIXED ... } END</code>), which prevents the database engine from optimizing the execution plan.</li>
+        <li><strong>Audit queries</strong> using Tableau Desktop's Performance Recorder to identify subquery execution bottlenecks in the XML database trace logs.</li>
+        <li><strong>Perform calculations</strong> in the data modeling layer (SQL/dbt) for static aggregations (like customer signup cohort dates) to save dashboard compute time.</li>
+      </ul>
+ 
+      <h2 id="expert-view" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">8. Architectural Insight</h2>
       <blockquote style="border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 2rem 0; font-style: italic; color: var(--muted); background: var(--surface2); border-radius: 0 8px 8px 0; font-size: 1.05rem; line-height: 1.7;">
-        "Deploying visual frontends or complex backend queries without a deep analysis of lock durations, payload compression, and edge caching is a recipe for expensive compute bills and slow adoption. True technical excellence requires optimizing every byte along the network pathway."
+        "Level of Detail expressions are the secret sauce of advanced Tableau dashboard design, but they must be deployed with care. An analytics engineer must understand the query translation process: a single misplaced FIXED calculation can turn a 2-second dashboard render into a 30-second database query. Optimize your query pipeline first."
         <span style="display: block; font-style: normal; font-weight: bold; margin-top: 0.5rem; font-size: 0.85rem; color: var(--text); font-family: var(--font-mono); text-transform: uppercase;">— Datta Sable, Principal BI Consultant</span>
       </blockquote>
-
-      <h2 id="frequently-asked" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">6. Frequently Asked Questions (FAQ)</h2>
+ 
+      <h2 id="frequently-asked" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">9. Frequently Asked Questions (FAQ)</h2>
       <div style="margin-top: 1.5rem; space-y-4;">
-        
         <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q1: What is the performance cost of LOD expressions in Tableau?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">FIXED LODs generate subqueries in the underlying database, which can slow down dashboards if run on live database connections. Hyper extracts mitigate this cost significantly.</p>
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q1: What is the primary performance difference between FIXED and INCLUDE/EXCLUDE LODs?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">FIXED LODs generate independent subqueries that run before the view aggregations, requiring full database joins. INCLUDE and EXCLUDE LODs are evaluated as part of the primary visualization query, allowing database engines to optimize calculations using group-by parameters.</p>
         </div>
-        
-        
         <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q2: When should I use INCLUDE instead of FIXED?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Use INCLUDE when the calculation needs to respond to user filters dynamically, as FIXED LODs bypass standard dimension filters unless they are added to Context.</p>
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q2: Why doesn't my FIXED LOD calculation update when I check or uncheck a dimension filter?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Because FIXED LODs sit above Dimension Filters in the Tableau Order of Operations. The database calculates the FIXED value before the dimension filter is evaluated. To force the calculation to respect the filter, right-click the filter and select **Add to Context**.</p>
         </div>
-        
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q3: How do LOD expressions interact with Table Calculations?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">LOD expressions compile to SQL subqueries and execute in the database engine, returning values as standard database columns. Table Calculations (like <code>RUNNING_SUM</code> or <code>LOOKUP</code>) execute locally in the browser/client memory *after* all data is retrieved. LODs can be used inside Table Calculations, but Table Calculations cannot be nested inside LODs.</p>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q4: Can I use LOD expressions to compare values across different rows without a join?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes. For example, to evaluate the difference between a store's sales and the region's top store's sales, you can write: <code>SUM([Sales]) - SUM({ FIXED [Region] : MAX([Sales]) })</code>. The FIXED part calculates the maximum regional value and replicates it across all store rows.</p>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q5: How does Tableau LOD optimization compare to Power BI's DAX calculations?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">In Power BI, DAX uses <code>CALCULATE</code> and filter context modifiers to achieve similar results. DAX evaluates calculations in an in-memory columnar database (VertiPaq) which is extremely fast, while Tableau LODs translate to SQL subqueries against SQL databases. To compare optimization strategies, read <a href="/blog/bi-performance-tuning" class="text-[var(--accent)] hover:underline transition-colors">Performance Tuning: How to Make Your Power BI Reports 10x Faster</a>.</p>
+        </div>
       </div>
-
-      <h2 id="final-takeaway" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">7. Conclusion & Summary</h2>
+ 
+      <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">10. Related Resources & Internal Links</h2>
+      <p>Continue your analytics learning path with these advanced BI guides:</p>
+      <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
+        <li><a href="/blog/bi-performance-tuning" style="color: var(--accent); text-decoration: none; font-weight: 600;">Performance Tuning: How to Make Your Power BI Reports 10x Faster</a></li>
+        <li><a href="/blog/postgres-vs-snowflake-speed" style="color: var(--accent); text-decoration: none; font-weight: 600;">PostgreSQL vs Snowflake: When to Scale Your BI Database</a></li>
+        <li><a href="/blog/first-party-data-strategy-privacy-marketing-2026" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Sovereign Consumer: Architecting First-Party Data Ecosystems in the Age of Consent</a></li>
+      </ul>
+ 
+      <h2 id="final-takeaway" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">11. Conclusion & Summary</h2>
       <p>Optimizing your Tableau dashboards is a continuous process of refining queries, restructuring calculations, and simplifying visual marks. By mastering Level of Detail expressions and proper data modeling, you ensure that your dashboards remain highly responsive, driving real-time decisions at every level of the enterprise.</p>`,
     readTime: 5,
     date: "Apr 4, 2026",
