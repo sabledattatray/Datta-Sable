@@ -246,11 +246,42 @@ export default function PagesManager() {
   const [pages, setPages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState<'title' | 'wordCount' | 'seoScore' | 'updatedAt'>('updatedAt');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   
   // Delete confirm state
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const togglePublish = async (pageId: string, currentPublished: boolean) => {
+    try {
+      const pageToUpdate = pages.find(p => p.id === pageId);
+      if (!pageToUpdate) return;
+
+      const res = await fetch(`/api/admin/pages/${pageId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: pageToUpdate.title,
+          slug: pageToUpdate.slug,
+          excerpt: pageToUpdate.excerpt || '',
+          content: pageToUpdate.content,
+          published: !currentPublished
+        })
+      });
+
+      if (res.ok) {
+        setPages(ps => ps.map(p => p.id === pageId ? { ...p, published: !currentPublished } : p));
+        setMessage({ type: 'success', text: `Saved: Page "${pageToUpdate.title}" is now ${!currentPublished ? 'Published' : 'Draft'}.` });
+      } else {
+        setMessage({ type: 'error', text: 'Failed to update page status.' });
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage({ type: 'error', text: 'An error occurred while updating page status.' });
+    }
+  };
 
   const fetchPages = async () => {
     try {
@@ -295,10 +326,40 @@ export default function PagesManager() {
     }
   };
 
-  const filtered = pages.filter(p =>
+  const processedPages = pages.map(page => {
+    const wordCount = calculateWordCount(page.content);
+    const keyword = getFallbackKeyword(page.title, page.slug);
+    const seoResult = calculateSeoScore(page.title, page.slug, page.content, page.excerpt || '', keyword);
+    return {
+      ...page,
+      wordCount,
+      seoScore: seoResult.score,
+    };
+  });
+
+  const filtered = processedPages.filter(p =>
     p.title.toLowerCase().includes(search.toLowerCase()) ||
     p.slug.toLowerCase().includes(search.toLowerCase())
   );
+
+  const sorted = [...filtered].sort((a, b) => {
+    let aVal = a[sortBy];
+    let bVal = b[sortBy];
+
+    if (sortBy === 'updatedAt') {
+      aVal = new Date(a.updatedAt).getTime();
+      bVal = new Date(b.updatedAt).getTime();
+    }
+
+    if (typeof aVal === 'string') {
+      aVal = aVal.toLowerCase();
+      bVal = (bVal || '').toLowerCase();
+    }
+
+    if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
+    if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+    return 0;
+  });
 
   return (
     <div style={{ padding: '32px 28px', minHeight: '100%' }}>
@@ -340,6 +401,25 @@ export default function PagesManager() {
           <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>{filtered.length} dynamic page{filtered.length !== 1 ? 's' : ''}</p>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 16px' }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
+            <select 
+              value={sortBy} 
+              onChange={e => setSortBy(e.target.value as any)}
+              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 600, cursor: 'pointer' }}
+            >
+              <option value="updatedAt">Last Updated</option>
+              <option value="title">Page Title</option>
+              <option value="wordCount">Word Count</option>
+              <option value="seoScore">SEO Score</option>
+            </select>
+            <button 
+              onClick={() => setSortOrder(o => o === 'asc' ? 'desc' : 'asc')}
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', marginLeft: 4 }}
+            >
+              {sortOrder === 'asc' ? '▲' : '▼'}
+            </button>
+          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 16px' }}>
             <Search size={14} color={css.muted} />
             <input 
@@ -347,7 +427,7 @@ export default function PagesManager() {
               placeholder="Search custom pages..." 
               value={search} 
               onChange={e => setSearch(e.target.value)}
-              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 500, width: 180 }} 
+              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 500, width: 150 }} 
             />
           </div>
           <Link 
@@ -389,21 +469,19 @@ export default function PagesManager() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.length === 0 && (
-                  <tr><td colSpan={5} style={{ padding: '48px', textAlign: 'center', color: css.muted, fontSize: 14 }}>No custom pages created yet. Click "Add Page" to create one!</td></tr>
+                {sorted.length === 0 && (
+                  <tr><td colSpan={7} style={{ padding: '48px', textAlign: 'center', color: css.muted, fontSize: 14 }}>No custom pages created yet. Click "Add Page" to create one!</td></tr>
                 )}
-                {filtered.map((page, i) => {
+                {sorted.map((page, i) => {
                   const updateDate = new Date(page.updatedAt).toLocaleDateString('en-IN', {
                     day: 'numeric', month: 'short', year: 'numeric'
                   });
-                  const wordCount = calculateWordCount(page.content);
-                  const keyword = getFallbackKeyword(page.title, page.slug);
-                  const seoResult = calculateSeoScore(page.title, page.slug, page.content, page.excerpt || '', keyword);
-                  const seoScore = seoResult.score;
+                  const wordCount = page.wordCount;
+                  const seoScore = page.seoScore;
 
                   return (
                     <tr key={page.id}
-                      style={{ borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none', transition: 'background 0.15s' }}
+                      style={{ borderBottom: i < sorted.length - 1 ? `1px solid ${css.border}` : 'none', transition: 'background 0.15s' }}
                       onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = css.hoverBg}
                       onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
                     >
@@ -431,13 +509,20 @@ export default function PagesManager() {
                         </span>
                       </td>
                       <td style={{ padding: '16px 20px' }}>
-                        <span style={{ 
-                          display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, 
-                          background: page.published ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', 
-                          color: page.published ? '#10b981' : '#f59e0b', 
-                          border: `1px solid ${page.published ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, 
-                          padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em' 
-                        }}>
+                        <span 
+                          onClick={() => togglePublish(page.id, page.published)}
+                          title={`Click to ${page.published ? 'Unpublish (set to Draft)' : 'Publish'}`}
+                          style={{ 
+                            display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, 
+                            background: page.published ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', 
+                            color: page.published ? '#10b981' : '#f59e0b', 
+                            border: `1px solid ${page.published ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, 
+                            padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em',
+                            cursor: 'pointer', userSelect: 'none', transition: 'all 0.15s'
+                          }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '0.8'; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
+                        >
                           <span style={{ width: 5, height: 5, borderRadius: '50%', background: page.published ? '#10b981' : '#f59e0b' }} />
                           {page.published ? 'Published' : 'Draft'}
                         </span>
