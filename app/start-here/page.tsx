@@ -4,6 +4,8 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { BookOpen, Target, Zap, BarChart3, Database, BrainCircuit, ArrowRight } from 'lucide-react';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Start Your Data Journey | BI & Analytics Knowledge Hub | Datta Sable',
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
     description: 'Your roadmap to mastering Business Intelligence, Automation, and Data Architecture.',
     url: 'https://dattasable.com/start-here',
     type: 'website',
-    images: [{ url: '/images/blog/bi_performance_hero_1777410226286.webp', width: 1200, height: 630, alt: 'Start Your Data Journey \u2014 Datta Sable' }],
+    images: [{ url: '/images/blog/bi_performance_hero_1777410226286.webp', width: 1200, height: 630, alt: 'Start Your Data Journey — Datta Sable' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -24,8 +26,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://dattasable.com/start-here' },
 };
 
+export default async function StartHerePage() {
+  const dynamicPage = await getDynamicPage('start-here');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
 
-export default function StartHerePage() {
   const paths = [
     {
       title: "Data Architecture & Infrastructure",

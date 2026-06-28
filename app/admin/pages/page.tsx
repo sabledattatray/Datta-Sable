@@ -199,7 +199,7 @@ export default function PagesManager() {
                       </td>
                       <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.muted }}>
                         <code style={{ fontSize: 12, background: css.surface2, padding: '2px 6px', borderRadius: 6, color: css.accent }}>
-                          /p/{page.slug}
+                          {['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? '' : '/p'}/{page.slug}
                         </code>
                       </td>
                       <td style={{ padding: '16px 20px' }}>
@@ -228,7 +228,7 @@ export default function PagesManager() {
                           </Link>
                           {page.published && (
                             <a 
-                              href={`/p/${page.slug}`} 
+                              href={['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? `/${page.slug}` : `/p/${page.slug}`} 
                               target="_blank"
                               rel="noopener noreferrer"
                               title="View Page"

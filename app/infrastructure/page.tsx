@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Layers, Zap, GitBranch, Share2, Download, Code2, Database, Workflow } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Creator Infrastructure Hub | Surgical AI Systems | Datta Sable',
@@ -48,7 +50,12 @@ const INFRA_SECTIONS = [
   }
 ];
 
-export default function InfrastructureHub() {
+export default async function InfrastructureHub() {
+  const dynamicPage = await getDynamicPage('infrastructure');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
+
   return (
     <main className="min-h-screen bg-[var(--bg)]">
       <Navbar />

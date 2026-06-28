@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | Datta Sable',
@@ -17,7 +19,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://dattasable.com/terms' },
 };
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const dynamicPage = await getDynamicPage('terms');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
+
   const lastUpdated = "April 29, 2026";
 
   return (

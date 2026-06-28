@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Editorial Policy, AI Disclosure & Research Standards | Datta Sable',
@@ -8,7 +10,11 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://dattasable.com/editorial-policy' },
 };
 
-export default function EditorialPolicyPage() {
+export default async function EditorialPolicyPage() {
+  const dynamicPage = await getDynamicPage('editorial-policy');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />

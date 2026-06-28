@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Datta Sable',
@@ -17,7 +19,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://dattasable.com/privacy' },
 };
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const dynamicPage = await getDynamicPage('privacy');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
+
   const lastUpdated = "June 25, 2026";
 
   return (

@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import CareersContent from './CareersContent';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Urgent Hiring Collection Officers & Team Leaders | Datta Sable Careers',
@@ -16,7 +18,11 @@ export const metadata: Metadata = {
   }
 };
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const dynamicPage = await getDynamicPage('careers');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
   return (
     <>
       {/* Crawlable job listing links for SEO — resolves orphan page issues */}

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import ServicesContent from '@/components/ServicesContent';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: "Professional BI & Data Analytics Services | Datta Sable",
@@ -23,6 +25,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const dynamicPage = await getDynamicPage('services');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
   return <ServicesContent />;
 }

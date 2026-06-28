@@ -1,9 +1,22 @@
-'use client';
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ShieldCheck } from 'lucide-react';
+import { getDynamicPage } from '@/lib/dynamic-page';
+import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
-export default function CookiesPage() {
+export const metadata: Metadata = {
+  title: 'Cookie Policy | Datta Sable',
+  description: 'Cookie Policy for dattasable.com — explaining how we use cookies, tracking technologies, and Google AdSense integration.',
+  alternates: { canonical: 'https://dattasable.com/cookies' },
+};
+
+export default async function CookiesPage() {
+  const dynamicPage = await getDynamicPage('cookies');
+  if (dynamicPage) {
+    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
+  }
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
