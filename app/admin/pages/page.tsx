@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Plus, Search, Edit2, Trash2, Eye, X, Layers, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Eye, X, Layers, AlertCircle, CheckCircle2, Globe, EyeOff } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import Link from 'next/link';
 
@@ -246,13 +246,22 @@ export default function PagesManager() {
   const [pages, setPages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [sortBy, setSortBy] = useState<'title' | 'wordCount' | 'seoScore' | 'updatedAt'>('updatedAt');
+  const [sortBy, setSortBy] = useState<'title' | 'wordCount' | 'seoScore' | 'published' | 'updatedAt'>('updatedAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   
   // Delete confirm state
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const handleSort = (field: 'title' | 'wordCount' | 'seoScore' | 'published' | 'updatedAt') => {
+    if (sortBy === field) {
+      setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(field);
+      setSortOrder('desc');
+    }
+  };
 
   const togglePublish = async (pageId: string, currentPublished: boolean) => {
     try {
@@ -349,6 +358,9 @@ export default function PagesManager() {
     if (sortBy === 'updatedAt') {
       aVal = new Date(a.updatedAt).getTime();
       bVal = new Date(b.updatedAt).getTime();
+    } else if (sortBy === 'published') {
+      aVal = a.published ? 1 : 0;
+      bVal = b.published ? 1 : 0;
     }
 
     if (typeof aVal === 'string') {
@@ -412,6 +424,7 @@ export default function PagesManager() {
               <option value="title">Page Title</option>
               <option value="wordCount">Word Count</option>
               <option value="seoScore">SEO Score</option>
+              <option value="published">Status</option>
             </select>
             <button 
               onClick={() => setSortOrder(o => o === 'asc' ? 'desc' : 'asc')}
@@ -463,8 +476,33 @@ export default function PagesManager() {
             <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
-                  {['Page Title', 'URL Route', 'Word Count', 'SEO Score', 'Status', 'Last Updated', 'Actions'].map(h => (
-                    <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{h}</th>
+                  {[
+                    { key: 'title', label: 'Page Title' },
+                    { key: 'slug', label: 'URL Route', sortable: false },
+                    { key: 'wordCount', label: 'Word Count' },
+                    { key: 'seoScore', label: 'SEO Score' },
+                    { key: 'published', label: 'Status' },
+                    { key: 'updatedAt', label: 'Last Updated' },
+                    { key: 'actions', label: 'Actions', sortable: false }
+                  ].map(h => (
+                    <th 
+                      key={h.label} 
+                      onClick={() => h.sortable !== false && handleSort(h.key as any)}
+                      style={{ 
+                        padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, 
+                        letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+                        cursor: h.sortable !== false ? 'pointer' : 'default', userSelect: 'none'
+                      }}
+                    >
+                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                        {h.label}
+                        {h.sortable !== false && sortBy === h.key && (
+                          <span style={{ color: css.accent, fontSize: 8 }}>
+                            {sortOrder === 'desc' ? ' ▼' : ' ▲'}
+                          </span>
+                        )}
+                      </div>
+                    </th>
                   ))}
                 </tr>
               </thead>
@@ -530,6 +568,33 @@ export default function PagesManager() {
                       <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted, fontWeight: 500 }}>{updateDate}</td>
                       <td style={{ padding: '16px 20px' }}>
                         <div style={{ display: 'flex', gap: 6 }}>
+                          <button 
+                            onClick={() => togglePublish(page.id, page.published)}
+                            title={page.published ? 'Unpublish (Set to Draft)' : 'Publish Page'}
+                            style={{ 
+                              background: 'none', 
+                              border: `1px solid ${css.border}`, 
+                              borderRadius: 9, 
+                              padding: 7, 
+                              cursor: 'pointer', 
+                              color: page.published ? '#f59e0b' : '#10b981', 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              transition: 'all 0.15s' 
+                            }}
+                            onMouseEnter={e => { 
+                              (e.currentTarget as HTMLElement).style.color = page.published ? '#f59e0b' : '#10b981'; 
+                              (e.currentTarget as HTMLElement).style.borderColor = page.published ? 'rgba(245,158,11,0.5)' : 'rgba(16,185,129,0.5)'; 
+                              (e.currentTarget as HTMLElement).style.background = page.published ? 'rgba(245,158,11,0.08)' : 'rgba(16,185,129,0.08)'; 
+                            }}
+                            onMouseLeave={e => { 
+                              (e.currentTarget as HTMLElement).style.color = page.published ? '#f59e0b' : '#10b981'; 
+                              (e.currentTarget as HTMLElement).style.borderColor = css.border; 
+                              (e.currentTarget as HTMLElement).style.background = 'none'; 
+                            }}
+                          >
+                            {page.published ? <EyeOff size={14} /> : <Globe size={14} />}
+                          </button>
                           <Link 
                             href={`/admin/pages/editor?id=${page.id}`}
                             title="Edit"
