@@ -181,7 +181,7 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
   addCheck('additional', 'external_link', 'Contains at least one external outbound link', hasExternalLink, 5);
 
   const isUnique = !otherPages.some(p => {
-    let otherKwStr = p.focusedKeyword || '';
+    const otherKwStr = p.focusedKeyword || '';
     return otherKwStr.toLowerCase().split(',').map((s: string) => s.trim()).includes(kw);
   });
   addCheck('additional', 'unique_kw', 'Keyword is unique (not used in other pages)', isUnique, 5);
@@ -700,7 +700,7 @@ function EditorContent() {
                 </div>
               ) : (
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyBetween: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
                       SEO Analyzer
                     </p>
