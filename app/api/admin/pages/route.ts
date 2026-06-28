@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { title, slug, content, excerpt, published } = body;
+    const { title, slug, content, excerpt, published, focusedKeyword } = body;
 
     if (!title || !slug || !content) {
       return NextResponse.json({ error: 'Title, slug, and content are required' }, { status: 400 });
@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
         content,
         excerpt: excerpt || '',
         published: published !== undefined ? published : true,
+        focusedKeyword: focusedKeyword || '',
       }
     });
 

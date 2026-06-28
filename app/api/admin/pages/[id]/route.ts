@@ -41,7 +41,7 @@ export async function PUT(
     }
 
     const body = await req.json();
-    const { title, slug, content, excerpt, published } = body;
+    const { title, slug, content, excerpt, published, focusedKeyword } = body;
 
     const existingPage = await prisma.page.findUnique({
       where: { id: params.id }
@@ -69,6 +69,7 @@ export async function PUT(
         content: content !== undefined ? content : existingPage.content,
         excerpt: excerpt !== undefined ? excerpt : existingPage.excerpt,
         published: published !== undefined ? published : existingPage.published,
+        focusedKeyword: focusedKeyword !== undefined ? focusedKeyword : existingPage.focusedKeyword,
       }
     });
 
