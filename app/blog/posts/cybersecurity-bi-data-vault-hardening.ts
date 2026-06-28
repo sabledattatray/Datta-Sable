@@ -199,27 +199,16 @@ COMMIT;</code></pre>
       <h2 id="frequently-asked" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">11. Frequently Asked Questions (FAQ)</h2>
       <div style="margin-top: 1.5rem; space-y-4;">
         <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q1: How does TLS 1.3 improve database connection performance over TLS 1.2?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">TLS 1.3 reduces the handshake sequence from two round trips down to one. Under high-frequency, new-connection workloads, this slashes connection establishment time in half, minimizing dashboard loading delays.</p>
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q1: What is the difference between RLS and OLS?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Row-Level Security (RLS) filters rows based on user permissions, while Object-Level Security (OLS) hides entire tables or columns from unauthorized users.</p>
         </div>
+        
         <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q2: What is the risk of leaving database ports exposed if I use extremely secure passwords?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Exposing SQL connection ports leaves your database vulnerable to automated brute-force attacks, connection-exhaustion denial of service (DoS) floods, and zero-day vulnerabilities in the database daemon software itself. Network isolation is a critical layer of defense-in-depth.</p>
-        </div>
-        <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q3: How does PostgreSQL handle dynamic parameters for RLS policies securely?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">PostgreSQL supports session-level configurations (<code>current_setting()</code>). When the web application borrows a client connection from the pool, it runs a transaction setting the local user ID variables (<code>SET LOCAL</code>). Because this is scoped strictly to the current transaction, there is zero risk of parameter bleeding between concurrent connection requests.</p>
-        </div>
-        <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q4: What is the difference between RLS and OLS (Object-Level Security)?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Row-Level Security (RLS) filters rows matching specific attributes, returning only a subset of data. Object-Level Security (OLS) disables access to entire tables or columns. OLS is typically used to prevent specific application roles from reading sensitive fields like SSNs or salary totals entirely.</p>
-        </div>
-        <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q5: Can I connect to Microsoft Fabric or Synapse pools using these SSL configurations?</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes. Microsoft Fabric and Azure Synapse SQL endpoints enforce encrypted connections by default. When connecting from external platforms, your client drivers must explicitly support encrypted transport parameters (e.g., <code>Encrypt=true; TrustServerCertificate=false</code>). To understand how this fits into Fabric's security architecture, read our guide on <a href="/blog/microsoft-fabric-architecture-explained-2026" class="text-[var(--accent)] hover:underline transition-colors">Microsoft Fabric Architecture Explained: The Complete 2026 Guide</a>.</p>
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem;">Q2: How do you secure API secrets in serverless functions?</h4>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Inject them as environment variables encrypted at rest in your cloud console, rather than checking them into your git repository.</p>
         </div>
       </div>
- 
+      </div>
       <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">12. Related Resources & Internal Links</h2>
       <p>To further harden and optimize your enterprise analytical environments, explore these architectural guides:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">

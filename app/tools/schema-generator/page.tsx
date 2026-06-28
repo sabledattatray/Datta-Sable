@@ -194,33 +194,96 @@ export default function SchemaForge() {
         </section>
       </main>
 
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '2rem' }}>
+            <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '4rem' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
             <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
-            Schema Generator — Create JSON-LD Structured Data for Google Rich Results
+          
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
+            Schema Generator — JSON-LD Structured Data Builder
           </h2>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '1.25rem' }}>
-            The Schema Generator by Datta Sable creates valid JSON-LD structured data markup for SEO professionals, web developers, content managers, and bloggers who want their web pages to qualify for Google's rich results — including article star ratings, FAQ accordions, How-To cards, breadcrumbs, product prices, event listings, and local business panels in Google Search.
+          
+          <p style={{ fontSize: '1.05rem', color: 'var(--text)', lineHeight: 1.8, marginBottom: '1.25rem', fontWeight: 500 }} className="font-sans">
+            The Schema Generator by Datta Sable is a technical SEO utility designed to generate valid, structured data markup in JSON-LD format. It supports Article, VideoObject, and Product schemas, creating compliant script blocks that can be pasted directly into Next.js, HTML headers, or CMS databases to qualify for Google Rich Results.
           </p>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
-            Structured data (schema.org markup in JSON-LD format) is the primary signal Google uses to understand content type and decide whether to render rich results. Supported schema types include Article, BlogPosting, TechArticle, FAQPage, HowTo, SoftwareApplication, Product, LocalBusiness, Person, and BreadcrumbList — validated against Google's Rich Results Test standards.
+          
+          <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.75, marginBottom: '2.5rem' }} className="font-sans">
+            Search engines use schema.org vocabulary to understand the entities, relationships, and context of your web pages. Implementing correct JSON-LD schemas does not improve rankings directly, but it enables Google to display visual enhancements (Rich Snippets) like star ratings, review cards, FAQ accordions, and breadcrumbs on the search page, boosting click-through rates (CTR) by up to 30%.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1.25rem' }}>
-            {[
-              { label: 'Article / BlogPosting', desc: 'Structured data for blog posts and technical articles' },
-              { label: 'FAQPage', desc: 'FAQ accordion schema that appears directly in Google search results' },
-              { label: 'SoftwareApplication', desc: 'App schema with ratings, pricing, and platform details' },
-              { label: 'LocalBusiness', desc: 'NAP (Name, Address, Phone) schema for local SEO visibility' },
-            ].map(f => (
-              <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
-                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
-              </div>
-            ))}
+
+          {"/* ── Core Features Grid ── */"}
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Standard Compliant</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Generates schema objects that match schema.org and Google's official developer specifications.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Pre-formatted Blocks</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Outputs complete `&lt;script type="application/ld+json"&gt;` blocks ready for copy-pasting.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Responsive Setup</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Updates schemas instantly as you type data, minimizing errors and syntax typos.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Dynamic Schema Support</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Enables creation of Article, Product, and VideoObject schemas from a single UI.</div>
+            </div>
+          </div>
+
+          {"/* ── Deep Technical Sections ── */"}
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Entity SEO & Semantic Web Architectures</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              Modern search engine optimization has shifted from keyword matching to entity relationships. Google builds a Knowledge Graph to map entities (people, places, concepts, organizations). Schema markup serves as the metadata that explicitly defines these entities and their properties (e.g., who wrote an article, what organization published it, when it was updated). By providing this data, you make it easier for search algorithms to crawl, index, and match your pages with complex queries.
+            </p>
+          </div>
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Avoiding Schema Spam and Penalties</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              Google has strict guidelines regarding structured data. Never generate schema markup for content that is not visible to the user on the page. Generating product reviews for non-existent items or FAQ schemas that do not match the visible text is considered schema spam. If detected, Google may issue a manual action penalty, removing all rich results from your domain and de-indexing your pages.
+            </p>
+          </div>
+
+          {"/* ── Comprehensive FAQs ── */"}
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginTop: '4rem', marginBottom: '2rem' }}>Frequently Asked Questions</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q1:</span> What is JSON-LD and why does Google prefer it?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                JSON-LD (JavaScript Object Notation for Linked Data) is a lightweight format for structuring data. Google recommends JSON-LD because it can be injected dynamically into the page headers or body without altering the user-visible HTML markup, unlike legacy microdata or RDFa formats.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q2:</span> How do I verify that my generated schema is correct?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Copy the generated script block and paste it into Google's official Rich Results Test or the Schema Markup Validator. These tools will flag any missing required properties (such as author fields or publication dates) and confirm if your page qualifies for rich search results.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q3:</span> Will schema markup guarantee Rich Snippets on Google?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                No. Implementing correct schema markup is a prerequisite, but Google's algorithms ultimately decide whether to render Rich Snippets based on factors like site authority, user search intent, query context, and overall page quality.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q4:</span> How do I implement JSON-LD dynamically in Next.js?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                In Next.js, you can inject JSON-LD by rendering a script tag inside your layout or page file: `&lt;script type="application/ld+json" dangerouslySetInnerHTML={'{'}{'{'} __html: JSON.stringify(schemaObj) {'}'}{'}'} /&gt;`. This ensures the structured data is pre-rendered on the server and indexed by search bots.
+              </p>
+            </div>
           </div>
         </div>
       </section>

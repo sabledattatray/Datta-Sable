@@ -193,33 +193,96 @@ export default function MermaidForge() {
           </div>
         </section>
       </main>
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '2rem' }}>
+            <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '4rem' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
             <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
-            Mermaid Forge — Text-to-Diagram Generator for Developers
+          
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
+            Mermaid Forge — Interactive Text-to-Diagram Compiler
           </h2>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '1.25rem' }}>
-            Mermaid Forge is an online Mermaid.js diagram editor and renderer for software developers, technical writers, system architects, and data engineers. Mermaid is a JavaScript-based diagramming language that lets you create flowcharts, sequence diagrams, entity-relationship diagrams, Gantt charts, and more using plain text syntax — making diagrams versionable, diffable, and embeddable in Markdown documents and GitHub README files.
+          
+          <p style={{ fontSize: '1.05rem', color: 'var(--text)', lineHeight: 1.8, marginBottom: '1.25rem', fontWeight: 500 }} className="font-sans">
+            Mermaid Forge is an interactive visualization utility designed for developers and system architects. It compiles Mermaid markdown declarations into clean SVG diagrams client-side, enabling fast creation of flowcharts, sequence diagrams, class relationships, and Gantt tracking charts directly in your browser.
           </p>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
-            Write your Mermaid syntax in the left panel and see a live rendered diagram on the right. Export the finished diagram as an SVG or PNG for use in architecture documentation, technical specifications, onboarding guides, API design documents, or slide decks. Supported diagram types include flowchart (LR/TD), sequenceDiagram, classDiagram, erDiagram, gantt, pie, and stateDiagram.
+          
+          <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.75, marginBottom: '2.5rem' }} className="font-sans">
+            Visual system architectures are essential for technical communication and documentation. However, drawing diagrams manually is time-consuming and hard to maintain under git version control. By writing diagrams as code, developers can version-control, update, and render visual architectures dynamically, keeping documentation in sync with active repositories.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1.25rem' }}>
-            {[
-              { label: 'Live Preview', desc: 'Real-time diagram rendering as you type Mermaid syntax' },
-              { label: 'Multiple Diagram Types', desc: 'Flowcharts, sequence, ER, Gantt, class, state, and pie charts' },
-              { label: 'SVG / PNG Export', desc: 'Export diagrams in vector (SVG) or raster (PNG) formats' },
-              { label: 'GitHub Compatible', desc: 'Mermaid syntax renders natively in GitHub Markdown and GitLab' },
-            ].map(f => (
-              <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
-                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
-              </div>
-            ))}
+
+          {"/* ── Core Features Grid ── */"}
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>SVG Compilation</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Generates vector SVG graphics that scale cleanly without pixelation on high-res screens.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Syntax Validator</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Validates diagram declarations in real-time, highlighting syntax typos before compiling.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Multi-Diagram Support</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Supports Flowcharts, Sequence Diagrams, ERDs, and Gantt charts from a single compiler.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Git Integration</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Diagram definitions are plain text, making them ideal for version control commits.</div>
+            </div>
+          </div>
+
+          {"/* ── Deep Technical Sections ── */"}
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Diagrams-as-Code: Version Control and Documentation</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              Traditional image files (PNG/JPEG) are binary blobs, making it impossible to track changes or review diffs in git commits. Mermaid diagrams-as-code solves this by representing visuals as structured markdown. A developer can modify a node connection in a text file, submit a pull request, and reviewers can see the exact line change. This ensures that architectural documentation stays up-to-date alongside code modifications.
+            </p>
+          </div>
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Architectural Diagram Best Practices and Layouts</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              To maintain readability in complex diagrams, follow logical layout heuristics. Use top-down flows (`flowchart TD`) for linear processes, and left-to-right (`flowchart LR`) for sequential service integrations. Group related services using subgraphs. Avoid crossing lines by keeping nodes modular, and keep text labels inside nodes short and descriptive. Quote any labels containing special characters to prevent rendering syntax errors.
+            </p>
+          </div>
+
+          {"/* ── Comprehensive FAQs ── */"}
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginTop: '4rem', marginBottom: '2rem' }}>Frequently Asked Questions</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q1:</span> What is Mermaid and how does text-to-diagram work?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Mermaid is a Javascript-based diagramming and charting tool that uses Markdown-inspired text definitions to generate diagrams. The compiler reads your text layout definitions, calculates node coordinates, and renders an SVG image dynamically inside the web page DOM.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q2:</span> How do I render Mermaid diagrams on my personal site?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                You can embed Mermaid by importing the library via npm or CDN, initializing it on page load, and wrapping your diagram code inside a `&lt;div className="mermaid"&gt;` tag. On page load, the library parses these tags and replaces the text declarations with compiled SVG drawings.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q3:</span> What is the best way to handle layout sizing in SVGs?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Configure your Mermaid options to enable responsive scaling by setting `startOnLoad` to true and adjusting container CSS rules. Ensure that the parent container has a defined width and handles overflow correctly to prevent diagram layouts from shifting adjacent page elements.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q4:</span> How do I embed Mermaid diagrams into Next.js applications?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                You can render Mermaid diagrams in Next.js by importing the Mermaid library client-side and initializing it inside a `useEffect` hook: `mermaid.initialize({'{'} startOnLoad: true {'}'});`. Once initialized, it will automatically compile any `&lt;div class="mermaid"&gt;` tags on your page.
+              </p>
+            </div>
           </div>
         </div>
       </section>

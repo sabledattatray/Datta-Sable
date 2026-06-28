@@ -211,33 +211,96 @@ export default function ImageBlade() {
         </section>
       </main>
 
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '2rem' }}>
+            <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '4rem' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
             <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
-            Image Blade — Browser-Side Image Compression Tool
+          
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
+            Image Blade — Responsive Image and Compression Optimizer
           </h2>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '1.25rem' }}>
-            Image Blade is a free, privacy-first image compression and optimization tool that runs entirely in your browser. No uploads, no servers, no data leaving your device. Web developers, UX designers, bloggers, and digital marketers use Image Blade to reduce image file sizes before publishing to websites, CMS platforms like WordPress, or static site generators like Next.js.
+          
+          <p style={{ fontSize: '1.05rem', color: 'var(--text)', lineHeight: 1.8, marginBottom: '1.25rem', fontWeight: 500 }} className="font-sans">
+            Image Blade is a modern front-end utility designed to optimize image assets for web performance. It assists web developers, designers, and site administrators in calculating optimal dimensions, file formats, and responsive HTML sizes to minimize page load times and improve Core Web Vitals score.
           </p>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
-            Oversized images are the single largest contributor to poor web performance. Google's Largest Contentful Paint (LCP) metric is directly impacted by hero image weight. By compressing images to the optimal size and format (WebP, JPEG, PNG) before deployment, you can significantly improve page load times, reduce bandwidth costs, and achieve higher PageSpeed Insights scores without any server infrastructure.
+          
+          <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.75, marginBottom: '2.5rem' }} className="font-sans">
+            Images are often the heaviest resources on a webpage, accounting for over 60% of average page weight. Unoptimized images lead to slow page speeds, high bounce rates, and low search engine rankings. By utilizing modern compression formats (WebP/AVIF), lazy loading, and correct responsive scaling, you can significantly accelerate your website's performance.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1.25rem' }}>
-            {[
-              { label: 'Browser-Only Processing', desc: 'All compression happens on your device — zero server uploads' },
-              { label: 'WebP / JPEG / PNG', desc: 'Output in the format best suited for your deployment target' },
-              { label: 'Quality Control', desc: 'Adjustable compression quality slider from lossless to maximum savings' },
-              { label: 'Batch Compression', desc: 'Compress multiple images in one session without losing your queue' },
-            ].map(f => (
-              <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
-                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
-              </div>
-            ))}
+
+          {"/* ── Core Features Grid ── */"}
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Compression Analysis</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Calculates file sizes across JPEG, WebP, and AVIF formats to choose the best compression.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Responsive Scaler</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Recommends width configurations based on standard responsive screen breakpoints.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Metadata Stripper</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Explains how to strip unnecessary camera and EXIF metadata to shave off extra kilobytes.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>CLS Prevention Rules</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Generates correct width/height inline styles to lock layout dimensions.</div>
+            </div>
+          </div>
+
+          {"/* ── Deep Technical Sections ── */"}
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Core Web Vitals & Page Speed Engineering</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              Largest Contentful Paint (LCP) measures when the main content of a page has likely loaded. In most portfolios and landing pages, the LCP element is a hero background image. To optimize LCP, serve this image in AVIF format, set it to load with high priority (`priority` in Next.js, or `fetchpriority="high"` in HTML), and pre-render its dimensions. This ensures that browsers prioritize downloading the image before parsing heavy JavaScript bundles.
+            </p>
+          </div>
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Responsive Source Sets (srcset) and Layout Shift Prevention</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              To serve optimal images across devices, web developers must define responsive source sets. An image markup should include a list of different resolutions (`srcset`) and a helper query (`sizes`). In addition, always specify explicit `width` and `height` attributes on the image tag. This allows the browser to reserve the correct aspect ratio box in the layout flow before the image file is fetched, eliminating disruptive layout shifts.
+            </p>
+          </div>
+
+          {"/* ── Comprehensive FAQs ── */"}
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginTop: '4rem', marginBottom: '2rem' }}>Frequently Asked Questions</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q1:</span> What is the difference between WebP and AVIF formats?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                WebP is a widely supported next-generation format developed by Google, offering ~30% better compression than JPEG. AVIF is an even newer format based on the AV1 video codec, offering up to 50% better compression than JPEG with superior color reproduction and fewer compression artifacts. AVIF is supported by all modern browsers.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q2:</span> How do unoptimized images impact Core Web Vitals?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Heavy images slow down Largest Contentful Paint (LCP) because the browser takes longer to download the main visual asset. Furthermore, images without explicit width and height dimensions cause layout shifts as they load, directly hurting your Cumulative Layout Shift (CLS) score.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q3:</span> What does the 'sizes' attribute do in responsive HTML?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                The `sizes` attribute tells the browser how wide the image will render at different screen viewport widths. This allows the browser to select the most appropriate image size from the `srcset` list, avoiding downloading a massive desktop image on a small mobile device.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q4:</span> Should I always use lazy loading for all images?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Use lazy loading (`loading="lazy"`) for all images below the fold (images that are not immediately visible when the page loads). However, never use lazy loading for your primary hero image or above-the-fold assets, as this delays their loading and worsens your LCP score.
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -136,33 +136,96 @@ export default function WordCounter() {
         </section>
       </main>
 
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '2rem' }}>
+            <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0', marginTop: '4rem' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+          {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
             <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
-          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
-            Free Online Word Counter &amp; Text Analyzer
+          
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
+            Precision Word Counter & Content Density Analyzer
           </h2>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '1.25rem' }}>
-            The Word Counter tool by Datta Sable is a free, instant text analysis utility for content creators, bloggers, SEO professionals, students, and technical writers. Paste or type any text to instantly see your word count, character count (with and without spaces), sentence count, and estimated reading time — all calculated in real time without sending your data to any server.
+          
+          <p style={{ fontSize: '1.05rem', color: 'var(--text)', lineHeight: 1.8, marginBottom: '1.25rem', fontWeight: 500 }} className="font-sans">
+            The Word Counter by Datta Sable is a professional-grade text analysis utility built for content developers, technical copywriters, SEO architects, and web publishers who require granular formatting metadata. It runs entirely client-side, ensuring data privacy and zero network delay while computing metrics like total word count, character footprint (with and without whitespace), sentence count, and reading duration.
           </p>
-          <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
-            Whether you are writing a LinkedIn post (optimal length: 150–300 words), a blog article (1,500–2,500 words for SEO), a college essay with a strict word limit, or a technical specification document, this tool gives you immediate feedback on your content length and readability metrics.
+          
+          <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.75, marginBottom: '2.5rem' }} className="font-sans">
+            In modern SEO and digital publishing, text length and structure are critical factors for keyword relevance, readability, and user engagement. High-quality content must be written with the right density and length constraints to optimize search visibility without keyword stuffing. This counter serves as an immediate validator for metadata lengths, blog structures, and script drafts.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1.25rem' }}>
-            {[
-              { label: 'Word Count', desc: 'Accurate real-time word count for any length of text' },
-              { label: 'Character Count', desc: 'Total characters with and without spaces' },
-              { label: 'Sentence Count', desc: 'Counts full stops, exclamation marks, and question marks' },
-              { label: 'Reading Time', desc: 'Estimated at 225 words per minute — average adult reading speed' },
-            ].map(f => (
-              <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
-                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
-              </div>
-            ))}
+
+          {"/* ── Core Features Grid ── */"}
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>LSI Keyword Balancing</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Helps keep track of text length so you can balance core topic coverage with semantic search terms.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Reading Pace Metrics</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Provides estimated reading times to help structure blog posts for optimal reader retention.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Metadata Constraints</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Perfect for checking title tags and meta descriptions against search engine characters limits.</div>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Zero Server Tracking</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Data is processed entirely inside your local browser sandbox, providing absolute security for draft copy.</div>
+            </div>
+          </div>
+
+          {"/* ── Deep Technical Sections ── */"}
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>SEO Content Architecture & Length Strategies</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              When writing for the web, structuring your content determines how Google's crawler interprets hierarchy. Begin with a single H1 tag, followed by a logical progression of H2 and H3 tags. Word count should follow the complexity of the topic. If you are writing a comprehensive tutorial, aim for 2,000+ words to ensure all user search intents are met. For a simple FAQ, 600 words with structured schemas is ideal. Always prioritize semantic completeness over arbitrary word goals.
+            </p>
+          </div>
+          <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Topical Authority and GSC Benchmarks</h3>
+            <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
+              Google Search Console (GSC) metrics show that pages with comprehensive coverage of a topic receive significantly more impressions and higher click-through rates (CTR). To build topical authority, group your articles into semantic clusters. Link short-form glossary entries back to long-form pillar articles. Use this word counter to verify that your pillar pages have the required depth (1,500+ words) to compete for high-volume keywords.
+            </p>
+          </div>
+
+          {"/* ── Comprehensive FAQs ── */"}
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginTop: '4rem', marginBottom: '2rem' }}>Frequently Asked Questions</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q1:</span> Does content length directly affect Google rankings?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Google has repeatedly stated that word count is not a direct ranking factor. However, there is a strong correlation between long-form content (1,500 - 3,000 words) and higher search engine rankings. This is because longer articles tend to cover topics in greater depth, answer more user queries, and naturally incorporate a wider range of relevant LSI (Latent Semantic Indexing) keywords, building stronger topical authority.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q2:</span> What are the optimal word counts for different digital platforms?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                For standard SEO blog posts, aim for 1,500 to 2,500 words. For short news articles, 500 to 800 words is sufficient. LinkedIn posts perform best when they are concise and readable, usually between 100 and 300 words. Meta descriptions should stay under 150-160 characters (approximately 25 words) to avoid truncation on the search engine results page (SERP).
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q3:</span> How is the reading time metric calculated?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                The estimated reading time is calculated based on the average adult reading speed of 225 words per minute (WPM) for technical or business content. If your text contains highly complex formulas or code samples, the actual reading time may be higher, but this metric provides a solid baseline for editorial planning and user experience optimization.
+              </p>
+            </div>
+            <div style={{ paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+                <span style={{ color: 'var(--accent)' }} className="mono">Q4:</span> What is keyword density and how do I prevent stuffing?
+              </h4>
+              <p style={{ fontSize: '0.96rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.5rem' }} className="font-sans">
+                Keyword density represents the percentage of times a target keyword appears relative to the total word count. SEO best practices suggest maintaining a keyword density between 1% and 2%. Exceeding this range is considered keyword stuffing, which triggers search engine spam filters and harms rankings. Focus on writing natural, user-centric copy instead.
+              </p>
+            </div>
           </div>
         </div>
       </section>
