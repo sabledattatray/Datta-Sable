@@ -264,5 +264,98 @@ model SystemSetting {
   updatedAt DateTime @updatedAt
 }
 
+model Cohort {
+  id         String              @id @default(cuid())
+  name       String              @unique // Batch 1 - July 2026, Weekend Cohort
+  status     String              @default("ACTIVE") // ACTIVE, COMPLETED, UPCOMING
+  requests   MentorshipRequest[]
+  createdAt  DateTime            @default(now())
+}
+
+model CareerTrack {
+  id          String              @id @default(cuid())
+  name        String              @unique // Azure Data Engineer, Microsoft Fabric Engineer, etc.
+  description String?             @db.Text
+  requests    MentorshipRequest[]
+  createdAt   DateTime            @default(now())
+}
+
+model MentorshipRequest {
+  id                String               @id @default(cuid())
+  fullName          String
+  email             String               @unique
+  linkedin          String
+  experience        String               // Years of experience
+  targetRole        String               // Target role
+  challenge         String               @db.Text // Biggest challenge
+  resumeUrl         String?              // File path
+  cohortId          String?
+  cohort            Cohort?              @relation(fields: [cohortId], references: [id], onDelete: SetNull)
+  trackId           String?
+  track             CareerTrack?         @relation(fields: [trackId], references: [id], onDelete: SetNull)
+  status            String               @default("Applied") // Applied, Resume Reviewed, Learning, Project Completed, Mock Interview, Interview Scheduled, Offer Received, Placed
+  isComebackProgram Boolean              @default(false) // Career Comeback Program flag
+  mentorNotes       String?              @db.Text // Simple notes fallback
+  feedbackTimeline  MentorshipFeedback[]
+  progress          MentorshipProgress[]
+  projects          SubmittedProject[]
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+}
+
+model MentorshipFeedback {
+  id           String            @id @default(cuid())
+  mentorshipId String
+  content      String            @db.Text
+  createdAt    DateTime          @default(now())
+  mentorship   MentorshipRequest @relation(fields: [mentorshipId], references: [id], onDelete: Cascade)
+}
+
+model MentorshipProgress {
+  id           String            @id @default(cuid())
+  mentorshipId String
+  week         Int               @default(1)
+  moduleName   String            // e.g. SQL, Python, PySpark, ADF, Fabric
+  completed    Boolean           @default(false)
+  completedAt  DateTime?
+  mentorship   MentorshipRequest @relation(fields: [mentorshipId], references: [id], onDelete: Cascade)
+}
+
+model SubmittedProject {
+  id           String            @id @default(cuid())
+  mentorshipId String
+  title        String            // Project Name
+  repoUrl      String            // Repository
+  demoUrl      String?           // Live Demo link
+  architectureUrl String?        // Architecture diagram image path
+  description  String            @db.Text
+  status       String            @default("Pending") // Pending, Reviewed, Approved
+  rating       Float?            // Rating (e.g. 4.5/5)
+  showcase     Boolean           @default(false) // Public showcase opt-in
+  feedback     String?           @db.Text
+  technologies String            // Comma-separated tech list
+  createdAt    DateTime          @default(now())
+  mentorship   MentorshipRequest @relation(fields: [mentorshipId], references: [id], onDelete: Cascade)
+}
+
+model MentorshipResource {
+  id          String   @id @default(cuid())
+  title       String
+  category    String   // Roadmap, Template, Guide, Checklist
+  description String?  @db.Text
+  downloadUrl String   // Local path or external URL
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MentorshipToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
 
 
