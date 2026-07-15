@@ -1,3 +1,4 @@
+import { microsoftFabricOneLakeArchitectureGuidePost } from "./posts/microsoft-fabric-onelake-architecture-guide";
 import { executionChainInfrastructureExplainedPost } from "./posts/execution-chain-infrastructure-explained";
 import { buildingModularAiWorkflowSystemsPost } from "./posts/building-modular-ai-workflow-systems";
 import { caseStudyN8nAutomatedAuthorityScalingPost } from "./posts/case-study-n8n-automated-authority-scaling";
@@ -45,6 +46,7 @@ import { microsoftFabricMedallionArchitectureGuidePost } from "./posts/microsoft
 import { architectingCompoundAiSystemsMicrosoftFabricPost } from "./posts/architecting-compound-ai-systems-microsoft-fabric";
 import { newCertificationPosts } from "./certificationPosts";
 export const posts = [
+  microsoftFabricOneLakeArchitectureGuidePost,
   microsoftFabricArchitectureExplained2026Post,
   chatgptForDevelopersIReplaced12DeveloperToolsFor30DaysPost,
   whyMicrosoftFabricSkillsWillDominateTheDataIndustryIn2026Post,
