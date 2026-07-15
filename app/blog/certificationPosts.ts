@@ -75,7 +75,7 @@ export const newCertificationPosts = [
 
 <h2 id="roadmap">Step-by-Step 6-Week Study Roadmap</h2>
 <ul>
-  <li><strong>Week 1: OneLake and Fabric Workspace Governance</strong> - Study workspace roles, domains, capacity settings, and deployment pipelines. Understand the difference between Lakehouse Files and Tables.</li>
+  <li><strong>Week 1: OneLake and Fabric Workspace Governance</strong> - Study workspace roles, domains, capacity settings, and deployment pipelines. Understand the difference between Lakehouse Files and Tables. For the deepest technical grounding on OneLake, start with our <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake Architecture Guide</a> — it covers Delta Lake, V-Order, Shortcuts, Mirroring, and Direct Lake at the level the DP-600 expects.</li>
   <li><strong>Week 2: Data Transformation with Dataflows Gen2 and Spark</strong> - Learn when to use low-code Dataflows Gen2 vs code-first PySpark Notebooks. Practice writing PySpark code to read files and write to Delta Tables.</li>
   <li><strong>Week 3: Data Warehousing & T-SQL</strong> - Master T-SQL querying, stored procedures, views, and cross-database queries inside the Fabric Data Warehouse.</li>
   <li><strong>Week 4: Semantic Modeling & Direct Lake</strong> - Learn how to build Star Schemas in Fabric, configure relationships, and configure Direct Lake mode.</li>

@@ -42,7 +42,7 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
         </pre>
       </div>
 
-      <p>Fabric decouples computing from storage by introducing <strong>OneLake</strong>—a single, logical, multi-cloud data lake built on the open Delta Parquet format. Underneath the unified interface lie several key computing engines:</p>
+      <p>Fabric decouples computing from storage by introducing <strong>OneLake</strong>—a single, logical, multi-cloud data lake built on the open Delta Parquet format. OneLake is the storage foundation that every Fabric workload reads and writes to — understanding it in depth is essential before designing a Medallion Architecture. Our <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake Architecture Guide</a> covers Delta Lake internals, Shortcuts, Mirroring, and Direct Lake in full technical detail. Underneath the unified interface lie several key computing engines:</p>
       <ul>
         <li><strong>Lakehouse:</strong> A unified storage layer combining the scale of a data lake with the ACID transaction guarantees of a database.</li>
         <li><strong>Data Factory (Pipelines and Dataflows Gen2):</strong> The low-code ingestion and orchestration engines.</li>

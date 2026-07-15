@@ -250,7 +250,7 @@ export const whyMicrosoftFabricSkillsWillDominateTheDataIndustryIn2026Post = {
 
 <h2 id="architecture-flow" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Visualizing the OneLake Architecture Flow</h2>
 
-<p>To succeed in certifications like DP-600 and DP-700, you must understand the data flow within Fabric. The architecture relies on OneLake acting as the single source of truth, with specialized engines running downstream analytics queries without copying files:</p>
+<p>To succeed in certifications like DP-600 and DP-700, you must understand the data flow within Fabric. The architecture relies on OneLake acting as the single source of truth, with specialized engines running downstream analytics queries without copying files. For a complete technical deep-dive into OneLake's architecture — including Delta Lake foundations, V-Order, Shortcuts, Mirroring, Direct Lake, security, and migration paths — see our comprehensive <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake Architecture Guide</a>:</p>
 
 <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
   <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
