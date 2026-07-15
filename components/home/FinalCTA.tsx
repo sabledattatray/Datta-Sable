@@ -77,6 +77,7 @@ export default function FinalCTA() {
                   <input
                     type="email"
                     required
+                    aria-label="Email address for weekly tutorial"
                     placeholder="Enter your professional email..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

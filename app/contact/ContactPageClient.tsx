@@ -172,8 +172,9 @@ export default function ContactPageClient() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '1rem' }}>
                       {[{ name: 'name', label: 'Your Name', type: 'text' }, { name: 'email', label: 'Email Address', type: 'email' }].map(field => (
                         <div key={field.name}>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{field.label}</label>
+                          <label htmlFor={`contact-${field.name}`} style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{field.label}</label>
                           <input
+                            id={`contact-${field.name}`}
                             type={field.type} name={field.name} value={form[field.name as keyof typeof form]} onChange={handleChange} required
                             style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif' }}
                           />
@@ -181,8 +182,8 @@ export default function ContactPageClient() {
                       ))}
                     </div>
                     <div>
-                      <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
-                      <select name="subject" value={form.subject} onChange={handleChange}
+                      <label htmlFor="contact-subject" style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
+                      <select id="contact-subject" name="subject" value={form.subject} onChange={handleChange}
                         style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: form.subject ? 'var(--text)' : 'var(--muted)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif' }}>
                         <option value="">Select a topic...</option>
                         <option value="Dashboard Development">Dashboard Development</option>
@@ -192,8 +193,8 @@ export default function ContactPageClient() {
                       </select>
                     </div>
                     <div>
-                      <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
-                      <textarea name="message" value={form.message} onChange={handleChange} required rows={5}
+                      <label htmlFor="contact-message" style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
+                      <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} required rows={5}
                         style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif', resize: 'vertical' }}
                       />
                     </div>

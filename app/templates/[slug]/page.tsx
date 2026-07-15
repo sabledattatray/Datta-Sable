@@ -28,9 +28,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!template) return { title: 'Template Not Found' };
   
+  // Holistic evaluation of indexability (word count, utility role, search intent)
+  const wordCount = ((template.detailedExplanation || '') + ' ' + (template.description || '')).split(/\s+/).filter(Boolean).length;
+  const isUtility = (template as any).isUtility ?? false;
+  const hasUniqueValue = (template as any).hasUniqueValue ?? true;
+  const hasSearchIntent = (template as any).hasSearchIntent ?? true;
+  const isLandingPage = (template as any).isLandingPage ?? true;
+  
+  const noindex = (template as any).noindex === true || (
+    isUtility && wordCount < 200 && !isLandingPage && !hasSearchIntent
+  );
+  
   return {
     title: `${template.title} | Surgical AI Blueprint`,
     description: template.description,
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

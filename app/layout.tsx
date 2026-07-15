@@ -76,7 +76,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const nonce = headerList.get('x-nonce') || undefined;
 
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning className="dark" nonce={nonce}>
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content={formattedAdsenseId} />
@@ -87,15 +87,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preload" href="/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/jetbrains-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-
-        {/* ✅ Google AdSense Auto-Ads — required for AdSense crawlers to detect ad slots */}
-        <Script
-          id="adsense-auto-ads"
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
 
         <script
           nonce={nonce}
@@ -232,6 +223,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <PerformanceOptimizer
               googleAnalyticsId="G-Q4GEY4N9WN"
               googleSignInClientId={process.env.GOOGLE_ID || ""}
+              nonce={nonce}
             />
           </ThemeProvider>
         </Providers>

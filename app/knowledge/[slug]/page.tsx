@@ -30,9 +30,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   const finalTitle = article.title.length > 50 ? article.title : `${article.title} | Datta Sable`;
   
+  // Holistic evaluation of indexability (word count, utility role, search intent)
+  const wordCount = (article.content || '').split(/\s+/).filter(Boolean).length;
+  const isUtility = (article as any).isUtility ?? false; 
+  const hasUniqueValue = (article as any).hasUniqueValue ?? true;
+  const hasSearchIntent = (article as any).hasSearchIntent ?? true;
+  const isLandingPage = (article as any).isLandingPage ?? true;
+  
+  const noindex = (article as any).noindex === true || (
+    isUtility && wordCount < 200 && !isLandingPage && !hasSearchIntent
+  );
+  
   return {
     title: { absolute: finalTitle },
     description: article.description,
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

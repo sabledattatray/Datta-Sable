@@ -17,9 +17,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!chain) return { title: 'Chain Not Found' };
   
+  // Holistic evaluation of indexability (word count, utility role, search intent)
+  const wordCount = (chain.description || '').split(/\s+/).filter(Boolean).length;
+  const isUtility = (chain as any).isUtility ?? true; // Defaults to true for interactive execution node utilities
+  const hasUniqueValue = (chain as any).hasUniqueValue ?? false;
+  const hasSearchIntent = (chain as any).hasSearchIntent ?? false;
+  const isLandingPage = (chain as any).isLandingPage ?? false;
+  
+  const noindex = (chain as any).noindex === true || (
+    isUtility && wordCount < 200 && !isLandingPage && !hasSearchIntent
+  );
+  
   return {
     title: `${chain.title} | Execution Chain`,
     description: chain.description,
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

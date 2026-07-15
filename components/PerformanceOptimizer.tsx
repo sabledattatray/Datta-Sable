@@ -8,11 +8,13 @@ import GoogleAnalytics from './GoogleAnalytics';
 interface PerformanceOptimizerProps {
   googleAnalyticsId: string;
   googleSignInClientId: string;
+  nonce?: string;
 }
 
 export default function PerformanceOptimizer({
   googleAnalyticsId,
   googleSignInClientId,
+  nonce,
 }: PerformanceOptimizerProps) {
   const [loadAdSense, setLoadAdSense] = useState(false);
   const [loadAnalytics, setLoadAnalytics] = useState(false);
@@ -95,6 +97,7 @@ export default function PerformanceOptimizer({
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
           crossOrigin="anonymous"
           strategy="afterInteractive"
+          nonce={nonce}
         />
       )}
       {loadAnalytics && (
@@ -102,11 +105,12 @@ export default function PerformanceOptimizer({
           <Suspense fallback={null}>
             <AnalyticsTracker />
           </Suspense>
-          <GoogleAnalytics id={googleAnalyticsId} />
+          <GoogleAnalytics id={googleAnalyticsId} nonce={nonce} />
 
           <Script 
             src="https://accounts.google.com/gsi/client" 
             strategy="lazyOnload"
+            nonce={nonce}
           />
         </>
       )}

@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { HelpCircle, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import SchemaScript from '@/components/SchemaScript';
 
 const faqs = [
   {
@@ -56,18 +57,22 @@ const faqs = [
   }
 ];
 
-function FAQItem({ q, a }: { q: string, a: string }) {
+function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = `faq-panel-${index}`;
   return (
     <div style={{ borderBottom: '1px solid var(--border)', padding: '1.5rem 0' }}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
         style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         <span style={{ fontSize: '1rem', color: 'var(--text)', fontWeight: 600, lineHeight: 1.5 }}>{q}</span>
         <ChevronDown size={20} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s', color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
       </button>
       <motion.div
+        id={panelId}
         initial={false}
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         style={{ overflow: 'hidden' }}
@@ -93,10 +98,25 @@ export default function FAQPage() {
         </p>
         <div style={{ marginTop: '2rem' }}>
           {faqs.map((faq, index) => (
-            <FAQItem key={index} q={faq.q} a={faq.a} />
+            <FAQItem key={index} q={faq.q} a={faq.a} index={index} />
           ))}
         </div>
       </div>
+
+      <SchemaScript
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.a
+            }
+          }))
+        }}
+      />
 
       {/* Editorial Section */}
       <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0' }}>
