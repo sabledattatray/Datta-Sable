@@ -559,13 +559,11 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
                 "interactionType": { "@type": "WatchAction" },
                 "userInteractionCount": 1250
               },
-              "potentialAction": {
+              "potentialAction": localVideoUrl ? {
                 "@type": "SeekToAction",
-                "target": youtubeId 
-                  ? `https://dattasable.com/blog/${post.slug}?t={seek_to_second_number}` 
-                  : `${getAbsoluteUrl(localVideoUrl || '')}?t={seek_to_second_number}`,
+                "target": `${getAbsoluteUrl(localVideoUrl)}?t={seek_to_second_number}`,
                 "startOffset-input": "required name=seek_to_second_number"
-              }
+              } : undefined
             };
 
             return (

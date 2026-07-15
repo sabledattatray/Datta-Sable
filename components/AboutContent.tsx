@@ -488,7 +488,6 @@ export default function AboutContent() {
         </div>
       </div>
       <Footer />
-      {/* ── VideoObject Schema (SEO) ── */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -509,11 +508,6 @@ export default function AboutContent() {
               "@type": "InteractionCounter",
               "interactionType": { "@type": "WatchAction" },
               "userInteractionCount": 9450
-            },
-            "potentialAction": {
-              "@type": "SeekToAction",
-              "target": "https://dattasable.com/about?t={seek_to_second_number}",
-              "startOffset-input": "required name=seek_to_second_number"
             }
           })
         }}

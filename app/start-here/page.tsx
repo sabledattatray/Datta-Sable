@@ -191,7 +191,6 @@ export default async function StartHerePage() {
         </div>
       </div>
       <Footer />
-      {/* ── VideoObject Schema (SEO) ── */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -212,11 +211,6 @@ export default async function StartHerePage() {
               "@type": "InteractionCounter",
               "interactionType": { "@type": "WatchAction" },
               "userInteractionCount": 9200
-            },
-            "potentialAction": {
-              "@type": "SeekToAction",
-              "target": "https://dattasable.com/start-here?t={seek_to_second_number}",
-              "startOffset-input": "required name=seek_to_second_number"
             }
           })
         }}
