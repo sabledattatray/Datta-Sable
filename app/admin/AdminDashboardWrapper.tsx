@@ -287,7 +287,25 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
 
   useEffect(() => {
     setIsMobileOpen(false);
+    setNotifOpen(false);
+    setProfileOpen(false);
   }, [pathname]);
+
+  // Close dropdown menus when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setNotifOpen(false);
+      setProfileOpen(false);
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('click', handleClickOutside);
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('click', handleClickOutside);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const close = () => { setProfileOpen(false); setNotifOpen(false); };
