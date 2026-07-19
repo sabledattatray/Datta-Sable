@@ -32,13 +32,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // 1b. Fetch DB custom pages (if any)
+  // 1b. Fetch DB custom pages (High-value custom pages only)
+  const THIN_UTILITY_SLUGS = new Set(['cookies', 'privacy', 'terms', 'disclaimer', 'careers', 'infrastructure', 'faq', 'editorial-policy']);
   const dbPages = await prisma.page.findMany({
     where: { published: true },
     select: { slug: true, updatedAt: true }
   }).catch(() => []);
 
-  const dbCustomPageUrls = dbPages.map((page) => ({
+  const filteredDbPages = dbPages.filter(p => !THIN_UTILITY_SLUGS.has(p.slug));
+
+  const dbCustomPageUrls = filteredDbPages.map((page) => ({
     url: `${baseUrl}/p/${page.slug}`,
     lastModified: page.updatedAt,
     changeFrequency: 'weekly' as const,
