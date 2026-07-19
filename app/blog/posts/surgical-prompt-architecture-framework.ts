@@ -16,7 +16,7 @@ export const surgicalPromptArchitectureFrameworkPost = {
 </div>
 <!-- BREADCRUMB_END -->
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <p>Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">Prompt</a> Architecture™ is an engineering framework designed to treat LLM prompts as structured code. By utilizing rigid syntactic dividers, typed interfaces, and validation schemas, it ensures consistent outputs.</p>
+        <p>Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">Prompt</a> Architecture™ is an engineering framework designed to treat LLM prompts as structured code. By utilizing rigid syntactic dividers, typed interfaces, and validation schemas, it ensures consistent outputs.</p>
       </div>
  
       <div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
@@ -38,7 +38,7 @@ export const surgicalPromptArchitectureFrameworkPost = {
       </div>
  
       <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. The Anatomy of a Structured System Prompt</h2>
-      <p>Traditional conversational prompts lack clear boundaries, leading to model drift and variable formatting. Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">Prompt</a> Architecture™ establishes strict partitions: system role, instruction blocks, metadata variables, examples, and output schemas. Each partition is enclosed in XML tags, allowing the model's attention mechanism to index instructions accurately.</p>
+      <p>Traditional conversational prompts lack clear boundaries, leading to model drift and variable formatting. Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a> Architecture™ establishes strict partitions: system role, instruction blocks, metadata variables, examples, and output schemas. Each partition is enclosed in XML tags, allowing the model's attention mechanism to index instructions accurately.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Building a Surgical Prompt Compiler in TypeScript</h2>
       <p>Below is a TypeScript class that dynamically compiles values into a structured Surgical prompt template:</p>

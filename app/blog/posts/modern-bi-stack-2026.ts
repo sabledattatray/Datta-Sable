@@ -38,7 +38,7 @@ export const modernBiStack2026Post = {
       </div>
  
       <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. The Evolution of Decoupled Data Stacks</h2>
-      <p>Modern data architectures avoid hardcoded ETL scripts. We use dedicated toolsets: Fivetran/Airbyte for ingestion, Snowflake/Fabric <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> for storage, DBT for transformations, and Prefect/Airflow for orchestration. This decoupled stack ensures high availability and modular scaling.</p>
+      <p>Modern data architectures avoid hardcoded ETL scripts. We use dedicated toolsets: Fivetran/Airbyte for ingestion, Snowflake/Fabric <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake Architecture Explained">OneLake</a> for storage, DBT for transformations, and Prefect/Airflow for orchestration. This decoupled stack ensures high availability and modular scaling.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Designing an Ingestion Flow in DBT</h2>
       <p>Let's write a modular DBT model that cleans and normalizes transactional records for downstream reporting:</p>

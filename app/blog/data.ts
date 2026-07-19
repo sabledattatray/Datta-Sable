@@ -1,4 +1,4 @@
-﻿import { microsoftFabricPricingGuide2026Post } from "./posts/microsoft-fabric-pricing-guide-2026";
+import { microsoftFabricPricingGuide2026Post } from "./posts/microsoft-fabric-pricing-guide-2026";
 import { microsoftFabricOneLakeArchitectureGuidePost } from "./posts/microsoft-fabric-onelake-architecture-guide";
 import { executionChainInfrastructureExplainedPost } from "./posts/execution-chain-infrastructure-explained";
 import { buildingModularAiWorkflowSystemsPost } from "./posts/building-modular-ai-workflow-systems";
@@ -525,7 +525,7 @@ D -->|Direct Lake Connection| E[Power BI Reporting Layer]
 <p><strong>Cons:</strong> Rapidly changing toolset; requires constant upskilling; tool documentation can be sparse since many database AI extensions are newly released.</p>
 
 <div style="background: rgba(201, 243, 29, 0.05); padding: 1.25rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;">
-  <strong>💡 AI Integration Insight:</strong> If you are interested in building advanced agent workflows that combine database schemas with multi-agent orchestration, read our deep-dive on <a href="/blog/compound-ai-systems-fabric-2026">Building Compound AI Systems in Microsoft Fabric</a>.
+  <strong>💡 AI Integration Insight:</strong> If you are interested in building advanced agent workflows that combine database schemas with multi-agent orchestration, read our deep-dive on <a href="/blog/architecting-compound-ai-systems-microsoft-fabric">Building Compound AI Systems in Microsoft Fabric</a>.
 </div>
 
 ---

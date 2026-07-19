@@ -41,7 +41,7 @@ export const caseStudyContextCompressionTokenWastePost = {
       <p>In Retrieval-Augmented Generation (RAG) and chat history pipelines, systems often pass large chunks of raw documents to the model. Much of this text is conversational fluff or repetitive vocabulary. Context compression dynamically parses input text, removes low-information words, and optimizes the payload before sending it to the LLM.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Setting Up an Information-Density Filter in Node.js</h2>
-      <p>We can implement a basic keyword-density context compressor that prunes low-value sentences from retrieved text blocks before compiling the <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a>:</p>
+      <p>We can implement a basic keyword-density context compressor that prunes low-value sentences from retrieved text blocks before compiling the <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">prompt</a>:</p>
       <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">function compressContext(rawDocument: string, queryKeywords: string[]): string {
   const sentences = rawDocument.split(/[.!?]/);
   const matchedSentences = sentences.filter(sentence =&gt; {
@@ -95,7 +95,7 @@ export const caseStudyContextCompressionTokenWastePost = {
       <h2 id="best-practices-ops" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">7. Production Best Practices</h2>
       <p>When implementing these methods in live environments, make sure your team adheres to the following checklist:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
-        <li><strong>Filter</strong> out common stop words and system boilerplate from RAG documents.</li><li><strong>Leverage</strong> <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> caching for static instructions and system rules.</li><li><strong>Implement</strong> client-side token counting to intercept oversized requests.</li><li><strong>Use</strong> reranking models (like Cohere Rerank) to prioritize only high-value documents.</li>
+        <li><strong>Filter</strong> out common stop words and system boilerplate from RAG documents.</li><li><strong>Leverage</strong> prompt caching for static instructions and system rules.</li><li><strong>Implement</strong> client-side token counting to intercept oversized requests.</li><li><strong>Use</strong> reranking models (like Cohere Rerank) to prioritize only high-value documents.</li>
       </ul>
  
       <h2 id="expert-view" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">8. Architectural Insight</h2>

@@ -20,14 +20,14 @@ export const newCertificationPosts = [
 </div>
 <!-- BREADCRUMB_END -->
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
-  <p><strong>Planning your Microsoft Fabric Certification Roadmap 2026?</strong> This comprehensive guide maps out your learning path across Microsoft's certifications, including DP-600, <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;">DP-700</a>, and DP-800. Learn where to start based on your role, find study plans, and discover campaigns offering free vouchers.</p>
+  <p><strong>Planning your Microsoft Fabric Certification Roadmap 2026?</strong> This comprehensive guide maps out your learning path across Microsoft's certifications, including <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-600 Study Guide">DP-600</a>, DP-700, and DP-800. Learn where to start based on your role, find study plans, and discover campaigns offering free vouchers.</p>
 </div>
 
-<p>The <strong>Microsoft Fabric Certification Roadmap 2026</strong> is the blueprint for data professionals. As companies unify their data operations in <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a>, earning these certifications validates your ability to deploy analytics solutions.</p>
+<p>The <strong>Microsoft Fabric Certification Roadmap 2026</strong> is the blueprint for data professionals. As companies unify their data operations in <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake Architecture Explained">OneLake</a>, earning these certifications validates your ability to deploy analytics solutions.</p>
 
 <h2 id="learning-path">The Certification Pathways</h2>
 <ul>
-  <li><strong>Analytics Engineer Pathway:</strong> Start with PL-300 (Power BI), then advance to the <a href="/blog/dp-600-study-guide-2026">Complete DP-600 Study Guide</a> to master semantic models and <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a>.</li>
+  <li><strong>Analytics Engineer Pathway:</strong> Start with PL-300 (Power BI), then advance to the <a href="/blog/dp-600-study-guide-2026">Complete DP-600 Study Guide</a> to master semantic models and <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake Explained">Direct Lake</a>.</li>
   <li><strong>Data Engineer Pathway:</strong> Start with cloud fundamentals, then progress to the <a href="/blog/dp-700-study-guide-2026">Complete DP-700 Study Guide</a> to master Spark and data pipelines.</li>
   <li><strong>SQL AI Developer Pathway:</strong> Focus on database development, then complete the <a href="/blog/dp-800-study-guide">Complete DP-800 Study Guide</a> to learn vector search and OpenAI integrations.</li>
 </ul>
@@ -44,17 +44,17 @@ export const newCertificationPosts = [
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-600 (Analytics Engineer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;"><a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> (Analytics Engineer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">BI Developer, Power BI Analyst</td>
-        <td style="padding: 12px;"><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a>, semantic modeling, star schemas, DAX.</td>
+        <td style="padding: 12px;">Direct Lake, semantic modeling, star schemas, DAX.</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-700 (Data Engineer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;"><a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-700 Certification Guide">DP-700</a> (Data Engineer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">Data Engineer, ETL Developer</td>
-        <td style="padding: 12px;">Spark notebooks, pipeline orchestration, <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> security.</td>
+        <td style="padding: 12px;">Spark notebooks, pipeline orchestration, OneLake security.</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-800 (SQL AI Developer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;"><a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Solution Architect certification path">DP-800</a> (SQL AI Developer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">SQL Developer, Database Developer</td>
         <td style="padding: 12px;">Vector search, OpenAI integrations, RAG database structures.</td>
       </tr>
@@ -75,8 +75,8 @@ export const newCertificationPosts = [
   <li><strong>Can I take the exams online?</strong> Yes, they can be scheduled online via Pearson VUE.</li>
   <li><strong>Is the DP-800 exam part of Fabric?</strong> The DP-800 covers SQL AI development, which applies to Azure SQL Database and SQL components within Fabric.</li>
   <li><strong>Are there code questions on the exams?</strong> Yes, you will be tested on SQL, PySpark, and DAX syntax where relevant.</li>
-  <li><strong>What is OneLake?</strong> OneLake is the SaaS data lake that stores all Fabric files in open-source Delta Parquet format.</li>
-  <li><strong>Are these certifications valued by employers?</strong> Yes, they are highly valued as <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Microsoft Fabric</a> adoption grows.</li>
+  <li><strong>What is OneLake?</strong> <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> is the SaaS data lake that stores all Fabric files in open-source Delta Parquet format.</li>
+  <li><strong>Are these certifications valued by employers?</strong> Yes, they are highly valued as <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Architecture Guide">Microsoft Fabric</a> adoption grows.</li>
   <li><strong>Can I use documentation during the exam?</strong> Yes, Microsoft associate exams include access to Microsoft Learn.</li>
   <li><strong>What is the difference between DP-700 and DP-203?</strong> DP-203 covers PaaS cloud services. DP-700 covers the unified SaaS Fabric environment.</li>
   <li><strong>What is mirroring?</strong> Mirroring replicates data from external databases directly into OneLake in real-time.</li>

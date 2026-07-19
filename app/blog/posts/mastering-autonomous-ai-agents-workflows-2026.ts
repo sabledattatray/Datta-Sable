@@ -88,7 +88,7 @@ export const masteringAutonomousAiAgentsWorkflows2026Post = {
           </tr>
           <tr style="border-bottom: 1px solid var(--border);">
             <td style="padding: 10px; border-right: 1px solid var(--border); font-weight: bold;">Output Quality</td>
-            <td style="padding: 10px; border-right: 1px solid var(--border);">Variable (depends on input <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a>)</td>
+            <td style="padding: 10px; border-right: 1px solid var(--border);">Variable (depends on input <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">prompt</a>)</td>
             <td style="padding: 10px;">High (verified by reflection nodes)</td>
           </tr>
         </tbody>

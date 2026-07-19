@@ -53,14 +53,14 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h2 id="executive-summary" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">1. Executive Summary</h2>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Microsoft Fabric pricing is deceptively simple on the surface: you buy capacity, you use it, you pay for what you buy. In practice, getting this right requires a working understanding of how Capacity Units are consumed across seven distinct workload types simultaneously, how Microsoft's smoothing algorithm prevents short-duration bursts from immediately triggering throttling, and why a team that bought an F64 last year is now running out of CUs after adding three Power BI Semantic Models.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Architecture Guide">Microsoft Fabric</a> pricing is deceptively simple on the surface: you buy capacity, you use it, you pay for what you buy. In practice, getting this right requires a working understanding of how Capacity Units are consumed across seven distinct workload types simultaneously, how Microsoft's smoothing algorithm prevents short-duration bursts from immediately triggering throttling, and why a team that bought an F64 last year is now running out of CUs after adding three Power BI Semantic Models.</p>
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">I've designed Fabric platforms for enterprises across manufacturing, retail, banking, and healthcare over the past two years. The pricing and capacity questions are almost always the same: "We're paying $X per month — is that right? How many users can we support? Will adding another Spark workload break our dashboards?" This guide is the reference I wish had existed when I started these conversations.</p>
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Here is the high-level picture before we go deep:</p>
 
 <ul style="line-height: 1.8; padding-left: 1.5rem; margin-bottom: 1.5rem; color: var(--muted);">
-  <li><strong>Microsoft Fabric is a SaaS analytics platform</strong> that consolidates data engineering, data science, warehousing, real-time analytics, and Power BI under one roof with one storage layer (OneLake) and one compute billing model (Capacity Units).</li>
+  <li><strong>Microsoft Fabric is a SaaS analytics platform</strong> that consolidates data engineering, data science, warehousing, real-time analytics, and Power BI under one roof with one storage layer (<a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake Architecture Explained">OneLake</a>) and one compute billing model (Capacity Units).</li>
   <li><strong>All compute workloads share a single CU pool.</strong> Spark jobs, SQL queries, Power BI report refreshes, Data Factory pipelines, and Real-Time Intelligence all draw from the same capacity pool you purchased.</li>
   <li><strong>F-SKUs range from F2 to F2048.</strong> F2 costs roughly $262/month and suits small PoCs. F2048 costs around $268,000/month and serves the largest global enterprises. Most production deployments land between F8 and F128.</li>
   <li><strong>Storage is billed separately</strong> at approximately $0.023 per GB/month — usually a rounding error compared to compute costs.</li>
@@ -68,7 +68,7 @@ export const microsoftFabricPricingGuide2026Post = {
   <li><strong>Pausing and resuming capacity</strong> eliminates costs during off-hours, making pay-as-you-go viable for environments with predictable usage patterns.</li>
 </ul>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>Who this guide is for:</strong> Data engineers estimating their first Fabric deployment, Power BI developers migrating from Premium Per User, solution architects making SKU recommendations to a CTO, enterprise architects designing multi-workspace governance frameworks, FinOps practitioners building showback reports, IT managers evaluating total cost of ownership versus Databricks or Snowflake, and candidates preparing for DP-600 or <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;">DP-700</a> exams who need to understand the capacity model deeply.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>Who this guide is for:</strong> Data engineers estimating their first Fabric deployment, Power BI developers migrating from Premium Per User, solution architects making SKU recommendations to a CTO, enterprise architects designing multi-workspace governance frameworks, FinOps practitioners building showback reports, IT managers evaluating total cost of ownership versus Databricks or Snowflake, and candidates preparing for <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-600 Study Guide">DP-600</a> or DP-700 exams who need to understand the capacity model deeply.</p>
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What you'll be able to do after reading this:</strong> Choose the right SKU for your workload profile, build a bottom-up cost estimate for a stakeholder presentation, configure Reserved Capacity to cut costs by half, monitor capacity utilization without guessing, and avoid the 25 most common mistakes that cause enterprises to overspend or underperform on Fabric.</p>
 
@@ -116,7 +116,7 @@ export const microsoftFabricPricingGuide2026Post = {
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--accent); font-weight: bold;">F64</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">150–500</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">~$8,388</td>
-        <td style="padding: 12px; color: var(--muted);">Full Medallion, Mirroring, <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a> large models, streaming</td>
+        <td style="padding: 12px; color: var(--muted);">Full Medallion, Mirroring, <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake Explained">Direct Lake</a> large models, streaming</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Large Enterprise</td>
@@ -155,7 +155,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">These services had different billing APIs, different cost centers, and different utilization patterns. A FinOps team trying to answer "how much did the quarterly financial report cost us to run?" had to join cost records across six services and account for indirect costs like storage reads from Data Factory, which billed differently than storage reads from Synapse. The result was that most teams had no idea what their analytics infrastructure actually cost at a workload level.</p>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Microsoft Fabric changed this by introducing a single shared capacity pool model. You buy capacity measured in CUs. Every workload — regardless of whether it's a Spark notebook, a SQL query, a Power BI refresh, or a pipeline run — consumes from that same pool. The billing unit is the CU-second, and your monthly bill is a function of the SKU size you're running times the number of hours it runs.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> changed this by introducing a single shared capacity pool model. You buy capacity measured in CUs. Every workload — regardless of whether it's a Spark notebook, a SQL query, a Power BI refresh, or a pipeline run — consumes from that same pool. The billing unit is the CU-second, and your monthly bill is a function of the SKU size you're running times the number of hours it runs.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">3.2 Capacity Model vs Consumption Model</h3>
 
@@ -199,7 +199,7 @@ export const microsoftFabricPricingGuide2026Post = {
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--accent);">Interactive</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Power BI report loads, SQL queries (ad hoc), <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a> queries, notebook cell executions triggered by a user</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Power BI report loads, SQL queries (ad hoc), <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> queries, notebook cell executions triggered by a user</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Requests are queued, then either served slowly or rejected with a 429 error if severe overload</td>
         <td style="padding: 12px; color: var(--muted);">Directly visible — report loads slowly or shows error</td>
       </tr>
@@ -334,7 +334,7 @@ export const microsoftFabricPricingGuide2026Post = {
   </table>
 </div>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F2:</strong> Individual developers building proofs of concept, students preparing for DP-600 or DP-700 who need a real Fabric environment, small teams evaluating the platform.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F2:</strong> Individual developers building proofs of concept, students preparing for <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> or DP-700 who need a real Fabric environment, small teams evaluating the platform.</p>
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Individual Spark notebooks on small datasets under 5GB, basic Lakehouse exploration, Dataflows Gen2 on small sources, a few Power BI reports with lightweight data models.</p>
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What doesn't work:</strong> Any concurrent workloads, large Spark jobs, production pipelines with SLA requirements, datasets over 300M rows in Direct Lake, more than one or two simultaneous report users.</p>
 
@@ -368,7 +368,7 @@ export const microsoftFabricPricingGuide2026Post = {
 </div>
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F4:</strong> Small startups with a single data engineer and a handful of analysts. Development environments for teams whose production runs on F16+. Power BI deployments migrating from Premium Per User with light usage patterns.</p>
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> A simple Medallion pipeline with daily batch processing, 2–3 Dataflows Gen2, 5–10 Power BI reports with up to 10 concurrent users, a basic Warehouse with T-SQL queries for small team reporting.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> A simple <a href="/blog/microsoft-fabric-medallion-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Medallion Architecture Guide">Medallion pipeline</a> with daily batch processing, 2–3 Dataflows Gen2, 5–10 Power BI reports with up to 10 concurrent users, a basic Warehouse with T-SQL queries for small team reporting.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">F8 — The Development and SMB Production Tier</h3>
 
@@ -400,7 +400,7 @@ export const microsoftFabricPricingGuide2026Post = {
 </div>
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F8:</strong> Small-to-medium companies with 1–2 data engineers and 20–40 business users. Microsoft Partners building customer PoCs. Teams migrating from Power BI Premium P1 with moderate analytical workloads.</p>
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Full Medallion Architecture, Spark notebooks processing up to 50GB datasets, 10–15 Power BI reports with scheduled refreshes, a Fabric Warehouse with concurrent SQL users, basic Mirroring from a single Azure SQL source.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Full <a href="/blog/microsoft-fabric-medallion-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Medallion architecture bronze-silver-gold framework">Medallion Architecture</a>, Spark notebooks processing up to 50GB datasets, 10–15 Power BI reports with scheduled refreshes, a Fabric Warehouse with concurrent SQL users, basic Mirroring from a single Azure SQL source.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">F16 — The Mid-Market Tier</h3>
 
@@ -656,7 +656,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">7.3 Storage Planning</h3>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">OneLake storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
@@ -1103,7 +1103,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The DP-600 exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The DP-700 exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-700 Certification Guide">DP-700</a> exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Troubleshooting</h3>
 

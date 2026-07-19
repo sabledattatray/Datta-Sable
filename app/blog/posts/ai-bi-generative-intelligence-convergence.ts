@@ -41,7 +41,7 @@ export const aiBiGenerativeIntelligenceConvergencePost = {
       <p>Static charts show past trends but struggle to explain why they happened. Generative AI integration allows managers to chat with databases, ask questions, and receive automated summaries, data forecasts, and code suggestions.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Setting Up an Analytics Prompt Template in Python</h2>
-      <p>Implement a Python script that compiles aggregated database metrics into an LLM analysis <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a>:</p>
+      <p>Implement a Python script that compiles aggregated database metrics into an LLM analysis <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">prompt</a>:</p>
       <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">def compile_bi_prompt(metrics: dict) -&gt; str:
     prompt = f"""
     Analyze the following regional sales metrics:

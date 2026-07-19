@@ -16,7 +16,7 @@ export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
 </div>
 <!-- BREADCRUMB_END -->
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <p>Achieving consistent, structured JSON outputs from Large Language Models (LLMs) is one of the hardest parts of production AI. This case study details how we eliminated schema drift and stabilized output structures for an enterprise document extraction pipeline, raising output consistency to 99.8% using Precision <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">Prompt</a> Architecture™ templates and runtime schema validation.</p>
+        <p>Achieving consistent, structured JSON outputs from Large Language Models (LLMs) is one of the hardest parts of production AI. This case study details how we eliminated schema drift and stabilized output structures for an enterprise document extraction pipeline, raising output consistency to 99.8% using Precision <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">Prompt</a> Architecture™ templates and runtime schema validation.</p>
       </div>
  
       <div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
@@ -39,7 +39,7 @@ export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
  
       <h2 id="executive-summary" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. Executive Summary & Production Scale</h2>
       <p>In modern enterprise automation, relying on LLMs for unstructured document extraction requires high-fidelity precision. Our client—a global logistics and supply chain SaaS provider—processes over **500,000 shipping manifests and invoices daily**. The extraction pipeline must parse complex layouts, extract vendor names, dates, line items, tax aggregates, and output the data in structured JSON format to feed downstream ERP databases.</p>
-      <p>Before optimizing the prompting system, formatting failures and parsing bugs were causing significant operational disruption. With millions of tokens moving through the network hourly, even a minor 5% failure rate in JSON formatting meant tens of thousands of broken transactions daily, requiring manual correction and blocking automated pipelines. This case study documents how we designed a zero-trust <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> architecture to bring output reliability to **99.8%**.</p>
+      <p>Before optimizing the prompting system, formatting failures and parsing bugs were causing significant operational disruption. With millions of tokens moving through the network hourly, even a minor 5% failure rate in JSON formatting meant tens of thousands of broken transactions daily, requiring manual correction and blocking automated pipelines. This case study documents how we designed a zero-trust prompt architecture to bring output reliability to **99.8%**.</p>
  
       <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. The Legacy Challenge: Schema Drift & Pipeline Blocks</h2>
       <p>Under the client's legacy prompting model, instructions were written as standard natural language paragraphs (e.g. <i>"Read this shipping manifest and extract the vendor, total weight, and line items. Return your response as JSON. Do not include extra text."</i>). While this approach worked during manual testing, in high-volume production it suffered from three critical failure modes:</p>
@@ -117,7 +117,7 @@ export class SecureExtractionPipeline {
 }</ManifestOutput></typeof></code></pre>
  
       <h2 id="ab-testing-python" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">5. Python A/B Testing Evaluation Script</h2>
-      <p>Before rolling out the prompt migration, we developed a Python evaluation harness to benchmark the new Precision Prompt templates against legacy prompts. The script measures latency, token count, and schema validity over 1,000 simulated manifests:</p>
+      <p>Before rolling out the <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> migration, we developed a Python evaluation harness to benchmark the new Precision Prompt templates against legacy prompts. The script measures latency, token count, and schema validity over 1,000 simulated manifests:</p>
       <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">import json
 import time
 

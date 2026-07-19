@@ -26,22 +26,22 @@ export const microsoftFabricArchitecturalGuidePost = {
 
       <p>To build a modern analytics platform, you had to extract data from operational databases, land it in a raw storage lake, copy it to a cleaned lakehouse, copy it <em>again</em> to a relational data warehouse for business analysts, and finally import it into an in-memory database to make dashboards load in under two seconds. Five copies of the same transaction, five points of failure, and five distinct vendors to secure.</p>
 
-      <p><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Microsoft Fabric</a>, launched as a unified SaaS <strong>enterprise data platform 2026</strong>, promised to end this fragmentation with a simple proposition: <strong>OneLake</strong>—a single source of truth stored in open Delta Parquet files, shared by every computing engine.</p>
+      <p><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Architecture Guide">Microsoft Fabric</a>, launched as a unified SaaS <strong>enterprise data platform 2026</strong>, promised to end this fragmentation with a simple proposition: <strong>OneLake</strong>—a single source of truth stored in open Delta Parquet files, shared by every computing engine.</p>
 
       <p>But beneath the polished SaaS marketing lies a complex, multi-engine database engine. If you build a production-scale Fabric tenant using only the basic tutorials, you will inevitably hit performance walls, unexpected database lockups, and security leaks.</p>
 
       <p>This is the unofficial <strong>Microsoft Fabric architectural guide</strong>. We will introduce the core concepts step-by-step and then dive deep into the production realities that separate junior developers from enterprise data architects.</p>
 
       <h2>Step 1: Introducing Microsoft Fabric to the Enterprise</h2>
-      <p>At its simplest, <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Microsoft Fabric</a> is a Software-as-a-Service (SaaS) consolidation of data engineering, data warehousing, data science, real-time analytics, and business intelligence.</p>
+      <p>At its simplest, <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> is a Software-as-a-Service (SaaS) consolidation of data engineering, data warehousing, data science, real-time analytics, and business intelligence.</p>
 
       <p>Instead of provisioning separate Azure resources (like Synapse Analytics, Azure Data Factory, and Azure Databricks), configuring networking peerings, and managing complex credential chains, Fabric wraps all these capabilities inside a single workspace.</p>
 
       <p>The Three Pillars of Fabric:</p>
       <ul>
-        <li><strong>OneLake (Unified Storage):</strong> A single logical lakehouse for the entire organization. Just like OneDrive represents one drive for all your files, <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> holds all your organization's structured tables and unstructured documents.</li>
-        <li><strong>Dedicated Computing Engines:</strong> Instead of spinning up persistent virtual machines, Fabric lets you query <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> data using different serverless engines: <strong>Synapse Spark</strong> (for Python/Scala developers), <strong>Synapse SQL</strong> (for relational database administrators), and <strong>Eventhouse</strong> (for real-time streaming).</li>
-        <li><strong>Direct Lake Mode:</strong> A revolutionary new connection type in Power BI that reads data directly from OneLake Parquet files without requiring data refresh or importing copy files.</li>
+        <li><strong>OneLake (Unified Storage):</strong> A single logical lakehouse for the entire organization. Just like OneDrive represents one drive for all your files, <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake Architecture Explained">OneLake</a> holds all your organization's structured tables and unstructured documents.</li>
+        <li><strong>Dedicated Computing Engines:</strong> Instead of spinning up persistent virtual machines, Fabric lets you query OneLake data using different serverless engines: <strong>Synapse Spark</strong> (for Python/Scala developers), <strong>Synapse SQL</strong> (for relational database administrators), and <strong>Eventhouse</strong> (for real-time streaming).</li>
+        <li><strong>Direct Lake Mode:</strong> A revolutionary new connection type in Power BI that reads data directly from <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> Parquet files without requiring data refresh or importing copy files.</li>
       </ul>
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
@@ -70,14 +70,14 @@ export const microsoftFabricArchitecturalGuidePost = {
 
       <p>Historically, Power BI had two main modes: <strong>Import</strong> (ultra-fast performance, but requires scheduling data refreshes and duplicating data into memory) and <strong>DirectQuery</strong> (reads data directly from the source SQL database in real-time, but suffers from terrible dashboard query lag).</p>
 
-      <p><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a> merges these two worlds. It bypasses the relational database layer completely. When a user interacts with a report, the Power BI AS (Analysis Services) engine pages columns of the Delta Parquet files from OneLake directly into RAM, loading data on demand.</p>
+      <p><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake Explained">Direct Lake</a> merges these two worlds. It bypasses the relational database layer completely. When a user interacts with a report, the Power BI AS (Analysis Services) engine pages columns of the Delta Parquet files from OneLake directly into RAM, loading data on demand.</p>
 
       <h3>The Direct Lake Fallback Trap</h3>
-      <p>What Microsoft documentation glosses over is <strong>Direct Lake mode fallback</strong>. If your semantic model hits specific resource constraints, Power BI silently switches from <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a> to DirectQuery mode, degrading report performance by orders of magnitude.</p>
+      <p>What Microsoft documentation glosses over is <strong>Direct Lake mode fallback</strong>. If your semantic model hits specific resource constraints, Power BI silently switches from Direct Lake to DirectQuery mode, degrading report performance by orders of magnitude.</p>
 
       <p>Factors causing fallback include:</p>
       <ul>
-        <li><strong>The Capacity Limit Constraint:</strong> Direct Lake operates within the boundaries of your <a href="/blog/microsoft-fabric-pricing-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Fabric Capacity</a>. Each Capacity Unit (CU) sizing has a maximum memory allocation limit for semantic models. If your model size on disk exceeds this memory limit during paging, Fabric silently falls back to DirectQuery mode.</li>
+        <li><strong>The Capacity Limit Constraint:</strong> Direct Lake operates within the boundaries of your <a href="/blog/microsoft-fabric-pricing-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Pricing Guide">Fabric Capacity</a>. Each Capacity Unit (CU) sizing has a maximum memory allocation limit for semantic models. If your model size on disk exceeds this memory limit during paging, Fabric silently falls back to DirectQuery mode.</li>
         <li><strong>The Security Layer Conflict:</strong> If you define Row-Level Security (RLS) inside the Synapse SQL Warehouse rather than inside the Power BI Semantic Model, the engine cannot safely page raw Parquet files from OneLake. To enforce SQL permissions, it must fallback to querying through the SQL endpoint using standard SQL translation.</li>
       </ul>
 
@@ -227,7 +227,7 @@ export const microsoftFabricArchitecturalGuidePost = {
       <h2>Conclusion: The Modern Data Platform Paradigm</h2>
       <p>Microsoft Fabric represents a massive evolutionary step in data platform engineering. By replacing the traditional "Data Copy Tax" with a unified, file-based storage layer, it bridges the historical gap between software developers, data engineering, and business analysts.</p>
 
-      <p>However, moving to a SaaS data architecture does not excuse you from understanding database internals. Understanding the inner workings of Direct Lake memory paging, V-Order file compression, and Delta transaction logging is what will determine whether your enterprise data platform scales effortlessly for thousands of active users, or buckles under the load.</p>
+      <p>However, moving to a SaaS data architecture does not excuse you from understanding database internals. Understanding the inner workings of <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> memory paging, V-Order file compression, and Delta transaction logging is what will determine whether your enterprise data platform scales effortlessly for thousands of active users, or buckles under the load.</p>
 
       <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">Related Resources & Internal Links</h2>
       <p>To further expand your expertise in advanced data architectures and artificial intelligence, explore these detailed technical write-ups:</p>

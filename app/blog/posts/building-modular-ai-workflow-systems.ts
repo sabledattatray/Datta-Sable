@@ -16,7 +16,7 @@ export const buildingModularAiWorkflowSystemsPost = {
 </div>
 <!-- BREADCRUMB_END -->
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <p>Modular AI Workflow Systems enable enterprises to swap models, <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> structures, and external toolsets without rewriting the core orchestration layer. Designing plug-and-play modules ensures that as new models emerge, the architecture remains future-proof.</p>
+        <p>Modular AI Workflow Systems enable enterprises to swap models, <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">prompt</a> structures, and external toolsets without rewriting the core orchestration layer. Designing plug-and-play modules ensures that as new models emerge, the architecture remains future-proof.</p>
       </div>
  
       <div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
@@ -104,7 +104,7 @@ class ToolRegistry {
       <h2 id="best-practices-ops" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">7. Production Best Practices</h2>
       <p>When implementing these methods in live environments, make sure your team adheres to the following checklist:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
-        <li><strong>Standardize</strong> all tool inputs and outputs using JSON Schema definitions.</li><li><strong>Version</strong> <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> templates separately from the application codebase.</li><li><strong>Use</strong> model-agnostic abstraction libraries to simplify swapping LLM endpoints.</li><li><strong>Establish</strong> strict token quotas per workspace session to manage cloud spend.</li>
+        <li><strong>Standardize</strong> all tool inputs and outputs using JSON Schema definitions.</li><li><strong>Version</strong> <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> templates separately from the application codebase.</li><li><strong>Use</strong> model-agnostic abstraction libraries to simplify swapping LLM endpoints.</li><li><strong>Establish</strong> strict token quotas per workspace session to manage cloud spend.</li>
       </ul>
  
       <h2 id="expert-view" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">8. Architectural Insight</h2>

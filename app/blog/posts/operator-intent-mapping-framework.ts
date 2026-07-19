@@ -87,7 +87,7 @@ def route_query(query: str) -&gt; UserIntent:
           
           <tr style="border-bottom: 1px solid var(--border);">
             <td style="padding: 10px; border-right: 1px solid var(--border); font-weight: bold;">Execution Latency</td>
-            <td style="padding: 10px; border-right: 1px solid var(--border);">High (complex <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> processed)</td>
+            <td style="padding: 10px; border-right: 1px solid var(--border);">High (complex <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="AI Prompt Generator">prompt</a> processed)</td>
             <td style="padding: 10px;">Low (queries routed to specific tasks)</td>
           </tr>
           <tr style="border-bottom: 1px solid var(--border);">

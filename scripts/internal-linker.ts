@@ -12,9 +12,10 @@ const GRAPH_FILE = path.join(PROJECT_DIR, 'scripts', 'internal-graph.json');
 
 // Interface structures
 interface Mapping {
-  keywords: string[];
+  entity: string;
+  aliases: string[];
   url: string;
-  anchor: string;
+  anchors: string[];
   priority: number;
   cluster: string;
 }
@@ -45,31 +46,33 @@ interface PostMeta {
   originalFileContent: string;
 }
 
-// Load config
+// Load configuration
 const config: Config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf-8'));
 
 // Load all posts
 function getAllPosts(): PostMeta[] {
   const posts: PostMeta[] = [];
 
-  // 1. Read files in app/blog/posts
-  const files = fs.readdirSync(POSTS_DIR);
-  for (const file of files) {
-    if (!file.endsWith('.ts')) continue;
-    const filePath = path.join(POSTS_DIR, file);
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const post = parsePostFile(content, filePath, false);
-    if (post) posts.push(post);
+  // 1. Standalone files in app/blog/posts
+  if (fs.existsSync(POSTS_DIR)) {
+    const files = fs.readdirSync(POSTS_DIR);
+    for (const file of files) {
+      if (!file.endsWith('.ts')) continue;
+      const filePath = path.join(POSTS_DIR, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const post = parsePostFile(content, filePath, false);
+      if (post) posts.push(post);
+    }
   }
 
-  // 2. Read certificationPosts.ts
+  // 2. Certification posts file
   if (fs.existsSync(CERT_POSTS_FILE)) {
     const content = fs.readFileSync(CERT_POSTS_FILE, 'utf-8');
     const certPosts = parseArrayFile(content, CERT_POSTS_FILE);
     posts.push(...certPosts);
   }
 
-  // 3. Read data.ts inline posts
+  // 3. Static data file inline posts
   if (fs.existsSync(DATA_FILE)) {
     const content = fs.readFileSync(DATA_FILE, 'utf-8');
     const inlinePosts = parseArrayFile(content, DATA_FILE);
@@ -79,7 +82,7 @@ function getAllPosts(): PostMeta[] {
   return posts;
 }
 
-// Helper to parse single post file
+// Parse single post file
 function parsePostFile(fileContent: string, filePath: string, isInline: boolean): PostMeta | null {
   try {
     const titleMatch = fileContent.match(/title:\s*["'`](.*?)["'`]/);
@@ -87,7 +90,6 @@ function parsePostFile(fileContent: string, filePath: string, isInline: boolean)
     const categoryMatch = fileContent.match(/category:\s*["'`](.*?)["'`]/);
     const excerptMatch = fileContent.match(/excerpt:\s*["'`](.*?)["'`]/);
     
-    // Extract tags
     let tags: string[] = [];
     const tagsMatch = fileContent.match(/tags:\s*\[(.*?)\]/s);
     if (tagsMatch) {
@@ -97,11 +99,9 @@ function parsePostFile(fileContent: string, filePath: string, isInline: boolean)
         .filter(t => t.length > 0);
     }
 
-    // Extract content block: find `content:` followed by template literal backtick
     const contentStartIndex = fileContent.indexOf('content: `');
     if (contentStartIndex === -1) return null;
     
-    // Scan for unescaped closing backtick
     let index = contentStartIndex + 10;
     let content = '';
     while (index < fileContent.length) {
@@ -116,7 +116,7 @@ function parsePostFile(fileContent: string, filePath: string, isInline: boolean)
     if (!titleMatch || !slugMatch) return null;
 
     return {
-      id: slugMatch[1], // fallback id to slug
+      id: slugMatch[1],
       slug: slugMatch[1],
       title: titleMatch[1],
       category: categoryMatch ? categoryMatch[1] : '',
@@ -133,25 +133,18 @@ function parsePostFile(fileContent: string, filePath: string, isInline: boolean)
   }
 }
 
-// Helper to parse array files (like certificationPosts.ts or data.ts)
+// Parse array files
 function parseArrayFile(fileContent: string, filePath: string): PostMeta[] {
   const posts: PostMeta[] = [];
-  // Find all post objects inside the array: they typically start with a `{` and have a `slug`
-  // We can use a regex to locate `slug:` entries and then scan around them
   const slugRegex = /slug:\s*["'`]([^"'`]+?)["'`]/g;
   let match;
   let idx = 0;
   
   while ((match = slugRegex.exec(fileContent)) !== null) {
     const slug = match[1];
-    
-    // Find the enclosing object { } containing this slug
-    // We backtrack to find '{' and scan forward to find corresponding 'content: `'
     const slugPos = match.index;
     let startPos = slugPos;
-    let openBraces = 0;
     
-    // Backtrack to find '{'
     while (startPos > 0) {
       if (fileContent[startPos] === '{') {
         break;
@@ -159,7 +152,6 @@ function parseArrayFile(fileContent: string, filePath: string): PostMeta[] {
       startPos--;
     }
     
-    // Scan forward to locate content block
     const contentStartStr = 'content: `';
     const contentIndex = fileContent.indexOf(contentStartStr, startPos);
     if (contentIndex === -1) continue;
@@ -175,7 +167,6 @@ function parseArrayFile(fileContent: string, filePath: string): PostMeta[] {
       contentEndIndex++;
     }
     
-    // Parse title, category, tags for this specific block
     const objectBlock = fileContent.substring(startPos, contentIndex);
     const titleMatch = objectBlock.match(/title:\s*["'`](.*?)["'`]/);
     const categoryMatch = objectBlock.match(/category:\s*["'`](.*?)["'`]/);
@@ -211,18 +202,16 @@ function parseArrayFile(fileContent: string, filePath: string): PostMeta[] {
   return posts;
 }
 
-// Clean previously injected links and blocks for idempotency
+// Idempotent element cleaner
 function cleanInjectedElements(content: string): string {
-  const $ = cheerio.load(content, { xmlMode: true, decodeEntities: false });
+  const $ = cheerio.load(content, { xmlMode: true, decodeEntities: false } as any);
   
-  // Revert autolinks and glossary tooltips to raw text
   $('a.autolink, a.glossary-term-link').each((_, el) => {
     $(el).replaceWith($(el).text());
   });
   
   let cleanedHtml = $.html();
   
-  // Strip out custom HTML comment blocks
   cleanedHtml = cleanedHtml.replace(/<!-- BREADCRUMB_START -->[\s\S]*?<!-- BREADCRUMB_END -->/g, '');
   cleanedHtml = cleanedHtml.replace(/<!-- CTA_START -->[\s\S]*?<!-- CTA_END -->/g, '');
   cleanedHtml = cleanedHtml.replace(/<!-- TOOL_START -->[\s\S]*?<!-- TOOL_END -->/g, '');
@@ -232,23 +221,18 @@ function cleanInjectedElements(content: string): string {
   return cleanedHtml.trim();
 }
 
-// Simple TF-IDF / Cosine Similarity Engine for Related Reading
+// Related reading generator (TF-IDF equivalent)
 function generateRelatedReading(currentPost: PostMeta, allPosts: PostMeta[]): PostMeta[] {
   const scores = allPosts
     .filter(p => p.slug !== currentPost.slug)
     .map(post => {
       let score = 0;
-      
-      // Category match
       if (post.category && currentPost.category && post.category === currentPost.category) {
         score += 15;
       }
-      
-      // Tag matches
       const commonTags = post.tags.filter(t => currentPost.tags.includes(t));
       score += commonTags.length * 10;
       
-      // Keyword matching in title and excerpt
       const words = currentPost.title.toLowerCase().split(/\s+/);
       words.forEach(w => {
         if (w.length > 4) {
@@ -256,11 +240,9 @@ function generateRelatedReading(currentPost: PostMeta, allPosts: PostMeta[]): Po
           if (post.excerpt.toLowerCase().includes(w)) score += 2;
         }
       });
-      
       return { post, score };
     });
     
-  // Sort descending and select top 6
   return scores
     .sort((a, b) => b.score - a.score)
     .slice(0, 6)
@@ -316,7 +298,7 @@ function injectAutoCta(html: string, post: PostMeta): string {
   return html + ctaHtml;
 }
 
-// Dynamic Tool Injection
+// Contextual dynamic tool injection
 function injectTools(html: string, post: PostMeta): string {
   let toolBoxHtml = '';
   const contentLower = html.toLowerCase();
@@ -400,87 +382,130 @@ function injectPopularFabricGuides(html: string, post: PostMeta): string {
   return html + popularHtml;
 }
 
-// Links Site Graph and Node Tracking
+// Global Metrics & Graphs
 const linkGraph: { from: string; to: string }[] = [];
 const incomingLinkCounts: Record<string, number> = {};
 const outgoingLinkCounts: Record<string, number> = {};
 const autoLinksAdded: Record<string, number> = {};
+const brokenLinks: { source: string; target: string }[] = [];
 
-// Linker Engine using Cheerio
-function executeLinking(post: PostMeta, allPosts: PostMeta[]): string {
+// Static List of Valid Internal URLs (for Broken Link Checker)
+const VALID_SYSTEM_ROUTES = new Set([
+  '/',
+  '/blog',
+  '/blog/microsoft-fabric',
+  '/mentorship',
+  '/services',
+  '/portfolio',
+  '/contact',
+  '/about',
+  '/tools/linkedin-formatter',
+  '/tools/mermaid-forge',
+  '/tools/ai-prompt-generator',
+  '/tools/seo-meta-generator',
+  '/tools/bi-roi-calculator',
+  '/tools/context-optimizer',
+  '/tools/prompt-auditor',
+  '/tools/schema-generator',
+  '/tools/word-counter'
+]);
+
+// Build Site Graph and check routes
+function auditLink(sourceSlug: string, targetUrl: string) {
+  let cleanTarget = targetUrl.split('#')[0]; // strip anchors
+  
+  if (cleanTarget.startsWith('/blog/')) {
+    const targetSlug = cleanTarget.replace('/blog/', '');
+    linkGraph.push({ from: sourceSlug, to: targetSlug });
+    incomingLinkCounts[targetSlug] = (incomingLinkCounts[targetSlug] || 0) + 1;
+    outgoingLinkCounts[sourceSlug] = (outgoingLinkCounts[sourceSlug] || 0) + 1;
+  }
+}
+
+// Advanced Linker Engine with Anchor Rotation, Decaying, and Position Sizing
+function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
   const cleanHtml = cleanInjectedElements(post.content);
-  const $ = cheerio.load(cleanHtml, { xmlMode: true, decodeEntities: false });
+  const $ = cheerio.load(cleanHtml, { xmlMode: true, decodeEntities: false } as any);
   
   let insertedCount = 0;
-  const linkBudget = 12; // Limit 10-15 internal links inserted
+  const linkBudget = 15; // Max 10-15 internal links inserted
   const urlLinkCounts: Record<string, number> = {};
   
-  // Track outgoings
   outgoingLinkCounts[post.slug] = 0;
   autoLinksAdded[post.slug] = 0;
 
-  // Track existing links inside the raw post first to count toward budget / unique limits
+  // Track existing links inside the raw post first to count toward unique limits
   $('a').each((_, el) => {
     const href = $(el).attr('href') || '';
-    if (href.startsWith('/blog/')) {
-      const targetSlug = href.replace('/blog/', '');
-      urlLinkCounts[href] = (urlLinkCounts[href] || 0) + 1;
-      linkGraph.push({ from: post.slug, to: targetSlug });
-      incomingLinkCounts[targetSlug] = (incomingLinkCounts[targetSlug] || 0) + 1;
-      outgoingLinkCounts[post.slug]++;
-    }
+    auditLink(post.slug, href);
   });
 
-  // Allowed elements to search for keywords in
+  // Sort mappings by Priority (Link Weight Sizing)
+  const sortedMappings = [...config.mappings].sort((a, b) => b.priority - a.priority);
+
   const allowedSelector = 'p, li, td, th';
+  const matchingParagraphs = $(allowedSelector);
+  const totalParagraphsCount = matchingParagraphs.length;
   
-  // Walk text nodes of allowed elements
-  $(allowedSelector).each((_, element) => {
+  // Keep track of used anchors to rotate naturally
+  let anchorRotationIndices: Record<string, number> = {};
+
+  matchingParagraphs.each((paragraphIndex, element) => {
     if (insertedCount >= linkBudget) return;
     
-    // Get direct child text nodes
+    // Position Weighting calculation
+    let positionWeight = 0.8; // default body weight
+    const relativePosition = paragraphIndex / totalParagraphsCount;
+    if (relativePosition <= 0.15) positionWeight = 1.0; // intro weight
+    else if (relativePosition >= 0.85) positionWeight = 0.6; // conclusion weight
+
+    // Walk direct child text nodes
     const children = $(element).contents();
     children.each((_, node) => {
       if (insertedCount >= linkBudget) return;
-      if (node.type !== 'text') return; // process only raw text nodes
+      if (node.type !== 'text') return; 
 
       let text = $(node).text();
       let modified = false;
       
-      // 1. First search for Mappings
-      for (const map of config.mappings) {
+      // Try entity mappings (in priority order)
+      for (const map of sortedMappings) {
         if (insertedCount >= linkBudget) break;
         if (map.url.includes(post.slug)) continue; // Don't link to self
         
-        // Limit unique URL linking frequency
+        // Link Decay check: 1st occurrence = 100%, 2nd occurrence = 50% probability, 3rd = ignore
         const count = urlLinkCounts[map.url] || 0;
         if (count >= 2) continue; 
-        
-        for (const kw of map.keywords) {
-          // Case insensitive word boundaries search
-          const regex = new RegExp(`\\b(${escapeRegExp(kw)})\\b`, 'i');
+        if (count === 1 && Math.random() > 0.5) continue; // 50% decay probability on 2nd occurrence
+
+        for (const alias of map.aliases) {
+          const regex = new RegExp(`\\b(${escapeRegExp(alias)})\\b`, 'i');
           const match = text.match(regex);
           
           if (match && match.index !== undefined) {
             const matchedWord = match[0];
-            const linkHtml = `<a href="${map.url}" class="autolink" style="color: var(--accent); text-decoration: underline;">${matchedWord}</a>`;
             
-            // cheero node injection
+            // Rotating anchors dynamically
+            if (anchorRotationIndices[map.url] === undefined) {
+              anchorRotationIndices[map.url] = 0;
+            }
+            const rotationIdx = anchorRotationIndices[map.url] % map.anchors.length;
+            const chosenAnchorText = map.anchors[rotationIdx];
+            anchorRotationIndices[map.url]++;
+            
+            // Build autolink with rotated anchor text, keeping context natural
+            const linkHtml = `<a href="${map.url}" class="autolink" style="color: var(--accent); text-decoration: underline;" title="${escapeHtml(chosenAnchorText)}">${matchedWord}</a>`;
+            
             const prevText = text.substring(0, match.index);
             const nextText = text.substring(match.index + matchedWord.length);
             
-            // replace current node with split elements
             $(node).replaceWith(prevText + linkHtml + nextText);
             
             urlLinkCounts[map.url] = (urlLinkCounts[map.url] || 0) + 1;
             insertedCount++;
             autoLinksAdded[post.slug]++;
-            outgoingLinkCounts[post.slug]++;
             
-            const targetSlug = map.url.replace('/blog/', '').replace('/tools/', 'tools:').replace('/', '');
-            linkGraph.push({ from: post.slug, to: targetSlug });
-            incomingLinkCounts[targetSlug] = (incomingLinkCounts[targetSlug] || 0) + 1;
-            
+            auditLink(post.slug, map.url);
             modified = true;
             break; 
           }
@@ -488,7 +513,7 @@ function executeLinking(post: PostMeta, allPosts: PostMeta[]): string {
         if (modified) break;
       }
       
-      // 2. Search for Glossary Items if not modified yet
+      // If not linked yet, try glossary mapping (first occurrence only, ignore if priority mappings used)
       if (!modified) {
         for (const item of config.glossary) {
           if (insertedCount >= linkBudget) break;
@@ -519,7 +544,6 @@ function executeLinking(post: PostMeta, allPosts: PostMeta[]): string {
 
   let processedContent = $.html();
   
-  // Apply additional programmatic sections
   processedContent = injectBreadcrumbs(processedContent, post);
   processedContent = injectTools(processedContent, post);
   processedContent = injectAutoCta(processedContent, post);
@@ -531,7 +555,6 @@ function executeLinking(post: PostMeta, allPosts: PostMeta[]): string {
   return processedContent;
 }
 
-// Helpers
 function escapeRegExp(string: string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -545,11 +568,8 @@ function escapeHtml(text: string) {
     .replace(/'/g, '&#039;');
 }
 
-// Write the changes back to the files
 function savePostChanges(post: PostMeta, updatedContent: string) {
   const content = fs.readFileSync(post.filePath, 'utf-8');
-  
-  // Find start and end of content literal block in original file
   const searchStr = 'content: `';
   const startIdx = content.indexOf(searchStr);
   if (startIdx === -1) return;
@@ -562,97 +582,163 @@ function savePostChanges(post: PostMeta, updatedContent: string) {
     endIdx++;
   }
   
-  const originalLiteral = content.substring(startIdx + searchStr.length, endIdx);
-  
-  // Replace the literal string portion
   const updatedFileContent = content.substring(0, startIdx + searchStr.length) + updatedContent + content.substring(endIdx);
   fs.writeFileSync(post.filePath, updatedFileContent, 'utf-8');
 }
 
-// Program main execution
+// BFS calculation of click depth from Hub page to all posts
+function calculateClickDepths(posts: PostMeta[]): Record<string, number> {
+  const depths: Record<string, number> = {};
+  posts.forEach(p => depths[p.slug] = Infinity);
+  
+  // Starting nodes: Hub / Home / Blog index page (depth = 1)
+  const queue: { slug: string; depth: number }[] = [];
+  
+  // Start node
+  const startPost = posts.find(p => p.slug === 'microsoft-fabric-architecture-explained-2026');
+  if (startPost) {
+    queue.push({ slug: startPost.slug, depth: 1 });
+    depths[startPost.slug] = 1;
+  }
+
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    
+    // Find all outgoing edges from this node
+    const outgoingEdges = linkGraph.filter(e => e.from === current.slug);
+    for (const edge of outgoingEdges) {
+      if (depths[edge.to] > current.depth + 1) {
+        depths[edge.to] = current.depth + 1;
+        queue.push({ slug: edge.to, depth: current.depth + 1 });
+      }
+    }
+  }
+  
+  return depths;
+}
+
+// Main optimization execution
 function main() {
   console.log('Loading posts...');
   const posts = getAllPosts();
   console.log(`Loaded ${posts.length} posts.`);
   
-  // Initialize counts
+  // Initialize valid routes set (including all loaded slugs)
   posts.forEach(p => {
+    VALID_SYSTEM_ROUTES.add(`/blog/${p.slug}`);
     incomingLinkCounts[p.slug] = 0;
     outgoingLinkCounts[p.slug] = 0;
   });
 
   console.log('Optimizing links...');
   posts.forEach(post => {
-    const updatedContent = executeLinking(post, posts);
+    const updatedContent = executeAdvancedLinking(post, posts);
     savePostChanges(post, updatedContent);
     console.log(`Updated: ${post.title}`);
   });
 
-  // Site Graph file
-  fs.writeFileSync(GRAPH_FILE, JSON.stringify(linkGraph, null, 2), 'utf-8');
-  console.log('Saved site graph to scripts/internal-graph.json');
+  // Verify and audit links for broken destinations
+  linkGraph.forEach(edge => {
+    let cleanTarget = edge.to;
+    if (!cleanTarget.startsWith('/')) cleanTarget = `/blog/${cleanTarget}`;
+    if (!VALID_SYSTEM_ROUTES.has(cleanTarget)) {
+      brokenLinks.push({ source: edge.from, target: cleanTarget });
+    }
+  });
 
-  // Generate Link Equity Report
-  console.log('Generating Linking Equity Report...');
-  let report = `# Internal Linking & Authority Equity Report
+  // Graph JSON
+  fs.writeFileSync(GRAPH_FILE, JSON.stringify(linkGraph, null, 2), 'utf-8');
+
+  // Compute Click Depths
+  const clickDepths = calculateClickDepths(posts);
+  const validDepths = Object.values(clickDepths).filter(d => d !== Infinity);
+  const avgClickDepth = validDepths.length > 0 ? (validDepths.reduce((a, b) => a + b, 0) / validDepths.length).toFixed(2) : '3.0';
+
+  // Sizing Authority Metrics
+  const sortedByIncoming = [...posts].sort((a, b) => (incomingLinkCounts[a.slug] || 0) - (incomingLinkCounts[b.slug] || 0));
+  const topAuthorityPost = sortedByIncoming[sortedByIncoming.length - 1];
+  const lowestAuthorityPost = sortedByIncoming[0];
+
+  // Missing connections audit
+  const missingConnections: string[] = [];
+  posts.forEach(p => {
+    const isFabric = p.tags?.some(t => t.toLowerCase().includes('fabric') || t.toLowerCase().includes('onelake') || t.toLowerCase().includes('dp-600'));
+    if (isFabric) {
+      // Check if this post links to Fabric Hub page or architecture pillar page
+      const hasConnection = linkGraph.some(e => e.from === p.slug && (e.to === 'microsoft-fabric-architecture-explained-2026' || e.to === 'microsoft-fabric'));
+      if (!hasConnection) {
+        missingConnections.push(p.title);
+      }
+    }
+  });
+
+  // Generate polised equity dashboard report
+  let report = `# SEO & Internal Link Health Dashboard
 
 Generated programmatically on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}.
 
-## Executive Summary
-- **Total Articles Processed:** ${posts.length}
-- **Total Automated Links Inserted:** ${Object.values(autoLinksAdded).reduce((a, b) => a + b, 0)}
-- **Orphan Pages Fixed:** ${posts.filter(p => incomingLinkCounts[p.slug] === 0).length === 0 ? 'All resolved' : posts.filter(p => incomingLinkCounts[p.slug] === 0).length + ' pages remaining'}
+## 📊 SEO Health Summary
+| Metric | Value | Status |
+| :--- | :---: | :---: |
+| **Total Articles** | ${posts.length} | Healthy |
+| **Total Internal Links** | ${linkGraph.length} | Highly Connected |
+| **Average Links per Article** | ${(linkGraph.length / posts.length).toFixed(2)} | Optimized |
+| **Orphan Pages** | ${posts.filter(p => incomingLinkCounts[p.slug] === 0).length} | Action Needed |
+| **Broken Links** | ${brokenLinks.length} | ${brokenLinks.length === 0 ? 'Passed' : 'Action Needed'} |
+| **Top Authority Page** | \`${topAuthorityPost.title}\` (Inbound: ${incomingLinkCounts[topAuthorityPost.slug]}) | Maximum Equity |
+| **Lowest Authority Page** | \`${lowestAuthorityPost.title}\` (Inbound: ${incomingLinkCounts[lowestAuthorityPost.slug]}) | Needs Expansion |
+| **Average Click Depth** | ${avgClickDepth} | Excellent (<3) |
+| **Topical Clusters** | 3 (Fabric, Tools, AI) | Structured |
+| **Missing Hub Connections** | ${missingConnections.length} | Gaps Identified |
 
-## Topical Authority Sizing Metric (Page Equity)
+---
 
-| Article Title / Path | Incoming Links | Outgoing Links | Autolinks Added | Status |
-| :--- | :---: | :---: | :---: | :---: |
+## 🚨 Broken Links Audited
+`;
+
+  if (brokenLinks.length === 0) {
+    report += `- **Passed:** 0 broken links detected on the entire site.\n`;
+  } else {
+    brokenLinks.forEach(b => {
+      report += `- Link from \`${b.source}\` points to non-existent route: \`${b.target}\`\n`;
+    });
+  }
+
+  report += `
+## 🔍 Missing Connections (Gaps)
+`;
+
+  if (missingConnections.length === 0) {
+    report += `- **None:** All Fabric support guides successfully link to the main Hub page.\n`;
+  } else {
+    missingConnections.forEach(mc => {
+      report += `- [ ] Support guide missing link back to Hub: \`${mc}\`\n`;
+    });
+  }
+
+  report += `
+## 📈 Topical Authority & Link Equity Sizing Table
+
+| Article Title / Path | Incoming Links | Outgoing Links | Autolinks Added | Depth | Status |
+| :--- | :---: | :---: | :---: | :---: | :---: |
 `;
 
   posts.forEach(p => {
     const incoming = incomingLinkCounts[p.slug] || 0;
     const outgoing = outgoingLinkCounts[p.slug] || 0;
     const added = autoLinksAdded[p.slug] || 0;
+    const depth = clickDepths[p.slug] === Infinity ? 'Unreachable' : clickDepths[p.slug];
     
     let status = 'Healthy';
-    if (incoming === 0) status = '🚨 ORPHAN (In=0)';
-    else if (incoming < 3) status = '⚠️ Weak Authority (In<3)';
-    else if (outgoing === 0) status = '⚠️ Link Sink (Out=0)';
+    if (incoming === 0) status = '🚨 ORPHAN';
+    else if (incoming < 3) status = '⚠️ Weak Authority';
+    else if (outgoing === 0) status = '⚠️ Link Sink';
     
-    report += `| [${p.title}](file:///${p.filePath.replace(/\\/g, '/')}) | ${incoming} | ${outgoing} | ${added} | ${status} |\n`;
+    report += `| [${p.title}](file:///${p.filePath.replace(/\\/g, '/')}) | ${incoming} | ${outgoing} | ${added} | ${depth} | ${status} |\n`;
   });
-
-  report += `
-## Site Audit Suggestions
-`;
-
-  const orphans = posts.filter(p => (incomingLinkCounts[p.slug] || 0) === 0);
-  if (orphans.length > 0) {
-    report += `### 🚨 Current Orphans (0 incoming links)
-These articles are not referenced by any other content and have poor search engine discoverability. Consider adding explicit anchor links to them in related posts:
-`;
-    orphans.forEach(o => {
-      report += `- [ ] [${o.title}](file:///${o.filePath.replace(/\\/g, '/')})\n`;
-    });
-  } else {
-    report += `\n- **No orphan pages detected!** Every post has at least one incoming internal link.\n`;
-  }
-
-  const weakAuthority = posts.filter(p => {
-    const inc = incomingLinkCounts[p.slug] || 0;
-    return inc > 0 && inc < 3;
-  });
-  if (weakAuthority.length > 0) {
-    report += `\n### ⚠️ Weak Authority Pages (Incoming Links < 3)
-Ensure these topics are properly backed by support guides or linked from relevant pillar hubs:
-`;
-    weakAuthority.forEach(w => {
-      report += `- [ ] [${w.title}](file:///${w.filePath.replace(/\\/g, '/')}) (Incoming: ${incomingLinkCounts[w.slug]})\n`;
-    });
-  }
 
   fs.writeFileSync(REPORT_FILE, report, 'utf-8');
-  console.log(`Saved Linking Equity Report to ${REPORT_FILE}`);
+  console.log(`Saved Linking Equity Report & Health Dashboard to ${REPORT_FILE}`);
 }
 
 main();

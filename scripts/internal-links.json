@@ -1,31 +1,45 @@
 {
   "mappings": [
     {
-      "keywords": [
+      "entity": "Microsoft Fabric",
+      "aliases": [
         "Microsoft Fabric",
         "Fabric platform",
         "Fabric architecture",
         "Fabric ecosystem"
       ],
       "url": "/blog/microsoft-fabric-architecture-explained-2026",
-      "anchor": "Microsoft Fabric Architecture Guide",
+      "anchors": [
+        "Microsoft Fabric Architecture Guide",
+        "Microsoft Fabric architecture",
+        "Fabric architecture explained",
+        "unified Fabric platform guide"
+      ],
       "priority": 100,
       "cluster": "Microsoft Fabric"
     },
     {
-      "keywords": [
+      "entity": "OneLake",
+      "aliases": [
         "OneLake",
         "unified logical data lake",
         "single logical data lake",
-        "Fabric storage"
+        "Fabric storage",
+        "OneLake storage"
       ],
       "url": "/blog/microsoft-fabric-onelake-architecture-guide",
-      "anchor": "OneLake Architecture Explained",
-      "priority": 90,
+      "anchors": [
+        "OneLake Architecture Explained",
+        "OneLake data storage layout",
+        "Fabric OneLake fundamentals",
+        "single logical lake design"
+      ],
+      "priority": 95,
       "cluster": "Microsoft Fabric"
     },
     {
-      "keywords": [
+      "entity": "Fabric Capacity",
+      "aliases": [
         "Fabric capacity",
         "Fabric pricing",
         "Capacity Units",
@@ -33,12 +47,18 @@
         "F-SKUs"
       ],
       "url": "/blog/microsoft-fabric-pricing-guide-2026",
-      "anchor": "Microsoft Fabric Pricing Guide",
+      "anchors": [
+        "Microsoft Fabric Pricing Guide",
+        "Fabric capacity planning",
+        "F-SKU capacity sizing",
+        "Fabric pricing and costs"
+      ],
       "priority": 90,
       "cluster": "Microsoft Fabric"
     },
     {
-      "keywords": [
+      "entity": "Medallion Architecture",
+      "aliases": [
         "Medallion Architecture",
         "Bronze, Silver, and Gold",
         "Bronze-Silver-Gold",
@@ -46,95 +66,142 @@
         "medallion pipeline"
       ],
       "url": "/blog/microsoft-fabric-medallion-architecture-guide",
-      "anchor": "Microsoft Fabric Medallion Architecture Guide",
-      "priority": 80,
+      "anchors": [
+        "Microsoft Fabric Medallion Architecture Guide",
+        "Medallion architecture bronze-silver-gold framework",
+        "Bronze, Silver, and Gold data layers",
+        "Fabric medallion model"
+      ],
+      "priority": 85,
       "cluster": "Microsoft Fabric"
     },
     {
-      "keywords": [
+      "entity": "Direct Lake",
+      "aliases": [
         "Direct Lake",
         "Direct Lake mode",
         "Direct Lake query",
         "Direct Lake performance"
       ],
       "url": "/blog/power-bi-direct-lake-performance-tuning-fabric",
-      "anchor": "Direct Lake Explained",
-      "priority": 85,
+      "anchors": [
+        "Direct Lake Explained",
+        "Direct Lake performance tuning guide",
+        "Power BI Direct Lake mode",
+        "Direct Lake query lifecycle"
+      ],
+      "priority": 88,
       "cluster": "Microsoft Fabric"
     },
     {
-      "keywords": [
+      "entity": "DP-600",
+      "aliases": [
         "DP-600",
         "DP-600 exam",
         "DP-600 Study Guide",
         "Fabric Analytics Engineer certification"
       ],
       "url": "/blog/dp-600-study-guide-2026",
-      "anchor": "DP-600 Study Guide",
-      "priority": 90,
+      "anchors": [
+        "DP-600 Study Guide",
+        "Fabric Analytics Engineer exam preparation",
+        "DP-600 certification course",
+        "DP-600 study companion"
+      ],
+      "priority": 88,
       "cluster": "Microsoft Fabric Certifications"
     },
     {
-      "keywords": [
+      "entity": "DP-700",
+      "aliases": [
         "DP-700",
         "Fabric Data Engineer exam"
       ],
       "url": "/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
-      "anchor": "DP-700 Certification Guide",
+      "anchors": [
+        "DP-700 Certification Guide",
+        "Fabric Data Engineer certification details",
+        "DP-700 exam syllabus comparison"
+      ],
       "priority": 80,
       "cluster": "Microsoft Fabric Certifications"
     },
     {
-      "keywords": [
+      "entity": "DP-800",
+      "aliases": [
         "DP-800",
         "Fabric Solution Architect exam"
       ],
       "url": "/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
-      "anchor": "DP-800 Certification Guide",
+      "anchors": [
+        "DP-800 Certification Guide",
+        "Fabric Solution Architect certification path",
+        "DP-800 study resource details"
+      ],
       "priority": 80,
       "cluster": "Microsoft Fabric Certifications"
     },
     {
-      "keywords": [
+      "entity": "LinkedIn Tool",
+      "aliases": [
         "LinkedIn",
         "LinkedIn post",
         "LinkedIn formatting"
       ],
       "url": "/tools/linkedin-formatter",
-      "anchor": "LinkedIn Post Formatter",
+      "anchors": [
+        "LinkedIn Post Formatter",
+        "LinkedIn formatting optimizer",
+        "LinkedIn surgical spacer tool"
+      ],
       "priority": 40,
       "cluster": "Tools"
     },
     {
-      "keywords": [
+      "entity": "Mermaid Tool",
+      "aliases": [
         "Mermaid",
         "Mermaid diagram",
         "Mermaid flowcharts"
       ],
       "url": "/tools/mermaid-forge",
-      "anchor": "Mermaid Forge Diagram Builder",
+      "anchors": [
+        "Mermaid Forge Diagram Builder",
+        "Mermaid diagram editor",
+        "Mermaid flowchart utility"
+      ],
       "priority": 40,
       "cluster": "Tools"
     },
     {
-      "keywords": [
+      "entity": "AI Prompt Tool",
+      "aliases": [
         "Prompt",
         "Prompt Engineering",
         "AI Prompt"
       ],
       "url": "/tools/ai-prompt-generator",
-      "anchor": "AI Prompt Generator",
+      "anchors": [
+        "AI Prompt Generator",
+        "prompt optimization utility",
+        "system prompt builder"
+      ],
       "priority": 40,
       "cluster": "Tools"
     },
     {
-      "keywords": [
+      "entity": "SEO Tool",
+      "aliases": [
         "SEO",
         "Meta tags",
         "Meta description"
       ],
       "url": "/tools/seo-meta-generator",
-      "anchor": "SEO Meta Generator",
+      "anchors": [
+        "SEO Meta Generator",
+        "meta descriptions creator",
+        "high-CTR snippet utility"
+      ],
       "priority": 40,
       "cluster": "Tools"
     }
