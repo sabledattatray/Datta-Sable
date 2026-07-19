@@ -116,7 +116,7 @@ export async function POST(req: Request) {
     });
 
     if (post.published) {
-      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '').catch(err => {
+      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '', post.image).catch(err => {
         console.error('Failed to notify subscribers of new post:', err);
       });
     }

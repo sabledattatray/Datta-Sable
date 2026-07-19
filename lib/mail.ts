@@ -82,10 +82,12 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
   });
 };
 
-export const notifySubscribersOfNewPost = async (title: string, slug: string, excerpt: string) => {
+export const notifySubscribersOfNewPost = async (title: string, slug: string, excerpt: string, image?: string | null) => {
   try {
     const subscribers = await prisma.subscriber.findMany();
     if (subscribers.length === 0) return;
+
+    const imageUrl = image ? (image.startsWith('http') ? image : `${domain}${image}`) : null;
 
     const emailPromises = subscribers.map(sub => 
       transporter.sendMail({
@@ -97,6 +99,12 @@ export const notifySubscribersOfNewPost = async (title: string, slug: string, ex
             <span style="font-family: monospace; font-size: 0.75rem; color: #c9f31d; text-transform: uppercase; letter-spacing: 0.2em;">Fresh off the Press</span>
             <h2 style="color: #fff; margin-top: 10px; margin-bottom: 20px; font-size: 1.6rem;">${title}</h2>
             
+            ${imageUrl ? `
+              <div style="margin-bottom: 25px; border-radius: 6px; overflow: hidden; border: 1px solid #222;">
+                <img src="${imageUrl}" alt="${title}" style="width: 100%; height: auto; display: block;" />
+              </div>
+            ` : ''}
+
             <p style="color: #ccc; font-size: 1rem; line-height: 1.6; margin-bottom: 25px;">
               ${excerpt || "A new deep-dive technical article has just been published on dattasable.com. Click below to read the full guide."}
             </p>

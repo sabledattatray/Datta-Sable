@@ -64,7 +64,7 @@ export async function PUT(
     });
 
     if (post.published && (!prevPost || !prevPost.published)) {
-      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '').catch(err => {
+      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '', post.image).catch(err => {
         console.error('Failed to notify subscribers on post update publish:', err);
       });
     }
