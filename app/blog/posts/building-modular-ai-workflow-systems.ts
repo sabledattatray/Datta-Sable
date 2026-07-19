@@ -104,7 +104,7 @@ class ToolRegistry {
       <h2 id="best-practices-ops" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">7. Production Best Practices</h2>
       <p>When implementing these methods in live environments, make sure your team adheres to the following checklist:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
-        <li><strong>Standardize</strong> all tool inputs and outputs using JSON Schema definitions.</li><li><strong>Version</strong> <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> templates separately from the application codebase.</li><li><strong>Use</strong> model-agnostic abstraction libraries to simplify swapping LLM endpoints.</li><li><strong>Establish</strong> strict token quotas per workspace session to manage cloud spend.</li>
+        <li><strong>Standardize</strong> all tool inputs and outputs using JSON Schema definitions.</li><li><strong>Version</strong> prompt templates separately from the application codebase.</li><li><strong>Use</strong> model-agnostic abstraction libraries to simplify swapping LLM endpoints.</li><li><strong>Establish</strong> strict token quotas per workspace session to manage cloud spend.</li>
       </ul>
  
       <h2 id="expert-view" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">8. Architectural Insight</h2>

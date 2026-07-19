@@ -117,7 +117,7 @@ export class SecureExtractionPipeline {
 }</ManifestOutput></typeof></code></pre>
  
       <h2 id="ab-testing-python" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">5. Python A/B Testing Evaluation Script</h2>
-      <p>Before rolling out the <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> migration, we developed a Python evaluation harness to benchmark the new Precision Prompt templates against legacy prompts. The script measures latency, token count, and schema validity over 1,000 simulated manifests:</p>
+      <p>Before rolling out the prompt migration, we developed a Python evaluation harness to benchmark the new Precision Prompt templates against legacy prompts. The script measures latency, token count, and schema validity over 1,000 simulated manifests:</p>
       <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">import json
 import time
 
@@ -177,7 +177,7 @@ def evaluate_prompt_version(client, test_dataset, prompt_compiler_func) -> dict:
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">GPT-4o</td>
-              <td style="padding: 12px; border-right: 1px solid var(--border);">Precision Prompt</td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Precision <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a></td>
               <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">99.8%</td>
               <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">210ms</td>
               <td style="padding: 12px; color: var(--text); font-weight: 600;">0.2%</td>

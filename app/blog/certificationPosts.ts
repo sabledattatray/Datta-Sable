@@ -44,7 +44,7 @@ export const newCertificationPosts = [
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;"><a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> (Analytics Engineer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-600 (Analytics Engineer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">BI Developer, Power BI Analyst</td>
         <td style="padding: 12px;">Direct Lake, semantic modeling, star schemas, DAX.</td>
       </tr>
@@ -54,7 +54,7 @@ export const newCertificationPosts = [
         <td style="padding: 12px;">Spark notebooks, pipeline orchestration, OneLake security.</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;"><a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Solution Architect certification path">DP-800</a> (SQL AI Developer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-800 (SQL AI Developer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">SQL Developer, Database Developer</td>
         <td style="padding: 12px;">Vector search, OpenAI integrations, RAG database structures.</td>
       </tr>
@@ -67,7 +67,7 @@ export const newCertificationPosts = [
 
 <h2 id="faq">Frequently Asked Questions (FAQ)</h2>
 <ol>
-  <li><strong>Which Fabric certification should I take first?</strong> Take the DP-600 if you have a Power BI/analyst background. Take the DP-700 if you work with backend databases and ETL pipelines.</li>
+  <li><strong>Which Fabric certification should I take first?</strong> Take the <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> if you have a Power BI/analyst background. Take the DP-700 if you work with backend databases and ETL pipelines.</li>
   <li><strong>How much do Fabric certifications cost?</strong> The standard price is $165 USD per exam.</li>
   <li><strong>How long are the certifications valid?</strong> They are valid for one year and can be renewed online for free.</li>
   <li><strong>Does Microsoft offer free learning materials?</strong> Yes, Microsoft Learn provides free self-paced paths and sandbox environments.</li>
@@ -75,7 +75,7 @@ export const newCertificationPosts = [
   <li><strong>Can I take the exams online?</strong> Yes, they can be scheduled online via Pearson VUE.</li>
   <li><strong>Is the DP-800 exam part of Fabric?</strong> The DP-800 covers SQL AI development, which applies to Azure SQL Database and SQL components within Fabric.</li>
   <li><strong>Are there code questions on the exams?</strong> Yes, you will be tested on SQL, PySpark, and DAX syntax where relevant.</li>
-  <li><strong>What is OneLake?</strong> <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> is the SaaS data lake that stores all Fabric files in open-source Delta Parquet format.</li>
+  <li><strong>What is OneLake?</strong> OneLake is the SaaS data lake that stores all Fabric files in open-source Delta Parquet format.</li>
   <li><strong>Are these certifications valued by employers?</strong> Yes, they are highly valued as <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Architecture Guide">Microsoft Fabric</a> adoption grows.</li>
   <li><strong>Can I use documentation during the exam?</strong> Yes, Microsoft associate exams include access to Microsoft Learn.</li>
   <li><strong>What is the difference between DP-700 and DP-203?</strong> DP-203 covers PaaS cloud services. DP-700 covers the unified SaaS Fabric environment.</li>

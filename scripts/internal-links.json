@@ -204,6 +204,25 @@
       ],
       "priority": 40,
       "cluster": "Tools"
+    },
+    {
+      "entity": "Fabric Playground",
+      "aliases": [
+        "Fabric playground",
+        "Fabric sandbox",
+        "Fabric simulator",
+        "Fabric practice lab",
+        "Fabric training environment"
+      ],
+      "url": "https://fabric.dattasable.com/",
+      "anchors": [
+        "Microsoft Fabric Playground",
+        "Fabric Practice Lab sandbox",
+        "Fabric simulation environment",
+        "Interactive Fabric sandbox"
+      ],
+      "priority": 85,
+      "cluster": "Microsoft Fabric"
     }
   ],
   "glossary": [

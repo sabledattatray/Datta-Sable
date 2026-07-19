@@ -334,7 +334,7 @@ export const microsoftFabricPricingGuide2026Post = {
   </table>
 </div>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F2:</strong> Individual developers building proofs of concept, students preparing for <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> or DP-700 who need a real Fabric environment, small teams evaluating the platform.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F2:</strong> Individual developers building proofs of concept, students preparing for DP-600 or <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-700 Certification Guide">DP-700</a> who need a real Fabric environment, small teams evaluating the platform.</p>
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Individual Spark notebooks on small datasets under 5GB, basic Lakehouse exploration, Dataflows Gen2 on small sources, a few Power BI reports with lightweight data models.</p>
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What doesn't work:</strong> Any concurrent workloads, large Spark jobs, production pipelines with SLA requirements, datasets over 300M rows in Direct Lake, more than one or two simultaneous report users.</p>
 
@@ -400,7 +400,7 @@ export const microsoftFabricPricingGuide2026Post = {
 </div>
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F8:</strong> Small-to-medium companies with 1–2 data engineers and 20–40 business users. Microsoft Partners building customer PoCs. Teams migrating from Power BI Premium P1 with moderate analytical workloads.</p>
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Full <a href="/blog/microsoft-fabric-medallion-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Medallion architecture bronze-silver-gold framework">Medallion Architecture</a>, Spark notebooks processing up to 50GB datasets, 10–15 Power BI reports with scheduled refreshes, a Fabric Warehouse with concurrent SQL users, basic Mirroring from a single Azure SQL source.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Full Medallion Architecture, Spark notebooks processing up to 50GB datasets, 10–15 Power BI reports with scheduled refreshes, a Fabric Warehouse with concurrent SQL users, basic Mirroring from a single Azure SQL source.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">F16 — The Mid-Market Tier</h3>
 
@@ -570,7 +570,7 @@ export const microsoftFabricPricingGuide2026Post = {
 <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 1.5rem 0;">
   <p style="margin-bottom: 0.75rem; color: var(--text); font-weight: 600;">250 stores, 80 report users, 3 data engineers</p>
   <ul style="line-height: 1.8; padding-left: 1.5rem; color: var(--muted); margin-bottom: 0.75rem;">
-    <li>Full Medallion Architecture with 2 Spark notebooks running nightly (2 hours each), 30 Power BI reports refreshed 4x daily, 50 concurrent users at midday, hourly pipeline from ERP, 100GB storage</li>
+    <li>Full <a href="/blog/microsoft-fabric-medallion-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Medallion architecture bronze-silver-gold framework">Medallion Architecture</a> with 2 Spark notebooks running nightly (2 hours each), 30 Power BI reports refreshed 4x daily, 50 concurrent users at midday, hourly pipeline from ERP, 100GB storage</li>
   </ul>
   <p style="margin-bottom: 0.5rem; color: var(--text); font-weight: 600;">Cost: F32 Reserved (~$2,644) + Storage ($2.30) = <span style="color: var(--accent);">~$2,646/month</span></p>
   <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">Equivalent legacy cost (ADLS + Synapse + PBI Premium P1 + ADF): ~$6,500/month. Fabric saves ~60%.</p>
@@ -656,7 +656,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">7.3 Storage Planning</h3>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">OneLake storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
@@ -675,7 +675,7 @@ export const microsoftFabricPricingGuide2026Post = {
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A mid-size bank with $8B AUM deployed Fabric as a unified risk and finance analytics platform on a single F128 capacity with 6 domains, replacing separate Teradata DW, Oracle Analytics, and managed Databricks. The FinOps team implemented full chargeback: workspace CU consumption is allocated back to business units monthly based on Capacity Metrics App data. The Risk team's heavy Spark workloads made them the largest cost center — they voluntarily moved Monte Carlo simulation jobs to 2 AM to reduce their chargeback allocation.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">8.5 Government: High-Availability Reporting</h3>
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A government statistics agency migrated national economic data reporting to Fabric with a 99.9% availability requirement. Rather than one F64, they run two F32 capacities in active-active configuration — Production Workspace on Capacity A, standby on Capacity B. If Capacity A experiences unexpected throttling, an administrator reassigns the public reporting workspace to Capacity B within minutes via the Fabric Admin Portal, without data loss (since data lives in OneLake, not in the capacity).</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A government statistics agency migrated national economic data reporting to Fabric with a 99.9% availability requirement. Rather than one F64, they run two F32 capacities in active-active configuration — Production Workspace on Capacity A, standby on Capacity B. If Capacity A experiences unexpected throttling, an administrator reassigns the public reporting workspace to Capacity B within minutes via the Fabric Admin Portal, without data loss (since data lives in <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a>, not in the capacity).</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
@@ -1101,9 +1101,9 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Certifications</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The DP-600 exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-700 Certification Guide">DP-700</a> exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Data Engineer certification details">DP-700</a> exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Troubleshooting</h3>
 
