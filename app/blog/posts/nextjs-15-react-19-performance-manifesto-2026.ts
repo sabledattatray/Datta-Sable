@@ -8,7 +8,14 @@ export const nextjs15React19PerformanceManifesto2026Post = {
   icon: "🌐",
   image: "/images/blog/nextjs-15-react-19-enterprise-architecture.webp",
   tags: ["Next.js 15", "React 19", "Server Components", "Enterprise", "Performance"],
-  content: `<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+  content: `<!-- BREADCRUMB_START -->
+<div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+  <a href="/" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Home</a> &gt; 
+  <a href="/blog" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Blog</a> &gt; 
+  <span style="color: var(--text);">The Performance Manifesto: Architecting the Post-SPA Web with Next.js 15 and React 19</span>
+</div>
+<!-- BREADCRUMB_END -->
+<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
         <p>Next.js 15 and React 19 introduce Server Components, Actions, and asset optimizations. This performance manifesto details how to build post-SPA architectures.</p>
       </div>
  
@@ -111,7 +118,7 @@ export async function createPostAction(formData: FormData) {
           <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Using \`revalidatePath('/route')\` clears the router cache on the server, forcing the next request to fetch fresh data and rebuild the static page markup.</p>
         </div>
       </div>
-      </div>
+      
       <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">10. Related Resources & Internal Links</h2>
       <p>For more detailed technical guides and real-world implementation blueprints, explore the following curated resources in our knowledge hub:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
@@ -125,5 +132,36 @@ export async function createPostAction(formData: FormData) {
       <p>Ultimately, a successful deployment is not just about making the code work today, but ensuring it is maintainable for the next five years. By building modules that are isolated and well-tested, you protect the core user experience from regression failures. This operational resilience translates directly into customer trust and long-term brand equity, providing a solid foundation for sustainable commercial growth.</p>
 
       <h2 id="final-takeaway" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">12. Conclusion & Summary</h2>
-      <p>Success at scale requires a strategic commitment to modular systems, clean data flows, and active monitoring. By implementing these practices, you lay the foundation for a resilient, performant technology ecosystem.</p>`
+      <p>Success at scale requires a strategic commitment to modular systems, clean data flows, and active monitoring. By implementing these practices, you lay the foundation for a resilient, performant technology ecosystem.</p>
+<!-- RELATED_START -->
+<div class="related-articles-section" style="margin-top: 4rem; padding: 2.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;">
+  <h3 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin: 0 0 1.5rem 0; font-family: Syne, sans-serif;">Related Reading</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Web Dev</span>
+      <a href="/blog/future-of-web-development-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">The Future of Web Development in 2026: Beyond the Hype of AI and Edge Computing</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Web Dev</span>
+      <a href="/blog/building-your-first-website-2025" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">The Ultimate Beginner</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Web Dev</span>
+      <a href="/blog/mastering-surgical-ui-dashboard-engineering" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Mastering the </a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Engineering</span>
+      <a href="/blog/building-analytics-war-room" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Building the Surgical War Room: Engineering a High-Fidelity Live Analytics Dashboard</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-pricing-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Case Study</span>
+      <a href="/blog/case-study-n8n-automated-authority-scaling" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Case Study: Architecting the </a>
+    </li>
+  </ul>
+</div>
+<!-- RELATED_END -->`
 };

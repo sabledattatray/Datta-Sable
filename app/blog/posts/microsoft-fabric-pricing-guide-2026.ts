@@ -14,7 +14,14 @@ export const microsoftFabricPricingGuide2026Post = {
   blocks: {
     focusedKeyword: "Microsoft Fabric Pricing"
   },
-  content: `
+  content: `<!-- BREADCRUMB_START -->
+<div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+  <a href="/" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Home</a> &gt; 
+  <a href="/blog" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Blog</a> &gt; 
+  <a href="/blog/microsoft-fabric" style="color: var(--accent); text-decoration: none; font-weight: 600;">Microsoft Fabric Hub</a> &gt; 
+  <span style="color: var(--text);">Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing</span>
+</div>
+<!-- BREADCRUMB_END -->
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text);">
   <p><strong>Microsoft Fabric Pricing in 2026</strong> is built on a single, capacity-based model: you purchase a pool of Capacity Units (CUs), assign it to a workspace, and every workload — Spark, SQL, Power BI, Data Factory, Real-Time Intelligence — draws from that same shared pool. This guide covers every F-SKU from F2 to F2048, shows you how to estimate cost for your specific workload profile, and gives you the FinOps playbook enterprises use to cut Fabric spend by 30–60%.</p>
 </div>
@@ -42,7 +49,7 @@ export const microsoftFabricPricingGuide2026Post = {
   </ul>
 </div>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="executive-summary" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">1. Executive Summary</h2>
 
@@ -61,11 +68,11 @@ export const microsoftFabricPricingGuide2026Post = {
   <li><strong>Pausing and resuming capacity</strong> eliminates costs during off-hours, making pay-as-you-go viable for environments with predictable usage patterns.</li>
 </ul>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>Who this guide is for:</strong> Data engineers estimating their first Fabric deployment, Power BI developers migrating from Premium Per User, solution architects making SKU recommendations to a CTO, enterprise architects designing multi-workspace governance frameworks, FinOps practitioners building showback reports, IT managers evaluating total cost of ownership versus Databricks or Snowflake, and candidates preparing for DP-600 or DP-700 exams who need to understand the capacity model deeply.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>Who this guide is for:</strong> Data engineers estimating their first Fabric deployment, Power BI developers migrating from Premium Per User, solution architects making SKU recommendations to a CTO, enterprise architects designing multi-workspace governance frameworks, FinOps practitioners building showback reports, IT managers evaluating total cost of ownership versus Databricks or Snowflake, and candidates preparing for DP-600 or <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;">DP-700</a> exams who need to understand the capacity model deeply.</p>
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What you'll be able to do after reading this:</strong> Choose the right SKU for your workload profile, build a bottom-up cost estimate for a stakeholder presentation, configure Reserved Capacity to cut costs by half, monitor capacity utilization without guessing, and avoid the 25 most common mistakes that cause enterprises to overspend or underperform on Fabric.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="quick-decision-table" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">2. Quick Decision Table</h2>
 
@@ -109,7 +116,7 @@ export const microsoftFabricPricingGuide2026Post = {
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--accent); font-weight: bold;">F64</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">150–500</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">~$8,388</td>
-        <td style="padding: 12px; color: var(--muted);">Full Medallion, Mirroring, Direct Lake large models, streaming</td>
+        <td style="padding: 12px; color: var(--muted);">Full Medallion, Mirroring, <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a> large models, streaming</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Large Enterprise</td>
@@ -138,7 +145,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><em>Note: Prices shown are approximate US East pay-as-you-go rates. Regional pricing varies. Apply a 1-year Reserved Capacity discount of approximately 37% to get the reserved price. Verify all pricing on the Azure pricing calculator before procurement decisions.</em></p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="pricing-model-history" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">3. Understanding Microsoft Fabric Pricing</h2>
 
@@ -167,7 +174,7 @@ export const microsoftFabricPricingGuide2026Post = {
   <strong>Architect's Note:</strong> In large enterprises with distinct organizational units (Finance, Operations, Marketing), a common pattern is to buy one capacity per domain rather than one shared capacity for the entire company. This gives each domain a guaranteed performance budget and a clean chargeback boundary. The tradeoff is that you lose the ability to burst across domains during off-peak periods for other domains.
 </div>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="capacity-units-explained" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">4. Capacity Units Explained</h2>
 
@@ -192,7 +199,7 @@ export const microsoftFabricPricingGuide2026Post = {
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--accent);">Interactive</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Power BI report loads, SQL queries (ad hoc), Direct Lake queries, notebook cell executions triggered by a user</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Power BI report loads, SQL queries (ad hoc), <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a> queries, notebook cell executions triggered by a user</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Requests are queued, then either served slowly or rejected with a 429 error if severe overload</td>
         <td style="padding: 12px; color: var(--muted);">Directly visible — report loads slowly or shows error</td>
       </tr>
@@ -292,7 +299,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Peak CU demand during morning processing window: ~40 (Spark) + 16 (refreshes) + 2 (interactive) + 6 (Dataflow) = <strong>~64 CUs peak demand</strong>. An F32 would struggle at this peak. An F64 handles it comfortably. But because the Spark job runs only 45 minutes a day, the 24-hour smoothed average is much lower — an F32 with smoothing might absorb the burst without sustained throttling. The Capacity Metrics App tells you exactly how close you are to the limit.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="complete-sku-breakdown" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">5. Complete F-SKU Breakdown</h2>
 
@@ -544,7 +551,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">These tiers are for large enterprises running enterprise-wide Fabric platforms, organizations with heavy Spark workloads alongside high-concurrency reporting, and companies with significant Real-Time Intelligence requirements. At F128+, the architecture conversation shifts from "will this fit in our capacity?" to "how do we partition workloads across capacities to isolate critical workloads from development noise?" At these scales, the procurement process typically involves Enterprise Agreement negotiations with Microsoft, with additional volume discounts of 15–25% beyond published reserved rates.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="pricing-examples" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">6. Pricing Examples: Real-World Cost Calculations</h2>
 
@@ -588,7 +595,7 @@ export const microsoftFabricPricingGuide2026Post = {
   <p style="margin: 0; color: var(--accent); font-weight: bold;">3 × $21,139 + 3 × $1,322 + Storage ($690) = ~$68,073/month</p>
 </div>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="capacity-planning" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">7. Capacity Planning Framework</h2>
 
@@ -651,7 +658,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">OneLake storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="enterprise-scenarios" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">8. Real Enterprise Scenarios</h2>
 
@@ -670,7 +677,7 @@ export const microsoftFabricPricingGuide2026Post = {
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">8.5 Government: High-Availability Reporting</h3>
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A government statistics agency migrated national economic data reporting to Fabric with a 99.9% availability requirement. Rather than one F64, they run two F32 capacities in active-active configuration — Production Workspace on Capacity A, standby on Capacity B. If Capacity A experiences unexpected throttling, an administrator reassigns the public reporting workspace to Capacity B within minutes via the Fabric Admin Portal, without data loss (since data lives in OneLake, not in the capacity).</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="fabric-vs-pbi-premium" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">9. Microsoft Fabric vs Power BI Premium</h2>
 
@@ -730,7 +737,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">For organizations on <strong>Power BI Premium Per User (PPU)</strong> at $20/user/month: at 50+ users, a Fabric F8 Reserved ($661/month) is more cost-effective than PPU ($1,000/month for 50 users) while providing Spark, Warehouse, and Lakehouse capabilities that PPU doesn't offer.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="fabric-vs-synapse" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">10. Microsoft Fabric vs Azure Synapse Analytics</h2>
 
@@ -775,7 +782,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">The direction of development is clear: every new data platform feature ships to Microsoft Fabric first. For new deployments in 2026, Fabric is the standard recommendation. For existing Synapse customers, migration timelines vary — simple Spark + SQL workloads can migrate in weeks; complex Dedicated SQL Pool architectures may take 6–12 months.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="fabric-vs-databricks" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">11. Microsoft Fabric vs Databricks</h2>
 
@@ -820,7 +827,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A notable 2026 trend: enterprises running a <strong>Databricks + Fabric hybrid</strong>. Databricks handles large-scale ML training and complex Spark ETL, writing results as Delta tables to ADLS Gen2. Fabric shortcuts into those same Delta files via OneLake Shortcuts. Power BI Direct Lake queries the Databricks-managed Delta tables. This hybrid approach maximizes the strengths of both platforms.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="cost-optimization" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">12. Cost Optimization Strategies</h2>
 
@@ -884,7 +891,7 @@ export const microsoftFabricPricingGuide2026Post = {
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">12.6 Workload Isolation with Multiple Capacities</h3>
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">At F64+ scale, splitting workloads across multiple smaller capacities provides isolation guarantees that a single large capacity cannot offer. Example: Production BI Capacity (F32) hosts only Power BI workspaces; Data Engineering Capacity (F32) hosts Lakehouse, Warehouse, Spark notebooks; Real-Time Capacity (F8) hosts Eventstream and Eventhouse. Engineers can run heavy jobs without impacting BI users. The premium over a single F64 is small (~$949/month more) but the SLA guarantees are invaluable for organizations with strict reporting availability requirements.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="fabric-finops" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">13. Fabric FinOps: Governance, Chargeback, and Cost Accountability</h2>
 
@@ -945,7 +952,7 @@ export const microsoftFabricPricingGuide2026Post = {
   </table>
 </div>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="capacity-monitoring" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">14. Capacity Monitoring</h2>
 
@@ -972,7 +979,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Export this data nightly to a Fabric Lakehouse and build a Power BI report on top — this becomes your organization's custom FinOps dashboard with far more detail than the out-of-the-box Metrics App provides. Use a Fabric Reflex alert on a KQL query that fires when interactive CU utilization exceeds 80% for more than 10 consecutive minutes, posting a Teams message to the platform engineering channel.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="common-mistakes" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">15. The 25 Most Common Fabric Pricing Mistakes</h2>
 
@@ -1004,129 +1011,129 @@ export const microsoftFabricPricingGuide2026Post = {
   <li style="margin-bottom: 0.9rem;"><strong>Not reading the OneLake storage billing details carefully.</strong> OneLake charges for data storage plus data transactions (reads and writes). For workloads with very high transaction volume, transaction charges can become non-negligible. Monitor both storage and transaction costs in Azure Cost Management monthly.</li>
 </ol>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="faq" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">16. Frequently Asked Questions</h2>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Pricing Basics</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q1: How much does Microsoft Fabric cost?</strong><br />Fabric capacity ranges from ~$262/month (F2, PAYG, US East) to ~$268,428/month (F2048). Most production deployments use F32–F128 at $4,194–$16,776/month PAYG or $2,644–$10,570/month with 1-year Reserved Capacity. Storage is additional at ~$0.023/GB/month.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q1: How much does Microsoft Fabric cost?</strong><br/>Fabric capacity ranges from ~$262/month (F2, PAYG, US East) to ~$268,428/month (F2048). Most production deployments use F32–F128 at $4,194–$16,776/month PAYG or $2,644–$10,570/month with 1-year Reserved Capacity. Storage is additional at ~$0.023/GB/month.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q2: What is included in the Fabric capacity price?</strong><br />The capacity price covers all compute workloads: Lakehouse (Spark), Data Warehouse (SQL), Data Factory (pipelines, Dataflows Gen2), Power BI (refresh, rendering), Data Science (notebooks, experiments), Real-Time Intelligence (Eventstream, Eventhouse, Reflex), and Mirroring. OneLake storage is billed separately.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q2: What is included in the Fabric capacity price?</strong><br/>The capacity price covers all compute workloads: Lakehouse (Spark), Data Warehouse (SQL), Data Factory (pipelines, Dataflows Gen2), Power BI (refresh, rendering), Data Science (notebooks, experiments), Real-Time Intelligence (Eventstream, Eventhouse, Reflex), and Mirroring. OneLake storage is billed separately.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q3: Do I need Power BI Premium licenses separately from Fabric?</strong><br />No. F-SKU capacities include all Power BI Premium features. Users consuming content from a workspace on Fabric capacity need either a Microsoft Fabric Free license (for read-only report consumption) or a Power BI Pro/PPU license (for creating and publishing content).</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q3: Do I need Power BI Premium licenses separately from Fabric?</strong><br/>No. F-SKU capacities include all Power BI Premium features. Users consuming content from a workspace on Fabric capacity need either a Microsoft Fabric Free license (for read-only report consumption) or a Power BI Pro/PPU license (for creating and publishing content).</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q4: What is the cheapest way to use Microsoft Fabric?</strong><br />The Fabric Free Trial provides 60 days of access at no cost. After the trial, F2 at ~$262/month PAYG or ~$165/month with a 1-year reservation is the lowest cost entry. Pausing the capacity when not in use reduces effective monthly cost significantly.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q4: What is the cheapest way to use Microsoft Fabric?</strong><br/>The Fabric Free Trial provides 60 days of access at no cost. After the trial, F2 at ~$262/month PAYG or ~$165/month with a 1-year reservation is the lowest cost entry. Pausing the capacity when not in use reduces effective monthly cost significantly.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q5: How does Fabric pricing compare to Databricks?</strong><br />Fabric tends to be significantly less expensive for workloads that combine BI (Power BI) with data engineering (Spark). A comparable Databricks + Power BI Premium stack typically costs 2–3× more than the equivalent Fabric F-SKU for mid-market deployments.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q5: How does Fabric pricing compare to Databricks?</strong><br/>Fabric tends to be significantly less expensive for workloads that combine BI (Power BI) with data engineering (Spark). A comparable Databricks + Power BI Premium stack typically costs 2–3× more than the equivalent Fabric F-SKU for mid-market deployments.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q6: Is Microsoft Fabric billed monthly or annually?</strong><br />Pay-as-you-go Fabric capacity is billed hourly and appears on your Azure monthly invoice. Reserved Capacity is paid upfront for 1 or 3 years (or monthly installments for 1-year reservations at some tiers). Storage is billed monthly based on consumption.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q6: Is Microsoft Fabric billed monthly or annually?</strong><br/>Pay-as-you-go Fabric capacity is billed hourly and appears on your Azure monthly invoice. Reserved Capacity is paid upfront for 1 or 3 years (or monthly installments for 1-year reservations at some tiers). Storage is billed monthly based on consumption.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q7: Can I try Microsoft Fabric for free?</strong><br />Yes. Microsoft offers a 60-day free Fabric trial providing access to all Fabric workloads on a shared trial capacity. For any production validation, a paid capacity is strongly recommended.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q7: Can I try Microsoft Fabric for free?</strong><br/>Yes. Microsoft offers a 60-day free Fabric trial providing access to all Fabric workloads on a shared trial capacity. For any production validation, a paid capacity is strongly recommended.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Capacity Units and SKUs</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q8: What is the difference between an F-SKU and a P-SKU?</strong><br />P-SKUs (P1–P5) were Power BI Premium capacity tiers, now legacy. F-SKUs (F2–F2048) are the Microsoft Fabric capacity tiers that replace them. F-SKUs include all P-SKU features plus Spark, Warehouse, Lakehouse, Real-Time Intelligence, and OneLake access. Always buy F-SKU for new deployments.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q8: What is the difference between an F-SKU and a P-SKU?</strong><br/>P-SKUs (P1–P5) were Power BI Premium capacity tiers, now legacy. F-SKUs (F2–F2048) are the Microsoft Fabric capacity tiers that replace them. F-SKUs include all P-SKU features plus Spark, Warehouse, Lakehouse, Real-Time Intelligence, and OneLake access. Always buy F-SKU for new deployments.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q9: What does a Capacity Unit (CU) actually represent?</strong><br />A CU is Microsoft's normalized compute unit for Fabric. It abstracts the underlying CPU, memory, and I/O resources into a single measurement. An F8 capacity provides 8 CUs of concurrent compute. Every workload consumes CUs at some rate — a Spark job might consume 32 CUs for 30 minutes; a Power BI report load might consume 1 CU for 2 seconds.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q9: What does a Capacity Unit (CU) actually represent?</strong><br/>A CU is Microsoft's normalized compute unit for Fabric. It abstracts the underlying CPU, memory, and I/O resources into a single measurement. An F8 capacity provides 8 CUs of concurrent compute. Every workload consumes CUs at some rate — a Spark job might consume 32 CUs for 30 minutes; a Power BI report load might consume 1 CU for 2 seconds.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q10: Can I have multiple capacities in one Fabric tenant?</strong><br />Yes. You can provision multiple F-SKU capacities within a single Fabric tenant. Each capacity operates independently with different CU pools and different billing. This is standard practice for large enterprises: separate Production and Development capacities, or separate capacities by geographic region or business domain.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q10: Can I have multiple capacities in one Fabric tenant?</strong><br/>Yes. You can provision multiple F-SKU capacities within a single Fabric tenant. Each capacity operates independently with different CU pools and different billing. This is standard practice for large enterprises: separate Production and Development capacities, or separate capacities by geographic region or business domain.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q11: Can I assign multiple workspaces to the same capacity?</strong><br />Yes, and this is the recommended approach. A single F64 capacity can host hundreds of workspaces. All workspaces share the 64 CU pool. The Capacity Metrics App shows the breakdown of CU consumption by workspace.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q11: Can I assign multiple workspaces to the same capacity?</strong><br/>Yes, and this is the recommended approach. A single F64 capacity can host hundreds of workspaces. All workspaces share the 64 CU pool. The Capacity Metrics App shows the breakdown of CU consumption by workspace.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q12: What happens if my capacity runs out of CUs?</strong><br />Microsoft applies a smoothing algorithm rather than a hard real-time limit. If sustained usage exceeds capacity limits, background operations are delayed first, then interactive operations are throttled. Users see slow reports or error messages; data engineers see delayed pipeline completions.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q12: What happens if my capacity runs out of CUs?</strong><br/>Microsoft applies a smoothing algorithm rather than a hard real-time limit. If sustained usage exceeds capacity limits, background operations are delayed first, then interactive operations are throttled. Users see slow reports or error messages; data engineers see delayed pipeline completions.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q13: Can I scale my Fabric capacity up or down?</strong><br />Yes. You can change the SKU of a running Fabric capacity in the Azure Portal or Fabric Admin Portal. Scaling up takes a few minutes. Data in OneLake is unaffected by capacity changes. Reserved Capacity reservations are for a specific SKU — changing SKU breaks the reservation.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q13: Can I scale my Fabric capacity up or down?</strong><br/>Yes. You can change the SKU of a running Fabric capacity in the Azure Portal or Fabric Admin Portal. Scaling up takes a few minutes. Data in OneLake is unaffected by capacity changes. Reserved Capacity reservations are for a specific SKU — changing SKU breaks the reservation.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q14: What is the Direct Lake row limit for each SKU?</strong><br />F2 and F4 support approximately 300M rows per table; F8 supports ~1 billion rows; F16 supports ~3 billion; F32 supports ~6 billion. F64 and above have no documented row limits. Organizations with tables above these limits need to either upgrade SKUs or implement table partitioning strategies.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q14: What is the Direct Lake row limit for each SKU?</strong><br/>F2 and F4 support approximately 300M rows per table; F8 supports ~1 billion rows; F16 supports ~3 billion; F32 supports ~6 billion. F64 and above have no documented row limits. Organizations with tables above these limits need to either upgrade SKUs or implement table partitioning strategies.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q15: What is the minimum SKU for production use?</strong><br />There is no hard minimum. In practice, most production deployments start at F8 for small teams and F32–F64 for enterprise deployments. F2 and F4 are best reserved for development, exploration, and PoC scenarios.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q15: What is the minimum SKU for production use?</strong><br/>There is no hard minimum. In practice, most production deployments start at F8 for small teams and F32–F64 for enterprise deployments. F2 and F4 are best reserved for development, exploration, and PoC scenarios.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Reserved Capacity and Cost Optimization</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q16: How much do I save with Reserved Capacity?</strong><br />Approximately 37% for a 1-year commitment and 52% for a 3-year commitment compared to pay-as-you-go. On an F64, this translates to over $37,000/year saved with a 1-year reservation.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q16: How much do I save with Reserved Capacity?</strong><br/>Approximately 37% for a 1-year commitment and 52% for a 3-year commitment compared to pay-as-you-go. On an F64, this translates to over $37,000/year saved with a 1-year reservation.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q17: What happens if I need to cancel my Reserved Capacity?</strong><br />Microsoft Reserved Capacity follows Azure Reservations policies. You can cancel with a prorated refund within the first 7 days. After 7 days, cancellation is generally not available. Exchanges (changing to a different SKU reservation) may be possible — check current Azure Reservations policy at time of purchase.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q17: What happens if I need to cancel my Reserved Capacity?</strong><br/>Microsoft Reserved Capacity follows Azure Reservations policies. You can cancel with a prorated refund within the first 7 days. After 7 days, cancellation is generally not available. Exchanges (changing to a different SKU reservation) may be possible — check current Azure Reservations policy at time of purchase.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q18: Should I pause and resume capacity or keep it running 24/7?</strong><br />For production capacities serving users in a single timezone, pausing overnight and on weekends saves 40–60% of monthly compute costs. For all non-production capacities, pause automation is strongly recommended. Use Azure Automation or Logic Apps to schedule pauses automatically.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q18: Should I pause and resume capacity or keep it running 24/7?</strong><br/>For production capacities serving users in a single timezone, pausing overnight and on weekends saves 40–60% of monthly compute costs. For all non-production capacities, pause automation is strongly recommended. Use Azure Automation or Logic Apps to schedule pauses automatically.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q19: Can I reserve capacity at one SKU and run at a higher SKU during peak periods?</strong><br />Reservations apply to a specific SKU. If you reserve F32 but scale up to F64 for a peak period, you pay PAYG rates for the F64 during that period. Some organizations use this deliberately: reserve the base SKU, scale up temporarily for seasonal peaks.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q19: Can I reserve capacity at one SKU and run at a higher SKU during peak periods?</strong><br/>Reservations apply to a specific SKU. If you reserve F32 but scale up to F64 for a peak period, you pay PAYG rates for the F64 during that period. Some organizations use this deliberately: reserve the base SKU, scale up temporarily for seasonal peaks.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q20: Does Microsoft offer enterprise pricing discounts beyond Reserved Capacity?</strong><br />Yes, through Microsoft Enterprise Agreements. Organizations with annual Azure committed spend above certain thresholds can negotiate additional discounts through their Microsoft account team — typically 10–25% below published reserved rates for large commitments.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q20: Does Microsoft offer enterprise pricing discounts beyond Reserved Capacity?</strong><br/>Yes, through Microsoft Enterprise Agreements. Organizations with annual Azure committed spend above certain thresholds can negotiate additional discounts through their Microsoft account team — typically 10–25% below published reserved rates for large commitments.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">User Licensing</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q21: Do report viewers need a Power BI Pro license with Fabric?</strong><br />When a workspace is assigned to Fabric capacity, users who only view Power BI reports can use the free Microsoft Fabric license — no Pro license required. Report creators and people who publish content still need Power BI Pro, Premium Per User, or a Microsoft Fabric subscription.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q21: Do report viewers need a Power BI Pro license with Fabric?</strong><br/>When a workspace is assigned to Fabric capacity, users who only view Power BI reports can use the free Microsoft Fabric license — no Pro license required. Report creators and people who publish content still need Power BI Pro, Premium Per User, or a Microsoft Fabric subscription.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q22: How many users can access Fabric without additional user licenses?</strong><br />Unlimited read-only users can access content from a Fabric capacity with the free Microsoft Fabric license. The capacity itself is the billing mechanism — adding more viewers doesn't increase cost if the capacity is large enough. This is a significant advantage over PPU.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q22: How many users can access Fabric without additional user licenses?</strong><br/>Unlimited read-only users can access content from a Fabric capacity with the free Microsoft Fabric license. The capacity itself is the billing mechanism — adding more viewers doesn't increase cost if the capacity is large enough. This is a significant advantage over PPU.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Architecture and Technical</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q23: Can I use Fabric without OneLake?</strong><br />No. OneLake is the storage foundation of Microsoft Fabric. All Fabric workloads read from and write to OneLake. You cannot use Fabric compute against external ADLS Gen2 storage accounts as the primary storage (though you can access external storage via Shortcuts).</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q23: Can I use Fabric without OneLake?</strong><br/>No. OneLake is the storage foundation of Microsoft Fabric. All Fabric workloads read from and write to OneLake. You cannot use Fabric compute against external ADLS Gen2 storage accounts as the primary storage (though you can access external storage via Shortcuts).</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q24: How is OneLake storage priced?</strong><br />OneLake storage is approximately $0.023/GB/month (varies by region), the same as Azure Data Lake Storage Gen2 LRS pricing. Data transaction costs are also billed similarly to ADLS Gen2. For most organizations, OneLake storage is a minor fraction of total Fabric cost.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q24: How is OneLake storage priced?</strong><br/>OneLake storage is approximately $0.023/GB/month (varies by region), the same as Azure Data Lake Storage Gen2 LRS pricing. Data transaction costs are also billed similarly to ADLS Gen2. For most organizations, OneLake storage is a minor fraction of total Fabric cost.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q25: Does Mirroring consume capacity CUs?</strong><br />Yes. Mirroring continuously replicates data from source databases into OneLake and consumes CUs for the ongoing replication process. The CU consumption depends on the rate of change in the source database — a high-transaction OLTP database generates more Mirroring activity than a slowly changing reference database.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q25: Does Mirroring consume capacity CUs?</strong><br/>Yes. Mirroring continuously replicates data from source databases into OneLake and consumes CUs for the ongoing replication process. The CU consumption depends on the rate of change in the source database — a high-transaction OLTP database generates more Mirroring activity than a slowly changing reference database.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q26: How does Direct Lake affect capacity consumption compared to Import mode?</strong><br />Direct Lake framing consumes significantly fewer CUs than a full Import mode refresh. A scheduled Import refresh of a large model might take 20–30 minutes consuming 20–30 CUs; the equivalent Direct Lake framing operation takes 30–60 seconds consuming 2–5 CUs — an 80–90% reduction.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q26: How does Direct Lake affect capacity consumption compared to Import mode?</strong><br/>Direct Lake framing consumes significantly fewer CUs than a full Import mode refresh. A scheduled Import refresh of a large model might take 20–30 minutes consuming 20–30 CUs; the equivalent Direct Lake framing operation takes 30–60 seconds consuming 2–5 CUs — an 80–90% reduction.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q27: What is the Fabric Capacity API?</strong><br />The Fabric REST API provides programmatic access to capacity management: pause/resume, scale up/down, workspace assignment changes, and utilization monitoring. Organizations use this API to automate capacity scheduling, build custom monitoring dashboards, and integrate Fabric metrics into enterprise observability platforms.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q27: What is the Fabric Capacity API?</strong><br/>The Fabric REST API provides programmatic access to capacity management: pause/resume, scale up/down, workspace assignment changes, and utilization monitoring. Organizations use this API to automate capacity scheduling, build custom monitoring dashboards, and integrate Fabric metrics into enterprise observability platforms.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q28: Can I use Fabric for embedded analytics in customer-facing applications?</strong><br />Yes. Power BI Embedded is the standard mechanism for embedding Fabric reports in external applications. For embedded scenarios, you purchase an A-SKU (Azure) capacity rather than an F-SKU — the A-SKU is specifically designed for embedded use cases with different licensing terms for ISVs and customer-facing deployments.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q28: Can I use Fabric for embedded analytics in customer-facing applications?</strong><br/>Yes. Power BI Embedded is the standard mechanism for embedding Fabric reports in external applications. For embedded scenarios, you purchase an A-SKU (Azure) capacity rather than an F-SKU — the A-SKU is specifically designed for embedded use cases with different licensing terms for ISVs and customer-facing deployments.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Governance and Management</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q29: Who can manage a Fabric capacity?</strong><br />Fabric capacity administrators are specified in the Fabric Admin Portal. Tenant administrators automatically have capacity admin rights. Capacity admins can assign workspaces to the capacity, monitor utilization, and manage capacity settings.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q29: Who can manage a Fabric capacity?</strong><br/>Fabric capacity administrators are specified in the Fabric Admin Portal. Tenant administrators automatically have capacity admin rights. Capacity admins can assign workspaces to the capacity, monitor utilization, and manage capacity settings.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q30: Can I set CU quotas per workspace to prevent one team from monopolizing capacity?</strong><br />Yes. Fabric provides workspace-level controls that allow administrators to limit maximum CU consumption per workspace. When a workspace reaches its limit, its workloads are throttled while workloads in other workspaces continue operating. Configure these limits in the Fabric Admin Portal under workspace settings.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q30: Can I set CU quotas per workspace to prevent one team from monopolizing capacity?</strong><br/>Yes. Fabric provides workspace-level controls that allow administrators to limit maximum CU consumption per workspace. When a workspace reaches its limit, its workloads are throttled while workloads in other workspaces continue operating. Configure these limits in the Fabric Admin Portal under workspace settings.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q31: How do I implement chargeback for Fabric costs across business units?</strong><br />Use the Capacity Metrics App or Fabric REST API to export workspace-level CU consumption data monthly. Build a cost allocation calculation that apportions the total capacity monthly cost to business units based on their workspace's share of total CU consumption. Feed this data into your internal finance system as journal entries against the appropriate cost centers.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q31: How do I implement chargeback for Fabric costs across business units?</strong><br/>Use the Capacity Metrics App or Fabric REST API to export workspace-level CU consumption data monthly. Build a cost allocation calculation that apportions the total capacity monthly cost to business units based on their workspace's share of total CU consumption. Feed this data into your internal finance system as journal entries against the appropriate cost centers.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q32: Can I audit which users are consuming the most Fabric capacity?</strong><br />Yes. The Capacity Metrics App provides item-level granularity for CU consumption. You can identify which specific notebook executions, report loads, or pipeline runs consumed the most CUs, and trace them back to the user or service principal that triggered them. The Fabric Audit Log in Microsoft Purview provides a complementary record of all user actions.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q32: Can I audit which users are consuming the most Fabric capacity?</strong><br/>Yes. The Capacity Metrics App provides item-level granularity for CU consumption. You can identify which specific notebook executions, report loads, or pipeline runs consumed the most CUs, and trace them back to the user or service principal that triggered them. The Fabric Audit Log in Microsoft Purview provides a complementary record of all user actions.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Migration Questions</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q33: How do I migrate from Power BI Premium P1 to Fabric F-SKU?</strong><br />Provision an F-SKU capacity alongside your existing P1, move workspaces one at a time from P1 to F-SKU, validate report performance and functionality, then decommission the P1. Semantic models and dashboards carry over without modification; XMLA endpoints and dataset refresh schedules continue working.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q33: How do I migrate from Power BI Premium P1 to Fabric F-SKU?</strong><br/>Provision an F-SKU capacity alongside your existing P1, move workspaces one at a time from P1 to F-SKU, validate report performance and functionality, then decommission the P1. Semantic models and dashboards carry over without modification; XMLA endpoints and dataset refresh schedules continue working.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q34: How long does migrating from Azure Synapse to Fabric take?</strong><br />Simple Synapse workloads (Spark notebooks with basic transformations, straightforward SQL queries) can migrate in 2–4 weeks. Complex architectures (Synapse Link, Dedicated SQL Pools with many stored procedures) typically take 3–9 months. Plan for a parallel-run period where both platforms operate simultaneously to validate results before cutting over.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q34: How long does migrating from Azure Synapse to Fabric take?</strong><br/>Simple Synapse workloads (Spark notebooks with basic transformations, straightforward SQL queries) can migrate in 2–4 weeks. Complex architectures (Synapse Link, Dedicated SQL Pools with many stored procedures) typically take 3–9 months. Plan for a parallel-run period where both platforms operate simultaneously to validate results before cutting over.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q35: What happens to my Power BI Premium reports on Fabric?</strong><br />Power BI reports on Fabric work identically to Power BI Premium. The difference is that Fabric adds Lakehouse, Warehouse, Spark, and Real-Time Intelligence alongside your existing Power BI investment. Your existing .pbix files, semantic models, and report configurations remain unchanged.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q35: What happens to my Power BI Premium reports on Fabric?</strong><br/>Power BI reports on Fabric work identically to Power BI Premium. The difference is that Fabric adds Lakehouse, Warehouse, Spark, and Real-Time Intelligence alongside your existing Power BI investment. Your existing .pbix files, semantic models, and report configurations remain unchanged.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Certifications</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br />Yes. The DP-600 exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The DP-600 exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br />Yes. The DP-700 exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The DP-700 exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Troubleshooting</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q38: Why are my Power BI reports slow when Spark jobs are running?</strong><br />This is the most common symptom of shared capacity over-utilization. Spark jobs consume large amounts of CUs, depleting the smoothing buffer. Solutions: schedule Spark jobs during off-hours, upgrade capacity SKU, or isolate Spark workloads on a separate capacity.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q38: Why are my Power BI reports slow when Spark jobs are running?</strong><br/>This is the most common symptom of shared capacity over-utilization. Spark jobs consume large amounts of CUs, depleting the smoothing buffer. Solutions: schedule Spark jobs during off-hours, upgrade capacity SKU, or isolate Spark workloads on a separate capacity.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q39: Why does my Direct Lake report fall back to DirectQuery mode?</strong><br />Direct Lake falls back to DirectQuery when the VertiPaq engine's memory is exhausted and column segments cannot be loaded into the in-memory cache. Solutions: upgrade to a higher SKU, reduce the number of columns in your semantic model, or run OPTIMIZE on your Delta tables to improve compression.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q39: Why does my Direct Lake report fall back to DirectQuery mode?</strong><br/>Direct Lake falls back to DirectQuery when the VertiPaq engine's memory is exhausted and column segments cannot be loaded into the in-memory cache. Solutions: upgrade to a higher SKU, reduce the number of columns in your semantic model, or run OPTIMIZE on your Delta tables to improve compression.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q40: My pipeline is failing with a 429 error. What does this mean?</strong><br />A 429 error indicates capacity is throttled and rejecting new requests after sustained overutilization depleted the smoothing buffer. Immediate fix: pause non-critical workloads to free CU headroom. Medium-term: reschedule workloads or upgrade capacity. Use the Capacity Metrics App's Timepoint Explorer to find what was consuming CUs at the time of the 429 errors.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q40: My pipeline is failing with a 429 error. What does this mean?</strong><br/>A 429 error indicates capacity is throttled and rejecting new requests after sustained overutilization depleted the smoothing buffer. Immediate fix: pause non-critical workloads to free CU headroom. Medium-term: reschedule workloads or upgrade capacity. Use the Capacity Metrics App's Timepoint Explorer to find what was consuming CUs at the time of the 429 errors.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q41: My Fabric costs are higher than expected. Where should I look first?</strong><br />Open the Capacity Metrics App → Item Detail → sort by CU Seconds descending. The top 10 items account for the majority of your cost. In most cases, a few large Spark jobs or poorly designed scheduled refreshes account for 60–80% of total CU consumption. Fix those first.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q41: My Fabric costs are higher than expected. Where should I look first?</strong><br/>Open the Capacity Metrics App → Item Detail → sort by CU Seconds descending. The top 10 items account for the majority of your cost. In most cases, a few large Spark jobs or poorly designed scheduled refreshes account for 60–80% of total CU consumption. Fix those first.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q42: What should I do if my Fabric capacity is consistently at 90%+ utilization?</strong><br />Run a 2-week analysis in the Capacity Metrics App to understand the utilization pattern. If consistently high throughout the day, you need a larger SKU. If high only during specific windows, start with scheduling optimization before upgrading — moving 2–3 large background jobs to off-peak hours often resolves sustained high utilization at a fraction of the cost of an SKU upgrade.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q42: What should I do if my Fabric capacity is consistently at 90%+ utilization?</strong><br/>Run a 2-week analysis in the Capacity Metrics App to understand the utilization pattern. If consistently high throughout the day, you need a larger SKU. If high only during specific windows, start with scheduling optimization before upgrading — moving 2–3 large background jobs to off-peak hours often resolves sustained high utilization at a fraction of the cost of an SKU upgrade.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q43: In which Azure subscription do Fabric costs appear?</strong><br />Fabric capacity is an Azure resource in the Azure subscription it was provisioned in. All Fabric charges (capacity + OneLake storage) appear in Azure Cost Management under that subscription. Filter by resource type "Microsoft.Fabric/capacities" to see Fabric-specific charges separately from other Azure services.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q43: In which Azure subscription do Fabric costs appear?</strong><br/>Fabric capacity is an Azure resource in the Azure subscription it was provisioned in. All Fabric charges (capacity + OneLake storage) appear in Azure Cost Management under that subscription. Filter by resource type "Microsoft.Fabric/capacities" to see Fabric-specific charges separately from other Azure services.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q44: Does Fabric support multi-region for disaster recovery?</strong><br />Fabric capacities are provisioned in a single Azure region. For multi-region redundancy, provision separate capacities in each target region. A common approach for mission-critical workloads is active-active: two F32 capacities in separate regions, with workspace assignments switched if one capacity has issues. Since data lives in OneLake (not in the capacity), there is no data loss from capacity failover.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q44: Does Fabric support multi-region for disaster recovery?</strong><br/>Fabric capacities are provisioned in a single Azure region. For multi-region redundancy, provision separate capacities in each target region. A common approach for mission-critical workloads is active-active: two F32 capacities in separate regions, with workspace assignments switched if one capacity has issues. Since data lives in OneLake (not in the capacity), there is no data loss from capacity failover.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q45: Can I reduce cost by using fewer workspaces?</strong><br />Workspace count doesn't directly affect CU consumption — an empty workspace costs nothing in compute. Reducing the number of semantic models and Spark notebooks (by combining related workloads into fewer, more efficient items) can reduce total CU consumption. Workspace consolidation is more a governance simplification than a direct cost reduction.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q45: Can I reduce cost by using fewer workspaces?</strong><br/>Workspace count doesn't directly affect CU consumption — an empty workspace costs nothing in compute. Reducing the number of semantic models and Spark notebooks (by combining related workloads into fewer, more efficient items) can reduce total CU consumption. Workspace consolidation is more a governance simplification than a direct cost reduction.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q46: How does Fabric billing handle partial months?</strong><br />Pay-as-you-go Fabric capacity is billed hourly to the nearest hour. If you create a capacity mid-month and delete it before month-end, you pay only for the hours it was running. Reserved Capacity is purchased for a full year or 3 years regardless of actual usage — pausing the capacity doesn't reduce the reservation payment, only pay-as-you-go capacity benefits from the billing pause.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q46: How does Fabric billing handle partial months?</strong><br/>Pay-as-you-go Fabric capacity is billed hourly to the nearest hour. If you create a capacity mid-month and delete it before month-end, you pay only for the hours it was running. Reserved Capacity is purchased for a full year or 3 years regardless of actual usage — pausing the capacity doesn't reduce the reservation payment, only pay-as-you-go capacity benefits from the billing pause.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q47: What is the difference between Fabric capacity and Power BI Embedded (A-SKU)?</strong><br />Fabric F-SKU is for internal organizational analytics platforms. A-SKU (Azure, for Power BI Embedded) is for ISVs and customer-facing applications where you embed Power BI reports in your product for your customers. A-SKU pricing is similar to F-SKU pricing but with different licensing terms that allow non-organizational users to access content.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q47: What is the difference between Fabric capacity and Power BI Embedded (A-SKU)?</strong><br/>Fabric F-SKU is for internal organizational analytics platforms. A-SKU (Azure, for Power BI Embedded) is for ISVs and customer-facing applications where you embed Power BI reports in your product for your customers. A-SKU pricing is similar to F-SKU pricing but with different licensing terms that allow non-organizational users to access content.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q48: Is there autoscaling available for Fabric capacity?</strong><br />As of mid-2026, Fabric does not have native autoscaling — you cannot configure a capacity to automatically scale from F32 to F64 during peak demand and back down afterward. The Fabric REST API can be used to build custom autoscaling logic. Native autoscaling is on the product roadmap and expected to change this in future releases.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q48: Is there autoscaling available for Fabric capacity?</strong><br/>As of mid-2026, Fabric does not have native autoscaling — you cannot configure a capacity to automatically scale from F32 to F64 during peak demand and back down afterward. The Fabric REST API can be used to build custom autoscaling logic. Native autoscaling is on the product roadmap and expected to change this in future releases.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q49: How does the Fabric Trial differ from a purchased F2 capacity?</strong><br />The Fabric Trial provides a shared capacity pool — you share compute resources with other trial users and performance is not guaranteed. A purchased F2 capacity is a dedicated capacity — you have exclusive access to 2 CUs with SLA-backed performance guarantees. For any meaningful testing or development work, a purchased F2 is strongly preferable to the shared trial.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q49: How does the Fabric Trial differ from a purchased F2 capacity?</strong><br/>The Fabric Trial provides a shared capacity pool — you share compute resources with other trial users and performance is not guaranteed. A purchased F2 capacity is a dedicated capacity — you have exclusive access to 2 CUs with SLA-backed performance guarantees. For any meaningful testing or development work, a purchased F2 is strongly preferable to the shared trial.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q50: Where should I verify current Microsoft Fabric pricing?</strong><br />Always verify current pricing on the official <a href="https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/" style="color: var(--accent); text-decoration: underline;" target="_blank" rel="noopener">Azure Fabric Pricing page</a> before making procurement decisions. Prices change periodically and vary by region. The prices referenced in this guide are approximate US East rates current as of July 2026 and should be used for estimation purposes only, not for contract commitments.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q50: Where should I verify current Microsoft Fabric pricing?</strong><br/>Always verify current pricing on the official <a href="https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/" style="color: var(--accent); text-decoration: underline;" target="_blank" rel="noopener">Azure Fabric Pricing page</a> before making procurement decisions. Prices change periodically and vary by region. The prices referenced in this guide are approximate US East rates current as of July 2026 and should be used for estimation purposes only, not for contract commitments.</p>
 
-<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;" />
+<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="conclusion" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">17. Conclusion: Decision Tree and Final Recommendations</h2>
 
@@ -1134,10 +1141,10 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; margin: 1.5rem 0; line-height: 1.85; color: var(--muted);">
   <p style="color: var(--text); font-weight: 700; margin-bottom: 0.75rem;">Follow this decision path to your starting SKU:</p>
-  <p><strong>Step 1: Purpose</strong><br />→ Learning/PoC only? → <span style="color: var(--accent); font-weight: bold;">F2</span><br />→ Production workload? → Continue to Step 2</p>
-  <p><strong>Step 2: Team size and concurrent users at peak hour</strong><br />→ &lt;20 users, no Spark → <span style="color: var(--accent); font-weight: bold;">F4 or F8</span><br />→ 20–100 users, light Spark → <span style="color: var(--accent); font-weight: bold;">F8 or F16</span><br />→ 100–300 users, active Spark → <span style="color: var(--accent); font-weight: bold;">F32</span><br />→ 300–600 users, active Spark + Streaming → <span style="color: var(--accent); font-weight: bold;">F64</span><br />→ 600–2,000 users, heavy multi-domain → <span style="color: var(--accent); font-weight: bold;">F128 or F256</span><br />→ 2,000+ users, global enterprise → <span style="color: var(--accent); font-weight: bold;">F512+</span></p>
-  <p><strong>Step 3: Validate with the Metrics App</strong><br />→ Run PAYG for 4 weeks → Monitor average and peak CU utilization<br />→ Average &lt;50%: consider downgrade → Average &gt;70%: plan for upgrade → Peak &gt;85%: immediate scheduling optimization needed</p>
-  <p><strong>Step 4: Commit to Reserved Capacity</strong><br />→ Once SKU validated: purchase 1-year Reserved Capacity → Annual saving: ~37%</p>
+  <p><strong>Step 1: Purpose</strong><br/>→ Learning/PoC only? → <span style="color: var(--accent); font-weight: bold;">F2</span><br/>→ Production workload? → Continue to Step 2</p>
+  <p><strong>Step 2: Team size and concurrent users at peak hour</strong><br/>→ &lt;20 users, no Spark → <span style="color: var(--accent); font-weight: bold;">F4 or F8</span><br/>→ 20–100 users, light Spark → <span style="color: var(--accent); font-weight: bold;">F8 or F16</span><br/>→ 100–300 users, active Spark → <span style="color: var(--accent); font-weight: bold;">F32</span><br/>→ 300–600 users, active Spark + Streaming → <span style="color: var(--accent); font-weight: bold;">F64</span><br/>→ 600–2,000 users, heavy multi-domain → <span style="color: var(--accent); font-weight: bold;">F128 or F256</span><br/>→ 2,000+ users, global enterprise → <span style="color: var(--accent); font-weight: bold;">F512+</span></p>
+  <p><strong>Step 3: Validate with the Metrics App</strong><br/>→ Run PAYG for 4 weeks → Monitor average and peak CU utilization<br/>→ Average &lt;50%: consider downgrade → Average &gt;70%: plan for upgrade → Peak &gt;85%: immediate scheduling optimization needed</p>
+  <p><strong>Step 4: Commit to Reserved Capacity</strong><br/>→ Once SKU validated: purchase 1-year Reserved Capacity → Annual saving: ~37%</p>
 </div>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">17.2 The Five Rules for Long-Term Cost Control</h3>
@@ -1248,5 +1255,58 @@ export const microsoftFabricPricingGuide2026Post = {
     }
   ]
 }
-</script>`
+</script>
+<!-- CTA_START -->
+<div class="auto-cta-box" style="margin-top: 3rem; padding: 2rem; border: 1px solid var(--accent); background: rgba(201, 243, 29, 0.02); border-radius: 4px; text-align: center;">
+  <h4 style="font-family: Syne, sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text);">Want to become a Microsoft Fabric Architect?</h4>
+  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Start here to scale your data engineering career with our certification resources and mentorship paths.</p>
+  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+    <a href="/blog/microsoft-fabric-architecture-explained-2026" style="background: var(--accent); color: #000; padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Start Here</a>
+    <a href="/mentorship" style="border: 1px solid var(--accent); color: var(--text); padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Mentorship</a>
+    <a href="/blog/microsoft-fabric-certification-roadmap-2026" style="border: 1px solid var(--border); color: var(--muted); padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Certification Roadmap</a>
+  </div>
+</div>
+<!-- CTA_END -->
+<!-- RELATED_START -->
+<div class="related-articles-section" style="margin-top: 4rem; padding: 2.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;">
+  <h3 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin: 0 0 1.5rem 0; font-family: Syne, sans-serif;">Related Reading</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Architecture Explained: The Complete 2026 Guide</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/dp-600-study-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">DP-600 Study Guide 2026: Complete Microsoft Fabric Analytics Engineer Exam Preparation</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-architectural-guide" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">The Fabric Architect’s Manifesto: The Unofficial Microsoft Fabric Architectural Guide</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Microsoft Fabric</span>
+      <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-certification-roadmap-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Certification Roadmap 2026: Plan Your Learning Path</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/free-microsoft-certifications-fabric-data-days-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Free Microsoft Fabric Certification Voucher 2026: Complete Guide to DP-600, DP-700 & DP-800 (With Proof)</a>
+    </li>
+  </ul>
+</div>
+<!-- RELATED_END -->
+<!-- POPULAR_START -->
+<div class="popular-fabric-guides" style="margin-top: 2rem; padding: 2rem; background: var(--surface2); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left-width: 4px;">
+  <h3 style="font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin: 0 0 1.25rem 0; font-family: Syne, sans-serif;">Popular Microsoft Fabric Guides</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+    <li><a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ Microsoft Fabric Architecture: The Complete Blueprint (2026)</a></li>
+    <li><a href="/blog/microsoft-fabric-pricing-guide-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ Microsoft Fabric Capacity Sizing &amp; Pricing Masterclass</a></li>
+    <li><a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ OneLake Architecture: Enterprise Virtualization Deep-Dive</a></li>
+    <li><a href="/blog/dp-600-study-guide-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ DP-600 Fabric Analytics Engineer Pass Preparation Roadmap</a></li>
+  </ul>
+</div>
+<!-- POPULAR_END -->`
 };

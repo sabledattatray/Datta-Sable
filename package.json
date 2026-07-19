@@ -40,6 +40,7 @@
     "@types/dompurify": "^3.0.5",
     "@vercel/blob": "^2.4.0",
     "bcrypt": "^5.1.1",
+    "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.20",
     "dompurify": "^3.4.8",

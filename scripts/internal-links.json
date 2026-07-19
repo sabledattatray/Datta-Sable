@@ -1,0 +1,228 @@
+{
+  "mappings": [
+    {
+      "keywords": [
+        "Microsoft Fabric",
+        "Fabric platform",
+        "Fabric architecture",
+        "Fabric ecosystem"
+      ],
+      "url": "/blog/microsoft-fabric-architecture-explained-2026",
+      "anchor": "Microsoft Fabric Architecture Guide",
+      "priority": 100,
+      "cluster": "Microsoft Fabric"
+    },
+    {
+      "keywords": [
+        "OneLake",
+        "unified logical data lake",
+        "single logical data lake",
+        "Fabric storage"
+      ],
+      "url": "/blog/microsoft-fabric-onelake-architecture-guide",
+      "anchor": "OneLake Architecture Explained",
+      "priority": 90,
+      "cluster": "Microsoft Fabric"
+    },
+    {
+      "keywords": [
+        "Fabric capacity",
+        "Fabric pricing",
+        "Capacity Units",
+        "F-SKU",
+        "F-SKUs"
+      ],
+      "url": "/blog/microsoft-fabric-pricing-guide-2026",
+      "anchor": "Microsoft Fabric Pricing Guide",
+      "priority": 90,
+      "cluster": "Microsoft Fabric"
+    },
+    {
+      "keywords": [
+        "Medallion Architecture",
+        "Bronze, Silver, and Gold",
+        "Bronze-Silver-Gold",
+        "Medallion framework",
+        "medallion pipeline"
+      ],
+      "url": "/blog/microsoft-fabric-medallion-architecture-guide",
+      "anchor": "Microsoft Fabric Medallion Architecture Guide",
+      "priority": 80,
+      "cluster": "Microsoft Fabric"
+    },
+    {
+      "keywords": [
+        "Direct Lake",
+        "Direct Lake mode",
+        "Direct Lake query",
+        "Direct Lake performance"
+      ],
+      "url": "/blog/power-bi-direct-lake-performance-tuning-fabric",
+      "anchor": "Direct Lake Explained",
+      "priority": 85,
+      "cluster": "Microsoft Fabric"
+    },
+    {
+      "keywords": [
+        "DP-600",
+        "DP-600 exam",
+        "DP-600 Study Guide",
+        "Fabric Analytics Engineer certification"
+      ],
+      "url": "/blog/dp-600-study-guide-2026",
+      "anchor": "DP-600 Study Guide",
+      "priority": 90,
+      "cluster": "Microsoft Fabric Certifications"
+    },
+    {
+      "keywords": [
+        "DP-700",
+        "Fabric Data Engineer exam"
+      ],
+      "url": "/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "anchor": "DP-700 Certification Guide",
+      "priority": 80,
+      "cluster": "Microsoft Fabric Certifications"
+    },
+    {
+      "keywords": [
+        "DP-800",
+        "Fabric Solution Architect exam"
+      ],
+      "url": "/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "anchor": "DP-800 Certification Guide",
+      "priority": 80,
+      "cluster": "Microsoft Fabric Certifications"
+    },
+    {
+      "keywords": [
+        "LinkedIn",
+        "LinkedIn post",
+        "LinkedIn formatting"
+      ],
+      "url": "/tools/linkedin-formatter",
+      "anchor": "LinkedIn Post Formatter",
+      "priority": 40,
+      "cluster": "Tools"
+    },
+    {
+      "keywords": [
+        "Mermaid",
+        "Mermaid diagram",
+        "Mermaid flowcharts"
+      ],
+      "url": "/tools/mermaid-forge",
+      "anchor": "Mermaid Forge Diagram Builder",
+      "priority": 40,
+      "cluster": "Tools"
+    },
+    {
+      "keywords": [
+        "Prompt",
+        "Prompt Engineering",
+        "AI Prompt"
+      ],
+      "url": "/tools/ai-prompt-generator",
+      "anchor": "AI Prompt Generator",
+      "priority": 40,
+      "cluster": "Tools"
+    },
+    {
+      "keywords": [
+        "SEO",
+        "Meta tags",
+        "Meta description"
+      ],
+      "url": "/tools/seo-meta-generator",
+      "anchor": "SEO Meta Generator",
+      "priority": 40,
+      "cluster": "Tools"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Semantic Compression",
+      "keywords": ["Semantic Compression"],
+      "url": "/glossary/semantic-compression",
+      "definition": "The technical process of reducing prompt token count while preserving core logical meaning. Critical for optimizing Large Language Model (LLM) context windows."
+    },
+    {
+      "term": "Operator Intent Mapping",
+      "keywords": ["Operator Intent Mapping", "intent mapping"],
+      "url": "/glossary/operator-intent-mapping",
+      "definition": "A framework for aligning AI system outputs with professional technical personas to ensure execution fidelity and brand consistency."
+    },
+    {
+      "term": "Token Density",
+      "keywords": ["Token Density", "token density"],
+      "url": "/glossary/token-density-optimization",
+      "definition": "The measurement of information per token in a system prompt. High density reduces costs and increases reasoning accuracy."
+    },
+    {
+      "term": "Prompt Chaining",
+      "keywords": ["Prompt Chaining", "prompt chaining"],
+      "url": "/glossary/prompt-chaining-architecture",
+      "definition": "A surgical workflow technique where the output of one AI model call is used as the input for the next to solve complex, multi-step tasks."
+    },
+    {
+      "term": "Agentic Workflow",
+      "keywords": ["Agentic Workflow", "agentic workflow", "agentic workflows"],
+      "url": "/glossary/agentic-workflow-engineering",
+      "definition": "A system architecture where AI models act as autonomous agents with specific roles, communication protocols, and tool-use capabilities."
+    },
+    {
+      "term": "Surgical Spacing",
+      "keywords": ["Surgical Spacing", "surgical spacing"],
+      "url": "/glossary/surgical-spacing-method",
+      "definition": "The formatting technique of using double line breaks and minimalist characters to ensure high mobile readability for LinkedIn content."
+    },
+    {
+      "term": "Context Window",
+      "keywords": ["Context Window", "context window", "context windows"],
+      "url": "/glossary/llm-context-window-limits",
+      "definition": "The maximum amount of information (tokens) an AI model can process at one time before losing logical continuity or history."
+    },
+    {
+      "term": "Zero-Shot Prompting",
+      "keywords": ["Zero-Shot Prompting", "zero-shot prompting"],
+      "url": "/glossary/zero-shot-prompting-execution",
+      "definition": "Providing an AI model with a task description without any previous examples. Requires high-fidelity instruction mapping."
+    },
+    {
+      "term": "Few-Shot Prompting",
+      "keywords": ["Few-Shot Prompting", "few-shot prompting"],
+      "url": "/glossary/few-shot-prompting-strategies",
+      "definition": "A method of providing a small set of examples to a model to guide its output style and logical constraints."
+    },
+    {
+      "term": "Technical Authority",
+      "keywords": ["Technical Authority", "technical authority"],
+      "url": "/glossary/technical-authority-signals",
+      "definition": "The collection of EEAT signals (Expertise, Experience, Authoritativeness, Trustworthiness) that establish professional domain dominance."
+    },
+    {
+      "term": "AI Hallucination",
+      "keywords": ["AI Hallucination", "hallucination", "hallucinations"],
+      "url": "/glossary/ai-hallucination-risks",
+      "definition": "The phenomenon where a Large Language Model generates information that is factually incorrect or logically inconsistent."
+    },
+    {
+      "term": "Data Fidelity",
+      "keywords": ["Data Fidelity", "data fidelity"],
+      "url": "/glossary/data-fidelity-benchmarks",
+      "definition": "The degree of accuracy and consistency in a data set or AI output. High fidelity ensures automated systems can be trusted."
+    },
+    {
+      "term": "n8n",
+      "keywords": ["n8n"],
+      "url": "/glossary/n8n-workflow-orchestration",
+      "definition": "A source-available workflow automation tool that allows for complex, multi-node technical orchestrations."
+    },
+    {
+      "term": "Workflow Orchestration",
+      "keywords": ["Workflow Orchestration", "workflow orchestration"],
+      "url": "/glossary/workflow-orchestration-logic",
+      "definition": "The coordination of multiple automated tasks and AI agents into a single, cohesive system executing business logic."
+    }
+  ]
+}

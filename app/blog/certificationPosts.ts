@@ -11,138 +11,88 @@ export const newCertificationPosts = [
     icon: "📖",
     image: "/images/blog/dp-600-fabric-analytics-engineer-study-companion-notebook.webp",
     tags: ["Microsoft Fabric", "DP-600", "Analytics Engineering", "Direct Lake", "Power BI", "Data Warehouse", "Study Guide"],
-    content: `<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
-  <p><strong>Looking for the ultimate DP-600 Study Guide 2026 to pass your Microsoft Fabric Analytics Engineer certification?</strong> In this guide, you will master OneLake storage, Direct Lake semantic models, data warehouse architectures, Spark pipelines, and advanced DAX calculations. Learn the exact weekly roadmap, enterprise real-world scenarios, and exam strategies that will help you clear the exam on your first attempt.</p>
+    content: `<!-- BREADCRUMB_START -->
+<div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+  <a href="/" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Home</a> &gt; 
+  <a href="/blog" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Blog</a> &gt; 
+  <a href="/blog/microsoft-fabric" style="color: var(--accent); text-decoration: none; font-weight: 600;">Microsoft Fabric Hub</a> &gt; 
+  <span style="color: var(--text);">Microsoft Fabric Certification Roadmap 2026: Plan Your Learning Path</span>
+</div>
+<!-- BREADCRUMB_END -->
+<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
+  <p><strong>Planning your Microsoft Fabric Certification Roadmap 2026?</strong> This comprehensive guide maps out your learning path across Microsoft's certifications, including DP-600, <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;">DP-700</a>, and DP-800. Learn where to start based on your role, find study plans, and discover campaigns offering free vouchers.</p>
 </div>
 
-<p>The <strong>DP-600 Study Guide 2026</strong> is designed for data analysts, Power BI developers, and data engineers transitionally stepping into the Analytics Engineer role. In the era of unified SaaS data platforms, understanding how to construct high-fidelity analytics solutions with Microsoft Fabric is a career-defining skill.</p>
+<p>The <strong>Microsoft Fabric Certification Roadmap 2026</strong> is the blueprint for data professionals. As companies unify their data operations in <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a>, earning these certifications validates your ability to deploy analytics solutions.</p>
 
-<h2 id="quick-answer">Quick Answer: What is the DP-600 Exam?</h2>
+<h2 id="learning-path">The Certification Pathways</h2>
 <ul>
-  <li><strong>Credential Name:</strong> Microsoft Certified: Fabric Analytics Engineer Associate</li>
-  <li><strong>Exam Duration:</strong> 120 minutes</li>
-  <li><strong>Number of Questions:</strong> 40-50 questions (Multiple-choice, scenario-based)</li>
-  <li><strong>Passing Score:</strong> 700 / 1000</li>
-  <li><strong>Cost:</strong> $165 USD (Varies by region)</li>
-  <li><strong>Study Time:</strong> 4-6 weeks (5-10 hours/week)</li>
+  <li><strong>Analytics Engineer Pathway:</strong> Start with PL-300 (Power BI), then advance to the <a href="/blog/dp-600-study-guide-2026">Complete DP-600 Study Guide</a> to master semantic models and <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a>.</li>
+  <li><strong>Data Engineer Pathway:</strong> Start with cloud fundamentals, then progress to the <a href="/blog/dp-700-study-guide-2026">Complete DP-700 Study Guide</a> to master Spark and data pipelines.</li>
+  <li><strong>SQL AI Developer Pathway:</strong> Focus on database development, then complete the <a href="/blog/dp-800-study-guide">Complete DP-800 Study Guide</a> to learn vector search and OpenAI integrations.</li>
 </ul>
 
-<h2 id="why-dp600-matters-2026">Why This Certification Matters in 2026</h2>
-<p>As enterprise adoption of Microsoft Fabric scales, there is a massive demand for analytics engineers who can bridge the gap between backend data engineering and frontend reporting. Traditional Power BI developers who transition to Microsoft Fabric are seeing salary increases of 20-35% as companies migrate their legacy platforms to OneLake.</p>
-
-<h2 id="skills-measured">Skills Measured & Exam Weight</h2>
+<h2 id="comparative-matrix">Pathways Comparison Matrix</h2>
 <div class="overflow-x-auto my-8">
   <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
     <thead>
       <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Exam Domain</th>
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Weight</th>
-        <th style="padding: 12px; text-align: left;">Key Sub-topics</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Certification</th>
+        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Target Persona</th>
+        <th style="padding: 12px; text-align: left;">Core Competencies</th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Plan and Implement Data Analytics Environments</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">10-15%</td>
-        <td style="padding: 12px;">Workspace governance, capacity settings, deployment pipelines, XMLA endpoints.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-600 (Analytics Engineer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">BI Developer, Power BI Analyst</td>
+        <td style="padding: 12px;"><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;">Direct Lake</a>, semantic modeling, star schemas, DAX.</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Prepare and Serve Data</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">40-45%</td>
-        <td style="padding: 12px;">Dataflows Gen2, PySpark notebooks, Delta Lake tables, T-SQL queries.</td>
-      </tr>
-      <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Implement and Manage Semantic Models</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">30-35%</td>
-        <td style="padding: 12px;">Direct Lake mode, relationship modeling, DAX optimization, calculation groups.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-700 (Data Engineer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Data Engineer, ETL Developer</td>
+        <td style="padding: 12px;">Spark notebooks, pipeline orchestration, <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> security.</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Explore and Analyze Data</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">10-15%</td>
-        <td style="padding: 12px;">T-SQL querying, Copilot analytics, visual exploration in Notebooks.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-800 (SQL AI Developer)</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">SQL Developer, Database Developer</td>
+        <td style="padding: 12px;">Vector search, OpenAI integrations, RAG database structures.</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<h2 id="real-world-scenarios">Real-World Scenario: Direct Lake Paging & Fallback Prevention</h2>
-<p>An enterprise retail client builds a dashboard on top of a Gold Delta table containing 150 million rows. They observe that during peak usage hours, the dashboard queries transition from Direct Lake mode to DirectQuery (fallback mode), resulting in high latency. As an analytics engineer, you must resolve this.</p>
-<p><strong>Solution Architecture:</strong>
-1. Review the capacity size (minimum F64 capacity is required to support large Direct Lake semantic models without paging limits).
-2. Configure <strong>V-Order</strong> optimization on the Delta tables using Spark notebooks to optimize the sorting and layout of Parquet files.
-3. Keep the column structure lean; remove high-cardinality columns (like unique transaction timestamps or hash keys) from the semantic model if they are not required for visual analysis.
-4. Set the <code>DirectLakeBehavior</code> property to <code>DirectLakeOnly</code> to prevent fallback, forcing you to resolve memory size constraints rather than silently degrading performance.</p>
-
-<h2 id="roadmap">Step-by-Step 6-Week Study Roadmap</h2>
-<ul>
-  <li><strong>Week 1: OneLake and Fabric Workspace Governance</strong> - Study workspace roles, domains, capacity settings, and deployment pipelines. Understand the difference between Lakehouse Files and Tables. For the deepest technical grounding on OneLake, start with our <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake Architecture Guide</a> — it covers Delta Lake, V-Order, Shortcuts, Mirroring, and Direct Lake at the level the DP-600 expects.</li>
-  <li><strong>Week 2: Data Transformation with Dataflows Gen2 and Spark</strong> - Learn when to use low-code Dataflows Gen2 vs code-first PySpark Notebooks. Practice writing PySpark code to read files and write to Delta Tables.</li>
-  <li><strong>Week 3: Data Warehousing & T-SQL</strong> - Master T-SQL querying, stored procedures, views, and cross-database queries inside the Fabric Data Warehouse.</li>
-  <li><strong>Week 4: Semantic Modeling & Direct Lake</strong> - Learn how to build Star Schemas in Fabric, configure relationships, and configure Direct Lake mode.</li>
-  <li><strong>Week 5: Advanced DAX & Security</strong> - Understand context transitions, write complex DAX metrics, and configure Row-Level Security (RLS) / Object-Level Security (OLS).</li>
-  <li><strong>Week 6: Review & Practice</strong> - Go through official Microsoft Learn practice questions. Review the <a href="/blog/dp-600-fabric-analytics-engineer-study-companion-notebook">Complete DP-600 Companion Notebook</a>.</li>
-</ul>
-
-<h2 id="exam-questions">Sample Exam Questions</h2>
-<p><strong>Question 1:</strong> You have a workspace named Sales_WS that is assigned to a Fabric capacity. You need to ensure that database developers can create new Lakehouse items in the workspace but cannot modify workspace member lists. Which workspace role should you assign?<br />
-<em>Answer:</em> **Contributor**. Members and Admins can modify member lists, while Contributors can create, edit, and delete items but cannot modify user assignments. Readers are read-only.</p>
-
-<h2 id="careers">Careers & Salaries</h2>
-<div class="overflow-x-auto my-8">
-  <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.9rem;">
-    <thead>
-      <tr style="background: var(--surface2); border-bottom: 1px solid var(--border);">
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">Role</th>
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">USA Salary</th>
-        <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border);">India Salary</th>
-        <th style="padding: 12px; text-align: left;">Europe Salary</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Analytics Engineer</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">$110,000 - $145,000</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">₹12L - ₹24L</td>
-        <td style="padding: 12px;">€70,000 - €95,000</td>
-      </tr>
-      <tr>
-        <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">Lead BI Architect</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">$140,000 - $185,000</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);">₹22L - ₹45L</td>
-        <td style="padding: 12px;">€95,000 - €130,000</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<h2 id="free-vouchers">Claiming Free Exam Vouchers</h2>
+<p>Microsoft frequently hosts learning campaigns, such as the <strong>Microsoft Fabric Cloud Skills Challenge</strong> or <strong>Fabric Data Days</strong>, where participants can claim a free exam voucher upon completing required learning modules. Check Microsoft Learn regularly to register for these events.</p>
 
 <h2 id="faq">Frequently Asked Questions (FAQ)</h2>
 <ol>
-  <li><strong>What is the primary focus of the DP-600 exam?</strong> The DP-600 exam validates technical expertise in implementing analytics solutions using Microsoft Fabric, emphasizing semantic modeling, Direct Lake mode, data warehousing, and Spark ETL operations.</li>
-  <li><strong>How does DP-600 compare to PL-300?</strong> PL-300 focuses on Power BI dashboard design, basic data modeling, and Desktop operations. DP-600 covers the complete backend Fabric data platform, including warehouse engines, Spark transformations, and capacity management.</li>
-  <li><strong>Is Python required for DP-600?</strong> Basic familiarity with PySpark is required. You should know how to read CSV or Parquet files into a Spark DataFrame and write them back as Delta Tables.</li>
-  <li><strong>What is Direct Lake mode?</strong> Direct Lake is a new semantic model storage mode that reads Delta Parquet files directly from OneLake without importing the data into memory or querying the SQL Endpoint.</li>
-  <li><strong>What is V-Order in Fabric?</strong> V-Order is a proprietary sorting algorithm applied to Delta Parquet files that optimizes read performance, making queries in Direct Lake mode significantly faster.</li>
-  <li><strong>How long is the DP-600 certification valid?</strong> Like all Microsoft associate certifications, the DP-600 credential is valid for one year and can be renewed annually for free online.</li>
-  <li><strong>Can I take the exam open book?</strong> Yes. Microsoft associate exams offer access to Microsoft Learn documentation during the test via an integrated split-screen browser.</li>
-  <li><strong>Are there hands-on labs in the exam?</strong> Some sittings may include live lab environments, but most versions consist of multiple-choice, drag-and-drop, and case studies.</li>
-  <li><strong>What is the passing score?</strong> You need a minimum score of 700 out of 1000 to pass.</li>
-  <li><strong>How much does the DP-600 cost?</strong> The standard price is $165 USD, with regional variations for other currencies.</li>
-  <li><strong>What is a Fabric shortcut?</strong> Shortcuts are virtual links inside OneLake that reference external ADLS, S3, or GCS data stores without physically duplicating files.</li>
-  <li><strong>What is the difference between Lakehouse and Warehouse?</strong> Lakehouse supports file storage and Spark-based writes. Warehouse supports transaction-consistent relational tables written via T-SQL.</li>
-  <li><strong>What is the SQL Analytics Endpoint?</strong> It is a read-only SQL connection automatically provisioned for every Lakehouse that allows T-SQL querying of Delta Tables.</li>
-  <li><strong>What are Calculation Groups?</strong> They are modeling features that allow you to define reusable DAX measures (like year-to-date or year-over-year calculations) and apply them dynamically across metrics.</li>
-  <li><strong>Is the DP-600 worth it in 2026?</strong> Yes. Microsoft Fabric is seeing massive enterprise adoption, making DP-600 one of the highest-paying data credentials in 2026.</li>
+  <li><strong>Which Fabric certification should I take first?</strong> Take the DP-600 if you have a Power BI/analyst background. Take the DP-700 if you work with backend databases and ETL pipelines.</li>
+  <li><strong>How much do Fabric certifications cost?</strong> The standard price is $165 USD per exam.</li>
+  <li><strong>How long are the certifications valid?</strong> They are valid for one year and can be renewed online for free.</li>
+  <li><strong>Does Microsoft offer free learning materials?</strong> Yes, Microsoft Learn provides free self-paced paths and sandbox environments.</li>
+  <li><strong>What is the passing score?</strong> You need a score of 700 or higher out of 1000 to pass.</li>
+  <li><strong>Can I take the exams online?</strong> Yes, they can be scheduled online via Pearson VUE.</li>
+  <li><strong>Is the DP-800 exam part of Fabric?</strong> The DP-800 covers SQL AI development, which applies to Azure SQL Database and SQL components within Fabric.</li>
+  <li><strong>Are there code questions on the exams?</strong> Yes, you will be tested on SQL, PySpark, and DAX syntax where relevant.</li>
+  <li><strong>What is OneLake?</strong> OneLake is the SaaS data lake that stores all Fabric files in open-source Delta Parquet format.</li>
+  <li><strong>Are these certifications valued by employers?</strong> Yes, they are highly valued as <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Microsoft Fabric</a> adoption grows.</li>
+  <li><strong>Can I use documentation during the exam?</strong> Yes, Microsoft associate exams include access to Microsoft Learn.</li>
+  <li><strong>What is the difference between DP-700 and DP-203?</strong> DP-203 covers PaaS cloud services. DP-700 covers the unified SaaS Fabric environment.</li>
+  <li><strong>What is mirroring?</strong> Mirroring replicates data from external databases directly into OneLake in real-time.</li>
+  <li><strong>How often are the exams updated?</strong> Microsoft updates exam objectives every 3-6 months to reflect platform updates.</li>
+  <li><strong>How should I prepare?</strong> Combine hands-on sandbox labs with Microsoft Learn and read our <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">Microsoft Fabric Comparison Guide</a>.</li>
 </ol>
 
 <h2 id="conclusion">Conclusion</h2>
-<p>Passing the DP-600 requires a solid grasp of how storage and compute tiers interact in Fabric. By following this <strong>DP-600 Study Guide 2026</strong>, performing hands-on labs, and referencing our <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison">Microsoft Fabric Certification Comparison</a>, you will be fully prepared to succeed.</p>
+<p>Establishing your <strong>Microsoft Fabric Certification Roadmap 2026</strong> is the key to career growth. Refer to our <a href="/blog/dp-600-study-guide-2026">Complete DP-600 Study Guide</a> and our <a href="/blog/dp-700-study-guide-2026">Complete DP-700 Study Guide</a> to start your preparation.</p>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "DP-600 Study Guide 2026: Complete Microsoft Fabric Analytics Engineer Exam Preparation",
-  "description": "Prepare for the DP-600 exam with this complete study guide. Master OneLake, Direct Lake, semantic modeling, and DAX optimization.",
+  "headline": "Microsoft Fabric Certification Roadmap 2026: Plan Your Learning Path",
+  "description": "Plan your Microsoft Fabric learning journey with the complete 2026 certification roadmap for DP-600, DP-700, and DP-800.",
   "author": {
     "@type": "Person",
     "name": "Datta Sable",
@@ -157,9 +107,62 @@ export const newCertificationPosts = [
     }
   },
   "datePublished": "2026-06-25",
-  "mainEntityOfPage": "https://dattasable.com/blog/dp-600-study-guide-2026"
+  "mainEntityOfPage": "https://dattasable.com/blog/microsoft-fabric-certification-roadmap-2026"
 }
-</script>`
+</script>
+<!-- CTA_START -->
+<div class="auto-cta-box" style="margin-top: 3rem; padding: 2rem; border: 1px solid var(--accent); background: rgba(201, 243, 29, 0.02); border-radius: 4px; text-align: center;">
+  <h4 style="font-family: Syne, sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text);">Want to become a Microsoft Fabric Architect?</h4>
+  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Start here to scale your data engineering career with our certification resources and mentorship paths.</p>
+  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+    <a href="/blog/microsoft-fabric-architecture-explained-2026" style="background: var(--accent); color: #000; padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Start Here</a>
+    <a href="/mentorship" style="border: 1px solid var(--accent); color: var(--text); padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Mentorship</a>
+    <a href="/blog/microsoft-fabric-certification-roadmap-2026" style="border: 1px solid var(--border); color: var(--muted); padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Certification Roadmap</a>
+  </div>
+</div>
+<!-- CTA_END -->
+<!-- RELATED_START -->
+<div class="related-articles-section" style="margin-top: 4rem; padding: 2.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;">
+  <h3 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin: 0 0 1.5rem 0; font-family: Syne, sans-serif;">Related Reading</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Why Microsoft Fabric Skills Will Dominate the Data Industry in 2026</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Architecture Explained: The Complete 2026 Guide</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/dp-600-study-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">DP-600 Study Guide 2026: Complete Microsoft Fabric Analytics Engineer Exam Preparation</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Microsoft Fabric</span>
+      <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/dp-600-exam-questions-and-scenarios" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">DP-600 Exam Questions & Scenarios: Pass Microsoft Fabric Analytics Engineer Exam</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Data Engineering</span>
+      <a href="/blog/dp-700-study-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">DP-700 Study Guide 2026: Complete Microsoft Fabric Data Engineer Certification Preparation</a>
+    </li>
+  </ul>
+</div>
+<!-- RELATED_END -->
+<!-- POPULAR_START -->
+<div class="popular-fabric-guides" style="margin-top: 2rem; padding: 2rem; background: var(--surface2); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left-width: 4px;">
+  <h3 style="font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin: 0 0 1.25rem 0; font-family: Syne, sans-serif;">Popular Microsoft Fabric Guides</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+    <li><a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ Microsoft Fabric Architecture: The Complete Blueprint (2026)</a></li>
+    <li><a href="/blog/microsoft-fabric-pricing-guide-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ Microsoft Fabric Capacity Sizing &amp; Pricing Masterclass</a></li>
+    <li><a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ OneLake Architecture: Enterprise Virtualization Deep-Dive</a></li>
+    <li><a href="/blog/dp-600-study-guide-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ DP-600 Fabric Analytics Engineer Pass Preparation Roadmap</a></li>
+  </ul>
+</div>
+<!-- POPULAR_END -->`
   },
 
   {

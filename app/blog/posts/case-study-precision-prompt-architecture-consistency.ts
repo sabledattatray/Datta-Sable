@@ -8,8 +8,15 @@ export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
   icon: "📊",
   image: "/images/blog/case_study_prompt_architecture.webp",
   tags: ["Case Study", "AI Consistency", "Prompt Architecture", "Fidelity Benchmarks"],
-  content: `<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <p>Achieving consistent, structured JSON outputs from Large Language Models (LLMs) is one of the hardest parts of production AI. This case study details how we eliminated schema drift and stabilized output structures for an enterprise document extraction pipeline, raising output consistency to 99.8% using Precision Prompt Architecture™ templates and runtime schema validation.</p>
+  content: `<!-- BREADCRUMB_START -->
+<div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+  <a href="/" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Home</a> &gt; 
+  <a href="/blog" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Blog</a> &gt; 
+  <span style="color: var(--text);">Case Study: Achieving 99.8% Output Consistency via Precision Prompt Architecture™</span>
+</div>
+<!-- BREADCRUMB_END -->
+<div class="featured-snippet" style="background: rgba(201, 243, 29, 0.03); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+        <p>Achieving consistent, structured JSON outputs from Large Language Models (LLMs) is one of the hardest parts of production AI. This case study details how we eliminated schema drift and stabilized output structures for an enterprise document extraction pipeline, raising output consistency to 99.8% using Precision <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">Prompt</a> Architecture™ templates and runtime schema validation.</p>
       </div>
  
       <div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
@@ -32,7 +39,7 @@ export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
  
       <h2 id="executive-summary" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. Executive Summary & Production Scale</h2>
       <p>In modern enterprise automation, relying on LLMs for unstructured document extraction requires high-fidelity precision. Our client—a global logistics and supply chain SaaS provider—processes over **500,000 shipping manifests and invoices daily**. The extraction pipeline must parse complex layouts, extract vendor names, dates, line items, tax aggregates, and output the data in structured JSON format to feed downstream ERP databases.</p>
-      <p>Before optimizing the prompting system, formatting failures and parsing bugs were causing significant operational disruption. With millions of tokens moving through the network hourly, even a minor 5% failure rate in JSON formatting meant tens of thousands of broken transactions daily, requiring manual correction and blocking automated pipelines. This case study documents how we designed a zero-trust prompt architecture to bring output reliability to **99.8%**.</p>
+      <p>Before optimizing the prompting system, formatting failures and parsing bugs were causing significant operational disruption. With millions of tokens moving through the network hourly, even a minor 5% failure rate in JSON formatting meant tens of thousands of broken transactions daily, requiring manual correction and blocking automated pipelines. This case study documents how we designed a zero-trust <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> architecture to bring output reliability to **99.8%**.</p>
  
       <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. The Legacy Challenge: Schema Drift & Pipeline Blocks</h2>
       <p>Under the client's legacy prompting model, instructions were written as standard natural language paragraphs (e.g. <i>"Read this shipping manifest and extract the vendor, total weight, and line items. Return your response as JSON. Do not include extra text."</i>). While this approach worked during manual testing, in high-volume production it suffered from three critical failure modes:</p>
@@ -62,7 +69,7 @@ const ManifestSchema = z.object({
   }))
 });
 
-type ManifestOutput = z.infer<typeof ManifestSchema>;
+type ManifestOutput = z.infer<typeof ManifestSchema="">;
 
 export class SecureExtractionPipeline {
   constructor(private llmClient: any) {}
@@ -107,7 +114,7 @@ export class SecureExtractionPipeline {
     }
     throw new Error('Pipeline execution terminated unexpectedly.');
   }
-}</code></pre>
+}</ManifestOutput></typeof></code></pre>
  
       <h2 id="ab-testing-python" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">5. Python A/B Testing Evaluation Script</h2>
       <p>Before rolling out the prompt migration, we developed a Python evaluation harness to benchmark the new Precision Prompt templates against legacy prompts. The script measures latency, token count, and schema validity over 1,000 simulated manifests:</p>
@@ -221,7 +228,7 @@ def evaluate_prompt_version(client, test_dataset, prompt_compiler_func) -> dict:
           <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">By storing static pages and resources close to the user geographically, reducing the round-trip network latency to the origin server.</p>
         </div>
       </div>
-      </div>
+      
       <h2 id="related-reading" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">10. Related Resources & Internal Links</h2>
       <p>To further scale and secure your enterprise AI application architectures, explore these related technical write-ups:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
@@ -238,5 +245,44 @@ def evaluate_prompt_version(client, test_dataset, prompt_compiler_func) -> dict:
       <p>Ultimately, a successful deployment is not just about making the code work today, but ensuring it is maintainable for the next five years. By building modules that are isolated and well-tested, you protect the core user experience from regression failures. This operational resilience translates directly into customer trust and long-term brand equity, providing a solid foundation for sustainable commercial growth.</p>
 
       <h2 id="final-takeaway" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">12. Conclusion & Summary</h2>
-      <p>Migrating to Precision Prompt Architecture™ allowed the client to reduce pipeline parsing failures from 5.4% down to 0.2%, achieving a robust **99.8% schema consistency rate**. By treating prompts as typed code layers, escaping user variables, and enforcing schemas at runtime via Zod validator blocks, developers can build stable, production-grade AI systems that run continuously without database write conflicts or operational stalls.</p>`
+      <p>Migrating to Precision Prompt Architecture™ allowed the client to reduce pipeline parsing failures from 5.4% down to 0.2%, achieving a robust **99.8% schema consistency rate**. By treating prompts as typed code layers, escaping user variables, and enforcing schemas at runtime via Zod validator blocks, developers can build stable, production-grade AI systems that run continuously without database write conflicts or operational stalls.</p>
+<!-- TOOL_START -->
+<div class="tool-callout" style="margin: 2rem 0; padding: 1.5rem; background: var(--surface2); border-left: 4px solid var(--accent); border-radius: 0 4px 4px 0;">
+  <span style="font-family: monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">LinkedIn Growth Utility</span>
+  <h5 style="font-size: 1.05rem; margin: 0 0 0.5rem 0; font-family: Syne, sans-serif;">Optimize Your Technical Social Content</h5>
+  <p style="font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem 0; line-height: 1.5;">Format your system engineering posts with surgical spacing, bold code blocks, and custom headers to maximize reach.</p>
+  <a href="/tools/linkedin-formatter" style="color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 700;">Format LinkedIn Post &rarr;</a>
+</div>
+<!-- TOOL_END -->
+<!-- RELATED_START -->
+<div class="related-articles-section" style="margin-top: 4rem; padding: 2.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;">
+  <h3 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin: 0 0 1.5rem 0; font-family: Syne, sans-serif;">Related Reading</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Case Study</span>
+      <a href="/blog/case-study-surgical-prompt-architecture-consistency" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Case Study: Achieving 99.8% Output Consistency via Surgical Prompt Architecture™</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Case Study</span>
+      <a href="/blog/case-study-context-compression-token-waste" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Case Study: Reducing AI Token Waste by 42.4% via Context Compression™</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Case Study</span>
+      <a href="/blog/case-study-n8n-automated-authority-scaling" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Case Study: Architecting the </a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Case Study</span>
+      <a href="/blog/case-study-workflow-automation-roi" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Case Study: Automating 400+ Manual MIS Hours for Global Logistics Stakeholders</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Framework</span>
+      <a href="/blog/precision-prompt-architecture-framework" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Precision Prompt Architecture™: The Blueprint for Precision AI Outputs</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Framework</span>
+      <a href="/blog/surgical-prompt-architecture-framework" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Surgical Prompt Architecture™: The Blueprint for Precision AI Outputs</a>
+    </li>
+  </ul>
+</div>
+<!-- RELATED_END -->`
 };

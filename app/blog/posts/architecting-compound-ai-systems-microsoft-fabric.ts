@@ -14,7 +14,15 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
   blocks: {
     focusedKeyword: "Compound AI Systems Microsoft Fabric"
   },
-  content: `<p>Over the last two years, almost every enterprise data team has fallen into the same architectural trap. The workflow looks something like this: you take a repository of company PDFs, slice them into 500-token chunks, dump them into a vector database, point a large language model at the index, and announce to your executive team that you have built an "Enterprise AI Assistant."</p>
+  content: `<!-- BREADCRUMB_START -->
+<div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+  <a href="/" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Home</a> &gt; 
+  <a href="/blog" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Blog</a> &gt; 
+  <a href="/blog/microsoft-fabric" style="color: var(--accent); text-decoration: none; font-weight: 600;">Microsoft Fabric Hub</a> &gt; 
+  <span style="color: var(--text);">Architecting Compound AI Systems: A Microsoft Fabric and Python Guide</span>
+</div>
+<!-- BREADCRUMB_END -->
+<p>Over the last two years, almost every enterprise data team has fallen into the same architectural trap. The workflow looks something like this: you take a repository of company PDFs, slice them into 500-token chunks, dump them into a vector database, point a large language model at the index, and announce to your executive team that you have built an "Enterprise AI Assistant."</p>
 
       <p>For the first week, during the demo phase, it looks impressive. But when you deploy this system to production, the illusion shatters.</p>
 
@@ -35,10 +43,10 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
 
       <p>Vector databases are fantastic for finding unstructured semantic similarity, but they are terrible at deterministic relational math. Conversely, SQL data warehouses are perfect for exact aggregations but cannot understand unstructured policy manuals.</p>
 
-      <p>To solve this fragmentation, the AI engineering industry is moving past standalone model calls and adopting <strong>Compound AI Systems</strong>. In this comprehensive engineering guide, we will examine how to build production-grade Compound AI Systems using Microsoft Fabric, OneLake, and Python.</p>
+      <p>To solve this fragmentation, the AI engineering industry is moving past standalone model calls and adopting <strong>Compound AI Systems</strong>. In this comprehensive engineering guide, we will examine how to build production-grade Compound AI Systems using <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Microsoft Fabric</a>, OneLake, and Python.</p>
 
       <h2>What is a Compound AI System?</h2>
-      <p>Pioneered by researchers at Berkeley (HAI) and rapidly adopted by elite engineering teams, a <strong>Compound AI System</strong> is an architecture that tackles complex tasks by coordinating multiple interacting components—such as query routers, hybrid retrievers, SQL execution engines, semantic caches, guardrails, and multi-agent loops—rather than relying on a single monolithic LLM prompt.</p>
+      <p>Pioneered by researchers at Berkeley (HAI) and rapidly adopted by elite engineering teams, a <strong>Compound AI System</strong> is an architecture that tackles complex tasks by coordinating multiple interacting components—such as query routers, hybrid retrievers, SQL execution engines, semantic caches, guardrails, and multi-agent loops—rather than relying on a single monolithic LLM <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a>.</p>
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
         <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
@@ -59,7 +67,7 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
       <h3>Why Microsoft Fabric is the Perfect Substrate</h3>
       <p>Building a compound system requires tight integration between unstructured data, structured data, and high-performance computing. Historically, teams had to stitch together five different cloud vendors to achieve this.</p>
 
-      <p>Microsoft Fabric solves this by providing a unified analytical substrate:</p>
+      <p><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;">Microsoft Fabric</a> solves this by providing a unified analytical substrate:</p>
       <ul>
         <li><strong>OneLake:</strong> Acts as the unified storage layer for both structured Delta Parquet tables and unstructured vector embeddings.</li>
         <li><strong>Synapse Data Engineering (Spark):</strong> Powers high-throughput data cleaning, chunking, and embedding generation pipelines.</li>
@@ -89,15 +97,15 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
       <p>Before any compute-heavy LLM routing occurs, the incoming query hits a <strong>Semantic Cache</strong>. Using vector similarity matching against previously answered queries, the system checks if an identical or highly similar question was resolved recently. If a match is found (e.g., >0.95 cosine similarity), the cached response is returned in sub-50ms, bypassing the LLM entirely.</p>
 
       <h3>Step 2: Intent Classification & Query Routing</h3>
-      <p>If the cache misses, the query is passed to a lightweight, highly tuned Router LLM (or a specialized classifier). The router evaluates the syntax and intent of the prompt to determine the execution path:</p>
+      <p>If the cache misses, the query is passed to a lightweight, highly tuned Router LLM (or a specialized classifier). The router evaluates the syntax and intent of the <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;">prompt</a> to determine the execution path:</p>
       <ul>
-        <li><strong>Path A (Unstructured Vector Search):</strong> For questions like "What is our internal policy on remote server provisioning?" the router directs the query to OneLake Vector Search.</li>
+        <li><strong>Path A (Unstructured Vector Search):</strong> For questions like "What is our internal policy on remote server provisioning?" the router directs the query to <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> Vector Search.</li>
         <li><strong>Path B (Structured Relational SQL):</strong> For questions like "What was the total invoice volume for Client X last month?" the router bypasses vector search and generates a deterministic T-SQL query executed against the Synapse Warehouse.</li>
         <li><strong>Path C (Multi-Agent Workflow):</strong> For complex cross-domain questions ("Correlate our Q3 cloud infrastructure spend with our engineering team's output logs"), the router spins up a LangGraph multi-agent loop that executes both SQL queries and vector searches iteratively.</li>
       </ul>
 
       <h3>Step 3: Context Curation & Reranking</h3>
-      <p>Once raw data is retrieved from OneLake or Synapse SQL, it enters the <strong>Reranking Node</strong>. Naive retrievers often return 20 chunks of data, many of which contain irrelevant noise. We pass these chunks through a Cross-Encoder reranking model to score their exact relevance to the prompt, keeping only the top 5 highest-fidelity chunks. This prevents "Lost in the Middle" syndrome and drastically reduces token costs.</p>
+      <p>Once raw data is retrieved from <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;">OneLake</a> or Synapse SQL, it enters the <strong>Reranking Node</strong>. Naive retrievers often return 20 chunks of data, many of which contain irrelevant noise. We pass these chunks through a Cross-Encoder reranking model to score their exact relevance to the prompt, keeping only the top 5 highest-fidelity chunks. This prevents "Lost in the Middle" syndrome and drastically reduces token costs.</p>
 
       <h3>Step 4: Synthesizer & Deterministic Guardrail</h3>
       <p>Finally, the curated context and the user prompt are sent to the Synthesizer LLM. The prompt enforces strict structural constraints: the model is forbidden from using external pre-trained knowledge and must provide explicit, bracketed citations linking every claim back to the source OneLake table or document ID. A secondary Guardrail script audits the output string for hallucinated values before releasing it to the user interface.</p>
@@ -268,7 +276,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
       <p>Architecting a Compound AI System requires a higher initial engineering investment than spinning up a naive RAG script. However, the long-term Return on Investment (ROI) and Total Cost of Ownership (TCO) metrics are overwhelmingly positive.</p>
 
       <ul>
-        <li><strong>Relational Accuracy:</strong> Improved from &lt;25% (naive RAG hallucination) to <strong>99.8%</strong> via deterministic SQL routing.</li>
+        <li><strong>Relational Accuracy:</strong> Improved from &lt;25% (naive RAG <a href="/glossary/ai-hallucination-risks" class="glossary-term-link" title="The phenomenon where a Large Language Model generates information that is factually incorrect or logically inconsistent." data-definition="The phenomenon where a Large Language Model generates information that is factually incorrect or logically inconsistent." style="color: var(--accent); border-bottom: 1px dashed var(--accent); text-decoration: none; cursor: help;">hallucination</a>) to <strong>99.8%</strong> via deterministic SQL routing.</li>
         <li><strong>Average Query Latency:</strong> Reduced from 8.5s to <strong>1.2s</strong> (and sub-50ms for cached hits).</li>
         <li><strong>Monthly Token Spend:</strong> <strong>73% Reduction</strong> in recurring LLM API operational costs due to reranking and semantic caching.</li>
         <li><strong>Governance & Class:</strong> Zero risk of data leaks; inherits Entra ID and Row-Level Security automatically.</li>
@@ -280,7 +288,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
       <ol>
         <li><strong>Relying on LLMs for Mathematical Calculations:</strong> Never allow an LLM to calculate percentages, currency conversions, or financial sums directly from raw text. LLMs are token predictors, not calculators. Always use a Query Router to pass mathematical intents to Synapse Server in SQL, allowing the database engine to perform the exact calculation.</li>
         <li><strong>Over-Chunking Tabular Data:</strong> When ingesting PDFs or documents that contain embedded tables, naive chunking algorithms slice the tables in half across row boundaries, destroying the column headers. Use specialized document parsing tools to extract tables as intact Markdown or HTML blocks before embedding them.</li>
-        <li><strong>Skipping the Reranking Layer:</strong> If you retrieve 20 document chunks from OneLake and stuff them all into the LLM context window, the model will suffer from "Lost in the Middle" syndrome. Always insert a Cross-Encoder reranking node to filter the context down to the absolute highest-scoring fragments.</li>
+        <li><strong>Skipping the Reranking Layer:</strong> If you retrieve 20 document chunks from OneLake and stuff them all into the LLM <a href="/glossary/llm-context-window-limits" class="glossary-term-link" title="The maximum amount of information (tokens) an AI model can process at one time before losing logical continuity or history." data-definition="The maximum amount of information (tokens) an AI model can process at one time before losing logical continuity or history." style="color: var(--accent); border-bottom: 1px dashed var(--accent); text-decoration: none; cursor: help;">context window</a>, the model will suffer from "Lost in the Middle" syndrome. Always insert a Cross-Encoder reranking node to filter the context down to the absolute highest-scoring fragments.</li>
       </ol>
 
       <h2>Conclusion: Architecting for the Next Decade</h2>
@@ -297,5 +305,65 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
         <li><a href="/blog/case-study-precision-prompt-architecture-consistency" style="color: var(--accent); text-decoration: none; font-weight: 600;">Case Study: Achieving 99.8% Output Consistency via Precision Prompt Architecture™</a></li>
         <li><a href="/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026" style="color: var(--accent); text-decoration: none; font-weight: 600;">Why Microsoft Fabric Skills Will Dominate the Data Industry in 2026</a></li>
       </ul>
-`
+<!-- TOOL_START -->
+<div class="tool-callout" style="margin: 2rem 0; padding: 1.5rem; background: var(--surface2); border-left: 4px solid var(--accent); border-radius: 0 4px 4px 0;">
+  <span style="font-family: monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Interactive Developer Tool</span>
+  <h5 style="font-size: 1.05rem; margin: 0 0 0.5rem 0; font-family: Syne, sans-serif;">Build Professional Architecture Flowcharts Instantly</h5>
+  <p style="font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem 0; line-height: 1.5;">We built a custom Mermaid diagram optimizer specifically for data architects. Create, edit, and export visual blueprints in seconds.</p>
+  <a href="/tools/mermaid-forge" style="color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 700;">Try Mermaid Forge &rarr;</a>
+</div>
+<!-- TOOL_END -->
+<!-- CTA_START -->
+<div class="auto-cta-box" style="margin-top: 3rem; padding: 2rem; border: 1px solid var(--accent); background: rgba(201, 243, 29, 0.02); border-radius: 4px; text-align: center;">
+  <h4 style="font-family: Syne, sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text);">Want to become a Microsoft Fabric Architect?</h4>
+  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Start here to scale your data engineering career with our certification resources and mentorship paths.</p>
+  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+    <a href="/blog/microsoft-fabric-architecture-explained-2026" style="background: var(--accent); color: #000; padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Start Here</a>
+    <a href="/mentorship" style="border: 1px solid var(--accent); color: var(--text); padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Mentorship</a>
+    <a href="/blog/microsoft-fabric-certification-roadmap-2026" style="border: 1px solid var(--border); color: var(--muted); padding: 0.6rem 1.5rem; font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Certification Roadmap</a>
+  </div>
+</div>
+<!-- CTA_END -->
+<!-- RELATED_START -->
+<div class="related-articles-section" style="margin-top: 4rem; padding: 2.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;">
+  <h3 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin: 0 0 1.5rem 0; font-family: Syne, sans-serif;">Related Reading</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture</span>
+      <a href="/blog/microsoft-fabric-medallion-architecture-guide" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Medallion Architecture Guide: Ingesting Bronze, Silver, and Gold Tiers</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Architecture Explained: The Complete 2026 Guide</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Microsoft Fabric</span>
+      <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-pricing-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/microsoft-fabric-architectural-guide" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">The Fabric Architect’s Manifesto: The Unofficial Microsoft Fabric Architectural Guide</a>
+    </li>
+    <li style="border-left: 2px solid var(--accent); padding-left: 1rem;">
+      <span style="font-family: monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.25rem;">Architecture & BI</span>
+      <a href="/blog/dp-600-study-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; line-height: 1.4; hover: text-[var(--accent)]">DP-600 Study Guide 2026: Complete Microsoft Fabric Analytics Engineer Exam Preparation</a>
+    </li>
+  </ul>
+</div>
+<!-- RELATED_END -->
+<!-- POPULAR_START -->
+<div class="popular-fabric-guides" style="margin-top: 2rem; padding: 2rem; background: var(--surface2); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left-width: 4px;">
+  <h3 style="font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin: 0 0 1.25rem 0; font-family: Syne, sans-serif;">Popular Microsoft Fabric Guides</h3>
+  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+    <li><a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ Microsoft Fabric Architecture: The Complete Blueprint (2026)</a></li>
+    <li><a href="/blog/microsoft-fabric-pricing-guide-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ Microsoft Fabric Capacity Sizing &amp; Pricing Masterclass</a></li>
+    <li><a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ OneLake Architecture: Enterprise Virtualization Deep-Dive</a></li>
+    <li><a href="/blog/dp-600-study-guide-2026" style="color: var(--text); text-decoration: none; font-size: 0.9rem; hover: underline;">→ DP-600 Fabric Analytics Engineer Pass Preparation Roadmap</a></li>
+  </ul>
+</div>
+<!-- POPULAR_END -->`
 };
