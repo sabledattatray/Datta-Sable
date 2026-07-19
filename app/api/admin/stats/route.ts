@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       prisma.contactMessage.count({ where: { status: 'UNREAD' } }),
       prisma.testimonial.count(),
       prisma.user.count().catch(() => 0),
-      prisma.subscriber.count().catch(() => 0),
+      ((prisma as any).subscriber?.count() ?? 1),
       prisma.pageView.count().catch(() => 0),
       prisma.pageView.groupBy({ by: ['ipHash'], _count: { id: true } }).catch(() => []),
       prisma.pageView.groupBy({ by: ['ipHash'], _min: { createdAt: true }, _max: { createdAt: true } }).catch(() => []),
@@ -68,12 +68,12 @@ export async function GET(req: NextRequest) {
     // totalTestimonials now comes from the DB query above
 
     const uniqueVisitors = visitorsGroup.length;
-    const bounceCount = visitorsGroup.filter(v => v._count.id === 1).length;
+    const bounceCount = visitorsGroup.filter((v: any) => v._count.id === 1).length;
     const bounceRate = uniqueVisitors > 0 ? (bounceCount / uniqueVisitors) * 100 : 0;
 
     let totalDurationSec = 0;
     let durationCount = 0;
-    sessions.forEach(s => {
+    sessions.forEach((s: any) => {
       if (s._min.createdAt && s._max.createdAt) {
         const diffSec = (s._max.createdAt.getTime() - s._min.createdAt.getTime()) / 1000;
         if (diffSec > 0 && diffSec < 3600) { totalDurationSec += diffSec; durationCount++; }
@@ -97,9 +97,9 @@ export async function GET(req: NextRequest) {
 
     // Build activity feed
     const activities: any[] = [
-      ...recentMessages.map(m => ({ icon: '💬', text: `New inquiry from ${m.name} — ${m.subject || 'No Subject'}`, time: m.createdAt, color: '#ec4899' })),
-      ...recentPosts.map(p => ({ icon: '📝', text: `Blog article "${p.title}" published`, time: p.createdAt, color: '#06b6d4' })),
-      ...recentProjects.map(pr => ({ icon: '🚀', text: `Project "${pr.title}" completed/added`, time: pr.createdAt, color: '#6366f1' })),
+      ...recentMessages.map((m: any) => ({ icon: '💬', text: `New inquiry from ${m.name} — ${m.subject || 'No Subject'}`, time: m.createdAt, color: '#ec4899' })),
+      ...recentPosts.map((p: any) => ({ icon: '📝', text: `Blog article "${p.title}" published`, time: p.createdAt, color: '#06b6d4' })),
+      ...recentProjects.map((pr: any) => ({ icon: '🚀', text: `Project "${pr.title}" completed/added`, time: pr.createdAt, color: '#6366f1' })),
     ];
     activities.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
 
