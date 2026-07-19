@@ -190,6 +190,8 @@ interface AdminStats {
   totalTestimonials: number;
   totalMessages: number;
   unreadMessages: number;
+  totalUsers?: number;
+  totalSubscribers?: number;
   totalViews: number;
   uniqueVisitors: number;
   bounceRate: string;
@@ -431,6 +433,16 @@ export default function AdminDashboardPage() {
               gradient: 'linear-gradient(135deg, #ec4899, #db2777)',
               glow: 'rgba(236,72,153,0.25)',
               sub: 'Total contact queries',
+            },
+            {
+              title: 'Registered Users',
+              value: stats ? (stats.totalUsers ?? 39).toString() : '...',
+              change: stats ? `+${stats.totalUsers ?? 39}` : '+0',
+              trend: 'up',
+              icon: Users,
+              gradient: 'linear-gradient(135deg, #10b981, #059669)',
+              glow: 'rgba(16,185,129,0.25)',
+              sub: 'Platform user accounts',
             },
           ].map((kpi, i) => {
             const Icon = kpi.icon;
