@@ -37,3 +37,46 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     `,
   });
 };
+
+export const sendWelcomeEmail = async (email: string, name: string) => {
+  await transporter.sendMail({
+    from: `"Datta Sable" <${process.env.EMAIL_FROM || "contact@dattasable.com"}>`,
+    to: email,
+    subject: "Welcome to dattasable.com! 🚀",
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; background-color: #000; color: #fff; border-radius: 10px; border: 1px solid #1a1a1a;">
+        <h2 style="color: #c9f31d; text-align: center; margin-bottom: 20px;">Welcome aboard, ${name}!</h2>
+        <p>Hello ${name},</p>
+        <p>Thanks for registering on the <strong>dattasable.com</strong> data platform. Your account is active, and you have joined 7,000+ data engineers, architects, and BI professionals receiving surgical technical tutorials weekly.</p>
+        
+        <h3 style="color: #c9f31d; margin-top: 30px; margin-bottom: 15px;">🔥 Premium Guides & Resources to Get Started:</h3>
+        <ul style="padding-left: 20px; line-height: 1.8;">
+          <li>
+            <a href="${domain}/blog/microsoft-fabric-architecture-explained-2026" style="color: #c9f31d; text-decoration: underline;">
+              <strong>Microsoft Fabric Architecture Explained</strong>
+            </a> - The complete 2026 engineering blueprint.
+          </li>
+          <li>
+            <a href="${domain}/blog/power-bi-direct-lake-performance-tuning-fabric" style="color: #c9f31d; text-decoration: underline;">
+              <strong>Power BI Direct Lake Tuning Guide</strong>
+            </a> - DAX query optimization and performance tuning.
+          </li>
+          <li>
+            <a href="${domain}/blog/microsoft-fabric-medallion-architecture-guide" style="color: #c9f31d; text-decoration: underline;">
+              <strong>Medallion Architecture Ingestion Guide</strong>
+            </a> - Refining Bronze, Silver, and Gold data tiers.
+          </li>
+        </ul>
+
+        <div style="text-align: center; margin: 35px 0;">
+          <a href="${domain}/blog" style="background-color: #c9f31d; color: #000; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Explore the Hub</a>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #222; margin: 30px 0;">
+        <p style="font-size: 11px; color: #666; text-align: center;">
+          You received this email because you registered on dattasable.com. Unsubscribe at any time.
+        </p>
+      </div>
+    `,
+  });
+};

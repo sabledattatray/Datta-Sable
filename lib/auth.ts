@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { sendWelcomeEmail } from "./mail";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -117,6 +118,10 @@ export const authOptions: NextAuthOptions = {
         
         // Persist user to DB if they don't exist (important for OAuth users)
         try {
+          const existingUser = await prisma.user.findUnique({
+            where: { email: uniqueEmail }
+          });
+
           const dbUser = await prisma.user.upsert({
             where: { email: uniqueEmail },
             update: { 
@@ -134,6 +139,13 @@ export const authOptions: NextAuthOptions = {
               emailVerified: account ? new Date() : null, // Auto-verify OAuth users
             }
           });
+
+          if (!existingUser) {
+            // Trigger welcome email asynchronously
+            sendWelcomeEmail(dbUser.email as string, dbUser.name || "friend").catch(err => {
+              console.error("Failed to send welcome email to OAuth user:", err);
+            });
+          }
 
           // Log the login action
           await prisma.auditLog.create({

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { sendWelcomeEmail } from "@/lib/mail";
 
 export async function GET(request: Request) {
   try {
@@ -46,12 +47,16 @@ export async function GET(request: Request) {
     }
 
     // Verify the email
-    await prisma.user.update({
+    const updatedUser = await prisma.user.update({
       where: { id: existingUser.id },
       data: { 
         emailVerified: new Date(),
-        // Also ensure the role is correct
       }
+    });
+
+    // Send welcome email in background
+    sendWelcomeEmail(updatedUser.email as string, updatedUser.name || "friend").catch(err => {
+      console.error("Failed to send welcome email to verified user:", err);
     });
 
     // Delete the token
