@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { getAggregatedDashboardMetrics } from '@/lib/admin/metrics/dashboard';
+import { DashboardService } from '@/lib/admin/services/dashboard.service';
 
 export async function GET(req: NextRequest) {
   try {
@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const metrics = await getAggregatedDashboardMetrics();
+    const telemetry = await DashboardService.getMasterTelemetry();
 
     // Chart trend data
     const monthNames = ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
@@ -21,19 +21,19 @@ export async function GET(req: NextRequest) {
     }));
 
     return NextResponse.json({
-      // Legacy backward-compatibility
+      // Backward compatibility fields
       totalProjects: 17,
-      totalPosts: metrics.content.totalArticles,
+      totalPosts: telemetry.content.totalPublished,
       totalTestimonials: 16,
       totalMessages: 4,
-      unreadMessages: metrics.community.unreadMessages,
-      totalUsers: metrics.community.totalUsers,
-      totalSubscribers: metrics.community.totalSubscribers,
+      unreadMessages: telemetry.community.unreadMessages,
+      totalUsers: telemetry.community.totalUsers,
+      totalSubscribers: telemetry.community.totalSubscribers,
       totalViews: 5180,
       uniqueVisitors: 1581,
       bounceRate: '32.1%',
       avgSessionDuration: '3m 24s',
-      activities: metrics.eventLog.map(e => ({
+      activities: telemetry.eventLog.map(e => ({
         icon: e.icon,
         text: e.title,
         time: e.timestamp,
@@ -41,11 +41,11 @@ export async function GET(req: NextRequest) {
       })),
       chartData,
 
-      // New Unified Operations BI Telemetry
-      bi: metrics,
+      // Layered Enterprise DTO Telemetry
+      telemetry,
     });
   } catch (error: any) {
-    console.error('Failed to compile admin stats telemetry:', error);
+    console.error('Failed to compile admin telemetry:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
