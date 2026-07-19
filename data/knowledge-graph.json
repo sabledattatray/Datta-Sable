@@ -8,6 +8,8 @@
       "children": ["onelake", "fabric-engines"],
       "prerequisites": [],
       "category": "Foundations",
+      "difficulty": "Beginner",
+      "definition": "The unified SaaS data analytics platform that consolidates data warehousing, data engineering, data integration, real-time intelligence, and business intelligence into a single environment.",
       "aliases": ["Fabric architecture", "Fabric platform", "Fabric ecosystem"]
     },
     {
@@ -18,6 +20,8 @@
       "children": ["medallion", "direct-lake"],
       "prerequisites": ["fabric-architecture"],
       "category": "Storage",
+      "difficulty": "Intermediate",
+      "definition": "The single, unified, logical data lake for the entire organization, built on ADLS Gen2, storing all tabular data in open Delta Lake (Parquet) format.",
       "aliases": ["OneLake", "unified logical data lake", "single logical data lake", "Fabric storage"]
     },
     {
@@ -28,6 +32,8 @@
       "children": ["lakehouse", "warehouse"],
       "prerequisites": ["onelake"],
       "category": "Storage",
+      "difficulty": "Intermediate",
+      "definition": "A data design pattern describing logical refinement tiers: Bronze (raw ingestion), Silver (cleaned/conformed data), and Gold (business-ready aggregated models).",
       "aliases": ["Medallion Architecture", "Bronze, Silver, and Gold", "Bronze-Silver-Gold", "Medallion framework"]
     },
     {
@@ -38,6 +44,8 @@
       "children": ["semantic-model"],
       "prerequisites": ["onelake"],
       "category": "Analytics",
+      "difficulty": "Architect",
+      "definition": "A ground-breaking Power BI engine mode that loads V-Ordered Delta Parquet files directly from OneLake into memory without intermediate import copies.",
       "aliases": ["Direct Lake", "Direct Lake mode", "Direct Lake query", "Direct Lake performance"]
     },
     {
@@ -48,6 +56,8 @@
       "children": ["capacity"],
       "prerequisites": ["fabric-architecture"],
       "category": "FinOps",
+      "difficulty": "Intermediate",
+      "definition": "Capacity sizing models based on F-SKUs (F2 to F2048) and Capacity Units (CUs), utilizing Azure pay-as-you-go or Reserved Capacity optimization billing.",
       "aliases": ["Fabric capacity", "Fabric pricing", "Capacity Units", "F-SKU", "F-SKUs"]
     },
     {
@@ -58,6 +68,8 @@
       "children": ["dp-700", "dp-800"],
       "prerequisites": ["fabric-architecture"],
       "category": "Careers",
+      "difficulty": "Beginner",
+      "definition": "Microsoft Certified: Fabric Analytics Engineer Associate certification exam. Covers data engineering, semantic modeling, warehousing, and BI solutions.",
       "aliases": ["DP-600", "DP-600 exam", "DP-600 Study Guide", "Fabric Analytics Engineer certification"]
     },
     {
@@ -68,6 +80,8 @@
       "children": [],
       "prerequisites": ["dp-600"],
       "category": "Careers",
+      "difficulty": "Intermediate",
+      "definition": "Microsoft Certified: Fabric Data Engineer Associate certification exam. Focuses on orchestrating pipelines, Spark workloads, and ingestion flows.",
       "aliases": ["DP-700", "Fabric Data Engineer exam"]
     },
     {
@@ -78,6 +92,8 @@
       "children": [],
       "prerequisites": ["dp-600"],
       "category": "Careers",
+      "difficulty": "Architect",
+      "definition": "Microsoft Certified: Fabric Solution Architect exam. Validates skills in designing enterprise governance, cost monitoring, security, and architectures.",
       "aliases": ["DP-800", "Fabric Solution Architect exam"]
     }
   ]

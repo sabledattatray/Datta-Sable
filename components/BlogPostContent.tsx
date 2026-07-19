@@ -6,8 +6,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronLeft, Share2, Clock } from 'lucide-react';
 import BlockRenderer from '@/components/editor/BlockRenderer';
-import { sanitizeHtml } from '@/lib/sanitize';
 import { useTheme } from '@/components/ThemeProvider';
+import DiagramRenderer from '@/components/blog/interactive/DiagramRenderer';
 
 const parseSafeDate = (dateStr: any, fallbackStr?: any): string => {
   const fallbackDate = "2026-01-01T00:00:00.000Z";
@@ -349,10 +349,20 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
         {post.blocks && post.blocks.length > 0 ? (
           <BlockRenderer blocks={post.blocks} />
         ) : (
-          <div
-            className="blog-content"
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
-          />
+          <div className="blog-content">
+            {post.content.split(/(\[\[diagram:[a-zA-Z0-9-_]+\]\])/g).map((part, index) => {
+              if (part.startsWith('[[diagram:') && part.endsWith(']]')) {
+                const diagramId = part.substring(10, part.length - 2);
+                return <DiagramRenderer key={`diagram-${index}`} name={diagramId} />;
+              }
+              return (
+                <div
+                  key={`html-${index}`}
+                  dangerouslySetInnerHTML={{ __html: part }}
+                />
+              );
+            })}
+          </div>
         )}
 
         {/* ── Technical References & Standards (E-E-A-T Outbound Links) ── */}

@@ -38,10 +38,10 @@ export const caseStudySurgicalPromptArchitectureConsistencyPost = {
       </div>
  
       <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. The Problem of LLM Schema Drift</h2>
-      <p>Standard text prompts often lead to output formatting failures: missing brackets, trailing text, or hallucinated fields. These formatting bugs crash downstream databases. To achieve absolute structural compliance, we developed Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a> Architecture™—a template method that enforces strict parser boundaries on the LLM output.</p>
+      <p>Standard text prompts often lead to output formatting failures: missing brackets, trailing text, or hallucinated fields. These formatting bugs crash downstream databases. To achieve absolute structural compliance, we developed Surgical Prompt Architecture™—a template method that enforces strict parser boundaries on the LLM output.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Designing the Surgical Prompt Scaffolding</h2>
-      <p>Surgical Prompt Architecture utilizes clear XML-style tags to separate instructions, examples, context, and output formats. This clear separation reduces cognitive drift in the model. Below is a TypeScript node demonstrating how we construct and validate these outputs using Zod schemas:</p>
+      <p>Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a> Architecture utilizes clear XML-style tags to separate instructions, examples, context, and output formats. This clear separation reduces cognitive drift in the model. Below is a TypeScript node demonstrating how we construct and validate these outputs using Zod schemas:</p>
       <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">import { z } from 'zod';
 
 const OutputSchema = z.object({

@@ -187,6 +187,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 
 
+
 <h2 id="capacity-units-explained" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">4. Capacity Units Explained</h2>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">4.1 What Is a Capacity Unit?</h3>
@@ -226,7 +227,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">4.3 The Smoothing Algorithm (Bursting)</h3>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Microsoft Fabric does not enforce your capacity limit in real-time at the millisecond level. Instead, it uses a <strong>smoothing algorithm</strong> that averages CU consumption over a rolling window — typically 24 hours for background workloads and shorter windows for interactive operations.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> does not enforce your capacity limit in real-time at the millisecond level. Instead, it uses a <strong>smoothing algorithm</strong> that averages CU consumption over a rolling window — typically 24 hours for background workloads and shorter windows for interactive operations.</p>
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">This means your capacity can legitimately burst above its nominal CU rate for short periods. An F8 running 8 CUs continuously can briefly absorb a 20 CU Spark job without immediately throttling, because the 24-hour smoothing window shows average utilization well below the 8 CU rate. The burst headroom depends on how much available CU "credit" has accumulated during quiet periods.</p>
 
@@ -314,7 +315,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h2 id="complete-sku-breakdown" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">5. Complete F-SKU Breakdown</h2>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> offers 11 capacity tiers, from F2 to F2048. Each doubles in CU count from the previous tier. Below is a detailed breakdown of each SKU with practical guidance on who should use it and what workloads it supports.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Microsoft Fabric offers 11 capacity tiers, from F2 to F2048. Each doubles in CU count from the previous tier. Below is a detailed breakdown of each SKU with practical guidance on who should use it and what workloads it supports.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">F2 — The Exploration Tier</h3>
 
@@ -1114,7 +1115,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The DP-600 exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The DP-700 exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Data Engineer certification details">DP-700</a> exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Troubleshooting</h3>
 

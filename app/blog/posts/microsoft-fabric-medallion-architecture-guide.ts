@@ -63,7 +63,7 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
         <li><strong>Data Factory (Pipelines and Dataflows Gen2):</strong> The low-code ingestion and orchestration engines.</li>
         <li><strong>Synapse Notebooks & Spark Jobs:</strong> The code-first engine for high-volume data engineering and data science.</li>
         <li><strong>Synapse Data Warehouse:</strong> A fully managed, highly performant SQL computing engine.</li>
-        <li><strong>Power BI:</strong> The visualization and reporting layer, utilizing the revolutionary <strong>Direct Lake mode</strong> to query data straight from <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> without importing or refreshing.</li>
+        <li><strong>Power BI:</strong> The visualization and reporting layer, utilizing the revolutionary <strong>Direct Lake mode</strong> to query data straight from OneLake without importing or refreshing.</li>
       </ul>
 
       <h2>The Real Problem with Learning Tools Individually</h2>
@@ -83,7 +83,7 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
       <p>The primary objective of the <strong>Bronze Layer</strong> is raw data preservation. Here, data is ingested from external sources (databases, SaaS applications, REST APIs, IoT streams) exactly as it exists in the source system. No transformations, no corrections, and no business logic are applied.</p>
       <p>In the context of Microsoft Fabric Architecture, the Bronze layer is implemented using a <strong>Fabric Lakehouse</strong>'s "Files" directory.</p>
       <ul>
-        <li><strong>Fabric Pipelines:</strong> Pipelines are ideal for high-volume, low-code data copy actions. You use the Copy Activity to pull multi-gigabyte database tables or API endpoints directly into OneLake.</li>
+        <li><strong>Fabric Pipelines:</strong> Pipelines are ideal for high-volume, low-code data copy actions. You use the Copy Activity to pull multi-gigabyte database tables or API endpoints directly into <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a>.</li>
         <li><strong>Dataflows Gen2:</strong> For developers who prefer a visual, Power Query-based interface, Dataflows Gen2 can ingest raw files and write them to the lake.</li>
         <li><strong>OneLake Shortcuts:</strong> A game-changing feature in Fabric. Instead of duplicating data, you can create a shortcut to external Amazon S3, ADLS Gen2, or Google Cloud storage, making external raw files instantly visible in your Bronze layer without moving a single byte.</li>
       </ul>
@@ -99,7 +99,7 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
       <p>Gold data is structured as a <strong>Star Schema</strong>, composed of Fact Tables (numerical transaction metrics) and Dimension Tables (descriptive lookup variables).</p>
       <ul>
         <li><strong>Synapse Data Warehouse:</strong> Unlike Silver which is managed via code-first Spark Lakehouses, the Gold layer is often modeled using the Synapse Data Warehouse. Here, you use standard, highly performant Serverless SQL views, stored procedures, and T-SQL queries to build dimensional star schemas.</li>
-        <li><strong>Direct Lake Power BI Semantic Models:</strong> This is Microsoft Fabric's greatest engineering feat. Power BI can read Gold Delta tables directly from OneLake in <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> mode. There is no import step, no data duplication, and no query lag. You get the performance of an in-memory import with the real-time availability of Direct Query.</li>
+        <li><strong>Direct Lake Power BI Semantic Models:</strong> This is Microsoft Fabric's greatest engineering feat. Power BI can read Gold Delta tables directly from OneLake in Direct Lake mode. There is no import step, no data duplication, and no query lag. You get the performance of an in-memory import with the real-time availability of Direct Query.</li>
       </ul>
 
       <h2>Putting it All Together: The End-to-End Fabric Workflow</h2>
