@@ -8,6 +8,7 @@ const domain = process.env.NEXTAUTH_URL || "http://localhost:3000";
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST || "smtp.gmail.com",
   port: parseInt(process.env.EMAIL_SERVER_PORT || "587"),
+  secure: parseInt(process.env.EMAIL_SERVER_PORT || "587") === 465,
   auth: {
     user: process.env.EMAIL_SERVER_USER || "your-email@gmail.com",
     pass: process.env.EMAIL_SERVER_PASSWORD || "your-app-password",
