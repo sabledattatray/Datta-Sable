@@ -4,6 +4,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function TemplatesLayout({ children }: { children: React.ReactNode }) {
+export default function ToolsLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

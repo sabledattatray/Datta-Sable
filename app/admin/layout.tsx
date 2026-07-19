@@ -57,8 +57,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <AdminDashboardWrapper>
-      {children}
-    </AdminDashboardWrapper>
+    <>
+      <head>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
+      <AdminDashboardWrapper>
+        {children}
+      </AdminDashboardWrapper>
+    </>
   );
 }

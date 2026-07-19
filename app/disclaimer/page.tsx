@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary', title: 'Disclaimer | Datta Sable', description: 'Legal disclaimer for dattasable.com.', images: ['/images/dattasable.com.webp'] },
   alternates: { canonical: 'https://dattasable.com/disclaimer' },
+  robots: { index: false, follow: true },
 };
 
 export default async function DisclaimerPage() {

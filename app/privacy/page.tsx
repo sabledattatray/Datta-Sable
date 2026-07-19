@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary', title: 'Privacy Policy | Datta Sable', description: 'Privacy Policy for dattasable.com.', images: ['/images/dattasable.com.webp'] },
   alternates: { canonical: 'https://dattasable.com/privacy' },
+  robots: { index: false, follow: true },
 };
 
 export default async function PrivacyPage() {

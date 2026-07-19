@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Cookie Policy | Datta Sable',
   description: 'Cookie Policy for dattasable.com — explaining how we use cookies, tracking technologies, and Google AdSense integration.',
   alternates: { canonical: 'https://dattasable.com/cookies' },
+  robots: { index: false, follow: true },
 };
 
 export default async function CookiesPage() {

@@ -73,37 +73,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // 3. Static main pages — thin utility/tool pages excluded for content quality
+  // 3. Static main pillar pages (High-value content pages only)
   const staticUrls = [
     '',
-    '/services',
-    '/portfolio',
     '/blog',
     '/about',
+    '/portfolio',
+    '/services',
     '/contact',
-    '/privacy',
-    '/terms',
-    '/disclaimer',
-    '/cookies',
-    '/faq',
-    '/careers',
-    '/careers/collection-officer-mumbai',
-    '/careers/collection-team-leader-mumbai',
     '/start-here',
-    '/tools',
-    '/knowledge',
-    '/knowledge/architecture',
-    '/knowledge/data-engineering',
-    '/glossary',
-    // Individual tool pages, chains, templates, rfc, knowledge sub-pages excluded
-    // — these are utility/thin pages; noindex applied at page level
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: baselineDate,
     changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1.0
-      : route === '/tools' ? 0.8
-      : 0.7,
+    priority: route === '' ? 1.0 : 0.8,
   }));
 
   // 4. Execution Chains

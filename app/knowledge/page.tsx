@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Surgical Knowledge Hub | Technical AI & Creator Guides",
   description: "Expert-grade educational resources for high-performance AI engineering, LinkedIn authority systems, and SEO infrastructure.",
   alternates: { canonical: 'https://dattasable.com/knowledge' },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Surgical Knowledge Hub | Technical AI & Creator Guides | Datta Sable',
     description: 'Expert-grade educational resources for high-performance AI engineering, LinkedIn authority systems, and SEO infrastructure.',

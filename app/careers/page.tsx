@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     description: 'Apply for Collection Officer and Collection Team Leader jobs. Freshers welcome. 10th pass eligible. Immediate joining. Mumbai and surrounding areas.',
     url: 'https://dattasable.com/careers',
     type: 'website',
-  }
+  },
+  robots: { index: false, follow: true },
 };
 
 export default async function CareersPage() {
