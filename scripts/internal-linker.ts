@@ -7,6 +7,7 @@ const POSTS_DIR = path.join(PROJECT_DIR, 'app', 'blog', 'posts');
 const CERT_POSTS_FILE = path.join(PROJECT_DIR, 'app', 'blog', 'certificationPosts.ts');
 const DATA_FILE = path.join(PROJECT_DIR, 'app', 'blog', 'data.ts');
 const CONFIG_FILE = path.join(PROJECT_DIR, 'scripts', 'internal-links.json');
+const GRAPH_DATA_FILE = path.join(PROJECT_DIR, 'data', 'knowledge-graph.json');
 const REPORT_FILE = path.join(PROJECT_DIR, 'internal-linking-report.md');
 const GRAPH_FILE = path.join(PROJECT_DIR, 'scripts', 'internal-graph.json');
 
@@ -32,6 +33,21 @@ interface Config {
   glossary: GlossaryItem[];
 }
 
+interface GraphNode {
+  id: string;
+  slug: string;
+  title: string;
+  parent: string | null;
+  children: string[];
+  prerequisites: string[];
+  category: string;
+  aliases: string[];
+}
+
+interface KnowledgeGraph {
+  topics: GraphNode[];
+}
+
 interface PostMeta {
   id: string;
   slug: string;
@@ -46,8 +62,9 @@ interface PostMeta {
   originalFileContent: string;
 }
 
-// Load configuration
+// Load configurations
 const config: Config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf-8'));
+const knowledgeGraph: KnowledgeGraph = JSON.parse(fs.readFileSync(GRAPH_DATA_FILE, 'utf-8'));
 
 // Load all posts
 function getAllPosts(): PostMeta[] {
@@ -213,6 +230,8 @@ function cleanInjectedElements(content: string): string {
   let cleanedHtml = $.html();
   
   cleanedHtml = cleanedHtml.replace(/<!-- BREADCRUMB_START -->[\s\S]*?<!-- BREADCRUMB_END -->/g, '');
+  cleanedHtml = cleanedHtml.replace(/<!-- PREREQUISITE_START -->[\s\S]*?<!-- PREREQUISITE_END -->/g, '');
+  cleanedHtml = cleanedHtml.replace(/<!-- PROGRESSION_START -->[\s\S]*?<!-- PROGRESSION_END -->/g, '');
   cleanedHtml = cleanedHtml.replace(/<!-- CTA_START -->[\s\S]*?<!-- CTA_END -->/g, '');
   cleanedHtml = cleanedHtml.replace(/<!-- TOOL_START -->[\s\S]*?<!-- TOOL_END -->/g, '');
   cleanedHtml = cleanedHtml.replace(/<!-- RELATED_START -->[\s\S]*?<!-- RELATED_END -->/g, '');
@@ -275,6 +294,64 @@ function injectBreadcrumbs(html: string, post: PostMeta): string {
   return breadcrumbHtml + html;
 }
 
+// Injects Graph Prerequisite callouts
+function injectGraphPrerequisites(html: string, post: PostMeta, allPosts: PostMeta[]): string {
+  const node = knowledgeGraph.topics.find(t => t.slug === post.slug);
+  if (!node || node.prerequisites.length === 0) return html;
+  
+  let prereqHtml = `\n<!-- PREREQUISITE_START -->
+<div class="prereq-callout" style="margin: 2rem 0; padding: 1.5rem; background: rgba(201, 243, 29, 0.01); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 0 4px 4px 0;">
+  <span style="font-family: monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Recommended Prerequisite</span>
+  <p style="font-size: 0.85rem; color: var(--muted); margin: 0 0 0.75rem 0; line-height: 1.5;">To fully grasp this concept, we recommend reviewing our foundational guide first:</p>`;
+
+  node.prerequisites.forEach(prereqId => {
+    const prereqNode = knowledgeGraph.topics.find(t => t.id === prereqId);
+    if (prereqNode) {
+      prereqHtml += `
+      <a href="/blog/${prereqNode.slug}" style="color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: block; margin-top: 0.25rem;">&rarr; ${prereqNode.title}</a>`;
+    }
+  });
+
+  prereqHtml += `\n</div>
+<!-- PREREQUISITE_END -->`;
+
+  // Inject right after the first paragraph (if any) or table of contents
+  const tocMarker = '</div>\n\n<hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>';
+  const tocIndex = html.indexOf(tocMarker);
+  if (tocIndex !== -1) {
+    const splitIndex = tocIndex + tocMarker.length;
+    return html.substring(0, splitIndex) + prereqHtml + html.substring(splitIndex);
+  }
+
+  return prereqHtml + html;
+}
+
+// Injects Graph Progression learning paths at the bottom of the article
+function injectGraphProgression(html: string, post: PostMeta): string {
+  const node = knowledgeGraph.topics.find(t => t.slug === post.slug);
+  if (!node || node.children.length === 0) return html;
+  
+  let progHtml = `\n<!-- PROGRESSION_START -->
+<div class="progression-callout" style="margin: 3rem 0; padding: 2rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px;">
+  <h4 style="font-family: Syne, sans-serif; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text); font-weight: 700;">Microsoft Fabric Curriculum progression</h4>
+  <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; line-height: 1.5;">Continue your progression through the structured topical learning path:</p>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap;">`;
+
+  node.children.forEach(childId => {
+    const childNode = knowledgeGraph.topics.find(t => t.id === childId);
+    if (childNode) {
+      progHtml += `
+      <a href="/blog/${childNode.slug}" style="background: var(--accent); color: #000; padding: 0.55rem 1.25rem; font-weight: 700; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 2px;">Next: ${childNode.title} &rarr;</a>`;
+    }
+  });
+
+  progHtml += `\n  </div>
+</div>
+<!-- PROGRESSION_END -->`;
+
+  return html + progHtml;
+}
+
 // Injects Auto CTA Box
 function injectAutoCta(html: string, post: PostMeta): string {
   const isFabric = post.tags?.some(t => t.toLowerCase().includes('fabric') || t.toLowerCase().includes('onelake') || t.toLowerCase().includes('dp-600')) ||
@@ -298,7 +375,7 @@ function injectAutoCta(html: string, post: PostMeta): string {
   return html + ctaHtml;
 }
 
-// Contextual dynamic tool injection
+// Dynamic tools callouts
 function injectTools(html: string, post: PostMeta): string {
   let toolBoxHtml = '';
   const contentLower = html.toLowerCase();
@@ -389,7 +466,7 @@ const outgoingLinkCounts: Record<string, number> = {};
 const autoLinksAdded: Record<string, number> = {};
 const brokenLinks: { source: string; target: string }[] = [];
 
-// Static List of Valid Internal URLs (for Broken Link Checker)
+// Static List of Valid Internal URLs
 const VALID_SYSTEM_ROUTES = new Set([
   '/',
   '/blog',
@@ -410,7 +487,6 @@ const VALID_SYSTEM_ROUTES = new Set([
   '/tools/word-counter'
 ]);
 
-// Build Site Graph and check routes
 function auditLink(sourceSlug: string, targetUrl: string) {
   let cleanTarget = targetUrl.split('#')[0]; // strip anchors
   
@@ -440,26 +516,46 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
     auditLink(post.slug, href);
   });
 
+  // Load and merge Mappings from BOTH internal-links.json AND the knowledge-graph.json
+  const graphMappings: Mapping[] = knowledgeGraph.topics.map(topic => ({
+    entity: topic.title,
+    aliases: topic.aliases,
+    url: `/blog/${topic.slug}`,
+    anchors: [topic.title, `${topic.title} Guide`, `learn ${topic.title}`],
+    priority: topic.parent ? 90 : 100, // higher priority for pillars
+    cluster: topic.category
+  }));
+
+  const allMappings = [...config.mappings, ...graphMappings];
+  
+  // Remove duplicates by URL path
+  const uniqueMappings: Mapping[] = [];
+  const seenUrls = new Set<string>();
+  allMappings.forEach(m => {
+    if (!seenUrls.has(m.url)) {
+      seenUrls.add(m.url);
+      uniqueMappings.push(m);
+    }
+  });
+
   // Sort mappings by Priority (Link Weight Sizing)
-  const sortedMappings = [...config.mappings].sort((a, b) => b.priority - a.priority);
+  const sortedMappings = uniqueMappings.sort((a, b) => b.priority - a.priority);
 
   const allowedSelector = 'p, li, td, th';
   const matchingParagraphs = $(allowedSelector);
   const totalParagraphsCount = matchingParagraphs.length;
   
-  // Keep track of used anchors to rotate naturally
   let anchorRotationIndices: Record<string, number> = {};
 
   matchingParagraphs.each((paragraphIndex, element) => {
     if (insertedCount >= linkBudget) return;
     
     // Position Weighting calculation
-    let positionWeight = 0.8; // default body weight
+    let positionWeight = 0.8;
     const relativePosition = paragraphIndex / totalParagraphsCount;
-    if (relativePosition <= 0.15) positionWeight = 1.0; // intro weight
-    else if (relativePosition >= 0.85) positionWeight = 0.6; // conclusion weight
+    if (relativePosition <= 0.15) positionWeight = 1.0;
+    else if (relativePosition >= 0.85) positionWeight = 0.6;
 
-    // Walk direct child text nodes
     const children = $(element).contents();
     children.each((_, node) => {
       if (insertedCount >= linkBudget) return;
@@ -468,15 +564,14 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
       let text = $(node).text();
       let modified = false;
       
-      // Try entity mappings (in priority order)
+      // Try entity mappings
       for (const map of sortedMappings) {
         if (insertedCount >= linkBudget) break;
         if (map.url.includes(post.slug)) continue; // Don't link to self
         
-        // Link Decay check: 1st occurrence = 100%, 2nd occurrence = 50% probability, 3rd = ignore
         const count = urlLinkCounts[map.url] || 0;
         if (count >= 2) continue; 
-        if (count === 1 && Math.random() > 0.5) continue; // 50% decay probability on 2nd occurrence
+        if (count === 1 && Math.random() > 0.5) continue; // 50% decay probability
 
         for (const alias of map.aliases) {
           const regex = new RegExp(`\\b(${escapeRegExp(alias)})\\b`, 'i');
@@ -485,7 +580,6 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
           if (match && match.index !== undefined) {
             const matchedWord = match[0];
             
-            // Rotating anchors dynamically
             if (anchorRotationIndices[map.url] === undefined) {
               anchorRotationIndices[map.url] = 0;
             }
@@ -493,7 +587,6 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
             const chosenAnchorText = map.anchors[rotationIdx];
             anchorRotationIndices[map.url]++;
             
-            // Build autolink with rotated anchor text, keeping context natural
             const linkHtml = `<a href="${map.url}" class="autolink" style="color: var(--accent); text-decoration: underline;" title="${escapeHtml(chosenAnchorText)}">${matchedWord}</a>`;
             
             const prevText = text.substring(0, match.index);
@@ -513,7 +606,7 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
         if (modified) break;
       }
       
-      // If not linked yet, try glossary mapping (first occurrence only, ignore if priority mappings used)
+      // Try glossary mapping
       if (!modified) {
         for (const item of config.glossary) {
           if (insertedCount >= linkBudget) break;
@@ -545,6 +638,8 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
   let processedContent = $.html();
   
   processedContent = injectBreadcrumbs(processedContent, post);
+  processedContent = injectGraphPrerequisites(processedContent, post, allPosts);
+  processedContent = injectGraphProgression(processedContent, post);
   processedContent = injectTools(processedContent, post);
   processedContent = injectAutoCta(processedContent, post);
   
@@ -586,15 +681,12 @@ function savePostChanges(post: PostMeta, updatedContent: string) {
   fs.writeFileSync(post.filePath, updatedFileContent, 'utf-8');
 }
 
-// BFS calculation of click depth from Hub page to all posts
+// BFS calculation of click depth from Hub page
 function calculateClickDepths(posts: PostMeta[]): Record<string, number> {
   const depths: Record<string, number> = {};
   posts.forEach(p => depths[p.slug] = Infinity);
   
-  // Starting nodes: Hub / Home / Blog index page (depth = 1)
   const queue: { slug: string; depth: number }[] = [];
-  
-  // Start node
   const startPost = posts.find(p => p.slug === 'microsoft-fabric-architecture-explained-2026');
   if (startPost) {
     queue.push({ slug: startPost.slug, depth: 1 });
@@ -603,8 +695,6 @@ function calculateClickDepths(posts: PostMeta[]): Record<string, number> {
 
   while (queue.length > 0) {
     const current = queue.shift()!;
-    
-    // Find all outgoing edges from this node
     const outgoingEdges = linkGraph.filter(e => e.from === current.slug);
     for (const edge of outgoingEdges) {
       if (depths[edge.to] > current.depth + 1) {
@@ -623,21 +713,20 @@ function main() {
   const posts = getAllPosts();
   console.log(`Loaded ${posts.length} posts.`);
   
-  // Initialize valid routes set (including all loaded slugs)
   posts.forEach(p => {
     VALID_SYSTEM_ROUTES.add(`/blog/${p.slug}`);
     incomingLinkCounts[p.slug] = 0;
     outgoingLinkCounts[p.slug] = 0;
   });
 
-  console.log('Optimizing links...');
+  console.log('Optimizing links using Semantic Knowledge Graph...');
   posts.forEach(post => {
     const updatedContent = executeAdvancedLinking(post, posts);
     savePostChanges(post, updatedContent);
     console.log(`Updated: ${post.title}`);
   });
 
-  // Verify and audit links for broken destinations
+  // Verify and audit links
   linkGraph.forEach(edge => {
     let cleanTarget = edge.to;
     if (!cleanTarget.startsWith('/')) cleanTarget = `/blog/${cleanTarget}`;
@@ -654,7 +743,6 @@ function main() {
   const validDepths = Object.values(clickDepths).filter(d => d !== Infinity);
   const avgClickDepth = validDepths.length > 0 ? (validDepths.reduce((a, b) => a + b, 0) / validDepths.length).toFixed(2) : '3.0';
 
-  // Sizing Authority Metrics
   const sortedByIncoming = [...posts].sort((a, b) => (incomingLinkCounts[a.slug] || 0) - (incomingLinkCounts[b.slug] || 0));
   const topAuthorityPost = sortedByIncoming[sortedByIncoming.length - 1];
   const lowestAuthorityPost = sortedByIncoming[0];
@@ -664,7 +752,6 @@ function main() {
   posts.forEach(p => {
     const isFabric = p.tags?.some(t => t.toLowerCase().includes('fabric') || t.toLowerCase().includes('onelake') || t.toLowerCase().includes('dp-600'));
     if (isFabric) {
-      // Check if this post links to Fabric Hub page or architecture pillar page
       const hasConnection = linkGraph.some(e => e.from === p.slug && (e.to === 'microsoft-fabric-architecture-explained-2026' || e.to === 'microsoft-fabric'));
       if (!hasConnection) {
         missingConnections.push(p.title);
@@ -672,7 +759,7 @@ function main() {
     }
   });
 
-  // Generate polised equity dashboard report
+  // Generate polished equity dashboard report
   let report = `# SEO & Internal Link Health Dashboard
 
 Generated programmatically on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}.

@@ -3,6 +3,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
+import FabricHubClient from '@/components/blog/FabricHubClient';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export const metadata: Metadata = {
   title: 'Microsoft Fabric Hub: Architecture, Pricing & Certification Guides',
@@ -28,6 +31,10 @@ export default async function MicrosoftFabricHub() {
     post.title.toLowerCase().includes('fabric') ||
     post.title.toLowerCase().includes('onelake')
   );
+
+  // Load knowledge graph data
+  const graphFilePath = path.join(process.cwd(), 'data', 'knowledge-graph.json');
+  const graphData = JSON.parse(fs.readFileSync(graphFilePath, 'utf-8'));
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
@@ -100,45 +107,8 @@ export default async function MicrosoftFabricHub() {
 
           </div>
 
-          {/* All Related Fabric Articles */}
-          <div>
-            <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '2rem', fontFamily: 'Syne, sans-serif' }}>
-              All Fabric <span style={{ color: 'var(--accent)' }}>Articles</span>
-            </h3>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
-              {fabricPosts.map(post => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <div style={{ 
-                    background: 'var(--surface2)', 
-                    border: '1px solid var(--border)', 
-                    borderRadius: '4px', 
-                    padding: '1.5rem',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent)'}
-                  onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
-                  >
-                    <span style={{ fontSize: '0.75rem', fontFamily: 'monospace', color: 'var(--accent)', marginBottom: '0.5rem', display: 'block', textTransform: 'uppercase' }}>
-                      {post.category}
-                    </span>
-                    <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 0.75rem 0', lineHeight: 1.3, fontFamily: 'Syne, sans-serif' }}>
-                      {post.title}
-                    </h4>
-                    <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
-                      {post.excerpt}
-                    </p>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent)', marginTop: '1.5rem', display: 'block' }}>
-                      Read Article →
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          {/* Dynamic Knowledge Graph & Semantic Search Platform */}
+          <FabricHubClient initialPosts={fabricPosts as any[]} graphData={graphData} />
 
         </section>
       </div>

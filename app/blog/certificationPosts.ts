@@ -51,7 +51,7 @@ export const newCertificationPosts = [
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;"><a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-700 Certification Guide">DP-700</a> (Data Engineer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">Data Engineer, ETL Developer</td>
-        <td style="padding: 12px;">Spark notebooks, pipeline orchestration, <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> security.</td>
+        <td style="padding: 12px;">Spark notebooks, pipeline orchestration, OneLake security.</td>
       </tr>
       <tr>
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold;">DP-800 (SQL AI Developer)</td>

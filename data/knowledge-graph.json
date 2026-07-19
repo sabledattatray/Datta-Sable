@@ -1,0 +1,84 @@
+{
+  "topics": [
+    {
+      "id": "fabric-architecture",
+      "slug": "microsoft-fabric-architecture-explained-2026",
+      "title": "Microsoft Fabric Architecture",
+      "parent": null,
+      "children": ["onelake", "fabric-engines"],
+      "prerequisites": [],
+      "category": "Foundations",
+      "aliases": ["Fabric architecture", "Fabric platform", "Fabric ecosystem"]
+    },
+    {
+      "id": "onelake",
+      "slug": "microsoft-fabric-onelake-architecture-guide",
+      "title": "OneLake Virtualization",
+      "parent": "fabric-architecture",
+      "children": ["medallion", "direct-lake"],
+      "prerequisites": ["fabric-architecture"],
+      "category": "Storage",
+      "aliases": ["OneLake", "unified logical data lake", "single logical data lake", "Fabric storage"]
+    },
+    {
+      "id": "medallion",
+      "slug": "microsoft-fabric-medallion-architecture-guide",
+      "title": "Medallion Architecture",
+      "parent": "onelake",
+      "children": ["lakehouse", "warehouse"],
+      "prerequisites": ["onelake"],
+      "category": "Storage",
+      "aliases": ["Medallion Architecture", "Bronze, Silver, and Gold", "Bronze-Silver-Gold", "Medallion framework"]
+    },
+    {
+      "id": "direct-lake",
+      "slug": "power-bi-direct-lake-performance-tuning-fabric",
+      "title": "Direct Lake Mode",
+      "parent": "onelake",
+      "children": ["semantic-model"],
+      "prerequisites": ["onelake"],
+      "category": "Analytics",
+      "aliases": ["Direct Lake", "Direct Lake mode", "Direct Lake query", "Direct Lake performance"]
+    },
+    {
+      "id": "pricing",
+      "slug": "microsoft-fabric-pricing-guide-2026",
+      "title": "Fabric Sizing & Pricing",
+      "parent": "fabric-architecture",
+      "children": ["capacity"],
+      "prerequisites": ["fabric-architecture"],
+      "category": "FinOps",
+      "aliases": ["Fabric capacity", "Fabric pricing", "Capacity Units", "F-SKU", "F-SKUs"]
+    },
+    {
+      "id": "dp-600",
+      "slug": "dp-600-study-guide-2026",
+      "title": "DP-600 Certification",
+      "parent": "fabric-architecture",
+      "children": ["dp-700", "dp-800"],
+      "prerequisites": ["fabric-architecture"],
+      "category": "Careers",
+      "aliases": ["DP-600", "DP-600 exam", "DP-600 Study Guide", "Fabric Analytics Engineer certification"]
+    },
+    {
+      "id": "dp-700",
+      "slug": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "title": "DP-700 Certification",
+      "parent": "dp-600",
+      "children": [],
+      "prerequisites": ["dp-600"],
+      "category": "Careers",
+      "aliases": ["DP-700", "Fabric Data Engineer exam"]
+    },
+    {
+      "id": "dp-800",
+      "slug": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "title": "DP-800 Certification",
+      "parent": "dp-600",
+      "children": [],
+      "prerequisites": ["dp-600"],
+      "category": "Careers",
+      "aliases": ["DP-800", "Fabric Solution Architect exam"]
+    }
+  ]
+}

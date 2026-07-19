@@ -14,7 +14,14 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
   blocks: {
     focusedKeyword: "Microsoft Fabric Medallion Architecture Guide"
   },
-  content: `<!-- BREADCRUMB_START -->
+  content: `
+<!-- PREREQUISITE_START -->
+<div class="prereq-callout" style="margin: 2rem 0; padding: 1.5rem; background: rgba(201, 243, 29, 0.01); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 0 4px 4px 0;">
+  <span style="font-family: monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Recommended Prerequisite</span>
+  <p style="font-size: 0.85rem; color: var(--muted); margin: 0 0 0.75rem 0; line-height: 1.5;">To fully grasp this concept, we recommend reviewing our foundational guide first:</p>
+      <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: block; margin-top: 0.25rem;">&rarr; OneLake Virtualization</a>
+</div>
+<!-- PREREQUISITE_END --><!-- BREADCRUMB_START -->
 <div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
   <a href="/" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Home</a> &gt; 
   <a href="/blog" style="color: var(--muted); text-decoration: none; hover: text-[var(--accent)]">Blog</a> &gt; 
@@ -92,7 +99,7 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
       <p>Gold data is structured as a <strong>Star Schema</strong>, composed of Fact Tables (numerical transaction metrics) and Dimension Tables (descriptive lookup variables).</p>
       <ul>
         <li><strong>Synapse Data Warehouse:</strong> Unlike Silver which is managed via code-first Spark Lakehouses, the Gold layer is often modeled using the Synapse Data Warehouse. Here, you use standard, highly performant Serverless SQL views, stored procedures, and T-SQL queries to build dimensional star schemas.</li>
-        <li><strong>Direct Lake Power BI Semantic Models:</strong> This is Microsoft Fabric's greatest engineering feat. Power BI can read Gold Delta tables directly from OneLake in <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> mode. There is no import step, no data duplication, and no query lag. You get the performance of an in-memory import with the real-time availability of Direct Query.</li>
+        <li><strong>Direct Lake Power BI Semantic Models:</strong> This is Microsoft Fabric's greatest engineering feat. Power BI can read Gold Delta tables directly from OneLake in Direct Lake mode. There is no import step, no data duplication, and no query lag. You get the performance of an in-memory import with the real-time availability of Direct Query.</li>
       </ul>
 
       <h2>Putting it All Together: The End-to-End Fabric Workflow</h2>
@@ -133,6 +140,14 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
         <li><a href="/blog/microsoft-fabric-architectural-guide" style="color: var(--accent); text-decoration: none; font-weight: 600;">The Fabric Architect’s Manifesto: The Unofficial Microsoft Fabric Architectural Guide</a></li>
         <li><a href="/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026" style="color: var(--accent); text-decoration: none; font-weight: 600;">Why Microsoft Fabric Skills Will Dominate the Data Industry in 2026</a></li>
       </ul>
+<!-- PROGRESSION_START -->
+<div class="progression-callout" style="margin: 3rem 0; padding: 2rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px;">
+  <h4 style="font-family: Syne, sans-serif; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text); font-weight: 700;">Microsoft Fabric Curriculum progression</h4>
+  <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; line-height: 1.5;">Continue your progression through the structured topical learning path:</p>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+  </div>
+</div>
+<!-- PROGRESSION_END -->
 <!-- TOOL_START -->
 <div class="tool-callout" style="margin: 2rem 0; padding: 1.5rem; background: var(--surface2); border-left: 4px solid var(--accent); border-radius: 0 4px 4px 0;">
   <span style="font-family: monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Interactive Developer Tool</span>
