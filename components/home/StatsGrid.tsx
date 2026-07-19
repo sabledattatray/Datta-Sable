@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { BarChart3, Clock, Database, BookOpen, Zap, LucideIcon } from 'lucide-react';
+import { BarChart3, Database, BookOpen, Zap, LucideIcon } from 'lucide-react';
 
 interface Stat {
   value: number;

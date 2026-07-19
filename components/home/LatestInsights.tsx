@@ -57,7 +57,7 @@ const formatDisplayDate = (dateStr: string) => {
       }
       return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     }
-  } catch (e) {}
+  } catch {}
   return dateStr;
 };
 
