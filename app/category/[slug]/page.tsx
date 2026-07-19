@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${categoryName} Articles | Datta Sable`,
     description: `Browse all articles in the ${categoryName} category on Datta Sable. Expert guides on Microsoft Fabric, Power BI, SQL, data engineering, and AI workflows.`,
     alternates: { canonical: `https://dattasable.com/category/${slug}` },
-    robots: { index: false, follow: true },
+    robots: { index: true, follow: true },
     openGraph: {
       title: `${categoryName} Articles | Datta Sable`,
       description: `Browse all ${categoryName} articles by Datta Sable — BI Expert & Data Engineer.`,

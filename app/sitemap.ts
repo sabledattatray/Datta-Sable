@@ -136,9 +136,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticUrls,
     ...dbBlogUrls,
     ...staticBlogUrls,
-    ...dbCustomPageUrls,
     ...categoryUrls,
-    // chainUrls, templateUrls, knowledgeUrls, landingPageUrls, glossaryUrls excluded — utility/thin pages
   ];
 
   // De-duplicate by URL to prevent crawler warnings in Search Console
