@@ -88,7 +88,8 @@ export const notifySubscribersOfNewPost = async (title: string, slug: string, ex
     const subscribers = await prisma.subscriber.findMany();
     if (subscribers.length === 0) return;
 
-    const imageUrl = image ? (image.startsWith('http') ? image : `${domain}${image}`) : null;
+    const productionDomain = "https://dattasable.com";
+    const imageUrl = image ? (image.startsWith('http') ? image : `${productionDomain}${image}`) : null;
 
     const emailPromises = subscribers.map(sub => 
       transporter.sendMail({
