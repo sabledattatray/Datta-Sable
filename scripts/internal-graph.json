@@ -41,6 +41,10 @@
   },
   {
     "from": "architecting-compound-ai-systems-microsoft-fabric",
+    "to": "microsoft-fabric-architecture-explained-2026"
+  },
+  {
+    "from": "architecting-compound-ai-systems-microsoft-fabric",
     "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
@@ -309,15 +313,19 @@
   },
   {
     "from": "microsoft-fabric-architectural-guide",
-    "to": "microsoft-fabric-onelake-architecture-guide"
-  },
-  {
-    "from": "microsoft-fabric-architectural-guide",
-    "to": "microsoft-fabric-onelake-architecture-guide"
-  },
-  {
-    "from": "microsoft-fabric-architectural-guide",
     "to": "microsoft-fabric-architecture-explained-2026"
+  },
+  {
+    "from": "microsoft-fabric-architectural-guide",
+    "to": "microsoft-fabric-onelake-architecture-guide"
+  },
+  {
+    "from": "microsoft-fabric-architectural-guide",
+    "to": "microsoft-fabric-onelake-architecture-guide"
+  },
+  {
+    "from": "microsoft-fabric-architectural-guide",
+    "to": "power-bi-direct-lake-performance-tuning-fabric"
   },
   {
     "from": "microsoft-fabric-architectural-guide",
@@ -481,11 +489,7 @@
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
-    "to": "power-bi-direct-lake-performance-tuning-fabric"
-  },
-  {
-    "from": "microsoft-fabric-architecture-explained-2026",
-    "to": "microsoft-fabric-onelake-architecture-guide"
+    "to": "dp-600-study-guide-2026"
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
@@ -497,27 +501,31 @@
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
-    "to": "dp-600-study-guide-2026"
+    "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
-    "to": "dp-600-study-guide-2026"
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
+  },
+  {
+    "from": "microsoft-fabric-architecture-explained-2026",
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
     "to": "microsoft-fabric-pricing-guide-2026"
-  },
-  {
-    "from": "microsoft-fabric-architecture-explained-2026",
-    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
-  },
-  {
-    "from": "microsoft-fabric-architecture-explained-2026",
-    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
     "to": "microsoft-fabric-medallion-architecture-guide"
+  },
+  {
+    "from": "microsoft-fabric-architecture-explained-2026",
+    "to": "power-bi-direct-lake-performance-tuning-fabric"
+  },
+  {
+    "from": "microsoft-fabric-architecture-explained-2026",
+    "to": "dp-600-study-guide-2026"
   },
   {
     "from": "microsoft-fabric-architecture-explained-2026",
@@ -564,6 +572,10 @@
     "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
+    "from": "microsoft-fabric-medallion-architecture-guide",
+    "to": "power-bi-direct-lake-performance-tuning-fabric"
+  },
+  {
     "from": "microsoft-fabric-onelake-architecture-guide",
     "to": "dp-600-study-guide-2026"
   },
@@ -578,10 +590,6 @@
   {
     "from": "microsoft-fabric-onelake-architecture-guide",
     "to": "microsoft-fabric-architecture-explained-2026"
-  },
-  {
-    "from": "microsoft-fabric-onelake-architecture-guide",
-    "to": "dp-600-study-guide-2026"
   },
   {
     "from": "microsoft-fabric-onelake-architecture-guide",
@@ -694,10 +702,6 @@
   {
     "from": "microsoft-fabric-pricing-guide-2026",
     "to": "microsoft-fabric-onelake-architecture-guide"
-  },
-  {
-    "from": "microsoft-fabric-pricing-guide-2026",
-    "to": "dp-600-study-guide-2026"
   },
   {
     "from": "microsoft-fabric-pricing-guide-2026",
@@ -853,35 +857,35 @@
   },
   {
     "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-    "to": "microsoft-fabric-onelake-architecture-guide"
-  },
-  {
-    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
     "to": "power-bi-direct-lake-performance-tuning-fabric"
-  },
-  {
-    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-    "to": "dp-600-study-guide-2026"
-  },
-  {
-    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-    "to": "power-bi-direct-lake-performance-tuning-fabric"
-  },
-  {
-    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
-  },
-  {
-    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-    "to": "dp-600-study-guide-2026"
-  },
-  {
-    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
     "to": "microsoft-fabric-architecture-explained-2026"
+  },
+  {
+    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+    "to": "dp-600-study-guide-2026"
+  },
+  {
+    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
+  },
+  {
+    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+    "to": "microsoft-fabric-onelake-architecture-guide"
+  },
+  {
+    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+    "to": "dp-600-study-guide-2026"
+  },
+  {
+    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+    "to": "power-bi-direct-lake-performance-tuning-fabric"
+  },
+  {
+    "from": "why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "dp-600-study-guide-2026",
@@ -925,11 +929,11 @@
   },
   {
     "from": "dp-600-study-guide-2026",
-    "to": "microsoft-fabric-onelake-architecture-guide"
+    "to": "microsoft-fabric-architecture-explained-2026"
   },
   {
     "from": "dp-600-study-guide-2026",
-    "to": "microsoft-fabric-architecture-explained-2026"
+    "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
     "from": "dp-700-study-guide-2026",
@@ -954,10 +958,6 @@
   {
     "from": "dp-700-study-guide-2026",
     "to": "dp-600-study-guide-2026"
-  },
-  {
-    "from": "dp-700-study-guide-2026",
-    "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
     "from": "dp-800-study-guide",
@@ -1064,6 +1064,10 @@
     "to": "microsoft-fabric-architecture-explained-2026"
   },
   {
+    "from": "dp-800-career-path-opportunities",
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
+  },
+  {
     "from": "microsoft-fabric-certification-roadmap-2026",
     "to": "dp-600-study-guide-2026"
   },
@@ -1101,11 +1105,19 @@
   },
   {
     "from": "microsoft-fabric-certification-roadmap-2026",
+    "to": "dp-600-study-guide-2026"
+  },
+  {
+    "from": "microsoft-fabric-certification-roadmap-2026",
     "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "microsoft-fabric-certification-roadmap-2026",
-    "to": "dp-600-study-guide-2026"
+    "to": "microsoft-fabric-onelake-architecture-guide"
+  },
+  {
+    "from": "microsoft-fabric-certification-roadmap-2026",
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "microsoft-fabric-certification-roadmap-2026",
@@ -1153,6 +1165,10 @@
   },
   {
     "from": "microsoft-fabric-career-roadmap-2026",
+    "to": "microsoft-fabric-architecture-explained-2026"
+  },
+  {
+    "from": "microsoft-fabric-career-roadmap-2026",
     "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
@@ -1170,14 +1186,6 @@
   {
     "from": "microsoft-fabric-career-roadmap-2026",
     "to": "dp-600-study-guide-2026"
-  },
-  {
-    "from": "microsoft-fabric-career-roadmap-2026",
-    "to": "microsoft-fabric-architecture-explained-2026"
-  },
-  {
-    "from": "microsoft-fabric-career-roadmap-2026",
-    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
   },
   {
     "from": "microsoft-fabric-career-roadmap-2026",
@@ -1249,14 +1257,6 @@
   },
   {
     "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
-    "to": "microsoft-fabric-architecture-explained-2026"
-  },
-  {
-    "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
-    "to": "power-bi-direct-lake-performance-tuning-fabric"
-  },
-  {
-    "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
     "to": "power-bi-direct-lake-performance-tuning-fabric"
   },
   {
@@ -1273,7 +1273,15 @@
   },
   {
     "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+    "to": "power-bi-direct-lake-performance-tuning-fabric"
+  },
+  {
+    "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
     "to": "dp-600-study-guide-2026"
+  },
+  {
+    "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+    "to": "microsoft-fabric-architecture-explained-2026"
   },
   {
     "from": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
@@ -1317,6 +1325,10 @@
   },
   {
     "from": "free-microsoft-certifications-fabric-data-days-2026",
+    "to": "microsoft-fabric-architecture-explained-2026"
+  },
+  {
+    "from": "free-microsoft-certifications-fabric-data-days-2026",
     "to": "microsoft-fabric-onelake-architecture-guide"
   },
   {
@@ -1329,19 +1341,15 @@
   },
   {
     "from": "free-microsoft-certifications-fabric-data-days-2026",
+    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
+  },
+  {
+    "from": "free-microsoft-certifications-fabric-data-days-2026",
     "to": "power-bi-direct-lake-performance-tuning-fabric"
   },
   {
     "from": "free-microsoft-certifications-fabric-data-days-2026",
     "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
-  },
-  {
-    "from": "free-microsoft-certifications-fabric-data-days-2026",
-    "to": "dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison"
-  },
-  {
-    "from": "free-microsoft-certifications-fabric-data-days-2026",
-    "to": "microsoft-fabric-architecture-explained-2026"
   },
   {
     "from": "architecting-compound-ai-systems-microsoft-fabric",
@@ -1381,7 +1389,7 @@
   },
   {
     "from": "microsoft-fabric-medallion-architecture-guide",
-    "to": "microsoft-fabric-onelake-architecture-guide"
+    "to": "power-bi-direct-lake-performance-tuning-fabric"
   },
   {
     "from": "architecting-mtd-lmtd-time-intelligence",

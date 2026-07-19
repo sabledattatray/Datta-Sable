@@ -49,6 +49,8 @@ export const microsoftFabricPricingGuide2026Post = {
   </ul>
 </div>
 
+<img src="/images/blog/microsoft-fabric-pricing-guide-2026-f-sku-capacity-planning.webp" alt="Microsoft Fabric Pricing Guide and Capacity Sizing Chart" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 2rem 0;"/>
+
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
 <h2 id="executive-summary" style="color: var(--text); font-size: 1.75rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">1. Executive Summary</h2>
@@ -155,7 +157,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">These services had different billing APIs, different cost centers, and different utilization patterns. A FinOps team trying to answer "how much did the quarterly financial report cost us to run?" had to join cost records across six services and account for indirect costs like storage reads from Data Factory, which billed differently than storage reads from Synapse. The result was that most teams had no idea what their analytics infrastructure actually cost at a workload level.</p>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> changed this by introducing a single shared capacity pool model. You buy capacity measured in CUs. Every workload — regardless of whether it's a Spark notebook, a SQL query, a Power BI refresh, or a pipeline run — consumes from that same pool. The billing unit is the CU-second, and your monthly bill is a function of the SKU size you're running times the number of hours it runs.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Microsoft Fabric changed this by introducing a single shared capacity pool model. You buy capacity measured in CUs. Every workload — regardless of whether it's a Spark notebook, a SQL query, a Power BI refresh, or a pipeline run — consumes from that same pool. The billing unit is the CU-second, and your monthly bill is a function of the SKU size you're running times the number of hours it runs.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">3.2 Capacity Model vs Consumption Model</h3>
 
@@ -199,7 +201,7 @@ export const microsoftFabricPricingGuide2026Post = {
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--accent);">Interactive</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Power BI report loads, SQL queries (ad hoc), <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> queries, notebook cell executions triggered by a user</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Power BI report loads, SQL queries (ad hoc), Direct Lake queries, notebook cell executions triggered by a user</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Requests are queued, then either served slowly or rejected with a 429 error if severe overload</td>
         <td style="padding: 12px; color: var(--muted);">Directly visible — report loads slowly or shows error</td>
       </tr>
@@ -215,7 +217,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">4.3 The Smoothing Algorithm (Bursting)</h3>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Microsoft Fabric does not enforce your capacity limit in real-time at the millisecond level. Instead, it uses a <strong>smoothing algorithm</strong> that averages CU consumption over a rolling window — typically 24 hours for background workloads and shorter windows for interactive operations.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> does not enforce your capacity limit in real-time at the millisecond level. Instead, it uses a <strong>smoothing algorithm</strong> that averages CU consumption over a rolling window — typically 24 hours for background workloads and shorter windows for interactive operations.</p>
 
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">This means your capacity can legitimately burst above its nominal CU rate for short periods. An F8 running 8 CUs continuously can briefly absorb a 20 CU Spark job without immediately throttling, because the 24-hour smoothing window shows average utilization well below the 8 CU rate. The burst headroom depends on how much available CU "credit" has accumulated during quiet periods.</p>
 
@@ -250,7 +252,7 @@ export const microsoftFabricPricingGuide2026Post = {
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Power BI Report Load</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">0.5–2 CUs</td>
         <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--muted);">Seconds</td>
-        <td style="padding: 12px; color: var(--muted);">Direct Lake; higher for Import refresh</td>
+        <td style="padding: 12px; color: var(--muted);"><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a>; higher for Import refresh</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">Semantic Model Refresh</td>
@@ -400,7 +402,7 @@ export const microsoftFabricPricingGuide2026Post = {
 </div>
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Who should use F8:</strong> Small-to-medium companies with 1–2 data engineers and 20–40 business users. Microsoft Partners building customer PoCs. Teams migrating from Power BI Premium P1 with moderate analytical workloads.</p>
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Full Medallion Architecture, Spark notebooks processing up to 50GB datasets, 10–15 Power BI reports with scheduled refreshes, a Fabric Warehouse with concurrent SQL users, basic Mirroring from a single Azure SQL source.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><strong>What works well:</strong> Full <a href="/blog/microsoft-fabric-medallion-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Medallion architecture bronze-silver-gold framework">Medallion Architecture</a>, Spark notebooks processing up to 50GB datasets, 10–15 Power BI reports with scheduled refreshes, a Fabric Warehouse with concurrent SQL users, basic Mirroring from a single Azure SQL source.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">F16 — The Mid-Market Tier</h3>
 
@@ -570,7 +572,7 @@ export const microsoftFabricPricingGuide2026Post = {
 <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 1.5rem 0;">
   <p style="margin-bottom: 0.75rem; color: var(--text); font-weight: 600;">250 stores, 80 report users, 3 data engineers</p>
   <ul style="line-height: 1.8; padding-left: 1.5rem; color: var(--muted); margin-bottom: 0.75rem;">
-    <li>Full <a href="/blog/microsoft-fabric-medallion-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Medallion architecture bronze-silver-gold framework">Medallion Architecture</a> with 2 Spark notebooks running nightly (2 hours each), 30 Power BI reports refreshed 4x daily, 50 concurrent users at midday, hourly pipeline from ERP, 100GB storage</li>
+    <li>Full Medallion Architecture with 2 Spark notebooks running nightly (2 hours each), 30 Power BI reports refreshed 4x daily, 50 concurrent users at midday, hourly pipeline from ERP, 100GB storage</li>
   </ul>
   <p style="margin-bottom: 0.5rem; color: var(--text); font-weight: 600;">Cost: F32 Reserved (~$2,644) + Storage ($2.30) = <span style="color: var(--accent);">~$2,646/month</span></p>
   <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">Equivalent legacy cost (ADLS + Synapse + PBI Premium P1 + ADF): ~$6,500/month. Fabric saves ~60%.</p>
@@ -656,7 +658,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">7.3 Storage Planning</h3>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">OneLake storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);"><a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> storage at ~$0.023/GB/month is usually a minor cost. However, poorly managed Delta tables accumulate old Parquet files from time-travel history, ballooning storage unexpectedly. Run <code style="font-family: monospace; background: var(--surface2); padding: 0.1rem 0.4rem; border-radius: 3px;">VACUUM</code> with a 7–30 day retention window to keep storage predictable. V-Ordered Parquet files achieve 20–40% better compression than unoptimized Parquet, directly reducing storage costs.</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
@@ -675,7 +677,7 @@ export const microsoftFabricPricingGuide2026Post = {
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A mid-size bank with $8B AUM deployed Fabric as a unified risk and finance analytics platform on a single F128 capacity with 6 domains, replacing separate Teradata DW, Oracle Analytics, and managed Databricks. The FinOps team implemented full chargeback: workspace CU consumption is allocated back to business units monthly based on Capacity Metrics App data. The Risk team's heavy Spark workloads made them the largest cost center — they voluntarily moved Monte Carlo simulation jobs to 2 AM to reduce their chargeback allocation.</p>
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">8.5 Government: High-Availability Reporting</h3>
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A government statistics agency migrated national economic data reporting to Fabric with a 99.9% availability requirement. Rather than one F64, they run two F32 capacities in active-active configuration — Production Workspace on Capacity A, standby on Capacity B. If Capacity A experiences unexpected throttling, an administrator reassigns the public reporting workspace to Capacity B within minutes via the Fabric Admin Portal, without data loss (since data lives in <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a>, not in the capacity).</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">A government statistics agency migrated national economic data reporting to Fabric with a 99.9% availability requirement. Rather than one F64, they run two F32 capacities in active-active configuration — Production Workspace on Capacity A, standby on Capacity B. If Capacity A experiences unexpected throttling, an administrator reassigns the public reporting workspace to Capacity B within minutes via the Fabric Admin Portal, without data loss (since data lives in OneLake, not in the capacity).</p>
 
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
 
@@ -1101,7 +1103,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Certifications</h3>
 
-<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The <a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Analytics Engineer exam preparation">DP-600</a> exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
+<p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q36: Is Fabric capacity planning covered in the DP-600 exam?</strong><br/>Yes. The DP-600 exam covers workspace governance, capacity settings, and deployment pipelines as part of the "Plan and Implement Data Analytics Environments" domain (10–15% of the exam). See our <a href="/blog/dp-600-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-600 Study Guide 2026</a> for complete exam preparation.</p>
 
 <p style="margin-bottom: 1rem; line-height: 1.7; color: var(--muted);"><strong>Q37: Is capacity optimization covered in the DP-700 exam?</strong><br/>Yes. The <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Data Engineer certification details">DP-700</a> exam covers the Capacity Metrics App, Spark cluster optimization, and pipeline performance tuning as part of the "Monitor and Optimize Solutions" domain (15–20% of the exam). See our <a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 Study Guide 2026</a> for detailed coverage.</p>
 
@@ -1256,6 +1258,8 @@ export const microsoftFabricPricingGuide2026Post = {
   ]
 }
 </script>
+
+<div style="display: none;">Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing Microsoft Fabric Pricing</div>
 <!-- CTA_START -->
 <div class="auto-cta-box" style="margin-top: 3rem; padding: 2rem; border: 1px solid var(--accent); background: rgba(201, 243, 29, 0.02); border-radius: 4px; text-align: center;">
   <h4 style="font-family: Syne, sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text);">Want to become a Microsoft Fabric Architect?</h4>

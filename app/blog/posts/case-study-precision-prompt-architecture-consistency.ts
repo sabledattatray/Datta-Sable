@@ -51,7 +51,7 @@ export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
       <p>The legacy pipeline had a JSON parsing failure rate of **5.4%**. Every failed query required either automated retries—which doubled the API token costs—or manual routing to human operators, creating a severe bottleneck in fulfillment rates.</p>
  
       <h2 id="architecture-migration" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">3. The Migration Solution: Enforcing Structural Constraints</h2>
-      <p>To eliminate conversational drift and enforce absolute formatting boundaries, we migrated the extraction pipeline to **Precision Prompt Architecture™**. This framework structures the system context and variables into distinct XML boundaries, treating prompts as compiled code interfaces rather than loose prose. In addition, we introduced few-shot example blocks demonstrating the exact schema requirements and integrated a lightweight TypeScript validation layer with an **Error Healing Loop** to automatically heal parsing issues at runtime.</p>
+      <p>To eliminate conversational drift and enforce absolute formatting boundaries, we migrated the extraction pipeline to **Precision <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a> Architecture™**. This framework structures the system context and variables into distinct XML boundaries, treating prompts as compiled code interfaces rather than loose prose. In addition, we introduced few-shot example blocks demonstrating the exact schema requirements and integrated a lightweight TypeScript validation layer with an **Error Healing Loop** to automatically heal parsing issues at runtime.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">4. TypeScript Runtime Wrapper & Error Healing Loops</h2>
       <p>The production TypeScript module wraps the LLM API client, parses the response, and uses **Zod** to validate schema conformance. If a validation error is detected (such as a missing field or incorrect enum type), the module catches the Zod error logs, appends them to a structured fallback prompt, and resubmits the query to the LLM to "heal" its output:</p>
@@ -177,7 +177,7 @@ def evaluate_prompt_version(client, test_dataset, prompt_compiler_func) -> dict:
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--text);">GPT-4o</td>
-              <td style="padding: 12px; border-right: 1px solid var(--border);">Precision <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a></td>
+              <td style="padding: 12px; border-right: 1px solid var(--border);">Precision Prompt</td>
               <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">99.8%</td>
               <td style="padding: 12px; border-right: 1px solid var(--border); color: var(--text); font-weight: 600;">210ms</td>
               <td style="padding: 12px; color: var(--text); font-weight: 600;">0.2%</td>

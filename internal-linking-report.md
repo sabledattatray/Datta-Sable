@@ -1,16 +1,16 @@
 # SEO & Internal Link Health Dashboard
 
-Generated programmatically on 19/7/2026 at 10:21:13 pm.
+Generated programmatically on 19/7/2026 at 10:24:29 pm.
 
 ## 📊 SEO Health Summary
 | Metric | Value | Status |
 | :--- | :---: | :---: |
 | **Total Articles** | 91 | Healthy |
-| **Total Internal Links** | 359 | Highly Connected |
-| **Average Links per Article** | 3.95 | Optimized |
+| **Total Internal Links** | 361 | Highly Connected |
+| **Average Links per Article** | 3.97 | Optimized |
 | **Orphan Pages** | 35 | Action Needed |
 | **Broken Links** | 0 | Passed |
-| **Top Authority Page** | `DP-600 vs DP-700 vs DP-800: Which Microsoft Fabric Certification Should You Choose?` (Inbound: 38) | Maximum Equity |
+| **Top Authority Page** | `DP-600 vs DP-700 vs DP-800: Which Microsoft Fabric Certification Should You Choose?` (Inbound: 39) | Maximum Equity |
 | **Lowest Authority Page** | `The Convergence of Generative AI and Business Intelligence: Beyond Predictive Analytics` (Inbound: 0) | Needs Expansion |
 | **Average Click Depth** | 2.92 | Excellent (<3) |
 | **Topical Clusters** | 3 (Fabric, Tools, AI) | Structured |
@@ -44,7 +44,7 @@ Generated programmatically on 19/7/2026 at 10:21:13 pm.
 | [Case Study: Achieving 99.8% Output Consistency via Surgical Prompt Architecture™](file:///d:/Datta Sable/dattasable/app/blog/posts/case-study-surgical-prompt-architecture-consistency.ts) | 3 | 2 | 2 | Unreachable | Healthy |
 | [Case Study: Automating 400+ Manual MIS Hours for Global Logistics Stakeholders](file:///d:/Datta Sable/dattasable/app/blog/posts/case-study-workflow-automation-roi.ts) | 0 | 2 | 0 | Unreachable | 🚨 ORPHAN |
 | [ChatGPT for Developers: I Replaced 12 Developer Tools for 30 Days](file:///d:/Datta Sable/dattasable/app/blog/posts/chatgpt-for-developers-i-replaced-12-developer-tools-for-30-days.ts) | 0 | 2 | 0 | Unreachable | 🚨 ORPHAN |
-| [Context Compression™: The Engineering Guide to Information Density](file:///d:/Datta Sable/dattasable/app/blog/posts/context-compression-framework-benchmarks.ts) | 0 | 2 | 3 | Unreachable | 🚨 ORPHAN |
+| [Context Compression™: The Engineering Guide to Information Density](file:///d:/Datta Sable/dattasable/app/blog/posts/context-compression-framework-benchmarks.ts) | 0 | 2 | 4 | Unreachable | 🚨 ORPHAN |
 | [Hardening the Data Vault: Security Protocols for Enterprise BI Infrastructure](file:///d:/Datta Sable/dattasable/app/blog/posts/cybersecurity-bi-data-vault-hardening.ts) | 5 | 7 | 0 | 2 | Healthy |
 | [7 UI/UX Principles for High-Stakes Executive Dashboards](file:///d:/Datta Sable/dattasable/app/blog/posts/dashboard-ux-principles.ts) | 2 | 2 | 0 | 5 | ⚠️ Weak Authority |
 | [Data Democratization: Balancing Access with Security in 2026](file:///d:/Datta Sable/dattasable/app/blog/posts/data-democratization-risk.ts) | 2 | 2 | 1 | Unreachable | ⚠️ Weak Authority |
@@ -60,11 +60,11 @@ Generated programmatically on 19/7/2026 at 10:21:13 pm.
 | [The Architect’s Dilemma: Mastering Autonomous Intelligence and the Evolution of Agentic Workflows in 2026](file:///d:/Datta Sable/dattasable/app/blog/posts/mastering-autonomous-ai-agents-workflows-2026.ts) | 3 | 2 | 6 | 3 | Healthy |
 | [Digital Localization: Mastering Marathi Input on Windows 10/11](file:///d:/Datta Sable/dattasable/app/blog/posts/mastering-marathi-typing-windows.ts) | 2 | 2 | 0 | Unreachable | ⚠️ Weak Authority |
 | [Mastering the ](file:///d:/Datta Sable/dattasable/app/blog/posts/mastering-surgical-ui-dashboard-engineering.ts) | 2 | 2 | 0 | Unreachable | ⚠️ Weak Authority |
-| [The Fabric Architect’s Manifesto: The Unofficial Microsoft Fabric Architectural Guide](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-architectural-guide.ts) | 9 | 8 | 6 | 2 | Healthy |
-| [Microsoft Fabric Architecture Explained: The Complete 2026 Guide](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-architecture-explained-2026.ts) | 32 | 49 | 12 | 1 | Healthy |
+| [The Fabric Architect’s Manifesto: The Unofficial Microsoft Fabric Architectural Guide](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-architectural-guide.ts) | 9 | 9 | 7 | 2 | Healthy |
+| [Microsoft Fabric Architecture Explained: The Complete 2026 Guide](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-architecture-explained-2026.ts) | 33 | 49 | 12 | 1 | Healthy |
 | [Microsoft Fabric Medallion Architecture Guide: Ingesting Bronze, Silver, and Gold Tiers](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-medallion-architecture-guide.ts) | 17 | 6 | 4 | 2 | Healthy |
-| [OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-onelake-architecture-guide.ts) | 38 | 10 | 8 | 2 | Healthy |
-| [Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-pricing-guide-2026.ts) | 10 | 25 | 12 | 2 | Healthy |
+| [OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-onelake-architecture-guide.ts) | 37 | 9 | 7 | 2 | Healthy |
+| [Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing](file:///d:/Datta Sable/dattasable/app/blog/posts/microsoft-fabric-pricing-guide-2026.ts) | 10 | 24 | 11 | 2 | Healthy |
 | [The 2026 Modern Data Stack: Orchestrating Intelligence at Scale](file:///d:/Datta Sable/dattasable/app/blog/posts/modern-bi-stack-2026.ts) | 2 | 3 | 2 | 2 | ⚠️ Weak Authority |
 | [Natural Language Query: Is \](file:///d:/Datta Sable/dattasable/app/blog/posts/natural-language-query-engines.ts) | 2 | 2 | 0 | 3 | ⚠️ Weak Authority |
 | [The Performance Manifesto: Architecting the Post-SPA Web with Next.js 15 and React 19](file:///d:/Datta Sable/dattasable/app/blog/posts/nextjs-15-react-19-performance-manifesto-2026.ts) | 2 | 2 | 0 | Unreachable | ⚠️ Weak Authority |
@@ -78,16 +78,16 @@ Generated programmatically on 19/7/2026 at 10:21:13 pm.
 | [Telecom Analytics: Optimizing Postpaid Collection Workflows](file:///d:/Datta Sable/dattasable/app/blog/posts/telecom-collection-optimization-strategies.ts) | 4 | 2 | 4 | Unreachable | Healthy |
 | [The Surgical Cockpit: Why I Built a Standalone BI Lab in Next.js](file:///d:/Datta Sable/dattasable/app/blog/posts/the-surgical-cockpit-bi-ux-design.ts) | 2 | 2 | 0 | 5 | ⚠️ Weak Authority |
 | [Why Microsoft Fabric Skills Will Dominate the Data Industry in 2026](file:///d:/Datta Sable/dattasable/app/blog/posts/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026.ts) | 3 | 17 | 10 | 3 | Healthy |
-| [DP-600 Study Guide 2026: Complete Microsoft Fabric Analytics Engineer Exam Preparation](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 31 | 12 | 6 | 2 | Healthy |
-| [DP-700 Study Guide 2026: Complete Microsoft Fabric Data Engineer Certification Preparation](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 14 | 7 | 5 | 2 | Healthy |
-| [The Ultimate DP-800 Study Guide 2026: How to Pass Microsoft](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 12 | 6 | 3 | 2 | Healthy |
+| [DP-600 Study Guide 2026: Complete Microsoft Fabric Analytics Engineer Exam Preparation](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 29 | 12 | 6 | 2 | Healthy |
+| [DP-700 Study Guide 2026: Complete Microsoft Fabric Data Engineer Certification Preparation](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 14 | 6 | 4 | 2 | Healthy |
+| [The Ultimate DP-800 Study Guide 2026: How to Pass Microsoft](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 12 | 6 | 4 | 2 | Healthy |
 | [DP-600 Exam Questions & Scenarios: Pass Microsoft Fabric Analytics Engineer Exam](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 1 | 9 | 7 | 3 | ⚠️ Weak Authority |
 | [DP-700 vs DP-203: Which Data Engineering Certification Should You Earn?](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 2 | 9 | 7 | 3 | ⚠️ Weak Authority |
-| [DP-800 Career Path: Opportunities for SQL AI Developers](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 2 | 2 | 2 | 3 | ⚠️ Weak Authority |
-| [Microsoft Fabric Certification Roadmap 2026: Plan Your Learning Path](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 5 | 12 | 6 | 2 | Healthy |
+| [DP-800 Career Path: Opportunities for SQL AI Developers](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 2 | 3 | 3 | 3 | ⚠️ Weak Authority |
+| [Microsoft Fabric Certification Roadmap 2026: Plan Your Learning Path](file:///d:/Datta Sable/dattasable/app/blog/certificationPosts.ts) | 5 | 14 | 8 | 2 | Healthy |
 | [DP-600 Fabric Analytics Engineer Study Companion Notebook – Lakehouse, Warehouse, Direct Lake & Semantic Models](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 0 | 0 | 0 | Unreachable | 🚨 ORPHAN |
-| [Microsoft Fabric Career Roadmap 2026: Analytics Engineer vs Data Engineer vs BI Developer vs AI Developer](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 5 | 19 | 12 | 2 | Healthy |
-| [DP-600 vs DP-700 vs DP-800: Which Microsoft Fabric Certification Should You Choose?](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 38 | 23 | 9 | 2 | Healthy |
+| [Microsoft Fabric Career Roadmap 2026: Analytics Engineer vs Data Engineer vs BI Developer vs AI Developer](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 5 | 18 | 11 | 2 | Healthy |
+| [DP-600 vs DP-700 vs DP-800: Which Microsoft Fabric Certification Should You Choose?](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 39 | 23 | 9 | 2 | Healthy |
 | [Free Microsoft Fabric Certification Voucher 2026: Complete Guide to DP-600, DP-700 & DP-800 (With Proof)](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 5 | 16 | 10 | 3 | Healthy |
 | [Hosting Next.js on Vercel behind Cloudflare: The Ultimate Zero-Dollar Production Stack](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 0 | 0 | 0 | Unreachable | 🚨 ORPHAN |
 | [Beyond the Screen: How AI Agents Are Replacing Apps in 2026](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 0 | 0 | 1 | Unreachable | 🚨 ORPHAN |
@@ -117,6 +117,6 @@ Generated programmatically on 19/7/2026 at 10:21:13 pm.
 | [Precision Marketing: Using Customer Data Platforms (CDP) for Hyper-Personalized Growth](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 0 | 0 | 0 | Unreachable | 🚨 ORPHAN |
 | [The Sovereign Consumer: Architecting First-Party Data Ecosystems in the Age of Consent](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 1 | 0 | 0 | Unreachable | ⚠️ Weak Authority |
 | [The Data-Driven Alpha: Engineering Financial Sovereignty through Python and BI in 2026](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 0 | 0 | 0 | Unreachable | 🚨 ORPHAN |
-| [Advanced Power BI Direct Lake Performance Tuning & Troubleshooting in Microsoft Fabric](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 27 | 4 | 4 | 2 | Healthy |
+| [Advanced Power BI Direct Lake Performance Tuning & Troubleshooting in Microsoft Fabric](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 30 | 4 | 4 | 2 | Healthy |
 | [Architecting Production-Grade Multi-Agent AI Systems: State Management, Orchestration & Reliability](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 1 | 0 | 2 | 4 | ⚠️ Weak Authority |
 | [SQL Server Columnstore Indexes: Architectural Guide & Performance Optimization Patterns](file:///d:/Datta Sable/dattasable/app/blog/data.ts) | 0 | 0 | 0 | Unreachable | 🚨 ORPHAN |

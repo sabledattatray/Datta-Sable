@@ -24,9 +24,9 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
 <!-- BREADCRUMB_END -->
 <p>Open any tutorial on <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Architecture Guide">Microsoft Fabric</a>, and you will immediately be bombarded with technical walkthroughs. You will learn how to build an ingestion pipeline, spin up a Spark notebook, construct an enterprise data warehouse, and model data inside Power BI.</p>
 
-      <p>But if you learn Microsoft Fabric this way, you are missing the forest for the trees.</p>
+      <p>But if you learn <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> this way, you are missing the forest for the trees.</p>
 
-      <p><a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> is not merely a collection of standalone software-as-a-service (SaaS) tools. It is a highly cohesive ecosystem designed to solve the modern enterprise’s data fragmentation problem. Learning the individual interfaces of Data Factory, Synapse Data Engineering, and Synapse Data Science without a unifying framework is like memorizing the controls of a fighter jet without learning aerodynamic theory. You might get the engine to start, but you won't know how to navigate the skies.</p>
+      <p>Microsoft Fabric is not merely a collection of standalone software-as-a-service (SaaS) tools. It is a highly cohesive ecosystem designed to solve the modern enterprise’s data fragmentation problem. Learning the individual interfaces of Data Factory, Synapse Data Engineering, and Synapse Data Science without a unifying framework is like memorizing the controls of a fighter jet without learning aerodynamic theory. You might get the engine to start, but you won't know how to navigate the skies.</p>
 
       <p>The missing organizing principle that binds the entire Fabric ecosystem together is the <strong>Medallion Architecture</strong> (also known as the Bronze, Silver, and Gold data layers).</p>
 
@@ -92,7 +92,7 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
       <p>Gold data is structured as a <strong>Star Schema</strong>, composed of Fact Tables (numerical transaction metrics) and Dimension Tables (descriptive lookup variables).</p>
       <ul>
         <li><strong>Synapse Data Warehouse:</strong> Unlike Silver which is managed via code-first Spark Lakehouses, the Gold layer is often modeled using the Synapse Data Warehouse. Here, you use standard, highly performant Serverless SQL views, stored procedures, and T-SQL queries to build dimensional star schemas.</li>
-        <li><strong>Direct Lake Power BI Semantic Models:</strong> This is Microsoft Fabric's greatest engineering feat. Power BI can read Gold Delta tables directly from OneLake in Direct Lake mode. There is no import step, no data duplication, and no query lag. You get the performance of an in-memory import with the real-time availability of Direct Query.</li>
+        <li><strong>Direct Lake Power BI Semantic Models:</strong> This is Microsoft Fabric's greatest engineering feat. Power BI can read Gold Delta tables directly from OneLake in <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> mode. There is no import step, no data duplication, and no query lag. You get the performance of an in-memory import with the real-time availability of Direct Query.</li>
       </ul>
 
       <h2>Putting it All Together: The End-to-End Fabric Workflow</h2>
