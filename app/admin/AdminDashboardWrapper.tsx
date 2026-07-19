@@ -44,6 +44,9 @@ const navItems = [
     category: 'Core',
     links: [
       { name: 'Dashboard', href: '/admin', icon: LayoutDashboard, exact: true, badge: null },
+      { name: 'SEO Intelligence', href: '/admin/seo', icon: TrendingUp, exact: false },
+      { name: 'Knowledge Graph', href: '/admin/knowledge', icon: Zap, exact: false },
+      { name: 'Fabric Master', href: '/admin/fabric', icon: Layers, exact: false },
     ],
   },
   {
