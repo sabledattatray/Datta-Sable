@@ -38,10 +38,10 @@ export const surgicalPromptArchitectureFrameworkPost = {
       </div>
  
       <h2 id="understanding-core" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">1. The Anatomy of a Structured System Prompt</h2>
-      <p>Traditional conversational prompts lack clear boundaries, leading to model drift and variable formatting. Surgical Prompt Architecture™ establishes strict partitions: system role, instruction blocks, metadata variables, examples, and output schemas. Each partition is enclosed in XML tags, allowing the model's attention mechanism to index instructions accurately.</p>
+      <p>Traditional conversational prompts lack clear boundaries, leading to model drift and variable formatting. Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">Prompt</a> Architecture™ establishes strict partitions: system role, instruction blocks, metadata variables, examples, and output schemas. Each partition is enclosed in XML tags, allowing the model's attention mechanism to index instructions accurately.</p>
  
       <h2 id="implementation-blueprint" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">2. Building a Surgical Prompt Compiler in TypeScript</h2>
-      <p>Below is a TypeScript class that dynamically compiles values into a structured Surgical <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> template:</p>
+      <p>Below is a TypeScript class that dynamically compiles values into a structured Surgical prompt template:</p>
       <pre style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 2rem 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); line-height: 1.5;">class SurgicalPrompt {
   constructor(private instructions: string, private schema: string) {}
 

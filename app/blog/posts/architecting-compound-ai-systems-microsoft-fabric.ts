@@ -97,7 +97,7 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
       <p>Before any compute-heavy LLM routing occurs, the incoming query hits a <strong>Semantic Cache</strong>. Using vector similarity matching against previously answered queries, the system checks if an identical or highly similar question was resolved recently. If a match is found (e.g., >0.95 cosine similarity), the cached response is returned in sub-50ms, bypassing the LLM entirely.</p>
 
       <h3>Step 2: Intent Classification & Query Routing</h3>
-      <p>If the cache misses, the query is passed to a lightweight, highly tuned Router LLM (or a specialized classifier). The router evaluates the syntax and intent of the <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> to determine the execution path:</p>
+      <p>If the cache misses, the query is passed to a lightweight, highly tuned Router LLM (or a specialized classifier). The router evaluates the syntax and intent of the prompt to determine the execution path:</p>
       <ul>
         <li><strong>Path A (Unstructured Vector Search):</strong> For questions like "What is our internal policy on remote server provisioning?" the router directs the query to <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake Architecture Explained">OneLake</a> Vector Search.</li>
         <li><strong>Path B (Structured Relational SQL):</strong> For questions like "What was the total invoice volume for Client X last month?" the router bypasses vector search and generates a deterministic T-SQL query executed against the Synapse Warehouse.</li>
@@ -105,7 +105,7 @@ export const architectingCompoundAiSystemsMicrosoftFabricPost = {
       </ul>
 
       <h3>Step 3: Context Curation & Reranking</h3>
-      <p>Once raw data is retrieved from OneLake or Synapse SQL, it enters the <strong>Reranking Node</strong>. Naive retrievers often return 20 chunks of data, many of which contain irrelevant noise. We pass these chunks through a Cross-Encoder reranking model to score their exact relevance to the prompt, keeping only the top 5 highest-fidelity chunks. This prevents "Lost in the Middle" syndrome and drastically reduces token costs.</p>
+      <p>Once raw data is retrieved from <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> or Synapse SQL, it enters the <strong>Reranking Node</strong>. Naive retrievers often return 20 chunks of data, many of which contain irrelevant noise. We pass these chunks through a Cross-Encoder reranking model to score their exact relevance to the prompt, keeping only the top 5 highest-fidelity chunks. This prevents "Lost in the Middle" syndrome and drastically reduces token costs.</p>
 
       <h3>Step 4: Synthesizer & Deterministic Guardrail</h3>
       <p>Finally, the curated context and the user prompt are sent to the Synthesizer LLM. The prompt enforces strict structural constraints: the model is forbidden from using external pre-trained knowledge and must provide explicit, bracketed citations linking every claim back to the source OneLake table or document ID. A secondary Guardrail script audits the output string for hallucinated values before releasing it to the user interface.</p>
@@ -270,7 +270,7 @@ print(f"Query B routed to: {decision_b.datasource}") # Output: vector_search</co
 
       <p>Because our structured data and vector embeddings live inside OneLake Delta tables, we configure <strong>Row-Level Security (RLS)</strong> and <strong>Object-Level Security (OLS)</strong> directly inside the Synapse Data Warehouse and Lakehouse SQL endpoints. When our LangGraph Python agent executes a T-SQL query or a vector scan, it passes the Azure Active Directory (Entra ID) token of the calling user. The Fabric compute engine intercepts the query and automatically strips out any rows or documents the user is not explicitly authorized to view.</p>
 
-      <p>Furthermore, Microsoft Fabric’s native <strong>Purview Lineage</strong> tracking provides an unalterable audit trail, showing exactly which <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> tables, Spark jobs, and API endpoints contributed to a specific AI-generated dashboard insight.</p>
+      <p>Furthermore, Microsoft Fabric’s native <strong>Purview Lineage</strong> tracking provides an unalterable audit trail, showing exactly which OneLake tables, Spark jobs, and API endpoints contributed to a specific AI-generated dashboard insight.</p>
 
       <h2>The Business ROI of Compound AI Systems</h2>
       <p>Architecting a Compound AI System requires a higher initial engineering investment than spinning up a naive RAG script. However, the long-term Return on Investment (ROI) and Total Cost of Ownership (TCO) metrics are overwhelmingly positive.</p>

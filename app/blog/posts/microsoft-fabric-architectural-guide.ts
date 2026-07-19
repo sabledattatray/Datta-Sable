@@ -33,15 +33,15 @@ export const microsoftFabricArchitecturalGuidePost = {
       <p>This is the unofficial <strong>Microsoft Fabric architectural guide</strong>. We will introduce the core concepts step-by-step and then dive deep into the production realities that separate junior developers from enterprise data architects.</p>
 
       <h2>Step 1: Introducing Microsoft Fabric to the Enterprise</h2>
-      <p>At its simplest, <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> is a Software-as-a-Service (SaaS) consolidation of data engineering, data warehousing, data science, real-time analytics, and business intelligence.</p>
+      <p>At its simplest, Microsoft Fabric is a Software-as-a-Service (SaaS) consolidation of data engineering, data warehousing, data science, real-time analytics, and business intelligence.</p>
 
       <p>Instead of provisioning separate Azure resources (like Synapse Analytics, Azure Data Factory, and Azure Databricks), configuring networking peerings, and managing complex credential chains, Fabric wraps all these capabilities inside a single workspace.</p>
 
       <p>The Three Pillars of Fabric:</p>
       <ul>
         <li><strong>OneLake (Unified Storage):</strong> A single logical lakehouse for the entire organization. Just like OneDrive represents one drive for all your files, <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake Architecture Explained">OneLake</a> holds all your organization's structured tables and unstructured documents.</li>
-        <li><strong>Dedicated Computing Engines:</strong> Instead of spinning up persistent virtual machines, Fabric lets you query <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> data using different serverless engines: <strong>Synapse Spark</strong> (for Python/Scala developers), <strong>Synapse SQL</strong> (for relational database administrators), and <strong>Eventhouse</strong> (for real-time streaming).</li>
-        <li><strong>Direct Lake Mode:</strong> A revolutionary new connection type in Power BI that reads data directly from OneLake Parquet files without requiring data refresh or importing copy files.</li>
+        <li><strong>Dedicated Computing Engines:</strong> Instead of spinning up persistent virtual machines, Fabric lets you query OneLake data using different serverless engines: <strong>Synapse Spark</strong> (for Python/Scala developers), <strong>Synapse SQL</strong> (for relational database administrators), and <strong>Eventhouse</strong> (for real-time streaming).</li>
+        <li><strong>Direct Lake Mode:</strong> A revolutionary new connection type in Power BI that reads data directly from <a href="/blog/microsoft-fabric-onelake-architecture-guide" class="autolink" style="color: var(--accent); text-decoration: underline;" title="OneLake data storage layout">OneLake</a> Parquet files without requiring data refresh or importing copy files.</li>
       </ul>
 
       <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
@@ -66,14 +66,14 @@ export const microsoftFabricArchitecturalGuidePost = {
       </div>
 
       <h2>Step 2: The Direct Lake Deep Dive (And the Fallback Trap)</h2>
-      <p>The headline feature of Microsoft Fabric is <strong>Direct Lake mode</strong>.</p>
+      <p>The headline feature of <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> is <strong>Direct Lake mode</strong>.</p>
 
       <p>Historically, Power BI had two main modes: <strong>Import</strong> (ultra-fast performance, but requires scheduling data refreshes and duplicating data into memory) and <strong>DirectQuery</strong> (reads data directly from the source SQL database in real-time, but suffers from terrible dashboard query lag).</p>
 
       <p><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake Explained">Direct Lake</a> merges these two worlds. It bypasses the relational database layer completely. When a user interacts with a report, the Power BI AS (Analysis Services) engine pages columns of the Delta Parquet files from OneLake directly into RAM, loading data on demand.</p>
 
       <h3>The Direct Lake Fallback Trap</h3>
-      <p>What Microsoft documentation glosses over is <strong>Direct Lake mode fallback</strong>. If your semantic model hits specific resource constraints, Power BI silently switches from <a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> to DirectQuery mode, degrading report performance by orders of magnitude.</p>
+      <p>What Microsoft documentation glosses over is <strong>Direct Lake mode fallback</strong>. If your semantic model hits specific resource constraints, Power BI silently switches from Direct Lake to DirectQuery mode, degrading report performance by orders of magnitude.</p>
 
       <p>Factors causing fallback include:</p>
       <ul>

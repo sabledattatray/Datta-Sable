@@ -181,7 +181,7 @@ export const whyMicrosoftFabricSkillsWillDominateTheDataIndustryIn2026Post = {
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 12px; border-right: 1px solid var(--border); font-weight: bold; color: var(--accent);"><a href="/blog/dp-600-study-guide-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="DP-600 Study Guide">DP-600</a> (Analytics Engineer)</td>
         <td style="padding: 12px; border-right: 1px solid var(--border);">Power BI Developers, Analysts, SQL Pros</td>
-        <td style="padding: 12px; border-right: 1px solid var(--border);"><a href="/blog/power-bi-direct-lake-performance-tuning-fabric" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Direct Lake performance tuning guide">Direct Lake</a> models, Star Schema design, complex DAX, XMLA endpoints, Fabric workspace Git integration.</td>
+        <td style="padding: 12px; border-right: 1px solid var(--border);">Direct Lake models, Star Schema design, complex DAX, XMLA endpoints, Fabric workspace Git integration.</td>
         <td style="padding: 12px;">Validates the transition from simple desktop reporting to enterprise-grade semantic modeling and SaaS administration.</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
@@ -258,7 +258,7 @@ export const whyMicrosoftFabricSkillsWillDominateTheDataIndustryIn2026Post = {
 
 <h2 id="architecture-flow" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Visualizing the OneLake Architecture Flow</h2>
 
-<p>To succeed in certifications like DP-600 and <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Data Engineer certification details">DP-700</a>, you must understand the data flow within Fabric. The architecture relies on OneLake acting as the single source of truth, with specialized engines running downstream analytics queries without copying files. For a complete technical deep-dive into OneLake's architecture — including Delta Lake foundations, V-Order, Shortcuts, Mirroring, Direct Lake, security, and migration paths — see our comprehensive <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake Architecture Guide</a>:</p>
+<p>To succeed in certifications like DP-600 and DP-700, you must understand the data flow within Fabric. The architecture relies on OneLake acting as the single source of truth, with specialized engines running downstream analytics queries without copying files. For a complete technical deep-dive into OneLake's architecture — including Delta Lake foundations, V-Order, Shortcuts, Mirroring, Direct Lake, security, and migration paths — see our comprehensive <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake Architecture Guide</a>:</p>
 
 <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin: 2rem 0; overflow-x: auto;">
   <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.85rem; line-height: 1.4; white-space: pre;">
@@ -330,7 +330,7 @@ graph TD
 
 <div style="margin-bottom: 2rem;">
   <h3 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q4: Can I study for the DP-600 and DP-700 at the same time?</h3>
-  <p>There is about a 30% overlap in topics (such as OneLake, workspace security, Data Factory pipelines, and basic SQL Endpoint usage). However, the DP-600 requires deep DAX and semantic modeling knowledge, while the DP-700 requires Spark notebook optimization and big data configurations. It is recommended to master one before moving to the other.</p>
+  <p>There is about a 30% overlap in topics (such as OneLake, workspace security, Data Factory pipelines, and basic SQL Endpoint usage). However, the DP-600 requires deep DAX and semantic modeling knowledge, while the <a href="/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Fabric Data Engineer certification details">DP-700</a> requires Spark notebook optimization and big data configurations. It is recommended to master one before moving to the other.</p>
 </div>
 
 

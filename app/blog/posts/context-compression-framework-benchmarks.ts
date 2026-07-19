@@ -96,7 +96,7 @@ export const contextCompressionFrameworkBenchmarksPost = {
       <h2 id="best-practices-ops" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">7. Production Best Practices</h2>
       <p>When implementing these methods in live environments, make sure your team adheres to the following checklist:</p>
       <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; line-height: 1.7; color: var(--muted);">
-        <li><strong>Prune</strong> common headers, footers, and compliance boilerplate during data ingestion.</li><li><strong>Filter</strong> retrieved context blocks based on query keyword matches.</li><li><strong>Set</strong> <a href="/tools/ai-prompt-generator" class="autolink" style="color: var(--accent); text-decoration: underline;" title="prompt optimization utility">prompt</a> caching limits on static instruction templates.</li><li><strong>Regularly</strong> audit context usage patterns to detect token waste.</li>
+        <li><strong>Prune</strong> common headers, footers, and compliance boilerplate during data ingestion.</li><li><strong>Filter</strong> retrieved context blocks based on query keyword matches.</li><li><strong>Set</strong> prompt caching limits on static instruction templates.</li><li><strong>Regularly</strong> audit context usage patterns to detect token waste.</li>
       </ul>
  
       <h2 id="expert-view" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text);">8. Architectural Insight</h2>
