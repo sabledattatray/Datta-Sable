@@ -85,16 +85,36 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
 
 export const notifySubscribersOfNewPost = async (title: string, slug: string, excerpt: string, image?: string | null) => {
   try {
-    const subscribers = await prisma.subscriber.findMany();
-    if (subscribers.length === 0) return;
+    // 1. Fetch all newsletter subscribers
+    const subscribers = await prisma.subscriber.findMany({
+      select: { email: true }
+    });
+
+    // 2. Fetch all registered users
+    const users = await prisma.user.findMany({
+      where: { email: { not: null } },
+      select: { email: true }
+    });
+
+    // 3. Combine and de-duplicate emails
+    const emailSet = new Set<string>();
+    subscribers.forEach(sub => emailSet.add(sub.email.trim().toLowerCase()));
+    users.forEach(user => {
+      if (user.email) {
+        emailSet.add(user.email.trim().toLowerCase());
+      }
+    });
+
+    const emails = Array.from(emailSet);
+    if (emails.length === 0) return;
 
     const productionDomain = "https://dattasable.com";
     const imageUrl = image ? (image.startsWith('http') ? image : `${productionDomain}${image}`) : null;
 
-    const emailPromises = subscribers.map(sub => 
+    const emailPromises = emails.map(email => 
       transporter.sendMail({
         from: `"Datta Sable" <${process.env.EMAIL_FROM || "contact@dattasable.com"}>`,
-        to: sub.email,
+        to: email,
         subject: `New Article: ${title} 📣`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; background-color: #000; color: #fff; border-radius: 10px; border: 1px solid #1a1a1a;">
