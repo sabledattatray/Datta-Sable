@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
+import { notifySubscribersOfNewPost } from '@/lib/mail';
 
 export async function GET() {
   try {
@@ -113,6 +114,12 @@ export async function POST(req: Request) {
         blocks: blocks || null,
       },
     });
+
+    if (post.published) {
+      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '').catch(err => {
+        console.error('Failed to notify subscribers of new post:', err);
+      });
+    }
 
     return NextResponse.json(post);
   } catch (error) {

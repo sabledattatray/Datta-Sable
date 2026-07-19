@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { prisma } from "./prisma";
 
 const domain = process.env.NEXTAUTH_URL || "http://localhost:3000";
 
@@ -79,4 +80,42 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
       </div>
     `,
   });
+};
+
+export const notifySubscribersOfNewPost = async (title: string, slug: string, excerpt: string) => {
+  try {
+    const subscribers = await prisma.subscriber.findMany();
+    if (subscribers.length === 0) return;
+
+    const emailPromises = subscribers.map(sub => 
+      transporter.sendMail({
+        from: `"Datta Sable" <${process.env.EMAIL_FROM || "contact@dattasable.com"}>`,
+        to: sub.email,
+        subject: `New Article: ${title} 📣`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; background-color: #000; color: #fff; border-radius: 10px; border: 1px solid #1a1a1a;">
+            <span style="font-family: monospace; font-size: 0.75rem; color: #c9f31d; text-transform: uppercase; letter-spacing: 0.2em;">Fresh off the Press</span>
+            <h2 style="color: #fff; margin-top: 10px; margin-bottom: 20px; font-size: 1.6rem;">${title}</h2>
+            
+            <p style="color: #ccc; font-size: 1rem; line-height: 1.6; margin-bottom: 25px;">
+              ${excerpt || "A new deep-dive technical article has just been published on dattasable.com. Click below to read the full guide."}
+            </p>
+
+            <div style="text-align: center; margin: 35px 0;">
+              <a href="${domain}/blog/${slug}" style="background-color: #c9f31d; color: #000; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Read the Full Article &rarr;</a>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #222; margin: 30px 0;">
+            <p style="font-size: 11px; color: #666; text-align: center;">
+              You received this email because you subscribed to the newsletter on dattasable.com. Unsubscribe at any time.
+            </p>
+          </div>
+        `,
+      })
+    );
+
+    await Promise.all(emailPromises);
+  } catch (err) {
+    console.error("Failed to notify subscribers:", err);
+  }
 };

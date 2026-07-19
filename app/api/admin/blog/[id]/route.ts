@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
+import { notifySubscribersOfNewPost } from '@/lib/mail';
 
 export async function GET(
   req: Request,
@@ -53,10 +54,20 @@ export async function PUT(
       updateData.readTime = Number(updateData.readTime) || 3;
     }
 
+    const prevPost = await prisma.post.findUnique({
+      where: { id },
+    });
+
     const post = await prisma.post.update({
       where: { id },
       data: updateData,
     });
+
+    if (post.published && (!prevPost || !prevPost.published)) {
+      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '').catch(err => {
+        console.error('Failed to notify subscribers on post update publish:', err);
+      });
+    }
 
     return NextResponse.json(post);
   } catch (error) {
