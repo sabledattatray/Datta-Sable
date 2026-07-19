@@ -85,16 +85,11 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
 
 export const notifySubscribersOfNewPost = async (title: string, slug: string, excerpt: string, image?: string | null) => {
   try {
-    // 1. Fetch all newsletter subscribers
-    const subscribers = await prisma.subscriber.findMany({
-      select: { email: true }
-    });
+    // 1. Fetch all newsletter subscribers via Raw SQL to bypass IDE Prisma Client caching issues
+    const subscribers = (await prisma.$queryRaw`SELECT email FROM "Subscriber"`) as { email: string }[];
 
-    // 2. Fetch all registered users
-    const users = await prisma.user.findMany({
-      where: { email: { not: null } },
-      select: { email: true }
-    });
+    // 2. Fetch all registered users via Raw SQL
+    const users = (await prisma.$queryRaw`SELECT email FROM "User" WHERE email IS NOT NULL`) as { email: string }[];
 
     // 3. Combine and de-duplicate emails
     const emailSet = new Set<string>();
