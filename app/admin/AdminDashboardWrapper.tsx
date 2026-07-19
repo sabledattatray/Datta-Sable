@@ -120,6 +120,7 @@ const navItems = [
         submenu: [
           { name: 'Pages', href: '/admin/pages', exact: false },
           { name: 'Blog', href: '/admin/blog', exact: false },
+          { name: 'Users & Subscribers', href: '/admin/users', exact: false },
           { name: 'Media Library', href: '/admin/cms/media', exact: false },
           { name: 'Projects', href: '/admin/projects', exact: false },
           { name: 'Services', href: '/admin/services', exact: false },

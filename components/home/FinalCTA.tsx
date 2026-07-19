@@ -7,11 +7,22 @@ export default function FinalCTA() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setSubscribed(true);
-      setEmail('');
+      try {
+        const response = await fetch('/api/newsletter/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        if (response.ok) {
+          setSubscribed(true);
+          setEmail('');
+        }
+      } catch (err) {
+        console.error('Subscription error:', err);
+      }
     }
   };
 

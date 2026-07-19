@@ -1,110 +1,62 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  
-  // Security check: Only allow ADMINs to see the user list
-  if (!session || (session.user as any).role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
   try {
     const users = await prisma.user.findMany({
       include: {
-        accounts: {
-          select: {
-            provider: true
-          }
-        }
+        accounts: true
       },
       orderBy: {
-        // Show newest users first
-        id: 'desc'
+        createdAt: 'desc'
       }
     });
 
-    // Format the data for the frontend table
-    const formattedUsers = users.map(user => ({
-      id: user.id,
-      name: user.name || 'Anonymous',
-      email: user.email || 'N/A',
-      avatar: user.image || '',
-      role: user.role,
-      // Identify login method
-      provider: user.accounts.length > 0 ? user.accounts[0].provider : 'credentials',
-      status: 'online', // Placeholder for now
-      department: 'N/A',
-      phone: 'N/A',
-      location: 'N/A',
-      createdAt: user.createdAt,
-      lastLoginAt: user.lastLoginAt,
-      emailVerified: user.emailVerified,
-    }));
+    const subscribers = await prisma.subscriber.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
 
-    return NextResponse.json(formattedUsers);
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      users: users.map(u => ({
+        id: u.id,
+        name: u.name || 'Anonymous',
+        email: u.email,
+        image: u.image,
+        role: u.role,
+        createdAt: u.createdAt,
+        lastLoginAt: u.lastLoginAt,
+        provider: u.accounts.length > 0 ? u.accounts[0].provider : 'local'
+      })),
+      subscribers
+    });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function DELETE(request: Request) {
-  const session = await getServerSession(authOptions);
-  
-  if (!session || (session.user as any).role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+export async function DELETE(req: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const { type, id } = await req.json();
 
-    if (!id) {
-      return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+    if (!id || !type) {
+      return NextResponse.json({ success: false, error: 'Missing parameters.' }, { status: 400 });
     }
 
-    await prisma.user.delete({
-      where: { id },
-    });
+    if (type === 'subscriber') {
+      await prisma.subscriber.delete({ where: { id } });
+    } else if (type === 'user') {
+      await prisma.user.delete({ where: { id } });
+    } else {
+      return NextResponse.json({ success: false, error: 'Invalid delete target type.' }, { status: 400 });
+    }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Error deleting user:', error);
-    return NextResponse.json({ error: 'Failed to delete user' }, { status: 500 });
-  }
-}
-
-export async function PATCH(request: Request) {
-  const session = await getServerSession(authOptions);
-  
-  if (!session || (session.user as any).role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  try {
-    const { id, role, emailVerified } = await request.json();
-
-    if (!id) {
-      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
-    }
-
-    const updateData: any = {};
-    if (role) updateData.role = role;
-    if (emailVerified !== undefined) {
-      updateData.emailVerified = emailVerified ? new Date() : null;
-    }
-
-    const updatedUser = await prisma.user.update({
-      where: { id },
-      data: updateData,
-    });
-
-    return NextResponse.json(updatedUser);
-  } catch (error) {
-    console.error('Error updating user:', error);
-    return NextResponse.json({ error: 'Failed to update user' }, { status: 500 });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
