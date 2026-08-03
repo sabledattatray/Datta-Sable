@@ -755,284 +755,284 @@ ORDER BY step_index;
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
 
 <h2 id="section18">18. Frequently Asked Questions (FAQ)</h2>
-<div class="faq-section" style="display: flex; flex-col; gap: 1.5rem;">
+<div class="faq-section" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
   
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">1. What is the difference between Microsoft Fabric Warehouse and a Lakehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">1. What is the difference between Microsoft Fabric Warehouse and a Lakehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse uses a SQL-centric engine (Polaris) that supports full T-SQL DDL and DML operations. It is designed for structured tables, schema enforcement, and multi-table transactions. A Lakehouse is Spark-centric, designed to support Python, Scala, and SQL, and can store unstructured files (like raw PDFs, CSVs, and JSONs) alongside structured Delta tables.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">2. Does Fabric Warehouse support primary and foreign key constraints?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">2. Does Fabric Warehouse support primary and foreign key constraints?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse allows you to define primary keys, foreign keys, and unique constraints. However, **these constraints are not enforced** by the query engine during data writes. You must validate data integrity in your ETL pipelines (e.g., using Spark or Dataflows) before loading it into the warehouse.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">3. What is Direct Lake mode in Power BI?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">3. What is Direct Lake mode in Power BI?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Direct Lake mode allows Power BI to query Delta Parquet files directly from OneLake without importing the data into the Power BI service or running direct queries against the database engine. This provides the speed of Import mode with the real-time data access of DirectQuery mode.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">4. Can I write data to a Warehouse using PySpark?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">4. Can I write data to a Warehouse using PySpark?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       You cannot write data directly to a Warehouse using PySpark notebooks. You must write data using T-SQL commands. However, you can write data to a Lakehouse using Spark, and then read that data inside the Warehouse using OneLake shortcuts.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">5. How does Fabric Warehouse handle query caching?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">5. How does Fabric Warehouse handle query caching?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse caches query results in memory. If a query is run and the underlying data has not changed, the results are returned directly from cache. Additionally, the engine caches active Parquet files on fast local SSDs to speed up subsequent scans.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">6. What is the Polaris engine?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">6. What is the Polaris engine?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Polaris is a serverless, distributed SQL query processor built by Microsoft. It is designed to run queries against data lakes using stateless compute nodes, scaling resources up and down based on the query complexity.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">7. Does Fabric Warehouse support stored procedures?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">7. Does Fabric Warehouse support stored procedures?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes, Fabric Warehouse supports T-SQL stored procedures, user-defined functions (UDFs), and views. This makes it easier to migrate existing database logic from SQL Server or Synapse Dedicated Pools.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">8. Can I use indexes in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">8. Can I use indexes in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       No. Fabric Warehouse does not support traditional indexes (like clustered or non-clustered indexes). Instead, it uses columnar storage, metadata pruning, and V-Order sorting to optimize query performance.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">9. What is V-Order sorting?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">9. What is V-Order sorting?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       V-Order is a Microsoft sorting optimization applied to Parquet files. It sorts data to enable faster reads by Power BI and SQL query engines, reducing query latencies.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">10. How is Fabric Warehouse billed?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">10. How is Fabric Warehouse billed?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse compute usage is billed against your shared workspace capacity (F-SKUs). Storage is billed separately based on the volume of data stored in OneLake (measured in TB per month).
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">11. What is capacity smoothing in Fabric?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">11. What is capacity smoothing in Fabric?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Smoothing is a Fabric capacity management feature. It spreads short spikes in compute usage over a longer window (e.g., 24 hours), preventing query throttling during peak activity times.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">12. Does Fabric Warehouse support Row-Level Security (RLS)?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">12. Does Fabric Warehouse support Row-Level Security (RLS)?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes. Fabric Warehouse supports Row-Level Security using security functions and policies. This allows you to restrict data access based on the user's login credentials.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">13. Does Fabric Warehouse support Column-Level Security (CLS)?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">13. Does Fabric Warehouse support Column-Level Security (CLS)?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes. You can configure Column-Level Security using SQL grant permissions, restricting access to sensitive columns for specific users or roles.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">14. What are OneLake shortcuts?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">14. What are OneLake shortcuts?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       OneLake shortcuts are virtual links to external data sources (like Amazon S3 or ADLS Gen2). They make external files visible in OneLake without copying or moving the data.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">15. What are the prerequisites for the DP-600 exam?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">15. What are the prerequisites for the DP-600 exam?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       There are no formal prerequisites for the DP-600 exam, but candidates should have experience with Power BI, T-SQL, and basic data engineering concepts. You can read our <a href="/blog/dp-600-fabric-analytics-engineer-study-companion-notebook" style="color: var(--accent); text-decoration: underline;">DP-600 study companion guide</a> for exam preparation.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">16. What does the DP-700 exam cover?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">16. What does the DP-700 exam cover?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       The DP-700 exam focuses on implementing data engineering solutions in Microsoft Fabric, including OneLake data integration, Spark optimization, and Warehouse architecture.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">17. How do I monitor query execution in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">17. How do I monitor query execution in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       You can monitor query execution using Dynamic Management Views (DMVs) like <code>sys.dm_exec_requests</code> and <code>sys.dm_exec_request_steps</code> to identify performance bottlenecks.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">18. Can I migrate Synapse Dedicated SQL Pools to Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">18. Can I migrate Synapse Dedicated SQL Pools to Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes. You can migrate Dedicated Pools to Fabric Warehouse by exporting your database schemas, refactoring DDL scripts, and using the <code>COPY INTO</code> command to load staged data files.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">19. What is metadata pruning?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">19. What is metadata pruning?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Metadata pruning is a query optimization technique. The query engine reads file-level metadata (like min/max column values) in Delta logs to skip scanning irrelevant data files, reducing disk I/O.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">20. What is a Default Semantic Model?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">20. What is a Default Semantic Model?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       The Default Semantic Model is a Power BI dataset generated automatically by Fabric for each Warehouse. It updates in real-time as schemas change, allowing Direct Lake access to database tables.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">21. How do I optimize a fragmented table in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">21. How do I optimize a fragmented table in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       You can optimize fragmented tables by rewriting them using <code>CTAS</code> (Create Table As Select). This consolidates small files and applies V-Order sorting to the table data.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">22. What is the default file format in OneLake?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">22. What is the default file format in OneLake?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       The default file format in OneLake is Delta Parquet, an open storage format that supports columnar data compression and ACID transactions.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">23. Does Fabric Warehouse support cross-database queries?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">23. Does Fabric Warehouse support cross-database queries?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes, you can run cross-database queries between Warehouses and Lakehouses within the same Fabric workspace using standard three-part names (e.g., <code>DatabaseName.SchemaName.TableName</code>).
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">24. Can I use dbt with Microsoft Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">24. Can I use dbt with Microsoft Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes, you can use dbt (Data Build Tool) with Fabric Warehouse using the Microsoft Fabric adapter (<code>dbt-fabric</code>), allowing you to manage database transformations and tests using SQL.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">25. What is the limit of database size in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">25. What is the limit of database size in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse storage scales dynamically within OneLake. There is no hard limit on database size, and you are billed based on the total TB of data stored.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">26. What happens during a Fabric capacity outage or throttling?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">26. What happens during a Fabric capacity outage or throttling?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       If your capacity exceeds its limit, Fabric will throttle your workspace. Queries will execute more slowly or fail until capacity consumption drops below the threshold.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">27. Can I configure auto-pause in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">27. Can I configure auto-pause in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Because Fabric Warehouse compute is serverless, you do not need to configure auto-pause. Compute resources are automatically spun down when no queries are active.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">28. What SQL Server features are not supported in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">28. What SQL Server features are not supported in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse does not support features like database triggers, XML columns, full-text indexes, custom filegroups, and clustered index creation.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">29. How do I secure a Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">29. How do I secure a Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       You secure a Fabric Warehouse using workspace roles (Admin, Member, Contributor, Viewer) combined with database-level SQL permissions (GRANT/DENY), RLS, and CLS.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">30. What is the difference between DirectQuery and Direct Lake?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">30. What is the difference between DirectQuery and Direct Lake?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       DirectQuery sends SQL queries to the database engine for execution, which can be slow for large datasets. Direct Lake reads Delta Parquet files directly from OneLake storage, bypassing the database engine for faster query speeds.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">31. How does Fabric handle schema drift?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">31. How does Fabric handle schema drift?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Fabric Warehouse supports schema evolution. If you add columns to a table, the Delta log updates the metadata structure, allowing queries to read the new schema.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">32. What is the Microsoft Fabric Capacity Metrics app?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">32. What is the Microsoft Fabric Capacity Metrics app?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       The Capacity Metrics app is a Microsoft-provided tool for workspace administrators. It displays detailed compute consumption logs, helping monitor capacity usage and identify throttling risks.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">33. Does Fabric Warehouse support Git integration?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">33. Does Fabric Warehouse support Git integration?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes, Fabric workspaces support Git integration, allowing you to track database schema definitions (DDL) and model metadata in a connected Git repository.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">34. Can I use stored procedures for ETL in Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">34. Can I use stored procedures for ETL in Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes. You can use stored procedures and views to write and execute SQL-based ETL transformations inside the Warehouse, orchestrating them via Data Factory.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">35. Can I use third-party tools to connect to Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">35. Can I use third-party tools to connect to Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes. You can connect to Fabric Warehouse using any database client that supports the TDS protocol (such as SSMS, Azure Data Studio, or DBeaver).
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">36. How does Fabric Warehouse handle concurrent queries?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">36. How does Fabric Warehouse handle concurrent queries?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       The Polaris engine queues and runs queries concurrently, using available compute resources from your workspace capacity. Smoothing helps manage query spikes without throttling.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">37. Can I mirror databases into Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">37. Can I mirror databases into Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Yes. Fabric supports Mirroring for databases like Azure SQL Database, Snowflake, and Cosmos DB, automatically syncing data changes to OneLake for access inside the Warehouse.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">38. Does Fabric Warehouse support temporal tables?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">38. Does Fabric Warehouse support temporal tables?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       No, Fabric Warehouse does not support SQL Server temporal tables. You can manage data versioning using Delta Lake's native time travel feature or custom ETL pipelines.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">39. What is Delta Lake Time Travel?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">39. What is Delta Lake Time Travel?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       Time Travel allows you to query historical versions of a table using transaction log version offsets, helping you audit data changes or roll back updates.
     </p>
   </div>
 
-  <div>
-    <h4 style="font-weight: bold; margin-bottom: 0.5rem;">40. How do I get started with Microsoft Fabric Warehouse?</h4>
-    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted);">
+  <div style="padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; transition: transform 0.2s ease;">
+    <h4 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem 0; color: var(--text); font-family: 'Syne', sans-serif;">40. How do I get started with Microsoft Fabric Warehouse?</h4>
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);">
       You can get started by creating a new Microsoft Fabric workspace, provisioning a Warehouse item, and using the <code>COPY INTO</code> command to load sample data.
     </p>
   </div>
