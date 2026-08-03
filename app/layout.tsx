@@ -65,8 +65,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
-  const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
   const headerList = await headers();
   const nonce = headerList.get('x-nonce') || undefined;
 
@@ -74,7 +72,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" suppressHydrationWarning className="dark" nonce={nonce}>
       <head>
         <meta name="color-scheme" content="light dark" />
-        <meta name="google-adsense-account" content={formattedAdsenseId} />
         {/* Critical font preloads — removes all 4 fonts from the blocking chain */}
         <link rel="preload" href="/fonts/syne-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/syne-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -200,10 +197,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             `,
           }}
         />
-        {/* AdSense & Analytics — preconnect primary, dns-prefetch secondary */}
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://ep1.adtrafficquality.google" />
+        {/* Third-Party Integrations preconnect and dns-prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>

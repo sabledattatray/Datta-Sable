@@ -16,11 +16,7 @@ export default function PerformanceOptimizer({
   googleSignInClientId,
   nonce,
 }: PerformanceOptimizerProps) {
-  const [loadAdSense, setLoadAdSense] = useState(false);
   const [loadAnalytics, setLoadAnalytics] = useState(false);
-
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4242010382827250';
-  const formattedAdsenseId = adsenseId.startsWith('ca-') ? adsenseId : `ca-${adsenseId}`;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -35,24 +31,20 @@ export default function PerformanceOptimizer({
       return;
     }
 
-    // 2. Identify all search engines, crawlers, and ad/verification bots (Googlebot, Bingbot, AdSense, etc.)
-    // They must see the scripts immediately so verification, indexing, and crawling succeed.
-    const isCrawlerOrBot = /bot|crawl|spider|slurp|google|adsense|mediapartners|adsbot|ads-bot/i.test(ua);
+    // 2. Identify all search engines, crawlers, and verification bots
+    const isCrawlerOrBot = /bot|crawl|spider|slurp|google|googletagmanager/i.test(ua);
 
     if (isCrawlerOrBot) {
-      setLoadAdSense(true);
       setLoadAnalytics(true);
       return;
     }
 
     // 3. For real human users, load scripts lazily to keep mobile interactive and fast
     const triggerLoad = () => {
-      setLoadAdSense(true);
       setLoadAnalytics(true);
     };
 
     // Load only on actual user input interactions.
-    // Excluded 'scroll' and 'mousemove' since automated bots or layout shifts can trigger them programmatically.
     const interactionEvents = ['mousedown', 'keydown', 'touchstart'];
     const handleInteraction = () => {
       triggerLoad();
@@ -69,7 +61,7 @@ export default function PerformanceOptimizer({
       window.addEventListener(event, handleInteraction, { once: true, passive: true });
     });
 
-    // Fallback timer for idle loading (only for real users - reduced to 2s to capture scroll-only/engaged users)
+    // Fallback timer for idle loading (reduced to 2s to capture scroll-only/engaged users)
     let idleId: number;
     const timer = setTimeout(() => {
       if ('requestIdleCallback' in window) {
@@ -90,16 +82,6 @@ export default function PerformanceOptimizer({
 
   return (
     <>
-      {loadAdSense && (
-        <Script
-          id="adsense-optimizer"
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${formattedAdsenseId}`}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-          nonce={nonce}
-        />
-      )}
       {loadAnalytics && (
         <>
           <Suspense fallback={null}>
