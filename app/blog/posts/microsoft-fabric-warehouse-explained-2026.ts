@@ -8,7 +8,7 @@ export const microsoftFabricWarehouseExplained2026Post = {
   readTime: 45,
   color: "var(--accent)",
   icon: "🏢",
-  image: "/images/blog/Microsoft Fabric Warehouse Guide.webp",
+  image: "/images/blog/Microsoft Fabric Warehouse Guide.png",
   tags: ["Microsoft Fabric", "Synapse Data Warehouse", "OneLake", "Data Engineering", "SQL Performance", "DP-600", "DP-700"],
   published: true,
   blocks: {
