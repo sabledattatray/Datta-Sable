@@ -45,8 +45,10 @@ import { whyMicrosoftFabricSkillsWillDominateTheDataIndustryIn2026Post } from ".
 import { microsoftFabricArchitecturalGuidePost } from "./posts/microsoft-fabric-architectural-guide";
 import { microsoftFabricMedallionArchitectureGuidePost } from "./posts/microsoft-fabric-medallion-architecture-guide";
 import { architectingCompoundAiSystemsMicrosoftFabricPost } from "./posts/architecting-compound-ai-systems-microsoft-fabric";
+import { microsoftFabricWarehouseExplained2026Post } from "./posts/microsoft-fabric-warehouse-explained-2026";
 import { newCertificationPosts } from "./certificationPosts";
 export const posts = [
+  microsoftFabricWarehouseExplained2026Post,
   microsoftFabricPricingGuide2026Post,
   microsoftFabricOneLakeArchitectureGuidePost,
   microsoftFabricArchitectureExplained2026Post,
