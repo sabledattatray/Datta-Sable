@@ -46,8 +46,10 @@ import { microsoftFabricArchitecturalGuidePost } from "./posts/microsoft-fabric-
 import { microsoftFabricMedallionArchitectureGuidePost } from "./posts/microsoft-fabric-medallion-architecture-guide";
 import { architectingCompoundAiSystemsMicrosoftFabricPost } from "./posts/architecting-compound-ai-systems-microsoft-fabric";
 import { microsoftFabricWarehouseExplained2026Post } from "./posts/microsoft-fabric-warehouse-explained-2026";
+import { microsoftFabricSecurityGuide2026Post } from "./posts/microsoft-fabric-security-guide-2026";
 import { newCertificationPosts } from "./certificationPosts";
 export const posts = [
+  microsoftFabricSecurityGuide2026Post,
   microsoftFabricWarehouseExplained2026Post,
   microsoftFabricPricingGuide2026Post,
   microsoftFabricOneLakeArchitectureGuidePost,
