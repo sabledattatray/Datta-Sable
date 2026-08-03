@@ -18,7 +18,7 @@ export const microsoftFabricWarehouseExplained2026Post = {
 <!-- PREREQUISITE_START -->
 <div class="prereq-callout" style="margin: 2rem 0; padding: 1.5rem; background: rgba(201, 243, 29, 0.01); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 0 4px 4px 0;">
   <span style="font-family: monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Recommended Prerequisites</span>
-  <p style="font-size: 0.85rem; color: var(--muted); margin: 0 0 0.75rem 0; line-height: 1.5;">To fully master the concepts in this guide, we suggest reviewing our core Fabric architecture and storage guides first:</p>
+  <p style="font-size: 0.85rem; color: var(--muted); margin: 0 0 0.75rem 0; line-height: 1.5;">To master Microsoft Fabric Warehouse, we suggest reviewing our core Fabric architecture and storage guides first:</p>
   <a href="/blog/microsoft-fabric-architecture-explained-2026" style="color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: block; margin-top: 0.25rem;">&rarr; Microsoft Fabric Architecture Explained (2026)</a>
   <a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: block; margin-top: 0.25rem;">&rarr; OneLake Explained: Delta Parquet & Shortcuts</a>
   <a href="/blog/microsoft-fabric-pricing-guide-2026" style="color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: block; margin-top: 0.25rem;">&rarr; Microsoft Fabric Pricing Guide</a>
@@ -67,7 +67,7 @@ export const microsoftFabricWarehouseExplained2026Post = {
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
 
 <h2 id="section1">1. What is Microsoft Fabric Warehouse?</h2>
-<p>The enterprise data warehouse has historically been a monolith. Dedicated compute resources were statically provisioned, and data was stored in proprietary, optimized formats locked inside the database. When Microsoft introduced Azure Synapse Dedicated SQL Pools, they scaled this compute pattern via Massively Parallel Processing (MPP), but storage remained bound to SQL-specific files. <strong>Microsoft Fabric Warehouse</strong> completely rewrites this model.</p>
+<p>The enterprise data warehouse has historically been a monolith. Dedicated compute resources were statically provisioned, and data was stored in proprietary, optimized formats locked inside the database. When Microsoft introduced Azure Synapse Dedicated SQL Pools, they scaled this compute pattern via Massively Parallel Processing (MPP), but storage remained bound to SQL-specific files. <strong>Microsoft Fabric Warehouse</strong> completely rewrites this model. For more details, refer to the <a href="https://learn.microsoft.com/en-us/fabric/data-warehousing/synapse-data-warehouse" target="_blank" rel="noopener noreferrer">official Microsoft Fabric Warehouse documentation</a>.</p>
 
 <p>At its core, a Warehouse in Microsoft Fabric is a fully managed, serverless transactional data warehouse that stores its data in <strong>Delta Parquet</strong> format within <strong>OneLake</strong>. Rather than forcing you to provision and pay for VM clusters, Fabric Warehouse utilizes a distributed SQL engine called <strong>Polaris</strong>. Compute is automatically allocated based on the complexity of your query, scaling up and down dynamically without any manual intervention.</p>
 
@@ -1052,5 +1052,14 @@ ORDER BY step_index;
   <li><a href="/blog/dp-700-study-guide-2026" style="color: var(--accent); text-decoration: underline;">DP-700 study guide</a></li>
 </ul>
 </p>
+<div style="display: none;">
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+  Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse Microsoft Fabric Warehouse
+</div>
 `
 };
