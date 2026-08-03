@@ -4,8 +4,6 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { BookOpen, Target, Zap, BarChart3, Database, BrainCircuit, ArrowRight } from 'lucide-react';
-import { getDynamicPage } from '@/lib/dynamic-page';
-import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Start Your Data Journey | BI & Analytics Knowledge Hub | Datta Sable',
@@ -26,12 +24,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://dattasable.com/start-here' },
 };
 
-export default async function StartHerePage() {
-  const dynamicPage = await getDynamicPage('start-here');
-  if (dynamicPage) {
-    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
-  }
-
+export default function StartHerePage() {
   const paths = [
     {
       title: "Data Architecture & Infrastructure",
@@ -179,7 +172,7 @@ export default async function StartHerePage() {
             ))}
           </div>
 
-          <div className="card" style={{ marginTop: '4rem', padding: '3rem', textAlign: 'center', background: 'linear-gradient(135deg, var(--surface2) 0%, transparent 100%)' }}>
+          <div className="card" style={{ marginTop: '4rem', padding: '3rem', textAlign: 'center', background: 'linear-gradient(135deg, var(--surface2) 0%, transparent 100%)', border: 'none' }}>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Need a Custom BI Roadmap?</h3>
             <p style={{ color: 'var(--muted)', maxWidth: 500, margin: '0 auto 2rem' }}>
               I help organizations architect high-performance data systems and automated analytics workflows.

@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import AboutContent from '@/components/AboutContent';
-import { getDynamicPage } from '@/lib/dynamic-page';
-import DynamicPageRenderer from '@/components/DynamicPageRenderer';
+
 
 export const metadata: Metadata = {
   title: "About Datta Sable | BI & Data Strategy Expert",
@@ -25,10 +24,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function AboutPage() {
-  const dynamicPage = await getDynamicPage('about');
-  if (dynamicPage) {
-    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
-  }
+export default function AboutPage() {
   return <AboutContent />;
 }
