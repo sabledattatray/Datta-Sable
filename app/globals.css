@@ -1281,3 +1281,12 @@ body:has(.admin-layout-root) {
 .light .blog-toc a:hover {
   color: var(--accent) !important;
 }
+
+/* Mobile responsive override for sticky controls on the blog list page */
+@media (max-width: 768px) {
+  .sticky-controls {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
