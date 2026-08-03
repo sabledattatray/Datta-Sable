@@ -8,7 +8,7 @@ export const microsoftFabricWarehouseExplained2026Post = {
   readTime: 45,
   color: "var(--accent)",
   icon: "🏢",
-  image: "/images/blog/Microsoft Fabric Warehouse Guide.png",
+  image: "/images/blog/Microsoft Fabric Warehouse Guide.webp",
   tags: ["Microsoft Fabric", "Synapse Data Warehouse", "OneLake", "Data Engineering", "SQL Performance", "DP-600", "DP-700"],
   published: true,
   blocks: {
@@ -367,6 +367,10 @@ Data written using Fabric Warehouse automatically applies V-Order sorting, which
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
 
 <h2 id="section10">10. Capacity Planning & SKU Allocation</h2>
+<div style="margin: 2.5rem 0; text-align: center;">
+  <img src="/images/blog/Microsoft Fabric Warehouse Guide.png" alt="Microsoft Fabric Warehouse Architecture and Sizing Map" style="max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-lg);" />
+  <span style="display: block; font-family: monospace; font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem;">Figure: Microsoft Fabric Warehouse Architecture & Sizing Reference Map</span>
+</div>
 <p>Microsoft Fabric billing is based on shared workspace capacity, represented by F-SKUs (Fabric Capacity Units). Let's review the available capacity tiers and their performance profiles:</p>
 
 <table style="width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; text-align: left;">
