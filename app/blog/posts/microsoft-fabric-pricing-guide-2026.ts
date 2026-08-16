@@ -615,7 +615,7 @@ export const microsoftFabricPricingGuide2026Post = {
 
 <h3 style="color: var(--text); font-size: 1.3rem; margin-top: 1.75rem; margin-bottom: 0.75rem;">7.1 The Five-Factor Sizing Framework</h3>
 
-<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Use these five factors to estimate your capacity need. Score each factor and sum to get an approximate CU target:</p>
+<p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted);">Use these five factors to estimate your capacity need. Score each factor and sum to get an approximate CU target. For a comprehensive deep dive into sizing F-SKUs and navigating Microsoft's throttling algorithms, read our dedicated guide on <a href="/blog/microsoft-fabric-capacity-sizing-guide-2026" style="color: var(--accent); text-decoration: underline;" title="Fabric capacity sizing">Fabric capacity sizing</a>:</p>
 
 <div class="overflow-x-auto my-8">
   <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--border); font-size: 0.88rem;">

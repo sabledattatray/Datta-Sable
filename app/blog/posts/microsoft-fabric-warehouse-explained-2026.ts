@@ -436,7 +436,7 @@ Data written using Fabric Warehouse automatically applies V-Order sorting, which
   </tbody>
 </table>
 
-<p>When selecting your SKU, consider your **concurrency and compute requirements**.
+<p>When selecting your SKU, consider your <a href="/blog/microsoft-fabric-capacity-sizing-guide-2026" style="color: var(--accent); text-decoration: underline;" title="Fabric capacity requirements">Fabric capacity requirements</a> around concurrency and compute workload intensity.
 Because Fabric compute is serverless, running queries can consume more Capacity Units than your base SKU provides.
 This is managed by **Smoothing**. Under this model, if a query uses 128 CUs for 10 seconds on an F64 capacity, Fabric spreads that consumption over a longer window (e.g., 20 seconds), allowing you to run spikes in workload without immediate throttling.</p>
 

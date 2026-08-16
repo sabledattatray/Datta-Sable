@@ -49,7 +49,9 @@ import { architectingCompoundAiSystemsMicrosoftFabricPost } from "./posts/archit
 import { microsoftFabricWarehouseExplained2026Post } from "./posts/microsoft-fabric-warehouse-explained-2026";
 import { microsoftFabricSecurityGuide2026Post } from "./posts/microsoft-fabric-security-guide-2026";
 import { newCertificationPosts } from "./certificationPosts";
+import { microsoftFabricCapacitySizingGuide2026Post } from "./posts/microsoft-fabric-capacity-sizing-guide-2026";
 export const posts = [
+  microsoftFabricCapacitySizingGuide2026Post,
   microsoftFabricGovernancePurviewGuide2026Post,
   microsoftFabricSecurityGuide2026Post,
   microsoftFabricWarehouseExplained2026Post,
