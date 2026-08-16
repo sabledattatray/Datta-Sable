@@ -99,6 +99,34 @@ export const microsoftFabricGovernancePurviewGuide2026Post = {
 <li><strong>Zero Trust Demands More Than SaaS Defaults</strong>: Fabric is not automatically Zero Trust. It requires explicit verification, least-privilege RBAC design, and continuous monitoring.</li>
 <li><strong>Operating Models Dictate Success</strong>: A hybrid governance model—combining centralized platform standards with federated domain ownership—typically yields the best results for enterprise data products.</li>
 </ol>
+<hr />
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#section-1-what-is-microsoft-fabric-governance">Section 1 — What is Microsoft Fabric Governance?</a></li>
+<li><a href="#section-2-microsoft-fabric-governance-architecture">Section 2 — Microsoft Fabric Governance Architecture</a></li>
+<li><a href="#section-3-microsoft-fabric-and-microsoft-purview">Section 3 — Microsoft Fabric and Microsoft Purview: How They Work Together</a></li>
+<li><a href="#section-4-onelake-governance">Section 4 — OneLake Governance</a></li>
+<li><a href="#section-5-fabric-workspace-governance">Section 5 — Fabric Workspace Governance</a></li>
+<li><a href="#section-6-domains-and-organizational-governance">Section 6 — Domains and Organizational Governance</a></li>
+<li><a href="#section-7-microsoft-fabric-rbac-and-access-control">Section 7 — Microsoft Fabric RBAC and Access Control</a></li>
+<li><a href="#section-8-designing-least-privilege-access">Section 8 — Designing Least-Privilege Access</a></li>
+<li><a href="#section-9-data-lineage-and-impact-analysis">Section 9 — Data Lineage and Impact Analysis</a></li>
+<li><a href="#section-10-data-classification-and-sensitivity">Section 10 — Data Classification and Sensitivity</a></li>
+<li><a href="#section-11-microsoft-fabric-security-architecture">Section 11 — Microsoft Fabric Security Architecture</a></li>
+<li><a href="#section-12-zero-trust-and-microsoft-fabric">Section 12 — Zero Trust and Microsoft Fabric</a></li>
+<li><a href="#section-13-development-test-and-production-governance">Section 13 — Development, Test and Production Governance</a></li>
+<li><a href="#section-14-fabric-governance-monitoring-and-auditing">Section 14 — Fabric Governance Monitoring and Auditing</a></li>
+<li><a href="#section-15-fabric-governance-operating-model">Section 15 — Fabric Governance Operating Model</a></li>
+<li><a href="#section-16-enterprise-fabric-governance-policy">Section 16 — Enterprise Fabric Governance Policy</a></li>
+<li><a href="#section-17-common-microsoft-fabric-governance-mistakes">Section 17 — Common Microsoft Fabric Governance Mistakes</a></li>
+<li><a href="#section-18-centralized-vs-federated-vs-hybrid-governance">Section 18 — Centralized vs Federated vs Hybrid Governance</a></li>
+<li><a href="#section-19-real-world-enterprise-scenario">Section 19 — Real-World Enterprise Scenario</a></li>
+<li><a href="#section-20-implementation-roadmap">Section 20 — Implementation Roadmap</a></li>
+<li><a href="#section-21-fabric-governance-maturity-model">Section 21 — Fabric Governance Maturity Model</a></li>
+<li><a href="#section-22-microsoft-fabric-governance-checklist">Section 22 — Microsoft Fabric Governance Checklist</a></li>
+<li><a href="#section-23-faq">Section 23 — FAQ</a></li>
+</ol>
+<hr />
 <h2>Section 1 — What is Microsoft Fabric Governance?</h2>
 <p>Before the introduction of Microsoft Fabric, data governance often meant managing fragmented systems. Security teams governed Azure Data Lake Storage (ADLS) via Access Control Lists (ACLs), DBAs managed SQL Server permissions, and BI managers governed Power BI workspaces. Each layer had a distinct operating model.</p>
 <p>With Microsoft Fabric, these layers collapse into a single SaaS platform. The governance conversation changes entirely because the underlying friction of integrating disparate PaaS resources is gone. However, a common mistake is assuming that a unified platform is an inherently governed platform.</p>
@@ -162,7 +190,7 @@ export const microsoftFabricGovernancePurviewGuide2026Post = {
 </tbody>
 </table>
 <hr />
-<h2>Section 2 — Microsoft Fabric Governance Architecture</h2>
+<h2 id="section-2-microsoft-fabric-governance-architecture">Section 2 — Microsoft Fabric Governance Architecture</h2>
 <figure style="margin: 2rem 0;">
   <figure style="margin: 2rem 0;">
   <img src="/images/blog/microsoft-fabric-governance-reference-architecture.webp" alt="Microsoft Fabric enterprise governance architecture" loading="lazy" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);" />
@@ -193,7 +221,7 @@ export const microsoftFabricGovernancePurviewGuide2026Post = {
 * <strong>Purpose:</strong> To visually communicate how governance controls span the entire stack from Entra ID down to the Semantic Model, all monitored by Microsoft Purview.</p>
 <p>Before designing governance controls, it is useful to understand how Fabric's underlying architecture brings OneLake, workloads, semantic models, and Power BI together. Our <a href="file:///blog/microsoft-fabric-architecture-explained-2026">Microsoft Fabric architecture</a> guide provides that foundation.</p>
 <hr />
-<h2>Section 3 — Microsoft Fabric and Microsoft Purview: How They Work Together</h2>
+<h2 id="section-3-microsoft-fabric-and-microsoft-purview">Section 3 — Microsoft Fabric and Microsoft Purview: How They Work Together</h2>
 <p><strong>Microsoft capability:</strong> Fabric provides the underlying platform capabilities described below; organizations should adapt the governance operating model to their own security, compliance, and organizational requirements. For official documentation, see <a href="https://learn.microsoft.com/en-us/fabric/governance/" style="color: var(--accent);" target="_blank">Microsoft Fabric Governance</a> and <a href="https://learn.microsoft.com/en-us/purview/" style="color: var(--accent);" target="_blank">Microsoft Purview</a>.</p>
 <figure style="margin: 2rem 0;">
   <figure style="margin: 2rem 0;">
@@ -263,7 +291,7 @@ export const microsoftFabricGovernancePurviewGuide2026Post = {
 </table>
 <p>Organizations evaluating Microsoft Fabric must realize that while Fabric provides the execution engine, Purview provides the enterprise oversight. For a robust architecture, you need both.</p>
 <hr />
-<h2>Section 4 — OneLake Governance</h2>
+<h2 id="section-4-onelake-governance">Section 4 — OneLake Governance</h2>
 <figure style="margin: 2rem 0;">
   <figure style="margin: 2rem 0;">
   <img src="/images/blog/onelake-governance-controls.webp" alt="OneLake governance controls architecture" loading="lazy" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);" />
@@ -287,7 +315,7 @@ The Sales team remains the data owner. The Marketing team is a consumer. If Sale
 Traditionally, you secured a Lakehouse via the SQL analytics endpoint or semantic models. Now, with OneLake Data Access Roles (currently expanding in capabilities), you can define RBAC policies directly at the OneLake folder/table level. This ensures that even if a user accesses the data via a Spark Notebook rather than SQL, the security policies remain intact.</p>
 <p>For a deeper understanding of how data is stored and organized in this unified layer, review our <a href="file:///blog/microsoft-fabric-onelake-architecture-guide"><a href="/blog/microsoft-fabric-onelake-architecture-guide" style="color: var(--accent); text-decoration: underline;">OneLake architecture</a></a> guide.</p>
 <hr />
-<h2>Section 5 — Fabric Workspace Governance</h2>
+<h2 id="section-5-fabric-workspace-governance">Section 5 — Fabric Workspace Governance</h2>
 <p>Workspaces are the fundamental organizational units within Microsoft Fabric. An enterprise workspace strategy dictates how these boundaries are drawn. If every data engineer and BI developer can spin up workspaces at will, you end up with hundreds of untracked assets, orphaned data, and a chaotic permissions model.</p>
 <h3>Workspace Ownership and Creation Policies</h3>
 <p>A common enterprise mistake is allowing all users to create workspaces. Instead, workspace creation should be restricted to a centralized Fabric Platform Team or designated Domain Administrators via the Fabric Admin portal. </p>
@@ -307,7 +335,7 @@ A standard naming policy makes auditing and capacity management dramatically eas
 <h3>Workspace Sprawl and Lifecycle Management</h3>
 <p>Workspace sprawl happens when short-term projects leave behind permanent, unused workspaces. Implement a workspace lifecycle policy that requires regular access reviews. The Fabric Platform Team should actively monitor for inactive workspaces (e.g., no queries or pipeline runs in 90 days) and archive or delete them to free up OneLake storage and reduce audit scope.</p>
 <hr />
-<h2>Section 6 — Domains and Organizational Governance</h2>
+<h2 id="section-6-domains-and-organizational-governance">Section 6 — Domains and Organizational Governance</h2>
 <p>While workspaces organize individual projects, <strong>Domains</strong> organize workspaces at the enterprise level. Domains allow you to group multiple workspaces under a single business unit or functional area. </p>
 <p>Examples of practical domains include:
 * Finance
@@ -330,7 +358,7 @@ A standard naming policy makes auditing and capacity management dramatically eas
 <h4>The Pragmatic Hybrid Model</h4>
 <p>For most enterprise Microsoft Fabric deployments, a hybrid model is recommended. The central Fabric Platform Team provisions capacities, manages the tenant settings, establishes security standards, and creates domains. The Domain teams operate within those domains, building data products and managing workspace access according to the central standards. This approach balances agility with security.</p>
 <hr />
-<h2>Section 7 — Microsoft Fabric RBAC and Access Control</h2>
+<h2 id="section-7-microsoft-fabric-rbac-and-access-control">Section 7 — Microsoft Fabric RBAC and Access Control</h2>
 <p><strong>Microsoft capability:</strong> Refer to the official <a href="https://learn.microsoft.com/en-us/fabric/security/workspace-roles" style="color: var(--accent);" target="_blank">Workspace Roles documentation</a> for the definitive list of permissions.</p>
 <figure style="margin: 2rem 0;">
   <img src="/images/blog/fabric-rbac-least-privilege-model.webp" alt="Fabric RBAC least privilege access control model" loading="lazy" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);" />
@@ -357,7 +385,7 @@ A standard naming policy makes auditing and capacity management dramatically eas
 * Manage group membership via Entra ID lifecycle management or IT service requests.</p>
 <p>When applicable, use Service Principals or Managed Identities to execute automated pipelines or REST API calls, ensuring that automated processes do not rely on individual user credentials that might expire or be revoked.</p>
 <hr />
-<h2>Section 8 — One Person, One Role? No: Designing Least-Privilege Access</h2>
+<h2 id="section-8-one-person-one-role-no-designing-least-privilege-access">Section 8 — One Person, One Role? No: Designing Least-Privilege Access</h2>
 <p>A critical governance concept is the principle of least privilege: users and service principals should have the absolute minimum access necessary to perform their jobs.</p>
 <p>In a Fabric environment, least privilege requires separation of duties. </p>
 <ul>
@@ -370,7 +398,7 @@ A standard naming policy makes auditing and capacity management dramatically eas
 <p>A common mistake is allowing developers to manually deploy changes to production workspaces. This violates least privilege and breaks auditability. Production deployments should be executed by deployment pipelines or CI/CD processes (via Service Principals), removing the need for developers to have write access to production data. </p>
 <p>For emergency fixes ("break-glass" scenarios), implement temporary, time-bound elevated access (e.g., using Entra Privileged Identity Management) rather than leaving permanent admin rights active.</p>
 <hr />
-<h2>Section 9 — Data Lineage and Impact Analysis</h2>
+<h2 id="section-9-data-lineage-and-impact-analysis">Section 9 — Data Lineage and Impact Analysis</h2>
 <p>When data is centralized, understanding how it flows becomes critical for compliance, incident response, and change management. Data lineage provides a map of your data's journey.</p>
 <p><em>Example Lineage Flow:</em>
 Source (On-Premises SQL) → Data Pipeline → Lakehouse (Bronze) → Spark Notebook → Lakehouse (Silver) → Warehouse (Gold) → Semantic Model → Power BI Report → Executive Dashboard.</p>
@@ -382,7 +410,7 @@ Source (On-Premises SQL) → Data Pipeline → Lakehouse (Bronze) → Spark Note
 * <strong>Documentation:</strong> Automatically mapping dependencies without relying on static architecture diagrams.</p>
 <p>While Fabric provides excellent workload-level lineage (showing how a Lakehouse connects to a Semantic Model), <strong>Microsoft Purview</strong> expands this capability. Purview can trace lineage all the way back to the operational source systems (like SAP or Salesforce) outside of Fabric, providing true enterprise-to-end data lineage.</p>
 <hr />
-<h2>Section 10 — Data Classification and Sensitivity</h2>
+<h2 id="section-10-data-classification-and-sensitivity">Section 10 — Data Classification and Sensitivity</h2>
 <p><strong>Microsoft capability:</strong> Sensitivity labels from Microsoft Purview extend automatically to Fabric. Review the <a href="https://learn.microsoft.com/en-us/fabric/governance/sensitivity-labels" style="color: var(--accent);" target="_blank">official sensitivity label documentation</a> for implementation details.</p>
 <p>Not all data is equal. A table containing public website traffic requires different governance than a table containing employee social security numbers. </p>
 <h3>Establishing a Classification Model</h3>
@@ -395,7 +423,7 @@ Source (On-Premises SQL) → Data Pipeline → Lakehouse (Bronze) → Spark Note
 <p>This is where Microsoft Purview’s integration shines. In Fabric, you can apply Sensitivity Labels (managed by Purview Information Protection) to workspaces, lakehouses, semantic models, and reports. </p>
 <p>When a BI Developer exports data from a "Highly Confidential" Power BI report to Excel, that sensitivity label travels with the Excel file. If your Purview policies restrict highly confidential files from being emailed outside the organization, the user will be blocked from sending that Excel file. This ensures that Fabric governance extends beyond the boundaries of the SaaS platform and protects the data wherever it goes.</p>
 <hr />
-<h2>Section 11 — Microsoft Fabric Security Architecture</h2>
+<h2 id="section-11-microsoft-fabric-security-architecture">Section 11 — Microsoft Fabric Security Architecture</h2>
 <p>To govern effectively, you must treat security as defense in depth. If one layer fails or is misconfigured, the underlying layers should still protect the data. A robust Microsoft Fabric security architecture consists of eight distinct layers.</p>
 <h3>Layer 1: Identity (Microsoft Entra ID)</h3>
 <p>The foundation. This layer verifies <em>who</em> is attempting to access the platform. Controls include Multi-Factor Authentication (MFA), Conditional Access policies (e.g., blocking logins from risky IP addresses), and Identity Protection.</p>
@@ -414,7 +442,7 @@ Source (On-Premises SQL) → Data Pipeline → Lakehouse (Bronze) → Spark Note
 <h3>Layer 8: Governance (Microsoft Purview)</h3>
 <p>The oversight layer. Applying sensitivity labels and Data Loss Prevention (DLP) policies to ensure that even if a user legitimately accesses data, they cannot improperly exfiltrate it.</p>
 <hr />
-<h2>Section 12 — Zero Trust and Microsoft Fabric</h2>
+<h2 id="section-12-zero-trust-and-microsoft-fabric">Section 12 — Zero Trust and Microsoft Fabric</h2>
 <p>Zero Trust is a security framework based on three principles: Verify explicitly, Use least privilege access, and Assume breach. </p>
 <p>A common enterprise misconception is that adopting a Microsoft SaaS product automatically makes your architecture "Zero Trust." <strong>Fabric is not automatically Zero Trust.</strong> It provides the tools to <em>build</em> a Zero Trust architecture, but the organization must configure the controls.</p>
 <ul>
@@ -424,7 +452,7 @@ Source (On-Premises SQL) → Data Pipeline → Lakehouse (Bronze) → Spark Note
 </ul>
 <p>For a deeper dive into securing the network layer of Fabric, review our architectural guidance on configuring Private Endpoints.</p>
 <hr />
-<h2>Section 13 — Development, Test and Production Governance</h2>
+<h2 id="section-13-development-test-and-production-governance">Section 13 — Development, Test and Production Governance</h2>
 <div style="background: var(--surface2); padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; margin: 2rem 0; overflow-x: auto;">
 <pre class="mermaid" style="background: transparent; border: none; padding: 0; font-size: 0.82rem; line-height: 1.5; white-space: pre;">
 flowchart LR
@@ -459,7 +487,7 @@ flowchart LR
 <p>The key governance control here is <strong>approval routing</strong>. Developers should not have the ability to click "Deploy to Production." Instead, promoting code from Test to Production should require a pull request review by a senior architect, and the actual deployment should ideally be handled by a Service Principal running an automated CI/CD pipeline. </p>
 <p>This process ensures that no unreviewed, unapproved code runs against production data, and if a pipeline fails, there is a documented rollback plan via Git history.</p>
 <hr />
-<h2>Section 14 — Fabric Governance Monitoring and Auditing</h2>
+<h2 id="section-14-fabric-governance-monitoring-and-auditing">Section 14 — Fabric Governance Monitoring and Auditing</h2>
 <p>A governance policy is useless if you cannot verify that people are following it. Continuous monitoring is the engine of operational governance.</p>
 <p>Fabric generates extensive audit logs that are recorded in the Microsoft 365 Unified Audit Log. These logs capture almost every activity: who created a workspace, who viewed a report, who exported data, and who changed a tenant setting.</p>
 <h3>Key Governance KPIs to Monitor</h3>
@@ -474,7 +502,7 @@ flowchart LR
 </ul>
 <p>Monitoring these KPIs requires extracting the Fabric Admin APIs and Audit Logs into a central monitoring Lakehouse to build a "Governance Dashboard."</p>
 <hr />
-<h2>Section 15 — Fabric Governance Operating Model</h2>
+<h2 id="section-15-fabric-governance-operating-model">Section 15 — Fabric Governance Operating Model</h2>
 <p>Governance also extends beyond permissions and data protection. Enterprise teams need clear ownership of capacity consumption, workload allocation, and cost accountability. For organizations sizing Fabric workloads, the <a href="/tools/fabric-capacity-calculator" style="color: var(--accent); text-decoration: underline;">Fabric Capacity Calculator</a> can be used alongside the governance model to establish capacity ownership and planning assumptions.</p>
 <p>To operationalize governance, you must define who does what. This is where a highly practical RACI (Responsible, Accountable, Consulted, Informed) model is essential. </p>
 <h3>Enterprise Governance RACI</h3>
@@ -559,7 +587,7 @@ flowchart LR
 <p><em>Note: R = Responsible (does the work), A = Accountable (owns the result), C = Consulted (provides input), I = Informed (kept in the loop).</em></p>
 <p>This operating model ensures that the Platform Team handles the infrastructure, the Governance Team handles the policies, and the Domains handle the actual data products.</p>
 <hr />
-<h2>Section 16 — Enterprise Fabric Governance Policy</h2>
+<h2 id="section-16-enterprise-fabric-governance-policy">Section 16 — Enterprise Fabric Governance Policy</h2>
 <p>Instead of writing a 100-page governance manual that no one reads, enterprises should establish a concise, practical policy framework. </p>
 <p>A practical Fabric Governance Policy should dictate:</p>
 <ol>
@@ -574,7 +602,7 @@ flowchart LR
 </ol>
 <p>Make these recommendations practical. A policy that developers can easily follow is infinitely more secure than a perfect policy that developers actively bypass.</p>
 <hr />
-<h2>Section 17 — Common Microsoft Fabric Governance Mistakes</h2>
+<h2 id="section-17-common-microsoft-fabric-governance-mistakes">Section 17 — Common Microsoft Fabric Governance Mistakes</h2>
 <p>Even with a solid architecture, organizations frequently stumble during execution. Here are the most common Fabric governance mistakes and how to avoid them.</p>
 <p><strong>1. Giving everyone Workspace Admin access</strong>
 * <strong>Problem:</strong> Developers demand Admin access because "things are breaking."
@@ -607,7 +635,7 @@ flowchart LR
 * <strong>Consequence:</strong> The team bypasses the process completely.
 * <strong>Better approach:</strong> Scale governance controls to match organizational risk and size.</p>
 <hr />
-<h2>Section 18 — Centralized vs Federated vs Hybrid Governance</h2>
+<h2 id="section-18-centralized-vs-federated-vs-hybrid-governance">Section 18 — Centralized vs Federated vs Hybrid Governance</h2>
 <p>How should your organization manage Fabric? Provide a decision framework based on your organizational structure.</p>
 <h3>Centralized Governance</h3>
 <p>The central IT team manages everything.
@@ -623,7 +651,7 @@ flowchart LR
 * <strong>The Trade-off:</strong> Requires a strong Data Governance council to maintain alignment between IT and the business domains.</p>
 <p>I strongly recommend the Hybrid model for Microsoft Fabric. It leverages Fabric's Domain feature perfectly, allowing central oversight with distributed execution.</p>
 <hr />
-<h2>Section 19 — Real-World Enterprise Scenario</h2>
+<h2 id="section-19-real-world-enterprise-scenario">Section 19 — Real-World Enterprise Scenario</h2>
 <p><em>Note: The following is a fictional reference architecture designed to illustrate governance concepts.</em></p>
 <p><strong>The Scenario:</strong> A global financial services organization is adopting Fabric. They have five major units: Finance, Sales, Operations, Risk, and Customer Analytics.</p>
 <p><strong>The Implementation:</strong>
@@ -634,7 +662,7 @@ flowchart LR
 5. <strong>Purview Integration:</strong> The Governance Team configures Purview to automatically scan the <code>Risk-PRD</code> workspaces. Any table containing customer credit scores is tagged "Highly Confidential," which triggers a DLP policy preventing the data from being exported to unmanaged devices.
 6. <strong>OneLake:</strong> The Customer Analytics team needs credit risk scores. Instead of copying the data, the Risk team provisions a OneLake shortcut for Customer Analytics, ensuring that Risk maintains absolute control over the single source of truth.</p>
 <hr />
-<h2>Section 20 — Microsoft Fabric Governance Implementation Roadmap</h2>
+<h2 id="section-20-microsoft-fabric-governance-implementation-roadmap">Section 20 — Microsoft Fabric Governance Implementation Roadmap</h2>
 <p>Do not attempt to implement every governance control on day one. A phased approach ensures adoption without halting business velocity.</p>
 <h3>Phase 1 — Foundation</h3>
 <ul>
@@ -668,7 +696,7 @@ flowchart LR
 <li>Implement cross-domain data contracts for OneLake sharing.</li>
 </ul>
 <hr />
-<h2>Section 21 — Fabric Governance Maturity Model</h2>
+<h2 id="section-21-fabric-governance-maturity-model">Section 21 — Fabric Governance Maturity Model</h2>
 <p><strong>Dattasable recommendation:</strong> The following governance model is a practical operating framework rather than an official Microsoft governance standard.</p>
 <figure style="margin: 2rem 0;">
   <figure style="margin: 2rem 0;">
@@ -717,7 +745,7 @@ flowchart LR
 * <strong>Alt text:</strong> A five-level maturity model from Ad Hoc to Enterprise, showing the progression of Microsoft Fabric governance capabilities.
 * <strong>Recommended filename:</strong> <code>fabric-governance-maturity-model.webp</code></p>
 <hr />
-<h2>Section 22 — Microsoft Fabric Governance Checklist</h2>
+<h2 id="section-22-microsoft-fabric-governance-checklist">Section 22 — Microsoft Fabric Governance Checklist</h2>
 <p><strong>Dattasable recommendation:</strong> Use this scannable checklist to audit your enterprise deployment.</p>
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem; text-align: left;">
   <thead>
@@ -779,7 +807,7 @@ flowchart LR
     </tr>
   </tbody>
 </table>
-<h2>Section 23 — FAQ</h2>
+<h2 id="section-23-faq">Section 23 — FAQ</h2>
 <p><strong>What is Microsoft Fabric governance?</strong>
 It is the framework of policies, architecture, and processes that dictate how users securely interact with data, compute, and workspaces in Fabric, ensuring trust and compliance.</p>
 <p><strong>Does Microsoft Fabric include data governance?</strong>
