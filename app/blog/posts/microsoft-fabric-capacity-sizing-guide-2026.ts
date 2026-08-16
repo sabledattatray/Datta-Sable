@@ -1,9 +1,9 @@
 export const microsoftFabricCapacitySizingGuide2026Post = {
   id: "microsoft-fabric-capacity-sizing-guide-2026",
   slug: "microsoft-fabric-capacity-sizing-guide-2026",
-  title: "Microsoft Fabric Capacity Sizing 2026: F-SKU Selection, Capacity Units, Throttling & Cost Optimization",
+  title: "Microsoft Fabric Capacity Sizing 2026: The Complete F-SKU Guide",
   category: "Architecture & BI",
-  excerpt: "How to estimate Microsoft Fabric capacity requirements, choose the right F-SKU, manage Capacity Units, prevent throttling and validate sizing with production telemetry.",
+  excerpt: "Master Microsoft Fabric capacity sizing. Learn to choose the right F-SKU, manage Capacity Units, and optimize costs with production telemetry in 2026.",
   date: "August 16, 2026",
   icon: "⚙️",
   image: "/images/blog/microsoft-fabric-capacity-sizing-guide-2026.webp",

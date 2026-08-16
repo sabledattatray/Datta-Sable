@@ -1,9 +1,9 @@
 export const microsoftFabricPricingGuide2026Post = {
   id: "microsoft-fabric-pricing-guide-2026",
   slug: "microsoft-fabric-pricing-guide-2026",
-  title: "Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing",
+  title: "Microsoft Fabric Pricing Guide 2026: F-SKUs & Cost Optimization",
   category: "Architecture & BI",
-  excerpt: "The most comprehensive Microsoft Fabric pricing guide available. Master F-SKUs, Capacity Units, cost optimization, Reserved Capacity, enterprise sizing, and FinOps governance for 2026.",
+  excerpt: "The ultimate 2026 Microsoft Fabric pricing guide. Master F-SKUs, Capacity Units, cost optimization, and FinOps governance to reduce your enterprise spend.",
   date: "July 19, 2026",
   readTime: 55,
   color: "var(--accent)",
