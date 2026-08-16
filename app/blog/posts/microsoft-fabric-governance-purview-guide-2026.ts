@@ -99,34 +99,6 @@ export const microsoftFabricGovernancePurviewGuide2026Post = {
 <li><strong>Zero Trust Demands More Than SaaS Defaults</strong>: Fabric is not automatically Zero Trust. It requires explicit verification, least-privilege RBAC design, and continuous monitoring.</li>
 <li><strong>Operating Models Dictate Success</strong>: A hybrid governance model—combining centralized platform standards with federated domain ownership—typically yields the best results for enterprise data products.</li>
 </ol>
-<hr />
-<h2>Table of Contents</h2>
-<ol>
-<li><a href="#section-1--what-is-microsoft-fabric-governance">Section 1 — What is Microsoft Fabric Governance?</a></li>
-<li><a href="#section-2--microsoft-fabric-governance-architecture">Section 2 — Microsoft Fabric Governance Architecture</a></li>
-<li><a href="#section-3--microsoft-fabric-and-microsoft-purview-how-they-work-together">Section 3 — Microsoft Fabric and Microsoft Purview: How They Work Together</a></li>
-<li><a href="#section-4--onelake-governance">Section 4 — OneLake Governance</a></li>
-<li><a href="#section-5--fabric-workspace-governance">Section 5 — Fabric Workspace Governance</a></li>
-<li><a href="#section-6--domains-and-organizational-governance">Section 6 — Domains and Organizational Governance</a></li>
-<li><a href="#section-7--microsoft-fabric-rbac-and-access-control">Section 7 — Microsoft Fabric RBAC and Access Control</a></li>
-<li><a href="#section-8--designing-least-privilege-access">Section 8 — Designing Least-Privilege Access</a></li>
-<li><a href="#section-9--data-lineage-and-impact-analysis">Section 9 — Data Lineage and Impact Analysis</a></li>
-<li><a href="#section-10--data-classification-and-sensitivity">Section 10 — Data Classification and Sensitivity</a></li>
-<li><a href="#section-11--microsoft-fabric-security-architecture">Section 11 — Microsoft Fabric Security Architecture</a></li>
-<li><a href="#section-12--zero-trust-and-microsoft-fabric">Section 12 — Zero Trust and Microsoft Fabric</a></li>
-<li><a href="#section-13--development-test-and-production-governance">Section 13 — Development, Test and Production Governance</a></li>
-<li><a href="#section-14--fabric-governance-monitoring-and-auditing">Section 14 — Fabric Governance Monitoring and Auditing</a></li>
-<li><a href="#section-15--fabric-governance-operating-model">Section 15 — Fabric Governance Operating Model</a></li>
-<li><a href="#section-16--enterprise-fabric-governance-policy">Section 16 — Enterprise Fabric Governance Policy</a></li>
-<li><a href="#section-17--common-microsoft-fabric-governance-mistakes">Section 17 — Common Microsoft Fabric Governance Mistakes</a></li>
-<li><a href="#section-18--centralized-vs-federated-vs-hybrid-governance">Section 18 — Centralized vs Federated vs Hybrid Governance</a></li>
-<li><a href="#section-19--real-world-enterprise-scenario">Section 19 — Real-World Enterprise Scenario</a></li>
-<li><a href="#section-20--implementation-roadmap">Section 20 — Implementation Roadmap</a></li>
-<li><a href="#section-21--fabric-governance-maturity-model">Section 21 — Fabric Governance Maturity Model</a></li>
-<li><a href="#section-22--microsoft-fabric-governance-checklist">Section 22 — Microsoft Fabric Governance Checklist</a></li>
-<li><a href="#section-23--faq">Section 23 — FAQ</a></li>
-</ol>
-<hr />
 <h2>Section 1 — What is Microsoft Fabric Governance?</h2>
 <p>Before the introduction of Microsoft Fabric, data governance often meant managing fragmented systems. Security teams governed Azure Data Lake Storage (ADLS) via Access Control Lists (ACLs), DBAs managed SQL Server permissions, and BI managers governed Power BI workspaces. Each layer had a distinct operating model.</p>
 <p>With Microsoft Fabric, these layers collapse into a single SaaS platform. The governance conversation changes entirely because the underlying friction of integrating disparate PaaS resources is gone. However, a common mistake is assuming that a unified platform is an inherently governed platform.</p>
