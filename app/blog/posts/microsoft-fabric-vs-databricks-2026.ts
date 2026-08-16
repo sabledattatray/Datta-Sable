@@ -290,27 +290,83 @@ graph TD
 
 <h2 id="faq" style="color: var(--text); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">14. Massive 25-Question FAQ</h2>
 <div style="margin-top: 1.5rem;">
+  <!-- Section 1: Architecture & Integration -->
+  <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem;">Architecture & Integration</h3>
   <div style="margin-bottom: 1.5rem;">
-    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q1: Can Fabric read Unity Catalog tables?</h4>
-    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes. Fabric supports creating Shortcuts directly to ADLS locations governed by Unity Catalog.</p>
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q1: Can Microsoft Fabric natively read Databricks Unity Catalog tables?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes. Microsoft Fabric supports creating Shortcuts directly to ADLS Gen2 locations that are governed by Unity Catalog. Additionally, Databricks and Fabric both support Delta Sharing, which allows for secure, cross-platform, and cross-cloud data exchange without duplicating files.</p>
   </div>
   <div style="margin-bottom: 1.5rem;">
     <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q2: Will Databricks Liquid Clustering break Fabric Direct Lake?</h4>
-    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">No, but because Databricks writes these files, they do not have Microsoft's proprietary V-Order optimization. Direct Lake will still work and read the files directly, but you may see a slight performance degradation.</p>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">No, Direct Lake will not break, but it requires architectural nuance. Fabric supports reading Delta tables with Liquid Clustering enabled. However, because Databricks writes these files (rather than the Fabric Spark engine), they do not have Microsoft's proprietary V-Order optimization applied. Direct Lake will still work and read the files directly into memory, but you may see a 10-20% performance degradation in Power BI rendering compared to native V-Ordered tables written by Fabric engines.</p>
   </div>
   <div style="margin-bottom: 1.5rem;">
-    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q3: Which certification should I pursue?</h4>
-    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">For Databricks, the <strong>Data Engineer Professional</strong>. For Fabric, the <strong>DP-600 (Analytics Engineer)</strong>.</p>
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q3: How do we handle Row-Level Security (RLS) in the Hybrid Architecture?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">If you use Shortcuts to bring Databricks tables into Fabric, the Unity Catalog RLS policies are <em>not</em> automatically carried over to Power BI. You must redefine the RLS policies in the Power BI Semantic Model, or implement the security at the Fabric SQL Endpoint layer using Fabric's native security roles.</p>
+  </div>
+
+  <!-- Section 2: Certifications & Careers -->
+  <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem;">Certifications & Careers</h3>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q4: Which certification should data engineers pursue in 2026?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">For Databricks specialists, the <strong>Databricks Certified Data Engineer Professional</strong> remains the gold standard, focusing heavily on Spark internals, DLT, and streaming. For Microsoft Fabric and Power BI professionals, you should aim for the <strong>DP-600 (Implementing Analytics Solutions Using Microsoft Fabric)</strong>, which grants the "Fabric Analytics Engineer Associate" title.</p>
   </div>
   <div style="margin-bottom: 1.5rem;">
-    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q4: Is Fabric replacing Azure Synapse Analytics?</h4>
-    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes. All new feature development is focused entirely on Microsoft Fabric.</p>
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q5: Are Databricks developers going to lose their jobs to Fabric?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Absolutely not. The demand for deep Spark optimization, Python programming, ML Ops, and complex data pipeline orchestration is higher than ever. Fabric abstracts the infrastructure, but the actual logic of transforming petabytes of data still requires elite data engineering skills. The tools change, but the discipline remains.</p>
+  </div>
+
+  <!-- Section 3: Microsoft Ecosystem & Synapse -->
+  <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem;">Microsoft Ecosystem & Synapse</h3>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q6: Is Microsoft Fabric officially replacing Azure Synapse Analytics?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes. While Microsoft will support Azure Synapse for years to come for existing enterprise customers, all new feature development, Copilot integration, and strategic investments are focused entirely on Microsoft Fabric. Synapse Dedicated SQL Pools are conceptually replaced by the Fabric SQL Warehouse. Organizations should actively begin planning their migration paths from Synapse to Fabric using OneLake.</p>
   </div>
   <div style="margin-bottom: 1.5rem;">
-    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q5: Can I use Databricks if my company requires a strict Microsoft-only stack?</h4>
-    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes! Azure Databricks is a first-party Microsoft Azure service, integrated natively with Entra ID.</p>
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q7: Can I use Databricks if my company requires a strict "Microsoft-only" tech stack?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes! Azure Databricks is a first-party Microsoft Azure service. It is billed directly through your Azure Enterprise Agreement (EA), integrates natively with Azure Active Directory (Entra ID), and complies with all Microsoft Azure security frameworks. It is as much a part of the Azure ecosystem as Fabric.</p>
   </div>
-  <!-- Note: We have summarized the key FAQs for brevity, but the architecture covers hundreds of scenarios. -->
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q8: How does Azure Data Factory (ADF) fit into this?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Azure Data Factory is the underlying engine for Fabric Data Pipelines. If you are currently using ADF, you will feel completely at home in Fabric. However, if you use Databricks, you might prefer Databricks Workflows or Delta Live Tables for native orchestration, bypassing ADF entirely.</p>
+  </div>
+
+  <!-- Section 4: Performance & Compute -->
+  <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem;">Performance & Compute</h3>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q9: Is Databricks Photon really that much faster than Fabric Spark?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">For highly complex, multi-terabyte joins and deep string manipulations, yes. Photon's C++ vectorized engine bypasses the JVM entirely, resulting in massive performance gains for heavy ETL. For smaller, everyday transformations, the difference is negligible, and Fabric's instant-on serverless startup time often makes the end-to-end developer experience feel faster.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q10: Can I schedule Spark jobs to run every 1 minute in Fabric?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">While theoretically possible, scheduling batch Spark jobs at a 1-minute frequency is an anti-pattern on both platforms. For sub-minute latency, you should use Databricks Structured Streaming or Fabric Real-Time Intelligence (KQL Eventstreams).</p>
+  </div>
+
+  <!-- Section 5: Pricing & Licensing -->
+  <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem;">Pricing & Licensing</h3>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q11: Does Fabric require Power BI Premium?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Fabric operates on F-SKUs. If you purchase an F64 capacity or higher, it includes Power BI Premium capabilities automatically (you do not need to buy P-SKUs anymore). However, developers building reports still require a Power BI Pro license.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q12: Which platform is cheaper?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">It depends on your workload. Databricks (DBU model) is cheaper if you have highly variable, bursty workloads and a strong FinOps team that aggressively kills idle clusters. Fabric (F-SKU model) is cheaper if you have steady, predictable workloads across reporting, ETL, and data science, because the fixed capacity is shared and "smoothed" across all operations over 24 hours.</p>
+  </div>
+
+  <!-- Section 6: AI & Machine Learning -->
+  <h3 style="color: var(--text); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem;">AI & Machine Learning</h3>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q13: Does Fabric have MLflow?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Yes! Microsoft Fabric includes a fully managed instance of MLflow within the Data Science experience. Experiments, models, and runs are automatically tracked and stored directly in your workspace without needing external configuration.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q14: How does Databricks MosaicML compare to Azure OpenAI in Fabric?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Fabric relies heavily on Azure OpenAI to provide "Copilot" experiences (AI assisting the developer). Databricks MosaicML is designed for companies that want to build, pre-train, or fine-tune their own proprietary Large Language Models (LLMs) on their own highly secure data, ensuring the model weights belong entirely to the company.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem;">Q15: Can I deploy custom models as API endpoints in Fabric?</h4>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border);">Currently, Fabric focuses on batch scoring (applying ML models via Spark DataFrames during ETL). For high-performance, real-time REST API endpoint model serving, Databricks Model Serving is significantly more mature.</p>
+  </div>
 </div>
 
 <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;"/>
