@@ -115,10 +115,10 @@ graph TD
         F --> G[Enterprise Dashboards]
     end
     
-    style B fill:transparent,stroke:var(--accent),stroke-width:2px,color:var(--text)
-    style F fill:transparent,stroke:var(--accent),stroke-width:2px,color:var(--text)
-    style C fill:transparent,stroke:var(--border),stroke-width:1px,color:var(--text)
-    style E fill:transparent,stroke:var(--border),stroke-width:1px,color:var(--text)
+    style B fill:transparent,stroke:#c9f31d,stroke-width:2px,color:#ffffff
+    style F fill:transparent,stroke:#c9f31d,stroke-width:2px,color:#ffffff
+    style C fill:transparent,stroke:#475569,stroke-width:1px,color:#ffffff
+    style E fill:transparent,stroke:#475569,stroke-width:1px,color:#ffffff
 </code></pre>
 <p style="margin-bottom: 1.25rem; line-height: 1.7; color: var(--muted); margin-top: 1.5rem;">By using Databricks to write Delta tables to ADLS Gen2, and using Fabric's OneLake Shortcuts to virtually mount those tables into Fabric, organizations get the raw power of Databricks for ETL/ML and the seamless, high-speed reporting of Power BI Direct Lake — all with exactly zero data movement.</p>
 `
