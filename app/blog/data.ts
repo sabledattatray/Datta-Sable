@@ -1,3 +1,4 @@
+import { microsoftFabricGovernancePurviewGuide2026Post } from "./posts/microsoft-fabric-governance-purview-guide-2026";
 import { microsoftFabricPricingGuide2026Post } from "./posts/microsoft-fabric-pricing-guide-2026";
 import { microsoftFabricOneLakeArchitectureGuidePost } from "./posts/microsoft-fabric-onelake-architecture-guide";
 import { executionChainInfrastructureExplainedPost } from "./posts/execution-chain-infrastructure-explained";
@@ -49,6 +50,7 @@ import { microsoftFabricWarehouseExplained2026Post } from "./posts/microsoft-fab
 import { microsoftFabricSecurityGuide2026Post } from "./posts/microsoft-fabric-security-guide-2026";
 import { newCertificationPosts } from "./certificationPosts";
 export const posts = [
+  microsoftFabricGovernancePurviewGuide2026Post,
   microsoftFabricSecurityGuide2026Post,
   microsoftFabricWarehouseExplained2026Post,
   microsoftFabricPricingGuide2026Post,
@@ -5121,7 +5123,7 @@ def process_data(file_path):
   <p><strong>Direct Lake is the holy grail of Power BI connectivity.</strong> By reading Delta Parquet files directly from OneLake without importing data or converting queries to SQL, it promises the performance of Import mode with the real-time nature of DirectQuery. However, in enterprise settings, many teams run into performance bottlenecks or unexpected fallbacks to DirectQuery. This guide details the advanced mechanics of Direct Lake, troubleshooting fallback triggers, and performance tuning strategies for production-grade semantic models.</p>
 </div>
 
-<p>For BI professionals and data engineers working in Microsoft Fabric, understanding the storage-to-viz pipeline is critical. When Direct Lake works, it is blisteringly fast. When it fails, your capacity costs skyrocket and report load times suffer. Let's walk through how to keep your models in Direct Lake mode at all times.</p>
+<p>For BI professionals and data engineers working in Microsoft Fabric, understanding the storage-to-viz pipeline is critical. When Direct Lake works, it is blisteringly fast. When it fails, your capacity costs skyrocket and report load times suffer. Let's walk through how to keep your models in Direct Lake mode at all times. Before tuning memory, ensure you've mapped out the <a href="/blog/microsoft-fabric-governance-purview-guide-2026" style="color: var(--accent); text-decoration: underline;">governance and security considerations for Direct Lake</a>.</p>
 
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;" />
 

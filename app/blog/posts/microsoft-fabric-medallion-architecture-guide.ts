@@ -29,6 +29,8 @@ export const microsoftFabricMedallionArchitectureGuidePost = {
   <span style="color: var(--text);">Microsoft Fabric Medallion Architecture Guide: Ingesting Bronze, Silver, and Gold Tiers</span>
 </div>
 <!-- BREADCRUMB_END -->
+<div style="padding: 1rem; border-left: 4px solid var(--accent); background: var(--surface2); margin: 1.5rem 0; border-radius: 4px;"><strong>Enterprise Resource:</strong> For a complete security and compliance framework, read our guide to <a href="/blog/microsoft-fabric-governance-purview-guide-2026" style="color: var(--accent); text-decoration: underline;">governance across Fabric data layers</a>.</div>
+
 <p>Open any tutorial on <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric Architecture Guide">Microsoft Fabric</a>, and you will immediately be bombarded with technical walkthroughs. You will learn how to build an ingestion pipeline, spin up a Spark notebook, construct an enterprise data warehouse, and model data inside Power BI.</p>
 
       <p>But if you learn <a href="/blog/microsoft-fabric-architecture-explained-2026" class="autolink" style="color: var(--accent); text-decoration: underline;" title="Microsoft Fabric architecture">Microsoft Fabric</a> this way, you are missing the forest for the trees.</p>

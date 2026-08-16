@@ -22,6 +22,8 @@ export const microsoftFabricPricingGuide2026Post = {
   <span style="color: var(--text);">Microsoft Fabric Pricing Explained (2026): Complete Guide to F-SKUs, Capacity Planning, Cost Optimization & Enterprise Sizing</span>
 </div>
 <!-- BREADCRUMB_END -->
+<div style="padding: 1rem; border-left: 4px solid var(--accent); background: var(--surface2); margin: 1.5rem 0; border-radius: 4px;"><strong>Enterprise Resource:</strong> For a complete security and compliance framework, read our guide to <a href="/blog/microsoft-fabric-governance-purview-guide-2026" style="color: var(--accent); text-decoration: underline;">Fabric governance and capacity ownership</a>.</div>
+
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text);">
   <p><strong>Microsoft Fabric Pricing in 2026</strong> is built on a single, capacity-based model: you purchase a pool of Capacity Units (CUs), assign it to a workspace, and every workload — Spark, SQL, Power BI, Data Factory, Real-Time Intelligence — draws from that same shared pool. This guide covers every F-SKU from F2 to F2048, shows you how to estimate cost for your specific workload profile, and gives you the FinOps playbook enterprises use to cut Fabric spend by 30–60%.</p>
 </div>

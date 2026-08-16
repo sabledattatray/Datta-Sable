@@ -34,6 +34,8 @@ export const microsoftFabricWarehouseExplained2026Post = {
   <span style="color: var(--text);">Microsoft Fabric Warehouse Guide</span>
 </div>
 <!-- BREADCRUMB_END -->
+<div style="padding: 1rem; border-left: 4px solid var(--accent); background: var(--surface2); margin: 1.5rem 0; border-radius: 4px;"><strong>Enterprise Resource:</strong> For a complete security and compliance framework, read our guide to <a href="/blog/microsoft-fabric-governance-purview-guide-2026" style="color: var(--accent); text-decoration: underline;">enterprise Fabric governance</a>.</div>
+
 
 <div class="featured-snippet" style="background: rgba(201, 243, 29, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
   <p><strong>Microsoft Fabric Warehouse</strong> represents a fundamental departure from traditional relational data warehousing. By decoupling serverless SQL compute from open-format Delta Parquet files in OneLake, Fabric eliminates the need for expensive dedicated clusters, manual distribution indexing, and proprietary storage formats. In this handbook, we explore the internal Polaris engine, query processing workflows, cost estimation schemas, security matrices (RLS/OLS), and 40 deep-dive FAQs to prepare you for designing enterprise data platforms and passing your DP-600 and DP-700 exams.</p>
