@@ -50,7 +50,9 @@ import { microsoftFabricWarehouseExplained2026Post } from "./posts/microsoft-fab
 import { microsoftFabricSecurityGuide2026Post } from "./posts/microsoft-fabric-security-guide-2026";
 import { newCertificationPosts } from "./certificationPosts";
 import { microsoftFabricCapacitySizingGuide2026Post } from "./posts/microsoft-fabric-capacity-sizing-guide-2026";
+import { microsoftFabricVsDatabricks2026Post } from "./posts/microsoft-fabric-vs-databricks-2026";
 export const posts = [
+  microsoftFabricVsDatabricks2026Post,
   microsoftFabricCapacitySizingGuide2026Post,
   microsoftFabricGovernancePurviewGuide2026Post,
   microsoftFabricSecurityGuide2026Post,
