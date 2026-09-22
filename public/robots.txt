@@ -55,6 +55,11 @@ Disallow: /knowledge/comparisons
 
 # --- Google AdSense and Ads crawlers ---
 User-agent: Mediapartners-Google
+Disallow: /tools
+Disallow: /portfolio
+Disallow: /services
+Disallow: /about
+Disallow: /contact
 User-agent: Google-Display-Ads-Bot
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
