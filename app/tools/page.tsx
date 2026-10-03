@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     description: 'AI-powered tools for content workflows, SEO execution, and technical optimization.',
     images: ['/images/dattasable.com.webp'],
   },
+  robots: { index: false, follow: true },
   alternates: { canonical: 'https://dattasable.com/tools' },
 };
 

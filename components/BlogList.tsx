@@ -132,7 +132,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
     <div className="container">
       {/* Blog Landing Hero */}
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '4rem' }}>
-        <div className="label-tech mb-4" style={{ letterSpacing: '0.3em' }}>KNOWLEDGE-HUB</div>
+        <div className="label-tech mb-4" style={{ letterSpacing: '0.3em' }}>BLOG</div>
         <h1 style={{ 
           fontSize: 'clamp(2.5rem, 6vw, 48px)', 
           fontWeight: 600,
@@ -166,7 +166,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <span className="label-tech" style={{ color: 'var(--accent)', letterSpacing: '0.25em' }}>
-                PRIORITY READING PATHS
+                FEATURED ARTICLES
               </span>
               <span style={{
                 background: 'rgba(201,243,29,0.1)',
@@ -179,11 +179,11 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                 borderRadius: '2px',
                 letterSpacing: '0.08em'
               }}>
-                {PRIORITY_READING_LINKS.length} CURATED
+                {PRIORITY_READING_LINKS.length} SELECTED
               </span>
             </div>
             <span style={{ fontSize: '10px', color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>
-              HANDPICKED · START HERE
+              RECOMMENDED FOR YOU
             </span>
           </div>
 
@@ -329,7 +329,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg) 0%, transparent 100%)', display: 'none' }} className="lg:block" />
               </div>
               <div style={{ padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div className="label-tech mb-4">FEATURED-ANALYSIS</div>
+                <div className="label-tech mb-4">FEATURED POST</div>
                 <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>{enrichedPosts[0].title}</h2>
                 <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2rem' }}>{enrichedPosts[0].excerpt}</p>
                 <div className="flex items-center gap-4 flex-wrap">
@@ -345,7 +345,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                     color: 'var(--accent)',
                     background: 'rgba(201, 243, 29, 0.05)'
                   }}>{enrichedPosts[0].difficulty}</div>
-                  <div className="mono text-[11px] font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">READ FULL LOG →</div>
+                  <div className="mono text-[11px] font-bold text-[var(--accent)] group-hover:translate-x-1 transition-transform">READ FULL ARTICLE →</div>
                 </div>
               </div>
             </div>
@@ -376,7 +376,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
             <input 
               type="text" 
               placeholder="SEARCH TECHNICAL TUTORIALS..." 
-              aria-label="Search logs"
+              aria-label="Search articles"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               style={{
@@ -551,7 +551,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
               <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>{p.excerpt}</p>
               
               <div className="flex items-center gap-2 mt-auto" style={{ color: 'var(--accent)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em' }}>
-                READ LOG <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                READ ARTICLE <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </motion.div>
           </Link>

@@ -130,25 +130,9 @@ export default async function BlogPostPage({ params }: Props) {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        {/* ── Top-left Precision Crosshair ── */}
-        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
-        </div>
-
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
           <BlogPostContent post={post as any} relatedPosts={relatedPosts} />
         </section>
-
-        {/* ── Bottom-right Precision Crosshair ── */}
-        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
-        </div>
       </div>
       <Footer />
     </div>

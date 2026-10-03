@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: { absolute: finalTitle },
     description: article.description,
-    ...(noindex ? { robots: { index: false, follow: true } } : {}),
+    robots: { index: !noindex, follow: true },
   };
 }
 
@@ -68,7 +68,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
               href="/knowledge" 
               className="flex items-center gap-2 text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-12 mono text-xs no-underline"
             >
-              <ArrowLeft size={14} /> BACK_TO_KNOWLEDGE_HUB
+              <ArrowLeft size={14} /> BACK TO ARTICLES
             </Link>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
@@ -100,7 +100,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                           <span className="text-xs mono font-bold text-[var(--accent)]">DS</span>
                         </div>
                         <div>
-                          <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Breakdown</h5>
+                          <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Author Note</h5>
                           <p className="text-[9px] mono text-[var(--muted)]">Expert Commentary by Datta Sable</p>
                         </div>
                       </div>
@@ -116,17 +116,17 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                   <div className="mt-16 p-8 card" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)' }}>
                     <div className="flex items-center gap-2 mb-4 text-[var(--accent)]">
                       <Target size={20} />
-                      <span className="mono text-[10px] font-bold tracking-widest uppercase">Direct_Blueprint_Injection</span>
+                      <span className="mono text-[10px] font-bold tracking-widest uppercase">Related Template</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-4">Deploy the {blueprint.title}</h3>
+                    <h3 className="text-xl font-bold mb-4">Get the {blueprint.title}</h3>
                     <p className="text-sm text-[var(--muted)] mb-8">
-                      Ready to execute this guide? Inject the optimized blueprint directly into your workspace node.
+                      Ready to put this guide into practice? Download the template to get started.
                     </p>
                     <Link 
                       href={`/templates/${blueprint.slug}`}
                       className="btn-primary inline-flex items-center gap-2 py-3 px-8 no-underline"
                     >
-                      VIEW_BLUEPRINT <ChevronRight size={14} />
+                      VIEW TEMPLATE <ChevronRight size={14} />
                     </Link>
                   </div>
                 )}
@@ -136,7 +136,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
               <div className="lg:col-span-1">
                 <div className="sticky top-32 flex flex-col gap-8">
                   <div className="card p-8" style={{ background: 'var(--surface2)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Execution_Target</h4>
+                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Related Tools</h4>
                     <Link 
                       href={article.associatedTool}
                       className="group flex flex-col gap-4 no-underline p-4 border border-[var(--border)] hover:border-[var(--accent)] transition-all"
@@ -145,7 +145,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                         <Zap size={18} className="text-[var(--accent)]" />
                         <ArrowUpRight size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)]" />
                       </div>
-                      <div className="font-bold text-sm">LAUNCH_WORKPLACE_NODE</div>
+                      <div className="font-bold text-sm">View Tools</div>
                       <div className="text-[10px] mono text-[var(--muted)]">Recommended for this guide</div>
                     </Link>
                   </div>
@@ -153,13 +153,13 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                   <div className="card p-8 border-dashed" style={{ background: 'var(--bg)' }}>
                      <div className="flex items-center gap-2 mb-6">
                         <Sparkles size={16} className="text-[var(--accent)]" />
-                        <h4 className="mono text-[10px] uppercase tracking-widest">Authority_Loop</h4>
+                        <h4 className="mono text-[10px] uppercase tracking-widest">Related Articles</h4>
                      </div>
                      <p className="text-[10px] mono text-[var(--muted)] leading-relaxed mb-6">
-                        This guide is part of a Topical Cluster. Master the entire domain to secure dominant organic authority.
+                        This guide is part of a broader topic. Check out our other articles to learn more.
                      </p>
                      <Link href="/knowledge" className="text-[10px] mono font-bold text-[var(--accent)] no-underline flex items-center gap-1">
-                        VIEW_CLUSTER_NODES <ChevronRight size={12} />
+                        VIEW MORE ARTICLES <ChevronRight size={12} />
                      </Link>
                   </div>
                 </div>

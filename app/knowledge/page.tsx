@@ -136,10 +136,10 @@ export default function KnowledgeHub() {
                 <div style={{ color: 'var(--accent)', padding: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px' }}>
                   <BookOpen size={20} />
                 </div>
-                <div className="label-tech">TOPICAL-AUTHORITY-V1.0</div>
+                <div className="label-tech">Knowledge Base</div>
               </div>
               <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1, marginBottom: '1.5rem' }}>
-                Surgical <span className="hero-title">Knowledge</span>
+                Technical <span className="hero-title">Knowledge</span>
               </h1>
               <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
                 High-fidelity technical guides engineered for creators and builders. Master the architecture of the new AI-driven economy.
@@ -169,7 +169,7 @@ export default function KnowledgeHub() {
 
                     <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)]/30">
                       <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
-                        READ_OPERATOR_GUIDE <ArrowRight size={12} />
+                        READ GUIDE <ArrowRight size={12} />
                       </div>
                       <span className="text-[10px] mono text-[var(--muted)]">{article.readingTime}</span>
                     </div>
@@ -199,7 +199,7 @@ export default function KnowledgeHub() {
 
                   <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)]/30">
                     <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
-                      COMPARE_FRAMEWORKS <ArrowRight size={12} />
+                      COMPARE FRAMEWORKS <ArrowRight size={12} />
                     </div>
                     <span className="text-[10px] mono text-[var(--muted)]">6 min</span>
                   </div>
@@ -237,7 +237,7 @@ export default function KnowledgeHub() {
                  Master the technical terms of the new creator infrastructure with our surgical glossary. From semantic compression to prompt chaining.
                </p>
                <Link href="/glossary" className="btn-outline inline-flex items-center gap-2 no-underline">
-                 OPEN_GLOSSARY <ChevronRight size={14} />
+                 VIEW GLOSSARY <ChevronRight size={14} />
                </Link>
             </div>
           </div>

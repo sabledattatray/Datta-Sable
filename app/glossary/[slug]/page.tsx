@@ -79,24 +79,24 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                 </div>
 
                 <div className="knowledge-content text-[var(--text)] leading-relaxed mb-12">
-                   <h3 className="text-2xl font-bold mb-6">Operator's Perspective</h3>
+                   <h3 className="text-2xl font-bold mb-6">Practical Usage</h3>
                    <p className="mb-6 opacity-80 leading-relaxed">
                       {term.operatorsPerspective}
                    </p>
                    
-                   <h3 className="text-xl font-bold mt-12 mb-6">Technical Application</h3>
+                   <h3 className="text-xl font-bold mt-12 mb-6">How it Works</h3>
                    <p className="mb-6 opacity-80 leading-relaxed">
                       {term.technicalApplication}
                    </p>
                 </div>
 
-                {/* Founder Insight - E-E-A-T Signal */}
+                {/* Author Insight - E-E-A-T Signal */}
                 <div className="p-8 bg-[var(--accent)]/5 border border-[var(--border)] rounded-sm mb-12">
                    <div className="flex items-center gap-3 mb-4">
                       <div className="w-8 h-8 rounded-full bg-[var(--surface2)] border border-[var(--accent)]/30 flex items-center justify-center">
                          <span className="text-[10px] mono font-bold text-[var(--accent)]">DS</span>
                       </div>
-                      <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Note</h5>
+                      <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Author Note</h5>
                    </div>
                    <p className="text-sm italic text-[var(--text)] leading-relaxed">
                       "{term.founderNote}"
@@ -104,11 +104,11 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                 </div>
               </div>
 
-              {/* Sidebar: Internal Flywheel */}
+              {/* Sidebar */}
               <div className="lg:col-span-1">
                 <div className="sticky top-32 flex flex-col gap-8">
                   <div className="card p-8" style={{ background: 'var(--surface2)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Execute_Now</h4>
+                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Related Tools</h4>
                     <Link 
                       href="/tools"
                       className="group flex flex-col gap-4 no-underline p-4 border border-[var(--border)] hover:border-[var(--accent)] transition-all bg-[var(--bg)]"
@@ -117,23 +117,23 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                         <Zap size={18} className="text-[var(--accent)]" />
                         <ArrowUpRight size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)]" />
                       </div>
-                      <div className="font-bold text-sm">OPEN_WORKPLACE</div>
-                      <div className="text-[10px] mono text-[var(--muted)]">Apply this concept immediately</div>
+                      <div className="font-bold text-sm">View Tools</div>
+                      <div className="text-[10px] mono text-[var(--muted)]">Apply this concept using our free tools</div>
                     </Link>
                   </div>
 
                   <div className="card p-8 border-dashed" style={{ background: 'var(--bg)' }}>
                      <div className="flex items-center gap-2 mb-6">
                         <Sparkles size={16} className="text-[var(--accent)]" />
-                        <h4 className="mono text-[10px] uppercase tracking-widest">Authority_Metrics</h4>
+                        <h4 className="mono text-[10px] uppercase tracking-widest">Article Info</h4>
                      </div>
                      <div className="flex justify-between items-center mb-4">
-                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Index_Priority:</span>
-                        <span className="text-[10px] mono text-[var(--accent)]">HIGH</span>
+                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Category:</span>
+                        <span className="text-[10px] mono text-[var(--accent)]">{term.category}</span>
                      </div>
                      <div className="flex justify-between items-center">
-                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Traffic_Node:</span>
-                        <span className="text-[10px] mono text-[var(--text)]">ACTIVE</span>
+                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Status:</span>
+                        <span className="text-[10px] mono text-[var(--text)]">Published</span>
                      </div>
                   </div>
                 </div>

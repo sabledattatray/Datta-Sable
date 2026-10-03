@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     description: 'Technical articles on Power BI, Tableau, SQL, Microsoft Fabric, Python & AI.',
     images: ['/images/dattasable.com.webp'],
   },
+  robots: { index: false, follow: true },
   alternates: { canonical: 'https://dattasable.com/blog' },
 };
 

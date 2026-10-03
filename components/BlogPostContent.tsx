@@ -263,7 +263,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
             className="flex items-center gap-2"
             style={{ textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}
           >
-            <ChevronLeft size={16} /> BACK TO LOGS
+            <ChevronLeft size={16} /> BACK TO ARTICLES
           </Link>
           
           <nav className="flex items-center gap-2 mono text-[10px] text-[var(--muted)] opacity-60 uppercase tracking-widest">
@@ -417,7 +417,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
               />
             </div>
             <div>
-              <div className="label-tech mb-2">VERIFIED-AUTHOR</div>
+              <div className="label-tech mb-2">Author</div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Datta Sable</h3>
               <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                 Senior BI Developer & Data Architect with over 10 years of experience in engineering high-fidelity analytics systems. Specialized in Tableau, Power BI, SQL, and Python-driven automation for enterprise-grade decision clarity.
