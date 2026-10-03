@@ -136,7 +136,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticUrls,
     ...dbBlogUrls,
     ...staticBlogUrls,
-    ...categoryUrls,
+    // ...categoryUrls, // REMOVED: category pages are noindex for AdSense
   ];
 
   // De-duplicate by URL to prevent crawler warnings in Search Console
