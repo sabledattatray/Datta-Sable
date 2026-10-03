@@ -455,7 +455,7 @@ async function main() {
       html = html.replace(/\{jobs\.map\([\s\S]*?\)\}/g, `<div>${jobsHtml}</div>`);
       html = html.replace(/<form[\s\S]*?<\/form>/g, '<div style="background: var(--surface); padding: 2rem; border-radius: 8px; text-align: center; border: 1px dashed var(--border);"><h3>Apply Online</h3><p style="color: var(--muted);">Please submit your CV and cover letter directly to our careers portal or contact email.</p></div>');
     } else if (page.slug === 'contact') {
-      html = html.replace(/<form[\s\S]*?<\/form>/g, '<div style="background: var(--surface); padding: 2rem; border-radius: 8px; border: 1px dashed var(--border);"><h3 style="margin-bottom: 1rem;">Direct Contact Channels</h3><p>📩 Email: <strong>contact@dattasable.com</strong></p><p>📞 Mobile: <strong>+91 99999 99999</strong></p><p style="color: var(--muted); margin-top: 1rem; font-size: 0.85rem;">Send a detailed project description to receive a free consultation and customized quote within 24 hours.</p></div>');
+      html = html.replace(/<form[\s\S]*?<\/form>/g, '<div style="background: var(--surface); padding: 2rem; border-radius: 8px; border: 1px dashed var(--border);"><h3 style="margin-bottom: 1rem;">Direct Contact Channels</h3><p>📩 Email: <strong>contact@dattasable.com</strong></p><p>📞 Mobile: <strong>+91 80108 03756</strong></p><p style="color: var(--muted); margin-top: 1rem; font-size: 0.85rem;">Send a detailed project description to receive a free consultation and customized quote within 24 hours.</p></div>');
     }
 
     // Upsert into database

@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
 import ContactPageClient from './ContactPageClient';
-import { getDynamicPage } from '@/lib/dynamic-page';
-import DynamicPageRenderer from '@/components/DynamicPageRenderer';
-
 export const metadata: Metadata = {
   title: 'Contact Datta Sable | BI Consulting & Data Analytics',
   description: 'Get in touch with Datta Sable — Business Intelligence expert available for dashboard development, data analytics consulting, SQL automation, and Python ETL projects. Based in Mumbai, India.',
@@ -25,10 +22,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ContactPage() {
-  const dynamicPage = await getDynamicPage('contact');
-  if (dynamicPage) {
-    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
-  }
+export default function ContactPage() {
   return <ContactPageClient />;
 }
