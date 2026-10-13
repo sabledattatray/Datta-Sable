@@ -3,515 +3,776 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Surgical AI Workspace</title>
+  <title>Surgical AI Workspace — Enterprise Workflow Intelligence</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js from cdnjs for ultra-reliable loading -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
   <style>
-    :root{
-      --bg:#071018;
-      --bg2:#0d1623;
-      --panel:rgba(255,255,255,.06);
-      --panel-border:rgba(255,255,255,.08);
-      --text:#f5f7fb;
-      --muted:#9fb0c7;
-      --primary:#6ee7ff;
-      --secondary:#7c5cff;
-      --success:#3df7b8;
-      --danger:#ff5c8a;
-      --shadow:0 10px 40px rgba(0,0,0,.35);
-      --blur:blur(18px);
+    :root {
+      --bg: #071018;
+      --bg2: #0d1623;
+      --panel: rgba(255, 255, 255, .05);
+      --panel-hover: rgba(255, 255, 255, .09);
+      --panel-border: rgba(255, 255, 255, .08);
+      --text: #f5f7fb;
+      --muted: #9fb0c7;
+      --primary: #6ee7ff;
+      --secondary: #7c5cff;
+      --success: #3df7b8;
+      --danger: #ff5c8a;
+      --warning: #ffb800;
+      --shadow: 0 10px 40px rgba(0, 0, 0, .45);
+      --blur: blur(18px);
     }
 
-    body.light{
-      --bg:#eef3fb;
-      --bg2:#f7f9fc;
-      --panel:rgba(255,255,255,.8);
-      --panel-border:rgba(0,0,0,.05);
-      --text:#0d1726;
-      --muted:#64748b;
-      --shadow:0 12px 30px rgba(15,23,42,.08);
+    body.light {
+      --bg: #eef3fb;
+      --bg2: #f7f9fc;
+      --panel: rgba(255, 255, 255, .85);
+      --panel-hover: rgba(255, 255, 255, .95);
+      --panel-border: rgba(0, 0, 0, .08);
+      --text: #0d1726;
+      --muted: #64748b;
+      --shadow: 0 12px 30px rgba(15, 23, 42, .08);
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    body{
-      font-family:"Inter",sans-serif;
+    body {
+      font-family: "Inter", sans-serif;
       background:
-      radial-gradient(circle at top left, rgba(124,92,255,.22), transparent 35%),
-      radial-gradient(circle at bottom right, rgba(110,231,255,.18), transparent 30%),
-      linear-gradient(135deg,var(--bg),var(--bg2));
-      color:var(--text);
-      min-height:100vh;
-      overflow-x:hidden;
-      transition:.3s ease;
+        radial-gradient(circle at top left, rgba(124, 92, 255, .22), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(110, 231, 255, .18), transparent 30%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
       background-image:
-      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size:40px 40px;
-      pointer-events:none;
-      z-index:-1;
+        linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    .dashboard{
-      display:grid;
-      grid-template-columns:280px 1fr;
-      min-height:100vh;
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .15); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      min-height: 100vh;
     }
 
-    .sidebar{
-      position:sticky;
-      top:0;
-      height:100vh;
-      padding:30px 22px;
-      backdrop-filter:var(--blur);
-      background:rgba(255,255,255,.04);
-      border-right:1px solid var(--panel-border);
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 26px 20px;
+      backdrop-filter: var(--blur);
+      background: rgba(255, 255, 255, .03);
+      border-right: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
     }
 
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:40px;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      cursor: pointer;
     }
 
-    .logo-icon{
-      width:52px;
-      height:52px;
-      border-radius:18px;
-      background:linear-gradient(135deg,var(--primary),var(--secondary));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:#000;
-      font-size:20px;
-      box-shadow:0 0 25px rgba(110,231,255,.35);
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #000;
+      font-size: 19px;
+      box-shadow: 0 0 25px rgba(110, 231, 255, .35);
+      flex-shrink: 0;
     }
 
-    .logo h1{
-      font-family:"Syne",sans-serif;
-      font-size:1.2rem;
-      line-height:1.2;
+    .logo h1 {
+      font-family: "Syne", sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.2;
     }
 
-    .logo span{
-      color:var(--muted);
-      font-size:.82rem;
+    .logo span {
+      color: var(--muted);
+      font-size: .8rem;
     }
 
-    .menu{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .menu a{
-      text-decoration:none;
-      color:var(--muted);
-      padding:14px 16px;
-      border-radius:16px;
-      transition:.25s ease;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border:1px solid transparent;
+    .menu-item {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 14px;
+      transition: all .2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      user-select: none;
     }
 
-    .menu a:hover,
-    .menu a.active{
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      border:1px solid var(--panel-border);
-      transform:translateX(4px);
+    .menu-item:hover {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--panel-border);
+      transform: translateX(4px);
     }
 
-    .main{
-      padding:30px;
+    .menu-item.active {
+      background: linear-gradient(90deg, rgba(110, 231, 255, .15), rgba(124, 92, 255, .1));
+      color: var(--primary);
+      border: 1px solid rgba(110, 231, 255, .3);
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(110, 231, 255, .1);
     }
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:28px;
+    .menu-item span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .06);
+      color: var(--muted);
+    }
+    .menu-item.active span {
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
     }
 
-    .search{
-      flex:1;
-      background:var(--panel);
-      border:1px solid var(--panel-border);
-      padding:16px 20px;
-      border-radius:20px;
-      backdrop-filter:var(--blur);
-      box-shadow:var(--shadow);
-      color:var(--text);
-      outline:none;
+    .sidebar-footer {
+      padding-top: 20px;
+      border-top: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
     }
 
-    .actions{
-      display:flex;
-      gap:12px;
-      align-items:center;
+    /* Main Content */
+    .main {
+      padding: 28px 34px 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 1600px;
     }
 
-    .btn{
-      background:linear-gradient(135deg,var(--primary),var(--secondary));
-      border:none;
-      color:#000;
-      padding:14px 20px;
-      border-radius:18px;
-      font-weight:700;
-      cursor:pointer;
-      transition:.25s ease;
-      box-shadow:0 10px 25px rgba(110,231,255,.25);
+    /* Top Bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    .btn:hover{
-      transform:translateY(-2px) scale(1.02);
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      max-width: 550px;
     }
 
-    .toggle{
-      width:58px;
-      height:58px;
-      border-radius:18px;
-      border:1px solid var(--panel-border);
-      background:var(--panel);
-      backdrop-filter:var(--blur);
-      color:var(--text);
-      cursor:pointer;
-      font-size:1.1rem;
+    .search-input {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 12px 18px;
+      border-radius: 14px;
+      backdrop-filter: var(--blur);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: all .2s;
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(110, 231, 255, .25);
     }
 
-    .hero{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:20px;
-      margin-bottom:28px;
+    .period-tabs {
+      display: flex;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      padding: 3px;
+      gap: 2px;
     }
 
-    .hero h2{
-      font-size:2.5rem;
-      font-family:"Syne",sans-serif;
-      margin-bottom:10px;
+    .p-tab {
+      background: none;
+      border: none;
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: "JetBrains Mono", monospace;
+      transition: all .2s;
+    }
+    .p-tab.active {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 4px 12px rgba(110, 231, 255, .3);
     }
 
-    .hero p{
-      color:var(--muted);
-      max-width:700px;
-      line-height:1.8;
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
 
-    .hero-card{
-      width:320px;
-      padding:24px;
-      border-radius:28px;
-      background:var(--panel);
-      border:1px solid var(--panel-border);
-      backdrop-filter:var(--blur);
-      box-shadow:var(--shadow);
+    .btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      color: #000;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 6px 20px rgba(110, 231, 255, .25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(110, 231, 255, .35);
     }
 
-    .hero-card h4{
-      margin-bottom:12px;
-      font-size:1rem;
-      color:var(--muted);
+    .toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      backdrop-filter: var(--blur);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+    .toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
-    .hero-card .big{
-      font-size:2.6rem;
-      font-weight:700;
-      margin-bottom:8px;
+    /* Hero Banner */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 28px;
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(110, 231, 255, .15), transparent 70%);
+      pointer-events: none;
     }
 
-    .hero-card .status{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      color:var(--success);
-      font-size:.9rem;
+    .hero-text h2 {
+      font-size: 2.1rem;
+      font-family: "Syne", sans-serif;
+      margin-bottom: 8px;
+      letter-spacing: -.5px;
+    }
+    .hero-text h2 span {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.6;
+      font-size: 13.5px;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:22px;
+    .hero-card {
+      width: 280px;
+      padding: 18px 22px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--panel-border);
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+    }
+    .hero-card h4 {
+      margin-bottom: 6px;
+      font-size: .85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-family: "JetBrains Mono", monospace;
+    }
+    .hero-card .big {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: "Syne", sans-serif;
+      margin-bottom: 4px;
+    }
+    .hero-card .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--success);
+      font-size: .8rem;
+      font-family: "JetBrains Mono", monospace;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      animation: pulseBeacon 2s infinite;
+    }
+    @keyframes pulseBeacon {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(1.3); }
     }
 
-    .card{
-      background:var(--panel);
-      border:1px solid var(--panel-border);
-      border-radius:28px;
-      padding:24px;
-      backdrop-filter:var(--blur);
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
+    /* Views Container */
+    .view-container {
+      display: none;
+    }
+    .view-container.active {
+      display: block;
+      animation: fadeIn .25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .card::after{
-      content:"";
-      position:absolute;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(110,231,255,.14), transparent 70%);
-      top:-80px;
-      right:-80px;
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
     }
 
-    .card h3{
-      margin-bottom:16px;
-      font-size:1rem;
-      color:var(--muted);
-      font-weight:600;
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: all .25s;
+    }
+    .card:hover {
+      border-color: rgba(110, 231, 255, .25);
+      transform: translateY(-2px);
     }
 
-    .kpi{
-      grid-column:span 3;
+    .kpi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .kpi-title {
+      font-size: .85rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: "JetBrains Mono", monospace;
+    }
+    .kpi-value {
+      font-size: 2.1rem;
+      font-weight: 800;
+      font-family: "Syne", sans-serif;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+      font-family: "JetBrains Mono", monospace;
+    }
+    .badge-primary { background: rgba(110, 231, 255, .12); color: var(--primary); }
+    .badge-success { background: rgba(61, 247, 184, .12); color: var(--success); }
+    .badge-warning { background: rgba(255, 184, 0, .12); color: var(--warning); }
+    .badge-secondary { background: rgba(124, 92, 255, .12); color: var(--secondary); }
+
+    /* Main Chart Grid */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 8fr 4fr;
+      gap: 20px;
+      margin-bottom: 22px;
     }
 
-    .kpi .value{
-      font-size:2rem;
-      font-weight:700;
-      margin-bottom:10px;
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .chart-title {
+      font-family: "Syne", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .chart-body {
+      position: relative;
+      height: 320px;
+      width: 100%;
     }
 
-    .badge{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:.8rem;
-      background:rgba(110,231,255,.12);
-      color:var(--primary);
+    /* Side Panel */
+    .side-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
-    .chart-lg{
-      grid-column:span 8;
-      min-height:420px;
+    .intent-item {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--panel-border);
+      margin-bottom: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .intent-item strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .bar {
+      height: 6px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 999px;
+      transition: width .4s ease;
     }
 
-    .side-panel{
-      grid-column:span 4;
-      display:flex;
-      flex-direction:column;
-      gap:22px;
+    /* Pipeline */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .node {
+      flex: 1;
+      padding: 12px 6px;
+      text-align: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--panel-border);
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 12px;
+      font-weight: 600;
+      user-select: none;
+    }
+    .node:hover, .node.active {
+      background: linear-gradient(135deg, rgba(110, 231, 255, .2), rgba(124, 92, 255, .2));
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: scale(1.04);
     }
 
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--panel-border);
-      border-radius:28px;
-      padding:22px;
-      backdrop-filter:var(--blur);
-      box-shadow:var(--shadow);
+    /* Bottom Grid */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 4fr 8fr;
+      gap: 20px;
     }
 
-    .intent{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
+    /* Activity Feed */
+    .activity-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .feed {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--panel-border);
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-top: 5px;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      flex-shrink: 0;
+    }
+    .feed p {
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.5;
     }
 
-    .intent-item{
-      padding:16px;
-      border-radius:20px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--panel-border);
+    /* Terminal Console */
+    .terminal {
+      background: #030810;
+      border-radius: 20px;
+      padding: 18px 22px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      display: flex;
+      flex-direction: column;
+      height: 340px;
+    }
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+    .terminal-dots {
+      display: flex;
+      gap: 7px;
+    }
+    .terminal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .terminal-dots span:nth-child(1) { background: #ff5f57; }
+    .terminal-dots span:nth-child(2) { background: #febc2e; }
+    .terminal-dots span:nth-child(3) { background: #28c840; }
+
+    .terminal-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .terminal-btn {
+      background: rgba(255, 255, 255, .08);
+      border: none;
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .terminal-btn:hover { color: var(--text); background: rgba(255, 255, 255, .15); }
+
+    .logs {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: #7CFFB7;
+      line-height: 1.7;
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .log-info { color: var(--primary); }
+    .log-success { color: var(--success); }
+    .log-trace { color: var(--muted); }
+    .log-system { color: var(--secondary); }
+
+    /* Tab: AI Agents Grid */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .agent-card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 18px;
+      transition: all .2s;
+    }
+    .agent-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .agent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .agent-name {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .agent-role {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .agent-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .02);
+      font-size: 11px;
+      margin-bottom: 12px;
+      font-family: "JetBrains Mono", monospace;
     }
 
-    .intent-item strong{
-      display:block;
-      margin-bottom:6px;
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .82);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 60px 20px 20px;
+      overflow-y: auto;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      background: #0d1623;
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 520px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .8);
+      margin-bottom: 40px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .modal-header h3 {
+      font-family: "Syne", sans-serif;
+      font-size: 18px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 11.5px;
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .form-select, .form-input {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      outline: none;
+    }
+    .form-select:focus, .form-input:focus {
+      border-color: var(--primary);
     }
 
-    .bar{
-      height:8px;
-      background:rgba(255,255,255,.08);
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:10px;
+    @media (max-width: 1100px) {
+      .dashboard { grid-template-columns: 1fr; }
+      .sidebar { height: auto; position: relative; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .chart-grid { grid-template-columns: 1fr; }
+      .bottom-grid { grid-template-columns: 1fr; }
     }
-
-    .bar span{
-      display:block;
-      height:100%;
-      background:linear-gradient(90deg,var(--primary),var(--secondary));
-      border-radius:999px;
-    }
-
-    .activity{
-      grid-column:span 4;
-    }
-
-    .activity-feed{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
-
-    .feed{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-    }
-
-    .dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      margin-top:6px;
-      background:var(--success);
-      box-shadow:0 0 12px var(--success);
-    }
-
-    .feed p{
-      color:var(--muted);
-      font-size:.92rem;
-      line-height:1.6;
-    }
-
-    .terminal{
-      grid-column:span 8;
-      background:#02060d;
-      border-radius:28px;
-      padding:22px;
-      border:1px solid rgba(255,255,255,.08);
-      overflow:hidden;
-    }
-
-    .terminal-header{
-      display:flex;
-      gap:10px;
-      margin-bottom:18px;
-    }
-
-    .terminal-header span{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:#ff5f57;
-    }
-
-    .terminal-header span:nth-child(2){
-      background:#febc2e;
-    }
-
-    .terminal-header span:nth-child(3){
-      background:#28c840;
-    }
-
-    .logs{
-      font-family:monospace;
-      font-size:.9rem;
-      color:#7CFFB7;
-      line-height:1.8;
-      max-height:260px;
-      overflow:auto;
-    }
-
-    .pipeline{
-      margin-top:18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .node{
-      flex:1;
-      min-width:120px;
-      padding:18px;
-      text-align:center;
-      border-radius:18px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--panel-border);
-      position:relative;
-    }
-
-    .node::after{
-      content:"";
-      position:absolute;
-      top:50%;
-      right:-18px;
-      width:18px;
-      height:2px;
-      background:linear-gradient(90deg,var(--primary),transparent);
-    }
-
-    .node:last-child::after{
-      display:none;
-    }
-
-    canvas{
-      width:100%!important;
-      height:300px!important;
-    }
-
-    @media(max-width:1200px){
-      .kpi{
-        grid-column:span 6;
-      }
-
-      .chart-lg,
-      .terminal,
-      .activity,
-      .side-panel{
-        grid-column:span 12;
-      }
-    }
-
-    @media(max-width:900px){
-      .dashboard{
-        grid-template-columns:1fr;
-      }
-
-      .sidebar{
-        height:auto;
-        position:relative;
-      }
-
-      .hero{
-        flex-direction:column;
-      }
-
-      .hero-card{
-        width:100%;
-      }
-    }
-
-    @media(max-width:640px){
-      .main{
-        padding:20px;
-      }
-
-      .topbar{
-        flex-direction:column;
-      }
-
-      .kpi{
-        grid-column:span 12;
-      }
-
-      .hero h2{
-        font-size:2rem;
-      }
+    @media (max-width: 650px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .hero { flex-direction: column; align-items: stretch; }
+      .hero-card { width: 100%; }
     }
   </style>
 </head>
@@ -519,311 +780,814 @@
 
 <div class="dashboard">
 
+  <!-- Sidebar -->
   <aside class="sidebar">
-    <div class="logo">
-      <div class="logo-icon">AI</div>
-      <div>
-        <h1>Surgical AI</h1>
-        <span>Workflow Intelligence</span>
-      </div>
-    </div>
-
-    <nav class="menu">
-      <a href="#" class="active">Dashboard <span>01</span></a>
-      <a href="#">AI Agents <span>12</span></a>
-      <a href="#">Execution Chains <span>08</span></a>
-      <a href="#">Prompt Analytics <span>04</span></a>
-      <a href="#">Operator Mapping <span>09</span></a>
-      <a href="#">Automation Flows <span>15</span></a>
-      <a href="#">Token Monitoring <span>∞</span></a>
-      <a href="#">AI Cost Center <span>$</span></a>
-      <a href="#">System Logs <span>24h</span></a>
-    </nav>
-  </aside>
-
-  <main class="main">
-
-    <div class="topbar">
-      <div style="display:flex; gap:10px;">
-        <div class="period-tabs" style="display:flex; background:var(--panel); border:1px solid var(--panel-border); border-radius:14px; padding:4px;">
-          <button class="p-tab" style="background:none; border:none; color:var(--muted); padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600;">WTD</button>
-          <button class="p-tab" style="background:none; border:none; color:var(--muted); padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600;">MTD</button>
-          <button class="p-tab active" style="background:var(--primary); border:none; color:#000; padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600; box-shadow:0 4px 12px rgba(110,231,255,.3);">QTD</button>
-          <button class="p-tab" style="background:none; border:none; color:var(--muted); padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:600;">YTD</button>
+    <div>
+      <div class="logo" onclick="switchTab('dashboard')">
+        <div class="logo-icon">AI</div>
+        <div>
+          <h1>Surgical AI</h1>
+          <span>Workflow Intelligence</span>
         </div>
       </div>
-      <div class="actions">
-        <button class="btn">Deploy Workflow</button>
-        <button class="toggle" id="themeToggle">☾</button>
-      </div>
+
+      <nav class="menu" id="sidebarMenu">
+        <div class="menu-item active" data-tab="dashboard">Dashboard <span>01</span></div>
+        <div class="menu-item" data-tab="agents">AI Agents <span>12</span></div>
+        <div class="menu-item" data-tab="chains">Execution Chains <span>08</span></div>
+        <div class="menu-item" data-tab="prompts">Prompt Analytics <span>04</span></div>
+        <div class="menu-item" data-tab="operator">Operator Mapping <span>09</span></div>
+        <div class="menu-item" data-tab="automation">Automation Flows <span>15</span></div>
+        <div class="menu-item" data-tab="tokens">Token Monitoring <span>∞</span></div>
+        <div class="menu-item" data-tab="cost">AI Cost Center <span>$</span></div>
+        <div class="menu-item" data-tab="logs">System Logs <span>24h</span></div>
+      </nav>
     </div>
 
+    <div class="sidebar-footer">
+      <span>Engine: v4.8 Stable</span>
+      <span style="color: var(--success); font-family: 'JetBrains Mono';">● 99.98% SLA</span>
+    </div>
+  </aside>
+
+  <!-- Main Container -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <input type="text" class="search-input" id="globalSearch" placeholder="Search AI agents, workflows, execution chains or prompt schemas...">
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <!-- Time Range Selector -->
+        <div class="period-tabs" id="periodTabs">
+          <button class="p-tab" data-period="WTD">WTD</button>
+          <button class="p-tab" data-period="MTD">MTD</button>
+          <button class="p-tab active" data-period="QTD">QTD</button>
+          <button class="p-tab" data-period="YTD">YTD</button>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="deployWorkflowBtn">
+            <span>⚡</span> Deploy Workflow
+          </button>
+          <button class="toggle" id="themeToggle" title="Toggle Theme">☾</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Header -->
     <section class="hero">
-      <div>
-        <h2>Surgical AI Workspace™</h2>
+      <div class="hero-text">
+        <h2>Surgical <span>AI Workspace™</span></h2>
         <p>
-          Enterprise-grade AI workflow infrastructure for creators, operators, and automation architects.
-          Monitor intelligent execution chains, optimize prompt fidelity, and scale AI operations using
-          real-time operator analytics and workflow intelligence.
+          Enterprise-grade AI workflow infrastructure for operators, creators, and automation architects.
+          Monitor intelligent execution chains, optimize prompt fidelity, and scale autonomous AI operations in real time.
         </p>
       </div>
 
       <div class="hero-card">
         <h4>AI Execution Success</h4>
         <div class="big" id="execSuccess">98.4%</div>
-        <div class="status">● Live AI orchestration stable</div>
+        <div class="status">
+          <span class="pulse-dot"></span>
+          Live AI Orchestration Active
+        </div>
       </div>
     </section>
 
-    <div class="grid">
+    <!-- VIEW 1: DASHBOARD (Overview) -->
+    <div class="view-container active" id="view-dashboard">
+      <!-- 4 Top KPI Cards -->
+      <section class="kpi-grid">
+        <div class="card">
+          <div class="kpi-top">
+            <span class="kpi-title">AI Agent Runtime</span>
+            <span class="badge badge-primary">+12.4% EFF</span>
+          </div>
+          <div class="kpi-value" id="runtimeVal">14h 32m</div>
+          <div style="font-size: 11.5px; color: var(--muted);">Across 12 Active Agent Nodes</div>
+        </div>
 
-      <div class="card kpi">
-        <h3>AI Agent Runtime</h3>
-        <div class="value" id="runtimeVal">14h 32m</div>
-        <span class="badge">+12.4% Efficiency</span>
-      </div>
+        <div class="card">
+          <div class="kpi-top">
+            <span class="kpi-title">Prompt Accuracy</span>
+            <span class="badge badge-success">HIGH FIDELITY</span>
+          </div>
+          <div class="kpi-value" id="accuracyVal" style="color: var(--success);">92.8%</div>
+          <div style="font-size: 11.5px; color: var(--muted);">Semantic Intent Alignment</div>
+        </div>
 
-      <div class="card kpi">
-        <h3>Prompt Accuracy</h3>
-        <div class="value" id="accuracyVal">92.8%</div>
-        <span class="badge">High Fidelity</span>
-      </div>
+        <div class="card">
+          <div class="kpi-top">
+            <span class="kpi-title">Token Consumption</span>
+            <span class="badge badge-warning">OPTIMIZED</span>
+          </div>
+          <div class="kpi-value" id="tokenVal">18.4M</div>
+          <div style="font-size: 11.5px; color: var(--muted);">-14.7% Cache Compression</div>
+        </div>
 
-      <div class="card kpi">
-        <h3>Token Consumption</h3>
-        <div class="value" id="tokenVal">18.4M</div>
-        <span class="badge">Optimized Usage</span>
-      </div>
+        <div class="card">
+          <div class="kpi-top">
+            <span class="kpi-title">AI Operational Cost</span>
+            <span class="badge badge-secondary">-6.2% REDUCTION</span>
+          </div>
+          <div class="kpi-value" id="costVal" style="color: var(--primary);">$8,412</div>
+          <div style="font-size: 11.5px; color: var(--muted);">Budget Variance Under Target</div>
+        </div>
+      </section>
 
-      <div class="card kpi">
-        <h3>AI Operational Cost</h3>
-        <div class="value" id="costVal">$8,412</div>
-        <span class="badge">-6.2% Reduction</span>
-      </div>
+      <!-- Charts & Side Panels -->
+      <section class="chart-grid">
+        <!-- Main Line Chart -->
+        <div class="card">
+          <div class="chart-header">
+            <div class="chart-title">AI Workflow Intelligence Analytics</div>
+            <div style="display: flex; gap: 8px;">
+              <span class="badge badge-primary">QTD TIMELINE</span>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="analyticsChart"></canvas>
+          </div>
+        </div>
 
-      <div class="card chart-lg">
-        <h3>AI Workflow Intelligence Analytics</h3>
-        <canvas id="analyticsChart"></canvas>
-      </div>
+        <!-- Side Stack -->
+        <div class="side-stack">
+          <!-- Intent Mapping -->
+          <div class="card" style="padding: 18px;">
+            <div class="chart-header" style="margin-bottom: 12px;">
+              <div class="chart-title" style="font-size: 15px;">Operator Intent Mapping™</div>
+            </div>
 
-      <div class="side-panel">
-
-        <div class="panel">
-          <h3>Operator Intent Mapping™</h3>
-
-          <div class="intent">
             <div class="intent-item">
               <strong>Execution Precision</strong>
-              Autonomous workflow routing confidence
-              <div class="bar"><span id="bar1" style="width:94%"></span></div>
+              Autonomous routing confidence
+              <div class="bar"><span id="bar1" style="width: 94%;"></span></div>
             </div>
 
             <div class="intent-item">
               <strong>Prompt Optimization</strong>
-              Semantic intent stability monitoring
-              <div class="bar"><span id="bar2" style="width:87%"></span></div>
+              Semantic drift stability
+              <div class="bar"><span id="bar2" style="width: 87%;"></span></div>
             </div>
 
-            <div class="intent-item">
+            <div class="intent-item" style="margin-bottom: 0;">
               <strong>Automation Trust Layer</strong>
-              AI execution governance score
-              <div class="bar"><span id="bar3" style="width:91%"></span></div>
+              AI execution governance
+              <div class="bar"><span id="bar3" style="width: 91%;"></span></div>
+            </div>
+          </div>
+
+          <!-- Pipeline Architecture -->
+          <div class="card" style="padding: 18px;">
+            <div class="chart-header" style="margin-bottom: 6px;">
+              <div class="chart-title" style="font-size: 15px;">Automation Pipeline Stages</div>
+            </div>
+            <div style="font-size: 11.5px; color: var(--muted); margin-bottom: 10px;">Click stage to inspect latency:</div>
+
+            <div class="pipeline" id="pipelineNodes">
+              <div class="node active" data-stage="Intent">Intent<div style="font-size: 10px; color: var(--primary);">42ms</div></div>
+              <div class="node" data-stage="Prompt">Prompt<div style="font-size: 10px; color: var(--primary);">18ms</div></div>
+              <div class="node" data-stage="AI Agent">Agent<div style="font-size: 10px; color: var(--primary);">180ms</div></div>
+              <div class="node" data-stage="Validation">Verify<div style="font-size: 10px; color: var(--primary);">35ms</div></div>
+              <div class="node" data-stage="Deploy">Deploy<div style="font-size: 10px; color: var(--primary);">12ms</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Row: Activity Feed & Live Terminal -->
+      <section class="bottom-grid">
+        <div class="card">
+          <div class="chart-header">
+            <div class="chart-title">Live Activity Feed</div>
+            <span class="badge badge-success">LIVE STREAM</span>
+          </div>
+
+          <div class="activity-feed" id="activityFeed">
+            <div class="feed">
+              <div class="dot"></div>
+              <p>Operator workflow “Surgical Prompt Architecture™” deployed successfully.</p>
+            </div>
+            <div class="feed">
+              <div class="dot"></div>
+              <p>AI Agent #04 completed semantic optimization with 98.2% fidelity.</p>
+            </div>
+            <div class="feed">
+              <div class="dot"></div>
+              <p>Execution chain validation completed in 2.1 seconds.</p>
+            </div>
+            <div class="feed">
+              <div class="dot"></div>
+              <p>Token optimization protocol reduced usage by 14.7%.</p>
             </div>
           </div>
         </div>
 
-        <div class="panel">
-          <h3>Automation Pipeline</h3>
-
-          <div class="pipeline">
-            <div class="node">Intent</div>
-            <div class="node">Prompt</div>
-            <div class="node">AI Agent</div>
-            <div class="node">Validation</div>
-            <div class="node">Deploy</div>
+        <!-- Terminal Console -->
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div style="font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted);">surgical_ai_daemon.log</div>
+            <div class="terminal-controls">
+              <button class="terminal-btn" id="clearTerminalBtn">Clear</button>
+              <button class="terminal-btn" id="pauseTerminalBtn">Pause</button>
+            </div>
           </div>
-        </div>
 
+          <div class="logs" id="terminalLogs">[SYSTEM] AI orchestration layer initialized...
+[SUCCESS] Workflow Intelligence API connected.
+[INFO] Prompt execution fidelity: 98.4%
+[TRACE] Autonomous routing node activated.
+[SUCCESS] AI Agent #12 deployed to production.
+[INFO] Live semantic optimization active.
+[TRACE] Token compression layer engaged.
+[SUCCESS] Operator Intent Mapping™ synchronized.
+[INFO] Predictive execution analytics running...
+[DONE] Surgical AI Workspace stable.</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: AI AGENTS -->
+    <div class="view-container" id="view-agents">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-family: 'Syne'; font-size: 20px;">Autonomous AI Agent Registry (12 Deployed)</h3>
+        <button class="btn" onclick="openDeployModal()">+ Deploy New Agent</button>
       </div>
 
-      <div class="card activity">
-        <h3>Live Activity Feed</h3>
+      <div class="agents-grid" id="agentsList">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
 
-        <div class="activity-feed" id="activityFeed">
-          <div class="feed">
-            <div class="dot"></div>
-            <p>Operator workflow “Surgical Prompt Architecture™” deployed successfully.</p>
-          </div>
+    <!-- VIEW 3: EXECUTION CHAINS -->
+    <div class="view-container" id="view-chains">
+      <h3 style="font-family: 'Syne'; font-size: 20px; margin-bottom: 20px;">Active Execution Chains (08 Orchestrated)</h3>
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+          <thead>
+            <tr style="background: rgba(255,255,255,.03); border-bottom: 1px solid var(--panel-border); font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted);">
+              <th style="padding: 14px 20px;">Chain ID</th>
+              <th style="padding: 14px 20px;">Workflow Name</th>
+              <th style="padding: 14px 20px;">Nodes</th>
+              <th style="padding: 14px 20px;">Avg Latency</th>
+              <th style="padding: 14px 20px;">Success Rate</th>
+              <th style="padding: 14px 20px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="chainsTableBody">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-          <div class="feed">
-            <div class="dot"></div>
-            <p>AI Agent #04 completed semantic optimization with 98.2% fidelity.</p>
-          </div>
-
-          <div class="feed">
-            <div class="dot"></div>
-            <p>Execution chain validation completed in 2.1 seconds.</p>
-          </div>
-
-          <div class="feed">
-            <div class="dot"></div>
-            <p>Token optimization protocol reduced usage by 14.7%.</p>
-          </div>
+    <!-- VIEW 4: PROMPT ANALYTICS -->
+    <div class="view-container" id="view-prompts">
+      <h3 style="font-family: 'Syne'; font-size: 20px; margin-bottom: 20px;">Prompt Engineering & Semantic Compression</h3>
+      <div class="kpi-grid">
+        <div class="card">
+          <div class="kpi-title">Avg Prompt Tokens</div>
+          <div class="kpi-value" style="color: var(--primary);">1,420</div>
+          <span class="badge badge-success">-38.2% via AST Pruning</span>
+        </div>
+        <div class="card">
+          <div class="kpi-title">Context Cache Hit</div>
+          <div class="kpi-value" style="color: var(--success);">88.4%</div>
+          <span class="badge badge-primary">Sub-50ms TTFT</span>
+        </div>
+        <div class="card">
+          <div class="kpi-title">Prompt Drift Rate</div>
+          <div class="kpi-value">1.2%</div>
+          <span class="badge badge-secondary">Low Variance</span>
+        </div>
+        <div class="card">
+          <div class="kpi-title">Hallucination Risk</div>
+          <div class="kpi-value" style="color: var(--warning);">&lt; 0.4%</div>
+          <span class="badge badge-warning">Zero Critical</span>
         </div>
       </div>
+    </div>
 
-      <div class="terminal">
-        <div class="terminal-header">
-          <span></span><span></span><span></span>
-        </div>
-
-        <div class="logs" id="terminalLogs">
-          [SYSTEM] AI orchestration layer initialized...<br>
-          [SUCCESS] Workflow Intelligence API connected.<br>
-          [INFO] Prompt execution fidelity: 98.4%<br>
-          [TRACE] Autonomous routing node activated.<br>
-          [SUCCESS] AI Agent #12 deployed to production.<br>
-          [INFO] Live semantic optimization active.<br>
-          [TRACE] Token compression layer engaged.<br>
-          [SUCCESS] Operator Intent Mapping™ synchronized.<br>
-          [INFO] Predictive execution analytics running...<br>
-          [DONE] Surgical AI Workspace stable.
+    <!-- VIEW 5: OPERATOR MAPPING -->
+    <div class="view-container" id="view-operator">
+      <h3 style="font-family: 'Syne'; font-size: 20px; margin-bottom: 20px;">Operator Intent Mapping™ Matrix</h3>
+      <div class="card">
+        <p style="color: var(--muted); margin-bottom: 16px;">Heuristic classification matrix mapping high-level user commands to specific AI agent capabilities.</p>
+        <div id="operatorMatrix" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+          <!-- Injected via JS -->
         </div>
       </div>
+    </div>
 
+    <!-- VIEW 6: AUTOMATION FLOWS -->
+    <div class="view-container" id="view-automation">
+      <h3 style="font-family: 'Syne'; font-size: 20px; margin-bottom: 20px;">Automation Flows & Webhook Triggers</h3>
+      <div class="card">
+        <div id="flowsList" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 7: TOKEN MONITORING -->
+    <div class="view-container" id="view-tokens">
+      <h3 style="font-family: 'Syne'; font-size: 20px; margin-bottom: 20px;">Real-Time Token Ingestion & Quotas</h3>
+      <div class="card" style="padding: 24px;">
+        <canvas id="tokensChart" style="height: 320px;"></canvas>
+      </div>
+    </div>
+
+    <!-- VIEW 8: COST CENTER -->
+    <div class="view-container" id="view-cost">
+      <h3 style="font-family: 'Syne'; font-size: 20px; margin-bottom: 20px;">Enterprise AI Cost Allocation</h3>
+      <div class="kpi-grid">
+        <div class="card">
+          <div class="kpi-title">GPT-4o Spend</div>
+          <div class="kpi-value">$4,280</div>
+          <span class="badge badge-primary">50.8% Share</span>
+        </div>
+        <div class="card">
+          <div class="kpi-title">Claude 3.5 Spend</div>
+          <div class="kpi-value">$2,940</div>
+          <span class="badge badge-secondary">34.9% Share</span>
+        </div>
+        <div class="card">
+          <div class="kpi-title">Gemini 1.5 Spend</div>
+          <div class="kpi-value">$1,192</div>
+          <span class="badge badge-warning">14.3% Share</span>
+        </div>
+        <div class="card">
+          <div class="kpi-title">Cost Per Exec</div>
+          <div class="kpi-value" style="color: var(--success);">$0.0028</div>
+          <span class="badge badge-success">-22% MoM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 9: SYSTEM LOGS -->
+    <div class="view-container" id="view-logs">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-family: 'Syne'; font-size: 20px;">System Orchestration Event Stream</h3>
+        <button class="btn" onclick="injectTestLog()">+ Dispatch Test Event</button>
+      </div>
+      <div class="terminal" style="height: 500px;">
+        <div class="logs" id="fullLogs" style="height: 100%;"></div>
+      </div>
     </div>
 
   </main>
+</div>
 
-  <footer style="text-align:center; padding: 25px; font-size: 11px; color: var(--muted); opacity: 0.7; border-top: 1px solid var(--panel-border); margin-top: 20px; font-family: 'Inter', sans-serif;">
-    Surgical AI Workspace (Interactive Prototype) · Proprietary Workflow Architecture · Engineered by Datta Sable · © 2026 dattasable.com
-  </footer>
+<!-- Deploy Workflow Modal -->
+<div class="modal-backdrop" id="deployModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Deploy AI Execution Chain</h3>
+      <button style="background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px;" onclick="closeDeployModal()">✕</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Select AI Agent Node</label>
+      <select class="form-select" id="deployAgentSelect">
+        <option>Agent #01 — Surgical Prompt Architect</option>
+        <option>Agent #02 — Semantic Intent Parser</option>
+        <option>Agent #03 — Token Optimization Layer</option>
+        <option>Agent #04 — Multi-Node Validation Engine</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Workflow Execution Pattern</label>
+      <select class="form-select" id="deployPatternSelect">
+        <option>Autonomous Sequential DAG</option>
+        <option>Concurrent Map-Reduce</option>
+        <option>Surgical Heuristic Feedback Loop</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Simulation Concurrency</label>
+      <input type="number" class="form-input" value="100" min="1" max="1000">
+    </div>
+
+    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px;">
+      <button class="terminal-btn" style="padding: 10px 16px;" onclick="closeDeployModal()">Cancel</button>
+      <button class="btn" onclick="submitDeployWorkflow()">Launch Deployment</button>
+    </div>
+  </div>
 </div>
 
 <script>
+  // State
   let currentPeriod = 'QTD';
-  const pMult = { 'WTD': 0.1, 'MTD': 0.35, 'QTD': 1.0, 'YTD': 4.2 };
-  let chart;
+  let isTerminalPaused = false;
+  let chart = null;
+  let tokensChart = null;
+
+  const PERIOD_MULT = { 'WTD': 0.12, 'MTD': 0.38, 'QTD': 1.0, 'YTD': 4.15 };
+
+  // Sample Agents Data
+  const AGENTS = [
+    { id: '#01', name: 'Prompt Architect', model: 'Claude 3.5 Sonnet', status: 'Active', tokens: '4.2M', fidelity: '99.4%' },
+    { id: '#02', name: 'Intent Classifier', model: 'GPT-4o', status: 'Active', tokens: '3.8M', fidelity: '98.1%' },
+    { id: '#03', name: 'AST Pruning Engine', model: 'Gemini 1.5 Pro', status: 'Optimizing', tokens: '2.1M', fidelity: '97.6%' },
+    { id: '#04', name: 'Semantic Guardrail', model: 'Claude 3.5 Sonnet', status: 'Active', tokens: '1.9M', fidelity: '99.8%' },
+    { id: '#05', name: 'Vector Embedding Sync', model: 'Text-Embedding-3', status: 'Active', tokens: '5.6M', fidelity: '99.9%' },
+    { id: '#06', name: 'Output Verification', model: 'GPT-4o', status: 'Active', tokens: '2.4M', fidelity: '96.9%' },
+    { id: '#07', name: 'Context Compactor', model: 'Custom LoRA', status: 'Active', tokens: '3.1M', fidelity: '98.5%' },
+    { id: '#08', name: 'Autonomous Router', model: 'Claude 3.5 Haiku', status: 'Idle', tokens: '890K', fidelity: '99.0%' },
+    { id: '#09', name: 'Telemetry Probe', model: 'System Node', status: 'Active', tokens: '1.2M', fidelity: '100%' },
+    { id: '#10', name: 'Code Synthesizer', model: 'Claude 3.5 Sonnet', status: 'Active', tokens: '4.8M', fidelity: '98.7%' },
+    { id: '#11', name: 'Schema Validator', model: 'Zod Native', status: 'Active', tokens: '640K', fidelity: '100%' },
+    { id: '#12', name: 'Surgical Dispatcher', model: 'GPT-4o', status: 'Active', tokens: '3.5M', fidelity: '99.2%' }
+  ];
+
+  const CHAINS = [
+    { id: 'CHN-001', name: 'End-to-End Prompt Hardening', nodes: 5, latency: '142ms', success: '99.4%' },
+    { id: 'CHN-002', name: 'Autonomous Intent Disambiguation', nodes: 3, latency: '86ms', success: '98.7%' },
+    { id: 'CHN-003', name: 'Recursive AST Token Compression', nodes: 4, latency: '115ms', success: '99.1%' },
+    { id: 'CHN-004', name: 'Multi-Agent Consensus Protocol', nodes: 7, latency: '320ms', success: '97.9%' },
+    { id: 'CHN-005', name: 'Real-time Guardrail Interception', nodes: 2, latency: '48ms', success: '99.8%' },
+    { id: 'CHN-006', name: 'Predictive Cache Pre-warming', nodes: 3, latency: '65ms', success: '98.5%' },
+    { id: 'CHN-007', name: 'Schema Integrity Verification', nodes: 4, latency: '94ms', success: '99.6%' },
+    { id: 'CHN-008', name: 'Surgical Enterprise Rollout', nodes: 6, latency: '210ms', success: '99.2%' }
+  ];
 
   function randomRange(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-  function updateData() {
-    const m = pMult[currentPeriod];
-    
-    // Update KPIs
-    document.getElementById('execSuccess').innerText = (95 + Math.random() * 4.5).toFixed(1) + '%';
-    document.getElementById('runtimeVal').innerText = Math.floor(10 + Math.random() * 20 * m) + 'h ' + randomRange(10, 59) + 'm';
-    document.getElementById('accuracyVal').innerText = (90 + Math.random() * 8).toFixed(1) + '%';
-    document.getElementById('tokenVal').innerText = (18.4 * m + Math.random() * 2).toFixed(1) + 'M';
-    document.getElementById('costVal').innerText = '$' + Math.floor(8412 * m + Math.random() * 500).toLocaleString();
-
-    // Update Bars
-    document.getElementById('bar1').style.width = randomRange(85, 98) + '%';
-    document.getElementById('bar2').style.width = randomRange(80, 95) + '%';
-    document.getElementById('bar3').style.width = randomRange(88, 99) + '%';
-
-    // Update Chart
-    if (chart) {
-      chart.data.datasets[0].data = Array.from({length: 7}, () => randomRange(60, 100));
-      chart.data.datasets[1].data = Array.from({length: 7}, () => randomRange(50, 90));
-      chart.update();
+  // Safe Chart Initialization
+  function initMainChart() {
+    if (typeof Chart === 'undefined') {
+      console.warn('Chart.js not loaded yet');
+      return;
     }
+    const ctx = document.getElementById('analyticsChart');
+    if (!ctx) return;
 
-    // Add random log
-    const logs = document.getElementById('terminalLogs');
-    const newLog = document.createElement('div');
-    const types = ['[INFO]', '[SUCCESS]', '[TRACE]', '[SYSTEM]'];
-    const msgs = [
-      'Semantic intent synchronized.',
-      'AI Agent #'+randomRange(1,20)+' optimized.',
-      'Token compression active.',
-      'Execution chain validated.',
-      'Surgical mapping updated.'
-    ];
-    newLog.innerHTML = `${types[randomRange(0,3)]} ${msgs[randomRange(0,4)]}`;
-    logs.prepend(newLog);
-    if(logs.children.length > 15) logs.lastElementChild.remove();
-  }
+    if (chart) chart.destroy();
 
-  // Tabs
-  document.querySelectorAll('.p-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.p-tab').forEach(b => {
-        b.style.background = 'none';
-        b.style.color = 'var(--muted)';
-        b.style.boxShadow = 'none';
-      });
-      btn.style.background = 'var(--primary)';
-      btn.style.color = '#000';
-      btn.style.boxShadow = '0 4px 12px rgba(110,231,255,.3)';
-      currentPeriod = btn.innerText;
-      updateData();
-    });
-  });
-
-  const ctx = document.getElementById('analyticsChart');
-  chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-      datasets: [
-        {
-          label:'Workflow Efficiency',
-          data:[62,74,81,79,92,96,99],
-          borderColor:'#6ee7ff',
-          backgroundColor:'rgba(110,231,255,.15)',
-          fill:true,
-          tension:.4
-        },
-        {
-          label:'AI Cost Optimization',
-          data:[88,84,79,73,68,61,58],
-          borderColor:'#7c5cff',
-          backgroundColor:'rgba(124,92,255,.15)',
-          fill:true,
-          tension:.4
-        }
-      ]
-    },
-    options:{
-      responsive:true,
-      maintainAspectRatio: false,
-      plugins:{
-        legend:{
-          labels:{
-            color:'#9fb0c7'
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Workflow Efficiency (%)',
+            data: [68, 79, 84, 82, 94, 97, 99],
+            borderColor: '#6ee7ff',
+            backgroundColor: 'rgba(110, 231, 255, .12)',
+            fill: true,
+            tension: .35,
+            borderWidth: 2.5
+          },
+          {
+            label: 'Cost Optimization Index',
+            data: [88, 83, 76, 71, 65, 59, 54],
+            borderColor: '#7c5cff',
+            backgroundColor: 'transparent',
+            borderDash: [5, 5],
+            tension: .35,
+            borderWidth: 2
           }
-        }
+        ]
       },
-      scales:{
-        x:{
-          ticks:{
-            color:'#9fb0c7'
-          },
-          grid:{
-            color:'rgba(255,255,255,.05)'
-          }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#9fb0c7', font: { family: 'Inter', size: 12 } } }
         },
-        y:{
-          ticks:{
-            color:'#9fb0c7'
+        scales: {
+          x: {
+            ticks: { color: '#9fb0c7', font: { family: 'JetBrains Mono', size: 10 } },
+            grid: { color: 'rgba(255, 255, 255, .05)' }
           },
-          grid:{
-            color:'rgba(255,255,255,.05)'
+          y: {
+            ticks: { color: '#9fb0c7', font: { family: 'JetBrains Mono', size: 10 } },
+            grid: { color: 'rgba(255, 255, 255, .05)' }
           }
         }
       }
+    });
+  }
+
+  // Recalculate KPIs based on period tab
+  function updateData() {
+    const mult = PERIOD_MULT[currentPeriod] || 1.0;
+
+    document.getElementById('execSuccess').innerText = (97.5 + Math.random() * 2).toFixed(1) + '%';
+    document.getElementById('runtimeVal').innerText = Math.floor(14 * mult) + 'h ' + randomRange(10, 55) + 'm';
+    document.getElementById('accuracyVal').innerText = (92.0 + Math.random() * 6).toFixed(1) + '%';
+    document.getElementById('tokenVal').innerText = (18.4 * mult + Math.random() * 1.5).toFixed(1) + 'M';
+    document.getElementById('costVal').innerText = '$' + Math.floor(8412 * mult).toLocaleString();
+
+    document.getElementById('bar1').style.width = randomRange(88, 98) + '%';
+    document.getElementById('bar2').style.width = randomRange(82, 95) + '%';
+    document.getElementById('bar3').style.width = randomRange(89, 99) + '%';
+
+    if (chart) {
+      chart.data.datasets[0].data = Array.from({ length: 7 }, () => randomRange(70, 99));
+      chart.data.datasets[1].data = Array.from({ length: 7 }, () => randomRange(50, 85));
+      chart.update();
     }
-  });
+  }
 
-  const toggle = document.getElementById("themeToggle");
-  toggle.addEventListener("click",()=>{
-    document.body.classList.toggle("light");
-    toggle.innerHTML = document.body.classList.contains("light") ? "☀" : "☾";
-    setTimeout(() => chart.update(), 100);
-  });
+  // Switch Active View Tab
+  function switchTab(tabId) {
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.tab === tabId);
+    });
 
-  window.addEventListener('load', updateData);
+    document.querySelectorAll('.view-container').forEach(view => {
+      view.classList.remove('active');
+    });
+
+    const target = document.getElementById(`view-${tabId}`);
+    if (target) {
+      target.classList.add('active');
+    }
+
+    if (tabId === 'tokens' && !tokensChart) {
+      initTokensChart();
+    }
+  }
+
+  function initTokensChart() {
+    if (typeof Chart === 'undefined') return;
+    const ctx = document.getElementById('tokensChart');
+    if (!ctx) return;
+
+    tokensChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Agent 01', 'Agent 02', 'Agent 03', 'Agent 04', 'Agent 05', 'Agent 06', 'Agent 07', 'Agent 08'],
+        datasets: [{
+          label: 'Token Volume (Millions)',
+          data: [4.2, 3.8, 2.1, 1.9, 5.6, 2.4, 3.1, 0.9],
+          backgroundColor: '#6ee7ff',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#9fb0c7' } } },
+        scales: {
+          x: { ticks: { color: '#9fb0c7' }, grid: { display: false } },
+          y: { ticks: { color: '#9fb0c7' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        }
+      }
+    });
+  }
+
+  // Render Agents
+  function renderAgents() {
+    const container = document.getElementById('agentsList');
+    if (!container) return;
+
+    container.innerHTML = AGENTS.map(a => `
+      <div class="agent-card">
+        <div class="agent-header">
+          <span class="agent-name">${a.id} ${a.name}</span>
+          <span class="badge ${a.status === 'Active' ? 'badge-success' : 'badge-warning'}">${a.status}</span>
+        </div>
+        <div class="agent-role">Engine: <strong>${a.model}</strong></div>
+        <div class="agent-metrics">
+          <div>Tokens: <strong>${a.tokens}</strong></div>
+          <div>Fidelity: <strong style="color: var(--primary);">${a.fidelity}</strong></div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="terminal-btn" style="flex: 1;" onclick="inspectAgent('${a.id}')">Inspect Telemetry</button>
+          <button class="terminal-btn" style="color: var(--primary);" onclick="triggerAgent('${a.id}')">Ping</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Render Chains Table
+  function renderChains() {
+    const tbody = document.getElementById('chainsTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = CHAINS.map(c => `
+      <tr style="border-bottom: 1px solid var(--panel-border);">
+        <td style="padding: 12px 20px; font-family: 'JetBrains Mono'; color: var(--primary);">${c.id}</td>
+        <td style="padding: 12px 20px; font-weight: 600;">${c.name}</td>
+        <td style="padding: 12px 20px; font-family: 'JetBrains Mono';">${c.nodes} Nodes</td>
+        <td style="padding: 12px 20px; font-family: 'JetBrains Mono';">${c.latency}</td>
+        <td style="padding: 12px 20px; font-family: 'JetBrains Mono'; color: var(--success);">${c.success}</td>
+        <td style="padding: 12px 20px;">
+          <button class="terminal-btn" onclick="executeChain('${c.id}')">Execute Run</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // Render Operator Mapping Matrix
+  function renderOperatorMatrix() {
+    const container = document.getElementById('operatorMatrix');
+    if (!container) return;
+
+    const intents = [
+      { trigger: 'Refactor SQL Model', target: 'Agent #01 & #10', score: '99.4%' },
+      { trigger: 'Compress Prompt Tokens', target: 'Agent #03 & #07', score: '98.8%' },
+      { trigger: 'Verify Schema Conformity', target: 'Agent #11', score: '100%' },
+      { trigger: 'Detect Semantic Drift', target: 'Agent #04', score: '99.1%' },
+      { trigger: 'Parallel DAG Rollout', target: 'Agent #12', score: '97.9%' },
+      { trigger: 'Cache Warmup Protocol', target: 'Agent #05', score: '99.7%' }
+    ];
+
+    container.innerHTML = intents.map(i => `
+      <div class="intent-item" style="margin-bottom: 0;">
+        <strong style="color: var(--primary);">${i.trigger}</strong>
+        Mapped Agent: ${i.target}
+        <div style="margin-top: 6px; font-family: 'JetBrains Mono'; font-size: 11px; color: var(--success);">Routing Confidence: ${i.score}</div>
+      </div>
+    `).join('');
+  }
+
+  // Render Automation Flows
+  function renderAutomationFlows() {
+    const container = document.getElementById('flowsList');
+    if (!container) return;
+
+    const flows = [
+      { name: 'Cron: Daily Token Compression Re-index', trigger: 'Every 24h at 00:00 UTC', status: 'Running' },
+      { name: 'Webhook: GitHub PR Semantic Verification', trigger: 'On pull_request.opened', status: 'Active' },
+      { name: 'Alert: Token Cost Spike Interceptor', trigger: 'Delta > 15% threshold', status: 'Armed' },
+      { name: 'Telemetry: 60-second Agent Health Heartbeat', trigger: 'Real-time daemon', status: 'Healthy' }
+    ];
+
+    container.innerHTML = flows.map(f => `
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 12px; background: rgba(255,255,255,.02); border: 1px solid var(--panel-border);">
+        <div>
+          <strong style="font-size: 13.5px; display: block;">${f.name}</strong>
+          <span style="font-size: 11.5px; color: var(--muted); font-family: 'JetBrains Mono';">${f.trigger}</span>
+        </div>
+        <span class="badge badge-success">${f.status}</span>
+      </div>
+    `).join('');
+  }
+
+  // Live Terminal Log Streamer
+  function appendTerminalLog(msg, type = '[INFO]') {
+    if (isTerminalPaused) return;
+    const term = document.getElementById('terminalLogs');
+    const fullLogs = document.getElementById('fullLogs');
+
+    const line = `${type} ${msg}\n`;
+    if (term) {
+      term.innerHTML = line + term.innerHTML;
+      if (term.innerText.length > 3000) {
+        term.innerText = term.innerText.substring(0, 2500);
+      }
+    }
+    if (fullLogs) {
+      fullLogs.innerHTML = line + fullLogs.innerHTML;
+    }
+  }
+
+  function startLogStream() {
+    const types = ['[INFO]', '[SUCCESS]', '[TRACE]', '[SYSTEM]'];
+    const sampleMsgs = [
+      'Semantic intent synchronized across regional gateway.',
+      'AI Agent #04 completed heuristic evaluation in 18ms.',
+      'Token compression ratio improved to -38.4%.',
+      'Execution DAG CHN-002 dispatched to inference cluster.',
+      'Context cache hit on operator prompt template.',
+      'Memory utilization optimal across host orchestrators.'
+    ];
+
+    setInterval(() => {
+      if (isTerminalPaused) return;
+      const t = types[Math.floor(Math.random() * types.length)];
+      const m = sampleMsgs[Math.floor(Math.random() * sampleMsgs.length)];
+      appendTerminalLog(m, t);
+    }, 4500);
+  }
+
+  // Interactivity Actions
+  window.inspectAgent = function(id) {
+    appendTerminalLog(`Manual probe dispatched to ${id}. Status: HEALTHY, Latency: 22ms.`, '[TRACE]');
+    alert(`Inspecting ${id}: Telemetry node operational with 99.8% fidelity.`);
+  };
+
+  window.triggerAgent = function(id) {
+    appendTerminalLog(`Direct ping to ${id} returned ACK in 14ms.`, '[SUCCESS]');
+  };
+
+  window.executeChain = function(id) {
+    appendTerminalLog(`Triggered execution run on ${id}...`, '[SYSTEM]');
+    setTimeout(() => {
+      appendTerminalLog(`Execution run ${id} completed with 100% step convergence.`, '[SUCCESS]');
+    }, 800);
+  };
+
+  window.injectTestLog = function() {
+    appendTerminalLog(`Custom operator command executed via console.`, '[SUCCESS]');
+  };
+
+  // Modal Functions
+  window.openDeployModal = function() {
+    document.getElementById('deployModal').classList.add('open');
+  };
+  window.closeDeployModal = function() {
+    document.getElementById('deployModal').classList.remove('open');
+  };
+  window.submitDeployWorkflow = function() {
+    const agent = document.getElementById('deployAgentSelect').value;
+    const pattern = document.getElementById('deployPatternSelect').value;
+    closeDeployModal();
+
+    appendTerminalLog(`Deployment initiated: ${agent} (${pattern})`, '[SYSTEM]');
+    setTimeout(() => {
+      appendTerminalLog(`Deployment converged! Autonomous node online.`, '[SUCCESS]');
+      // Add feed item
+      const feed = document.getElementById('activityFeed');
+      if (feed) {
+        const item = document.createElement('div');
+        item.className = 'feed';
+        item.innerHTML = `<div class="dot"></div><p>Workflow deployed: <strong>${agent}</strong> (${pattern})</p>`;
+        feed.prepend(item);
+      }
+    }, 1000);
+  };
+
+  // Initialization
+  window.addEventListener('DOMContentLoaded', () => {
+    // 1. Sidebar Nav
+    document.querySelectorAll('#sidebarMenu .menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        switchTab(item.dataset.tab);
+      });
+    });
+
+    // 2. Period Tabs
+    document.querySelectorAll('#periodTabs .p-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('#periodTabs .p-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentPeriod = tab.dataset.period;
+        updateData();
+      });
+    });
+
+    // 3. Deploy Workflow button
+    document.getElementById('deployWorkflowBtn').addEventListener('click', openDeployModal);
+
+    // 4. Pipeline Nodes
+    document.querySelectorAll('#pipelineNodes .node').forEach(node => {
+      node.addEventListener('click', () => {
+        document.querySelectorAll('#pipelineNodes .node').forEach(n => n.classList.remove('active'));
+        node.classList.add('active');
+        appendTerminalLog(`Pipeline inspection: Node '${node.dataset.stage}' active. Latency nominal.`, '[TRACE]');
+      });
+    });
+
+    // 5. Terminal Controls
+    document.getElementById('clearTerminalBtn').addEventListener('click', () => {
+      document.getElementById('terminalLogs').innerText = '[CONSOLE CLEARED]\n';
+    });
+
+    document.getElementById('pauseTerminalBtn').addEventListener('click', function() {
+      isTerminalPaused = !isTerminalPaused;
+      this.innerText = isTerminalPaused ? 'Resume' : 'Pause';
+    });
+
+    // 6. Theme Toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      themeBtn.innerText = document.body.classList.contains('light') ? '☀' : '☾';
+      if (chart) chart.update();
+      if (tokensChart) tokensChart.update();
+    });
+
+    // 7. Search filter
+    document.getElementById('globalSearch').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      if (q.length > 1) {
+        appendTerminalLog(`Searching workspace entities matching: "${q}"...`, '[INFO]');
+      }
+    });
+
+    // 8. Render Data Views
+    renderAgents();
+    renderChains();
+    renderOperatorMatrix();
+    renderAutomationFlows();
+
+    // 9. Init Chart & Start Stream
+    initMainChart();
+    startLogStream();
+    updateData();
+  });
 </script>
 
 </body>

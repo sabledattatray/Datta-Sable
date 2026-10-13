@@ -32,11 +32,20 @@ export default function SurgicalAIDashboardPage() {
                 <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Interactive Prototype: Enterprise Workflow Intelligence</div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-               <div className="flex items-center gap-2 px-3 py-1.5 bg-[#3df7b8]/10 border border-[#3df7b8]/20 rounded-full text-[#3df7b8] font-medium text-xs">
+            <div className="flex items-center gap-3">
+               <div className="flex items-center gap-2 px-3 py-1.5 bg-[#3df7b8]/10 border border-[#3df7b8]/20 rounded-full text-[#3df7b8] font-medium text-xs font-mono">
                  <div className="w-1.5 h-1.5 bg-[#3df7b8] rounded-full animate-pulse shadow-[0_0_6px_#3df7b8]"></div>
                  SYSTEM STABLE
                </div>
+               <a
+                 href="/Dashboard/surgical-ai-workspace.html"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="flex items-center gap-2 px-3.5 py-1.5 bg-[var(--surface)] hover:bg-[var(--surface-hover)] border border-[var(--border)] rounded-full text-xs font-semibold text-[var(--text)] transition-colors"
+               >
+                 <span>Fullscreen App</span>
+                 <span className="text-xs">↗</span>
+               </a>
             </div>
           </div>
         </header>
@@ -46,7 +55,7 @@ export default function SurgicalAIDashboardPage() {
           <iframe
             src="/Dashboard/surgical-ai-workspace.html"
             className="w-full"
-            style={{ height: '1100px', border: 'none', display: 'block' }}
+            style={{ height: '1250px', border: 'none', display: 'block' }}
             title="Surgical AI Workspace Dashboard"
             allowFullScreen
           />
