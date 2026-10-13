@@ -64,12 +64,6 @@ const systemPages = [
     content: `<h2>Frequently Asked Questions</h2><p>Have questions? Find answers to the most common queries regarding our BI services, tool integrations, and engagement models.</p>`
   },
   {
-    slug: 'portfolio',
-    title: 'Portfolio & Case Studies',
-    excerpt: 'Explore successful BI projects, engineering frameworks, and technical case studies.',
-    content: `<h2>Project Portfolio</h2><p>A showcase of enterprise dashboard solutions, custom analytics pipelines, and advanced automation workflows.</p>`
-  },
-  {
     slug: 'infrastructure',
     title: 'Infrastructure & Tech Stack',
     excerpt: 'The technical setup, hosting architecture, and frameworks powering this platform.',

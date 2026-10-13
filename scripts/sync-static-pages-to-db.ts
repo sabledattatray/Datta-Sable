@@ -241,7 +241,6 @@ const pagesConfig = [
   { slug: 'disclaimer', filePath: 'app/disclaimer/page.tsx', title: 'Disclaimer | Datta Sable', excerpt: 'Legal disclaimer for dattasable.com.' },
   { slug: 'editorial-policy', filePath: 'app/editorial-policy/page.tsx', title: 'Editorial Policy, AI Disclosure & Research Standards | Datta Sable', excerpt: 'Learn about our editorial standards, AI content disclosure, fact-checking process, research methodology, and testing protocols.' },
   { slug: 'faq', filePath: 'app/faq/FAQClientPage.tsx', title: 'Frequently Asked Questions (FAQ) | Datta Sable', excerpt: 'Answers to common questions about Business Intelligence services, Power BI optimization, SQL automation, and timelines.' },
-  { slug: 'portfolio', filePath: 'app/portfolio/PortfolioClientPage.tsx', title: 'Portfolio & Case Studies | Datta Sable', excerpt: 'Explore successful BI projects, custom data engineering frameworks, Tableau/Power BI dashboards, and technical automation.' },
   { slug: 'infrastructure', filePath: 'app/infrastructure/page.tsx', title: 'Creator Infrastructure Hub | Surgical AI Systems | Datta Sable', excerpt: 'The definitive hub for automation systems, AI content pipelines, and execution chains.' },
   { slug: 'start-here', filePath: 'app/start-here/page.tsx', title: 'Start Your Data Journey | BI & Analytics Knowledge Hub | Datta Sable', excerpt: 'A structured learning pathway from data fundamentals to advanced enterprise orchestration.' }
 ];
@@ -260,16 +259,9 @@ async function main() {
     const fileContent = fs.readFileSync(fullPath, 'utf-8');
     
     let returnIndex = -1;
-    if (page.slug === 'portfolio') {
-      const contentIndex = fileContent.indexOf('function PortfolioContent');
-      if (contentIndex !== -1) {
-        returnIndex = fileContent.indexOf('return (', contentIndex);
-      }
-    } else {
-      const exportDefaultIndex = fileContent.indexOf('export default');
-      if (exportDefaultIndex !== -1) {
-        returnIndex = fileContent.indexOf('return (', exportDefaultIndex);
-      }
+    const exportDefaultIndex = fileContent.indexOf('export default');
+    if (exportDefaultIndex !== -1) {
+      returnIndex = fileContent.indexOf('return (', exportDefaultIndex);
     }
 
     if (returnIndex === -1) {
@@ -430,20 +422,6 @@ async function main() {
         </div>
       `).join('');
       html = html.replace(/\{INFRA_SECTIONS\.map\([\s\S]*?\)\}/g, `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem;">${sectionsHtml}</div>`);
-    } else if (page.slug === 'portfolio') {
-      const projectsHtml = projects.map(p => `
-        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 1rem;">
-          <img src="${p.image}" alt="${p.title}" style="width: 100%; height: 160px; object-fit: cover;" />
-          <div style="padding: 1.5rem;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">${p.category}</span>
-            <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text); margin-top: 0.5rem; margin-bottom: 0.75rem;">${p.title}</h3>
-            <p style="color: var(--muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.5rem;">${p.description}</p>
-            <a href="${p.liveUrl}" style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.85rem;">Live Demo ➔</a>
-          </div>
-        </div>
-      `).join('');
-      html = html.replace(/\{filtered\.map\([\s\S]*?\)\}/g, `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">${projectsHtml}</div>`);
-      html = html.replace(/<AnimatePresence>[\s\S]*?<\/AnimatePresence>/g, `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">${projectsHtml}</div>`);
     } else if (page.slug === 'careers') {
       const jobsHtml = jobs.map(j => `
         <div style="background: var(--surface2); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">

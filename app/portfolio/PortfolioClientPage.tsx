@@ -1,17 +1,17 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
-import { ExternalLink, GitBranch, X, ChevronRight } from 'lucide-react';
+import { ExternalLink, GitBranch, X, ChevronRight, Layers } from 'lucide-react';
 
 import Crosshair from '@/components/Crosshair';
 
-const categories = ['All', 'Dashboard', 'Report', 'Analysis', 'Automation'];
-
 import { projects as staticProjects, ProjectData } from './data';
+
+const defaultCategoryOrder = ['All', 'Dashboard', 'Analysis', 'Automation', 'Report', 'AI Infrastructure'];
 
 function PortfolioContent() {
   const searchParams = useSearchParams();
@@ -36,12 +36,44 @@ function PortfolioContent() {
     loadProjects();
   }, []);
 
+  // Compute categories dynamically from project list
+  const categories = useMemo(() => {
+    const projectCats = Array.from(new Set(projectList.map(p => p.category))).filter(Boolean);
+    const ordered = defaultCategoryOrder.filter(c => c === 'All' || projectCats.includes(c));
+    const extras = projectCats.filter(c => !defaultCategoryOrder.includes(c));
+    return [...ordered, ...extras];
+  }, [projectList]);
+
+  // Compute item counts per category
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: projectList.length };
+    for (const p of projectList) {
+      if (p.category) {
+        counts[p.category] = (counts[p.category] || 0) + 1;
+      }
+    }
+    return counts;
+  }, [projectList]);
+
   useEffect(() => {
     const cat = searchParams.get('category');
     if (cat && categories.includes(cat)) {
       setActive(cat);
     }
-  }, [searchParams]);
+  }, [searchParams, categories]);
+
+  const handleCategoryChange = (cat: string) => {
+    setActive(cat);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (cat === 'All') {
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.set('category', cat);
+      }
+      window.history.replaceState(null, '', url.pathname + url.search);
+    }
+  };
 
   const filtered = active === 'All' ? projectList : projectList.filter(p => p.category === active);
 
@@ -70,36 +102,120 @@ function PortfolioContent() {
           </motion.div>
 
           {/* Filter tabs */}
-          <div className="flex flex-wrap gap-3" style={{ marginBottom: '2.5rem' }}>
-            {categories.map(cat => (
-              <button
-                key={cat}
-                className={`filter-tab ${active === cat ? 'active' : ''}`}
-                onClick={() => setActive(cat)}
-                style={{
-                  padding: '0.6rem 1.5rem',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  background: active === cat ? 'var(--accent)' : 'var(--tag-bg)',
-                  color: active === cat ? 'var(--btn-primary-text)' : 'var(--muted)',
-                  border: '1px solid var(--border)',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center gap-2.5" style={{ marginBottom: '1.75rem' }}>
+            {categories.map(cat => {
+              const isSelected = active === cat;
+              const count = categoryCounts[cat] || 0;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`filter-tab ${isSelected ? 'active' : ''}`}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '0.65rem 1.25rem',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    background: isSelected ? 'var(--accent)' : 'var(--tag-bg)',
+                    color: isSelected ? 'var(--btn-primary-text)' : 'var(--muted)',
+                    border: isSelected ? '1px solid var(--accent)' : '1px solid var(--border)',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                    boxShadow: isSelected ? '0 0 16px rgba(201, 243, 29, 0.25)' : 'none',
+                  }}
+                >
+                  <span>{cat}</span>
+                  <span
+                    className="mono"
+                    style={{
+                      fontSize: '10px',
+                      fontWeight: 700,
+                      padding: '2px 6px',
+                      borderRadius: '3px',
+                      background: isSelected ? 'rgba(0, 0, 0, 0.15)' : 'var(--surface)',
+                      color: isSelected ? 'var(--btn-primary-text)' : 'var(--accent)',
+                      border: isSelected ? 'none' : '1px solid var(--border)',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Grid */}
-          <motion.div
-            layout
-            className="grid-auto-fill-340"
-            style={{ marginBottom: '6rem' }}
+          {/* Sub-header meta */}
+          <div 
+            className="flex flex-wrap items-center justify-between gap-3 mb-8" 
+            style={{ 
+              borderBottom: '1px solid var(--border)', 
+              paddingBottom: '0.85rem' 
+            }}
           >
+            <div className="mono text-xs flex items-center gap-2" style={{ color: 'var(--muted)', letterSpacing: '0.05em' }}>
+              <Layers size={13} style={{ color: 'var(--accent)' }} />
+              <span>SHOWING</span>
+              <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{filtered.length}</span>
+              <span>{filtered.length === 1 ? 'CASE STUDY' : 'CASE STUDIES'}</span>
+              <span style={{ opacity: 0.5 }}>//</span>
+              <span style={{ color: 'var(--text)', fontWeight: 600 }}>{active.toUpperCase()}</span>
+            </div>
+            {active !== 'All' && (
+              <button
+                type="button"
+                onClick={() => handleCategoryChange('All')}
+                className="mono text-xs"
+                style={{ 
+                  background: 'none', 
+                  border: 'none', 
+                  color: 'var(--accent)', 
+                  cursor: 'pointer', 
+                  padding: 0,
+                  textDecoration: 'underline'
+                }}
+              >
+                [SHOW ALL PROJECTS]
+              </button>
+            )}
+          </div>
+
+          {/* Empty state or Grid */}
+          {filtered.length === 0 ? (
+            <div 
+              style={{ 
+                textAlign: 'center', 
+                padding: '4rem 1.5rem', 
+                background: 'var(--surface2)', 
+                border: '1px dashed var(--border)', 
+                borderRadius: '8px', 
+                marginBottom: '6rem' 
+              }}
+            >
+              <p style={{ color: 'var(--muted)', marginBottom: '1.25rem', fontSize: '0.95rem' }}>
+                No projects found in category &quot;{active}&quot;.
+              </p>
+              <button
+                type="button"
+                onClick={() => handleCategoryChange('All')}
+                className="btn-outline"
+                style={{ fontSize: '11px', padding: '0.6rem 1.25rem', cursor: 'pointer' }}
+              >
+                Reset to All Projects
+              </button>
+            </div>
+          ) : (
+            <motion.div
+              layout
+              className="grid-auto-fill-340"
+              style={{ marginBottom: '6rem' }}
+            >
             <AnimatePresence>
               {filtered.map((p) => (
                 <motion.div
@@ -143,14 +259,38 @@ function PortfolioContent() {
                       {p.tools.slice(0, 3).map(t => <span key={t} className="tag">{t}</span>)}
                       {p.tools.length > 3 && <span className="tag">+{p.tools.length - 3}</span>}
                     </div>
-                    <div className="flex items-center gap-1" style={{ color: p.color, fontSize: '0.875rem', fontWeight: 600 }}>
-                      View Case Study <ChevronRight size={14} />
+                    <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid var(--border)' }}>
+                      <div className="flex items-center gap-1" style={{ color: p.color, fontSize: '0.85rem', fontWeight: 600 }}>
+                        View Case Study <ChevronRight size={14} />
+                      </div>
+                      {Boolean(p.live && p.live !== '#' && p.live !== 'https://dattasable.com/dashboards') && (
+                        <a
+                          href={p.live}
+                          target={p.live.startsWith('http') ? '_blank' : undefined}
+                          rel={p.live.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          onClick={(e) => e.stopPropagation()}
+                          className="mono text-xs flex items-center gap-1.5"
+                          style={{
+                            color: 'var(--accent)',
+                            textDecoration: 'none',
+                            padding: '4px 10px',
+                            borderRadius: '4px',
+                            background: 'var(--tag-bg)',
+                            border: '1px solid var(--border)',
+                            transition: 'all 0.2s ease',
+                          }}
+                        >
+                          <ExternalLink size={11} />
+                          <span>Live Demo</span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
+          )}
 
           {/* Peer Reviews / System Validation */}
           <motion.div 
@@ -268,13 +408,65 @@ function PortfolioContent() {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <a href={selected.github} target="_blank" rel="noopener noreferrer" className="btn-outline flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', flex: '1 1 auto', justifyContent: 'center' }}>
-                    <GitBranch size={18} /> Documentation
-                  </a>
-                  {selected.live.startsWith('http') && (
-                    <a href={selected.live} target="_blank" rel="noopener noreferrer" className="btn-primary flex items-center gap-3" style={{ textDecoration: 'none', padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)', position: 'relative', zIndex: 1, flex: '1 1 auto', justifyContent: 'center' }}>
-                      <ExternalLink size={18} /> Live Deployment
+                  {Boolean(selected.github && selected.github !== '#') && (
+                    <a
+                      href={selected.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline flex items-center gap-2"
+                      style={{
+                        textDecoration: 'none',
+                        padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)',
+                        flex: '1 1 auto',
+                        justifyContent: 'center',
+                        fontSize: '0.85rem',
+                      }}
+                    >
+                      <GitBranch size={16} /> Repository & Specs
                     </a>
+                  )}
+                  {Boolean(selected.live && selected.live !== '#' && selected.live !== 'https://dattasable.com/dashboards') ? (
+                    <a
+                      href={selected.live}
+                      target={selected.live.startsWith('http') ? '_blank' : undefined}
+                      rel={selected.live.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="btn-primary flex items-center gap-2"
+                      style={{
+                        textDecoration: 'none',
+                        padding: 'clamp(0.65rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem)',
+                        position: 'relative',
+                        zIndex: 1,
+                        flex: '1 1 auto',
+                        justifyContent: 'center',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                      }}
+                    >
+                      <ExternalLink size={16} />
+                      <span>
+                        {selected.live.includes('/blog/')
+                          ? 'Read Case Study Article'
+                          : selected.live.includes('tableau') || selected.live.includes('powerbi') || selected.live.includes('looker')
+                          ? 'Open Live Interactive Report'
+                          : 'Launch Live Solution'}
+                      </span>
+                    </a>
+                  ) : (
+                    <div
+                      className="mono text-xs flex items-center gap-2"
+                      style={{
+                        color: 'var(--muted)',
+                        background: 'var(--surface2)',
+                        padding: '0.75rem 1.25rem',
+                        border: '1px solid var(--border)',
+                        borderRadius: '4px',
+                        flex: '1 1 auto',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <span>🔒</span>
+                      <span>Proprietary Client Architecture (Confidential / NDA)</span>
+                    </div>
                   )}
                 </div>
               </div>

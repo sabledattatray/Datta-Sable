@@ -25,6 +25,21 @@ interface DashboardItem {
 
 const dashboards: DashboardItem[] = [
   {
+    id: 110,
+    title: 'World Business Intelligence',
+    category: 'Analytics',
+    tool: 'DuckDB / BI',
+    color: '#00F0FF',
+    icon: '🌐',
+    image: '/images/dashboards/world_business_intelligence.webp',
+    desc: '3,000,000 audited global transactions (.72B GMV) across 50 sovereign markets, 6 continents, and 15 industry verticals with live cross-filtering.',
+    embed: '/Dashboard/world-business-dashboard.html',
+    link: '/dashboards/world-business',
+    isInternal: true,
+    tags: ['Big Data', '3M Records', 'Global BI', 'DuckDB'],
+    metrics: ['.72B GMV', '3M Orders', '50 Nations'],
+  },
+  {
     id: 103,
     title: 'Blinkit Sales Dashboard',
     category: 'Sales',
@@ -62,7 +77,7 @@ const dashboards: DashboardItem[] = [
     tool: 'Python',
     color: '#9b59ff',
     icon: '🌍',
-    image: '/images/dashboards/global_sales_intelligence.webp',
+    image: '/images/dashboards/world_business_intelligence.webp',
     desc: 'Real-time global revenue monitoring with market penetration and conversion funnel analysis.',
     embed: '/dashboards/global-sales-intelligence',
     isInternal: true,
