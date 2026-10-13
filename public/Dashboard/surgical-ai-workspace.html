@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Chart.js from cdnjs for ultra-reliable loading -->
+  <!-- Chart.js from cdnjs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
   <style>
@@ -88,7 +88,7 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      padding: 26px 20px;
+      padding: 24px 18px;
       backdrop-filter: var(--blur);
       background: rgba(255, 255, 255, .03);
       border-right: 1px solid var(--panel-border);
@@ -102,21 +102,21 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       cursor: pointer;
     }
 
     .logo-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       color: #000;
-      font-size: 19px;
+      font-size: 18px;
       box-shadow: 0 0 25px rgba(110, 231, 255, .35);
       flex-shrink: 0;
     }
@@ -135,14 +135,14 @@
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .menu-item {
       text-decoration: none;
       color: var(--muted);
-      padding: 12px 14px;
-      border-radius: 14px;
+      padding: 11px 14px;
+      border-radius: 12px;
       transition: all .2s ease;
       display: flex;
       justify-content: space-between;
@@ -158,7 +158,7 @@
       background: var(--panel);
       color: var(--text);
       border: 1px solid var(--panel-border);
-      transform: translateX(4px);
+      transform: translateX(3px);
     }
 
     .menu-item.active {
@@ -171,9 +171,9 @@
 
     .menu-item span {
       font-family: "JetBrains Mono", monospace;
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 6px;
+      font-size: 10.5px;
+      padding: 2px 6px;
+      border-radius: 5px;
       background: rgba(255, 255, 255, .06);
       color: var(--muted);
     }
@@ -184,7 +184,7 @@
     }
 
     .sidebar-footer {
-      padding-top: 20px;
+      padding-top: 18px;
       border-top: 1px solid var(--panel-border);
       display: flex;
       align-items: center;
@@ -195,10 +195,10 @@
 
     /* Main Content */
     .main {
-      padding: 28px 34px 50px;
+      padding: 26px 30px 50px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 22px;
       max-width: 1600px;
     }
 
@@ -223,8 +223,8 @@
       width: 100%;
       background: var(--panel);
       border: 1px solid var(--panel-border);
-      padding: 12px 18px;
-      border-radius: 14px;
+      padding: 11px 16px;
+      border-radius: 12px;
       backdrop-filter: var(--blur);
       color: var(--text);
       font-family: "Inter", sans-serif;
@@ -274,8 +274,8 @@
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       border: none;
       color: #000;
-      padding: 10px 18px;
-      border-radius: 12px;
+      padding: 9px 16px;
+      border-radius: 11px;
       font-weight: 700;
       font-size: 12.5px;
       cursor: pointer;
@@ -283,7 +283,7 @@
       box-shadow: 0 6px 20px rgba(110, 231, 255, .25);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .btn:hover {
       transform: translateY(-2px);
@@ -291,9 +291,9 @@
     }
 
     .toggle {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       border: 1px solid var(--panel-border);
       background: var(--panel);
       backdrop-filter: var(--blur);
@@ -315,9 +315,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 24px;
-      padding: 24px 28px;
-      border-radius: 20px;
+      gap: 20px;
+      padding: 22px 26px;
+      border-radius: 18px;
       background: var(--panel);
       border: 1px solid var(--panel-border);
       backdrop-filter: var(--blur);
@@ -337,9 +337,9 @@
     }
 
     .hero-text h2 {
-      font-size: 2.1rem;
+      font-size: 1.95rem;
       font-family: "Syne", sans-serif;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       letter-spacing: -.5px;
     }
     .hero-text h2 span {
@@ -351,38 +351,39 @@
       color: var(--muted);
       max-width: 680px;
       line-height: 1.6;
-      font-size: 13.5px;
+      font-size: 13px;
     }
 
     .hero-card {
-      width: 280px;
-      padding: 18px 22px;
-      border-radius: 16px;
+      width: 260px;
+      padding: 16px 20px;
+      border-radius: 14px;
       background: rgba(255, 255, 255, .04);
       border: 1px solid var(--panel-border);
       box-shadow: var(--shadow);
       flex-shrink: 0;
     }
     .hero-card h4 {
-      margin-bottom: 6px;
-      font-size: .85rem;
+      margin-bottom: 4px;
+      font-size: .8rem;
       color: var(--muted);
       text-transform: uppercase;
       font-family: "JetBrains Mono", monospace;
     }
     .hero-card .big {
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: var(--primary);
       font-family: "Syne", sans-serif;
       margin-bottom: 4px;
+      line-height: 1.1;
     }
     .hero-card .status {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       color: var(--success);
-      font-size: .8rem;
+      font-size: .78rem;
       font-family: "JetBrains Mono", monospace;
     }
     .pulse-dot {
@@ -411,24 +412,28 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* KPI Grid */
+    /* KPI Grid - Responsive 2 to 4 columns */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
       margin-bottom: 22px;
     }
 
     .card {
       background: var(--panel);
       border: 1px solid var(--panel-border);
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 18px;
+      padding: 18px 20px;
       backdrop-filter: var(--blur);
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
       transition: all .25s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 145px;
     }
     .card:hover {
       border-color: rgba(110, 231, 255, .25);
@@ -438,29 +443,35 @@
     .kpi-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
     }
     .kpi-title {
-      font-size: .85rem;
+      font-size: 11px;
       color: var(--muted);
       font-weight: 600;
       text-transform: uppercase;
       font-family: "JetBrains Mono", monospace;
+      line-height: 1.3;
     }
     .kpi-value {
-      font-size: 2.1rem;
+      font-size: clamp(23px, 2.2vw, 27px);
       font-weight: 800;
       font-family: "Syne", sans-serif;
-      margin-bottom: 8px;
+      margin: 4px 0 8px;
+      line-height: 1.2;
+      white-space: nowrap;
     }
     .badge {
       display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: .75rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: .72rem;
       font-weight: 600;
       font-family: "JetBrains Mono", monospace;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .badge-primary { background: rgba(110, 231, 255, .12); color: var(--primary); }
     .badge-success { background: rgba(61, 247, 184, .12); color: var(--success); }
@@ -471,7 +482,7 @@
     .chart-grid {
       display: grid;
       grid-template-columns: 8fr 4fr;
-      gap: 20px;
+      gap: 18px;
       margin-bottom: 22px;
     }
 
@@ -479,11 +490,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .chart-title {
       font-family: "Syne", sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
     }
     .chart-body {
@@ -496,30 +507,30 @@
     .side-stack {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
     .intent-item {
-      padding: 14px;
-      border-radius: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
       background: rgba(255, 255, 255, .03);
       border: 1px solid var(--panel-border);
-      margin-bottom: 10px;
-      font-size: 12.5px;
+      margin-bottom: 8px;
+      font-size: 12px;
       color: var(--muted);
     }
     .intent-item strong {
       display: block;
       color: var(--text);
-      font-size: 13px;
-      margin-bottom: 4px;
+      font-size: 12.5px;
+      margin-bottom: 2px;
     }
     .bar {
       height: 6px;
       background: rgba(255, 255, 255, .08);
       border-radius: 999px;
       overflow: hidden;
-      margin-top: 8px;
+      margin-top: 6px;
     }
     .bar span {
       display: block;
@@ -534,19 +545,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 6px;
+      margin-top: 8px;
     }
     .node {
       flex: 1;
-      padding: 12px 6px;
+      padding: 10px 4px;
       text-align: center;
-      border-radius: 12px;
+      border-radius: 10px;
       background: rgba(255, 255, 255, .03);
       border: 1px solid var(--panel-border);
       cursor: pointer;
       transition: all .2s;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       user-select: none;
     }
@@ -554,36 +565,36 @@
       background: linear-gradient(135deg, rgba(110, 231, 255, .2), rgba(124, 92, 255, .2));
       border-color: var(--primary);
       color: var(--primary);
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
     /* Bottom Grid */
     .bottom-grid {
       display: grid;
       grid-template-columns: 4fr 8fr;
-      gap: 20px;
+      gap: 18px;
     }
 
     /* Activity Feed */
     .activity-feed {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       max-height: 280px;
       overflow-y: auto;
     }
     .feed {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: flex-start;
-      padding: 10px;
+      padding: 9px 12px;
       border-radius: 10px;
       background: rgba(255, 255, 255, .02);
       border: 1px solid var(--panel-border);
     }
     .dot {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       margin-top: 5px;
       background: var(--success);
@@ -592,15 +603,15 @@
     }
     .feed p {
       color: var(--muted);
-      font-size: .85rem;
+      font-size: .83rem;
       line-height: 1.5;
     }
 
     /* Terminal Console */
     .terminal {
       background: #030810;
-      border-radius: 20px;
-      padding: 18px 22px;
+      border-radius: 18px;
+      padding: 16px 20px;
       border: 1px solid rgba(255, 255, 255, .08);
       display: flex;
       flex-direction: column;
@@ -610,17 +621,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(255, 255, 255, .06);
     }
     .terminal-dots {
       display: flex;
-      gap: 7px;
+      gap: 6px;
     }
     .terminal-dots span {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
     }
     .terminal-dots span:nth-child(1) { background: #ff5f57; }
@@ -637,9 +648,10 @@
       color: var(--muted);
       font-family: "JetBrains Mono", monospace;
       font-size: 10.5px;
-      padding: 3px 8px;
-      border-radius: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: all .15s;
     }
     .terminal-btn:hover { color: var(--text); background: rgba(255, 255, 255, .15); }
 
@@ -652,22 +664,18 @@
       overflow-y: auto;
       white-space: pre-wrap;
     }
-    .log-info { color: var(--primary); }
-    .log-success { color: var(--success); }
-    .log-trace { color: var(--muted); }
-    .log-system { color: var(--secondary); }
 
     /* Tab: AI Agents Grid */
     .agents-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 16px;
     }
     .agent-card {
       background: var(--panel);
       border: 1px solid var(--panel-border);
       border-radius: 16px;
-      padding: 18px;
+      padding: 16px;
       transition: all .2s;
     }
     .agent-card:hover {
@@ -678,24 +686,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .agent-name {
       font-family: "Syne", sans-serif;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
     }
     .agent-role {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--muted);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .agent-metrics {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 9px;
+      border-radius: 9px;
       background: rgba(255, 255, 255, .02);
       font-size: 11px;
       margin-bottom: 12px;
@@ -721,7 +729,7 @@
       border: 1px solid var(--panel-border);
       border-radius: 20px;
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       padding: 24px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, .8);
       margin-bottom: 40px;
@@ -741,7 +749,7 @@
     }
     .form-label {
       display: block;
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--muted);
       font-family: "JetBrains Mono", monospace;
       margin-bottom: 6px;
@@ -765,12 +773,10 @@
     @media (max-width: 1100px) {
       .dashboard { grid-template-columns: 1fr; }
       .sidebar { height: auto; position: relative; }
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
       .chart-grid { grid-template-columns: 1fr; }
       .bottom-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 650px) {
-      .kpi-grid { grid-template-columns: 1fr; }
       .hero { flex-direction: column; align-items: stretch; }
       .hero-card { width: 100%; }
     }
@@ -792,15 +798,15 @@
       </div>
 
       <nav class="menu" id="sidebarMenu">
-        <div class="menu-item active" data-tab="dashboard">Dashboard <span>01</span></div>
-        <div class="menu-item" data-tab="agents">AI Agents <span>12</span></div>
-        <div class="menu-item" data-tab="chains">Execution Chains <span>08</span></div>
-        <div class="menu-item" data-tab="prompts">Prompt Analytics <span>04</span></div>
-        <div class="menu-item" data-tab="operator">Operator Mapping <span>09</span></div>
-        <div class="menu-item" data-tab="automation">Automation Flows <span>15</span></div>
-        <div class="menu-item" data-tab="tokens">Token Monitoring <span>∞</span></div>
-        <div class="menu-item" data-tab="cost">AI Cost Center <span>$</span></div>
-        <div class="menu-item" data-tab="logs">System Logs <span>24h</span></div>
+        <div class="menu-item active" data-tab="dashboard" onclick="switchTab('dashboard')">Dashboard <span>01</span></div>
+        <div class="menu-item" data-tab="agents" onclick="switchTab('agents')">AI Agents <span>12</span></div>
+        <div class="menu-item" data-tab="chains" onclick="switchTab('chains')">Execution Chains <span>08</span></div>
+        <div class="menu-item" data-tab="prompts" onclick="switchTab('prompts')">Prompt Analytics <span>04</span></div>
+        <div class="menu-item" data-tab="operator" onclick="switchTab('operator')">Operator Mapping <span>09</span></div>
+        <div class="menu-item" data-tab="automation" onclick="switchTab('automation')">Automation Flows <span>15</span></div>
+        <div class="menu-item" data-tab="tokens" onclick="switchTab('tokens')">Token Monitoring <span>∞</span></div>
+        <div class="menu-item" data-tab="cost" onclick="switchTab('cost')">AI Cost Center <span>$</span></div>
+        <div class="menu-item" data-tab="logs" onclick="switchTab('logs')">System Logs <span>24h</span></div>
       </nav>
     </div>
 
@@ -816,23 +822,23 @@
     <!-- Topbar -->
     <header class="topbar">
       <div class="topbar-left">
-        <input type="text" class="search-input" id="globalSearch" placeholder="Search AI agents, workflows, execution chains or prompt schemas...">
+        <input type="text" class="search-input" id="globalSearch" placeholder="Search AI agents, workflows, execution chains or prompt schemas..." oninput="handleSearch(this.value)">
       </div>
 
       <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
         <!-- Time Range Selector -->
         <div class="period-tabs" id="periodTabs">
-          <button class="p-tab" data-period="WTD">WTD</button>
-          <button class="p-tab" data-period="MTD">MTD</button>
-          <button class="p-tab active" data-period="QTD">QTD</button>
-          <button class="p-tab" data-period="YTD">YTD</button>
+          <button class="p-tab" data-period="WTD" onclick="setPeriod('WTD')">WTD</button>
+          <button class="p-tab" data-period="MTD" onclick="setPeriod('MTD')">MTD</button>
+          <button class="p-tab active" data-period="QTD" onclick="setPeriod('QTD')">QTD</button>
+          <button class="p-tab" data-period="YTD" onclick="setPeriod('YTD')">YTD</button>
         </div>
 
         <div class="actions">
-          <button class="btn" id="deployWorkflowBtn">
+          <button class="btn" id="deployWorkflowBtn" onclick="openDeployModal()">
             <span>⚡</span> Deploy Workflow
           </button>
-          <button class="toggle" id="themeToggle" title="Toggle Theme">☾</button>
+          <button class="toggle" id="themeToggle" title="Toggle Theme" onclick="toggleTheme()">☾</button>
         </div>
       </div>
     </header>
@@ -867,7 +873,7 @@
             <span class="badge badge-primary">+12.4% EFF</span>
           </div>
           <div class="kpi-value" id="runtimeVal">14h 32m</div>
-          <div style="font-size: 11.5px; color: var(--muted);">Across 12 Active Agent Nodes</div>
+          <div style="font-size: 11.5px; color: var(--muted);">12 Active Agent Nodes</div>
         </div>
 
         <div class="card">
@@ -885,16 +891,16 @@
             <span class="badge badge-warning">OPTIMIZED</span>
           </div>
           <div class="kpi-value" id="tokenVal">18.4M</div>
-          <div style="font-size: 11.5px; color: var(--muted);">-14.7% Cache Compression</div>
+          <div style="font-size: 11.5px; color: var(--muted);">-14.7% Compression</div>
         </div>
 
         <div class="card">
           <div class="kpi-top">
-            <span class="kpi-title">AI Operational Cost</span>
+            <span class="kpi-title">Operational Cost</span>
             <span class="badge badge-secondary">-6.2% REDUCTION</span>
           </div>
           <div class="kpi-value" id="costVal" style="color: var(--primary);">$8,412</div>
-          <div style="font-size: 11.5px; color: var(--muted);">Budget Variance Under Target</div>
+          <div style="font-size: 11.5px; color: var(--muted);">Under Allocated Budget</div>
         </div>
       </section>
 
@@ -905,7 +911,7 @@
           <div class="chart-header">
             <div class="chart-title">AI Workflow Intelligence Analytics</div>
             <div style="display: flex; gap: 8px;">
-              <span class="badge badge-primary">QTD TIMELINE</span>
+              <span class="badge badge-primary" id="chartPeriodBadge">QTD TIMELINE</span>
             </div>
           </div>
           <div class="chart-body">
@@ -917,8 +923,8 @@
         <div class="side-stack">
           <!-- Intent Mapping -->
           <div class="card" style="padding: 18px;">
-            <div class="chart-header" style="margin-bottom: 12px;">
-              <div class="chart-title" style="font-size: 15px;">Operator Intent Mapping™</div>
+            <div class="chart-header" style="margin-bottom: 10px;">
+              <div class="chart-title" style="font-size: 14.5px;">Operator Intent Mapping™</div>
             </div>
 
             <div class="intent-item">
@@ -943,16 +949,16 @@
           <!-- Pipeline Architecture -->
           <div class="card" style="padding: 18px;">
             <div class="chart-header" style="margin-bottom: 6px;">
-              <div class="chart-title" style="font-size: 15px;">Automation Pipeline Stages</div>
+              <div class="chart-title" style="font-size: 14.5px;">Automation Pipeline Stages</div>
             </div>
-            <div style="font-size: 11.5px; color: var(--muted); margin-bottom: 10px;">Click stage to inspect latency:</div>
+            <div style="font-size: 11px; color: var(--muted); margin-bottom: 8px;">Click stage to inspect latency:</div>
 
             <div class="pipeline" id="pipelineNodes">
-              <div class="node active" data-stage="Intent">Intent<div style="font-size: 10px; color: var(--primary);">42ms</div></div>
-              <div class="node" data-stage="Prompt">Prompt<div style="font-size: 10px; color: var(--primary);">18ms</div></div>
-              <div class="node" data-stage="AI Agent">Agent<div style="font-size: 10px; color: var(--primary);">180ms</div></div>
-              <div class="node" data-stage="Validation">Verify<div style="font-size: 10px; color: var(--primary);">35ms</div></div>
-              <div class="node" data-stage="Deploy">Deploy<div style="font-size: 10px; color: var(--primary);">12ms</div></div>
+              <div class="node active" data-stage="Intent" onclick="inspectPipeline('Intent', this)">Intent<div style="font-size: 10px; color: var(--primary);">42ms</div></div>
+              <div class="node" data-stage="Prompt" onclick="inspectPipeline('Prompt', this)">Prompt<div style="font-size: 10px; color: var(--primary);">18ms</div></div>
+              <div class="node" data-stage="AI Agent" onclick="inspectPipeline('AI Agent', this)">Agent<div style="font-size: 10px; color: var(--primary);">180ms</div></div>
+              <div class="node" data-stage="Validation" onclick="inspectPipeline('Validation', this)">Verify<div style="font-size: 10px; color: var(--primary);">35ms</div></div>
+              <div class="node" data-stage="Deploy" onclick="inspectPipeline('Deploy', this)">Deploy<div style="font-size: 10px; color: var(--primary);">12ms</div></div>
             </div>
           </div>
         </div>
@@ -994,8 +1000,8 @@
             </div>
             <div style="font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted);">surgical_ai_daemon.log</div>
             <div class="terminal-controls">
-              <button class="terminal-btn" id="clearTerminalBtn">Clear</button>
-              <button class="terminal-btn" id="pauseTerminalBtn">Pause</button>
+              <button class="terminal-btn" id="clearTerminalBtn" onclick="clearTerminal()">Clear</button>
+              <button class="terminal-btn" id="pauseTerminalBtn" onclick="togglePauseTerminal()">Pause</button>
             </div>
           </div>
 
@@ -1173,7 +1179,7 @@
 
     <div class="form-group">
       <label class="form-label">Simulation Concurrency</label>
-      <input type="number" class="form-input" value="100" min="1" max="1000">
+      <input type="number" class="form-input" id="deployConcurrency" value="100" min="1" max="1000">
     </div>
 
     <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px;">
@@ -1278,18 +1284,42 @@
   }
 
   // Recalculate KPIs based on period tab
+  window.setPeriod = function(p) {
+    currentPeriod = p;
+    document.querySelectorAll('#periodTabs .p-tab').forEach(b => {
+      b.classList.toggle('active', b.dataset.period === p);
+    });
+
+    const badge = document.getElementById('chartPeriodBadge');
+    if (badge) badge.innerText = `${p} TIMELINE`;
+
+    updateData();
+  };
+
   function updateData() {
     const mult = PERIOD_MULT[currentPeriod] || 1.0;
 
-    document.getElementById('execSuccess').innerText = (97.5 + Math.random() * 2).toFixed(1) + '%';
-    document.getElementById('runtimeVal').innerText = Math.floor(14 * mult) + 'h ' + randomRange(10, 55) + 'm';
-    document.getElementById('accuracyVal').innerText = (92.0 + Math.random() * 6).toFixed(1) + '%';
-    document.getElementById('tokenVal').innerText = (18.4 * mult + Math.random() * 1.5).toFixed(1) + 'M';
-    document.getElementById('costVal').innerText = '$' + Math.floor(8412 * mult).toLocaleString();
+    const execEl = document.getElementById('execSuccess');
+    if (execEl) execEl.innerText = (97.5 + Math.random() * 2).toFixed(1) + '%';
 
-    document.getElementById('bar1').style.width = randomRange(88, 98) + '%';
-    document.getElementById('bar2').style.width = randomRange(82, 95) + '%';
-    document.getElementById('bar3').style.width = randomRange(89, 99) + '%';
+    const runEl = document.getElementById('runtimeVal');
+    if (runEl) runEl.innerText = Math.floor(14 * mult) + 'h ' + randomRange(10, 55) + 'm';
+
+    const accEl = document.getElementById('accuracyVal');
+    if (accEl) accEl.innerText = (92.0 + Math.random() * 6).toFixed(1) + '%';
+
+    const tokEl = document.getElementById('tokenVal');
+    if (tokEl) tokEl.innerText = (18.4 * mult + Math.random() * 1.5).toFixed(1) + 'M';
+
+    const costEl = document.getElementById('costVal');
+    if (costEl) costEl.innerText = '$' + Math.floor(8412 * mult).toLocaleString();
+
+    const b1 = document.getElementById('bar1');
+    const b2 = document.getElementById('bar2');
+    const b3 = document.getElementById('bar3');
+    if (b1) b1.style.width = randomRange(88, 98) + '%';
+    if (b2) b2.style.width = randomRange(82, 95) + '%';
+    if (b3) b3.style.width = randomRange(89, 99) + '%';
 
     if (chart) {
       chart.data.datasets[0].data = Array.from({ length: 7 }, () => randomRange(70, 99));
@@ -1299,7 +1329,7 @@
   }
 
   // Switch Active View Tab
-  function switchTab(tabId) {
+  window.switchTab = function(tabId) {
     document.querySelectorAll('.menu-item').forEach(item => {
       item.classList.toggle('active', item.dataset.tab === tabId);
     });
@@ -1314,14 +1344,16 @@
     }
 
     if (tabId === 'tokens' && !tokensChart) {
-      initTokensChart();
+      setTimeout(initTokensChart, 50);
     }
-  }
+  };
 
   function initTokensChart() {
     if (typeof Chart === 'undefined') return;
     const ctx = document.getElementById('tokensChart');
     if (!ctx) return;
+
+    if (tokensChart) tokensChart.destroy();
 
     tokensChart = new Chart(ctx, {
       type: 'bar',
@@ -1427,8 +1459,8 @@
     container.innerHTML = flows.map(f => `
       <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 12px; background: rgba(255,255,255,.02); border: 1px solid var(--panel-border);">
         <div>
-          <strong style="font-size: 13.5px; display: block;">${f.name}</strong>
-          <span style="font-size: 11.5px; color: var(--muted); font-family: 'JetBrains Mono';">${f.trigger}</span>
+          <strong style="font-size: 13px; display: block;">${f.name}</strong>
+          <span style="font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono';">${f.trigger}</span>
         </div>
         <span class="badge badge-success">${f.status}</span>
       </div>
@@ -1473,6 +1505,12 @@
   }
 
   // Interactivity Actions
+  window.inspectPipeline = function(stage, el) {
+    document.querySelectorAll('#pipelineNodes .node').forEach(n => n.classList.remove('active'));
+    if (el) el.classList.add('active');
+    appendTerminalLog(`Pipeline inspection: Node '${stage}' active. Latency nominal.`, '[TRACE]');
+  };
+
   window.inspectAgent = function(id) {
     appendTerminalLog(`Manual probe dispatched to ${id}. Status: HEALTHY, Latency: 22ms.`, '[TRACE]');
     alert(`Inspecting ${id}: Telemetry node operational with 99.8% fidelity.`);
@@ -1493,13 +1531,42 @@
     appendTerminalLog(`Custom operator command executed via console.`, '[SUCCESS]');
   };
 
+  window.clearTerminal = function() {
+    const term = document.getElementById('terminalLogs');
+    if (term) term.innerText = '[CONSOLE CLEARED]\n';
+  };
+
+  window.togglePauseTerminal = function() {
+    isTerminalPaused = !isTerminalPaused;
+    const btn = document.getElementById('pauseTerminalBtn');
+    if (btn) btn.innerText = isTerminalPaused ? 'Resume' : 'Pause';
+  };
+
+  window.toggleTheme = function() {
+    document.body.classList.toggle('light');
+    const themeBtn = document.getElementById('themeToggle');
+    if (themeBtn) themeBtn.innerText = document.body.classList.contains('light') ? '☀' : '☾';
+    if (chart) chart.update();
+    if (tokensChart) tokensChart.update();
+  };
+
+  window.handleSearch = function(q) {
+    if (q && q.length > 1) {
+      appendTerminalLog(`Searching entities matching: "${q}"...`, '[INFO]');
+    }
+  };
+
   // Modal Functions
   window.openDeployModal = function() {
-    document.getElementById('deployModal').classList.add('open');
+    const modal = document.getElementById('deployModal');
+    if (modal) modal.classList.add('open');
   };
+
   window.closeDeployModal = function() {
-    document.getElementById('deployModal').classList.remove('open');
+    const modal = document.getElementById('deployModal');
+    if (modal) modal.classList.remove('open');
   };
+
   window.submitDeployWorkflow = function() {
     const agent = document.getElementById('deployAgentSelect').value;
     const pattern = document.getElementById('deployPatternSelect').value;
@@ -1508,7 +1575,6 @@
     appendTerminalLog(`Deployment initiated: ${agent} (${pattern})`, '[SYSTEM]');
     setTimeout(() => {
       appendTerminalLog(`Deployment converged! Autonomous node online.`, '[SUCCESS]');
-      // Add feed item
       const feed = document.getElementById('activityFeed');
       if (feed) {
         const item = document.createElement('div');
@@ -1519,75 +1585,22 @@
     }, 1000);
   };
 
-  // Initialization
-  window.addEventListener('DOMContentLoaded', () => {
-    // 1. Sidebar Nav
-    document.querySelectorAll('#sidebarMenu .menu-item').forEach(item => {
-      item.addEventListener('click', () => {
-        switchTab(item.dataset.tab);
-      });
-    });
-
-    // 2. Period Tabs
-    document.querySelectorAll('#periodTabs .p-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('#periodTabs .p-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentPeriod = tab.dataset.period;
-        updateData();
-      });
-    });
-
-    // 3. Deploy Workflow button
-    document.getElementById('deployWorkflowBtn').addEventListener('click', openDeployModal);
-
-    // 4. Pipeline Nodes
-    document.querySelectorAll('#pipelineNodes .node').forEach(node => {
-      node.addEventListener('click', () => {
-        document.querySelectorAll('#pipelineNodes .node').forEach(n => n.classList.remove('active'));
-        node.classList.add('active');
-        appendTerminalLog(`Pipeline inspection: Node '${node.dataset.stage}' active. Latency nominal.`, '[TRACE]');
-      });
-    });
-
-    // 5. Terminal Controls
-    document.getElementById('clearTerminalBtn').addEventListener('click', () => {
-      document.getElementById('terminalLogs').innerText = '[CONSOLE CLEARED]\n';
-    });
-
-    document.getElementById('pauseTerminalBtn').addEventListener('click', function() {
-      isTerminalPaused = !isTerminalPaused;
-      this.innerText = isTerminalPaused ? 'Resume' : 'Pause';
-    });
-
-    // 6. Theme Toggle
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      themeBtn.innerText = document.body.classList.contains('light') ? '☀' : '☾';
-      if (chart) chart.update();
-      if (tokensChart) tokensChart.update();
-    });
-
-    // 7. Search filter
-    document.getElementById('globalSearch').addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      if (q.length > 1) {
-        appendTerminalLog(`Searching workspace entities matching: "${q}"...`, '[INFO]');
-      }
-    });
-
-    // 8. Render Data Views
+  // Immediate Boot Sequence
+  function boot() {
     renderAgents();
     renderChains();
     renderOperatorMatrix();
     renderAutomationFlows();
-
-    // 9. Init Chart & Start Stream
     initMainChart();
     startLogStream();
     updateData();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 </script>
 
 </body>
