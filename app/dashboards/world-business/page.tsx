@@ -57,7 +57,7 @@ export default function WorldBusinessDashboardPage() {
           <iframe
             src="/Dashboard/world-business-dashboard.html"
             className="w-full"
-            style={{ height: '1450px', border: 'none', display: 'block' }}
+            style={{ height: '1650px', border: 'none', display: 'block' }}
             title="World Business Intelligence 3M Dashboard"
             allowFullScreen
           />
