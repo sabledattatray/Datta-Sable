@@ -1230,7 +1230,7 @@
   // Safe Chart Initialization
   function initMainChart() {
     if (typeof Chart === 'undefined') {
-      console.warn('Chart.js not loaded yet');
+      setTimeout(initMainChart, 80);
       return;
     }
     const ctx = document.getElementById('analyticsChart');
@@ -1587,13 +1587,13 @@
 
   // Immediate Boot Sequence
   function boot() {
-    renderAgents();
-    renderChains();
-    renderOperatorMatrix();
-    renderAutomationFlows();
-    initMainChart();
-    startLogStream();
-    updateData();
+    try { renderAgents(); } catch (e) { console.warn('renderAgents error:', e); }
+    try { renderChains(); } catch (e) { console.warn('renderChains error:', e); }
+    try { renderOperatorMatrix(); } catch (e) { console.warn('renderOperatorMatrix error:', e); }
+    try { renderAutomationFlows(); } catch (e) { console.warn('renderAutomationFlows error:', e); }
+    try { initMainChart(); } catch (e) { console.warn('initMainChart error:', e); }
+    try { startLogStream(); } catch (e) { console.warn('startLogStream error:', e); }
+    try { updateData(); } catch (e) { console.warn('updateData error:', e); }
   }
 
   if (document.readyState === 'loading') {

@@ -1296,12 +1296,11 @@ function formatNumber(val) {
 
 // Initialization
 async function initDashboard() {
-  // 1. Immediately initialize with high-fidelity embedded data (0ms delay, zero blank state)
-  populateFilterDropdowns();
-  setupEventListeners();
-  updateDashboard();
-  renderTable();
-  if (typeof lucide !== 'undefined' && lucide.createIcons) { lucide.createIcons(); }
+  try { populateFilterDropdowns(); } catch (e) { console.warn('Filter populate error:', e); }
+  try { setupEventListeners(); } catch (e) { console.warn('Events setup error:', e); }
+  try { updateDashboard(); } catch (e) { console.warn('Dashboard update error:', e); }
+  try { renderTable(); } catch (e) { console.warn('Table render error:', e); }
+  try { if (typeof lucide !== 'undefined' && lucide.createIcons) { lucide.createIcons(); } } catch (e) {}
 
   // 2. Asynchronously load the complete 1,000 transaction ledger in the background
   try {
@@ -1311,6 +1310,7 @@ async function initDashboard() {
       rawData = fullData;
       renderTable();
       updateKPIs();
+      renderCharts();
       console.log('Successfully upgraded to live 3M transaction ledger.');
     }
   } catch (err) {
@@ -1321,28 +1321,34 @@ async function initDashboard() {
 // Populate Dropdown Menus
 function populateFilterDropdowns() {
   const industrySelect = document.getElementById('industryFilter');
-  rawData.by_industry.forEach(ind => {
-    const opt = document.createElement('option');
-    opt.value = ind.industry;
-    opt.textContent = `${ind.industry} (${ind.share_pct}%)`;
-    industrySelect.appendChild(opt);
-  });
+  if (industrySelect && rawData && rawData.by_industry) {
+    rawData.by_industry.forEach(ind => {
+      const opt = document.createElement('option');
+      opt.value = ind.industry;
+      opt.textContent = `${ind.industry} (${ind.share_pct}%)`;
+      industrySelect.appendChild(opt);
+    });
+  }
 
   const categorySelect = document.getElementById('categoryFilter');
-  rawData.by_category.forEach(cat => {
-    const opt = document.createElement('option');
-    opt.value = cat.product_category;
-    opt.textContent = `${cat.product_category} (${cat.share_pct}%)`;
-    categorySelect.appendChild(opt);
-  });
+  if (categorySelect && rawData && rawData.by_category) {
+    rawData.by_category.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat.product_category;
+      opt.textContent = `${cat.product_category} (${cat.share_pct}%)`;
+      categorySelect.appendChild(opt);
+    });
+  }
 
   const channelSelect = document.getElementById('channelFilter');
-  rawData.by_channel.forEach(ch => {
-    const opt = document.createElement('option');
-    opt.value = ch.sales_channel;
-    opt.textContent = `${ch.sales_channel} (${ch.share_pct}%)`;
-    channelSelect.appendChild(opt);
-  });
+  if (channelSelect && rawData && rawData.by_channel) {
+    rawData.by_channel.forEach(ch => {
+      const opt = document.createElement('option');
+      opt.value = ch.sales_channel;
+      opt.textContent = `${ch.sales_channel} (${ch.share_pct}%)`;
+      channelSelect.appendChild(opt);
+    });
+  }
 }
 
 // Setup Event Listeners
@@ -1358,7 +1364,7 @@ function setupEventListeners() {
   });
 
   // Currency Selector
-  document.getElementById('currencySelect').addEventListener('change', (e) => {
+  document.getElementById('currencySelect')?.addEventListener('change', (e) => {
     currentCurrency = e.target.value;
     if (currentCurrency === 'EUR') {
       currencyMultiplier = 0.92;
@@ -1396,23 +1402,23 @@ function setupEventListeners() {
   });
 
   // Dropdowns
-  document.getElementById('industryFilter').addEventListener('change', (e) => {
+  document.getElementById('industryFilter')?.addEventListener('change', (e) => {
     activeFilters.industry = e.target.value;
     updateDashboard();
   });
 
-  document.getElementById('categoryFilter').addEventListener('change', (e) => {
+  document.getElementById('categoryFilter')?.addEventListener('change', (e) => {
     activeFilters.category = e.target.value;
     updateDashboard();
   });
 
-  document.getElementById('channelFilter').addEventListener('change', (e) => {
+  document.getElementById('channelFilter')?.addEventListener('change', (e) => {
     activeFilters.channel = e.target.value;
     updateDashboard();
   });
 
   // Reset Filters
-  document.getElementById('resetFilters').addEventListener('click', () => {
+  document.getElementById('resetFilters')?.addEventListener('click', () => {
     activeFilters = {
       year: 'ALL',
       continent: 'ALL',
@@ -1423,44 +1429,44 @@ function setupEventListeners() {
       search: ''
     };
     document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    document.querySelector('#yearPills [data-year="ALL"]').classList.add('active');
-    document.querySelector('#continentPills [data-continent="ALL"]').classList.add('active');
-    document.getElementById('industryFilter').value = 'ALL';
-    document.getElementById('categoryFilter').value = 'ALL';
-    document.getElementById('channelFilter').value = 'ALL';
-    document.getElementById('statusFilter').value = 'ALL';
-    document.getElementById('tableSearch').value = '';
+    document.querySelector('#yearPills [data-year="ALL"]')?.classList.add('active');
+    document.querySelector('#continentPills [data-continent="ALL"]')?.classList.add('active');
+    const ind = document.getElementById('industryFilter'); if (ind) ind.value = 'ALL';
+    const cat = document.getElementById('categoryFilter'); if (cat) cat.value = 'ALL';
+    const chn = document.getElementById('channelFilter'); if (chn) chn.value = 'ALL';
+    const st = document.getElementById('statusFilter'); if (st) st.value = 'ALL';
+    const sr = document.getElementById('tableSearch'); if (sr) sr.value = '';
     updateDashboard();
     renderTable();
   });
 
   // Table Search & Controls
-  document.getElementById('tableSearch').addEventListener('input', (e) => {
+  document.getElementById('tableSearch')?.addEventListener('input', (e) => {
     activeFilters.search = e.target.value.toLowerCase();
     tablePage = 1;
     renderTable();
   });
 
-  document.getElementById('statusFilter').addEventListener('change', (e) => {
+  document.getElementById('statusFilter')?.addEventListener('change', (e) => {
     activeFilters.status = e.target.value;
     tablePage = 1;
     renderTable();
   });
 
-  document.getElementById('pageSizeSelect').addEventListener('change', (e) => {
+  document.getElementById('pageSizeSelect')?.addEventListener('change', (e) => {
     tablePageSize = parseInt(e.target.value, 10);
     tablePage = 1;
     renderTable();
   });
 
-  document.getElementById('prevPageBtn').addEventListener('click', () => {
+  document.getElementById('prevPageBtn')?.addEventListener('click', () => {
     if (tablePage > 1) {
       tablePage--;
       renderTable();
     }
   });
 
-  document.getElementById('nextPageBtn').addEventListener('click', () => {
+  document.getElementById('nextPageBtn')?.addEventListener('click', () => {
     tablePage++;
     renderTable();
   });
@@ -1480,28 +1486,28 @@ function setupEventListeners() {
   });
 
   // Modal Close
-  document.getElementById('modalCloseBtn').addEventListener('click', () => {
-    document.getElementById('txModal').classList.remove('open');
+  document.getElementById('modalCloseBtn')?.addEventListener('click', () => {
+    document.getElementById('txModal')?.classList.remove('open');
   });
-  document.getElementById('txModal').addEventListener('click', (e) => {
+  document.getElementById('txModal')?.addEventListener('click', (e) => {
     if (e.target.id === 'txModal') {
-      document.getElementById('txModal').classList.remove('open');
+      document.getElementById('txModal')?.classList.remove('open');
     }
   });
 
   // Theme Toggle
-  document.getElementById('themeToggle').addEventListener('click', () => {
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const nextTheme = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', nextTheme);
     const icon = document.getElementById('themeIcon');
-    icon.setAttribute('data-lucide', isDark ? 'moon' : 'sun');
+    if (icon) icon.setAttribute('data-lucide', isDark ? 'moon' : 'sun');
     if (typeof lucide !== 'undefined' && lucide.createIcons) { lucide.createIcons(); }
     renderCharts();
   });
 
   // Fullscreen
-  document.getElementById('fsToggle').addEventListener('click', () => {
+  document.getElementById('fsToggle')?.addEventListener('click', () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(() => {});
     } else {
@@ -1510,7 +1516,7 @@ function setupEventListeners() {
   });
 
   // Export CSV
-  document.getElementById('exportBtn').addEventListener('click', exportSummaryCSV);
+  document.getElementById('exportBtn')?.addEventListener('click', exportSummaryCSV);
 }
 
 // Master Dashboard Recalculation
@@ -1580,31 +1586,24 @@ function updateKPIs() {
 // Chart Rendering Engine
 function renderCharts() {
   if (!rawData) return;
+  if (typeof Chart === 'undefined') {
+    setTimeout(renderCharts, 70);
+    return;
+  }
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
   const textColor = isDark ? '#94A3B8' : '#64748B';
 
-  // 1. Trend Chart (Monthly Velocity)
-  renderTrendChart(gridColor, textColor);
-
-  // 2. Continent Share Donut
-  renderContinentChart(textColor);
-
-  // 3. Country Leaderboard Bar
-  renderCountryChart(gridColor, textColor);
-
-  // 4. Category Performance
-  renderCategoryChart(gridColor, textColor);
-
-  // 5. Industry Bar Chart
-  renderIndustryChart(gridColor, textColor);
-
-  // 6. Omnichannel / Diagnostics
-  renderChannelChart(gridColor, textColor);
+  try { renderTrendChart(gridColor, textColor); } catch (e) { console.warn('trend chart error', e); }
+  try { renderContinentChart(textColor); } catch (e) { console.warn('continent chart error', e); }
+  try { renderCountryChart(gridColor, textColor); } catch (e) { console.warn('country chart error', e); }
+  try { renderCategoryChart(gridColor, textColor); } catch (e) { console.warn('category chart error', e); }
+  try { renderIndustryChart(gridColor, textColor); } catch (e) { console.warn('industry chart error', e); }
+  try { renderChannelChart(gridColor, textColor); } catch (e) { console.warn('channel chart error', e); }
 }
 
 function renderTrendChart(gridColor, textColor) {
-  const ctx = document.getElementById('trendChart').getContext('2d');
+  const cvs = document.getElementById('trendChart'); if (!cvs) return; const ctx = cvs.getContext('2d');
   if (chartInstances.trend) chartInstances.trend.destroy();
 
   let months = rawData.monthly_trend;
@@ -1685,7 +1684,7 @@ function renderTrendChart(gridColor, textColor) {
 }
 
 function renderContinentChart(textColor) {
-  const ctx = document.getElementById('continentChart').getContext('2d');
+  const cvs = document.getElementById('continentChart'); if (!cvs) return; const ctx = cvs.getContext('2d');
   if (chartInstances.continent) chartInstances.continent.destroy();
 
   const labels = rawData.by_continent.map(c => c.continent);
@@ -1729,7 +1728,7 @@ function renderContinentChart(textColor) {
 }
 
 function renderCountryChart(gridColor, textColor) {
-  const ctx = document.getElementById('countryChart').getContext('2d');
+  const cvs = document.getElementById('countryChart'); if (!cvs) return; const ctx = cvs.getContext('2d');
   if (chartInstances.country) chartInstances.country.destroy();
 
   let countries = [...rawData.by_country];
@@ -1780,7 +1779,7 @@ function renderCountryChart(gridColor, textColor) {
 }
 
 function renderCategoryChart(gridColor, textColor) {
-  const ctx = document.getElementById('categoryChart').getContext('2d');
+  const cvs = document.getElementById('categoryChart'); if (!cvs) return; const ctx = cvs.getContext('2d');
   if (chartInstances.category) chartInstances.category.destroy();
 
   const labels = rawData.by_category.map(c => c.product_category);
@@ -1827,7 +1826,7 @@ function renderCategoryChart(gridColor, textColor) {
 }
 
 function renderIndustryChart(gridColor, textColor) {
-  const ctx = document.getElementById('industryChart').getContext('2d');
+  const cvs = document.getElementById('industryChart'); if (!cvs) return; const ctx = cvs.getContext('2d');
   if (chartInstances.industry) chartInstances.industry.destroy();
 
   const industries = rawData.by_industry.slice(0, 10);
@@ -1861,7 +1860,7 @@ function renderIndustryChart(gridColor, textColor) {
 }
 
 function renderChannelChart(gridColor, textColor) {
-  const ctx = document.getElementById('channelChart').getContext('2d');
+  const cvs = document.getElementById('channelChart'); if (!cvs) return; const ctx = cvs.getContext('2d');
   if (chartInstances.channel) chartInstances.channel.destroy();
 
   const labels = rawData.by_channel.map(c => c.sales_channel);
@@ -2079,8 +2078,20 @@ function exportSummaryCSV() {
   document.body.removeChild(a);
 }
 
-// Bootstrap
-window.addEventListener('DOMContentLoaded', initDashboard);
+// Bootstrap: execute immediately if document is already ready, or wait for DOMContentLoaded
+function safeBoot() {
+  if (typeof Chart === 'undefined') {
+    setTimeout(safeBoot, 60);
+    return;
+  }
+  initDashboard();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', safeBoot);
+} else {
+  safeBoot();
+}
 </script>
 
 </body>
