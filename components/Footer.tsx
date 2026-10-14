@@ -40,6 +40,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Workspace',
     links: [
+      { label: 'Open MIS',         href: '/tools/open-mis', icon: BarChart3 },
       { label: 'Surgical Tools',   href: '/tools',          icon: Zap },
       { label: 'Templates Hub',    href: '/templates',      icon: Library },
       { label: 'Workflow Chains',  href: '/chains',         icon: GitBranch },

@@ -102,6 +102,7 @@ export const megaMenuData: Record<string, any> = {
       tag: 'Workspace',
     },
     items: [
+      { title: 'Open MIS',           desc: 'Free browser-side Excel dashboard builder.', icon: <BarChart3 size={18} />,     href: '/tools/open-mis',             color: '#c9f31d' },
       { title: 'Surgical Tools',     desc: 'Generators, formatting & counter tools.', icon: <Zap size={18} />,          href: '/tools',                      color: '#c9f31d' },
       { title: 'Workflow Chains',    desc: 'Multi-node automated AI pipelines.',     icon: <Workflow size={18} />,     href: '/chains',                     color: '#fb923c' },
       { title: 'Templates Hub',      desc: 'Downloadable BI & database templates.',  icon: <Layers size={18} />,       href: '/templates',                  color: '#60a5fa' },

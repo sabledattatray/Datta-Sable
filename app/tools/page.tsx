@@ -12,7 +12,8 @@ import {
   FileJson, 
   LayoutDashboard,
   Library,
-  Minimize2
+  Minimize2,
+  BarChart3
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -36,8 +37,15 @@ export const metadata: Metadata = {
 };
 
 const TOOLS = [
-
-
+  {
+    id: 'open-mis',
+    title: 'Nexdial OpenMIS™',
+    description: 'Free, privacy-first Excel & CSV dashboard builder. 100% in-browser processing with zero cloud telemetry or data uploads.',
+    icon: <BarChart3 size={24} className="text-[var(--accent)]" />,
+    category: 'Analytics',
+    href: '/tools/open-mis',
+    status: 'Featured'
+  },
   {
     id: 'execution-chains',
     title: 'Surgical Execution Chains™',
