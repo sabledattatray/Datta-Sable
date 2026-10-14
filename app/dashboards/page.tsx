@@ -25,6 +25,21 @@ interface DashboardItem {
 
 const dashboards: DashboardItem[] = [
   {
+    id: 115,
+    title: 'Hyperlocal Fleet Operations & Rider MIS',
+    category: 'Operations',
+    tool: 'Excel / Next.js',
+    color: '#00F0FF',
+    icon: '🛵',
+    image: '/images/dashboards/fleet_logistics.webp',
+    desc: 'Interactive operational MIS dashboard modeling driver trip velocity, attendance compliance, bonus qualifications, and net payout reconciliation across 4 regional hub zones.',
+    embed: null,
+    link: '/dashboards/rider-ops',
+    isInternal: true,
+    tags: ['Rider Ops', 'Excel MIS', 'XLOOKUP', 'Fleet Logistics'],
+    metrics: ['12 Fleet Riders', '4 Mumbai Hubs', '100% Reconciled'],
+  },
+  {
     id: 110,
     title: 'World Business Intelligence',
     category: 'Analytics',

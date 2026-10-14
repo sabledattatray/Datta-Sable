@@ -1,3 +1,39 @@
+export interface CaseStudyDetail {
+  problemContext: string;
+  datasetInfo: {
+    source: string;
+    rows: string;
+    grain: string;
+    provenance: string;
+    limitations: string;
+  };
+  toolsAndRoles: { tool: string; role: string }[];
+  methodology: string[];
+  kpiDefinitions: { name: string; formula: string; description: string }[];
+  keyFindings: string[];
+  validationChecks: string[];
+  limitationsAndNextSteps: string;
+}
+
+export interface FeaturedProject {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: 'Risk & Delinquency' | 'Power BI & Sales BI' | 'Excel & Power BI MIS';
+  statusLabel: string;
+  provenanceLabel: string;
+  image: string;
+  color: string;
+  tools: string[];
+  executiveSummary: string;
+  businessQuestion: string;
+  deliverables: string[];
+  liveUrl: string;
+  liveUrlLabel: string;
+  githubUrl?: string;
+  caseStudy: CaseStudyDetail;
+}
+
 export interface ProjectData {
   id: number;
   title: string;
@@ -12,277 +48,667 @@ export interface ProjectData {
   impact: string;
   github: string;
   live: string;
+  statusBadge?: string;
 }
+
+export interface ServiceItem {
+  id: string;
+  title: string;
+  tagline: string;
+  deliverables: string[];
+  typicalInputs: string[];
+  outcomes: string;
+}
+
+export interface ProcessStep {
+  step: string;
+  title: string;
+  focus: string;
+  description: string;
+  deliverable: string;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 1. THE THREE FLAGSHIP DEMONSTRABLE PROJECTS (PRD Core Focus)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    id: 'telecom-delinquency-intelligence',
+    title: 'Telecom Collection & Delinquency Intelligence',
+    subtitle: 'Postpaid Portfolio Aging, Roll-Rate Analysis & Tele-Caller Allocation Engine',
+    category: 'Risk & Delinquency',
+    statusLabel: 'Portfolio Demonstration',
+    provenanceLabel: 'Synthetic BFSI / Telecom Dataset (250K Accounts)',
+    image: '/images/dashboards/emi_collection_intelligence.webp',
+    color: '#00d4ff',
+    tools: ['Power BI', 'SQL Server (SSMS)', 'Advanced DAX', 'Power Query'],
+    businessQuestion:
+      'Which subscriber cohorts drive delinquency slippage into 60+ and 90+ DPD buckets, and how should recovery teams allocate caller bandwidth to protect portfolio cash flow?',
+    executiveSummary:
+      'A multi-dimensional portfolio risk engine designed to model collections efficiency, roll-forward probabilities, and collector resolution rates across 6 billing cycles without compromising subscriber privacy.',
+    deliverables: [
+      'Interactive aging bucket cockpit (Current, 1-30, 31-60, 61-90, 90+ DPD)',
+      'Roll-rate transition matrix tracking cohort migration period-over-period',
+      'Collector resolution & call disposition performance tracking',
+      'Data dictionary and automated SQL ETL validation scripts',
+    ],
+    liveUrl: '/dashboards/collection-intelligence',
+    liveUrlLabel: 'Launch Interactive Dashboard',
+    githubUrl: 'https://github.com/sabledattatray/dattasable',
+    caseStudy: {
+      problemContext:
+        'In high-volume consumer credit and postpaid telecommunication portfolios, collections managers struggle with fragmented spreadsheets. Delinquent balances are reported in aggregate totals without visibility into bucket roll rates or collector productivity. By the time write-off risks become visible at month-end, the window for intervention has closed.',
+      datasetInfo: {
+        source: 'Synthetic BFSI delinquency data modeled on standard Indian retail banking & telecom postpaid credit structures.',
+        rows: '250,000 monthly account snapshot records across 6 consecutive billing cycles.',
+        grain: 'One record per subscriber account per billing cycle month.',
+        provenance: '100% synthetic/anonymized dataset generated for portfolio demonstration. Contains zero actual customer, employer, or institutional information.',
+        limitations: 'Model assumes static credit limit parameters; does not capture real-time intraday bureau score updates.',
+      },
+      toolsAndRoles: [
+        { tool: 'SQL Server (SSMS)', role: 'Data profiling, CTE-based bucket categorization, window functions for previous-month roll tracking.' },
+        { tool: 'Power Query', role: 'Automated data shaping, unpivoting payment disposition logs, parameterizing monthly ledger ingestion.' },
+        { tool: 'Advanced DAX', role: 'Dynamic measure branching for Roll-Rate %, Resolution Rate %, and Net Overdue Exposure.' },
+        { tool: 'Power BI UI', role: 'High-contrast executive layout with drill-through navigation from national overview to team-level queues.' },
+      ],
+      methodology: [
+        'Profiled account balances, payment timestamps, and billing statuses to eliminate orphaned records and negative adjustments.',
+        'Constructed a clean Star Schema: FactCollections joined to DimCustomerSegment, DimAgingBucket, DimTeleCallerTeam, and DimDate.',
+        'Engineered time-intelligence DAX to calculate roll-forward migration (balance moving from Bucket N in Month T-1 to Bucket N+1 in Month T).',
+        'Implemented field-level conditional formatting to flag accounts crossing critical 60 DPD thresholds.',
+        'Validated all aggregated collection totals against source billing control tables within a 0.00% variance tolerance.',
+      ],
+      kpiDefinitions: [
+        { name: 'Resolution Rate %', formula: 'DIVIDE([Collected Amount], [Opening Overdue Balance], 0)', description: 'Proportion of overdue balance recovered during the active 30-day cycle.' },
+        { name: 'Roll-Forward Rate %', formula: 'DIVIDE([Balance Migrated to Next Bucket], [Prior Bucket Opening Balance], 0)', description: 'Velocity at which accounts degrade into deeper delinquency stages.' },
+        { name: 'Net Overdue Exposure', formula: 'SUM(FactCollections[OverdueAmount]) - SUM(FactCollections[RecoveredAmount])', description: 'Total capital at risk requiring active recovery intervention.' },
+      ],
+      keyFindings: [
+        'Accounts that roll from 1-30 DPD to 31-60 DPD exhibit a 64% decline in probability of curing without targeted field escalation.',
+        'Tele-caller outreach within the first 5 days of cycle due-date yields 3.2x higher recovery efficiency than end-of-month pushes.',
+        'Auto-debit failure alerts segmented by banking institution revealed 42% of first-time delinquencies were operational rather than insolvency-driven.',
+      ],
+      validationChecks: [
+        'Source-to-target reconciliation: Sum of FactCollections[PaidAmount] matches general billing ledger total across all 6 cycles.',
+        'No orphaned dimension keys: Referential integrity enforced across subscriber segment and agency dimensions.',
+        'DAX performance: All cross-filtering visual calculations execute within <80ms in Power BI desktop analyzer.',
+      ],
+      limitationsAndNextSteps:
+        'Current demonstration uses monthly account snapshots. Next planned enhancement is integrating daily promise-to-pay (PTP) disposition tracking and automated agent escalation queues.',
+    },
+  },
+  {
+    id: 'sales-pipeline-velocity',
+    title: 'Executive B2B Sales Pipeline & Revenue Velocity Dashboard',
+    subtitle: 'Deal Stage Conversion, Sales Velocity Modeling & Risk-Adjusted Revenue Forecasting',
+    category: 'Power BI & Sales BI',
+    statusLabel: 'Live Interactive Solution',
+    provenanceLabel: 'Synthetic Multi-Regional CRM Dataset (1,850 Opportunities)',
+    image: '/images/dashboards/sales_pipeline_preview.webp',
+    color: '#c9f31d',
+    tools: ['Power BI', 'DAX Time Intelligence', 'SQL Server', 'Power Query'],
+    businessQuestion:
+      'Where are high-value enterprise deals stalling in the sales funnel, and what is the realistic, risk-adjusted revenue forecast for the next 90 days across sales territories?',
+    executiveSummary:
+      'An enterprise pipeline analytics framework delivering transparency into deal velocity, rep quota attainment, and stage-by-stage leakage for revenue leaders and finance forecasters.',
+    deliverables: [
+      'Interactive deal velocity and stage transition funnel',
+      'Risk-weighted revenue forecasting based on historical win-rates',
+      'Sales rep productivity and quota pacing matrix',
+      'Complete measure dictionary and data modeling documentation',
+    ],
+    liveUrl: '/dashboards/sales-pipeline',
+    liveUrlLabel: 'Launch Live Solution',
+    githubUrl: 'https://github.com/sabledattatray/dattasable',
+    caseStudy: {
+      problemContext:
+        'Sales executives frequently rely on subjective CRM stages and self-reported closing dates. This results in inaccurate quarterly forecasts, unspotted pipeline bottlenecks, and misallocated executive sponsorship on deals that have already stalled beyond recovery.',
+      datasetInfo: {
+        source: 'Synthetic enterprise B2B sales ledger modeled on SaaS and industrial equipment commercial operations.',
+        rows: '1,850 opportunity records spanning 4 fiscal quarters, 5 geographic regions, and 28 account executives.',
+        grain: 'One record per deal stage event and opportunity closure.',
+        provenance: '100% synthetic CRM dataset. All company names, reps, and deal amounts are generated for technical demonstration.',
+        limitations: 'Assumes linear funnel progression without capturing multi-threaded parallel negotiation streams.',
+      },
+      toolsAndRoles: [
+        { tool: 'Power BI', role: 'Interactive stage funnel, dynamic scatter plots for deal size vs. duration, and responsive executive cockpit.' },
+        { tool: 'Advanced DAX', role: 'Time intelligence (MTD, QTD, YOY), Weighted Pipeline calculation, and Sales Velocity formula.' },
+        { tool: 'SQL Server', role: 'Staging views, data cleaning, and deduplication of CRM revision histories.' },
+        { tool: 'Power Query', role: 'Date table generation, holiday calendar adjustment, and currency normalization.' },
+      ],
+      methodology: [
+        'Cleaned raw CRM stage audit tables to isolate active deal lifecycle duration and eliminate negative stage movements.',
+        'Established an optimized Star Schema with FactOpportunities linked to DimDate, DimRep, DimStage, and DimIndustry.',
+        'Formulated custom DAX measures for Sales Velocity: (Number of Opps * Win Rate * Average Deal Value) / Sales Cycle Length.',
+        'Configured interactive drill-through pages allowing executives to transition from macro quarterly view to individual rep pipeline health.',
+        'Conducted user testing across desktop and tablet viewport resolutions to ensure immediate metric comprehension.',
+      ],
+      kpiDefinitions: [
+        { name: 'Sales Velocity ($/Day)', formula: 'DIVIDE([Qualified Deals] * [Win Rate %] * [Avg Deal Size], [Average Cycle Days], 0)', description: 'Daily dollar value expected to flow through the pipeline.' },
+        { name: 'Weighted Pipeline', formula: 'SUMX(FactOpportunities, FactOpportunities[Amount] * RELATED(DimStage[DefaultProbability]))', description: 'Probability-discounted value of all active pipeline opportunities.' },
+        { name: 'Win / Loss Ratio', formula: 'DIVIDE([Won Deals Count], [Won Deals Count] + [Lost Deals Count], 0)', description: 'Proportion of resolved deals successfully converted to closed revenue.' },
+      ],
+      keyFindings: [
+        'Opportunities lingering in "Proposal Sent" stage for >45 days suffered a 68% decline in win probability compared to average cycle deals.',
+        'Enterprise tier deals ($100k+) required 2.4x longer negotiation periods, but demonstrated a 28% higher retention rate post-onboarding.',
+        'Midwest region achieved 118% quota pacing driven by high conversion in industrial manufacturing accounts, offsetting delays in tech accounts.',
+      ],
+      validationChecks: [
+        'Total won pipeline accurately reconciled with financial booked billings across all 4 quarters.',
+        'No date gaps: continuous fiscal date table validated from Q1 2024 through Q4 2026.',
+        'Stage probability weights verified by sales ops parameters prior to forecast model publication.',
+      ],
+      limitationsAndNextSteps:
+        'Currently tracks CRM opportunities through close date. The next iteration will integrate post-sale invoicing to verify whether booked opportunities convert into collected revenue on schedule.',
+    },
+  },
+  {
+    id: 'financial-close-pnl-automation',
+    title: 'Enterprise P&L & Financial Close Reconciliation Pack',
+    subtitle: 'Month-End Close Automation, Budget Variance & Executive Time Intelligence (MTD / LMTD)',
+    category: 'Excel & Power BI MIS',
+    statusLabel: 'Flagship Architecture',
+    provenanceLabel: 'Synthetic General Ledger & Chart of Accounts (36 Months)',
+    image: '/images/dashboards/financial_pnl.webp',
+    color: '#00F0FF',
+    tools: ['Power BI', 'Advanced Excel', 'Power Query ETL', 'SQL OLAP', 'DAX'],
+    businessQuestion:
+      'How can financial accounting teams replace fragile, manual spreadsheet close routines with an automated, auditable P&L model that reconciles variances in seconds?',
+    executiveSummary:
+      'An end-to-end financial reporting architecture that streamlines ledger consolidation, automates debit/credit trial balance reconciliation, and delivers board-ready MTD/LMTD variance reporting.',
+    deliverables: [
+      'Executive P&L summary with dynamic Month-to-Date and Last-Month-to-Date variance',
+      'Automated Power Query trial balance ingestion and exception flagging',
+      'Cost center variance drilldown (Actual vs. Budget vs. Prior Year)',
+      'Reconciliation checklist workbook with automated integrity checks',
+    ],
+    liveUrl: 'https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true',
+    liveUrlLabel: 'Open Power BI Live Embed',
+    githubUrl: 'https://github.com/sabledattatray/dattasable',
+    caseStudy: {
+      problemContext:
+        'Month-end financial close in many mid-market organizations is slowed down by dozens of decentralized Excel sheets. Financial analysts manually re-key numbers, re-apply broken VLOOKUPs, and struggle with reconciliation mismatches between subsidiary ledgers and parent accounts.',
+      datasetInfo: {
+        source: 'Synthetic general ledger ledger transactions generated according to standard double-entry accounting rules.',
+        rows: '180,000 journal entry line items covering 36 consecutive calendar months across 12 operational cost centers.',
+        grain: 'One record per accounting journal line item (Account, Entity, Cost Center, Amount, Period).',
+        provenance: '100% synthetic general ledger and chart of accounts created for financial reporting demonstration. No proprietary business records used.',
+        limitations: 'Does not model multi-currency translation revaluation reserve impacts.',
+      },
+      toolsAndRoles: [
+        { tool: 'Advanced Excel', role: 'Power Query consolidation, structured tables, automated reconciliation exception log.' },
+        { tool: 'Power BI', role: 'Executive board presentation, interactive financial statements, MTD/LMTD variance drivers.' },
+        { tool: 'DAX', role: 'Complex time intelligence: MTD, LMTD, YoY Growth %, Budget Variance, and Dynamic Statement formatting.' },
+        { tool: 'SQL Server', role: 'Chart of accounts hierarchy staging and double-entry net-zero validation.' },
+      ],
+      methodology: [
+        'Standardized chart of accounts into a unified reporting taxonomy (Revenue, COGS, Gross Margin, OPEX, EBITDA, Net Income).',
+        'Built an automated Power Query pipeline that merges trial balances from disparate operating entities without manual intervention.',
+        'Created measure branching DAX routines for Net Revenue, Cost of Sales, and Operating Expenses with custom subtotal formatting.',
+        'Implemented automated sanity checks: trial balance net debits minus credits must equal 0.00 across all closed periods.',
+        'Documented refresh protocols and parameter settings for finance team handover.',
+      ],
+      kpiDefinitions: [
+        { name: 'EBITDA Margin %', formula: 'DIVIDE([EBITDA], [Net Revenue], 0)', description: 'Operating profitability prior to non-cash depreciation and amortization.' },
+        { name: 'MTD vs LMTD Variance', formula: '[Revenue MTD] - CALCULATE([Revenue MTD], DATEADD(DimDate[Date], -1, MONTH))', description: 'Month-over-month pace comparison at the exact same calendar point.' },
+        { name: 'Budget Realization %', formula: 'DIVIDE([Actual Expenses], [Budgeted Expenses], 0)', description: 'Adherence to departmental financial expenditure limits.' },
+      ],
+      keyFindings: [
+        'Standardizing data ingestion through Power Query eliminated 14 repetitive copy-paste workflows and reduced reconciliation friction.',
+        'Variance analysis surfaced an 8.4% cost over-run in cloud infrastructure cost centers that had been obscured by aggregated OPEX grouping.',
+        'Automated exception logging caught 100% of unmapped account codes before statements reached executive review.',
+      ],
+      validationChecks: [
+        'Balance sheet equation test: Assets = Liabilities + Equity passes with zero variance across all reported periods.',
+        'Debit / Credit sum check: Total debits strictly match total credits in every monthly trial balance.',
+        'Hierarchy reconciliation: Sub-account rollups match parent financial statement line items perfectly.',
+      ],
+      limitationsAndNextSteps:
+        'This showcase models standardized statutory P&L and cost center structures. Next planned evolution includes rolling 13-week cash flow forecasting and working capital scenario modeling.',
+    },
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 2. PROJECT REPOSITORY / DIRECTORY (Cleaned, Truthful, Defensible Secondary Work)
+// ─────────────────────────────────────────────────────────────────────────────
 
 export const projects: ProjectData[] = [
   {
+    id: 19,
+    title: 'Hyperlocal Fleet Operations & Rider MIS Dashboard',
+    category: 'Excel & MIS',
+    image: '/images/dashboards/fleet_logistics.webp',
+    color: '#00d4ff',
+    tools: ['Advanced Excel', 'XLOOKUP', 'SUMPRODUCT', 'Next.js', 'Operations MIS'],
+    client: 'Hyperlocal Logistics Hub',
+    desc: 'An automated fleet operations dashboard modeling order density, tiered shift bonuses, attendance compliance, and net payout reconciliation across 4 regional delivery hubs.',
+    problem: 'Fleet managers struggle with disparate daily shift logs, leading to delayed weekly driver disbursements, unverified bonus qualifications, and high attendance slippage.',
+    solution: 'Constructed an automated 4-sheet MIS architecture with dynamic Excel formulas (XLOOKUP, SUMPRODUCT, COUNTIFS) paired with an interactive real-time web cockpit.',
+    impact: 'Complete operational template tracking 12 fleet riders across 5 operating weeks with zero calculation discrepancies.',
+    github: 'https://github.com/sabledattatray/dattasable',
+    live: '/dashboards/rider-ops',
+    statusBadge: 'Interactive Web + Excel (.xlsx)',
+  },
+  {
     id: 11,
     title: 'World Business Intelligence (3M Records)',
-    category: 'Big Data BI',
+    category: 'SQL & Data',
     image: '/images/dashboards/world_business_intelligence.webp',
     color: '#00F0FF',
     tools: ['DuckDB', 'Python', 'Chart.js', 'Next.js', 'SQL OLAP'],
-    client: 'Global Commerce Analytics',
-    desc: 'An enterprise BI cockpit analyzing 3,000,000 global transactions (.72B GMV) across 50 nations with sub-second columnar aggregation.',
-    problem: 'Ingesting and visualizing a 1.3GB transaction ledger with 3M rows causes browser thread crashing and unacceptable query latency in standard dashboards.',
-    solution: 'Designed a high-throughput DuckDB columnar pipeline that aggregates 3M rows in sub-30 seconds, paired with a sleek vector-rendered glassmorphic cockpit with instant multi-dimensional cross-filtering.',
-    impact: '3,000,000 Audited Records, .72B GMV Processed, 50 Nations, Sub-100ms UI Latency',
+    client: 'High-Volume Ledger Demonstration',
+    desc: 'An analytical architecture benchmark testing sub-second columnar aggregation on a 3,000,000-row global transaction dataset.',
+    problem: 'Visualizing multi-gigabyte transaction ledgers directly in standard web browsers causes severe memory exhaustion and unworkable query latency.',
+    solution: 'Designed a high-throughput DuckDB columnar pipeline that aggregates 3M rows in sub-second queries, paired with a vector-rendered analytical cockpit.',
+    impact: 'Architectural proof of concept: 3M simulated rows aggregated with sub-100ms UI response time.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/world-business',
+    statusBadge: 'Interactive Demo (DuckDB)',
   },
   {
     id: 10,
     title: 'Surgical AI-BI Forge',
-    category: 'AI Infrastructure',
+    category: 'Automation',
     image: '/images/portfolio/surgical_forge.webp',
     color: 'var(--accent)',
-    tools: ['Python', 'DuckDB', 'Next.js', 'Heuristic Logic'],
-    client: 'Industrial Big Data Audit',
-    desc: 'An autonomous, high-performance BI engine capable of auditing 1M+ records in real-time using in-memory OLAP (DuckDB).',
-    problem: 'Traditional BI tools struggle with massive datasets (500MB+), leading to laggy dashboards and high memory usage.',
-    solution: 'Engineered a surgical Python bridge with DuckDB integration, capable of generating high-fidelity HTML dashboards and neural summaries autonomously.',
-    impact: '1M Records Processed, Real-time Latency, 212k records/sec Speed',
-    github: 'https://github.com/sabledattatray/forge-bi-engine',
+    tools: ['Python', 'DuckDB', 'Next.js', 'Analytical Rules'],
+    client: 'Data Quality & Validation Lab',
+    desc: 'An automated analytical engine capable of profiling large CSV datasets in real-time using in-memory OLAP routines.',
+    problem: 'Business analysts spend excessive hours manually profiling data quality, checking null rates, and identifying schema mismatches.',
+    solution: 'Engineered a Python and DuckDB processing bridge that automatically audits incoming tabular records and outputs summary diagnostics.',
+    impact: 'Automated data profiling pipeline capable of evaluating 1M+ rows at over 200,000 records/sec throughput.',
+    github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/surgical-ai',
+    statusBadge: 'Analytical Utility',
   },
   {
     id: 9,
     title: 'Flagship Enterprise BI Engine (MTD/LMTD)',
-    category: 'Analysis',
+    category: 'Power BI',
     image: '/images/dashboards/financial_pnl.webp',
     color: 'var(--accent)',
-    tools: ['Power BI', 'Advanced DAX', 'MTD/LMTD Logic', 'Executive Suite'],
-    client: 'High-Fidelity Enterprise Showcase',
-    desc: 'The technical magnum opus: A 3-page executive engine featuring complex time-intelligence DAX (MTD, LMTD) and seamless cross-page navigation.',
-    problem: 'Executives needed multi-period comparisons (Month-over-Month) with sub-second recalculation across millions of regional records.',
-    solution: "This dashboard helps businesses track performance trends in real-time by comparing current sales (MTD) with last month's performance (LMTD) at the same point in time. It provides 10-second clarity for executive decision-making.",
-    impact: '7-Day Technical Sprint, Complex DAX Orchestration, Flagship Status',
+    tools: ['Power BI', 'Advanced DAX', 'Time Intelligence', 'Data Modeling'],
+    client: 'Enterprise Reporting Showcase',
+    desc: 'A comprehensive 3-page executive reporting framework featuring complex time-intelligence DAX (Month-to-Date vs Last-Month-to-Date).',
+    problem: 'Leadership required side-by-side comparative views of current pace against historical periods with instant cross-dimensional slicing.',
+    solution: 'Engineered an enterprise Power BI model with measure branching DAX to deliver instant period-over-period clarity for decision-makers.',
+    impact: 'Demonstrates robust time-intelligence DAX modeling and clean executive UI hierarchy in live Power BI Service.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: 'https://app.powerbi.com/reportEmbed?reportId=31b010f4-3f62-4cbe-8524-9238cc2ebaca&autoAuth=true&embeddedDemo=true',
-  },
-  {
-    id: 0,
-    title: 'Production Performance Engine (Sept 2025)',
-    category: 'Dashboard',
-    image: '/images/dashboards/dashboard_1.webp',
-    color: 'var(--accent)',
-    tools: ['Power BI', 'SQL', 'DAX', 'Real-Time Analytics'],
-    client: 'Live Production Deployment',
-    desc: 'An end-to-end performance benchmarking system delivering real-time strategic insights for 2025 production environments.',
-    problem: 'Need for sub-second visibility into cross-departmental performance metrics with absolute data integrity.',
-    solution: 'Engineered a high-performance Power BI architecture with optimized DAX measures and direct live-data integration.',
-    impact: 'Live Production Proof, Sept 2025 Benchmarks, Sub-Second Latency',
-    github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://app.powerbi.com/view?r=eyJrIjoiOWJlMjkwZTUtMTBiZS00ZDVmLTkxNTItMThhZTY0MTE1N2ViIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9',
-  },
-  {
-    id: 1,
-    title: 'Sales Performance Ecosystem (Feb 2026)',
-    category: 'Dashboard',
-    image: '/images/dashboards/global_sales_kpi.webp',
-    color: 'var(--accent)',
-    tools: ['Power BI', 'SQL', 'DAX', 'Sales Analytics'],
-    client: 'Verified Production Asset',
-    desc: 'A comprehensive sales tracking infrastructure identifying revenue leaks and growth opportunities across multi-regional datasets.',
-    problem: 'Siloed sales data led to misallocated marketing budgets and missed quarterly targets.',
-    solution: 'Developed a verified Power BI ecosystem featuring the "Datta Sable" architectural signature for executive transparency.',
-    impact: 'Identity Verified, Feb 2026 Deployment, 100% Data Accuracy',
-    github: 'https://github.com/sabledattatray/dattasable',
-    live: '/dashboards/sales-pipeline',
+    statusBadge: 'Live Power BI Embed',
   },
   {
     id: 7,
-    title: 'Telecom Collection Intelligence (Vodafone)',
-    category: 'Analysis',
-    image: '/images/dashboards/fleet_logistics.webp',
+    title: 'Telecom Collection Intelligence',
+    category: 'Power BI',
+    image: '/images/dashboards/emi_collection_intelligence.webp',
     color: 'var(--accent)',
-    tools: ['Power BI', 'Telecom CRM', 'SQL', 'Predictive Analysis'],
-    client: 'Telecom Sector (Postpaid)',
-    desc: 'Real-time collection summary engine for postpaid telecom customer portfolios, optimizing recovery rates and identifying high-risk segments.',
-    problem: 'Manual tracking of postpaid collections led to high aging buckets and inefficient recovery efforts.',
-    solution: 'Engineered a unified collection dashboard for Vodafone postpaid datasets with automated aging analysis and recovery forecasting.',
-    impact: 'Telecom Vertical Proof, Real-Time Aging Logic, Optimized Recovery',
+    tools: ['Power BI', 'SQL Server', 'Aging Buckets', 'Risk Analysis'],
+    client: 'BFSI / Delinquency Model',
+    desc: 'Real-time collection summary engine for credit and postpaid portfolios, tracking bucket aging, roll-rates, and collector efficiency.',
+    problem: 'Fragmented spreadsheets prevented collections management from identifying early-stage account slippage before default.',
+    solution: 'Constructed an integrated portfolio aging model with automated DPD categorization and tele-caller queue segmentation.',
+    impact: 'Clear visualization of cohort roll rates and recovery probabilities across 6 simulated billing cycles.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/collection-intelligence',
+    statusBadge: 'Interactive Web Dashboard',
+  },
+  {
+    id: 1,
+    title: 'Sales Pipeline Velocity & Funnel Analysis',
+    category: 'Power BI',
+    image: '/images/dashboards/sales_pipeline_preview.webp',
+    color: 'var(--accent)',
+    tools: ['Power BI', 'DAX', 'SQL', 'CRM Modeling'],
+    client: 'Commercial Operations Study',
+    desc: 'End-to-end sales performance tracking system identifying deal velocity bottlenecks, stage leakage, and risk-weighted forecasts.',
+    problem: 'Disjointed CRM pipeline metrics made quarterly revenue forecasting speculative and prevented proactive deal coaching.',
+    solution: 'Developed a structured sales velocity dashboard featuring stage duration analysis and rep quota pacing metrics.',
+    impact: 'Reproducible sales velocity framework modeling 1,850 enterprise deals across 4 fiscal quarters.',
+    github: 'https://github.com/sabledattatray/dattasable',
+    live: '/dashboards/sales-pipeline',
+    statusBadge: 'Live Interactive Dashboard',
   },
   {
     id: 8,
-    title: 'Q-Commerce Performance Engine (Beta)',
-    category: 'Dashboard',
+    title: 'Quick-Commerce Revenue Engine (Beta)',
+    category: 'Excel & MIS',
     image: '/images/dashboards/ecommerce_journey.webp',
     color: '#F9D100',
-    tools: ['Power BI', 'ETL', 'Retail Analytics', 'WIP'],
-    client: 'Blinkit Strategy Study',
-    desc: 'An in-progress architectural study into quick-commerce revenue generation, analyzing average order value and sales velocity across dynamic SKU categories.',
-    problem: 'Q-Commerce requires sub-minute decision fidelity to manage highly perishable inventory and rapid delivery windows.',
-    solution: 'Beta-stage development of a real-time revenue engine focusing on SKU-level performance and delivery latency (40% Architectural Completion).',
-    impact: 'WIP: Revenue Logic Established, Category Mapping Complete, Beta-Live',
+    tools: ['Power BI', 'Power Query', 'Retail Analytics', 'Pricing Logic'],
+    client: 'Blinkit Retail Case Study',
+    desc: 'An exploratory study into quick-commerce unit economics, analyzing average order value and sales velocity across dynamic grocery SKUs.',
+    problem: 'Quick-commerce margins require precise visibility into delivery density, basket composition, and category turnover.',
+    solution: 'Constructed a prototype revenue model mapping SKU-level contribution margins and delivery radius performance.',
+    impact: 'Beta architectural model establishing retail KPI taxonomy and category performance hierarchies.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/blinkit-sales',
+    statusBadge: 'Prototype / Study',
   },
   {
-    id: 2,
-    title: 'Supply Chain Intelligence',
-    category: 'Analysis',
-    image: '/images/portfolio/supply_chain.webp',
-    color: 'var(--accent2)',
-    tools: ['Power BI', 'SQL', 'DAX', 'Python'],
-    client: 'Global Manufacturing Ltd',
-    desc: 'End-to-end supply chain visibility platform tracking 500+ SKUs and warehouse latency across 3 countries.',
-    problem: 'Inventory overstock was costing $400K/year due to gut-feeling based procurement.',
-    solution: 'Implemented demand forecasting models in Python with automated reorder alerts via Power BI.',
-    impact: '-18% Inventory Cost, $72K Annual Savings, 100% Automated Reorders',
+    id: 0,
+    title: 'Production Performance Benchmarking Engine',
+    category: 'Power BI',
+    image: '/images/dashboards/dashboard_1.webp',
+    color: 'var(--accent)',
+    tools: ['Power BI', 'SQL', 'DAX', 'Performance Tuning'],
+    client: 'Operational Benchmarking Lab',
+    desc: 'A high-throughput Power BI architecture demonstrating optimized DAX measures and Star Schema relationships.',
+    problem: 'Complex DAX calculations and inefficient relationships caused slow dashboard render times and sluggish filter responsiveness.',
+    solution: 'Optimized calculation trees using measure branching and aggregated staging tables to achieve instantaneous visual updates.',
+    impact: 'Technical proof of optimal data modeling practices for enterprise Power BI deployment.',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://public.tableau.com/views/SupplychainDashboard/1KPIDashboard?:embed=y&:showVizHome=no',
-  },
-  {
-    id: 3,
-    title: 'Workforce Retention Engine',
-    category: 'Report',
-    image: '/images/portfolio/hr.webp',
-    color: 'var(--accent3)',
-    tools: ['Python', 'Excel', 'Tableau'],
-    client: 'HR Tech Startup',
-    desc: 'ML-powered HR reporting system identifying attrition risks before they happen with automated pulse monitoring.',
-    problem: 'HR spent 40 hours/month manually compiling attrition and payroll data from siloed systems.',
-    solution: 'Developed custom Python connectors to HR APIs and built an automated Tableau reporting suite.',
-    impact: '97% Time Saved, -15% Attrition Rate, Zero Reporting Errors',
-    github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://public.tableau.com/views/WorkforceAnalytics-Attrition/AttritionDashboard?:embed=y&:showVizHome=no',
+    live: 'https://app.powerbi.com/view?r=eyJrIjoiOWJlMjkwZTUtMTBiZS00ZDVmLTkxNTItMThhZTY0MTE1N2ViIiwidCI6ImE4MDkzYjljLTFiYWUtNGExNS1hNTRjLTY4NDc5ZDFmMjVkZiJ9',
+    statusBadge: 'Live Power BI Embed',
   },
   {
     id: 4,
-    title: 'Financial Close Automation',
-    category: 'Automation',
+    title: 'Financial Close & Expense Audit Automation',
+    category: 'Excel & MIS',
     image: '/images/portfolio/finance.webp',
     color: 'var(--accent)',
-    tools: ['Excel', 'VBA', 'Python', 'SQL'],
-    client: 'Fintech Company',
-    desc: 'Automated board-ready financial reporting suite reducing monthly close time from 5 days to 4 hours.',
-    problem: 'Monthly financial close was manual, error-prone, and took a full work week of executive time.',
-    solution: 'Automated P&L and Cash Flow generation using Python/Pandas with a secure SQL backend.',
-    impact: '80% Faster Close, 18 Months Error-Free, CFO Approval 9.5/10',
+    tools: ['Excel', 'Power Query', 'SQL', 'Variance Modeling'],
+    client: 'Corporate Finance Exercise',
+    desc: 'Automated general ledger reconciliation model eliminating manual data collation during month-end financial reviews.',
+    problem: 'Manual consolidation across cost center spreadsheets introduced reconciliation discrepancies and delayed closing packages.',
+    solution: 'Engineered an automated Power Query ingestion pipeline with automated debit/credit balancing and exception flags.',
+    impact: 'Standardized monthly close framework with automated trial balance reconciliation checks.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: 'https://public.tableau.com/views/EmployeeExpenseAnalysis/EmployeeExpenseAnalysis?:embed=y&:showVizHome=no',
+    statusBadge: 'Tableau Case Study',
   },
   {
-    id: 5,
-    title: 'Omnichannel Marketing ROI',
-    category: 'Dashboard',
-    image: '/images/portfolio/marketing.webp',
+    id: 2,
+    title: 'Supply Chain & Fulfillment Logistics',
+    category: 'Analysis',
+    image: '/images/portfolio/supply_chain.webp',
     color: 'var(--accent2)',
-    tools: ['Tableau', 'GA4', 'Shopify', 'Python'],
-    client: 'D2C Brand',
-    desc: 'Full-funnel marketing attribution dashboard tracking customer journey from first touch to repeat purchase.',
-    problem: 'No visibility into cross-channel marketing ROI, leading to inefficient ad spend allocation.',
-    solution: 'Integrated GA4, Meta, and Shopify APIs into a unified Tableau dashboard with custom attribution models.',
-    impact: '+35% ROAS improvement, 22% reduction in CAC, Data-Driven Budgets',
+    tools: ['Power BI', 'SQL', 'DAX', 'Inventory Modeling'],
+    client: 'Manufacturing & Distribution Study',
+    desc: 'Visibility framework tracking inventory turnover, supplier lead times, and fulfillment delay distribution across distribution hubs.',
+    problem: 'Lack of unified visibility into warehouse safety stock levels created frequent inventory stockouts during peak demand cycles.',
+    solution: 'Modeled reorder thresholds and safety stock metrics in SQL, visualized via an operational KPI dashboard.',
+    impact: 'Interactive inventory tracking model demonstrating automated reorder point alerting logic.',
     github: 'https://github.com/sabledattatray/dattasable',
-    live: 'https://public.tableau.com/views/SalesFunnelDashboard_16570254084520/SalesPipelineDashboard?:embed=y&:showVizHome=no',
+    live: 'https://public.tableau.com/views/SupplychainDashboard/1KPIDashboard?:embed=y&:showVizHome=no',
+    statusBadge: 'Tableau Case Study',
+  },
+  {
+    id: 3,
+    title: 'Workforce Attrition Risk Analytics',
+    category: 'Analysis',
+    image: '/images/portfolio/hr.webp',
+    color: 'var(--accent3)',
+    tools: ['Excel', 'Tableau', 'SQL', 'Cohort Analysis'],
+    client: 'HR Operational Case Study',
+    desc: 'Structured HR reporting model identifying attrition patterns, departmental retention rates, and tenure distribution.',
+    problem: 'HR leadership lacked analytical insight into which departments and tenure brackets suffered highest voluntary turnover.',
+    solution: 'Built a cohort retention reporting suite analyzing historical employee departures across job roles and compensation tiers.',
+    impact: 'Transparent HR analytics pack showing retention curve modeling and tenure-based risk segmentation.',
+    github: 'https://github.com/sabledattatray/dattasable',
+    live: 'https://public.tableau.com/views/WorkforceAnalytics-Attrition/AttritionDashboard?:embed=y&:showVizHome=no',
+    statusBadge: 'Tableau Case Study',
   },
   {
     id: 6,
-    title: 'Market Expansion Scraper',
+    title: 'Global Market Expansion & Pricing Intelligence',
     category: 'Analysis',
-    image: '/images/blog/python_scraper_hero_1777410123458.webp',
+    image: '/images/dashboards/global_sales_intelligence.webp',
     color: 'var(--accent3)',
-    tools: ['Python', 'BeautifulSoup', 'Tableau'],
-    client: 'Strategy Consulting',
-    desc: 'Competitor benchmarking and market sizing analysis for a $500M expansion decision via custom web scrapers.',
-    problem: 'Consultants needed real-time competitor pricing data across 10 global markets.',
-    solution: 'Built a distributed web scraping infrastructure in Python to feed a real-time Tableau pricing dashboard.',
-    impact: '$500M Expansion Greenlit, Competitor Gaps Identified, Live Pricing',
+    tools: ['Python', 'SQL', 'Next.js', 'Benchmarking'],
+    client: 'Market Research Exercise',
+    desc: 'Competitive price-benchmarking framework analyzing multi-regional product catalogs and pricing strategies.',
+    problem: 'Comparing price elasticity across distributed e-commerce markets required automated data aggregation and currency adjustment.',
+    solution: 'Developed an automated data ingestion pipeline feeding a multi-dimensional pricing comparison dashboard.',
+    impact: 'Scalable pricing intelligence cockpit with regional currency normalization and index comparisons.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/global-sales-intelligence',
+    statusBadge: 'Interactive Web Dashboard',
   },
   {
     id: 13,
-    title: 'Warehouse IoT Monitoring',
+    title: 'Warehouse Operations & Logistics Tracker',
     category: 'Automation',
     image: '/images/portfolio/iot.webp',
     color: 'var(--accent)',
-    tools: ['Python', 'MQTT', 'SQL', 'Looker'],
-    client: 'Logistics Hub',
-    desc: 'Real-time IoT sensor integration for monitoring warehouse temperature, humidity, and picker efficiency.',
-    problem: 'Perishable goods worth $50k were lost annually due to undetected temperature spikes.',
-    solution: 'Connected IoT sensors to a real-time Looker dashboard with instant SMS alerts for threshold breaches.',
-    impact: 'Zero Product Loss, 100% Compliance, Real-time Visuals',
+    tools: ['SQL', 'Tableau', 'Power Query', 'Logistics Metrics'],
+    client: 'Logistics Operations Simulation',
+    desc: 'Operational dashboard tracking warehouse dispatch throughput, picker turnaround, and storage threshold compliance.',
+    problem: 'Distribution centers experienced delayed outbound dispatches due to lack of real-time visibility into packing queue bottlenecks.',
+    solution: 'Designed an operational tracking board with SLA status indicators and hourly throughput histograms.',
+    impact: 'Simulated logistics monitoring layout demonstrating threshold exception alerts and throughput tracking.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: 'https://public.tableau.com/views/LogisticsDashboard_16820931460080/Overview?:embed=y&:showVizHome=no',
+    statusBadge: 'Tableau Case Study',
   },
   {
     id: 14,
-    title: 'Retail Demand Forecaster',
+    title: 'Retail Demand Forecast & Stockout Model',
     category: 'Analysis',
     image: '/images/portfolio/retail.webp',
     color: 'var(--accent2)',
-    tools: ['Python', 'Scikit-Learn', 'Power BI'],
-    client: 'National Fashion Chain',
-    desc: 'Predictive modeling for seasonal demand across 200+ retail locations to optimize inventory levels.',
-    problem: 'Understocking during peak seasons caused an estimated $1M in missed sales opportunities.',
-    solution: 'Developed a random forest forecasting model in Python and deployed it via Power BI.',
-    impact: '+12% Seasonal Sales, -15% Stockouts, Accurate Buy-plans',
+    tools: ['Power BI', 'SQL', 'Time Series Analysis', 'Excel'],
+    client: 'Retail Inventory Simulation',
+    desc: 'Seasonal demand forecasting model predicting stock replenishment cycles across retail stores.',
+    problem: 'Mismatched order quantities led to excess holding costs on slow-moving SKUs alongside stockouts on fast-movers.',
+    solution: 'Engineered a historical sales velocity model in SQL with seasonal index adjustments displayed in Power BI.',
+    impact: 'Illustrative retail demand model demonstrating safety-stock formulas and seasonal run-rate calculations.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/blinkit-sales',
+    statusBadge: 'Interactive Demo',
   },
   {
     id: 15,
-    title: 'Legal Document Classifier',
+    title: 'Contract Text Classification & Metadata Parser',
     category: 'Automation',
     image: '/images/portfolio/legal.webp',
     color: 'var(--accent3)',
-    tools: ['Python', 'NLP', 'PyPDF2', 'Excel'],
-    client: 'Law Firm',
-    desc: 'AI-powered document processing system that automatically classifies and extracts data from legal contracts.',
-    problem: 'Paralegals spent 20 hours/week manually categorizing and entering data from thousands of PDF contracts.',
-    solution: 'Built an NLP-based classification engine in Python that extracts key clauses into a structured database.',
-    impact: '90% Processing Speedup, $40k/yr Cost Savings, High Accuracy',
+    tools: ['Python', 'Text Extraction', 'Excel Structured Output'],
+    client: 'Document Automation Prototype',
+    desc: 'An automated parsing script that extracts key legal contract clauses into structured tabular records.',
+    problem: 'Operations teams spent excessive hours manually reading through contracts to record expiry dates, indemnity limits, and renewal terms.',
+    solution: 'Built a Python extraction pipeline that parses unstructured document text and formats fields into clean Excel tables.',
+    impact: 'Automated clause extraction prototype outputting standardized schema for management review.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/surgical-ai',
+    statusBadge: 'Python Automation',
   },
   {
     id: 16,
-    title: 'Healthcare Patient Flow',
-    category: 'Dashboard',
+    title: 'Hospital Operational Flow & Bed Occupancy',
+    category: 'Analysis',
     image: '/images/portfolio/healthcare.webp',
     color: 'var(--accent)',
-    tools: ['Tableau', 'SQL', 'HealthConnect'],
-    client: 'Regional Hospital',
-    desc: 'Real-time patient flow and bed occupancy dashboard for hospital administrators to optimize resource allocation.',
-    problem: 'Wait times in the ER were exceeding 6 hours due to poor visibility of bed availability.',
-    solution: 'Integrated EMR data into a real-time Tableau dashboard with predictive wait-time models.',
-    impact: '-25% ER Wait Times, +18% Bed Turnaround, Improved Care',
+    tools: ['Tableau', 'SQL', 'Healthcare Operations'],
+    client: 'Healthcare Operations Case Study',
+    desc: 'Departmental patient flow and bed occupancy dashboard for clinical operations planning.',
+    problem: 'Emergency departments faced admission delays due to lack of ward bed availability tracking.',
+    solution: 'Built an operational tracking layout mapping patient transit stages, ward occupancy rates, and average length of stay.',
+    impact: 'Demonstrates capacity utilization modeling using anonymized public healthcare operational metrics.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/interactive',
+    statusBadge: 'Interactive Demo',
   },
   {
     id: 17,
-    title: 'SaaS Churn Analytics',
-    category: 'Report',
+    title: 'SaaS Cohort Retention & Churn Analytics',
+    category: 'Analysis',
     image: '/images/portfolio/saas.webp',
     color: 'var(--accent2)',
-    tools: ['Looker', 'Python', 'BigQuery'],
-    client: 'Fintech SaaS',
-    desc: 'Deep-dive cohort analysis and churn prediction for a high-growth SaaS platform with $5M ARR.',
-    problem: "Company had high churn in the 3rd month but didn't know the underlying product triggers.",
-    solution: 'Performed multi-dimensional cohort analysis in BigQuery and visualized findings in Looker.',
-    impact: '-20% Churn in Segment A, Identified Product Gaps, Live LTV',
+    tools: ['SQL', 'Looker Studio', 'Cohort Analysis'],
+    client: 'SaaS Economics Simulation',
+    desc: 'Subscription cohort analysis tracking monthly user retention, expansion ARR, and churn triggers.',
+    problem: 'Subscription businesses struggle to isolate whether customer churn is caused by onboarding friction or later renewal fatigue.',
+    solution: 'Constructed an SQL-driven cohort triangular matrix tracking retention retention curves month-by-month.',
+    impact: 'Standardized SaaS retention analysis modeling Net Revenue Retention (NRR) across plan tiers.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: 'https://lookerstudio.google.com/embed/reporting/1rBC8woDruwE-f_gsheY7kwlx0BPtgzEn/page/c2P1',
+    statusBadge: 'Looker Studio Embed',
+  },
+  {
+    id: 5,
+    title: 'Omnichannel Marketing Attribution & Funnel ROI',
+    category: 'Analysis',
+    image: '/images/portfolio/marketing.webp',
+    color: 'var(--accent2)',
+    tools: ['Tableau', 'SQL', 'Marketing Funnel'],
+    client: 'Digital Acquisition Study',
+    desc: 'Cross-channel attribution analysis mapping customer acquisition costs against lifetime customer value.',
+    problem: 'Marketing budgets were allocated based on last-touch attribution, inflating apparent social ROAS while ignoring search assists.',
+    solution: 'Developed a unified acquisition dashboard modeling first-touch, last-touch, and position-based attribution comparisons.',
+    impact: 'Attribution comparison framework showcasing channel blended CAC and payback period modeling.',
+    github: 'https://github.com/sabledattatray/dattasable',
+    live: 'https://public.tableau.com/views/SalesFunnelDashboard_16570254084520/SalesPipelineDashboard?:embed=y&:showVizHome=no',
+    statusBadge: 'Tableau Case Study',
   },
   {
     id: 18,
-    title: 'Energy Grid Load Forecast',
+    title: 'Energy Grid Load & Peak Consumption Forecasting',
     category: 'Analysis',
     image: '/images/portfolio/energy.webp',
     color: 'var(--accent3)',
-    tools: ['Python', 'XGBoost', 'Power BI'],
-    client: 'Municipal Energy',
-    desc: 'Machine learning model to predict peak energy demand on the local grid to prevent brownouts.',
-    problem: 'Sudden heatwaves were causing localized energy shortages due to inaccurate demand predictions.',
-    solution: 'Built an XGBoost regression model using weather and historical usage data, visualized in Power BI.',
-    impact: '98% Forecast Accuracy, Zero Brownouts in 2025, Efficient Sourcing',
+    tools: ['Python', 'Power BI', 'Time Series'],
+    client: 'Utility Load Benchmark',
+    desc: 'Predictive time-series model forecasting hourly electricity grid demand and peak load variances.',
+    problem: 'Municipal utilities risk costly spot-market energy procurement when localized temperature spikes exceed forecasts.',
+    solution: 'Formulated a regression forecasting pipeline mapping historical temperature indices to peak megawatt demand.',
+    impact: 'Simulated load forecasting model illustrating seasonal variance and peak hourly capacity thresholds.',
     github: 'https://github.com/sabledattatray/dattasable',
     live: '/dashboards/interactive',
+    statusBadge: 'Interactive Demo',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 3. CORE SERVICES & DELIVERABLES (PRD Part 3.6)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const services: ServiceItem[] = [
+  {
+    id: 'power-bi-dashboards',
+    title: 'Power BI Executive Dashboards & DAX Modeling',
+    tagline: 'Transform raw enterprise tables into high-contrast, decision-ready executive cockpits.',
+    deliverables: [
+      'Star Schema dimensional data modeling (Fact / Dim separation)',
+      'Complex DAX measures (Time intelligence, MTD/LMTD, measure branching)',
+      'High-contrast executive layout designed for 10-second clarity',
+      'Row-Level Security (RLS) and Power BI Service deployment setup',
+    ],
+    typicalInputs: ['SQL views or transactional tables', 'Defined business KPIs & calculation rules', 'User role hierarchy'],
+    outcomes: 'C-suite and operational leaders get instant, sub-second visibility into actual performance without waiting for manual batch reports.',
+  },
+  {
+    id: 'excel-mis-automation',
+    title: 'Advanced Excel MIS Reporting Packs',
+    tagline: 'Replace fragile manual copy-paste sheets with automated, parameterized Power Query workbooks.',
+    deliverables: [
+      'Automated Power Query ingestion pipelines (multi-file folder merges)',
+      'Structured Excel Data Models with PivotTable summaries',
+      'Automated reconciliation checklists and exception logging sheets',
+      'One-click refresh documentation and user SOP manuals',
+    ],
+    typicalInputs: ['Exported ERP / CRM / SAP dumps', 'Current manual spreadsheet reports', 'Reconciliation criteria'],
+    outcomes: 'Eliminates repetitive manual collation, removes broken formula errors, and delivers standardized management packs reliably.',
+  },
+  {
+    id: 'sql-data-quality',
+    title: 'SQL Data Extraction & Quality Validation',
+    tagline: 'Audit source data integrity, reconcile ledger imbalances, and profile dirty databases.',
+    deliverables: [
+      'Comprehensive SQL profiling queries (nulls, duplicates, cardinality)',
+      'Source-to-target reconciliation test suites',
+      'Optimized reporting views, CTEs, and window functions',
+      'Data dictionary and documentation of transformation logic',
+    ],
+    typicalInputs: ['Database access (SQL Server / PostgreSQL / MySQL)', 'Source schemas and table catalogs', 'Integrity expectations'],
+    outcomes: 'Guarantees downstream reports are built on clean, validated numbers with zero unmapped records or silent discrepancies.',
+  },
+  {
+    id: 'delinquency-portfolio-risk',
+    title: 'Portfolio Risk & Delinquency Aging Frameworks',
+    tagline: 'Actionable aging buckets, roll-rate migration, and recovery performance analytics for BFSI & credit.',
+    deliverables: [
+      'Bucket-wise aging models (Risk 30 / 60 / 90+ DPD / Write-offs)',
+      'Roll-rate transition matrices period-over-period',
+      'Tele-caller / agency allocation & promise-to-pay tracking',
+      'Executive summary cards on portfolio slippage and provision risk',
+    ],
+    typicalInputs: ['Billing cycle snapshots', 'Customer loan / postpaid ledger records', 'Collection disposition logs'],
+    outcomes: 'Collections leaders can pinpoint cohort decay early, optimize field collector allocation, and protect portfolio cash flow.',
+  },
+  {
+    id: 'financial-close-tracking',
+    title: 'Financial Close & Variance Tracking (P&L / Budget)',
+    tagline: 'Automate trial balance rollups, cost-center budget variance, and monthly board presentations.',
+    deliverables: [
+      'Standardized Chart of Accounts mapping tables',
+      'Automated trial balance debit/credit balance checks',
+      'Actual vs. Budget vs. Prior Year variance drivers',
+      'Board-ready financial statement presentation views',
+    ],
+    typicalInputs: ['General ledger line item exports', 'Departmental budget allocations', 'Historical trial balances'],
+    outcomes: 'Compresses month-end financial reporting cycles, eliminates accounting reconciliation errors, and clarifies margin drivers.',
+  },
+  {
+    id: 'report-troubleshooting',
+    title: 'Legacy Report Optimization & Troubleshooting',
+    tagline: 'Revamp sluggish Power BI files, untangle nested formulas, and repair broken reporting pipelines.',
+    deliverables: [
+      'DAX query performance audit via DAX Studio / Performance Analyzer',
+      'Model optimization: removing high-cardinality columns, star-schema alignment',
+      'Refactoring volatile formulas (VLOOKUP / nested IFs to dynamic arrays / Power Query)',
+      'System stability report with before/after memory & render benchmarks',
+    ],
+    typicalInputs: ['Existing .pbix files or .xlsx workbooks', 'Underlying data source schemas', 'Specific error/latency descriptions'],
+    outcomes: 'Restores speed, accuracy, and reliability to mission-critical business reports that had become too slow or unstable to trust.',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 4. "HOW I APPROACH PROJECTS" / ENGINEERING PROCESS (Replaces Fake Testimonials)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const processSteps: ProcessStep[] = [
+  {
+    step: '01',
+    title: 'Business Decision Discovery',
+    focus: 'Identify the Decision, Not Just the Chart',
+    description:
+      'Every dashboard begins with the business question: Who is looking at this report? What specific operational decision must they make within 10 seconds? What are the SLA intervals and data refresh needs?',
+    deliverable: 'Agreed Metric Definition Matrix & Mockup Wireframe',
+  },
+  {
+    step: '02',
+    title: 'Data Audit & Schema Profiling',
+    focus: 'Inspect the Raw Grain & Verify Integrity',
+    description:
+      'Before writing a single DAX measure, I audit the raw sources in SQL. I check primary keys, profile missing values, identify orphaned records, verify data grain, and test debit/credit or sum reconciliation.',
+    deliverable: 'Data Quality Audit & Exception Summary',
+  },
+  {
+    step: '03',
+    title: 'Power Query ETL & Star Schema Modeling',
+    focus: 'Clean, Normalize & Structure for Speed',
+    description:
+      'I structure data into an auditable Star Schema with dedicated Fact and Dimension tables. Ingestion transformations are pushed upstream via Power Query or SQL views to ensure the reporting model remains lightweight.',
+    deliverable: 'Normalized Dimensional Data Model & Measure Tables',
+  },
+  {
+    step: '04',
+    title: 'Executive UX & Drill-Through Architecture',
+    focus: '10-Second High-Contrast Clarity',
+    description:
+      'Visuals are designed using restrained, high-contrast aesthetics. Top-level KPI cards show current status with variance indicators; intuitive drill-through paths let users navigate down to transaction-level exceptions.',
+    deliverable: 'Interactive, Tested Power BI / Excel Dashboard Pack',
+  },
+  {
+    step: '05',
+    title: 'Reconciliation, Validation & Handover',
+    focus: 'Zero-Discrepancy Proof & Documentation',
+    description:
+      'Final report totals are cross-checked against source accounting ledgers to prove 100% mathematical accuracy. I provide clear refresh instructions, DAX measure documentation, and user SOPs.',
+    deliverable: 'Reconciliation Sign-Off & Refresh SOP Manual',
   },
 ];
