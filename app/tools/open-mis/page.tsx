@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
@@ -30,7 +29,11 @@ import {
   ChevronDown,
   ChevronUp,
   FileText,
-  Workflow
+  Workflow,
+  XCircle,
+  CheckCircle,
+  Terminal,
+  Share2
 } from 'lucide-react';
 
 interface SampleDataset {
@@ -51,6 +54,7 @@ interface SampleDataset {
     amount: string;
   }[];
   formulaAudit: string;
+  formulaDesc: string;
 }
 
 const SAMPLE_DATASETS: SampleDataset[] = [
@@ -60,29 +64,30 @@ const SAMPLE_DATASETS: SampleDataset[] = [
     category: 'Commercial Operations',
     rowCount: '1,420 rows',
     kpis: [
-      { label: 'Total Revenue', value: '$482,910', sub: 'Formula: SUM(sale_amount)', trend: '+14.2% MoM', positive: true },
-      { label: 'Total Orders', value: '1,420', sub: 'Formula: COUNT(order_id)', trend: '100% Fulfilled', positive: true },
-      { label: 'Avg Order Value', value: '$340.08', sub: 'Formula: AVG(sale_amount)', trend: '+$24 vs baseline', positive: true },
-      { label: 'Top Segment', value: 'Enterprise', sub: '42.8% of Total Volume', trend: 'Key Growth Driver', positive: true },
+      { label: 'Total Revenue', value: '$482,910', sub: 'SUM(sale_amount)', trend: '+14.2% MoM', positive: true },
+      { label: 'Total Orders', value: '1,420', sub: 'COUNT(order_id)', trend: '100% Fulfilled', positive: true },
+      { label: 'Avg Order Value', value: '$340.08', sub: 'AVERAGE(sale_amount)', trend: '+$24 vs Base', positive: true },
+      { label: 'Top Cohort', value: 'Enterprise', sub: '42.8% of Gross', trend: 'Key Growth Vector', positive: true },
     ],
     breakdown: [
       { category: 'Enterprise Tier', share: 42.8, amount: '$206,685' },
       { category: 'Mid-Market SMB', share: 31.4, amount: '$151,634' },
       { category: 'Self-Serve SaaS', share: 18.2, amount: '$87,890' },
-      { category: 'Custom Integrations', share: 7.6, amount: '$36,701' },
+      { category: 'Custom Solutions', share: 7.6, amount: '$36,701' },
     ],
-    formulaAudit: '=SUMIFS(Sales_Amount, Order_Date, ">=2026-01-01", Status, "Completed")'
+    formulaAudit: '=SUMIFS(Sales_Amount, Order_Date, ">=2026-01-01", Status, "Completed")',
+    formulaDesc: 'Deterministic sum of settled enterprise invoices matching active accounting fiscal year.'
   },
   {
     id: 'rider-ops',
-    name: 'Hyperlocal Fleet & Rider MIS',
+    name: 'Hyperlocal Fleet & Rider Ops MIS',
     category: 'Logistics & Quick-Commerce',
     rowCount: '4,140 rows',
     kpis: [
-      { label: 'Total Net Payout', value: '₹4,89,900', sub: 'Formula: SUM(Net_Payout)', trend: '100% Reconciled', positive: true },
-      { label: 'Completed Deliveries', value: '4,140', sub: 'Formula: COUNT(trip_id)', trend: '103.5% vs SLA', positive: true },
-      { label: 'Avg Trips / Active Day', value: '11.5', sub: 'Formula: Trips / Days_Present', trend: 'Target: 10+', positive: true },
-      { label: 'Fleet Attendance', value: '89.7%', sub: 'Formula: Present / Scheduled', trend: '268 / 300 shifts', positive: true },
+      { label: 'Net Payout Reconciled', value: '₹4,89,900', sub: 'SUM(Net_Payout)', trend: '100% Reconciled', positive: true },
+      { label: 'Completed Deliveries', value: '4,140', sub: 'COUNT(trip_id)', trend: '103.5% vs SLA', positive: true },
+      { label: 'Trips / Active Day', value: '11.5', sub: 'Trips / Days_Present', trend: 'Target: 10+', positive: true },
+      { label: 'Fleet Attendance', value: '89.7%', sub: 'Present / Scheduled', trend: '268 / 300 shifts', positive: true },
     ],
     breakdown: [
       { category: 'South Mumbai Central', share: 32.5, amount: '₹1,59,200' },
@@ -90,7 +95,8 @@ const SAMPLE_DATASETS: SampleDataset[] = [
       { category: 'Powai Tech Corridor', share: 22.5, amount: '₹1,10,227' },
       { category: 'Bandra West Terminal', share: 17.0, amount: '₹83,301' },
     ],
-    formulaAudit: '=SUMPRODUCT((Attendance="Present")*(Trips>=11)*Bonus_Rate)+Gross_Pay-Deductions'
+    formulaAudit: '=SUMPRODUCT((Attendance="Present")*(Trips>=11)*Bonus_Rate)+Gross_Pay-Deductions',
+    formulaDesc: 'Multi-criteria conditional payout matrix evaluating trip targets, shift presence, and penalty deductions.'
   },
   {
     id: 'hr-headcount',
@@ -98,37 +104,39 @@ const SAMPLE_DATASETS: SampleDataset[] = [
     category: 'People Operations',
     rowCount: '320 rows',
     kpis: [
-      { label: 'Active Workforce', value: '320', sub: 'Formula: COUNTIF(status="Active")', trend: '+12 Net Hires', positive: true },
-      { label: 'Monthly Payroll', value: '₹1.42 Cr', sub: 'Formula: SUM(gross_salary)', trend: 'Within 98% Budget', positive: true },
-      { label: 'Retention Rate', value: '94.2%', sub: 'Formula: 1 - (Attr / Avg_HC)', trend: '+2.1% YoY', positive: true },
-      { label: 'Avg Tenure', value: '2.8 yrs', sub: 'Formula: AVG(tenure_months)', trend: 'Stable cohort', positive: true },
+      { label: 'Active Workforce', value: '320', sub: 'COUNTIFS(Status="Active")', trend: '+12 Net Hires', positive: true },
+      { label: 'Monthly Payroll', value: '₹1.42 Cr', sub: 'SUM(Gross_Salary)', trend: 'Within 98% Budget', positive: true },
+      { label: 'Retention Rate', value: '94.2%', sub: '1 - (Exits / Total)', trend: '+2.1% YoY', positive: true },
+      { label: 'Avg Tenure', value: '2.8 yrs', sub: 'AVERAGE(Tenure_Days)', trend: 'Stable cohort', positive: true },
     ],
     breakdown: [
       { category: 'Data & Engineering', share: 44.0, amount: '₹62.48 L' },
       { category: 'Operations & Logistics', share: 26.5, amount: '₹37.63 L' },
-      { category: 'Sales & Commercial', share: 18.5, amount: '₹26.27 L' },
-      { category: 'Corporate & Finance', share: 11.0, amount: '₹15.62 L' },
+      { category: 'Sales & Growth', share: 18.5, amount: '₹26.27 L' },
+      { category: 'Finance & Legal', share: 11.0, amount: '₹15.62 L' },
     ],
-    formulaAudit: '=COUNTIFS(Department, "Engineering", Status, "Active", Salary, ">1500000")'
+    formulaAudit: '=COUNTIFS(Department, "Engineering", Status, "Active", Salary, ">1500000")',
+    formulaDesc: 'Exact count of core senior technical headcount meeting high-compensation band criteria.'
   },
   {
     id: 'inventory',
-    name: 'Inventory & Stock Aging MIS',
-    category: 'Supply Chain',
-    rowCount: '2,890 rows',
+    name: 'Inventory Stock Aging & Turnover MIS',
+    category: 'Supply Chain & Warehousing',
+    rowCount: '890 SKUs',
     kpis: [
-      { label: 'Total Stock Valuation', value: '₹84.6 L', sub: 'Formula: SUM(Units * Cost)', trend: 'Optimal Range', positive: true },
-      { label: 'In-Stock SKUs', value: '2,890', sub: 'Formula: COUNT(sku_id)', trend: '99.1% In-Stock', positive: true },
-      { label: 'Fast Moving SKUs', value: '184', sub: 'Formula: Stock_Turnover > 12', trend: 'High Velocity', positive: true },
-      { label: 'Aged Stock (>60d)', value: '3.2%', sub: 'Formula: Aged / Total_Stock', trend: '-1.4% MoM', positive: true },
+      { label: 'Total Valuation', value: '₹84.6 L', sub: 'SUMPRODUCT(Qty, Unit_Cost)', trend: '890 Active SKUs', positive: true },
+      { label: 'Stock Turn Ratio', value: '6.4x', sub: 'COGS / Avg_Inventory', trend: 'High Velocity', positive: true },
+      { label: 'Obsolete (>90d)', value: '4.8%', sub: 'Aging > 90d / Total', trend: '-1.4% vs Q1', positive: true },
+      { label: 'Fulfillment Rate', value: '99.1%', sub: 'Dispatched / Ordered', trend: 'Exceeds SLA', positive: true },
     ],
     breakdown: [
-      { category: 'FMCG Essentials', share: 51.2, amount: '₹43.31 L' },
-      { category: 'Cold Storage Dairy', share: 24.8, amount: '₹20.98 L' },
-      { category: 'Packaged Foods', share: 16.0, amount: '₹13.53 L' },
-      { category: 'Non-Food FMCG', share: 8.0, amount: '₹6.78 L' },
+      { category: 'Fresh Stock (< 30d)', share: 58.0, amount: '₹49.07 L' },
+      { category: 'Standard Turn (30-60d)', share: 26.0, amount: '₹21.99 L' },
+      { category: 'Slow Moving (60-90d)', share: 11.2, amount: '₹9.48 L' },
+      { category: 'Critical Obsolete (>90d)', share: 4.8, amount: '₹4.06 L' },
     ],
-    formulaAudit: '=IF(Days_In_Stock>60, "Aged - Clearance Needed", "Healthy Velocity")'
+    formulaAudit: '=IF(Days_In_Stock>90, "Critical Obsolete", IF(Days_In_Stock>60, "Slow Moving", "Healthy"))',
+    formulaDesc: 'Nested condition classifying SKU inventory aging into liquidity danger zones.'
   }
 ];
 
@@ -141,264 +149,446 @@ export default function OpenMisToolPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans transition-colors duration-300">
+    <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
       <Navbar />
 
-      <main className="boxed-wrapper !max-w-[1360px] !mt-24 !mx-auto !min-h-screen border-none shadow-none bg-transparent relative pb-28">
-        <Crosshair position="tl" />
+      <main className="boxed-wrapper" style={{ position: 'relative', marginBottom: '80px' }}>
+        
+        {/* Precision Crosshair Decorators */}
+        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', zIndex: 10 }}>
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.3 }} />
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+        </div>
+
+        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', zIndex: 10 }}>
+          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.3 }} />
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '1px', height: '24px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '24px', height: '1px', background: 'var(--accent)' }} />
+          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+        </div>
 
         {/* ── 1. HERO SECTION ── */}
-        <section className="pt-8 pb-12 px-4 sm:px-6 md:px-8 border-b border-[var(--border)]">
-          <div className="max-w-5xl mx-auto text-center space-y-6">
-            
-            {/* Top Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
-                <ShieldCheck size={14} className="text-emerald-600 dark:text-emerald-400" />
-                100% In-Browser Processing • Zero Telemetry
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30">
-                <Cpu size={14} className="text-indigo-600 dark:text-indigo-400" />
-                Web Worker Analytics Engine
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--surface2)] text-[var(--muted)] border border-[var(--border)]">
-                <FileSpreadsheet size={14} className="text-[var(--accent)]" />
-                CSV &amp; Multi-Sheet Excel
-              </span>
+        <section className="section" style={{ paddingTop: 'clamp(5rem, 8vw, 7rem)', borderBottom: '1px solid var(--border)' }}>
+          <div className="container">
+            <div style={{ maxWidth: '880px', marginBottom: '2.5rem' }}>
+              
+              <div className="flex items-center gap-3 mb-4">
+                <BarChart3 className="text-[var(--accent)]" size={22} />
+                <span className="label-tech">FLAGSHIP_TOOL // ZERO_CLOUD_MIS</span>
+              </div>
+
+              <h1 style={{ 
+                fontFamily: 'var(--font-syne)', 
+                fontSize: 'clamp(2.4rem, 6vw, 44px)', 
+                fontWeight: 700, 
+                lineHeight: 1.15, 
+                letterSpacing: '-0.02em',
+                marginBottom: '1.25rem' 
+              }}>
+                Nexdial OpenMIS™ — <span className="hero-title">Client-Side Dashboard Builder</span>
+              </h1>
+
+              <p style={{ 
+                color: 'var(--muted)', 
+                fontSize: '1.08rem', 
+                lineHeight: 1.7, 
+                maxWidth: '740px',
+                marginBottom: '2rem' 
+              }}>
+                Transform raw Excel spreadsheets and multi-sheet CSVs into executive, interactive BI dashboards in seconds. Zero account sign-up, zero server uploads, and <strong>100% in-browser Web Worker computation</strong> — your financial, payroll, and operational data never leaves your device.
+              </p>
+
+              {/* Technical Capability Badges */}
+              <div className="flex flex-wrap items-center gap-2.5 mb-8">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
+                  <ShieldCheck size={13} className="text-[var(--accent)]" />
+                  Zero Telemetry • 0KB Network Ingestion
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
+                  <Cpu size={13} className="text-[var(--accent)]" />
+                  Web Worker Parsing Engine
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
+                  <FileSpreadsheet size={13} className="text-[var(--accent)]" />
+                  Multi-Sheet .xlsx &amp; .csv Support
+                </span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="https://app.nexdial.io/app/new"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-flex items-center gap-2.5 no-underline"
+                  style={{ padding: '0.9rem 1.85rem', borderRadius: '4px', cursor: 'pointer' }}
+                >
+                  <Sparkles size={16} />
+                  <span>Launch OpenMIS Web App</span>
+                  <ExternalLink size={14} className="opacity-80" />
+                </a>
+
+                <a
+                  href="https://app.nexdial.io/templates"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline inline-flex items-center gap-2 no-underline"
+                  style={{ 
+                    padding: '0.9rem 1.75rem', 
+                    borderRadius: '4px', 
+                    border: '1px solid var(--border)',
+                    background: 'var(--surface)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <FileSpreadsheet size={15} className="text-[var(--accent)]" />
+                  <span>Explore MIS Templates</span>
+                  <ArrowRight size={13} className="opacity-70" />
+                </a>
+
+                <a
+                  href="https://github.com/sabledattatray/app.nexdial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--muted)] hover:text-[var(--text)] transition-colors no-underline px-3 py-2"
+                >
+                  <Database size={14} />
+                  <span>GitHub Source (MIT)</span>
+                </a>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="mt-8 pt-6 border-t border-[var(--border)] flex flex-wrap items-center gap-6 sm:gap-8 text-xs text-[var(--muted)] font-mono">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={13} className="text-[var(--accent)]" />
+                  100% Free &amp; Open-Source
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Lock size={13} className="text-[var(--accent)]" />
+                  Zero Third-Party Cloud Tracking
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <TrendingUp size={13} className="text-[var(--accent)]" />
+                  Deterministic Excel Formula Math
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Download size={13} className="text-[var(--accent)]" />
+                  DDE Sanitized CSV &amp; PDF Export
+                </span>
+              </div>
+
             </div>
-
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12]">
-              Nexdial OpenMIS™ — Free, Privacy-First{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-500">
-                MIS &amp; Excel Dashboard Builder
-              </span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl text-[var(--muted)] max-w-3xl mx-auto leading-relaxed">
-              Transform raw Excel workbooks and CSV spreadsheets into interactive, presentation-ready business dashboards in minutes. Zero accounts required, zero subscription fees, and <strong>100% client-side privacy</strong> — your cell data never leaves your device.
-            </p>
-
-            {/* Primary Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
-              <a
-                href="https://app.nexdial.io/app/new"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-[var(--accent)] hover:brightness-105 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-pointer no-underline"
-              >
-                <Sparkles size={18} />
-                <span>Launch OpenMIS Web App</span>
-                <ExternalLink size={15} className="opacity-70" />
-              </a>
-
-              <a
-                href="https://app.nexdial.io/templates"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-[var(--surface2)] hover:bg-[var(--surface)] text-[var(--text)] border border-[var(--border)] transition-all cursor-pointer no-underline"
-              >
-                <FileSpreadsheet size={16} className="text-emerald-500" />
-                <span>Explore MIS Templates</span>
-                <ArrowRight size={14} className="opacity-60" />
-              </a>
-
-              <a
-                href="https://github.com/sabledattatray/app.nexdial"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-medium text-sm text-[var(--muted)] hover:text-[var(--text)] transition-colors no-underline"
-              >
-                <Database size={15} />
-                <span>GitHub Source (MIT)</span>
-              </a>
-            </div>
-
-            {/* Trust Micro-Metrics */}
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs text-[var(--muted)] font-medium">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-emerald-500" />
-                No Sign-Up or Credit Card
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Lock size={14} className="text-emerald-500" />
-                Runs 100% in Browser Memory
-              </span>
-              <span className="flex items-center gap-1.5">
-                <TrendingUp size={14} className="text-emerald-500" />
-                Deterministic, Traceable Math
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Download size={14} className="text-emerald-500" />
-                DDE Sanitized CSV &amp; PDF Export
-              </span>
-            </div>
-
           </div>
         </section>
 
-        {/* ── 2. INTERACTIVE DEMO SIMULATOR ── */}
-        <section className="py-14 px-4 sm:px-6 md:px-8 border-b border-[var(--border)]">
-          <div className="max-w-6xl mx-auto space-y-6">
+        {/* ── 2. LIVE INTERACTIVE ENGINE SIMULATOR ── */}
+        <section className="section" style={{ padding: 'clamp(3.5rem, 6vw, 5rem) 0', borderBottom: '1px solid var(--border)' }}>
+          <div className="container">
             
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-mono">
-                  LIVE INTERACTIVE ENGINE SIMULATOR
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mt-1 text-[var(--text)]">
-                  Preview How OpenMIS Analyzes Spreadsheets
-                </h2>
-                <p className="text-xs sm:text-sm text-[var(--muted)] mt-1 max-w-xl">
-                  Select a business domain below to see how OpenMIS automatically profiles columns, extracts KPIs, and maps categorical distributions.
-                </p>
+            <div className="mb-8">
+              <div className="label-tech mb-2">SIMULATED_WORKER_ENGINE // V2.4</div>
+              <h2 style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.75rem, 4vw, 32px)', fontWeight: 600, marginBottom: '0.75rem' }}>
+                Preview How OpenMIS <span className="hero-title">Profiles Spreadsheets</span>
+              </h2>
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '640px', lineHeight: 1.6 }}>
+                Select a business domain below to witness real-time column type inference, KPI card aggregation, categorical distribution mapping, and transparent formula audits.
+              </p>
+            </div>
+
+            {/* The Terminal Sandbox Container */}
+            <div 
+              style={{ 
+                background: 'var(--surface)', 
+                border: '1px solid var(--border)', 
+                borderRadius: 'var(--radius)',
+                boxShadow: '0 20px 40px -15px rgba(0, 0, 0, 0.25)',
+                overflow: 'hidden'
+              }}
+            >
+              
+              {/* Terminal Title Bar */}
+              <div 
+                style={{ 
+                  background: 'var(--surface2)', 
+                  borderBottom: '1px solid var(--border)', 
+                  padding: '0.85rem 1.25rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '0.75rem'
+                }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f56' }} />
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }} />
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#27c93f' }} />
+                  </div>
+                  <span className="mono text-[11px] font-bold text-[var(--text)] tracking-wider ml-2">
+                    NEXDIAL_PARSER_CONSOLE // IN_BROWSER_ISOLATION
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-4 text-[10px] font-mono text-[var(--muted)]">
+                  <span className="flex items-center gap-1.5">
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent)' }} />
+                    THREAD: WEB_WORKER_01
+                  </span>
+                  <span className="hidden sm:inline">NETWORK_TRANSFER: 0 KB</span>
+                  <span className="hidden sm:inline">LATENCY: &lt; 18ms</span>
+                </div>
               </div>
 
-              {/* Dataset Selector Tabs */}
-              <div className="flex flex-wrap gap-1.5 p-1 bg-[var(--surface2)] rounded-lg border border-[var(--border)]">
-                {SAMPLE_DATASETS.map((dataset) => {
-                  const isActive = activeDataset.id === dataset.id;
+              {/* Segmented Domain Tabs */}
+              <div 
+                style={{ 
+                  background: 'var(--bg)', 
+                  borderBottom: '1px solid var(--border)', 
+                  padding: '0.5rem 1rem',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.5rem'
+                }}
+              >
+                {SAMPLE_DATASETS.map((ds) => {
+                  const isActive = activeDataset.id === ds.id;
                   return (
                     <button
-                      key={dataset.id}
+                      key={ds.id}
                       type="button"
-                      onClick={() => setActiveDataset(dataset)}
-                      className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
-                        isActive
-                          ? 'bg-[var(--surface)] text-[var(--text)] shadow-xs border border-[var(--border)]'
-                          : 'text-[var(--muted)] hover:text-[var(--text)]'
-                      }`}
+                      onClick={() => setActiveDataset(ds)}
+                      style={{
+                        padding: '0.55rem 1.15rem',
+                        fontSize: '11px',
+                        fontFamily: 'var(--font-mono)',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        background: isActive ? 'var(--surface)' : 'transparent',
+                        color: isActive ? 'var(--accent)' : 'var(--muted)',
+                        border: isActive ? '1px solid var(--border)' : '1px solid transparent',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.2s ease'
+                      }}
                     >
-                      {dataset.name.split(' ')[0]} {dataset.name.split(' ')[1]}
+                      <span style={{ 
+                        width: '6px', 
+                        height: '6px', 
+                        borderRadius: '50%', 
+                        background: isActive ? 'var(--accent)' : 'var(--muted)',
+                        opacity: isActive ? 1 : 0.4
+                      }} />
+                      {ds.name.split('&')[0].trim()}
                     </button>
                   );
                 })}
               </div>
-            </div>
 
-            {/* Active Simulation Dashboard Card */}
-            <div className="border border-[var(--border)] rounded-2xl bg-[var(--surface)] p-6 sm:p-8 shadow-xl space-y-6">
-              
-              {/* Header Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--border)] gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-500/20">
-                    <BarChart3 size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-[var(--text)] flex items-center gap-2">
-                      <span>{activeDataset.name}</span>
-                      <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--muted)] border border-[var(--border)]">
-                        {activeDataset.rowCount}
-                      </span>
+              {/* Active Dataset Overview Banner */}
+              <div 
+                style={{ 
+                  padding: '1.25rem 1.5rem', 
+                  borderBottom: '1px solid var(--border)',
+                  background: 'var(--surface2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '1rem'
+                }}
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+                      {activeDataset.name}
                     </h3>
-                    <p className="text-xs text-[var(--muted)]">
-                      Domain: <strong className="text-[var(--text)] font-medium">{activeDataset.category}</strong> • Engine: <span className="text-emerald-600 dark:text-emerald-400 font-mono">Web Worker Local Memory</span>
-                    </p>
+                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--muted)]">
+                      {activeDataset.rowCount}
+                    </span>
                   </div>
+                  <p className="text-xs text-[var(--muted)] font-mono m-0">
+                    Domain: <span className="text-[var(--text)]">{activeDataset.category}</span> • Memory Residency: <span className="text-[var(--accent)]">Client RAM (IndexedDB)</span>
+                  </p>
                 </div>
 
                 <a
-                  href={`https://app.nexdial.io/app/new`}
+                  href="https://app.nexdial.io/app/report"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-xs cursor-pointer self-start sm:self-auto no-underline"
+                  className="btn-outline inline-flex items-center gap-2 text-[11px] font-mono no-underline"
+                  style={{ 
+                    padding: '0.5rem 1rem', 
+                    borderRadius: '4px', 
+                    border: '1px solid var(--border)',
+                    background: 'var(--surface)'
+                  }}
                 >
-                  <Sparkles size={13} />
-                  <span>Open This In Nexdial</span>
-                  <ExternalLink size={12} />
+                  <span>Open Full Dashboard In Nexdial</span>
+                  <ExternalLink size={12} className="text-[var(--accent)]" />
                 </a>
               </div>
 
-              {/* 4 Generated KPI Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {activeDataset.kpis.map((kpi, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface2)]/40 hover:bg-[var(--surface2)]/80 transition-all space-y-2"
-                  >
-                    <div className="text-[10.5px] uppercase font-bold tracking-wider text-[var(--muted)]">
-                      {kpi.label}
-                    </div>
-                    <div className="text-2xl sm:text-3xl font-black text-[var(--text)] tracking-tight">
-                      {kpi.value}
-                    </div>
-                    <div className="flex items-center justify-between text-[11px] pt-1">
-                      <span className="font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
-                        {kpi.trend}
-                      </span>
-                      <span className="text-[10px] text-[var(--muted)] truncate max-w-[120px]" title={kpi.sub}>
-                        {kpi.sub.split(':')[0]}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Visual Breakdown & Formula Auditing Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
-                
-                {/* Visual Categorical Distribution */}
-                <div className="lg:col-span-7 p-5 rounded-xl border border-[var(--border)] bg-[var(--surface2)]/20 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[var(--text)] flex items-center gap-1.5">
-                      <PieChart size={14} className="text-indigo-500" />
-                      Automatic Distribution Mapping (Apache ECharts)
-                    </span>
-                    <span className="text-[10px] font-mono text-[var(--muted)]">Categorical Split</span>
-                  </div>
-
-                  <div className="space-y-3 pt-1">
-                    {activeDataset.breakdown.map((item, idx) => (
-                      <div key={idx} className="space-y-1">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="font-medium text-[var(--text)]">{item.category}</span>
-                          <span className="font-mono text-[var(--muted)]">
-                            {item.amount} ({item.share}%)
-                          </span>
-                        </div>
-                        <div className="h-2 w-full bg-[var(--border)] rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 rounded-full transition-all duration-500"
-                            style={{ width: `${item.share}%` }}
-                          />
-                        </div>
+              {/* KPI Cards Grid */}
+              <div style={{ padding: '1.5rem' }}>
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
+                  gap: '1rem',
+                  marginBottom: '1.5rem'
+                }}>
+                  {activeDataset.kpis.map((kpi, idx) => (
+                    <div 
+                      key={idx}
+                      style={{
+                        background: 'var(--bg)',
+                        border: '1px solid var(--border)',
+                        borderRadius: '8px',
+                        padding: '1.25rem',
+                        position: 'relative'
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <span className="mono text-[10px] uppercase font-bold text-[var(--muted)] tracking-wider">
+                          {kpi.label}
+                        </span>
+                        <span className="mono text-[9px] px-1.5 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                          {kpi.trend}
+                        </span>
                       </div>
-                    ))}
-                  </div>
+
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.35rem' }}>
+                        {kpi.value}
+                      </div>
+
+                      <div className="mono text-[10px] text-[var(--muted)] flex items-center gap-1 truncate">
+                        <span className="text-[var(--accent)] font-bold">fx:</span> {kpi.sub}
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
-                {/* Deterministic Formula Audit Box */}
-                <div className="lg:col-span-5 p-5 rounded-xl border border-[var(--border)] bg-[var(--surface2)]/20 space-y-3 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[var(--text)] flex items-center gap-1.5">
-                        <Table size={14} className="text-emerald-500" />
-                        Formula Transparency Audit
-                      </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold border border-emerald-500/20">
-                        Zero Black Box
-                      </span>
+                {/* Distribution & Formula Audit Split */}
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+                  gap: '1.25rem' 
+                }}>
+                  
+                  {/* Category Distribution Progress Bars */}
+                  <div 
+                    style={{ 
+                      background: 'var(--bg)', 
+                      border: '1px solid var(--border)', 
+                      borderRadius: '8px', 
+                      padding: '1.25rem' 
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                        <PieChart size={15} className="text-[var(--accent)]" />
+                        <span className="mono text-[11px] font-bold text-[var(--text)] uppercase tracking-wider">
+                          Categorical Distribution Mapping
+                        </span>
+                      </div>
+                      <span className="mono text-[10px] text-[var(--muted)]">Apache ECharts Engine</span>
                     </div>
-                    <p className="text-xs text-[var(--muted)] leading-relaxed mb-3">
-                      Unlike generative AI tools that hallucinate totals, OpenMIS implements deterministic arithmetic and statistical methods:
-                    </p>
-                    <div className="p-3 rounded-lg bg-[var(--surface)] border border-[var(--border)] font-mono text-xs text-emerald-600 dark:text-emerald-400 break-all overflow-x-auto shadow-2xs">
-                      {activeDataset.formulaAudit}
+
+                    <div className="space-y-3.5">
+                      {activeDataset.breakdown.map((item, i) => (
+                        <div key={i} className="space-y-1.5">
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="font-medium text-[var(--text)]">{item.category}</span>
+                            <div className="flex items-center gap-2 font-mono text-[11px]">
+                              <span className="text-[var(--text)] font-semibold">{item.amount}</span>
+                              <span className="text-[var(--muted)]">({item.share}%)</span>
+                            </div>
+                          </div>
+
+                          {/* Progress track */}
+                          <div style={{ width: '100%', height: '8px', background: 'var(--surface2)', borderRadius: '999px', overflow: 'hidden' }}>
+                            <div 
+                              style={{ 
+                                width: `${item.share}%`, 
+                                height: '100%', 
+                                background: i === 0 ? 'var(--accent)' : 'linear-gradient(90deg, var(--accent) 0%, rgba(201, 243, 29, 0.4) 100%)',
+                                borderRadius: '999px',
+                                transition: 'width 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+                              }} 
+                            />
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--muted)]">
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 size={13} className="text-emerald-500" />
-                      IQR Outliers Neutralized
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Lock size={13} className="text-emerald-500" />
-                      0 Bytes Uploaded
-                    </span>
+                  {/* Formula Transparency Audit Card */}
+                  <div 
+                    style={{ 
+                      background: 'var(--bg)', 
+                      border: '1px solid var(--border)', 
+                      borderRadius: '8px', 
+                      padding: '1.25rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <Terminal size={15} className="text-[var(--accent)]" />
+                          <span className="mono text-[11px] font-bold text-[var(--text)] uppercase tracking-wider">
+                            Formula Transparency Audit
+                          </span>
+                        </div>
+                        <span className="mono text-[9px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] border border-[var(--border)] font-semibold">
+                          ZERO_BLACK_BOX
+                        </span>
+                      </div>
+
+                      <p className="text-xs text-[var(--muted)] leading-relaxed mb-3">
+                        {activeDataset.formulaDesc}
+                      </p>
+
+                      {/* Code Block */}
+                      <div 
+                        style={{ 
+                          background: 'var(--surface2)', 
+                          border: '1px solid var(--border)', 
+                          borderRadius: '6px', 
+                          padding: '0.85rem 1rem',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '11px',
+                          color: 'var(--text)',
+                          lineHeight: 1.6,
+                          overflowX: 'auto'
+                        }}
+                      >
+                        <div className="text-[var(--muted)] text-[10px] mb-1">// Deterministic Excel Logic:</div>
+                        <code className="text-[var(--accent)] font-semibold">{activeDataset.formulaAudit}</code>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-3 text-[10px] font-mono text-[var(--muted)]">
+                      <span className="flex items-center gap-1.5">
+                        <Check size={12} className="text-[var(--accent)]" />
+                        IQR Outlier Scrubbing Applied
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Lock size={12} className="text-[var(--accent)]" />
+                        RAM-Isolated Execution
+                      </span>
+                    </div>
+
                   </div>
+
                 </div>
 
               </div>
@@ -408,65 +598,71 @@ export default function OpenMisToolPage() {
           </div>
         </section>
 
-        {/* ── 3. HOW OPENMIS WORKS (4-STEP WORKFLOW) ── */}
-        <section className="py-14 px-4 sm:px-6 md:px-8 border-b border-[var(--border)]">
-          <div className="max-w-6xl mx-auto space-y-10">
+        {/* ── 3. FOUR-STEP ENGINEERING PIPELINE ── */}
+        <section className="section" style={{ padding: 'clamp(4rem, 7vw, 6rem) 0', borderBottom: '1px solid var(--border)' }}>
+          <div className="container">
             
-            <div className="text-center max-w-2xl mx-auto space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-                ENGINEERING SPECIFICATION
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text)]">
-                From Raw Workbook to Decision Cockpit in 4 Steps
+            <div className="mb-10">
+              <div className="label-tech mb-2">ENGINEERING_SPECIFICATION</div>
+              <h2 style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.75rem, 4vw, 32px)', fontWeight: 600, marginBottom: '0.75rem' }}>
+                From Raw Spreadsheet to <span className="hero-title">Decision Cockpit</span> in 4 Steps
               </h2>
-              <p className="text-xs sm:text-sm text-[var(--muted)]">
-                Engineered for speed, privacy, and mathematical reliability without requiring Python, SQL, or cloud setup.
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '640px', lineHeight: 1.6 }}>
+                Engineered for speed, privacy, and mathematical traceability without requiring Python scripts, SQL servers, or cloud subscriptions.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
               
               {/* Step 1 */}
-              <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] space-y-3 relative group hover:border-emerald-500/50 transition-all">
-                <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-500/20 font-mono">
-                  01
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
+                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                  PHASE_01 // INGESTION
                 </div>
-                <h3 className="text-base font-bold text-[var(--text)]">Drag &amp; Drop Spreadsheet</h3>
-                <p className="text-xs text-[var(--muted)] leading-relaxed">
-                  Support for multi-sheet <code className="font-mono text-emerald-500">.xlsx</code> workbooks and <code className="font-mono text-emerald-500">.csv</code> files. Files are parsed inside an isolated browser Web Worker without blocking your browser UI.
+                <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
+                  Drag &amp; Drop Spreadsheet
+                </h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                  Supports multi-sheet <code className="font-mono text-[var(--accent)]">.xlsx</code> workbooks and <code className="font-mono text-[var(--accent)]">.csv</code> files. Stream-parsed in isolated background Web Workers with 0KB cloud upload.
                 </p>
               </div>
 
               {/* Step 2 */}
-              <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] space-y-3 relative group hover:border-emerald-500/50 transition-all">
-                <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-500/20 font-mono">
-                  02
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
+                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                  PHASE_02 // PROFILING
                 </div>
-                <h3 className="text-base font-bold text-[var(--text)]">Automated Type Profiling</h3>
-                <p className="text-xs text-[var(--muted)] leading-relaxed">
-                  The profiler automatically detects timestamp columns, categorical labels, numerical measures, and primary IDs. Detects null values, duplicate rows, and statistical anomalies using IQR.
+                <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
+                  Automated Type Profiling
+                </h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                  Automatically indexes timestamp formats, categorical dimensions, numerical measures, and primary keys. Flags duplicate rows and cleans mathematical outliers via IQR.
                 </p>
               </div>
 
               {/* Step 3 */}
-              <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] space-y-3 relative group hover:border-emerald-500/50 transition-all">
-                <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-500/20 font-mono">
-                  03
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
+                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                  PHASE_03 // RENDERING
                 </div>
-                <h3 className="text-base font-bold text-[var(--text)]">Dynamic Visual Assembly</h3>
-                <p className="text-xs text-[var(--muted)] leading-relaxed">
-                  Calculates executive KPI totals, MoM variances, and generates high-performance Apache ECharts (time-series, categorical bars, doughnut splits, scatter clusters) mapped to your distribution.
+                <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
+                  Dynamic Visual Assembly
+                </h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                  Aggregates executive KPIs, MoM growth deltas, and renders high-performance Apache ECharts (time-series, split doughnuts, stacked bars, scatter correlations).
                 </p>
               </div>
 
               {/* Step 4 */}
-              <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--surface)] space-y-3 relative group hover:border-emerald-500/50 transition-all">
-                <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-base border border-emerald-500/20 font-mono">
-                  04
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
+                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                  PHASE_04 // EXPORT
                 </div>
-                <h3 className="text-base font-bold text-[var(--text)]">Sanitized Export &amp; PDF</h3>
-                <p className="text-xs text-[var(--muted)] leading-relaxed">
-                  Filter dimensions, customize charts, and export sanitized CSVs (all formula injection characters like <code className="font-mono text-emerald-500">=, +, @, -</code> neutralized) or print-ready PDF reports.
+                <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
+                  Sanitized Export &amp; PDF
+                </h3>
+                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                  Filter dimensions, customize charts, and export sanitized CSVs (all formula injection vectors like <code className="font-mono text-[var(--accent)]">=, +, @, -</code> neutralized) or print-ready PDF reports.
                 </p>
               </div>
 
@@ -475,230 +671,357 @@ export default function OpenMisToolPage() {
           </div>
         </section>
 
-        {/* ── 4. PRIVACY & ARCHITECTURE COMPARISON ── */}
-        <section className="py-14 px-4 sm:px-6 md:px-8 border-b border-[var(--border)]">
-          <div className="max-w-6xl mx-auto space-y-10">
+        {/* ── 4. ENTERPRISE BI COMPARISON MATRIX ── */}
+        <section className="section" style={{ padding: 'clamp(4rem, 7vw, 6rem) 0', borderBottom: '1px solid var(--border)' }}>
+          <div className="container">
             
-            <div className="text-center max-w-2xl mx-auto space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-mono">
-                PRIVACY FIRST ARCHITECTURE
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text)]">
-                Why OpenMIS Outperforms Cloud BI for Sensitive Data
+            <div className="mb-10 text-center" style={{ maxWidth: '720px', margin: '0 auto 3rem auto' }}>
+              <div className="label-tech mb-2 justify-center">PRIVACY_FIRST_ARCHITECTURE</div>
+              <h2 style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.75rem, 4vw, 32px)', fontWeight: 600, marginBottom: '0.75rem' }}>
+                Why OpenMIS Outperforms <span className="hero-title">Cloud BI Platforms</span>
               </h2>
-              <p className="text-xs sm:text-sm text-[var(--muted)]">
-                Most online analytics tools transmit your proprietary financials, salary sheets, and client rosters to remote clouds. OpenMIS operates like a desktop tool in your web browser.
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                Traditional cloud BI suites ingest proprietary financials, employee payroll, and confidential client lists to corporate clouds. OpenMIS operates like a hardened desktop tool directly inside your web browser.
               </p>
             </div>
 
-            {/* Comparison Matrix Table */}
-            <div className="overflow-x-auto border border-[var(--border)] rounded-xl bg-[var(--surface)] shadow-sm">
-              <table className="w-full text-xs text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-[var(--border)] bg-[var(--surface2)] font-bold text-[var(--text)] text-[11px]">
-                    <th className="py-3.5 px-4">Evaluation Criteria</th>
-                    <th className="py-3.5 px-4 text-emerald-600 dark:text-emerald-400 font-black">Nexdial OpenMIS™</th>
-                    <th className="py-3.5 px-4 text-[var(--muted)]">Power BI Service</th>
-                    <th className="py-3.5 px-4 text-[var(--muted)]">Google Looker Studio</th>
-                    <th className="py-3.5 px-4 text-[var(--muted)]">Raw Excel Spreadsheet</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[var(--border)]">
-                  <tr>
-                    <td className="py-3 px-4 font-semibold text-[var(--text)]">Data Residency</td>
-                    <td className="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">100% Local Device (RAM)</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Microsoft Azure Cloud</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Google Cloud Platform</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Local Drive / OneDrive</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-semibold text-[var(--text)]">Spreadsheet Telemetry</td>
-                    <td className="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">Zero Data Collected</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Full Tenant Telemetry</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Google Cloud Telemetry</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Microsoft Diagnostic Data</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-semibold text-[var(--text)]">Time to First Dashboard</td>
-                    <td className="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">&lt; 30 Seconds (Instant)</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">20 – 60 Minutes</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">15 – 45 Minutes</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">1 – 3 Hours (Manual)</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-semibold text-[var(--text)]">Subscription Cost</td>
-                    <td className="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">₹0 / Free Forever (MIT)</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">$10 – $20 / user / mo</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Free (Looker Pro $9/mo)</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">M365 License Needed</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-semibold text-[var(--text)]">Offline Capability</td>
-                    <td className="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">Yes (PWA &amp; IndexedDB)</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Requires Connection</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Requires Connection</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Yes (Desktop App)</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-semibold text-[var(--text)]">DDE Injection Security</td>
-                    <td className="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5">Built-in Auto-Sanitizer</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Manual Export Handling</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Not Sanitized by Default</td>
-                    <td className="py-3 px-4 text-[var(--muted)]">Vulnerable to Formulas</td>
-                  </tr>
-                </tbody>
-              </table>
+            {/* Comparison Matrix Card */}
+            <div 
+              style={{ 
+                background: 'var(--surface)', 
+                border: '1px solid var(--border)', 
+                borderRadius: 'var(--radius)',
+                overflow: 'hidden',
+                boxShadow: '0 15px 35px -10px rgba(0, 0, 0, 0.2)'
+              }}
+            >
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '680px' }}>
+                  <thead>
+                    <tr style={{ background: 'var(--surface2)', borderBottom: '1px solid var(--border)' }}>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                        Evaluation Vector
+                      </th>
+                      <th style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.08)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)' }}>
+                        <div className="flex items-center gap-1.5">
+                          <span style={{ fontFamily: 'var(--font-syne)', fontSize: '13px', fontWeight: 700, color: 'var(--accent)' }}>
+                            Nexdial OpenMIS™
+                          </span>
+                          <span className="mono text-[9px] px-1.5 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-bold">
+                            RECOMMENDED
+                          </span>
+                        </div>
+                      </th>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                        Power BI Service
+                      </th>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                        Google Looker Studio
+                      </th>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                        Raw Excel Workbook
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--border)] text-xs">
+                    
+                    {/* Row 1 */}
+                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                      <td style={{ padding: '1rem 1.25rem', fontWeight: 600, color: 'var(--text)' }}>
+                        Data Residency &amp; Storage
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.04)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)', fontWeight: 700, color: 'var(--accent)' }}>
+                        100% Local Device (RAM)
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Microsoft Azure Cloud</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Google Cloud Platform</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Local / OneDrive Cloud</td>
+                    </tr>
+
+                    {/* Row 2 */}
+                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                      <td style={{ padding: '1rem 1.25rem', fontWeight: 600, color: 'var(--text)' }}>
+                        Spreadsheet Telemetry
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.04)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)', fontWeight: 700, color: 'var(--accent)' }}>
+                        0 KB Transferred (Zero Telemetry)
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Full Tenant Telemetry</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Google Analytics Telemetry</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Microsoft Diagnostic Logs</td>
+                    </tr>
+
+                    {/* Row 3 */}
+                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                      <td style={{ padding: '1rem 1.25rem', fontWeight: 600, color: 'var(--text)' }}>
+                        Setup Time to First Dashboard
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.04)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)', fontWeight: 700, color: 'var(--accent)' }}>
+                        &lt; 30 Seconds (Instant Web)
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>20 – 45 Minutes (Gateway Setup)</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>15 – 30 Minutes</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>1 – 3 Hours (Manual Pivot Building)</td>
+                    </tr>
+
+                    {/* Row 4 */}
+                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                      <td style={{ padding: '1rem 1.25rem', fontWeight: 600, color: 'var(--text)' }}>
+                        CSV Formula Injection Shield
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.04)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)', fontWeight: 700, color: 'var(--accent)' }}>
+                        Active Sanitizer (=, +, @, - neutralized)
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Unsanitized Raw Export</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Unsanitized Raw Export</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Vulnerable to DDE exploits</td>
+                    </tr>
+
+                    {/* Row 5 */}
+                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                      <td style={{ padding: '1rem 1.25rem', fontWeight: 600, color: 'var(--text)' }}>
+                        Software Cost &amp; Licensing
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.04)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)', fontWeight: 700, color: 'var(--accent)' }}>
+                        ₹0 / Free Forever (MIT Open Source)
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>$10 – $20 / user / mo</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Free (Looker Pro $9/mo)</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Microsoft 365 License Needed</td>
+                    </tr>
+
+                    {/* Row 6 */}
+                    <tr>
+                      <td style={{ padding: '1rem 1.25rem', fontWeight: 600, color: 'var(--text)' }}>
+                        Offline PWA Capability
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.04)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)', fontWeight: 700, color: 'var(--accent)' }}>
+                        Full Offline Execution
+                      </td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Requires Active Internet</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Requires Active Internet</td>
+                      <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)' }}>Offline Desktop App</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
             </div>
 
           </div>
         </section>
 
-        {/* ── 5. PRE-BUILT MIS TEMPLATES ── */}
-        <section className="py-14 px-4 sm:px-6 md:px-8 border-b border-[var(--border)]">
-          <div className="max-w-6xl mx-auto space-y-8">
+        {/* ── 5. PRE-BUILT MIS BLUEPRINTS ── */}
+        <section className="section" style={{ padding: 'clamp(4rem, 7vw, 6rem) 0', borderBottom: '1px solid var(--border)' }}>
+          <div className="container">
             
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-                  READY-TO-USE BLUEPRINTS
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text)] mt-1">
-                  Featured MIS Templates on Nexdial
-                </h2>
-                <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
-                  Load pre-configured industry templates or download sanitized sample datasets to test immediately.
-                </p>
+            <div className="mb-10">
+              <div className="label-tech mb-2">CURATED_BLUEPRINTS</div>
+              <h2 style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.75rem, 4vw, 32px)', fontWeight: 600, marginBottom: '0.75rem' }}>
+                Pre-Engineered <span className="hero-title">MIS Templates</span>
+              </h2>
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: '640px', lineHeight: 1.6 }}>
+                Launch battle-tested operational blueprints with built-in formula models, cohort splits, and executive KPI cards.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+              
+              {/* Template 1 */}
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                      LOGISTICS // QUICK-COMMERCE
+                    </span>
+                    <span className="mono text-[10px] text-[var(--muted)]">4,140 rows</span>
+                  </div>
+                  <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
+                    Hyperlocal Fleet &amp; Rider Ops
+                  </h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                    Driver velocity, trip SLA attainment, shift compliance, and net payout reconciliation across multi-hub city operations.
+                  </p>
+                </div>
+                <a
+                  href="https://app.nexdial.io/templates"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
+                  style={{ padding: '0.65rem 1rem', borderRadius: '4px', border: '1px solid var(--border)' }}
+                >
+                  <span>Launch Blueprint</span>
+                  <ExternalLink size={13} className="text-[var(--accent)]" />
+                </a>
               </div>
 
-              <a
-                href="https://app.nexdial.io/templates"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[var(--accent)] hover:underline no-underline"
-              >
-                <span>Browse All Templates on Nexdial</span>
-                <ArrowRight size={14} />
-              </a>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                {
-                  title: 'Sales & Revenue MIS',
-                  desc: 'Executive commercial dashboard with MoM growth tracking, deal velocity, and regional revenue breakdown.',
-                  icon: TrendingUp,
-                  color: 'text-emerald-500',
-                  url: 'https://app.nexdial.io/app/new'
-                },
-                {
-                  title: 'Hyperlocal Rider Ops',
-                  desc: 'Fleet delivery auditing, incentive threshold verification, shift surge analytics, and net payout reconciliation.',
-                  icon: Activity,
-                  color: 'text-blue-500',
-                  url: 'https://app.nexdial.io/app/new'
-                },
-                {
-                  title: 'HR Headcount & Payroll',
-                  desc: 'Departmental salary distribution, employee tenure cohorts, retention analysis, and absenteeism ratios.',
-                  icon: Users,
-                  color: 'text-indigo-500',
-                  url: 'https://app.nexdial.io/app/new'
-                },
-                {
-                  title: 'Inventory & Stock Aging',
-                  desc: 'SKU velocity classification, holding cost valuation, dead-stock flags, and supplier fulfillment metrics.',
-                  icon: Database,
-                  color: 'text-amber-500',
-                  url: 'https://app.nexdial.io/app/new'
-                },
-              ].map((tmpl, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface2)]/50 transition-all space-y-3 flex flex-col justify-between"
-                >
-                  <div className="space-y-2.5">
-                    <div className="w-9 h-9 rounded-lg bg-[var(--surface2)] flex items-center justify-center border border-[var(--border)]">
-                      <tmpl.icon size={18} className={tmpl.color} />
-                    </div>
-                    <h3 className="font-bold text-sm text-[var(--text)]">{tmpl.title}</h3>
-                    <p className="text-xs text-[var(--muted)] leading-relaxed">
-                      {tmpl.desc}
-                    </p>
+              {/* Template 2 */}
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                      COMMERCIAL // REVENUE
+                    </span>
+                    <span className="mono text-[10px] text-[var(--muted)]">1,420 rows</span>
                   </div>
-
-                  <a
-                    href={tmpl.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] hover:underline pt-2 no-underline"
-                  >
-                    <span>Use Template</span>
-                    <ExternalLink size={12} />
-                  </a>
+                  <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
+                    B2B SaaS Sales Pipeline
+                  </h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                    Tracks pipeline conversion, sales cycle duration, average deal sizes, and quota fulfillment by sales rep.
+                  </p>
                 </div>
-              ))}
+                <a
+                  href="https://app.nexdial.io/templates"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
+                  style={{ padding: '0.65rem 1rem', borderRadius: '4px', border: '1px solid var(--border)' }}
+                >
+                  <span>Launch Blueprint</span>
+                  <ExternalLink size={13} className="text-[var(--accent)]" />
+                </a>
+              </div>
+
+              {/* Template 3 */}
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                      HR // PEOPLE OPS
+                    </span>
+                    <span className="mono text-[10px] text-[var(--muted)]">320 rows</span>
+                  </div>
+                  <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
+                    Executive Headcount &amp; Payroll
+                  </h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                    Department salary distributions, compensation band compliance, hiring velocity, and voluntary attrition trends.
+                  </p>
+                </div>
+                <a
+                  href="https://app.nexdial.io/templates"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
+                  style={{ padding: '0.65rem 1rem', borderRadius: '4px', border: '1px solid var(--border)' }}
+                >
+                  <span>Launch Blueprint</span>
+                  <ExternalLink size={13} className="text-[var(--accent)]" />
+                </a>
+              </div>
+
+              {/* Template 4 */}
+              <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                      SUPPLY CHAIN // WAREHOUSING
+                    </span>
+                    <span className="mono text-[10px] text-[var(--muted)]">890 SKUs</span>
+                  </div>
+                  <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
+                    Inventory Aging &amp; Stock Velocity
+                  </h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                    Categorizes aging buckets (&lt;30d, 60d, 90d+), calculates stock turn ratio, and flags slow-moving capital items.
+                  </p>
+                </div>
+                <a
+                  href="https://app.nexdial.io/templates"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
+                  style={{ padding: '0.65rem 1rem', borderRadius: '4px', border: '1px solid var(--border)' }}
+                >
+                  <span>Launch Blueprint</span>
+                  <ExternalLink size={13} className="text-[var(--accent)]" />
+                </a>
+              </div>
+
             </div>
 
           </div>
         </section>
 
-        {/* ── 6. FREQUENTLY ASKED QUESTIONS (ACCORDION) ── */}
-        <section className="py-14 px-4 sm:px-6 md:px-8 border-b border-[var(--border)]">
-          <div className="max-w-4xl mx-auto space-y-8">
+        {/* ── 6. TECHNICAL FAQ ACCORDION ── */}
+        <section className="section" style={{ padding: 'clamp(4rem, 7vw, 6rem) 0', borderBottom: '1px solid var(--border)' }}>
+          <div className="container" style={{ maxWidth: '840px' }}>
             
-            <div className="text-center space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-mono">
-                CLARITY &amp; TECHNICAL FAQ
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text)]">
-                Frequently Asked Questions About OpenMIS
+            <div className="mb-8">
+              <div className="label-tech mb-2">SYSTEM_KNOWLEDGE // FAQS</div>
+              <h2 style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(1.75rem, 4vw, 32px)', fontWeight: 600, marginBottom: '0.75rem' }}>
+                Frequently Asked <span className="hero-title">Technical Questions</span>
               </h2>
+              <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                Details on security guarantees, formula compatibility, offline capabilities, and architecture.
+              </p>
             </div>
 
             <div className="space-y-3">
               {[
                 {
-                  q: 'Is my spreadsheet data really 100% private and local?',
-                  a: 'Yes. Unlike typical SaaS tools that upload your files to AWS or Google Cloud servers for backend parsing, Nexdial OpenMIS runs its entire data pipeline inside your local browser via a Web Worker. If you open your browser Developer Tools Network tab, you will observe zero data payload bytes transmitted when parsing or interacting with your spreadsheets.'
+                  q: 'Is my confidential spreadsheet data really never uploaded to any server?',
+                  a: 'Yes, 100%. OpenMIS executes entirely within your browser\'s V8/SpiderMonkey JavaScript runtime using background Web Workers. You can open Developer Tools (F12) -> Network tab and verify that 0 KB of spreadsheet payload is ever dispatched over the network.'
                 },
                 {
-                  q: 'Can OpenMIS process large multi-sheet Excel workbooks?',
-                  a: 'Yes. OpenMIS supports both .csv and complex multi-sheet .xlsx files. Its memory-efficient parsing engine comfortably handles workbooks with dozens of sheets and tens of thousands of rows without crashing the browser thread.'
+                  q: 'What is CSV / DDE Formula Injection and how does OpenMIS protect me?',
+                  a: 'Spreadsheet programs like Microsoft Excel and LibreOffice interpret cells starting with =, +, -, or @ as executable formulas or Dynamic Data Exchange (DDE) commands. Malicious inputs can execute unauthorized system commands upon export. OpenMIS neutralizes these characters during CSV export to ensure zero command injection vulnerabilities.'
                 },
                 {
-                  q: 'Does it require an account, credit card, or installation?',
-                  a: 'No. OpenMIS is 100% free software licensed under MIT. You do not need to register, provide an email address, or install any software. You simply visit app.nexdial.io and begin analyzing your spreadsheets immediately.'
+                  q: 'Does OpenMIS support multi-sheet .xlsx workbooks?',
+                  a: 'Yes. Upon file selection, OpenMIS parses workbook metadata, displays all sheet tabs in a tabbed switcher, and allows you to select which sheet to profile, pivot, or visualize without needing to convert to individual CSV files.'
                 },
                 {
-                  q: 'What is DDE Formula Injection and how does OpenMIS protect against it?',
-                  a: 'When exporting data to CSV, malicious or malformed cells starting with =, +, -, or @ can trigger formula execution when opened in desktop Microsoft Excel (Dynamic Data Exchange attacks). OpenMIS includes an automated formula neutralizer that sanitizes export strings to ensure your exported files are safe for corporate distribution.'
+                  q: 'Can I use OpenMIS completely offline without an internet connection?',
+                  a: 'Yes. OpenMIS is built as a progressive web application (PWA) with client-side caching. Once the initial application bundle is loaded, you can disconnect from Wi-Fi or run in air-gapped secure corporate environments.'
                 },
                 {
-                  q: 'Can I use OpenMIS offline without an internet connection?',
-                  a: 'Yes. OpenMIS is built as an offline-ready Progressive Web Application (PWA). Once loaded in your browser cache, the Web Worker and client-side visualization library can parse spreadsheets and render dashboards completely offline.'
-                },
-              ].map((item, idx) => {
+                  q: 'How does OpenMIS perform automated outlier detection?',
+                  a: 'The profiling engine calculates the First Quartile (Q1), Third Quartile (Q3), and Interquartile Range (IQR = Q3 - Q1) for all numeric series. Any data points beyond [Q1 - 1.5 * IQR, Q3 + 1.5 * IQR] are flagged as statistical anomalies to prevent skewed executive aggregates.'
+                }
+              ].map((faq, idx) => {
                 const isOpen = openFaq === idx;
                 return (
-                  <div
+                  <div 
                     key={idx}
-                    className="border border-[var(--border)] rounded-xl bg-[var(--surface)] overflow-hidden transition-colors"
+                    style={{
+                      background: 'var(--surface)',
+                      border: '1px solid var(--border)',
+                      borderRadius: '8px',
+                      overflow: 'hidden'
+                    }}
                   >
                     <button
                       type="button"
                       onClick={() => toggleFaq(idx)}
-                      className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-[var(--text)] hover:bg-[var(--surface2)]/40 transition-colors cursor-pointer"
+                      style={{
+                        width: '100%',
+                        padding: '1.25rem 1.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'var(--text)',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-syne)',
+                        fontSize: '1.02rem',
+                        fontWeight: 600
+                      }}
                     >
-                      <span>{item.q}</span>
+                      <span>{faq.q}</span>
                       {isOpen ? (
-                        <ChevronUp size={16} className="text-emerald-500 shrink-0" />
+                        <ChevronUp size={18} className="text-[var(--accent)] shrink-0 ml-4" />
                       ) : (
-                        <ChevronDown size={16} className="text-[var(--muted)] shrink-0" />
+                        <ChevronDown size={18} className="text-[var(--muted)] shrink-0 ml-4" />
                       )}
                     </button>
+
                     {isOpen && (
-                      <div className="px-4 sm:px-5 pb-5 text-xs text-[var(--muted)] leading-relaxed border-t border-[var(--border)] pt-3">
-                        {item.a}
+                      <div style={{ padding: '0 1.5rem 1.25rem 1.5rem', color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+                        {faq.a}
                       </div>
                     )}
                   </div>
@@ -709,52 +1032,49 @@ export default function OpenMisToolPage() {
           </div>
         </section>
 
-        {/* ── 7. FINAL LAUNCH CTA BANNER ── */}
-        <section className="pt-14 px-4 sm:px-6 md:px-8">
-          <div className="max-w-5xl mx-auto rounded-2xl border border-[var(--border)] bg-gradient-to-br from-[var(--surface)] via-[var(--surface2)] to-[var(--surface)] p-8 sm:p-12 text-center space-y-6 shadow-2xl relative overflow-hidden">
-            
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
-              <Zap size={14} className="text-emerald-500" />
-              <span>Instant Setup • No Waiting</span>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--text)]">
-              Ready to Turn Your Spreadsheets Into Interactive Dashboards?
+        {/* ── 7. FINAL HIGH-IMPACT LAUNCH BANNER ── */}
+        <section style={{ padding: 'clamp(4rem, 7vw, 5rem) 1.5rem', background: 'var(--surface2)', textAlign: 'center' }}>
+          <div className="container" style={{ maxWidth: '720px' }}>
+            <div className="label-tech mb-3 justify-center">FREE // OPEN_SOURCE // PRIVACY_FIRST</div>
+            <h2 style={{ fontFamily: 'var(--font-syne)', fontSize: 'clamp(2rem, 5vw, 36px)', fontWeight: 700, marginBottom: '1rem' }}>
+              Turn Raw Excel Workbooks Into <span className="hero-title">Executive Dashboards</span>
             </h2>
-
-            <p className="text-sm sm:text-base text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
-              Launch Nexdial OpenMIS right now in your web browser. Upload your file, customize metrics, and generate clean executive reports without sharing private data with anyone.
+            <p style={{ color: 'var(--muted)', fontSize: '1.02rem', lineHeight: 1.7, marginBottom: '2rem' }}>
+              No subscriptions, no enterprise seat licenses, and zero cloud uploads. Try Nexdial OpenMIS right now in your browser.
             </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-4">
               <a
                 href="https://app.nexdial.io/app/new"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-[var(--accent)] hover:brightness-105 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-pointer no-underline"
+                className="btn-primary inline-flex items-center gap-2.5 text-xs font-bold no-underline"
+                style={{ padding: '0.95rem 2rem', borderRadius: '4px', cursor: 'pointer' }}
               >
-                <Sparkles size={18} />
-                <span>Open Nexdial OpenMIS Now</span>
-                <ExternalLink size={15} />
+                <Sparkles size={16} />
+                <span>Launch OpenMIS Web App</span>
+                <ExternalLink size={14} className="opacity-80" />
               </a>
 
               <a
-                href="/dashboards/rider-ops"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-[var(--surface)] hover:bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] transition-all cursor-pointer no-underline"
+                href="https://github.com/sabledattatray/app.nexdial"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline inline-flex items-center gap-2 text-xs font-mono no-underline"
+                style={{ 
+                  padding: '0.95rem 1.75rem', 
+                  borderRadius: '4px', 
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  cursor: 'pointer'
+                }}
               >
-                <Table size={16} className="text-[var(--accent)]" />
-                <span>View Rider Ops Excel MIS Demo</span>
+                <Database size={15} />
+                <span>Star on GitHub</span>
               </a>
             </div>
-
-            <div className="text-[11px] text-[var(--muted)] pt-2 font-mono">
-              Designed &amp; Engineered by Datta Sable • MIT Open Source Software
-            </div>
-
           </div>
         </section>
 
-        <Crosshair position="br" />
       </main>
 
       <Footer />
