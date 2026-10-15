@@ -33,7 +33,7 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Web Solutions',      href: '/services#web-solutions', icon: Globe },
       { label: 'Graphic Design',     href: '/services#graphic-design', icon: PenTool },
       { label: 'SEO Optimization',   href: '/services#seo-optimization', icon: Sparkles },
-      { label: 'n8n Automation',     href: '/services#n8n-automation', icon: Zap },
+      { label: 'Automation Solutions', href: '/services#automation', icon: Zap },
     ],
 
   },

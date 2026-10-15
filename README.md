@@ -36,7 +36,7 @@ This platform is a comprehensive **Digital Enterprise Hub**. It bridges the gap 
 ### 🚀 Key Features
 - **Native Mobile Client**: Accompanied by a dedicated [Android Mobile App (ds-droid)](https://github.com/sabledattatray/ds-droid) for seamless cross-platform delivery.
 - **Elite Performance**: Sub-second load times with native `next/image` WebP optimization and edge-caching.
-- **Expansive Service Suite**: Professional integration of Business Intelligence, Enterprise Web Development, Technical SEO, n8n Automation, and CorelDRAW Graphic Design.
+- **Expansive Service Suite**: Professional integration of Business Intelligence, Enterprise Web Development, Technical SEO, Python Automation, and CorelDRAW Graphic Design.
 - **Dynamic Knowledge Engine**: A high-authority blog featuring 33+ technical case studies and articles across specialized categories.
 - **Restricted Access Portal**: Secure, OAuth-driven gateway for proprietary professional assets and VIP dashboards.
 - **Admin Command Center**: A professional-grade dashboard for real-time CMS, portfolio, and analytics management.

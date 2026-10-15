@@ -32,7 +32,7 @@ export const megaMenuData: Record<string, any> = {
       { title: 'WordPress & CMS',       desc: 'Custom themes & headless setups.',   icon: <Globe size={18} />,     href: '/services#web-solutions',    color: '#60a5fa' },
       { title: 'Power BI Dashboards',   desc: 'Enterprise BI architecture.',        icon: <BarChart3 size={18} />, href: '/services#dashboards',       color: '#fb923c' },
       { title: 'SEO & Technical Audit', desc: 'Rankings, speed & Core Web Vitals.', icon: <Search size={18} />,   href: '/services#seo-optimization', color: '#34d399' },
-      { title: 'Marketing Automation',  desc: 'n8n workflows & CRM integration.',   icon: <Workflow size={18} />,  href: '/services#n8n-automation',   color: '#f472b6' },
+      { title: 'Excel & MIS Automation', desc: 'VBA macros & financial models.', icon: <Workflow size={18} />, href: '/services#automation', color: '#107c41' },
       { title: 'Python Automation',     desc: 'ETL pipelines & data processing.',   icon: <Cpu size={18} />,       href: '/services#automation',       color: '#c9f31d' },
       { title: 'E-commerce Dev',        desc: 'WooCommerce & Shopify builds.',      icon: <ShoppingCart size={18} />, href: '/services#web-solutions',  color: '#00C9F2' },
       { title: 'API & Backend Dev',     desc: 'REST APIs & Node.js services.',      icon: <Server size={18} />,    href: '/services#web-dev',          color: '#a78bfa' },
@@ -53,7 +53,7 @@ export const megaMenuData: Record<string, any> = {
       { title: 'Web Applications',    desc: 'Next.js & React full-stack builds.', icon: <Monitor size={18} />,     href: '/portfolio?category=Web',          color: '#c9f31d' },
       { title: 'BI Dashboards',       desc: 'Power BI & Tableau live reports.',   icon: <BarChart3 size={18} />,   href: '/portfolio?category=Dashboard',    color: '#60a5fa' },
       { title: 'UI/UX Projects',      desc: 'Interface design case studies.',     icon: <Palette size={18} />,     href: '/portfolio?category=Design',       color: '#a78bfa' },
-      { title: 'Automation Projects', desc: 'Python & n8n workflow builds.',      icon: <Zap size={18} />,         href: '/portfolio?category=Automation',   color: '#34d399' },
+      { title: 'Automation Projects', desc: 'Python & ETL workflow builds.',        icon: <Zap size={18} />,          href: '/portfolio?category=Automation',   color: '#34d399' },
       { title: 'SEO Case Studies',    desc: 'Traffic growth & ranking wins.',     icon: <TrendingUp size={18} />,  href: '/portfolio?category=SEO',          color: '#fb923c' },
     ]
   },
