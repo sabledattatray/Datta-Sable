@@ -488,8 +488,8 @@ export default function RiderOpsDashboardPage() {
       const matchSearch = !q || r.name.toLowerCase().includes(q) || r.id.toLowerCase().includes(q) || r.zone.toLowerCase().includes(q);
       return matchZone && matchSearch;
     }).sort((a, b) => {
-      let valA: any = a[sortField];
-      let valB: any = b[sortField];
+      const valA: any = a[sortField];
+      const valB: any = b[sortField];
       if (typeof valA === 'string') {
         return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
       }
