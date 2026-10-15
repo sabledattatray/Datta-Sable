@@ -25,6 +25,21 @@ interface DashboardItem {
 
 const dashboards: DashboardItem[] = [
   {
+    id: 116,
+    title: 'Aura Capital & FinTech Group — Executive Sales Dashboard',
+    category: 'Sales',
+    tool: 'Excel / Next.js',
+    color: '#00F0FF',
+    icon: '💼',
+    image: null,
+    desc: 'Audited enterprise FinTech BI model with 4 international theaters, dynamic quota scorecards, pivot matrix, and 1,037 certified transaction records. Includes direct .xlsx download.',
+    embed: null,
+    link: '/dashboards/aura-capital-sales',
+    isInternal: true,
+    tags: ['Excel BI', 'FinTech', '1,037 Rows', 'Downloadable .xlsx'],
+    metrics: ['$15.95M Volume', '102.3% Quota', '68.2% Margin'],
+  },
+  {
     id: 115,
     title: 'Hyperlocal Fleet Operations & Rider MIS',
     category: 'Operations',

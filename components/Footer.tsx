@@ -40,6 +40,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Workspace',
     links: [
+      { label: 'Aura FinTech BI (Excel)', href: '/dashboards/aura-capital-sales', icon: BarChart3 },
       { label: 'Open MIS Tool',    href: '/tools/open-mis',         icon: BarChart3 },
       { label: 'Nexdial App (Live)', href: 'https://app.nexdial.io/', icon: Sparkles, external: true },
       { label: 'Surgical Tools',   href: '/tools',                  icon: Zap },

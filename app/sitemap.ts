@@ -87,6 +87,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/start-here',
     '/dashboards',
     '/dashboards/world-business',
+    '/dashboards/aura-capital-sales',
+    '/dashboards/rider-ops',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: baselineDate,
