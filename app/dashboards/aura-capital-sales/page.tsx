@@ -10,7 +10,6 @@ import {
   Download,
   FileSpreadsheet,
   CheckCircle2,
-  ShieldCheck,
   Maximize2,
   X,
   ArrowRight,
@@ -18,6 +17,7 @@ import {
   Globe,
   Info,
   ExternalLink,
+  ChevronRight,
 } from 'lucide-react';
 import { EXCEL_PROJECTS } from '@/data/excelProjects';
 
@@ -43,7 +43,7 @@ const SCREENSHOT_TABS: ScreenshotTab[] = [
     height: 1658,
     badge: 'Main C-Suite Cockpit',
     description:
-      'The complete executive cockpit in Microsoft Excel. Features dynamic dropdown slicers (C4: Region, G4: Channel), 6 core KPI metric cards, monthly run-rate table with in-cell Unicode sparklines, regional quota scorecards, and top enterprise client summaries.',
+      'The complete executive cockpit in Microsoft Excel. Features dynamic dropdown slicers (C4: Region, G4: Channel), 6 core KPI metric cards, monthly financial run-rate table with in-cell sparklines, regional quota scorecards, and top enterprise client summaries.',
     keyHighlights: [
       'Interactive Slicer Dropdowns (C4: Region, G4: Channel)',
       '6 Core KPI Scorecards ($15.95M Gross Volume)',
@@ -59,9 +59,9 @@ const SCREENSHOT_TABS: ScreenshotTab[] = [
     imageSrc: '/images/projects/aura-capital/pivot_table_analysis_sheet.png',
     width: 1558,
     height: 722,
-    badge: 'Dynamic Cross-Tabulation',
+    badge: 'Cross-Tabulation Engine',
     description:
-      'Multi-dimensional aggregate pivot engine calculating Theater by Sales Channel matrices, product category revenues across international territories, and quarterly pacing (Q1 to Q4).',
+      'Multi-dimensional aggregate pivot engine calculating Theater by Sales Channel matrices, product category revenues across international territories, and quarterly pacing from Q1 through Q4.',
     keyHighlights: [
       'Global Theater × Sales Channel Revenue Matrix',
       'Product Category Portfolio by Regional Theater',
@@ -130,130 +130,136 @@ export default function AuraCapitalSalesDashboardPage() {
   const activeTab = SCREENSHOT_TABS.find((t) => t.id === activeTabId) || SCREENSHOT_TABS[0];
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans transition-colors duration-300">
+    <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
       <Navbar />
 
-      {/* CENTERED BOXED WRAPPER */}
-      <main className="boxed-wrapper !max-w-[1240px] !mt-24 !mx-auto !min-h-screen border-none shadow-none bg-transparent relative pb-20 px-4 sm:px-6">
+      {/* CANONICAL BOXED WRAPPER (Exact 1077.88px site width without overrides) */}
+      <main className="boxed-wrapper" style={{ position: 'relative', marginBottom: '80px' }}>
         <Crosshair position="tl" />
+        <Crosshair position="tr" />
+        <Crosshair position="bl" />
         <Crosshair position="br" />
 
-        {/* ── 1. HEADER SECTION (CENTERED & CLEAN) ── */}
-        <section className="pt-6 pb-10 border-b border-[var(--border)] mb-10 text-center">
-          <div className="max-w-3xl mx-auto">
-            {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-xs text-[var(--muted)] font-mono mb-4">
-              <Link href="/" className="hover:text-[var(--accent)] transition-colors">Home</Link>
-              <span>/</span>
-              <Link href="/dashboards" className="hover:text-[var(--accent)] transition-colors">Dashboards</Link>
-              <span>/</span>
-              <span className="text-[var(--accent)] font-semibold">Aura Capital Excel Project</span>
-            </div>
-
-            {/* Badges */}
-            <div className="flex items-center justify-center gap-2 flex-wrap mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                <CheckCircle2 size={13} />
-                Microsoft Excel Master Model
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">
-                <ShieldCheck size={13} />
-                2026 Audited Edition
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono bg-[var(--card)] border border-[var(--border)] text-[var(--muted)]">
-                <FileSpreadsheet size={13} className="text-emerald-400" />
-                4.86 MB .xlsx
-              </span>
-            </div>
-
-            {/* Main Title */}
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[var(--text)] mb-3 leading-tight">
-              Aura Capital & FinTech Group
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] via-sky-400 to-blue-500 mt-1">
-                Executive Sales & Commercial Dashboard
-              </span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed mb-8 max-w-2xl mx-auto">
-              Complete commercial intelligence spreadsheet model created in Microsoft Excel.
-              Browse the authentic high-resolution screenshots of each worksheet below, or download the original .xlsx workbook.
-            </p>
-
-            {/* Download Button */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx"
-                download="Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-[#00F0FF] via-sky-400 to-blue-500 text-black shadow-lg shadow-[#00F0FF]/20 hover:shadow-[#00F0FF]/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
-              >
-                <Download size={18} className="stroke-[2.5]" />
-                <span>Download Master Excel File (.xlsx)</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-black/20 text-black/90 font-bold">
-                  4.86 MB
-                </span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => {
-                  const el = document.getElementById('screenshots-viewer');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold border border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors cursor-pointer"
-              >
-                <span>Browse Excel Screenshots</span>
-                <ArrowRight size={15} />
-              </button>
-            </div>
+        {/* ── 1. HERO SECTION ── */}
+        <section className="p-8 sm:p-14 border-b border-[var(--border)] text-center">
+          {/* Breadcrumb */}
+          <div className="flex items-center justify-center gap-2 text-xs text-[var(--muted)] font-mono mb-6">
+            <Link href="/" className="hover:text-[var(--accent)] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/dashboards" className="hover:text-[var(--accent)] transition-colors">Dashboards</Link>
+            <span>/</span>
+            <span className="text-[var(--accent)] font-semibold">Aura Capital Excel BI</span>
           </div>
 
-          {/* 4 Key Summary Metric Pills */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto mt-8 text-center">
-            <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)]">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-0.5">
+          {/* Status Strip Badge */}
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] text-xs mb-6">
+            <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+            <span className="font-mono font-semibold tracking-wider text-[var(--accent)] text-[11px] uppercase">
+              Microsoft Excel Master BI Model
+            </span>
+            <span className="text-[var(--muted)] opacity-40">|</span>
+            <span className="font-mono text-xs text-[var(--muted)]">4.86 MB .xlsx • Audited Edition</span>
+          </div>
+
+          {/* Main Title */}
+          <h1
+            style={{
+              fontFamily: 'var(--font-syne)',
+              fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+              fontWeight: 700,
+              lineHeight: 1.18,
+              letterSpacing: '-0.02em',
+              marginBottom: '1rem',
+            }}
+          >
+            Aura Capital &amp; FinTech Group
+            <span className="block text-[var(--muted)] font-normal text-xl sm:text-2xl mt-2 tracking-normal">
+              Executive Performance &amp; Commercial Sales Dashboard
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mb-8 max-w-2xl mx-auto font-normal">
+            An institutional multi-sheet commercial intelligence model engineered in Microsoft Excel.
+            Explore authentic screenshots of each worksheet below, or download the master spreadsheet workbook.
+          </p>
+
+          {/* Download CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx"
+              download="Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx"
+              className="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 font-bold text-xs tracking-widest uppercase transition-all"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <Download size={16} className="stroke-[2.5]" />
+              <span>Download Master Excel File (.xlsx)</span>
+              <span className="px-2 py-0.5 bg-black/15 text-black text-[10px] font-mono font-bold">
+                4.86 MB
+              </span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('screenshots-viewer');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="btn-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold tracking-widest uppercase cursor-pointer"
+            >
+              <span>Browse Worksheets</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
+
+          {/* 4 Summary Metric Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-3xl mx-auto mt-10 text-left">
+            <div className="p-4 border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-[11px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-1">
                 Gross Volume
               </span>
-              <span className="text-xl font-black text-[#00F0FF] font-mono">
+              <div className="text-xl sm:text-2xl font-bold font-mono text-[var(--text)]">
                 $15.95M
-              </span>
-              <span className="text-[10px] text-emerald-400 font-mono block mt-0.5">
+              </div>
+              <span className="text-[11px] text-[var(--accent)] font-mono block mt-1">
                 $3.88M Certified Actuals
               </span>
             </div>
 
-            <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)]">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-0.5">
+            <div className="p-4 border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-[11px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-1">
                 Gross Profit
               </span>
-              <span className="text-xl font-black text-emerald-400 font-mono">
+              <div className="text-xl sm:text-2xl font-bold font-mono text-[var(--text)]">
                 $10.87M
-              </span>
-              <span className="text-[10px] text-[var(--muted)] font-mono block mt-0.5">
+              </div>
+              <span className="text-[11px] text-[var(--muted)] font-mono block mt-1">
                 68.2% Blended Margin
               </span>
             </div>
 
-            <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)]">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-0.5">
+            <div className="p-4 border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-[11px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-1">
                 Director Quota
               </span>
-              <span className="text-xl font-black text-sky-400 font-mono">
+              <div className="text-xl sm:text-2xl font-bold font-mono text-[var(--text)]">
                 102.3%
-              </span>
-              <span className="text-[10px] text-emerald-400 font-mono block mt-0.5">
+              </div>
+              <span className="text-[11px] text-[var(--accent)] font-mono block mt-1">
                 Global Target Exceeded
               </span>
             </div>
 
-            <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)]">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-0.5">
+            <div className="p-4 border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-[11px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-1">
                 Audit Transactions
               </span>
-              <span className="text-xl font-black text-purple-400 font-mono">
+              <div className="text-xl sm:text-2xl font-bold font-mono text-[var(--text)]">
                 1,037 Rows
-              </span>
-              <span className="text-[10px] text-[var(--muted)] font-mono block mt-0.5">
+              </div>
+              <span className="text-[11px] text-[var(--muted)] font-mono block mt-1">
                 6 Worksheets Included
               </span>
             </div>
@@ -261,16 +267,14 @@ export default function AuraCapitalSalesDashboardPage() {
         </section>
 
         {/* ── 2. SCREENSHOTS GALLERY & VIEWER ── */}
-        <section id="screenshots-viewer" className="space-y-4 mb-12">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-[var(--border)]">
+        <section id="screenshots-viewer" className="p-6 sm:p-10 border-b border-[var(--border)] space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-4 border-b border-[var(--border)]">
             <div>
-              <span className="text-xs font-mono uppercase tracking-wider text-[#00F0FF] font-bold block mb-1">
-                Visual Dashboard Showcase
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black text-[var(--text)]">
+              <div className="label-tech mb-2">Visual Showcase</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-[var(--text)]">
                 Workbook Sheet Screenshots
               </h2>
-              <p className="text-xs text-[var(--muted)] mt-0.5">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Click any sheet tab below to preview the exact spreadsheet reports created in Microsoft Excel
               </p>
             </div>
@@ -278,7 +282,7 @@ export default function AuraCapitalSalesDashboardPage() {
             <button
               type="button"
               onClick={() => setIsLightboxOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-[var(--border)] bg-[var(--card)] hover:border-[#00F0FF] hover:text-[#00F0FF] transition-colors cursor-pointer w-fit"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold uppercase tracking-wider border border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors cursor-pointer w-fit"
             >
               <Maximize2 size={13} />
               <span>Fullscreen Preview</span>
@@ -286,7 +290,7 @@ export default function AuraCapitalSalesDashboardPage() {
           </div>
 
           {/* Sheet Selector Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex items-center gap-1 overflow-x-auto pb-2 scrollbar-none border-b border-[var(--border)]">
             {SCREENSHOT_TABS.map((tab) => {
               const isActive = tab.id === activeTabId;
               return (
@@ -294,13 +298,13 @@ export default function AuraCapitalSalesDashboardPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTabId(tab.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                  className={`inline-flex items-center gap-2 px-4 py-2.5 text-xs font-mono font-semibold tracking-wider uppercase transition-all cursor-pointer border-b-2 -mb-[2px] ${
                     isActive
-                      ? 'bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/40 shadow-sm'
-                      : 'text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--card)] border border-transparent'
+                      ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--card)]'
+                      : 'border-transparent text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--card)]/50'
                   }`}
                 >
-                  <FileSpreadsheet size={14} className={isActive ? 'text-[#00F0FF]' : 'text-[var(--muted)]'} />
+                  <FileSpreadsheet size={14} />
                   <span>{tab.name}</span>
                 </button>
               );
@@ -308,31 +312,31 @@ export default function AuraCapitalSalesDashboardPage() {
           </div>
 
           {/* Screenshot Display Window Frame */}
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-2xl overflow-hidden">
+          <div className="border border-[var(--border)] bg-[var(--card)] overflow-hidden">
             {/* Window Title Bar */}
-            <div className="px-4 py-2.5 bg-[var(--bg)] border-b border-[var(--border)] flex items-center justify-between">
-              <div className="flex items-center gap-2">
+            <div className="px-5 py-3 bg-[var(--bg)] border-b border-[var(--border)] flex items-center justify-between">
+              <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/20 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/20 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/20 inline-block" />
                 </div>
                 <span className="text-xs font-mono text-[var(--muted)] ml-2 hidden sm:inline">
-                  Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx — [{activeTab.name}]
+                  Aura_Capital_Sales_Dashboard.xlsx — [{activeTab.name}]
                 </span>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00F0FF]/10 text-[#00F0FF] font-semibold border border-[#00F0FF]/20">
+              <div className="flex items-center gap-3">
+                <span className="text-[11px] font-mono px-2.5 py-0.5 border border-[var(--border)] bg-[var(--card)] text-[var(--accent)] font-semibold">
                   {activeTab.badge}
                 </span>
                 <button
                   type="button"
                   onClick={() => setIsLightboxOpen(true)}
                   title="View Fullscreen"
-                  className="p-1 rounded text-[var(--muted)] hover:text-[var(--text)] transition-colors cursor-pointer"
+                  className="p-1 text-[var(--muted)] hover:text-[var(--text)] transition-colors cursor-pointer"
                 >
-                  <Maximize2 size={13} />
+                  <Maximize2 size={14} />
                 </button>
               </div>
             </div>
@@ -340,9 +344,9 @@ export default function AuraCapitalSalesDashboardPage() {
             {/* Image Preview Container */}
             <div
               onClick={() => setIsLightboxOpen(true)}
-              className="relative w-full bg-neutral-950 p-3 sm:p-5 flex items-center justify-center cursor-zoom-in group"
+              className="relative w-full bg-black p-3 sm:p-6 flex items-center justify-center cursor-zoom-in group"
             >
-              <div className="relative w-full rounded-lg overflow-hidden border border-white/10 shadow-lg">
+              <div className="relative w-full border border-white/10 shadow-2xl overflow-hidden">
                 <Image
                   src={activeTab.imageSrc}
                   alt={activeTab.name}
@@ -354,78 +358,84 @@ export default function AuraCapitalSalesDashboardPage() {
               </div>
 
               {/* Hover Overlay Hint */}
-              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-black/85 backdrop-blur-md text-white text-xs px-3.5 py-1.5 rounded-lg border border-white/15 flex items-center gap-1.5 shadow-xl pointer-events-none">
-                <Maximize2 size={13} className="text-[#00F0FF]" />
-                <span>Click to zoom in full resolution</span>
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-black/90 backdrop-blur-md text-white text-xs px-3.5 py-2 border border-white/20 flex items-center gap-2 shadow-2xl pointer-events-none font-mono">
+                <Maximize2 size={13} className="text-[var(--accent)]" />
+                <span>Click to zoom full resolution</span>
               </div>
             </div>
 
             {/* Caption & Sheet Explanation */}
-            <div className="p-5 bg-[var(--card)] border-t border-[var(--border)] space-y-3">
+            <div className="p-6 sm:p-8 bg-[var(--bg)] border-t border-[var(--border)] space-y-5">
               <div>
-                <span className="text-xs font-mono font-bold text-[#00F0FF] block">
+                <div className="label-tech mb-2">Worksheet Overview</div>
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text)]">
                   {activeTab.sheetLabel}
-                </span>
-                <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed mt-1">
+                </h3>
+                <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mt-2 max-w-3xl">
                   {activeTab.description}
                 </p>
               </div>
 
-              {/* Highlights Chips */}
-              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[var(--border)]">
-                <span className="text-[11px] font-mono text-[var(--muted)]">Sheet Highlights:</span>
-                {activeTab.keyHighlights.map((hl, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-mono bg-[var(--bg)] border border-[var(--border)] text-[var(--text)]"
-                  >
-                    <CheckCircle2 size={11} className="text-emerald-400" />
-                    <span>{hl}</span>
-                  </span>
-                ))}
+              {/* Highlights List */}
+              <div className="pt-4 border-t border-[var(--border)]">
+                <div className="text-xs font-mono uppercase tracking-widest text-[var(--muted)] mb-3">
+                  Key Technical Features
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {activeTab.keyHighlights.map((hl, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2.5 text-xs sm:text-sm text-[var(--text)]"
+                    >
+                      <CheckCircle2 size={14} className="text-[var(--accent)] shrink-0" />
+                      <span>{hl}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── 3. WORKBOOK STRUCTURE SUMMARY ── */}
-        <section className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm mb-12 space-y-4">
-          <div className="pb-3 border-b border-[var(--border)]">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#00F0FF] font-bold block mb-1">
-              Workbook Directory
-            </span>
-            <h2 className="text-lg sm:text-xl font-black text-[var(--text)]">
-              What's Inside the Downloadable Excel File
+        {/* ── 3. WORKBOOK DIRECTORY (6 SHEETS) ── */}
+        <section className="p-6 sm:p-10 border-b border-[var(--border)] space-y-6">
+          <div className="pb-4 border-b border-[var(--border)]">
+            <div className="label-tech mb-2">Architecture</div>
+            <h2 className="text-xl sm:text-2xl font-bold text-[var(--text)]">
+              Workbook Directory &amp; Sheet Hierarchy
             </h2>
-            <p className="text-xs text-[var(--muted)] mt-0.5">
+            <p className="text-sm text-[var(--muted)] mt-1">
               The master workbook contains 6 structured worksheets designed for executive presentation and financial analysis
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {project.sheets.map((sheet, idx) => (
               <div
                 key={sheet.name}
-                className="p-4 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:border-[#00F0FF]/40 transition-colors space-y-2"
+                className="p-5 border border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)]/50 transition-colors space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold text-[#00F0FF]">
-                    Sheet {idx + 1}: {sheet.name}
+                  <span className="text-sm sm:text-base font-bold text-[var(--text)] flex items-center gap-2">
+                    <span className="font-mono text-xs text-[var(--accent)]">
+                      0{idx + 1}
+                    </span>
+                    <span>{sheet.name}</span>
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--card)] text-[var(--muted)] border border-[var(--border)]">
+                  <span className="text-xs font-mono px-2 py-0.5 border border-[var(--border)] bg-[var(--bg)] text-[var(--muted)]">
                     {sheet.type}
                   </span>
                 </div>
-                <p className="text-xs text-[var(--muted)] leading-relaxed">
+                <p className="text-sm text-[var(--muted)] leading-relaxed">
                   {sheet.description}
                 </p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex flex-wrap gap-2 pt-2 border-t border-[var(--border)]">
                   {sheet.highlights.map((h, i) => (
                     <span
                       key={i}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--card)] text-[var(--text)] border border-[var(--border)]"
+                      className="text-xs font-mono text-[var(--text)] opacity-80"
                     >
-                      {h}
+                      • {h}
                     </span>
                   ))}
                 </div>
@@ -435,160 +445,174 @@ export default function AuraCapitalSalesDashboardPage() {
         </section>
 
         {/* ── 4. COMMERCIAL CONTEXT & TAKEAWAYS ── */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* Executive Business Context */}
-          <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#00F0FF] font-bold uppercase tracking-wider">
-              <Globe size={15} />
-              <span>Commercial Background</span>
+        <section className="p-6 sm:p-10 border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {/* Executive Business Context */}
+            <div className="p-6 border border-[var(--border)] bg-[var(--card)] space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent)] font-semibold uppercase tracking-widest">
+                <Globe size={15} />
+                <span>Commercial Background</span>
+              </div>
+              <h3 className="text-lg font-bold text-[var(--text)]">
+                Executive Business Context
+              </h3>
+              <p className="text-sm text-[var(--muted)] leading-relaxed">
+                Aura Capital &amp; FinTech Group provides mission-critical risk compliance engines, low-latency execution terminals, and automated wealth management infrastructure to tier-1 financial institutions across 15+ countries.
+              </p>
+              <p className="text-sm text-[var(--muted)] leading-relaxed">
+                Previously, regional sales teams reported quotas across fragmented spreadsheets. This workbook consolidated global financial run-rates, individual contract margins, and partner channel contributions into an auditable, single-pane model.
+              </p>
             </div>
-            <h3 className="text-base font-bold text-[var(--text)]">
-              Executive Business Context
-            </h3>
-            <p className="text-xs text-[var(--muted)] leading-relaxed">
-              Aura Capital & FinTech Group provides mission-critical risk compliance engines, low-latency execution terminals, and automated wealth management infrastructure to tier-1 financial institutions across 15+ countries.
-            </p>
-            <p className="text-xs text-[var(--muted)] leading-relaxed">
-              Previously, regional sales teams reported quotas across fragmented spreadsheets. This workbook consolidated global financial run-rates, individual contract margins, and partner channel contributions into an auditable, single-pane model.
-            </p>
-          </div>
 
-          {/* Key Strategic Findings */}
-          <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">
-              <TrendingUp size={15} />
-              <span>Key Findings</span>
+            {/* Key Strategic Findings */}
+            <div className="p-6 border border-[var(--border)] bg-[var(--card)] space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent)] font-semibold uppercase tracking-widest">
+                <TrendingUp size={15} />
+                <span>Strategic Findings</span>
+              </div>
+              <h3 className="text-lg font-bold text-[var(--text)]">
+                Commercial Takeaways
+              </h3>
+              <ul className="space-y-3 text-sm text-[var(--text)]">
+                {project.strategicFindings.map((finding, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 size={15} className="text-[var(--accent)] shrink-0 mt-0.5" />
+                    <span className="leading-relaxed">{finding}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h3 className="text-base font-bold text-[var(--text)]">
-              Commercial Takeaways
-            </h3>
-            <ul className="space-y-2 text-xs text-[var(--muted)]">
-              {project.strategicFindings.map((finding, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle2 size={13} className="text-emerald-400 shrink-0 mt-0.5" />
-                  <span>{finding}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
         {/* ── 5. HOW TO RUN THE WORKBOOK ── */}
-        <section className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm mb-12 space-y-4">
-          <div className="flex items-center gap-2 text-xs font-mono text-sky-400 font-bold uppercase tracking-wider">
-            <Info size={15} />
-            <span>Usage Guide</span>
+        <section className="p-6 sm:p-10 border-b border-[var(--border)] space-y-6">
+          <div>
+            <div className="label-tech mb-2">Instructions</div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[var(--text)]">
+              How to Use This Excel Workbook
+            </h3>
+            <p className="text-sm text-[var(--muted)] mt-1">
+              Zero VBA or third-party add-ins required — works out of the box in modern Microsoft Excel
+            </p>
           </div>
-          <h3 className="text-base font-bold text-[var(--text)]">
-            How to Use This Excel Workbook
-          </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 text-xs">
-            <div className="p-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border)] space-y-1">
-              <span className="font-bold text-[var(--text)] font-mono block">1. Open in Excel</span>
-              <p className="text-[var(--muted)]">
-                Open in Microsoft Excel (2016, 2019, 2021, or Office 365). No macros, VBA code, or add-ins required.
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-5 border border-[var(--border)] bg-[var(--card)] space-y-2">
+              <span className="font-mono text-xl font-bold text-[var(--accent)] block">01</span>
+              <h4 className="text-base font-bold text-[var(--text)]">Open in Excel</h4>
+              <p className="text-sm text-[var(--muted)] leading-relaxed">
+                Open in Microsoft Excel (2016, 2019, 2021, or Microsoft 365). No macros, external links, or plugins needed.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border)] space-y-1">
-              <span className="font-bold text-[var(--text)] font-mono block">2. Click Slicer Dropdowns</span>
-              <p className="text-[var(--muted)]">
-                On the "Executive Dashboard" sheet, click cells C4 (Region Filter) or G4 (Channel Filter) to recalculate the entire model dynamically.
+            <div className="p-5 border border-[var(--border)] bg-[var(--card)] space-y-2">
+              <span className="font-mono text-xl font-bold text-[var(--accent)] block">02</span>
+              <h4 className="text-base font-bold text-[var(--text)]">Toggle Slicers</h4>
+              <p className="text-sm text-[var(--muted)] leading-relaxed">
+                On the "Executive Dashboard" sheet, click cells C4 (Region) or G4 (Channel) to recalculate the entire model dynamically.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-[var(--bg)] border border-[var(--border)] space-y-1">
-              <span className="font-bold text-[var(--text)] font-mono block">3. Inspect Formulas</span>
-              <p className="text-[var(--muted)]">
-                Inspect clean SUMIFS, XLOOKUP, pivot cross-tabulations, and 1,037 certified transaction records.
+            <div className="p-5 border border-[var(--border)] bg-[var(--card)] space-y-2">
+              <span className="font-mono text-xl font-bold text-[var(--accent)] block">03</span>
+              <h4 className="text-base font-bold text-[var(--text)]">Inspect Formulas</h4>
+              <p className="text-sm text-[var(--muted)] leading-relaxed">
+                Inspect clean SUMIFS, XLOOKUP, dynamic pivot tables, and 1,037 certified institutional transactions.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 6. DIRECT DOWNLOAD CTA CARD (CENTERED) ── */}
-        <section className="rounded-3xl border border-[#00F0FF]/30 bg-gradient-to-b from-[var(--card)] to-[var(--bg)] p-8 sm:p-10 text-center shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#00F0FF]/5 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 max-w-2xl mx-auto space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">
+        {/* ── 6. DIRECT DOWNLOAD CTA CARD ── */}
+        <section className="p-8 sm:p-14 text-center relative overflow-hidden bg-[var(--card)]">
+          <div className="relative z-10 max-w-xl mx-auto space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-[var(--accent)] border border-[var(--accent)]/30 bg-[var(--accent)]/5">
               <FileSpreadsheet size={13} />
-              Instant Direct Download
-            </span>
+              <span>Institutional Master Workbook</span>
+            </div>
 
-            <h2 className="text-2xl sm:text-3xl font-black text-[var(--text)] tracking-tight">
-              Ready to Explore the Full Model?
-            </h2>
+            <h3
+              style={{
+                fontFamily: 'var(--font-syne)',
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+              }}
+            >
+              Download Aura Capital Master Workbook
+            </h3>
 
-            <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-              Download the complete Microsoft Excel workbook (4.86 MB) containing all 6 dynamic worksheets,
-              formulas, pivot tables, and 1,037 certified transaction records.
+            <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
+              Fully unlocked .xlsx file including the executive dashboard, dynamic pivot models, 1,037 transaction rows, regional scorecards, and customer health registers.
             </p>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <a
                 href="/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx"
                 download="Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-[#00F0FF] via-sky-400 to-blue-500 text-black shadow-lg shadow-[#00F0FF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                className="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-xs tracking-widest uppercase transition-all"
+                style={{
+                  textDecoration: 'none',
+                }}
               >
-                <Download size={18} className="stroke-[2.5]" />
+                <Download size={16} className="stroke-[2.5]" />
                 <span>Download .xlsx File (4.86 MB)</span>
               </a>
 
               <Link
                 href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-semibold border border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
+                className="btn-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-xs font-semibold tracking-widest uppercase transition-colors"
+                style={{
+                  textDecoration: 'none',
+                }}
               >
                 <span>Request Custom Excel BI</span>
-                <ExternalLink size={15} />
+                <ExternalLink size={14} />
               </Link>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-3 text-[11px] font-mono text-[var(--muted)]">
-              <span>• Compatible: Excel 2016+, Office 365</span>
-              <span>• SHA-Verified Data</span>
-              <span>• Zero Third-Party Dependencies</span>
+            <div className="pt-4 text-xs font-mono text-[var(--muted)]">
+              SHA-256 Verified • Clean Format • Certified Compatible with Excel 2016-365
             </div>
           </div>
         </section>
 
-      </main>
-
-      {/* FULLSCREEN LIGHTBOX MODAL */}
-      {isLightboxOpen && (
-        <div
-          onClick={() => setIsLightboxOpen(false)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md p-4 sm:p-8 flex flex-col items-center justify-center overflow-auto animate-in fade-in duration-200"
-        >
-          <div className="w-full max-w-6xl flex items-center justify-between text-white mb-3">
-            <span className="text-xs sm:text-sm font-mono font-bold text-[#00F0FF]">
-              {activeTab.sheetLabel} — High-Resolution Preview
-            </span>
-            <button
-              type="button"
-              onClick={() => setIsLightboxOpen(false)}
-              className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors flex items-center gap-1.5 text-xs font-mono cursor-pointer"
-            >
-              <X size={16} />
-              <span>Close</span>
-            </button>
-          </div>
-
+        {/* ── 7. FULLSCREEN LIGHTBOX MODAL ── */}
+        {isLightboxOpen && (
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-6xl w-full max-h-[85vh] overflow-auto rounded-xl border border-white/20 bg-black p-2 shadow-2xl"
+            onClick={() => setIsLightboxOpen(false)}
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md p-4 sm:p-8 flex flex-col items-center justify-center overflow-auto animate-in fade-in duration-200"
           >
-            <Image
-              src={activeTab.imageSrc}
-              alt={activeTab.name}
-              width={activeTab.width}
-              height={activeTab.height}
-              className="w-full h-auto object-contain"
-            />
+            <div className="w-full max-w-5xl flex items-center justify-between text-white mb-3">
+              <span className="text-xs sm:text-sm font-mono font-bold text-[var(--accent)]">
+                {activeTab.sheetLabel} — High-Resolution Preview
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsLightboxOpen(false)}
+                className="p-1.5 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-5xl w-full max-h-[85vh] overflow-auto border border-white/20 bg-black p-2 shadow-2xl"
+            >
+              <Image
+                src={activeTab.imageSrc}
+                alt={activeTab.name}
+                width={activeTab.width}
+                height={activeTab.height}
+                className="w-full h-auto object-contain"
+                priority
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </main>
 
       <Footer />
     </div>
