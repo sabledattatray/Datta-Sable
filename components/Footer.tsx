@@ -40,12 +40,13 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Workspace',
     links: [
-      { label: 'Open MIS',         href: '/tools/open-mis', icon: BarChart3 },
-      { label: 'Surgical Tools',   href: '/tools',          icon: Zap },
-      { label: 'Templates Hub',    href: '/templates',      icon: Library },
-      { label: 'Workflow Chains',  href: '/chains',         icon: GitBranch },
-      { label: 'Knowledge Hub',    href: '/knowledge',      icon: BookOpen },
-      { label: 'Infrastructure Hub', href: '/infrastructure', icon: Layers },
+      { label: 'Open MIS Tool',    href: '/tools/open-mis',         icon: BarChart3 },
+      { label: 'Nexdial App (Live)', href: 'https://app.nexdial.io/', icon: Sparkles, external: true },
+      { label: 'Surgical Tools',   href: '/tools',                  icon: Zap },
+      { label: 'Templates Hub',    href: '/templates',              icon: Library },
+      { label: 'Workflow Chains',  href: '/chains',                 icon: GitBranch },
+      { label: 'Knowledge Hub',    href: '/knowledge',              icon: BookOpen },
+      { label: 'Infrastructure Hub', href: '/infrastructure',       icon: Layers },
     ],
   },
   {
@@ -73,11 +74,12 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Resources',
     links: [
-      { label: 'n8n Automation', href: 'https://n8n.io', icon: Zap, external: true },
-      { label: 'Live Analytics',  href: '/analytics-live',  icon: Activity  },
-      { label: 'Microsoft BI',   href: 'https://powerbi.microsoft.com/', icon: Database, external: true },
-      { label: 'Next.js 15',     href: 'https://nextjs.org/',            icon: Code2,    external: true },
-      { label: 'Vercel Cloud',   href: 'https://vercel.com/',            icon: Globe,    external: true },
+      { label: 'Nexdial OpenMIS™', href: 'https://app.nexdial.io/',   icon: BarChart3, external: true },
+      { label: 'n8n Automation',   href: 'https://n8n.io',             icon: Zap,       external: true },
+      { label: 'Live Analytics',    href: '/analytics-live',            icon: Activity },
+      { label: 'Microsoft BI',     href: 'https://powerbi.microsoft.com/', icon: Database, external: true },
+      { label: 'Next.js 15',       href: 'https://nextjs.org/',        icon: Code2,     external: true },
+      { label: 'Vercel Cloud',     href: 'https://vercel.com/',        icon: Globe,     external: true },
     ],
   },
 ];
