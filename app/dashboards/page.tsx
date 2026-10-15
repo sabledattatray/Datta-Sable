@@ -672,52 +672,55 @@ const dashboards: DashboardItem[] = [
   },
 ];
 
-const categories = ['All', 'Sales', 'Operations', 'HR', 'Finance', 'Marketing'];
-const tools = ['All Tools', 'Tableau', 'Power BI', 'Looker', 'Python'];
+const categories = ['All', 'Excel', 'Sales', 'Operations', 'Finance', 'HR', 'Marketing', 'Analytics'];
+const tools = ['All Tools', 'Excel', 'Tableau', 'Power BI', 'Looker', 'Python'];
 
 const toolColors: Record<string, string> = {
+  Excel: '#107c41',
+  'Excel / Next.js': '#107c41',
   Tableau: 'var(--accent)',
   'Power BI': 'var(--accent2)',
   Looker: 'var(--accent3)',
   Python: '#3776ab',
 };
 
-const DASHBOARD_READING_PATHS = [
-  {
-    title: 'Interactive Dashboard Demo',
-    href: '/dashboards/interactive',
-    label: 'LIVE DEMO'
-  },
-  {
-    title: 'Sales Pipeline Velocity',
-    href: '/dashboards/sales-pipeline',
-    label: 'SALES BI'
-  },
-  {
-    title: 'Dashboard Psychology',
-    href: '/blog/psychology-of-high-fidelity-dashboard-design',
-    label: 'DESIGN'
-  },
-  {
-    title: 'Natural Language Query Engines',
-    href: '/blog/natural-language-query-engines',
-    label: 'AI BI'
-  },
-  {
-    title: 'Execution Chain Infrastructure',
-    href: '/blog/execution-chain-infrastructure-explained',
-    label: 'AI OPS'
-  }
-];
-
 export default function DashboardsPage() {
   const [activeCat, setActiveCat] = useState('All');
   const [activeTool, setActiveTool] = useState('All Tools');
   const [preview, setPreview] = useState<typeof dashboards[0] | null>(null);
 
+  const isExcelItem = (d: DashboardItem) =>
+    d.category === 'Excel' ||
+    d.tool.toLowerCase().includes('excel') ||
+    d.tags.some(t => t.toLowerCase().includes('excel'));
+
+  const getCategoryCount = (cat: string) => {
+    if (cat === 'All') return dashboards.length;
+    if (cat === 'Excel') return dashboards.filter(isExcelItem).length;
+    return dashboards.filter(d => d.category === cat).length;
+  };
+
+  const getToolCount = (tool: string) => {
+    if (tool === 'All Tools') return dashboards.length;
+    if (tool === 'Excel') return dashboards.filter(d => d.tool.toLowerCase().includes('excel')).length;
+    return dashboards.filter(d => d.tool.toLowerCase().includes(tool.toLowerCase())).length;
+  };
+
   const filtered = dashboards.filter(d => {
-    const catMatch = activeCat === 'All' || d.category === activeCat;
-    const toolMatch = activeTool === 'All Tools' || d.tool === activeTool;
+    const catMatch =
+      activeCat === 'All'
+        ? true
+        : activeCat === 'Excel'
+          ? isExcelItem(d)
+          : d.category === activeCat;
+
+    const toolMatch =
+      activeTool === 'All Tools'
+        ? true
+        : activeTool === 'Excel'
+          ? d.tool.toLowerCase().includes('excel')
+          : d.tool.toLowerCase().includes(activeTool.toLowerCase());
+
     return catMatch && toolMatch;
   });
 
@@ -766,28 +769,50 @@ export default function DashboardsPage() {
                   CAT_FILTER:
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {categories.map(cat => (
-                    <button 
-                      key={cat} 
-                      className={`filter-tab ${activeCat === cat ? 'active' : ''}`} 
-                      onClick={() => setActiveCat(cat)}
-                      style={{
-                        padding: '0.4rem 1rem',
-                        fontSize: '10px',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
-                        background: activeCat === cat ? 'var(--accent)' : 'transparent',
-                        color: activeCat === cat ? 'var(--btn-primary-text)' : 'var(--muted)',
-                        border: '1px solid var(--border)',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        borderRadius: 0
-                      }}
-                    >
-                      {cat}
-                    </button>
-                  ))}
+                  {categories.map(cat => {
+                    const count = getCategoryCount(cat);
+                    const isActive = activeCat === cat;
+                    return (
+                      <button 
+                        key={cat} 
+                        className={`filter-tab ${isActive ? 'active' : ''}`} 
+                        onClick={() => setActiveCat(cat)}
+                        style={{
+                          padding: '0.4rem 0.85rem',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          background: isActive ? 'var(--accent)' : 'transparent',
+                          color: isActive ? 'var(--btn-primary-text)' : 'var(--muted)',
+                          border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          borderRadius: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        <span>{cat}</span>
+                        <span 
+                          className="mono" 
+                          style={{ 
+                            fontSize: '9px',
+                            fontWeight: 700,
+                            padding: '1px 5px',
+                            borderRadius: '2px',
+                            background: isActive ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.06)',
+                            color: isActive ? 'var(--btn-primary-text)' : 'var(--text)',
+                            border: isActive ? '1px solid rgba(0,0,0,0.15)' : '1px solid var(--border)',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -798,51 +823,54 @@ export default function DashboardsPage() {
                   TOOL_FILTER:
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {tools.map(t => (
-                    <button 
-                      key={t} 
-                      className={`filter-tab ${activeTool === t ? 'active' : ''}`} 
-                      onClick={() => setActiveTool(t)}
-                      style={{
-                        padding: '0.4rem 1rem',
-                        fontSize: '10px',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
-                        background: activeTool === t ? 'var(--accent2)' : 'transparent',
-                        color: activeTool === t ? 'var(--btn-primary-text)' : 'var(--muted)',
-                        border: '1px solid var(--border)',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        borderRadius: 0
-                      }}
-                    >
-                      {t}
-                    </button>
-                  ))}
+                  {tools.map(t => {
+                    const count = getToolCount(t);
+                    const isActive = activeTool === t;
+                    return (
+                      <button 
+                        key={t} 
+                        className={`filter-tab ${isActive ? 'active' : ''}`} 
+                        onClick={() => setActiveTool(t)}
+                        style={{
+                          padding: '0.4rem 0.85rem',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          background: isActive ? 'var(--accent2)' : 'transparent',
+                          color: isActive ? '#fff' : 'var(--muted)',
+                          border: isActive ? '1px solid var(--accent2)' : '1px solid var(--border)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          borderRadius: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        <span>{t}</span>
+                        <span 
+                          className="mono" 
+                          style={{ 
+                            fontSize: '9px',
+                            fontWeight: 700,
+                            padding: '1px 5px',
+                            borderRadius: '2px',
+                            background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)',
+                            color: isActive ? '#fff' : 'var(--text)',
+                            border: isActive ? '1px solid rgba(255,255,255,0.25)' : '1px solid var(--border)',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </motion.div>
-
-          <div className="mb-10 border border-[var(--border)] bg-[var(--surface2)] p-6">
-            <div className="label-tech mb-5 text-[var(--accent)]">Dashboard Research Paths</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
-              {DASHBOARD_READING_PATHS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
-                >
-                  <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
-                  <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
-                    <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
-                    <ExternalLink size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
 
           {/* Dashboard grid */}
           <motion.div layout style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.5rem' }}>
@@ -976,7 +1004,19 @@ export default function DashboardsPage() {
           </motion.div>
 
           {filtered.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--muted)' }}>No dashboards match these filters.</div>
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--muted)' }}>
+              <p style={{ marginBottom: '1.25rem', fontSize: '0.95rem' }}>No dashboards match these filters.</p>
+              <button
+                onClick={() => {
+                  setActiveCat('All');
+                  setActiveTool('All Tools');
+                }}
+                className="btn-outline"
+                style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '0.5rem 1.25rem' }}
+              >
+                Reset All Filters
+              </button>
+            </div>
           )}
         </div>
       </section>
