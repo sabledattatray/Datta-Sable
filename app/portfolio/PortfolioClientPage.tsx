@@ -26,6 +26,7 @@ import {
   ShieldCheck,
   Clock,
   Sparkles,
+  TrendingUp,
   Info,
   Calendar,
   Send,
@@ -382,9 +383,10 @@ function PortfolioContent() {
                     padding: 0,
                     overflow: 'hidden',
                     border: '1px solid var(--border)',
-                    borderRadius: '12px',
+                    borderRadius: '8px',
                     background: 'var(--surface)',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+                    transition: 'all 0.3s ease',
                   }}
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12">
@@ -394,47 +396,62 @@ function PortfolioContent() {
                       style={{
                         background: 'var(--surface2)',
                         borderRight: '1px solid var(--border)',
-                        minHeight: '340px',
                       }}
                     >
-                      <div className="relative w-full" style={{ height: '320px', overflow: 'hidden' }}>
+                      {/* Browser / Mockup Window Header */}
+                      <div
+                        style={{
+                          background: 'var(--surface)',
+                          borderBottom: '1px solid var(--border)',
+                          padding: '0.6rem 1rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '0.5rem',
+                        }}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444', opacity: 0.8 }} />
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', opacity: 0.8 }} />
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', opacity: 0.8 }} />
+                          <span className="mono text-[9px] text-[var(--muted)] ml-2 uppercase tracking-wider font-semibold">
+                            {project.statusLabel}
+                          </span>
+                        </div>
+                        <div className="mono text-[9px] text-[var(--muted)] flex items-center gap-1">
+                          <ShieldCheck size={11} className="text-[var(--accent)]" />
+                          <span>AUDITED</span>
+                        </div>
+                      </div>
+
+                      {/* Image Preview with Hover Zoom */}
+                      <div className="relative w-full group overflow-hidden" style={{ minHeight: '280px', flex: 1 }}>
                         <Image
                           src={project.image}
                           alt={`${project.title} dashboard screenshot`}
                           fill
                           sizes="(max-width: 1024px) 100vw, 42vw"
                           style={{ objectFit: 'cover' }}
+                          className="transition-transform duration-500 group-hover:scale-105"
                           priority={index === 0}
                         />
                         <div
                           style={{
                             position: 'absolute',
                             inset: 0,
-                            background: 'linear-gradient(to top, var(--surface2) 0%, transparent 60%)',
+                            background: 'linear-gradient(to top, var(--surface2) 0%, transparent 40%)',
+                            pointerEvents: 'none',
                           }}
                         />
-                        {/* Status Label on image */}
-                        <div style={{ position: 'absolute', top: 16, left: 16 }}>
-                          <span
-                            className="mono text-xs px-2.5 py-1 rounded font-bold"
-                            style={{
-                              background: 'var(--bg)',
-                              color: project.color,
-                              border: `1px solid ${project.color}55`,
-                            }}
-                          >
-                            {project.statusLabel}
-                          </span>
-                        </div>
                       </div>
 
-                      {/* Screenshot Caption / Proof Note */}
-                      <div style={{ padding: '1rem 1.25rem', borderTop: '1px solid var(--border)' }}>
-                        <div className="flex items-center gap-2 text-xs mono" style={{ color: 'var(--muted)' }}>
-                          <Info size={13} style={{ color: project.color }} />
-                          <span>DATA PROVENANCE:</span>
+                      {/* Screenshot Caption / Provenance Note */}
+                      <div style={{ padding: '0.85rem 1.15rem', borderTop: '1px solid var(--border)', background: 'var(--surface)' }}>
+                        <div className="flex items-center gap-1.5 text-[10px] mono font-bold" style={{ color: 'var(--accent)' }}>
+                          <Info size={12} />
+                          <span>DATA PROVENANCE &amp; CERTIFICATION</span>
                         </div>
-                        <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+                        <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.25rem', lineHeight: 1.5 }}>
                           {project.provenanceLabel}
                         </p>
                       </div>
@@ -445,10 +462,28 @@ function PortfolioContent() {
                       <div>
                         {/* Meta header */}
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                          <span className="mono text-xs font-bold" style={{ color: project.color, letterSpacing: '0.08em' }}>
-                            PROJECT #{index + 1} // {project.category.toUpperCase()}
-                          </span>
-                          <span className="text-xs mono" style={{ color: 'var(--muted)' }}>
+                          <div className="inline-flex items-center gap-2">
+                            <span
+                              className="mono text-[10px] font-bold tracking-widest px-2.5 py-1"
+                              style={{
+                                color: 'var(--accent)',
+                                background: 'rgba(201,243,29,0.08)',
+                                border: '1px solid rgba(201,243,29,0.2)',
+                              }}
+                            >
+                              PROJECT #{index + 1} // {project.category.toUpperCase()}
+                            </span>
+                          </div>
+                          <span className="mono text-[10px] text-[var(--muted)] flex items-center gap-1.5">
+                            <span
+                              style={{
+                                width: '6px',
+                                height: '6px',
+                                borderRadius: '50%',
+                                background: 'var(--accent)',
+                                display: 'inline-block',
+                              }}
+                            />
                             100% AUDITED RECONCILIATION
                           </span>
                         </div>
@@ -456,44 +491,69 @@ function PortfolioContent() {
                         {/* Title & Subtitle */}
                         <h3
                           style={{
-                            fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
-                            fontWeight: 700,
+                            fontSize: 'clamp(1.3rem, 2.2vw, 1.65rem)',
+                            fontWeight: 600,
                             lineHeight: 1.25,
                             color: 'var(--text)',
-                            marginBottom: '0.4rem',
+                            marginTop: '0.5rem',
+                            marginBottom: '0.35rem',
+                            letterSpacing: '-0.015em',
                           }}
                         >
                           {project.title}
                         </h3>
-                        <div className="text-sm font-medium mb-4" style={{ color: 'var(--muted)' }}>
+                        <p
+                          style={{
+                            fontSize: '0.88rem',
+                            color: 'var(--muted)',
+                            lineHeight: 1.6,
+                            marginBottom: '1rem',
+                            fontWeight: 400,
+                          }}
+                        >
                           {project.subtitle}
-                        </div>
+                        </p>
 
                         {/* Plain Language Business Question */}
                         <div
                           style={{
                             background: 'var(--surface2)',
-                            borderLeft: `3px solid ${project.color}`,
-                            padding: '1rem',
-                            borderRadius: '0 6px 6px 0',
-                            marginBottom: '1.25rem',
+                            border: '1px solid var(--border)',
+                            borderLeft: '3px solid var(--accent)',
+                            padding: '0.85rem 1rem',
+                            marginBottom: '1rem',
                           }}
                         >
-                          <div className="mono text-xs font-bold mb-1" style={{ color: project.color, letterSpacing: '0.05em' }}>
-                            BUSINESS QUESTION ANSWERED:
+                          <div
+                            className="mono"
+                            style={{
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              color: 'var(--accent)',
+                              letterSpacing: '0.08em',
+                              marginBottom: '0.35rem',
+                            }}
+                          >
+                            BUSINESS QUESTION ANSWERED
                           </div>
-                          <p style={{ fontSize: '0.92rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
-                            &ldquo;{project.businessQuestion}&rdquo;
+                          <p style={{ fontSize: '0.86rem', color: 'var(--text)', lineHeight: 1.55 }}>
+                            {project.businessQuestion}
                           </p>
                         </div>
 
-                        {/* Tools actually used */}
-                        <div className="flex flex-wrap gap-1.5 mb-5">
+                        {/* Tech Stack Chips */}
+                        <div className="flex flex-wrap items-center gap-1.5 mb-4">
+                          <span className="mono text-[9px] uppercase font-bold text-[var(--muted)] mr-1">STACK:</span>
                           {project.tools.map(tool => (
                             <span
                               key={tool}
-                              className="mono text-xs px-2.5 py-1 rounded"
-                              style={{ background: 'var(--tag-bg)', border: '1px solid var(--border)', color: 'var(--text)' }}
+                              className="mono text-[10px] px-2 py-0.5"
+                              style={{
+                                background: 'var(--surface2)',
+                                border: '1px solid var(--border)',
+                                color: 'var(--text)',
+                                fontWeight: 500,
+                              }}
                             >
                               {tool}
                             </span>
@@ -501,14 +561,23 @@ function PortfolioContent() {
                         </div>
 
                         {/* Deliverables Checklist */}
-                        <div className="mb-6">
-                          <div className="text-xs mono font-bold mb-2.5" style={{ color: 'var(--muted)', letterSpacing: '0.05em' }}>
-                            CORE DELIVERABLES &amp; MODELS INCLUDED:
+                        <div className="mb-4">
+                          <div
+                            className="mono text-[10px] uppercase font-bold text-[var(--muted)] tracking-wider mb-2.5"
+                          >
+                            CORE DELIVERABLES &amp; MODELS INCLUDED
                           </div>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
                             {project.deliverables.map((deliv, i) => (
-                              <div key={i} className="flex items-start gap-2 text-xs" style={{ color: 'var(--text)' }}>
-                                <CheckCircle2 size={14} style={{ color: project.color, flexShrink: 0, marginTop: '2px' }} />
+                              <div
+                                key={i}
+                                className="flex items-start gap-2 text-[12px] leading-snug"
+                                style={{ color: 'var(--text)' }}
+                              >
+                                <CheckCircle2
+                                  size={13}
+                                  style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }}
+                                />
                                 <span>{deliv}</span>
                               </div>
                             ))}
@@ -517,21 +586,44 @@ function PortfolioContent() {
 
                         {/* Key Finding highlight */}
                         <div
-                          className="p-3 rounded mb-6 text-xs leading-relaxed"
                           style={{
-                            background: 'rgba(255,255,255,0.02)',
-                            border: '1px dashed var(--border)',
-                            color: 'var(--muted)',
+                            background: 'var(--surface2)',
+                            border: '1px solid var(--border)',
+                            padding: '0.75rem 1rem',
+                            marginBottom: '1.25rem',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '0.75rem',
                           }}
                         >
-                          <strong style={{ color: 'var(--text)' }}>Verified Analytical Finding: </strong>
-                          {project.caseStudy.keyFindings[0]}
+                          <div
+                            style={{
+                              padding: '4px',
+                              background: 'rgba(201,243,29,0.1)',
+                              border: '1px solid rgba(201,243,29,0.25)',
+                              color: 'var(--accent)',
+                              flexShrink: 0,
+                              marginTop: '1px',
+                            }}
+                          >
+                            <TrendingUp size={14} />
+                          </div>
+                          <div style={{ fontSize: '0.82rem', lineHeight: 1.55 }}>
+                            <span
+                              className="mono text-[9px] uppercase font-bold text-[var(--accent)] tracking-wider block mb-0.5"
+                            >
+                              VERIFIED ANALYTICAL FINDING
+                            </span>
+                            <span style={{ color: 'var(--text)' }}>
+                              {project.caseStudy.keyFindings[0]}
+                            </span>
+                          </div>
                         </div>
                       </div>
 
                       {/* Action Bar */}
                       <div
-                        className="flex flex-wrap items-center justify-between gap-3 pt-5"
+                        className="flex flex-wrap items-center justify-between gap-3 pt-4"
                         style={{ borderTop: '1px solid var(--border)' }}
                       >
                         <div className="flex flex-wrap items-center gap-3">
@@ -540,16 +632,26 @@ function PortfolioContent() {
                               href={project.liveUrl}
                               target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
                               rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-                              className="btn-primary inline-flex items-center gap-2"
                               style={{
-                                padding: '0.65rem 1.25rem',
-                                fontSize: '0.86rem',
+                                background: 'var(--accent)',
+                                color: 'var(--btn-primary-text)',
+                                border: '1px solid var(--accent)',
+                                padding: '0.55rem 1.15rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 700,
                                 textDecoration: 'none',
-                                borderRadius: '4px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.06em',
+                                borderRadius: 0,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
                               }}
+                              className="hover:opacity-90"
                             >
-                              <ExternalLink size={14} />
+                              <ExternalLink size={13} />
                               <span>{project.liveUrlLabel}</span>
                             </a>
                           )}
@@ -557,36 +659,44 @@ function PortfolioContent() {
                           <button
                             type="button"
                             onClick={() => setSelectedFeatured(project)}
-                            className="btn-outline inline-flex items-center gap-2"
                             style={{
-                              padding: '0.65rem 1.25rem',
-                              fontSize: '0.86rem',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              background: 'var(--surface)',
+                              background: 'transparent',
                               color: 'var(--text)',
+                              border: '1px solid var(--border)',
+                              padding: '0.55rem 1.15rem',
+                              fontSize: '0.8rem',
+                              fontWeight: 600,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.06em',
+                              borderRadius: 0,
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
                             }}
+                            className="hover:border-[var(--accent)] hover:text-[var(--accent)]"
                           >
-                            <FileText size={14} />
-                            <span>Read Full Case Study</span>
+                            <FileText size={13} />
+                            <span>Read Case Study</span>
                           </button>
                         </div>
 
                         <button
                           type="button"
                           onClick={() => handleSelectServiceForEnquiry(project.title)}
-                          className="mono text-xs flex items-center gap-1"
+                          className="mono text-xs flex items-center gap-1.5 group"
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: project.color,
+                            color: 'var(--muted)',
                             cursor: 'pointer',
                             padding: '4px 0',
-                            textDecoration: 'underline',
+                            transition: 'color 0.2s ease',
                           }}
                         >
-                          <span>Request Similar Architecture</span>
-                          <ArrowRight size={12} />
+                          <span className="group-hover:text-[var(--accent)] transition-colors">Request Architecture</span>
+                          <ArrowRight size={12} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
                         </button>
                       </div>
                     </div>
