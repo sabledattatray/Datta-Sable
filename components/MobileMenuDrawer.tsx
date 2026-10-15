@@ -113,9 +113,17 @@ export default function MobileMenuDrawer({
                                 key={sub.title}
                                 href={sub.href}
                                 target={isExternal ? '_blank' : undefined}
-                                rel={isExternal ? 'noopener noreferrer' : undefined}
-                                onClick={onClose}
-                                style={{ padding: '0.75rem' }}
+                                onClick={() => {
+                                  onClose();
+                                  if (sub.href.includes('#')) {
+                                    const [path, hash] = sub.href.split('#');
+                                    if (typeof window !== 'undefined' && (window.location.pathname === path || !path)) {
+                                      setTimeout(() => {
+                                        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+                                      }, 50);
+                                    }
+                                  }
+                                }}
                                 className="flex items-center gap-4 rounded-lg hover:bg-white/5 no-underline group"
                               >
                                 <div style={{ width: '2.25rem', height: '2.25rem' }} className="flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover:border-[var(--accent)] transition-all">

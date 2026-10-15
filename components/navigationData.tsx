@@ -23,11 +23,11 @@ export const megaMenuData: Record<string, any> = {
     featured: {
       title: 'Full-Stack Web Development',
       desc: 'Next.js, React, Node.js, and PostgreSQL — end-to-end web applications built for scale and performance.',
-      href: '/services#web-dev',
+      href: '/services#web-solutions',
       tag: 'Most Popular',
     },
     items: [
-      { title: 'Next.js Development',   desc: 'Fast, SEO-ready React apps.',        icon: <Code2 size={18} />,     href: '/services#web-dev',          color: '#c9f31d' },
+      { title: 'Next.js Development',   desc: 'Fast, SEO-ready React apps.',        icon: <Code2 size={18} />,     href: '/services#web-solutions',    color: '#c9f31d' },
       { title: 'UI/UX Design',          desc: 'Figma-to-code premium interfaces.',  icon: <Palette size={18} />,   href: '/services#web-design',       color: '#a78bfa' },
       { title: 'WordPress & CMS',       desc: 'Custom themes & headless setups.',   icon: <Globe size={18} />,     href: '/services#web-solutions',    color: '#60a5fa' },
       { title: 'Power BI Dashboards',   desc: 'Enterprise BI architecture.',        icon: <BarChart3 size={18} />, href: '/services#dashboards',       color: '#fb923c' },
@@ -35,7 +35,7 @@ export const megaMenuData: Record<string, any> = {
       { title: 'Excel & MIS Automation', desc: 'VBA macros & financial models.', icon: <Workflow size={18} />, href: '/services#automation', color: '#107c41' },
       { title: 'Python Automation',     desc: 'ETL pipelines & data processing.',   icon: <Cpu size={18} />,       href: '/services#automation',       color: '#c9f31d' },
       { title: 'E-commerce Dev',        desc: 'WooCommerce & Shopify builds.',      icon: <ShoppingCart size={18} />, href: '/services#web-solutions',  color: '#00C9F2' },
-      { title: 'API & Backend Dev',     desc: 'REST APIs & Node.js services.',      icon: <Server size={18} />,    href: '/services#web-dev',          color: '#a78bfa' },
+      { title: 'API & Backend Dev',     desc: 'REST APIs & Node.js services.',      icon: <Server size={18} />,    href: '/services#web-solutions',    color: '#a78bfa' },
       { title: 'Digital Marketing',     desc: 'GTM, ads tracking & analytics.',     icon: <Megaphone size={18} />, href: '/services#seo-optimization', color: '#fb923c' },
       { title: 'Data Visualisation',    desc: 'Tableau, charts & infographics.',    icon: <Activity size={18} />,  href: '/services#dashboards',       color: '#60a5fa' },
       { title: 'Graphic Design',        desc: 'CorelDRAW vector brand assets.',     icon: <PenTool size={18} />,   href: '/services#graphic-design',   color: '#34d399' },

@@ -238,6 +238,15 @@ input:-webkit-autofill:active {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+[id] {
+  scroll-margin-top: 100px;
+}
+
 button, input, select, textarea {
   font-family: inherit;
 }

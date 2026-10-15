@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -112,6 +112,27 @@ const trustBadges = [
 export default function ServicesContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Smoothly scroll to target card if hash is provided in URL or changed
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window !== 'undefined' && window.location.hash) {
+        const hash = window.location.hash.slice(1);
+        const target = document.getElementById(hash);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    if (window.location.hash) {
+      const timer = setTimeout(handleHash, 200);
+      return () => clearTimeout(timer);
+    }
+
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
@@ -147,6 +168,14 @@ export default function ServicesContent() {
                 viewport={{ once: true }}
                 style={{ position: 'relative' }}
               >
+                {/* Anchor aliases for legacy or cross-referenced links */}
+                {s.id === 'web-solutions' && (
+                  <span id="web-dev" style={{ position: 'absolute', top: 0, scrollMarginTop: '110px' }} aria-hidden="true" />
+                )}
+                {s.id === 'automation' && (
+                  <span id="n8n-automation" style={{ position: 'absolute', top: 0, scrollMarginTop: '110px' }} aria-hidden="true" />
+                )}
+
                 {s.popular && (
                   <div
                     style={{
@@ -170,6 +199,7 @@ export default function ServicesContent() {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
+                    scrollMarginTop: '110px',
                   }}
                 >
                   <div

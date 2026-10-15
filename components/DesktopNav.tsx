@@ -99,10 +99,20 @@ export default function DesktopNav() {
                             target={isExternal ? '_blank' : undefined}
                             rel={isExternal ? 'noopener noreferrer' : undefined}
                             className="group/item block no-underline p-12 hover:bg-white/[0.02] transition-colors h-full min-h-[120px] flex flex-col justify-center"
-                            onClick={() => setHovered(null)}
+                            onClick={() => {
+                              setHovered(null);
+                              if (item.href.includes('#')) {
+                                const [path, hash] = item.href.split('#');
+                                if (typeof window !== 'undefined' && (pathname === path || !path)) {
+                                  setTimeout(() => {
+                                    document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+                                  }, 50);
+                                }
+                              }
+                            }}
                           >
-                          <div className="flex items-center gap-1.5">
-                            <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover/item:border-[var(--accent)] transition-all duration-500">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10 text-[var(--accent)] group-hover/item:border-[var(--accent)] transition-all duration-500">
                               {item.icon}
                             </div>
                             <div className="flex-1">
