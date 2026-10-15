@@ -83,7 +83,7 @@ export const megaMenuData: Record<string, any> = {
       tag: 'Featured',
     },
     items: [
-      { title: 'Aura FinTech BI',   desc: 'Excel model & download ($15.9M).',    icon: <TrendingUp size={18} />, href: '/dashboards/aura-capital-sales',       color: '#00F0FF' },
+      { title: 'Aura FinTech BI',   desc: 'Excel model & download ($15.9M).',    icon: <TrendingUp size={18} />, href: '/dashboards/aura-capital-sales',       color: '#c9f31d' },
       { title: 'Global Sales',      desc: 'Real-time revenue monitoring.',       icon: <Globe size={18} />,     href: '/dashboards/global-sales-intelligence', color: '#a78bfa' },
       { title: 'EMI Intelligence',  desc: 'Collection & loan performance.',      icon: <Activity size={18} />,  href: '/dashboards/collection-intelligence',   color: '#c9f31d' },
       { title: 'Revenue Intel',     desc: 'MoM forecasting & SQL reporting.',    icon: <TrendingUp size={18} />, href: '/dashboards/revenue-intelligence',      color: '#60a5fa' },

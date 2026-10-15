@@ -6,6 +6,7 @@ import { TEMPLATES } from '@/data/templates';
 import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
 import { LANDING_PAGES } from '@/data/landing-pages';
 import { GLOSSARY_TERMS } from '@/data/glossary';
+import { EXCEL_PROJECTS } from '@/data/excelProjects';
 
 function isPlaceholderPost(post: { content?: string }) {
   if (!post) return true;
@@ -136,8 +137,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
+  // 9. Excel BI Project Showcases
+  const excelProjectUrls = EXCEL_PROJECTS.map((p) => ({
+    url: `${baseUrl}/dashboards/${p.slug}`,
+    lastModified: baselineDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }));
+
   const allUrls = [
     ...staticUrls,
+    ...excelProjectUrls,
     ...dbBlogUrls,
     ...staticBlogUrls,
     // ...categoryUrls, // REMOVED: category pages are noindex for AdSense
