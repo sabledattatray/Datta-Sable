@@ -208,7 +208,9 @@ export default function ServicesContent() {
                   >
                     {s.icon}
                   </div>
-                  <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem' }}>{s.title}</h3>
+                  <Link href={`/services/${s.id}`} style={{ textDecoration: 'none', color: 'inherit' }} className="group">
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem' }} className="group-hover:text-[var(--accent)] transition-colors">{s.title}</h3>
+                  </Link>
                   <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>{s.desc}</p>
 
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.5rem', flex: 1 }}>
@@ -220,21 +222,34 @@ export default function ServicesContent() {
                   </ul>
 
                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.25rem', marginTop: 'auto' }}>
-                    <div className="mono" style={{ color: s.color, fontWeight: 700, fontSize: '1rem', marginBottom: '1rem' }}>{s.price}</div>
-                    <Link
-                      href="/contact"
-                      className="flex items-center justify-center gap-2 w-full py-5 font-semibold text-sm transition-all duration-200"
-                      style={{
-                        background: s.popular ? `linear-gradient(135deg, ${s.color}, var(--accent2))` : 'transparent',
-                        color: s.popular ? '#000' : s.color,
-                        border: s.popular ? 'none' : `1px solid ${s.color}`,
-                        textDecoration: 'none',
-                        display: 'flex',
-                        borderRadius: '4px',
-                      }}
-                    >
-                      {s.cta} <ArrowRight size={14} color={s.popular ? '#000' : s.color} />
-                    </Link>
+                    <div className="mono" style={{ color: s.color, fontWeight: 700, fontSize: '1rem', marginBottom: '0.75rem' }}>{s.price}</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                      <Link
+                        href={`/services/${s.id}`}
+                        className="btn-outline flex items-center justify-center gap-1.5 py-3 font-semibold text-xs transition-all duration-200"
+                        style={{
+                          textDecoration: 'none',
+                          borderRadius: '4px',
+                          border: '1px solid var(--border)',
+                          color: 'var(--text)',
+                        }}
+                      >
+                        Details <ArrowRight size={12} />
+                      </Link>
+                      <Link
+                        href={`/contact?service=${encodeURIComponent(s.title)}`}
+                        className="flex items-center justify-center gap-1.5 py-3 font-semibold text-xs transition-all duration-200"
+                        style={{
+                          background: s.popular ? `linear-gradient(135deg, ${s.color}, var(--accent2))` : 'transparent',
+                          color: s.popular ? '#000' : s.color,
+                          border: s.popular ? 'none' : `1px solid ${s.color}`,
+                          textDecoration: 'none',
+                          borderRadius: '4px',
+                        }}
+                      >
+                        {s.cta}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </motion.div>

@@ -28,14 +28,13 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Services',
     links: [
-      { label: 'BI Consulting',      href: '/services#consulting', icon: BrainCircuit },
-      { label: 'Dashboard Design',   href: '/services#dashboards', icon: PieChart },
-      { label: 'Web Solutions',      href: '/services#web-solutions', icon: Globe },
-      { label: 'Graphic Design',     href: '/services#graphic-design', icon: PenTool },
-      { label: 'SEO Optimization',   href: '/services#seo-optimization', icon: Sparkles },
-      { label: 'Automation Solutions', href: '/services#automation', icon: Zap },
+      { label: 'BI Consulting',      href: '/services/consulting', icon: BrainCircuit },
+      { label: 'Dashboard Design',   href: '/services/dashboards', icon: PieChart },
+      { label: 'Web Solutions',      href: '/services/web-solutions', icon: Globe },
+      { label: 'Graphic Design',     href: '/services/graphic-design', icon: PenTool },
+      { label: 'SEO Optimization',   href: '/services/seo-optimization', icon: Sparkles },
+      { label: 'Automation Solutions', href: '/services/automation', icon: Zap },
     ],
-
   },
   {
     heading: 'Workspace',
