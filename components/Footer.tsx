@@ -110,7 +110,10 @@ export default function Footer() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
           <div 
-            className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--border)] transition-all duration-500 relative overflow-hidden footer-card-pad"
+            className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--footer-card-border)] relative overflow-hidden footer-card-pad"
+            style={{
+              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+            }}
           >
             <div>
               <Link
@@ -125,7 +128,7 @@ export default function Footer() {
                   marginBottom: '1.75rem',
                 }}
               >
-                <div className="p-2 bg-white/5 border border-white/10 rounded-sm group-hover:border-[var(--accent)] transition-all duration-500">
+                <div className="p-2 bg-white/5 border border-white/10 rounded-sm group-hover:border-[var(--accent)] transition-all duration-300">
                   <LogoIcon className="w-6 h-6 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
                 </div>
                 <span
@@ -158,7 +161,7 @@ export default function Footer() {
                 <em>Brand Notice:</em> Datta Sable is an independent BI consultant. This platform is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed &quot;Datta Able&quot; admin dashboard template.
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1.5rem', paddingTop: '1.5rem' }} className="border-t border-[var(--border)] border-opacity-60">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1.5rem', paddingTop: '1.5rem' }} className="border-t border-[var(--footer-card-border)]">
                 <a
                   href="mailto:info@dattasable.com"
                   className="group/contact flex items-center gap-3 text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline"
@@ -289,7 +292,10 @@ export default function Footer() {
 
           {/* Navigation Columns Glass Container */}
           <div 
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--border)] transition-all duration-500 footer-card-pad"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--footer-card-border)] footer-card-pad"
+            style={{
+              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+            }}
           >
             {NAV_LINKS.map((col) => (
               <div key={col.heading} className="flex flex-col">
@@ -346,7 +352,7 @@ export default function Footer() {
         className="footer-bottom-pad"
         style={{
           background: 'var(--footer-bottom-bg)',
-          borderTop: '1px solid var(--border)',
+          borderTop: '1px solid var(--footer-card-border)',
         }}
       >
         <div 

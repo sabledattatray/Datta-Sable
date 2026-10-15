@@ -132,9 +132,10 @@ input:-webkit-autofill:active {
   --hero-gradient-solid: 25%;     /* Solid core */
   --hero-gradient-end: 90%;       /* Extended gradient */
   --hero-mobile-opacity: 0.35;    /* Opacity adjustment */
-  --footer-bg: #030305;
-  --footer-card-bg: #08080c;
-  --footer-bottom-bg: #020203;
+  --footer-bg: #050508;
+  --footer-card-bg: #0b0b10;
+  --footer-card-border: rgba(255, 255, 255, 0.08);
+  --footer-bottom-bg: #050508;
   --footer-shapes-display: none;                    /* Remove shapes in dark mode */
   --playstore-bg: #050508;
   --playstore-border: var(--border);
@@ -182,6 +183,7 @@ input:-webkit-autofill:active {
   --hero-mobile-opacity: 0.35;    /* Stronger visibility for light mode */
   --footer-bg: #f8f9fa;
   --footer-card-bg: #ffffff;
+  --footer-card-border: rgba(0, 0, 0, 0.08);
   --footer-bottom-bg: #f1f3f5;
   --footer-shapes-display: block;                   /* Show shapes in light mode */
   --playstore-bg: #ffffff;
