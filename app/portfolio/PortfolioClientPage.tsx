@@ -374,272 +374,371 @@ function PortfolioContent() {
             </div>
 
             {/* The 3 Deep Case Studies Grid */}
-            <div className="flex flex-col gap-14">
-              {featuredProjects.map((project, index) => (
-                <article
-                  key={project.id}
-                  className="card"
-                  style={{
-                    padding: 0,
-                    overflow: 'hidden',
-                    border: '1px solid var(--border)',
-                    borderRadius: '8px',
-                    background: 'var(--surface)',
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-12">
-                    {/* Visual & Evidence Column (5 cols) */}
+            <div className="flex flex-col gap-12">
+              {featuredProjects.map((project, index) => {
+                const projectKpis = {
+                  'telecom-delinquency-intelligence': [
+                    { value: '250,000', label: 'ACCOUNTS AUDITED' },
+                    { value: '64%', label: 'CURE DROP AT 60D' },
+                    { value: '6 Cycles', label: 'BILLING TIMELINE' },
+                    { value: '< 80ms', label: 'DAX ENGINE SPEED' },
+                  ],
+                  'sales-pipeline-velocity': [
+                    { value: '1,850', label: 'B2B OPPORTUNITIES' },
+                    { value: '68%', label: 'VELOCITY DROP >45D' },
+                    { value: '4 Qtrs', label: 'PIPELINE HORIZON' },
+                    { value: '118%', label: 'TERRITORY PACING' },
+                  ],
+                  'financial-close-pnl-automation': [
+                    { value: '180,000', label: 'JOURNAL LEDGER ROWS' },
+                    { value: '0.00%', label: 'RECON VARIANCE' },
+                    { value: '36 Mos', label: 'CHART OF ACCOUNTS' },
+                    { value: '12 Centers', label: 'COST ALLOCATION' },
+                  ],
+                }[project.id] || [
+                  { value: '100%', label: 'AUDIT COMPLIANT' },
+                  { value: 'Live', label: 'INTERACTIVE BI' },
+                  { value: 'Star', label: 'SCHEMA ARCHITECTURE' },
+                  { value: 'Verified', label: 'DATA PROVENANCE' },
+                ];
+
+                return (
+                  <article
+                    key={project.id}
+                    className="card group"
+                    style={{
+                      padding: 0,
+                      overflow: 'hidden',
+                      border: '1px solid var(--border)',
+                      borderRadius: '8px',
+                      background: 'var(--surface)',
+                      boxShadow: '0 10px 40px rgba(0,0,0,0.12)',
+                      transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                    }}
+                  >
+                    {/* Full-width Top Architectural Banner */}
                     <div
-                      className="lg:col-span-5 relative flex flex-col justify-between"
                       style={{
                         background: 'var(--surface2)',
-                        borderRight: '1px solid var(--border)',
+                        borderBottom: '1px solid var(--border)',
+                        padding: '0.75rem 1.25rem',
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '0.75rem',
                       }}
                     >
-                      {/* Browser / Mockup Window Header */}
-                      <div
-                        style={{
-                          background: 'var(--surface)',
-                          borderBottom: '1px solid var(--border)',
-                          padding: '0.6rem 1rem',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: '0.5rem',
-                        }}
-                      >
-                        <div className="flex items-center gap-1.5">
-                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444', opacity: 0.8 }} />
-                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', opacity: 0.8 }} />
-                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', opacity: 0.8 }} />
-                          <span className="mono text-[9px] text-[var(--muted)] ml-2 uppercase tracking-wider font-semibold">
-                            {project.statusLabel}
-                          </span>
-                        </div>
-                        <div className="mono text-[9px] text-[var(--muted)] flex items-center gap-1">
-                          <ShieldCheck size={11} className="text-[var(--accent)]" />
-                          <span>AUDITED</span>
-                        </div>
-                      </div>
-
-                      {/* Image Preview with Hover Zoom */}
-                      <div className="relative w-full group overflow-hidden" style={{ minHeight: '280px', flex: 1 }}>
-                        <Image
-                          src={project.image}
-                          alt={`${project.title} dashboard screenshot`}
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 42vw"
-                          style={{ objectFit: 'cover' }}
-                          className="transition-transform duration-500 group-hover:scale-105"
-                          priority={index === 0}
-                        />
-                        <div
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="mono text-[10px] font-bold px-2 py-0.5 tracking-wider"
                           style={{
-                            position: 'absolute',
-                            inset: 0,
-                            background: 'linear-gradient(to top, var(--surface2) 0%, transparent 40%)',
-                            pointerEvents: 'none',
+                            background: 'var(--accent)',
+                            color: 'var(--btn-primary-text)',
+                          }}
+                        >
+                          FLAGSHIP #{index + 1}
+                        </span>
+                        <span className="mono text-[11px] font-bold uppercase tracking-wider" style={{ color: 'var(--text)' }}>
+                          {project.category}
+                        </span>
+                        <span style={{ color: 'var(--border)' }} className="hidden sm:inline">•</span>
+                        <span className="mono text-[10px] hidden sm:inline" style={{ color: 'var(--muted)' }}>
+                          {project.statusLabel}
+                        </span>
+                      </div>
+                      <div className="mono text-[10px] flex items-center gap-2" style={{ color: 'var(--muted)' }}>
+                        <span
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            background: 'var(--accent)',
+                            display: 'inline-block',
                           }}
                         />
-                      </div>
-
-                      {/* Screenshot Caption / Provenance Note */}
-                      <div style={{ padding: '0.85rem 1.15rem', borderTop: '1px solid var(--border)', background: 'var(--surface)' }}>
-                        <div className="flex items-center gap-1.5 text-[10px] mono font-bold" style={{ color: 'var(--accent)' }}>
-                          <Info size={12} />
-                          <span>DATA PROVENANCE &amp; CERTIFICATION</span>
-                        </div>
-                        <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.25rem', lineHeight: 1.5 }}>
-                          {project.provenanceLabel}
-                        </p>
+                        <span>100% AUDITED RECONCILIATION</span>
                       </div>
                     </div>
 
-                    {/* Content & Architectural Details Column (7 cols) */}
-                    <div className="lg:col-span-7 flex flex-col justify-between p-6 md:p-8">
-                      <div>
-                        {/* Meta header */}
-                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                          <div className="inline-flex items-center gap-2">
-                            <span
-                              className="mono text-[10px] font-bold tracking-widest px-2.5 py-1"
-                              style={{
-                                color: 'var(--accent)',
-                                background: 'rgba(201,243,29,0.08)',
-                                border: '1px solid rgba(201,243,29,0.2)',
-                              }}
-                            >
-                              PROJECT #{index + 1} // {project.category.toUpperCase()}
-                            </span>
-                          </div>
-                          <span className="mono text-[10px] text-[var(--muted)] flex items-center gap-1.5">
-                            <span
-                              style={{
-                                width: '6px',
-                                height: '6px',
-                                borderRadius: '50%',
-                                background: 'var(--accent)',
-                                display: 'inline-block',
-                              }}
-                            />
-                            100% AUDITED RECONCILIATION
-                          </span>
-                        </div>
-
-                        {/* Title & Subtitle */}
-                        <h3
-                          style={{
-                            fontSize: 'clamp(1.3rem, 2.2vw, 1.65rem)',
-                            fontWeight: 600,
-                            lineHeight: 1.25,
-                            color: 'var(--text)',
-                            marginTop: '0.5rem',
-                            marginBottom: '0.35rem',
-                            letterSpacing: '-0.015em',
-                          }}
-                        >
-                          {project.title}
-                        </h3>
-                        <p
-                          style={{
-                            fontSize: '0.88rem',
-                            color: 'var(--muted)',
-                            lineHeight: 1.6,
-                            marginBottom: '1rem',
-                            fontWeight: 400,
-                          }}
-                        >
-                          {project.subtitle}
-                        </p>
-
-                        {/* Plain Language Business Question */}
-                        <div
-                          style={{
-                            background: 'var(--surface2)',
-                            border: '1px solid var(--border)',
-                            borderLeft: '3px solid var(--accent)',
-                            padding: '0.85rem 1rem',
-                            marginBottom: '1rem',
-                          }}
-                        >
-                          <div
-                            className="mono"
-                            style={{
-                              fontSize: '10px',
-                              fontWeight: 700,
-                              color: 'var(--accent)',
-                              letterSpacing: '0.08em',
-                              marginBottom: '0.35rem',
-                            }}
-                          >
-                            BUSINESS QUESTION ANSWERED
-                          </div>
-                          <p style={{ fontSize: '0.86rem', color: 'var(--text)', lineHeight: 1.55 }}>
-                            {project.businessQuestion}
-                          </p>
-                        </div>
-
-                        {/* Tech Stack Chips */}
-                        <div className="flex flex-wrap items-center gap-1.5 mb-4">
-                          <span className="mono text-[9px] uppercase font-bold text-[var(--muted)] mr-1">STACK:</span>
-                          {project.tools.map(tool => (
-                            <span
-                              key={tool}
-                              className="mono text-[10px] px-2 py-0.5"
-                              style={{
-                                background: 'var(--surface2)',
-                                border: '1px solid var(--border)',
-                                color: 'var(--text)',
-                                fontWeight: 500,
-                              }}
-                            >
-                              {tool}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Deliverables Checklist */}
-                        <div className="mb-4">
-                          <div
-                            className="mono text-[10px] uppercase font-bold text-[var(--muted)] tracking-wider mb-2.5"
-                          >
-                            CORE DELIVERABLES &amp; MODELS INCLUDED
-                          </div>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-                            {project.deliverables.map((deliv, i) => (
-                              <div
-                                key={i}
-                                className="flex items-start gap-2 text-[12px] leading-snug"
-                                style={{ color: 'var(--text)' }}
-                              >
-                                <CheckCircle2
-                                  size={13}
-                                  style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }}
-                                />
-                                <span>{deliv}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Key Finding highlight */}
-                        <div
-                          style={{
-                            background: 'var(--surface2)',
-                            border: '1px solid var(--border)',
-                            padding: '0.75rem 1rem',
-                            marginBottom: '1.25rem',
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '0.75rem',
-                          }}
-                        >
-                          <div
-                            style={{
-                              padding: '4px',
-                              background: 'rgba(201,243,29,0.1)',
-                              border: '1px solid rgba(201,243,29,0.25)',
-                              color: 'var(--accent)',
-                              flexShrink: 0,
-                              marginTop: '1px',
-                            }}
-                          >
-                            <TrendingUp size={14} />
-                          </div>
-                          <div style={{ fontSize: '0.82rem', lineHeight: 1.55 }}>
-                            <span
-                              className="mono text-[9px] uppercase font-bold text-[var(--accent)] tracking-wider block mb-0.5"
-                            >
-                              VERIFIED ANALYTICAL FINDING
-                            </span>
-                            <span style={{ color: 'var(--text)' }}>
-                              {project.caseStudy.keyFindings[0]}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Action Bar */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12">
+                      {/* Visual & Evidence Column (5 cols) */}
                       <div
-                        className="flex flex-wrap items-center justify-between gap-3 pt-4"
-                        style={{ borderTop: '1px solid var(--border)' }}
+                        className="lg:col-span-5 relative flex flex-col justify-between"
+                        style={{
+                          background: 'var(--surface2)',
+                          borderRight: '1px solid var(--border)',
+                        }}
                       >
-                        <div className="flex flex-wrap items-center gap-3">
+                        {/* Browser Window Frame Header */}
+                        <div
+                          style={{
+                            background: 'var(--surface)',
+                            borderBottom: '1px solid var(--border)',
+                            padding: '0.6rem 1rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '0.5rem',
+                          }}
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444', opacity: 0.8 }} />
+                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', opacity: 0.8 }} />
+                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', opacity: 0.8 }} />
+                            <span className="mono text-[9px] text-[var(--muted)] ml-2 truncate max-w-[190px]">
+                              {project.liveUrl ? project.liveUrl.replace('https://', '') : `/dashboards/${project.id}`}
+                            </span>
+                          </div>
+                          <div className="mono text-[9px] text-[var(--accent)] font-bold flex items-center gap-1">
+                            <ShieldCheck size={11} />
+                            <span>VERIFIED</span>
+                          </div>
+                        </div>
+
+                        {/* Interactive Image Container */}
+                        <div className="relative w-full overflow-hidden flex-1 group/img" style={{ minHeight: '320px' }}>
+                          <Image
+                            src={project.image}
+                            alt={`${project.title} dashboard screenshot`}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 42vw"
+                            style={{ objectFit: 'cover' }}
+                            className="transition-transform duration-700 group-hover/img:scale-105"
+                            priority={index === 0}
+                          />
+                          <div
+                            style={{
+                              position: 'absolute',
+                              inset: 0,
+                              background: 'linear-gradient(to top, var(--surface2) 0%, transparent 45%)',
+                              pointerEvents: 'none',
+                            }}
+                          />
+
+                          {/* Hover Prompt */}
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}
                               target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
                               rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 no-underline"
+                              style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(2px)' }}
+                            >
+                              <span
+                                className="mono text-xs font-bold px-4 py-2 uppercase tracking-wider flex items-center gap-2"
+                                style={{
+                                  background: 'var(--accent)',
+                                  color: 'var(--btn-primary-text)',
+                                  border: '1px solid var(--accent)',
+                                }}
+                              >
+                                Launch Live Platform <ExternalLink size={13} />
+                              </span>
+                            </a>
+                          )}
+                        </div>
+
+                        {/* Dataset Provenance Bar */}
+                        <div
+                          style={{
+                            padding: '0.75rem 1rem',
+                            borderTop: '1px solid var(--border)',
+                            background: 'var(--surface)',
+                          }}
+                        >
+                          <div className="flex items-center gap-2 text-[11px] mono" style={{ color: 'var(--muted)' }}>
+                            <Database size={12} style={{ color: 'var(--accent)' }} className="shrink-0" />
+                            <span className="truncate">{project.provenanceLabel}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Content & Architectural Details Column (7 cols) */}
+                      <div className="lg:col-span-7 flex flex-col justify-between p-6 md:p-8">
+                        <div>
+                          {/* Title & Subtitle */}
+                          <h3
+                            style={{
+                              fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)',
+                              fontWeight: 700,
+                              lineHeight: 1.25,
+                              color: 'var(--text)',
+                              marginBottom: '0.4rem',
+                              letterSpacing: '-0.02em',
+                            }}
+                          >
+                            {project.title}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: '0.9rem',
+                              color: 'var(--muted)',
+                              lineHeight: 1.6,
+                              marginBottom: '1.25rem',
+                              fontWeight: 400,
+                            }}
+                          >
+                            {project.subtitle}
+                          </p>
+
+                          {/* Certified Impact KPI Strip */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
+                            {projectKpis.map((kpi, kIdx) => (
+                              <div
+                                key={kIdx}
+                                style={{
+                                  background: 'var(--surface2)',
+                                  border: '1px solid var(--border)',
+                                  padding: '0.65rem 0.75rem',
+                                }}
+                              >
+                                <div
+                                  className="mono font-bold"
+                                  style={{
+                                    fontSize: 'clamp(1rem, 1.4vw, 1.2rem)',
+                                    color: 'var(--accent)',
+                                    letterSpacing: '-0.01em',
+                                  }}
+                                >
+                                  {kpi.value}
+                                </div>
+                                <div
+                                  className="mono uppercase text-[9px] tracking-wider mt-0.5 leading-tight"
+                                  style={{ color: 'var(--muted)' }}
+                                >
+                                  {kpi.label}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Business Problem Solved */}
+                          <div
+                            style={{
+                              background: 'var(--surface2)',
+                              border: '1px solid var(--border)',
+                              borderLeft: '3px solid var(--accent)',
+                              padding: '0.85rem 1rem',
+                              marginBottom: '1.25rem',
+                            }}
+                          >
+                            <span
+                              className="mono uppercase text-[10px] font-bold tracking-wider block mb-1"
+                              style={{ color: 'var(--accent)' }}
+                            >
+                              BUSINESS QUESTION SOLVED
+                            </span>
+                            <p
                               style={{
-                                background: 'var(--accent)',
-                                color: 'var(--btn-primary-text)',
-                                border: '1px solid var(--accent)',
-                                padding: '0.55rem 1.15rem',
+                                fontSize: '0.86rem',
+                                color: 'var(--text)',
+                                lineHeight: 1.55,
+                                margin: 0,
+                              }}
+                            >
+                              {project.businessQuestion}
+                            </p>
+                          </div>
+
+                          {/* Core Deliverables as Modular Micro-Cards */}
+                          <div className="mb-4">
+                            <div
+                              className="mono text-[10px] uppercase font-bold tracking-wider mb-2"
+                              style={{ color: 'var(--muted)' }}
+                            >
+                              CORE DELIVERABLES &amp; ARCHITECTURAL MODELS
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {project.deliverables.map((deliv, i) => (
+                                <div
+                                  key={i}
+                                  className="flex items-start gap-2"
+                                  style={{
+                                    background: 'var(--surface2)',
+                                    border: '1px solid var(--border)',
+                                    padding: '0.55rem 0.75rem',
+                                    fontSize: '11px',
+                                    lineHeight: 1.45,
+                                  }}
+                                >
+                                  <CheckCircle2
+                                    size={13}
+                                    style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }}
+                                  />
+                                  <span style={{ color: 'var(--text)' }}>{deliv}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Tech Stack Chips */}
+                          <div className="flex flex-wrap items-center gap-1.5 mb-5">
+                            <span className="mono text-[9px] uppercase font-bold mr-1" style={{ color: 'var(--muted)' }}>
+                              STACK:
+                            </span>
+                            {project.tools.map(tool => (
+                              <span
+                                key={tool}
+                                className="mono text-[10px] px-2 py-0.5"
+                                style={{
+                                  background: 'var(--surface2)',
+                                  border: '1px solid var(--border)',
+                                  color: 'var(--text)',
+                                  fontWeight: 500,
+                                }}
+                              >
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Action Bar */}
+                        <div
+                          className="flex flex-wrap items-center justify-between gap-3 pt-4"
+                          style={{ borderTop: '1px solid var(--border)' }}
+                        >
+                          <div className="flex flex-wrap items-center gap-3">
+                            {project.liveUrl && (
+                              <a
+                                href={project.liveUrl}
+                                target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                                rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                style={{
+                                  background: 'var(--accent)',
+                                  color: 'var(--btn-primary-text)',
+                                  border: '1px solid var(--accent)',
+                                  padding: '0.65rem 1.25rem',
+                                  fontSize: '0.8rem',
+                                  fontWeight: 700,
+                                  textDecoration: 'none',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '6px',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.06em',
+                                  borderRadius: 0,
+                                  cursor: 'pointer',
+                                  transition: 'all 0.2s ease',
+                                }}
+                                className="hover:opacity-90"
+                              >
+                                <ExternalLink size={13} />
+                                <span>{project.liveUrlLabel}</span>
+                              </a>
+                            )}
+
+                            <button
+                              type="button"
+                              onClick={() => setSelectedFeatured(project)}
+                              style={{
+                                background: 'transparent',
+                                color: 'var(--text)',
+                                border: '1px solid var(--border)',
+                                padding: '0.65rem 1.25rem',
                                 fontSize: '0.8rem',
-                                fontWeight: 700,
-                                textDecoration: 'none',
+                                fontWeight: 600,
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '6px',
@@ -649,60 +748,35 @@ function PortfolioContent() {
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
                               }}
-                              className="hover:opacity-90"
+                              className="hover:border-[var(--accent)] hover:text-[var(--accent)]"
                             >
-                              <ExternalLink size={13} />
-                              <span>{project.liveUrlLabel}</span>
-                            </a>
-                          )}
+                              <FileText size={13} />
+                              <span>Full Architecture &amp; Case Study</span>
+                            </button>
+                          </div>
 
                           <button
                             type="button"
-                            onClick={() => setSelectedFeatured(project)}
+                            onClick={() => handleSelectServiceForEnquiry(project.title)}
+                            className="mono text-xs flex items-center gap-1.5 group"
                             style={{
-                              background: 'transparent',
-                              color: 'var(--text)',
-                              border: '1px solid var(--border)',
-                              padding: '0.55rem 1.15rem',
-                              fontSize: '0.8rem',
-                              fontWeight: 600,
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '6px',
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.06em',
-                              borderRadius: 0,
+                              background: 'none',
+                              border: 'none',
+                              color: 'var(--muted)',
                               cursor: 'pointer',
-                              transition: 'all 0.2s ease',
+                              padding: '4px 0',
+                              transition: 'color 0.2s ease',
                             }}
-                            className="hover:border-[var(--accent)] hover:text-[var(--accent)]"
                           >
-                            <FileText size={13} />
-                            <span>Read Case Study</span>
+                            <span className="group-hover:text-[var(--accent)] transition-colors">Request Architecture</span>
+                            <ArrowRight size={12} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
                           </button>
                         </div>
-
-                        <button
-                          type="button"
-                          onClick={() => handleSelectServiceForEnquiry(project.title)}
-                          className="mono text-xs flex items-center gap-1.5 group"
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            color: 'var(--muted)',
-                            cursor: 'pointer',
-                            padding: '4px 0',
-                            transition: 'color 0.2s ease',
-                          }}
-                        >
-                          <span className="group-hover:text-[var(--accent)] transition-colors">Request Architecture</span>
-                          <ArrowRight size={12} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
-                        </button>
                       </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
