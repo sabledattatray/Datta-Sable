@@ -80,7 +80,7 @@ export const featuredProjects: FeaturedProject[] = [
     category: 'Risk & Delinquency',
     statusLabel: 'Portfolio Demonstration',
     provenanceLabel: 'Synthetic BFSI / Telecom Dataset (250K Accounts)',
-    image: '/images/dashboards/emi_collection_intelligence.webp',
+    image: '/images/dashboards/telecom_collection_delinquency.webp',
     color: '#00d4ff',
     tools: ['Power BI', 'SQL Server (SSMS)', 'Advanced DAX', 'Power Query'],
     businessQuestion:
@@ -343,7 +343,7 @@ export const projects: ProjectData[] = [
     id: 7,
     title: 'Telecom Collection Intelligence',
     category: 'Power BI',
-    image: '/images/dashboards/emi_collection_intelligence.webp',
+    image: '/images/dashboards/telecom_collection_delinquency.webp',
     color: 'var(--accent)',
     tools: ['Power BI', 'SQL Server', 'Aging Buckets', 'Risk Analysis'],
     client: 'BFSI / Delinquency Model',

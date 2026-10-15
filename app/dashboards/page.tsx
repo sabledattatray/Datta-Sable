@@ -286,7 +286,7 @@ const dashboards: DashboardItem[] = [
     tool: 'Python',
     color: '#00d4ff',
     icon: '💳',
-    image: '/images/dashboards/emi_collection_intelligence.webp',
+    image: '/images/dashboards/telecom_collection_delinquency.webp',
     desc: 'Next-gen collection infrastructure with real-time risk assessment, aging bucket analysis, and automated channel tracking.',
     embed: '/dashboards/collection-intelligence',
     isInternal: true,
