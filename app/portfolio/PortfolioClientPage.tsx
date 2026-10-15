@@ -337,48 +337,6 @@ function PortfolioContent() {
           </div>
         </section>
 
-        {/* ── 2. TRUST & CAPABILITIES STRIP (PRD Part 3.2) ── */}
-        <section
-          style={{
-            background: 'var(--surface2)',
-            borderBottom: '1px solid var(--border)',
-            padding: '1.25rem 0',
-          }}
-          aria-label="Core Capabilities"
-        >
-          <div className="container" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px' }}>
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <span className="mono text-xs font-semibold" style={{ color: 'var(--muted)', letterSpacing: '0.1em' }}>
-                CORE ARCHITECTURAL TOOLS //
-              </span>
-              <div className="flex flex-wrap items-center gap-2">
-                {[
-                  { name: 'Advanced Excel', detail: 'Power Query & Reconciliation' },
-                  { name: 'Power BI & DAX', detail: 'MTD/LMTD Time Intelligence' },
-                  { name: 'SQL Server (SSMS)', detail: 'CTEs, Staging & Profiling' },
-                  { name: 'Star Schema', detail: 'Dimensional Data Modeling' },
-                  { name: 'Delinquency MIS', detail: 'Bucket Aging & Roll-Rates' },
-                  { name: 'Process Automation', detail: 'Zero Copy-Paste Routines' },
-                ].map((cap, idx) => (
-                  <div
-                    key={idx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded"
-                    style={{
-                      background: 'var(--surface)',
-                      border: '1px solid var(--border)',
-                      fontSize: '0.82rem',
-                    }}
-                  >
-                    <span style={{ color: 'var(--accent)', fontWeight: 700 }}>✓</span>
-                    <span style={{ fontWeight: 600, color: 'var(--text)' }}>{cap.name}</span>
-                    <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>({cap.detail})</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── 3. THE THREE FLAGSHIP DEMONSTRABLE PROJECTS (User's Strongest Recommendation) ── */}
         <section
           id="flagship-projects"
