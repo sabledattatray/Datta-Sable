@@ -5,11 +5,12 @@ import { prisma } from '@/lib/prisma';
 import fs from 'fs';
 import path from 'path';
 
-async function checkAuth(req: NextRequest): Promise<boolean> {
+async function checkAuth(_req: NextRequest): Promise<boolean> {
   const session = await getServerSession(authOptions);
-  const isAdmin = (session?.user as any)?.role === 'ADMIN' || process.env.NODE_ENV === 'development';
-  return isAdmin;
+  const isAdmin = (session?.user as any)?.role === 'ADMIN';
+  return !!isAdmin;
 }
+
 
 export async function GET(req: NextRequest) {
   try {

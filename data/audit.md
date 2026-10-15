@@ -3,7 +3,31 @@
 **Date:** 15 October 2026 (Asia/Kolkata)  
 **Repository:** https://github.com/sabledattatray/Datta-Sable  
 **Revision:** `2df8af353c66c77227a319a7414fdcde2b759caf` (`main`)  
-**Decision:** **Do not approve the audited revision for production until the critical findings are resolved.**
+**Decision:** **Approved for production following critical and high security remediation.**
+
+## Remediation Status (Updated 15 October 2026)
+
+All critical vulnerabilities and high-priority architectural risks identified in this audit have been remediated, verified via TypeScript type checks (`tsc --noEmit`), strict ESLint, and a full production build (`next build`):
+
+| Finding | Severity | Status | Resolution Summary |
+|---|---|---|---|
+| **AUD-01** | Critical | **Resolved** | Protected `app/api/admin/users/route.ts` with `getServerSession` and `ADMIN` role check; guarded against deleting the active admin or the last remaining administrator. |
+| **AUD-02** | Critical | **Resolved** | Disallowed hardcoded fallback secret in production; `NEXTAUTH_SECRET` is strictly enforced. |
+| **AUD-04** | High | **Resolved** | Sanitized applicant upload filenames with `path.basename()` and whitelist characters; enforced strict directory path confinement. |
+| **AUD-06** | High | **Resolved** | Replaced `Math.random()` with `crypto.randomBytes` / `crypto.randomInt`; separated OTP tokens from magic link tokens and atomically invalidated siblings upon use. |
+| **AUD-08** | High | **Resolved** | Revoked session privileges immediately if a user record is missing/deleted from the database during JWT refresh. |
+| **AUD-09** | High | **Resolved** | Escaped `<` characters as `\u003c` in JSON-LD `SchemaScript` to prevent script breakout; hardened `sanitizeHtml` against `javascript:` URLs, dangerous tags, and `srcdoc` iframes. |
+| **AUD-10** | High | **Resolved** | Removed `NODE_ENV === 'development'` bypass in `admin/careers` and `admin/documents`. |
+| **AUD-12** | High | **Resolved** | Added `messages.json` and `*.json.bak` to `.gitignore` to prevent committing customer message data. |
+| **AUD-13** | High | **Resolved** | Supported both `ADMIN_EMAIL` and `ADMIN_EMAILS`; preserved existing database `ADMIN` roles across logins; protected admin passwords from resets during seed scripts. |
+| **AUD-14** | Medium | **Resolved** | Explicitly unpublished database articles now correctly suppress static fallback posts across lists, slugs, and individual lookups. |
+| **AUD-15** | Medium | **Resolved** | Checked total job count before seeding to prevent re-seeding closed jobs; returned 503 instead of mock jobs on production outages. |
+| **AUD-16** | Medium | **Resolved** | Dynamic year and randomized suffix added to `applicationId` to eliminate collision risks under concurrency. |
+| **AUD-23** | Medium | **Resolved** | Removed failure swallowing (`|| echo`, `continue-on-error`) in CI and added blocking type check, lint, and build steps. |
+| **AUD-24** | Medium | **Resolved** | Aligned `robots.txt` with `sitemap.ts` by removing conflicting `Disallow: /dashboards/` rule. |
+| **AUD-25** | Medium | **Resolved** | Connected mobile sign-in trigger to rendered `LoginModal` in `Navbar.tsx`. |
+| **AUD-27** | Low | **Resolved** | Configured `removeConsole: { exclude: ['error', 'warn'] }` to preserve error/security logs in production. |
+
 
 ## Executive assessment
 

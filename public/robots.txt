@@ -23,7 +23,6 @@ Allow: /rss.xml
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
-Disallow: /dashboards/
 Disallow: /preview/
 Disallow: /tools/workspace
 Disallow: /live-dashboard/
@@ -65,7 +64,6 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
-Disallow: /dashboards/
 Disallow: /preview/
 Disallow: /tools/workspace
 Disallow: /live-dashboard/

@@ -25,23 +25,32 @@ function isPlaceholderPost(post: any) {
 }
 
 export async function getPublishedBlogPosts() {
-  let dbPosts: any[] = [];
+  const dbPosts: any[] = [];
+  const unpublishedSlugs = new Set<string>();
+
 
   try {
     const rawDbPosts = await prisma.post.findMany({
-      where: { published: true },
       orderBy: { createdAt: 'desc' },
     });
-    dbPosts = rawDbPosts.map(serializeDbPost);
+    
+    rawDbPosts.forEach((p) => {
+      if (p.published) {
+        dbPosts.push(serializeDbPost(p));
+      } else {
+        unpublishedSlugs.add(p.slug);
+      }
+    });
   } catch (error) {
     console.warn('Database unavailable for blog posts; using static posts only.', error);
   }
 
   const postsBySlug = new Map<string, BlogPost>();
-  // Static posts in data.ts are always included — they are manually curated
-  // and must never be filtered by the placeholder guard (which targets DB drafts only).
+  // Static posts in data.ts are included unless explicitly unpublished in the DB (AUD-14)
   staticPosts.forEach((post) => {
-    postsBySlug.set(post.slug, post);
+    if (!unpublishedSlugs.has(post.slug)) {
+      postsBySlug.set(post.slug, post);
+    }
   });
   dbPosts.forEach((post) => {
     if (!isPlaceholderPost(post)) {
@@ -58,38 +67,52 @@ export async function getPublishedBlogPost(slug: string) {
       where: { slug },
     });
 
-    if (dbPost?.published && !isPlaceholderPost(dbPost)) {
-      return serializeDbPost(dbPost);
+    if (dbPost) {
+      // If DB record exists, respect its publication status (AUD-14)
+      if (dbPost.published && !isPlaceholderPost(dbPost)) {
+        return serializeDbPost(dbPost);
+      }
+      // If explicitly marked as unpublished in the database, suppress static fallback
+      return null;
     }
   } catch (error) {
     console.warn(`Database unavailable for blog post "${slug}"; checking static posts.`, error);
   }
 
-  // Static posts are always returned — placeholder guard is DB-only.
+  // Static posts fallback if no DB record overrides it
   const staticPost = staticPosts.find((post) => post.slug === slug);
   return staticPost ?? null;
 }
 
 export async function getPublishedBlogSlugs() {
-  let dbSlugs: string[] = [];
+  const dbSlugs: string[] = [];
+  const unpublishedSlugs = new Set<string>();
+
 
   try {
     const dbPosts = await prisma.post.findMany({
-      select: { slug: true, content: true },
-      where: { published: true },
+      select: { slug: true, published: true, content: true },
     });
-    dbSlugs = dbPosts
-      .filter((post) => !isPlaceholderPost(post))
-      .map((post) => post.slug);
+
+    dbPosts.forEach((post) => {
+      if (post.published && !isPlaceholderPost(post)) {
+        dbSlugs.push(post.slug);
+      } else if (!post.published) {
+        unpublishedSlugs.add(post.slug);
+      }
+    });
   } catch (error) {
     console.warn('Database unavailable for blog slugs; using static slugs only.', error);
   }
 
-  // All static slugs are valid — only DB posts need the placeholder filter.
-  const filteredStaticSlugs = staticPosts.map((post) => post.slug);
+  // Suppress static slugs that have been explicitly unpublished in DB
+  const filteredStaticSlugs = staticPosts
+    .filter((post) => !unpublishedSlugs.has(post.slug))
+    .map((post) => post.slug);
 
   return Array.from(new Set([...filteredStaticSlugs, ...dbSlugs]));
 }
+
 
 export function filterPostsByCategory(posts: BlogPost[], categoryName: string, slug: string) {
   const targetSlug = slug.toLowerCase();

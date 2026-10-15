@@ -9,6 +9,8 @@ import ThemeToggle from './ThemeToggle';
 
 const DesktopNav = dynamic(() => import('./DesktopNav'), { ssr: false });
 const MobileMenu = dynamic(() => import('./MobileMenu'), { ssr: false });
+const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
+
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -95,6 +97,13 @@ export default function Navbar() {
         signOut={() => signOut()}
         setIsLoginOpen={setIsLoginOpen}
       />
+
+      {/* Login Modal for Mobile and Quick Auth Actions */}
+      <LoginModal 
+        isOpen={isLoginOpen} 
+        onClose={() => setIsLoginOpen(false)} 
+      />
     </>
   );
 }
+

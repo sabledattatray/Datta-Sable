@@ -30,12 +30,15 @@ jobs:
       - name: Prisma Generate
         run: npx prisma generate
         
+      - name: Type Check
+        run: npx tsc --noEmit
+
       - name: Lint
-        run: npm run lint || echo "Linting failed, but continuing build..."
+        run: npm run lint
         
       - name: Build
         run: npm run build
-        continue-on-error: true
+
 
   # Placeholder for Deployment (e.g., to Vercel or Cloud Run)
   # deploy:

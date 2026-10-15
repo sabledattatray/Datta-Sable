@@ -50,9 +50,10 @@ export async function GET() {
       orderBy: { createdAt: 'desc' }
     });
 
-    // If no jobs exist in database, seed them for immediate visibility
-    if (jobs.length === 0) {
-      console.log("No jobs found. Seeding default positions...");
+    // Only seed if the job table is completely empty (do not re-seed when all jobs are closed)
+    const totalJobsCount = await prisma.job.count();
+    if (totalJobsCount === 0) {
+      console.log("No jobs found in table. Seeding default positions...");
       await prisma.job.createMany({
         data: defaultJobs
       });
@@ -65,7 +66,11 @@ export async function GET() {
     return NextResponse.json(jobs, { status: 200 });
   } catch (error: any) {
     console.error("Failed to fetch jobs:", error);
-    // Return mock data in development if db connection fails
-    return NextResponse.json(defaultJobs, { status: 200 });
+    // In development mode only, return mock data for zero-setup local previews
+    if (process.env.NODE_ENV === 'development') {
+      return NextResponse.json(defaultJobs, { status: 200 });
+    }
+    return NextResponse.json({ error: "Service temporarily unavailable" }, { status: 503 });
   }
 }
+

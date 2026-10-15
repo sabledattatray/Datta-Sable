@@ -50,4 +50,9 @@ surgical-forge-lab/public/staging/*.csv
 
 # User uploads
 /public/uploads/
-/storage/
+/storage/
+
+# Local fallback data files
+messages.json
+*.json.bak
+

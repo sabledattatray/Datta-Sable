@@ -4,8 +4,9 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [60, 75],

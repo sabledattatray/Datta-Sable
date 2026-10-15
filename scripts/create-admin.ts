@@ -14,12 +14,30 @@ async function main() {
   console.log('--- SEEDING DATABASE ---');
   
   // 1. Seed Admin
-  console.log('Updating Admin User...');
-  await prisma.user.upsert({
-    where: { email },
-    update: { password: hashedPassword, role: 'ADMIN', emailVerified: new Date() },
-    create: { email, name: 'Admin User', password: hashedPassword, role: 'ADMIN', emailVerified: new Date() },
-  });
+  console.log('Checking Admin User...');
+  const existingAdmin = await prisma.user.findUnique({ where: { email } });
+  if (existingAdmin) {
+    console.log(`Admin user ${email} already exists. Ensuring ADMIN role...`);
+    await prisma.user.update({
+      where: { email },
+      data: {
+        role: 'ADMIN',
+        ...(process.env.ADMIN_PASSWORD ? { password: hashedPassword } : {}),
+      }
+    });
+  } else {
+    console.log(`Creating Admin user ${email}...`);
+    await prisma.user.create({
+      data: {
+        email,
+        name: 'Admin User',
+        password: hashedPassword,
+        role: 'ADMIN',
+        emailVerified: new Date()
+      }
+    });
+  }
+
 
   // 2. Seed original blogs with FULL content
   console.log(`Seeding ${originalPosts.length} original blog posts...`);

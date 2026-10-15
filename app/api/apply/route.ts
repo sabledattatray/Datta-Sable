@@ -192,55 +192,71 @@ export async function POST(req: NextRequest) {
     // Secure Document Save: Store files inside root project folder 'storage/'
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
 
-    const tryWriteFile = (filePath: string, buffer: Buffer) => {
+    const sanitizeFileName = (fileName: string, fallback: string): string => {
+      const baseName = path.basename(fileName).replace(/[^a-zA-Z0-9._-]/g, '_');
+      return baseName.length > 0 ? baseName : fallback;
+    };
+
+    const tryWriteFile = (targetDir: string, safeName: string, buffer: Buffer): string | null => {
       try {
-        ensureDirectoryExistence(filePath);
-        fs.writeFileSync(filePath, buffer);
+        const resolvedBase = path.resolve(targetDir);
+        const fullPath = path.resolve(resolvedBase, safeName);
+        if (!fullPath.startsWith(resolvedBase)) {
+          console.error("Directory traversal attempted in file upload:", safeName);
+          return null;
+        }
+        ensureDirectoryExistence(fullPath);
+        fs.writeFileSync(fullPath, buffer);
+        return fullPath;
       } catch (err) {
         console.warn("Disk write failed (expected on read-only serverless environment):", err);
+        return null;
       }
     };
     
     // 1. Save Resume
     const resumeBuffer = Buffer.from(validatedData.resumeBase64.split(',')[1] || validatedData.resumeBase64, 'base64');
-    const resumeFileName = `${uniqueSuffix}-${validatedData.resumeName.replace(/\s+/g, '_')}`;
-    const resumeRelativePath = `/uploads/resumes/${resumeFileName}`;
-    const resumeFullPath = path.join(process.cwd(), 'storage', 'uploads', 'resumes', resumeFileName);
-    tryWriteFile(resumeFullPath, resumeBuffer);
+    const resumeSafeName = `${uniqueSuffix}-${sanitizeFileName(validatedData.resumeName, 'resume.pdf')}`;
+    const resumeRelativePath = `/uploads/resumes/${resumeSafeName}`;
+    const resumeTargetDir = path.join(process.cwd(), 'storage', 'uploads', 'resumes');
+    tryWriteFile(resumeTargetDir, resumeSafeName, resumeBuffer);
 
     // 2. Save Aadhaar (optional for backward compatibility)
     let aadhaarRelativePath: string | null = null;
     if (validatedData.aadhaarBase64 && validatedData.aadhaarName) {
       const aadhaarBuffer = Buffer.from(validatedData.aadhaarBase64.split(',')[1] || validatedData.aadhaarBase64, 'base64');
-      const aadhaarFileName = `${uniqueSuffix}-${validatedData.aadhaarName.replace(/\s+/g, '_')}`;
-      aadhaarRelativePath = `/uploads/aadhaar/${aadhaarFileName}`;
-      const aadhaarFullPath = path.join(process.cwd(), 'storage', 'uploads', 'aadhaar', aadhaarFileName);
-      tryWriteFile(aadhaarFullPath, aadhaarBuffer);
+      const aadhaarSafeName = `${uniqueSuffix}-${sanitizeFileName(validatedData.aadhaarName, 'aadhaar.pdf')}`;
+      aadhaarRelativePath = `/uploads/aadhaar/${aadhaarSafeName}`;
+      const aadhaarTargetDir = path.join(process.cwd(), 'storage', 'uploads', 'aadhaar');
+      tryWriteFile(aadhaarTargetDir, aadhaarSafeName, aadhaarBuffer);
     }
 
     // 3. Save Photo (optional for backward compatibility)
     let photoRelativePath: string | null = null;
     if (validatedData.photoBase64 && validatedData.photoName) {
       const photoBuffer = Buffer.from(validatedData.photoBase64.split(',')[1] || validatedData.photoBase64, 'base64');
-      const photoFileName = `${uniqueSuffix}-${validatedData.photoName.replace(/\s+/g, '_')}`;
-      photoRelativePath = `/uploads/photos/${photoFileName}`;
-      const photoFullPath = path.join(process.cwd(), 'storage', 'uploads', 'photos', photoFileName);
-      tryWriteFile(photoFullPath, photoBuffer);
+      const photoSafeName = `${uniqueSuffix}-${sanitizeFileName(validatedData.photoName, 'photo.jpg')}`;
+      photoRelativePath = `/uploads/photos/${photoSafeName}`;
+      const photoTargetDir = path.join(process.cwd(), 'storage', 'uploads', 'photos');
+      tryWriteFile(photoTargetDir, photoSafeName, photoBuffer);
     }
 
     // 4. Save Portfolio (if uploaded)
     let portfolioRelativePath: string | null = null;
     if (validatedData.portfolioBase64 && validatedData.portfolioFileName) {
       const portBuffer = Buffer.from(validatedData.portfolioBase64.split(',')[1] || validatedData.portfolioBase64, 'base64');
-      const portFileName = `${uniqueSuffix}-${validatedData.portfolioFileName.replace(/\s+/g, '_')}`;
-      portfolioRelativePath = `/uploads/portfolios/${portFileName}`;
-      const portFullPath = path.join(process.cwd(), 'storage', 'uploads', 'portfolios', portFileName);
-      tryWriteFile(portFullPath, portBuffer);
+      const portSafeName = `${uniqueSuffix}-${sanitizeFileName(validatedData.portfolioFileName, 'portfolio.pdf')}`;
+      portfolioRelativePath = `/uploads/portfolios/${portSafeName}`;
+      const portTargetDir = path.join(process.cwd(), 'storage', 'uploads', 'portfolios');
+      tryWriteFile(portTargetDir, portSafeName, portBuffer);
     }
 
-    // Generate Application ID: DS-2026-XXXX format
+    // Generate Application ID: DS-YYYY-XXXX format (dynamic year, collision-safe)
+    const currentYear = new Date().getFullYear();
     const applicantCount = await prisma.applicant.count();
-    const applicationId = `DS-2026-${String(applicantCount + 1).padStart(4, '0')}`;
+    const randomHex = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const applicationId = `DS-${currentYear}-${String(applicantCount + 1).padStart(4, '0')}-${randomHex}`;
+
 
     // Scoring calculation
     let calculatedScore = 0;

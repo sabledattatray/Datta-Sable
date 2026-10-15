@@ -111,10 +111,15 @@ export const authOptions: NextAuthOptions = {
       const now = Math.floor(Date.now() / 1000);
 
       if (user) {
-        const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim().toLowerCase()) || [];
+        const envAdminEmails = (process.env.ADMIN_EMAILS || process.env.ADMIN_EMAIL || '')
+          .split(',')
+          .map(e => e.trim().toLowerCase())
+          .filter(Boolean);
         const userEmail = user.email?.toLowerCase() || '';
-        const role = (userEmail && adminEmails.includes(userEmail)) ? 'ADMIN' : 'USER';
         const uniqueEmail = userEmail || `${account?.providerAccountId}@${account?.provider}.placeholder`;
+        const isEnvAdmin = userEmail && envAdminEmails.includes(userEmail);
+        let finalRole = isEnvAdmin ? 'ADMIN' : ((user as any).role || 'USER');
+
         
         // Persist user to DB if they don't exist (important for OAuth users)
         try {
@@ -122,23 +127,30 @@ export const authOptions: NextAuthOptions = {
             where: { email: uniqueEmail }
           });
 
+          // Preserve existing DB admin role and prevent accidental demotion (AUD-13)
+          if (existingUser?.role === 'ADMIN' || isEnvAdmin) {
+            finalRole = 'ADMIN';
+          }
+
           const dbUser = await prisma.user.upsert({
             where: { email: uniqueEmail },
             update: { 
               name: user.name, 
-              role: role,
+              role: finalRole,
+
               image: (user as any).image,
               lastLoginAt: new Date()
             },
             create: {
               email: uniqueEmail,
               name: user.name,
-              role: role,
+              role: finalRole,
               image: (user as any).image,
               lastLoginAt: new Date(),
               emailVerified: account ? new Date() : null, // Auto-verify OAuth users
             }
           });
+
 
           if (!existingUser) {
             // Trigger welcome email asynchronously
@@ -163,8 +175,9 @@ export const authOptions: NextAuthOptions = {
         } catch (error) {
           console.error("Error updating user activity:", error);
           token.id = user.id;
-          token.role = role;
+          token.role = finalRole;
           token.lastRoleCheck = now;
+
         }
       } else if (token.id) {
         // Stale privilege propagation check: Query the database at most once every 30 seconds
@@ -178,6 +191,10 @@ export const authOptions: NextAuthOptions = {
             if (dbUser) {
               token.role = dbUser.role;
               token.lastRoleCheck = now;
+            } else {
+              // User was deleted or no longer exists: revoke privileges immediately (AUD-08)
+              token.role = 'USER';
+              delete token.id;
             }
           } catch (error) {
             console.error("Error refreshing role from database:", error);
@@ -194,6 +211,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-dev-only-change-in-prod',
+  // In production, do NOT fall back to a public static secret; require NEXTAUTH_SECRET (AUD-02)
+  secret: process.env.NEXTAUTH_SECRET || (process.env.NODE_ENV === 'production' ? undefined : 'fallback-secret-for-dev-only-change-in-prod'),
   debug: process.env.NODE_ENV === 'development',
 };
+
