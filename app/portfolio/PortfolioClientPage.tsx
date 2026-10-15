@@ -44,12 +44,14 @@ import {
 } from './data';
 
 const categoryTabs = ['All', 'Power BI', 'Excel & MIS', 'SQL & Data', 'Automation', 'Analysis'];
+const toolTabs = ['All Tools', 'Power BI', 'Excel', 'SQL', 'Python'];
 
 function PortfolioContent() {
   const searchParams = useSearchParams();
 
   // Filter & Search states
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeTool, setActiveTool] = useState<string>('All Tools');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [projectList, setProjectList] = useState<ProjectData[]>(staticProjects);
 
@@ -118,6 +120,10 @@ function PortfolioContent() {
         (activeCategory === 'Excel & MIS' && (proj.category === 'Report' || proj.tools.includes('Excel'))) ||
         (activeCategory === 'SQL & Data' && (proj.category === 'Big Data BI' || proj.tools.includes('SQL')));
 
+      const matchesTool =
+        activeTool === 'All Tools' ||
+        proj.tools.some(t => t.toLowerCase().includes(activeTool.toLowerCase()));
+
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !q ||
@@ -126,9 +132,9 @@ function PortfolioContent() {
         proj.tools.some(t => t.toLowerCase().includes(q)) ||
         proj.problem.toLowerCase().includes(q);
 
-      return matchesCategory && matchesSearch;
+      return matchesCategory && matchesTool && matchesSearch;
     });
-  }, [projectList, activeCategory, searchQuery]);
+  }, [projectList, activeCategory, activeTool, searchQuery]);
 
   // Compute category counts
   const categoryCounts = useMemo(() => {
@@ -141,6 +147,16 @@ function PortfolioContent() {
         if (tab === 'SQL & Data') return p.category === 'SQL & Data' || p.category === 'Big Data BI' || p.tools.includes('SQL');
         return p.category.toLowerCase().includes(tab.toLowerCase());
       }).length;
+    });
+    return counts;
+  }, [projectList]);
+
+  // Compute tool counts
+  const toolCounts = useMemo(() => {
+    const counts: Record<string, number> = { 'All Tools': projectList.length };
+    toolTabs.forEach(t => {
+      if (t === 'All Tools') return;
+      counts[t] = projectList.filter(p => p.tools.some(tool => tool.toLowerCase().includes(t.toLowerCase()))).length;
     });
     return counts;
   }, [projectList]);
@@ -412,11 +428,11 @@ function PortfolioContent() {
                       border: '1px solid var(--border)',
                       borderRadius: '8px',
                       background: 'var(--surface)',
-                      boxShadow: '0 10px 40px rgba(0,0,0,0.12)',
+                      boxShadow: '0 12px 48px rgba(0,0,0,0.18)',
                       transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
                     }}
                   >
-                    {/* Full-width Top Architectural Banner */}
+                    {/* 1. Full-width Top Architectural Status Banner */}
                     <div
                       style={{
                         background: 'var(--surface2)',
@@ -461,10 +477,95 @@ function PortfolioContent() {
                       </div>
                     </div>
 
+                    {/* 2. Full-width Executive Header: Title, Subtitle & 4-Metric Impact Strip */}
+                    <div
+                      style={{
+                        padding: '1.25rem 1.5rem',
+                        borderBottom: '1px solid var(--border)',
+                        background: 'var(--surface)',
+                      }}
+                    >
+                      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                        <div style={{ maxWidth: '820px' }}>
+                          <h3
+                            style={{
+                              fontSize: 'clamp(1.35rem, 2.2vw, 1.8rem)',
+                              fontWeight: 700,
+                              lineHeight: 1.25,
+                              color: 'var(--text)',
+                              marginBottom: '0.35rem',
+                              letterSpacing: '-0.02em',
+                            }}
+                          >
+                            {project.title}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: '0.9rem',
+                              color: 'var(--muted)',
+                              lineHeight: 1.5,
+                              margin: 0,
+                            }}
+                          >
+                            {project.subtitle}
+                          </p>
+                        </div>
+
+                        {/* Request Architecture Quick Action */}
+                        <button
+                          type="button"
+                          onClick={() => handleSelectServiceForEnquiry(project.title)}
+                          className="mono text-xs flex items-center gap-1.5 self-start lg:self-center shrink-0 px-3 py-1.5 group"
+                          style={{
+                            background: 'var(--surface2)',
+                            border: '1px solid var(--border)',
+                            color: 'var(--muted)',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease',
+                          }}
+                        >
+                          <span className="group-hover:text-[var(--accent)] transition-colors">Request Architecture</span>
+                          <ArrowRight size={12} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      </div>
+
+                      {/* 4-KPI Metric Strip */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-4">
+                        {projectKpis.map((kpi, kIdx) => (
+                          <div
+                            key={kIdx}
+                            style={{
+                              background: 'var(--surface2)',
+                              border: '1px solid var(--border)',
+                              padding: '0.65rem 0.85rem',
+                            }}
+                          >
+                            <div
+                              className="mono font-bold"
+                              style={{
+                                fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)',
+                                color: 'var(--accent)',
+                                letterSpacing: '-0.01em',
+                              }}
+                            >
+                              {kpi.value}
+                            </div>
+                            <div
+                              className="mono uppercase text-[9px] tracking-wider mt-0.5 leading-tight"
+                              style={{ color: 'var(--muted)' }}
+                            >
+                              {kpi.label}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 3. Main Body Split: 7-Cols Visual Showcase Hub & 5-Cols Architectural Depth */}
                     <div className="grid grid-cols-1 lg:grid-cols-12">
-                      {/* Visual & Evidence Column (5 cols) */}
+                      {/* Left: Large Visual & Interactive Action Hub (7 cols) */}
                       <div
-                        className="lg:col-span-5 relative flex flex-col justify-between"
+                        className="lg:col-span-7 flex flex-col justify-between"
                         style={{
                           background: 'var(--surface2)',
                           borderRight: '1px solid var(--border)',
@@ -486,47 +587,55 @@ function PortfolioContent() {
                             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444', opacity: 0.8 }} />
                             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', opacity: 0.8 }} />
                             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', opacity: 0.8 }} />
-                            <span className="mono text-[9px] text-[var(--muted)] ml-2 truncate max-w-[190px]">
+                            <span className="mono text-[9px] text-[var(--muted)] ml-2 truncate max-w-[280px]">
                               {project.liveUrl ? project.liveUrl.replace('https://', '') : `/dashboards/${project.id}`}
                             </span>
                           </div>
                           <div className="mono text-[9px] text-[var(--accent)] font-bold flex items-center gap-1">
                             <ShieldCheck size={11} />
-                            <span>VERIFIED</span>
+                            <span>VERIFIED INTERFACE</span>
                           </div>
                         </div>
 
-                        {/* Interactive Image Container */}
-                        <div className="relative w-full overflow-hidden flex-1 group/img" style={{ minHeight: '320px' }}>
+                        {/* Large Hero Image Container (16:9 on 7 cols = ~700px x 394px) */}
+                        <div
+                          className="relative w-full overflow-hidden group/img"
+                          style={{
+                            aspectRatio: '16/9',
+                            background: '#090d16',
+                          }}
+                        >
                           <Image
                             src={project.image}
                             alt={`${project.title} dashboard screenshot`}
                             fill
-                            sizes="(max-width: 1024px) 100vw, 42vw"
-                            style={{ objectFit: 'cover' }}
-                            className="transition-transform duration-700 group-hover/img:scale-105"
+                            sizes="(max-width: 1024px) 100vw, 58vw"
+                            style={{
+                              objectFit: project.id === 'telecom-delinquency-intelligence' ? 'contain' : 'cover',
+                            }}
+                            className="transition-transform duration-700 group-hover/img:scale-[1.02]"
                             priority={index === 0}
                           />
                           <div
                             style={{
                               position: 'absolute',
                               inset: 0,
-                              background: 'linear-gradient(to top, var(--surface2) 0%, transparent 45%)',
+                              background: 'linear-gradient(to top, rgba(9,13,22,0.3) 0%, transparent 40%)',
                               pointerEvents: 'none',
                             }}
                           />
 
-                          {/* Hover Prompt */}
+                          {/* Hover Launch Overlay */}
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}
                               target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
                               rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
                               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 no-underline"
-                              style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(2px)' }}
+                              style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(3px)' }}
                             >
                               <span
-                                className="mono text-xs font-bold px-4 py-2 uppercase tracking-wider flex items-center gap-2"
+                                className="mono text-xs font-bold px-5 py-2.5 uppercase tracking-wider flex items-center gap-2"
                                 style={{
                                   background: 'var(--accent)',
                                   color: 'var(--btn-primary-text)',
@@ -539,81 +648,95 @@ function PortfolioContent() {
                           )}
                         </div>
 
-                        {/* Dataset Provenance Bar */}
+                        {/* Dataset & Provenance Sub-Bar */}
                         <div
+                          className="px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-[10px] mono"
                           style={{
-                            padding: '0.75rem 1rem',
-                            borderTop: '1px solid var(--border)',
                             background: 'var(--surface)',
+                            borderTop: '1px solid var(--border)',
+                            borderBottom: '1px solid var(--border)',
+                            color: 'var(--muted)',
                           }}
                         >
-                          <div className="flex items-center gap-2 text-[11px] mono" style={{ color: 'var(--muted)' }}>
-                            <Database size={12} style={{ color: 'var(--accent)' }} className="shrink-0" />
-                            <span className="truncate">{project.provenanceLabel}</span>
+                          <div className="flex items-center gap-1.5">
+                            <Database size={11} style={{ color: 'var(--accent)' }} />
+                            <span>{project.provenanceLabel}</span>
                           </div>
+                          <span style={{ color: 'var(--accent)', fontWeight: 600 }}>100% AUDIT READY</span>
+                        </div>
+
+                        {/* Action CTA Buttons directly under Visual Showcase */}
+                        <div
+                          className="p-4 flex flex-wrap items-center gap-3"
+                          style={{
+                            background: 'var(--surface2)',
+                          }}
+                        >
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                              rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                              style={{
+                                background: 'var(--accent)',
+                                color: 'var(--btn-primary-text)',
+                                border: '1px solid var(--accent)',
+                                padding: '0.65rem 1.25rem',
+                                fontSize: '0.8rem',
+                                fontWeight: 700,
+                                textDecoration: 'none',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.06em',
+                                borderRadius: 0,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                              }}
+                              className="hover:opacity-90"
+                            >
+                              <ExternalLink size={13} />
+                              <span>{project.liveUrlLabel}</span>
+                            </a>
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() => setSelectedFeatured(project)}
+                            style={{
+                              background: 'var(--surface)',
+                              color: 'var(--text)',
+                              border: '1px solid var(--border)',
+                              padding: '0.65rem 1.25rem',
+                              fontSize: '0.8rem',
+                              fontWeight: 600,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.06em',
+                              borderRadius: 0,
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
+                            }}
+                            className="hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                          >
+                            <FileText size={13} />
+                            <span>Full Architecture &amp; Case Study</span>
+                          </button>
                         </div>
                       </div>
 
-                      {/* Content & Architectural Details Column (7 cols) */}
-                      <div className="lg:col-span-7 flex flex-col justify-between p-6 md:p-8">
+                      {/* Right: Architectural Depth & Strategic Value (5 cols) */}
+                      <div
+                        className="lg:col-span-5 p-5 md:p-6 flex flex-col justify-between"
+                        style={{
+                          background: 'var(--surface)',
+                        }}
+                      >
                         <div>
-                          {/* Title & Subtitle */}
-                          <h3
-                            style={{
-                              fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)',
-                              fontWeight: 700,
-                              lineHeight: 1.25,
-                              color: 'var(--text)',
-                              marginBottom: '0.4rem',
-                              letterSpacing: '-0.02em',
-                            }}
-                          >
-                            {project.title}
-                          </h3>
-                          <p
-                            style={{
-                              fontSize: '0.9rem',
-                              color: 'var(--muted)',
-                              lineHeight: 1.6,
-                              marginBottom: '1.25rem',
-                              fontWeight: 400,
-                            }}
-                          >
-                            {project.subtitle}
-                          </p>
-
-                          {/* Certified Impact KPI Strip */}
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
-                            {projectKpis.map((kpi, kIdx) => (
-                              <div
-                                key={kIdx}
-                                style={{
-                                  background: 'var(--surface2)',
-                                  border: '1px solid var(--border)',
-                                  padding: '0.65rem 0.75rem',
-                                }}
-                              >
-                                <div
-                                  className="mono font-bold"
-                                  style={{
-                                    fontSize: 'clamp(1rem, 1.4vw, 1.2rem)',
-                                    color: 'var(--accent)',
-                                    letterSpacing: '-0.01em',
-                                  }}
-                                >
-                                  {kpi.value}
-                                </div>
-                                <div
-                                  className="mono uppercase text-[9px] tracking-wider mt-0.5 leading-tight"
-                                  style={{ color: 'var(--muted)' }}
-                                >
-                                  {kpi.label}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Business Problem Solved */}
+                          {/* Business Question Solved */}
                           <div
                             style={{
                               background: 'var(--surface2)',
@@ -631,7 +754,7 @@ function PortfolioContent() {
                             </span>
                             <p
                               style={{
-                                fontSize: '0.86rem',
+                                fontSize: '0.85rem',
                                 color: 'var(--text)',
                                 lineHeight: 1.55,
                                 margin: 0,
@@ -649,7 +772,7 @@ function PortfolioContent() {
                             >
                               CORE DELIVERABLES &amp; ARCHITECTURAL MODELS
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div className="flex flex-col gap-2">
                               {project.deliverables.map((deliv, i) => (
                                 <div
                                   key={i}
@@ -673,104 +796,39 @@ function PortfolioContent() {
                           </div>
 
                           {/* Tech Stack Chips */}
-                          <div className="flex flex-wrap items-center gap-1.5 mb-5">
-                            <span className="mono text-[9px] uppercase font-bold mr-1" style={{ color: 'var(--muted)' }}>
-                              STACK:
-                            </span>
-                            {project.tools.map(tool => (
-                              <span
-                                key={tool}
-                                className="mono text-[10px] px-2 py-0.5"
-                                style={{
-                                  background: 'var(--surface2)',
-                                  border: '1px solid var(--border)',
-                                  color: 'var(--text)',
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {tool}
-                              </span>
-                            ))}
+                          <div>
+                            <div className="mono text-[10px] uppercase font-bold tracking-wider mb-2" style={{ color: 'var(--muted)' }}>
+                              TECHNOLOGY STACK &amp; MODELING
+                            </div>
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              {project.tools.map(tool => (
+                                <span
+                                  key={tool}
+                                  className="mono text-[10px] px-2 py-0.5"
+                                  style={{
+                                    background: 'var(--surface2)',
+                                    border: '1px solid var(--border)',
+                                    color: 'var(--text)',
+                                    fontWeight: 500,
+                                  }}
+                                >
+                                  {tool}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
 
-                        {/* Action Bar */}
+                        {/* Engineering SLA / Audited Performance Badge */}
                         <div
-                          className="flex flex-wrap items-center justify-between gap-3 pt-4"
-                          style={{ borderTop: '1px solid var(--border)' }}
+                          className="mt-5 pt-3 flex items-center justify-between text-[10px] mono"
+                          style={{
+                            borderTop: '1px solid var(--border)',
+                            color: 'var(--muted)',
+                          }}
                         >
-                          <div className="flex flex-wrap items-center gap-3">
-                            {project.liveUrl && (
-                              <a
-                                href={project.liveUrl}
-                                target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
-                                rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                style={{
-                                  background: 'var(--accent)',
-                                  color: 'var(--btn-primary-text)',
-                                  border: '1px solid var(--accent)',
-                                  padding: '0.65rem 1.25rem',
-                                  fontSize: '0.8rem',
-                                  fontWeight: 700,
-                                  textDecoration: 'none',
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
-                                  gap: '6px',
-                                  textTransform: 'uppercase',
-                                  letterSpacing: '0.06em',
-                                  borderRadius: 0,
-                                  cursor: 'pointer',
-                                  transition: 'all 0.2s ease',
-                                }}
-                                className="hover:opacity-90"
-                              >
-                                <ExternalLink size={13} />
-                                <span>{project.liveUrlLabel}</span>
-                              </a>
-                            )}
-
-                            <button
-                              type="button"
-                              onClick={() => setSelectedFeatured(project)}
-                              style={{
-                                background: 'transparent',
-                                color: 'var(--text)',
-                                border: '1px solid var(--border)',
-                                padding: '0.65rem 1.25rem',
-                                fontSize: '0.8rem',
-                                fontWeight: 600,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.06em',
-                                borderRadius: 0,
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                              }}
-                              className="hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                            >
-                              <FileText size={13} />
-                              <span>Full Architecture &amp; Case Study</span>
-                            </button>
-                          </div>
-
-                          <button
-                            type="button"
-                            onClick={() => handleSelectServiceForEnquiry(project.title)}
-                            className="mono text-xs flex items-center gap-1.5 group"
-                            style={{
-                              background: 'none',
-                              border: 'none',
-                              color: 'var(--muted)',
-                              cursor: 'pointer',
-                              padding: '4px 0',
-                              transition: 'color 0.2s ease',
-                            }}
-                          >
-                            <span className="group-hover:text-[var(--accent)] transition-colors">Request Architecture</span>
-                            <ArrowRight size={12} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
-                          </button>
+                          <span>RECONCILIATION: 0.00% VARIANCE</span>
+                          <span style={{ color: 'var(--accent)', fontWeight: 600 }}>STAR SCHEMA VERIFIED</span>
                         </div>
                       </div>
                     </div>
@@ -862,42 +920,121 @@ function PortfolioContent() {
               </div>
             </div>
 
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap items-center gap-2 mb-6">
-              {categoryTabs.map(cat => {
-                const isSelected = activeCategory === cat;
-                const count = categoryCounts[cat] || 0;
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => handleCategoryChange(cat)}
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded transition-all"
-                    style={{
-                      fontSize: '0.82rem',
-                      fontWeight: 600,
-                      background: isSelected ? 'var(--accent)' : 'var(--tag-bg)',
-                      color: isSelected ? 'var(--btn-primary-text)' : 'var(--muted)',
-                      border: isSelected ? '1px solid var(--accent)' : '1px solid var(--border)',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <span>{cat}</span>
-                    <span
-                      className="mono"
-                      style={{
-                        fontSize: '10px',
-                        padding: '1px 5px',
-                        borderRadius: '3px',
-                        background: isSelected ? 'rgba(0,0,0,0.2)' : 'var(--surface)',
-                        color: isSelected ? 'var(--btn-primary-text)' : 'var(--accent)',
-                      }}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
+            {/* Filter Control Center */}
+            <div style={{ 
+              background: 'var(--surface2)', 
+              border: '1px solid var(--border)', 
+              padding: '1.25rem 1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
+              marginBottom: '1.5rem'
+            }}>
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="mono" style={{ fontSize: '9px', fontWeight: 700, color: 'var(--accent)', background: 'rgba(201,243,29,0.1)', padding: '2px 8px', border: '1px solid rgba(201,243,29,0.2)' }}>
+                  CAT_FILTER:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {categoryTabs.map(cat => {
+                    const count = categoryCounts[cat] || 0;
+                    const isActive = activeCategory === cat;
+                    return (
+                      <button 
+                        key={cat} 
+                        className={`filter-tab ${isActive ? 'active' : ''}`} 
+                        onClick={() => handleCategoryChange(cat)}
+                        style={{
+                          padding: '0.4rem 0.85rem',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          background: isActive ? 'var(--accent)' : 'transparent',
+                          color: isActive ? 'var(--btn-primary-text)' : 'var(--muted)',
+                          border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          borderRadius: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        <span>{cat}</span>
+                        <span 
+                          className="mono" 
+                          style={{ 
+                            fontSize: '9px',
+                            fontWeight: 700,
+                            padding: '1px 5px',
+                            borderRadius: '2px',
+                            background: isActive ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.06)',
+                            color: isActive ? 'var(--btn-primary-text)' : 'var(--text)',
+                            border: isActive ? '1px solid rgba(0,0,0,0.15)' : '1px solid var(--border)',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div style={{ height: '1px', background: 'var(--border)', opacity: 0.5 }} />
+
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="mono" style={{ fontSize: '9px', fontWeight: 700, color: 'var(--accent2)', background: 'rgba(139,92,246,0.1)', padding: '2px 8px', border: '1px solid rgba(139,92,246,0.2)' }}>
+                  TOOL_FILTER:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {toolTabs.map(t => {
+                    const count = toolCounts[t] || 0;
+                    const isActive = activeTool === t;
+                    return (
+                      <button 
+                        key={t} 
+                        className={`filter-tab ${isActive ? 'active' : ''}`} 
+                        onClick={() => setActiveTool(t)}
+                        style={{
+                          padding: '0.4rem 0.85rem',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          background: isActive ? 'var(--accent2)' : 'transparent',
+                          color: isActive ? '#fff' : 'var(--muted)',
+                          border: isActive ? '1px solid var(--accent2)' : '1px solid var(--border)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          borderRadius: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        <span>{t}</span>
+                        <span 
+                          className="mono" 
+                          style={{ 
+                            fontSize: '9px',
+                            fontWeight: 700,
+                            padding: '1px 5px',
+                            borderRadius: '2px',
+                            background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)',
+                            color: isActive ? '#fff' : 'var(--text)',
+                            border: isActive ? '1px solid rgba(255,255,255,0.25)' : '1px solid var(--border)',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             {/* Sub-header counter */}
@@ -911,12 +1048,16 @@ function PortfolioContent() {
                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{filteredDirectoryProjects.length}</span>
                 <span>PROJECTS</span>
                 <span>// CATEGORY: {activeCategory.toUpperCase()}</span>
+                {activeTool !== 'All Tools' && (
+                  <span>// TOOL: {activeTool.toUpperCase()}</span>
+                )}
               </div>
-              {(activeCategory !== 'All' || searchQuery) && (
+              {(activeCategory !== 'All' || activeTool !== 'All Tools' || searchQuery) && (
                 <button
                   type="button"
                   onClick={() => {
                     setActiveCategory('All');
+                    setActiveTool('All Tools');
                     setSearchQuery('');
                   }}
                   style={{
@@ -924,10 +1065,12 @@ function PortfolioContent() {
                     border: 'none',
                     color: 'var(--accent)',
                     cursor: 'pointer',
+                    fontSize: '11px',
                     textDecoration: 'underline',
+                    padding: 0,
                   }}
                 >
-                  [Reset All Filters]
+                  Clear Filters
                 </button>
               )}
             </div>
