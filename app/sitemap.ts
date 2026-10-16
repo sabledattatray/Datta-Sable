@@ -97,7 +97,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/dashboards/world-business',
     '/dashboards/aura-capital-sales',
     '/dashboards/rider-ops',
-    '/tools',
     '/privacy',
     '/terms',
     '/disclaimer',

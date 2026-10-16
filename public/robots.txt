@@ -2,11 +2,10 @@
 # robots.txt — dattasable.com
 # ============================================================
 
-# --- Default: Allow all well-behaved search engines ---
+# --- Default: Allow all search engines on high-value content ---
 User-agent: *
 Allow: /
 Allow: /blog/
-Allow: /tools/
 Allow: /dashboards/
 Allow: /portfolio/
 Allow: /services/
@@ -31,18 +30,58 @@ Disallow: /preview/
 Disallow: /live-dashboard/
 Disallow: /analytics-live/
 
-# --- Google AdSense and Ads crawlers (FULL ACCESS REQUIRED) ---
+# Exclude thin utility tools from general indexing to protect domain authority
+Disallow: /tools/
+Disallow: /chains/
+Disallow: /templates/
+Disallow: /lp/
+Disallow: /infrastructure
+
+# --- Google AdSense Bot (Mediapartners-Google): STRICTLY DISALLOW THIN TOOLS ---
+# This ensures AdSense review NEVER evaluates thin tool UI pages for content quality
 User-agent: Mediapartners-Google
 Allow: /
+Allow: /blog/
+Allow: /dashboards/
+Allow: /portfolio/
+Allow: /services/
+Allow: /about/
+Allow: /contact/
+Allow: /privacy
+Allow: /terms
+Allow: /disclaimer
+Allow: /cookies
+Disallow: /tools/
+Disallow: /chains/
+Disallow: /templates/
+Disallow: /lp/
+Disallow: /infrastructure
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /preview/
+Disallow: /live-dashboard/
+Disallow: /analytics-live/
 
 User-agent: Google-Display-Ads-Bot
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
 Allow: /
+Allow: /blog/
+Allow: /dashboards/
+Allow: /portfolio/
+Allow: /services/
+Allow: /about/
+Allow: /contact/
+Allow: /privacy
+Allow: /terms
+Allow: /disclaimer
+Allow: /cookies
+Disallow: /tools/
+Disallow: /chains/
+Disallow: /templates/
+Disallow: /lp/
+Disallow: /infrastructure
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
