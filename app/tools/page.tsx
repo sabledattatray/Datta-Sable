@@ -38,6 +38,16 @@ export const metadata: Metadata = {
 
 const TOOLS = [
   {
+    id: 'excel-dashboard-generator',
+    title: 'Excel to Dashboard Generator',
+    description: 'Free client-side Excel & CSV dashboard builder. Automated KPI report engine, multi-sheet .xlsx exports with live formulas, and 100% in-browser privacy.',
+    icon: <BarChart3 size={24} className="text-[#10b981]" />,
+    category: 'Flagship Tool',
+    href: 'https://excel.dattasable.com/',
+    status: 'Live App',
+    external: true
+  },
+  {
     id: 'open-mis',
     title: 'Nexdial OpenMIS™',
     description: 'Free, privacy-first Excel & CSV dashboard builder. 100% in-browser processing with zero cloud telemetry or data uploads.',

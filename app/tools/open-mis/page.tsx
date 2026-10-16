@@ -219,7 +219,7 @@ export default function OpenMisToolPage() {
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4">
                 <a
-                  href="https://app.nexdial.io/app/new"
+                  href="https://excel.dattasable.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary inline-flex items-center gap-2.5 no-underline"
@@ -231,7 +231,7 @@ export default function OpenMisToolPage() {
                 </a>
 
                 <a
-                  href="https://app.nexdial.io/templates"
+                  href="https://excel.dattasable.com/#templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline inline-flex items-center gap-2 no-underline"
@@ -249,7 +249,7 @@ export default function OpenMisToolPage() {
                 </a>
 
                 <a
-                  href="https://github.com/sabledattatray/app.nexdial"
+                  href="https://github.com/sabledattatray/nexusbi-excel-dashboard-generator"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--muted)] hover:text-[var(--text)] transition-colors no-underline px-3 py-2"
@@ -419,7 +419,7 @@ export default function OpenMisToolPage() {
                 </div>
 
                 <a
-                  href="https://app.nexdial.io/app/report"
+                  href="https://excel.dattasable.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline inline-flex items-center gap-2 text-[11px] font-mono no-underline"
@@ -844,7 +844,7 @@ export default function OpenMisToolPage() {
                   </p>
                 </div>
                 <a
-                  href="https://app.nexdial.io/templates"
+                  href="https://excel.dattasable.com/#templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
@@ -872,7 +872,7 @@ export default function OpenMisToolPage() {
                   </p>
                 </div>
                 <a
-                  href="https://app.nexdial.io/templates"
+                  href="https://excel.dattasable.com/#templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
@@ -900,7 +900,7 @@ export default function OpenMisToolPage() {
                   </p>
                 </div>
                 <a
-                  href="https://app.nexdial.io/templates"
+                  href="https://excel.dattasable.com/#templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
@@ -928,7 +928,7 @@ export default function OpenMisToolPage() {
                   </p>
                 </div>
                 <a
-                  href="https://app.nexdial.io/templates"
+                  href="https://excel.dattasable.com/#templates"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline inline-flex items-center justify-center gap-2 text-xs font-mono no-underline"
@@ -1044,7 +1044,7 @@ export default function OpenMisToolPage() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
-                href="https://app.nexdial.io/app/new"
+                href="https://excel.dattasable.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2.5 text-xs font-bold no-underline"
@@ -1056,7 +1056,7 @@ export default function OpenMisToolPage() {
               </a>
 
               <a
-                href="https://github.com/sabledattatray/app.nexdial"
+                href="https://github.com/sabledattatray/nexusbi-excel-dashboard-generator"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline inline-flex items-center gap-2 text-xs font-mono no-underline"

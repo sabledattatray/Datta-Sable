@@ -41,7 +41,7 @@ const NAV_LINKS: NavSection[] = [
     links: [
       { label: 'Aura FinTech BI (Excel)', href: '/dashboards/aura-capital-sales', icon: BarChart3 },
       { label: 'Open MIS Tool',    href: '/tools/open-mis',         icon: BarChart3 },
-      { label: 'Nexdial App (Live)', href: 'https://app.nexdial.io/', icon: Sparkles, external: true },
+      { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', icon: BarChart3, external: true },
       { label: 'Surgical Tools',   href: '/tools',                  icon: Zap },
       { label: 'Templates Hub',    href: '/templates',              icon: Library },
       { label: 'Workflow Chains',  href: '/chains',                 icon: GitBranch },
@@ -74,7 +74,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Resources',
     links: [
-      { label: 'Nexdial OpenMIS™', href: 'https://app.nexdial.io/',   icon: BarChart3, external: true },
+      { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', icon: BarChart3, external: true },
       { label: 'n8n Automation',   href: 'https://n8n.io',             icon: Zap,       external: true },
       { label: 'Live Analytics',    href: '/analytics-live',            icon: Activity },
       { label: 'Microsoft BI',     href: 'https://powerbi.microsoft.com/', icon: Database, external: true },

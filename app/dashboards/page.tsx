@@ -25,6 +25,21 @@ interface DashboardItem {
 
 const dashboards: DashboardItem[] = [
   {
+    id: 100,
+    title: 'Excel to Dashboards Generator & MIS Engine',
+    category: 'Operations',
+    tool: 'ExcelJS / Web App',
+    color: '#10b981',
+    icon: '📊',
+    image: '/images/projects/excel-dashboard-generator/executive_dashboard_full.png',
+    desc: 'Free client-side automated Excel KPI & MIS report generator. Multi-sheet workbook exports with live formulas, dynamic charts, and instant analytics. 100% private in-browser.',
+    embed: null,
+    link: 'https://excel.dattasable.com/',
+    isInternal: false,
+    tags: ['Flagship App', 'Excel Automation', 'Live Formulas', 'Zero Telemetry'],
+    metrics: ['Multi-Sheet .xlsx', '100% In-Browser', 'Instant KPI Audit'],
+  },
+  {
     id: 201,
     title: 'Aura Capital & FinTech Group — Executive Sales Dashboard',
     category: 'Finance',
@@ -947,7 +962,8 @@ export default function DashboardsPage() {
                         href={d.link || d.embed || '#'}
                         className="flex-1 btn-primary flex items-center justify-center gap-2"
                         style={{ fontSize: '0.75rem', height: '38px', whiteSpace: 'nowrap', padding: '0 1rem', textTransform: 'uppercase', fontWeight: 500, letterSpacing: '0.05em' }}
-                        target={d.embed && d.embed.startsWith('http') ? "_blank" : undefined}
+                        target={(d.link?.startsWith('http') || d.embed?.startsWith('http')) ? "_blank" : undefined}
+                        rel={(d.link?.startsWith('http') || d.embed?.startsWith('http')) ? "noopener noreferrer" : undefined}
                       >
                         <ExternalLink size={14} /> Open Dashboard
                       </Link>
