@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary', title: 'Terms of Service | Datta Sable', description: 'Terms of Service for dattasable.com.', images: ['/images/dattasable.com.webp'] },
   alternates: { canonical: 'https://dattasable.com/terms' },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default async function TermsPage() {

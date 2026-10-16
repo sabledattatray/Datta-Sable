@@ -1,17 +1,21 @@
 # ============================================================
 # robots.txt — dattasable.com
-# Last updated: 2026-06-27
 # ============================================================
 
-# --- Default: Allow all well-behaved bots ---
+# --- Default: Allow all well-behaved search engines ---
 User-agent: *
 Allow: /
 Allow: /blog/
 Allow: /tools/
+Allow: /dashboards/
 Allow: /portfolio/
 Allow: /services/
 Allow: /about/
 Allow: /contact/
+Allow: /privacy
+Allow: /terms
+Allow: /disclaimer
+Allow: /cookies
 Allow: /glossary/
 Allow: /knowledge/
 Allow: /careers/
@@ -19,44 +23,22 @@ Allow: /faq/
 Allow: /category/
 Allow: /rss.xml
 
-# Private / thin-content paths
+# Private administrative endpoints
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /preview/
-Disallow: /tools/workspace
 Disallow: /live-dashboard/
 Disallow: /analytics-live/
 
-# Utility / thin-content pages (excluded from AdSense indexing)
-Disallow: /tools/linkedin-formatter
-Disallow: /tools/ai-prompt-generator
-Disallow: /tools/seo-meta-generator
-Disallow: /tools/image-blade
-Disallow: /tools/context-optimizer
-Disallow: /tools/word-counter
-Disallow: /tools/schema-generator
-Disallow: /tools/mermaid-forge
-Disallow: /tools/bi-roi-calculator
-Disallow: /tools/prompt-auditor
-Disallow: /tools/demo
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /data-forge
-Disallow: /knowledge/rfc/
-Disallow: /knowledge/taxonomy
-Disallow: /knowledge/standards
-Disallow: /knowledge/protocols
-Disallow: /knowledge/patterns
-Disallow: /knowledge/comparisons
-
-# --- Google AdSense and Ads crawlers ---
+# --- Google AdSense and Ads crawlers (FULL ACCESS REQUIRED) ---
 User-agent: Mediapartners-Google
-Disallow: /tools
-Disallow: /portfolio
-Disallow: /services
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /preview/
+
 User-agent: Google-Display-Ads-Bot
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
@@ -65,31 +47,6 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /preview/
-Disallow: /tools/workspace
-Disallow: /live-dashboard/
-Disallow: /analytics-live/
-Disallow: /tools/linkedin-formatter
-Disallow: /tools/ai-prompt-generator
-Disallow: /tools/seo-meta-generator
-Disallow: /tools/image-blade
-Disallow: /tools/context-optimizer
-Disallow: /tools/word-counter
-Disallow: /tools/schema-generator
-Disallow: /tools/mermaid-forge
-Disallow: /tools/bi-roi-calculator
-Disallow: /tools/prompt-auditor
-Disallow: /tools/demo
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /data-forge
-Disallow: /knowledge/rfc/
-Disallow: /knowledge/taxonomy
-Disallow: /knowledge/standards
-Disallow: /knowledge/protocols
-Disallow: /knowledge/patterns
-Disallow: /knowledge/comparisons
 
 # --- Google Image crawler ---
 User-agent: Googlebot-Image
@@ -99,7 +56,7 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-# --- AI Training / RAG bots (allowed for discoverability) ---
+# --- AI Training / RAG bots ---
 User-agent: GPTBot
 User-agent: OAI-SearchBot
 User-agent: ClaudeBot
@@ -113,7 +70,5 @@ Allow: /
 # ============================================================
 # Sitemaps
 # ============================================================
-Sitemap: https://dattasable.com/sitemap-index.xml
 Sitemap: https://dattasable.com/sitemap.xml
-Sitemap: https://dattasable.com/image-sitemap.xml
-Sitemap: https://dattasable.com/news-sitemap.xml
+Sitemap: https://dattasable.com/sitemap-index.xml

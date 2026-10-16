@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: 'https://dattasable.com/careers',
     type: 'website',
   },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default async function CareersPage() {

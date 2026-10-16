@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function GlossaryLayout({ children }: { children: React.ReactNode }) {

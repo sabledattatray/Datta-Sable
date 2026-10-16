@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [{ url: '/images/blog/microsoft-fabric-architecture-explained-2026.webp', width: 1200, height: 630, alt: 'Microsoft Fabric Hub' }],
   },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
   alternates: { canonical: 'https://dattasable.com/blog/microsoft-fabric' },
 };
 
