@@ -3,14 +3,14 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const imagePath = "/images/blog/Rust for Data Engineers in 2026.webp";
+  const imagePath = "/images/blog/cybersecurity-cloud-security-guide-2026.webp";
   
   await prisma.post.update({
-    where: { slug: "rust-for-data-engineers" },
+    where: { slug: "cybersecurity-cloud-security-guide-2026" },
     data: { image: imagePath }
   });
 
-  console.log("Image updated successfully");
+  console.log("Image updated successfully in DB");
 }
 
 main()
