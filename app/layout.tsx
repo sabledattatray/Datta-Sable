@@ -199,6 +199,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         {/* Third-Party Integrations preconnect and dns-prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
@@ -215,6 +216,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
             {/* High-Performance Third-Party Script Optimization */}
             <PerformanceOptimizer
+              gtmId="GTM-TGNKBFWC"
               googleAnalyticsId="G-Q4GEY4N9WN"
               googleSignInClientId={process.env.GOOGLE_ID || ""}
               nonce={nonce}

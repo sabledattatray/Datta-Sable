@@ -55,6 +55,7 @@ export const megaMenuData: Record<string, any> = {
       { title: 'UI/UX Projects',      desc: 'Interface design case studies.',     icon: <Palette size={18} />,     href: '/portfolio?category=Design',       color: '#a78bfa' },
       { title: 'Automation Projects', desc: 'Python & ETL workflow builds.',        icon: <Zap size={18} />,          href: '/portfolio?category=Automation',   color: '#34d399' },
       { title: 'SEO Case Studies',    desc: 'Traffic growth & ranking wins.',     icon: <TrendingUp size={18} />,  href: '/portfolio?category=SEO',          color: '#fb923c' },
+      { title: 'Certifications',      desc: 'Google & LinkedIn verified credentials.', icon: <Sparkles size={18} />,   href: '/certification',                   color: '#c9f31d' },
     ]
   },
 
