@@ -4,7 +4,7 @@ import {
   FileText, Plus, Search, Trash2, Edit2,
   ChevronLeft, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
   Type, Highlighter, Save, Settings, Image as ImageIcon,
-  Eye, EyeOff, Columns, Globe, Laptop, Smartphone, CheckCircle2, XCircle, AlertCircle, Sparkles
+  Eye, EyeOff, Columns, Globe, Laptop, Smartphone, CheckCircle2, XCircle, AlertCircle, Sparkles, Megaphone
 } from 'lucide-react';
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
@@ -1388,23 +1388,41 @@ export default function AdminBlog() {
               {filtered.length} article{filtered.length !== 1 ? 's' : ''} {search ? 'found' : 'published'}
             </p>
           </div>
-          <button
-            onClick={() => handleOpenEditor()}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 8,
-              background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
-              border: 'none', color: '#fff',
-              fontWeight: 700, fontSize: 14,
-              padding: '11px 20px', borderRadius: 12,
-              cursor: 'pointer',
-              boxShadow: `0 4px 14px ${css.accent}40`,
-              transition: 'opacity 0.15s',
-            }}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.88'}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
-          >
-            <Plus size={17} /> Write New Story
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <Link
+              href="/admin/marketing/campaigns"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                background: 'rgba(201, 243, 29, 0.12)',
+                border: '1px solid rgba(201, 243, 29, 0.35)',
+                color: '#c9f31d',
+                fontWeight: 700, fontSize: 13,
+                padding: '11px 18px', borderRadius: 12,
+                cursor: 'pointer',
+                textDecoration: 'none',
+                transition: 'all 0.15s',
+              }}
+            >
+              <Megaphone size={16} /> Email Broadcast Hub
+            </Link>
+            <button
+              onClick={() => handleOpenEditor()}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
+                border: 'none', color: '#fff',
+                fontWeight: 700, fontSize: 14,
+                padding: '11px 20px', borderRadius: 12,
+                cursor: 'pointer',
+                boxShadow: `0 4px 14px ${css.accent}40`,
+                transition: 'opacity 0.15s',
+              }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.88'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
+            >
+              <Plus size={17} /> Write New Story
+            </button>
+          </div>
         </div>
 
         {/* Search & Sort Controls */}
