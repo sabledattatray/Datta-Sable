@@ -30,6 +30,7 @@ export default function PerformanceOptimizer({
       search.includes('gtm_debug') ||
       search.includes('_tagassistant') ||
       search.includes('test_tracking') ||
+      Boolean(window.opener) ||
       (typeof document !== 'undefined' && document.referrer.includes('tagassistant.google.com'));
 
     if (isTagAssistantOrDebug) {

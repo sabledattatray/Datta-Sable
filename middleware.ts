@@ -85,7 +85,17 @@ export function middleware(request: NextRequest) {
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
 
   // 7. Modern Security Controls (COOP, CORP)
-  response.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  // Tag Assistant requires window.opener cross-origin communication during debug sessions
+  const isDebugSession =
+    request.nextUrl.searchParams.has('gtm_debug') ||
+    request.nextUrl.searchParams.has('_tagassistant') ||
+    (request.headers.get('referer') || '').includes('tagassistant.google.com');
+
+  if (isDebugSession) {
+    response.headers.set('Cross-Origin-Opener-Policy', 'unsafe-none');
+  } else {
+    response.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  }
   response.headers.set('Cross-Origin-Resource-Policy', 'same-origin');
 
   return response;
