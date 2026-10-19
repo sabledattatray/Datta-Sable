@@ -11,7 +11,10 @@ import {
   ShieldAlert, 
   Key, 
   User, 
-  Activity 
+  Activity,
+  FileSpreadsheet,
+  Download,
+  Check
 } from 'lucide-react';
 
 interface UserRecord {
@@ -79,6 +82,99 @@ export default function UsersSubscribersAdmin() {
     }
   };
 
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportNotice, setExportNotice] = useState<string | null>(null);
+
+  const exportToExcel = async (exportScope: 'all' | 'filtered' = 'all') => {
+    setIsExporting(true);
+    try {
+      const XLSX = await import('xlsx');
+      const timestamp = new Date().toISOString().split('T')[0];
+
+      if (activeTab === 'users') {
+        const targetList = exportScope === 'filtered' && searchQuery ? filteredUsers : users;
+
+        if (targetList.length === 0) {
+          alert('No users found to export.');
+          setIsExporting(false);
+          return;
+        }
+
+        const dataToExport = targetList.map((u, index) => ({
+          'Sr No': index + 1,
+          'Name': u.name || 'Anonymous',
+          'Email': u.email || '',
+          'Auth Provider': u.provider === 'google' ? 'Google One Tap' : (u.provider === 'github' ? 'GitHub' : 'Local Auth'),
+          'Role': u.role || 'USER',
+          'Joined Date': u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A',
+          'Last Active': u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleString() : 'N/A',
+          'Account ID': u.id
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+
+        worksheet['!cols'] = [
+          { wch: 8 },  // Sr No
+          { wch: 28 }, // Name
+          { wch: 36 }, // Email
+          { wch: 20 }, // Auth Provider
+          { wch: 12 }, // Role
+          { wch: 16 }, // Joined Date
+          { wch: 24 }, // Last Active
+          { wch: 32 }  // Account ID
+        ];
+
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+
+        const fileName = `dattasable_registered_users_${timestamp}.xlsx`;
+        XLSX.writeFile(workbook, fileName);
+
+        setExportNotice(`Successfully exported ${targetList.length} users to Excel!`);
+        setTimeout(() => setExportNotice(null), 4000);
+      } else {
+        const targetList = exportScope === 'filtered' && searchQuery ? filteredSubscribers : subscribers;
+
+        if (targetList.length === 0) {
+          alert('No subscribers found to export.');
+          setIsExporting(false);
+          return;
+        }
+
+        const dataToExport = targetList.map((s, index) => ({
+          'Sr No': index + 1,
+          'Subscriber Email': s.email,
+          'Subscribed Date': s.createdAt ? new Date(s.createdAt).toLocaleDateString() : 'N/A',
+          'Status': 'Active',
+          'Subscriber ID': s.id
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        worksheet['!cols'] = [
+          { wch: 8 },
+          { wch: 36 },
+          { wch: 18 },
+          { wch: 12 },
+          { wch: 32 }
+        ];
+
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Subscribers');
+
+        const fileName = `dattasable_subscribers_${timestamp}.xlsx`;
+        XLSX.writeFile(workbook, fileName);
+
+        setExportNotice(`Successfully exported ${targetList.length} subscribers to Excel!`);
+        setTimeout(() => setExportNotice(null), 4000);
+      }
+    } catch (err) {
+      console.error('Failed to export to Excel:', err);
+      alert('Error generating Excel file. Please try again.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   const filteredUsers = users.filter(u => 
     u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     u.email.toLowerCase().includes(searchQuery.toLowerCase())
@@ -95,8 +191,28 @@ export default function UsersSubscribersAdmin() {
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       
+      {/* Export Success Notification Banner */}
+      {exportNotice && (
+        <div style={{
+          background: 'rgba(16, 124, 65, 0.95)',
+          color: '#ffffff',
+          padding: '0.75rem 1.25rem',
+          borderRadius: '6px',
+          marginBottom: '1.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.6rem',
+          boxShadow: '0 4px 12px rgba(16, 124, 65, 0.4)',
+          fontSize: '0.9rem',
+          fontWeight: 600
+        }}>
+          <Check size={18} />
+          {exportNotice}
+        </div>
+      )}
+
       {/* Page Header */}
-      <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 style={{ fontSize: '1.8rem', fontWeight: 800, fontFamily: 'Syne, sans-serif' }}>
             Users &amp; Subscribers <span style={{ color: 'var(--accent)' }}>Management</span>
@@ -105,20 +221,50 @@ export default function UsersSubscribersAdmin() {
             Audit active accounts, Google One Tap authentications, and newsletter subscriber contacts.
           </p>
         </div>
-        <button 
-          onClick={fetchRecords} 
-          style={{
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid var(--border)',
-            padding: '0.5rem 1rem',
-            borderRadius: '4px',
-            fontSize: '0.8rem',
-            fontFamily: 'monospace',
-            cursor: 'pointer'
-          }}
-        >
-          Refresh Data
-        </button>
+        
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          <button 
+            onClick={() => exportToExcel()} 
+            disabled={isExporting || (activeTab === 'users' ? users.length === 0 : subscribers.length === 0)}
+            style={{
+              background: '#107c41',
+              color: '#ffffff',
+              border: 'none',
+              padding: '0.55rem 1.15rem',
+              borderRadius: '4px',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              cursor: isExporting ? 'wait' : 'pointer',
+              boxShadow: '0 2px 10px rgba(16, 124, 65, 0.35)',
+              transition: 'background 0.2s ease',
+              opacity: (activeTab === 'users' ? users.length === 0 : subscribers.length === 0) ? 0.6 : 1
+            }}
+            onMouseEnter={(e) => { if (!isExporting) e.currentTarget.style.background = '#0e6b37'; }}
+            onMouseLeave={(e) => { if (!isExporting) e.currentTarget.style.background = '#107c41'; }}
+            title={`Export ${activeTab === 'users' ? `all ${users.length} registered users` : `all ${subscribers.length} subscribers`} to Excel (.xlsx)`}
+          >
+            <FileSpreadsheet size={16} />
+            {isExporting ? 'Generating Excel...' : `Export to Excel (${activeTab === 'users' ? users.length : subscribers.length})`}
+          </button>
+
+          <button 
+            onClick={fetchRecords} 
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid var(--border)',
+              padding: '0.55rem 1rem',
+              borderRadius: '4px',
+              fontSize: '0.8rem',
+              fontFamily: 'monospace',
+              cursor: 'pointer'
+            }}
+          >
+            Refresh Data
+          </button>
+        </div>
       </div>
 
       {/* ── METRICS DASHBOARD TILES ── */}
@@ -199,27 +345,57 @@ export default function UsersSubscribersAdmin() {
           </button>
         </div>
 
-        {/* Search */}
-        <div style={{ position: 'relative', minWidth: '260px' }}>
-          <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }}>
-            <Search size={16} />
-          </span>
-          <input
-            type="text"
-            placeholder={activeTab === 'users' ? 'Search by name or email...' : 'Search subscriber email...'}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+        {/* Search & Quick Export */}
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div style={{ position: 'relative', minWidth: '260px' }}>
+            <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }}>
+              <Search size={16} />
+            </span>
+            <input
+              type="text"
+              placeholder={activeTab === 'users' ? 'Search by name or email...' : 'Search subscriber email...'}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                background: 'var(--surface2)',
+                border: '1px solid var(--border)',
+                borderRadius: '4px',
+                padding: '0.5rem 1rem 0.5rem 2.25rem',
+                color: 'var(--text)',
+                fontSize: '0.85rem',
+                width: '100%',
+                outline: 'none'
+              }}
+            />
+          </div>
+
+          <button
+            onClick={() => exportToExcel(searchQuery ? 'filtered' : 'all')}
+            disabled={isExporting}
             style={{
-              background: 'var(--surface2)',
-              border: '1px solid var(--border)',
+              background: 'rgba(16, 124, 65, 0.15)',
+              border: '1px solid rgba(16, 124, 65, 0.4)',
+              color: '#34d399',
+              padding: '0.5rem 0.95rem',
               borderRadius: '4px',
-              padding: '0.5rem 1rem 0.5rem 2.25rem',
-              color: 'var(--text)',
-              fontSize: '0.85rem',
-              width: '100%',
-              outline: 'none'
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              cursor: isExporting ? 'wait' : 'pointer',
+              whiteSpace: 'nowrap',
+              transition: 'background 0.2s ease'
             }}
-          />
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(16, 124, 65, 0.25)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(16, 124, 65, 0.15)'; }}
+            title="Download current data view directly as Excel .xlsx"
+          >
+            <Download size={14} />
+            {searchQuery 
+              ? `Export Filtered (${activeTab === 'users' ? filteredUsers.length : filteredSubscribers.length})` 
+              : 'Export (.xlsx)'}
+          </button>
         </div>
       </div>
 

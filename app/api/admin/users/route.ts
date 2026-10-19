@@ -35,7 +35,7 @@ export async function GET() {
         role: u.role,
         createdAt: u.createdAt,
         lastLoginAt: u.lastLoginAt,
-        provider: u.accounts.length > 0 ? u.accounts[0].provider : 'local'
+        provider: u.accounts.length > 0 ? u.accounts[0].provider : (!u.password ? 'google' : 'local')
       })),
       subscribers
     });
