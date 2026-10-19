@@ -24,7 +24,7 @@ async function main() {
         color: p.color || null,
         icon: p.icon || null,
         image: post.image || null,
-        published: true,
+        published: p.published !== undefined ? p.published : true,
         blocks: p.blocks || { focusedKeyword: '' },
       };
 
@@ -44,9 +44,6 @@ async function main() {
           data: {
             slug: post.slug,
             ...postData,
-            blocks: {
-              focusedKeyword: '',
-            },
           },
         });
         createdCount++;

@@ -23,7 +23,7 @@ export const cybersecurityCloudSecurityGuide2026Post = {
     "AI Security",
     "Compliance"
   ],
-  published: false, // DRAFT status pending explicit review and approval per PRD specification
+  published: true,
   blocks: {
     focusedKeyword: "cybersecurity and cloud security",
   },
