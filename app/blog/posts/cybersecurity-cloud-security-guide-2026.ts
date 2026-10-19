@@ -8,7 +8,7 @@ export const cybersecurityCloudSecurityGuide2026Post = {
   readTime: 48,
   color: "var(--accent)",
   icon: "🛡️",
-  image: "/images/blog/cybersecurity_data_vault.webp",
+  image: "/images/blog/Cybersecurity & Cloud Security in 2026 The Complete Enterprise Guide.webp",
   tags: [
     "Cybersecurity",
     "Cloud Security",
