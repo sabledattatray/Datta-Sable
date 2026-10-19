@@ -349,7 +349,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
         {post.blocks && post.blocks.length > 0 ? (
           <BlockRenderer blocks={post.blocks} />
         ) : (
-          <div className="blog-content">
+          <div className="blog-content" suppressHydrationWarning>
             {post.content.split(/(\[\[diagram:[a-zA-Z0-9-_]+\]\])/g).map((part, index) => {
               if (part.startsWith('[[diagram:') && part.endsWith(']]')) {
                 const diagramId = part.substring(10, part.length - 2);
@@ -358,6 +358,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
               return (
                 <div
                   key={`html-${index}`}
+                  suppressHydrationWarning
                   dangerouslySetInnerHTML={{ __html: part }}
                 />
               );
