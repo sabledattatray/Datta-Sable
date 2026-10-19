@@ -37,8 +37,8 @@ Disallow: /templates/
 Disallow: /lp/
 Disallow: /infrastructure
 
-# --- Google AdSense Bot (Mediapartners-Google): STRICTLY DISALLOW THIN TOOLS ---
-# This ensures AdSense review NEVER evaluates thin tool UI pages for content quality
+# --- Google AdSense Bot (Mediapartners-Google): STRICTLY DISALLOW THIN & UTILITY PAGES ---
+# Channelling AdSense review ONLY to comprehensive, high-value editorial content
 User-agent: Mediapartners-Google
 Allow: /
 Allow: /blog/
@@ -46,6 +46,7 @@ Allow: /dashboards/
 Allow: /portfolio/
 Allow: /services/
 Allow: /about/
+Allow: /certification
 Allow: /contact/
 Allow: /privacy
 Allow: /terms
@@ -56,6 +57,11 @@ Disallow: /chains/
 Disallow: /templates/
 Disallow: /lp/
 Disallow: /infrastructure
+Disallow: /glossary/
+Disallow: /knowledge/
+Disallow: /careers/
+Disallow: /p/
+Disallow: /certifications
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
@@ -72,6 +78,7 @@ Allow: /dashboards/
 Allow: /portfolio/
 Allow: /services/
 Allow: /about/
+Allow: /certification
 Allow: /contact/
 Allow: /privacy
 Allow: /terms
@@ -82,10 +89,17 @@ Disallow: /chains/
 Disallow: /templates/
 Disallow: /lp/
 Disallow: /infrastructure
+Disallow: /glossary/
+Disallow: /knowledge/
+Disallow: /careers/
+Disallow: /p/
+Disallow: /certifications
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /preview/
+Disallow: /live-dashboard/
+Disallow: /analytics-live/
 
 # --- Google Image crawler ---
 User-agent: Googlebot-Image

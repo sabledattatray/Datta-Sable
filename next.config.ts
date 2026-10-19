@@ -31,6 +31,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/certifications',
+        destination: '/certification',
+        permanent: true,
+      },
+      {
         source: '/hiring',
         destination: '/careers',
         permanent: true,

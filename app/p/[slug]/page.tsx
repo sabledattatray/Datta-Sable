@@ -45,7 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: page.excerpt || 'Custom Dynamic Page',
       url: `${baseUrl}/p/${slug}`,
       type: 'website',
-    }
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 
