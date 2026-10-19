@@ -623,47 +623,10 @@ export default function AdminCatchAllPage() {
 
       // ─── MARKETING ───
       case 'marketing/campaigns':
-        return (
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
-              <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Marketing</p>
-                <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Email & Ad Campaigns</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Launch and monitor newsletter subscriptions and social campaigns.</p>
-              </div>
-              <button onClick={() => alert('Launching new campaign workflow')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
-                <Plus size={15} /> New Campaign
-              </button>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-              {[
-                { name: 'Monthly Tech Newsletter', channel: 'Email (Resend)', reach: '1,240 sent', conversion: '48.2% open', status: 'Completed' },
-                { name: 'Power BI consulting ads', channel: 'LinkedIn Ads', reach: '24k views', conversion: '124 clicks', status: 'Running' },
-                { name: 'SQL Query Guide PDF lead-gen', channel: 'Blog Opt-in', reach: '512 leads', conversion: '86% download', status: 'Running' },
-              ].map((c, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                    <span style={{ fontSize: 9.5, fontWeight: 800, color: css.accent, background: css.accentGlow, padding: '2px 8px', borderRadius: 6, textTransform: 'uppercase' }}>{c.channel}</span>
-                    <span style={{ fontSize: 9, fontWeight: 700, background: c.status === 'Running' ? 'rgba(16,185,129,0.1)' : 'rgba(100,116,139,0.1)', color: c.status === 'Running' ? '#10b981' : css.muted, padding: '2px 8px', borderRadius: 999 }}>{c.status}</span>
-                  </div>
-                  <h3 style={{ fontSize: 15, fontWeight: 800, color: css.text, margin: '0 0 14px' }}>{c.name}</h3>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12.5, borderTop: `1px solid ${css.border}`, paddingTop: 14 }}>
-                    <div>
-                      <div style={{ color: css.muted, fontSize: 10, fontWeight: 700, textTransform: 'uppercase' }}>Reach</div>
-                      <div style={{ fontWeight: 700, color: css.text, marginTop: 2 }}>{c.reach}</div>
-                    </div>
-                    <div>
-                      <div style={{ color: css.muted, fontSize: 10, fontWeight: 700, textTransform: 'uppercase' }}>Conversion</div>
-                      <div style={{ fontWeight: 700, color: css.text, marginTop: 2 }}>{c.conversion}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
+        if (typeof window !== 'undefined') {
+          window.location.href = '/admin/marketing/campaigns';
+        }
+        return null;
 
       case 'marketing/coupons':
         return (
