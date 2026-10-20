@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test:campaigns": "node --test tests/campaigns.test.mjs",
-    "db:seed:article": "node scripts/publish-fabric-real-time-article.cjs --publish"
+    "db:seed:article": "node scripts/publish-fabric-real-time-article.cjs --publish",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -41,7 +42,7 @@
     "@tiptap/starter-kit": "^3.22.4",
     "@types/dompurify": "^3.0.5",
     "@vercel/blob": "^2.4.0",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.20",
@@ -53,20 +54,21 @@
     "lru-cache": "^11.3.5",
     "lucide-react": "^1.11.0",
     "marked": "^18.0.14",
-    "mermaid": "^11.15.0",
+    "mermaid": "^12.2.0",
     "next": "^15.5.15",
     "next-auth": "^4.24.10",
     "next-themes": "^0.4.6",
-    "nodemailer": "^7.0.13",
+    "nodemailer": "^10.1.7",
     "papaparse": "^5.4.1",
     "react": "19.2.4",
     "react-device-detect": "^2.2.3",
     "react-dom": "19.2.4",
+    "sanitize-html": "^2.18.1",
     "sass": "^1.99.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.5",
     "simplebar-core": "^1.3.2",
     "simplebar-react": "^3.3.2",
-    "xlsx": "^0.18.5",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
     "zod": "^3.23.8",
     "zustand": "^5.0.12"
   },
@@ -79,6 +81,7 @@
     "@types/nodemailer": "^8.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.2",
     "eslint": "^9",
     "eslint-config-next": "^15.1.0",
     "glob": "^13.0.6",
@@ -98,5 +101,11 @@
     "firefox >= 100",
     "edge >= 100",
     "safari >= 15"
-  ]
+  ],
+  "overrides": {
+    "postcss": "^8.5.31",
+    "next-auth": {
+      "nodemailer": "$nodemailer"
+    }
+  }
 }

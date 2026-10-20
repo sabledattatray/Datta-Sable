@@ -8,6 +8,8 @@ import { prisma } from "@/lib/prisma";
 const db = prisma as any;
 
 export async function getCompanyProfile() {
+  const session = await getServerSession(authOptions);
+  if ((session?.user as {role?:string}|undefined)?.role !== "ADMIN") return null;
   try {
     const settings = await db.systemSetting.findMany({
       where: {

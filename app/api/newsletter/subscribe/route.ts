@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
+import { rateLimit } from '@/lib/security';
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
-
-    if (!email || !email.includes('@')) {
+    if (!rateLimit(`newsletter:${req.headers.get('x-forwarded-for')?.split(',')[0]||'unknown'}`, 10)) return NextResponse.json({success:false,error:'Too many requests.'},{status:429});
+    const input = z.object({email:z.string().trim().email().max(254).transform(value=>value.toLowerCase())}).safeParse(await req.json());
+    if (!input.success) {
       return NextResponse.json({ success: false, error: 'Invalid email address.' }, { status: 400 });
     }
 
+    const {email} = input.data;
     // Upsert or insert new subscriber
     await prisma.subscriber.upsert({
       where: { email },
@@ -20,6 +21,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ success: false, error: error instanceof SyntaxError ? 'Invalid request.' : 'Subscription could not be saved. Please try again.' }, { status: error instanceof SyntaxError ? 400 : 503 });
   }
 }

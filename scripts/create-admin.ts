@@ -7,15 +7,17 @@ import { posts as originalPosts } from '../app/blog/data';
 import { projects as originalProjects } from '../app/portfolio/data';
 
 async function main() {
-  const email = process.env.ADMIN_EMAIL || 'admin@dattasable.com';
-  const password = process.env.ADMIN_PASSWORD || 'admin123';
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !email.includes('@')) throw new Error('Set ADMIN_EMAIL explicitly before running the database seed.');
+  const existingAdmin = await prisma.user.findUnique({ where: { email } });
+  if ((!existingAdmin || password) && (!password || password.length < 12 || Buffer.byteLength(password, 'utf8') > 72)) throw new Error('Set ADMIN_PASSWORD to a unique password of at least 12 characters and at most 72 UTF-8 bytes.');
+  const hashedPassword = password ? await bcrypt.hash(password, 12) : undefined;
 
   console.log('--- SEEDING DATABASE ---');
   
   // 1. Seed Admin
   console.log('Checking Admin User...');
-  const existingAdmin = await prisma.user.findUnique({ where: { email } });
   if (existingAdmin) {
     console.log(`Admin user ${email} already exists. Ensuring ADMIN role...`);
     await prisma.user.update({
@@ -31,7 +33,7 @@ async function main() {
       data: {
         email,
         name: 'Admin User',
-        password: hashedPassword,
+        password: hashedPassword!,
         role: 'ADMIN',
         emailVerified: new Date()
       }
@@ -45,7 +47,7 @@ async function main() {
     const p = post as any;
     await prisma.post.upsert({
       where: { slug: post.slug },
-      update: {
+      update: process.env.SEED_UPDATE_CONTENT === '1' ? {
         title: post.title,
         category: post.category,
         excerpt: post.excerpt,
@@ -57,7 +59,7 @@ async function main() {
         image: post.image,
         published: p.published !== undefined ? p.published : true,
         blocks: p.blocks || { focusedKeyword: '' },
-      },
+      } : {},
       create: {
         title: post.title,
         slug: post.slug,
@@ -82,7 +84,7 @@ async function main() {
     const projectDbId = String(proj.id);
     await prisma.project.upsert({
       where: { id: projectDbId },
-      update: {
+      update: process.env.SEED_UPDATE_CONTENT === '1' ? {
         title: proj.title,
         category: proj.category,
         description: proj.desc,
@@ -96,7 +98,7 @@ async function main() {
         github: proj.github,
         live: proj.live,
         published: true,
-      },
+      } : {},
       create: {
         id: projectDbId,
         title: proj.title,

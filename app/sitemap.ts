@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
-import { posts as staticBlogPosts } from '@/app/blog/data';
+import { getPublishedBlogPosts } from '@/lib/blog-posts';
 import { CHAINS } from '@/data/chains';
 import { TEMPLATES } from '@/data/templates';
 import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
@@ -18,20 +18,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
   const baselineDate = new Date('2026-06-25');
 
-  // 1. Fetch DB blog posts (if any)
-  const dbPosts = await prisma.post.findMany({
-    where: { published: true },
-    select: { slug: true, category: true, updatedAt: true, content: true }
-  }).catch(() => []);
-
-  const filteredDbPosts = dbPosts.filter(post => !isPlaceholderPost(post as any));
-
-  const dbBlogUrls = filteredDbPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.updatedAt,
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
+  // Reuse the public catalog so database drafts cannot reappear through static fallbacks.
+  const dbPosts = await getPublishedBlogPosts();
+  const filteredDbPosts = dbPosts;
+  const dbBlogUrls = dbPosts.map(post => {
+    const candidate = new Date(post.updatedAt || post.date || baselineDate);
+    return {url: `${baseUrl}/blog/${post.slug}`, lastModified: Number.isFinite(candidate.getTime()) ? candidate : baselineDate, changeFrequency:'weekly' as const, priority:0.8};
+  });
 
   // 1b. Fetch DB custom pages (High-value custom pages only)
   const THIN_UTILITY_SLUGS = new Set(['cookies', 'privacy', 'terms', 'disclaimer', 'careers', 'infrastructure', 'faq', 'editorial-policy', 'portfolio']);
@@ -49,15 +42,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // 2. Fetch Static blog posts from data.ts
-  const filteredStaticBlogPosts = staticBlogPosts.filter(post => !isPlaceholderPost(post));
-
-  const staticBlogUrls = filteredStaticBlogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date || baselineDate),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
+  const filteredStaticBlogPosts: typeof dbPosts = [];
+  const staticBlogUrls: typeof dbBlogUrls = [];
 
   // 2b. Extract unique categories dynamically from DB and Static posts
   const allPostsForCategories = [

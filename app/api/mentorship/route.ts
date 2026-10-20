@@ -1,3 +1,7 @@
+import { randomUUID } from 'node:crypto';
+import { validateUpload, UploadValidationError } from '@/lib/upload-validation';
+import { z } from 'zod';
+import { rateLimit } from '@/lib/security';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { writeFile, mkdir } from 'fs/promises';
@@ -20,10 +24,13 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!rateLimit(`mentorship:apply:${req.headers.get('x-forwarded-for')?.split(',')[0]||'unknown'}`, 5)) return NextResponse.json({error:'Too many requests. Please try again later.'},{status:429});
   try {
     const formData = await req.formData();
     const fullName = formData.get('fullName') as string | null;
-    const email = formData.get('email') as string | null;
+    const address = z.string().trim().email().max(254).safeParse(formData.get('email'));
+    if (!address.success) return NextResponse.json({error:'Enter a valid email address.'},{status:400});
+    const email = address.data.toLowerCase();
     const linkedin = formData.get('linkedin') as string | null;
     const experience = formData.get('experience') as string | null;
     const targetRole = formData.get('targetRole') as string | null;
@@ -59,14 +66,9 @@ export async function POST(req: NextRequest) {
 
     let resumeUrl = null;
     if (file) {
-      // Validate PDF file size (Max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        return NextResponse.json({ error: 'Resume PDF exceeds 5MB size limit.' }, { status: 400 });
-      }
-      
-      const fileExt = path.extname(file.name) || '.pdf';
-      const cleanName = path.basename(file.name, fileExt).replace(/[^a-zA-Z0-9]/g, '_');
-      const filename = `resume-${cleanName}-${Date.now()}${fileExt}`;
+      const validated = await validateUpload(file, 'resume');
+      const filename = `resume-${randomUUID()}.${validated.extension}`;
+      if (process.env.VERCEL === '1' && !process.env.BLOB_READ_WRITE_TOKEN) return NextResponse.json({error:'Resume storage is temporarily unavailable.'},{status:503});
 
       if (process.env.BLOB_READ_WRITE_TOKEN) {
         const blob = await put(filename, file, { access: 'public' });
@@ -129,6 +131,7 @@ export async function POST(req: NextRequest) {
     });
 
   } catch (error) {
+    if (error instanceof UploadValidationError) return NextResponse.json({error:error.message},{status:400});
     console.error('API Mentorship POST error:', error);
     return NextResponse.json({ error: 'An error occurred during submission' }, { status: 500 });
   }

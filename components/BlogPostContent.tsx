@@ -163,7 +163,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
         mermaid.initialize({
           startOnLoad: false,
           theme: isLightTheme ? 'default' : 'dark',
-          securityLevel: 'loose',
+          securityLevel: 'strict',
           flowchart: {
             useMaxWidth: true,
             htmlLabels: false

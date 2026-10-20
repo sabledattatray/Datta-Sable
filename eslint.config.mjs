@@ -5,7 +5,9 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  { ignores: [".next*/**", "node_modules/**", "out/**", "build/**", "dist/**", ".vercel/**", "public/**", "next-env.d.ts", "admin-dashboard/**", "scratch/**", "notus/**"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  { files: ["scripts/**/*.cjs", "scripts/**/*.js", "tests/**/*.mjs"], rules: { "@typescript-eslint/no-require-imports": "off" } },
   {
     rules: {
       "@typescript-eslint/no-explicit-any": "off",

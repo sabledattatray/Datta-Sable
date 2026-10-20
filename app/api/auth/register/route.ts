@@ -1,3 +1,5 @@
+import { z } from 'zod';
+import { rateLimit } from '@/lib/security';
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
@@ -6,15 +8,17 @@ import { sendVerificationEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { email, password, firstName, lastName } = body;
+    if (!rateLimit(`register:${request.headers.get('x-forwarded-for')?.split(',')[0]||'unknown'}`, 5)) return NextResponse.json({error:'Too many requests. Please try again later.'},{status:429});
+    const input = z.object({email:z.string().trim().email().max(254).transform(value=>value.toLowerCase()),password:z.string().min(8).refine(value=>Buffer.byteLength(value,'utf8')<=72),firstName:z.string().trim().min(1).max(80),lastName:z.string().trim().min(1).max(80)}).safeParse(await request.json());
+    if (!input.success) return NextResponse.json({error:'Enter a valid email, name and password (8 characters minimum; 72 UTF-8 bytes maximum).'},{status:400});
+    const { email, password, firstName, lastName } = input.data;
 
     if (!email || !password || !firstName || !lastName) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    const existingUser = await prisma.user.findUnique({
-      where: { email }
+    const existingUser = await prisma.user.findFirst({
+      where: { email: {equals:email,mode:"insensitive"} }
     });
 
     if (existingUser) {
@@ -56,7 +60,8 @@ export async function POST(request: Request) {
     });
 
   } catch (error) {
-    console.error("Registration error:", error);
+    if (error instanceof SyntaxError) return NextResponse.json({error:"Invalid request."},{status:400});
+    console.error("Registration could not be completed.");
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

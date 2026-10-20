@@ -6,6 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { sendWelcomeEmail } from "./mail";
+import { rateLimit } from "./security";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,43 +17,23 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing credentials");
-        }
-
+        if (!credentials?.email || !credentials?.password || credentials.password.length > 1024) return null;
+        const email = credentials.email.trim().toLowerCase();
+        if (!rateLimit(`credentials:${email}`, 10)) return null;
+        let user;
         try {
-          const user = await prisma.user.findUnique({
-            where: { email: credentials.email }
-          });
-
-          if (!user || !user.password) {
-            throw new Error("Invalid login credentials");
-          }
-
-          if (!user.emailVerified) {
-            throw new Error("Please verify your email before logging in.");
-          }
-
-          const isPasswordValid = await bcrypt.compare(
-            credentials.password,
-            user.password
-          );
-
-          if (!isPasswordValid) {
-            throw new Error("Invalid login credentials");
-          }
-
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-          };
-        } catch (error) {
-          console.error("Auth error:", error);
-          throw new Error("Authentication service temporarily unavailable");
+          user = await prisma.user.findFirst({ where: { email: { equals: email, mode: 'insensitive' } } });
+        } catch {
+          console.error('Credential authentication could not access the database.');
+          throw new Error('Authentication service temporarily unavailable');
         }
+        if (!user?.password) return null;
+        const valid = await bcrypt.compare(credentials.password, user.password);
+        if (!valid) return null;
+        if (!user.emailVerified) throw new Error('Please verify your email before logging in.');
+        return { id: user.id, name: user.name, email: user.email, role: user.role };
       }
+
     }),
     ...(process.env.GOOGLE_ID && process.env.GOOGLE_SECRET ? [
       GoogleProvider({
@@ -174,9 +155,9 @@ export const authOptions: NextAuthOptions = {
           token.lastRoleCheck = now;
         } catch (error) {
           console.error("Error updating user activity:", error);
-          token.id = user.id;
-          token.role = finalRole;
-          token.lastRoleCheck = now;
+          delete token.id;
+          token.role = 'USER';
+          delete token.lastRoleCheck;
 
         }
       } else if (token.id) {
@@ -197,7 +178,9 @@ export const authOptions: NextAuthOptions = {
               delete token.id;
             }
           } catch (error) {
-            console.error("Error refreshing role from database:", error);
+            console.error("Role refresh could not access the database.");
+            token.role = "USER";
+            token.lastRoleCheck = now;
           }
         }
       }

@@ -46,7 +46,7 @@ export default function MermaidForge() {
       mermaid.initialize({
         startOnLoad: false,
         theme: isLightTheme ? 'default' : 'dark',
-        securityLevel: 'loose',
+        securityLevel: 'strict',
         flowchart: {
           useMaxWidth: true,
           htmlLabels: false

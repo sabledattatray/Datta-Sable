@@ -225,7 +225,7 @@ export default function MentorshipPage() {
 
       if (res.ok) {
         setOtpSent(true);
-        setMessage({ type: 'success', text: 'Verification code generated! Check your terminal console logs.' });
+        setMessage({ type: 'success', text: data.message || 'Check your inbox and spam folder for your verification code.' });
         if (data.devMode) {
           setDevHelper({ otp: data.otp, magicLink: data.magicLink });
         }

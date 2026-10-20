@@ -687,7 +687,7 @@ export default function AdminCatchAllPage() {
               ref={mediaFileInputRef}
               onChange={handleMediaFileUpload}
               style={{ display: 'none' }}
-              accept="image/*,application/pdf,.html,.svg"
+              accept="image/jpeg,image/png,image/webp,image/gif,application/pdf"
             />
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>

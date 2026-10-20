@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+import { validateUpload, UploadValidationError } from '@/lib/upload-validation';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
@@ -13,18 +15,15 @@ export async function POST(req: Request) {
     }
 
     const formData = await req.formData();
-    const file = formData.get('file') as File | null;
+    const validated = await validateUpload(formData.get('file'));
+    const file = validated.file;
 
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    // Sanitize and generate unique filename
-    const fileExt = path.extname(file.name) || '.png';
-    const originalName = path.basename(file.name, fileExt)
-      .toLowerCase()
-      .replace(/[^a-z0-9_-]/g, '');
-    const filename = `${originalName}-${Date.now()}${fileExt}`;
+    const filename = `media-${randomUUID()}.${validated.extension}`;
+    if (process.env.VERCEL === '1' && !process.env.BLOB_READ_WRITE_TOKEN) return NextResponse.json({error:'Persistent upload storage is not configured.'},{status:503});
 
     // If Vercel Blob Storage token is provided (typically in production/live server)
     if (process.env.BLOB_READ_WRITE_TOKEN) {
@@ -49,9 +48,10 @@ export async function POST(req: Request) {
     const fileUrl = `/uploads/${filename}`;
     return NextResponse.json({ url: fileUrl });
   } catch (error) {
+    if (error instanceof UploadValidationError) return NextResponse.json({error:error.message},{status:400});
     console.error('API Upload error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to upload file' },
+      { error: 'Failed to upload file. Please check storage configuration.' },
       { status: 500 }
     );
   }

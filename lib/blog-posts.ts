@@ -1,3 +1,5 @@
+import { mergePublishedPosts, isPlaceholderPost, type CatalogPost } from './blog-catalog';
+export interface PublicBlogPost extends CatalogPost {title:string;category:string;excerpt:string;image?:string|null;tags?:string[];}
 import { prisma } from '@/lib/prisma';
 import { posts as staticPosts } from '@/app/blog/data';
 
@@ -18,47 +20,10 @@ function serializeDbPost(dbPost: any) {
   };
 }
 
-function isPlaceholderPost(post: any) {
-  if (!post) return true;
-  const content = post.content || '';
-  return content.includes('In the rapidly evolving world of digital infrastructure and technology');
-}
-
 export async function getPublishedBlogPosts() {
-  const dbPosts: any[] = [];
-  const unpublishedSlugs = new Set<string>();
-
-
-  try {
-    const rawDbPosts = await prisma.post.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-    
-    rawDbPosts.forEach((p) => {
-      if (p.published) {
-        dbPosts.push(serializeDbPost(p));
-      } else {
-        unpublishedSlugs.add(p.slug);
-      }
-    });
-  } catch (error) {
-    console.warn('Database unavailable for blog posts; using static posts only.', error);
-  }
-
-  const postsBySlug = new Map<string, BlogPost>();
-  // Static posts in data.ts are included unless explicitly unpublished in the DB (AUD-14)
-  staticPosts.forEach((post) => {
-    if (!unpublishedSlugs.has(post.slug)) {
-      postsBySlug.set(post.slug, post);
-    }
-  });
-  dbPosts.forEach((post) => {
-    if (!isPlaceholderPost(post)) {
-      postsBySlug.set(post.slug, post);
-    }
-  });
-
-  return Array.from(postsBySlug.values()).sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
+  let databasePosts: any[] = [];
+  try {databasePosts = (await prisma.post.findMany({orderBy:{createdAt:'desc'}})).map(serializeDbPost);} catch {console.warn('Database unavailable for blog posts; using source fallback.');}
+  return mergePublishedPosts(staticPosts, databasePosts) as PublicBlogPost[];
 }
 
 export async function getPublishedBlogPost(slug: string) {

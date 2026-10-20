@@ -1,6 +1,7 @@
 import { sendEmail } from "./email-delivery";
+import { escapeHtml } from "./campaigns/shared";
 
-const domain = process.env.NEXTAUTH_URL || "http://localhost:3000";
+const domain = process.env.NEXTAUTH_URL || "https://dattasable.com";
 
 const transporter = { sendMail: sendEmail };
 
@@ -36,7 +37,7 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
     subject: "Welcome to dattasable.com! 🚀",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; background-color: #000; color: #fff; border-radius: 10px; border: 1px solid #1a1a1a;">
-        <h2 style="color: #c9f31d; text-align: center; margin-bottom: 20px;">Welcome aboard, ${name}!</h2>
+        <h2 style="color: #c9f31d; text-align: center; margin-bottom: 20px;">Welcome aboard, ${escapeHtml(name)}!</h2>
         <p>Hello ${name},</p>
         <p>Thanks for registering on the <strong>dattasable.com</strong> data platform. Your account is active, and you can now explore the latest technical guides and resources.</p>
         

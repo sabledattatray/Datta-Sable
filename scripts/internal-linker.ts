@@ -488,7 +488,7 @@ const VALID_SYSTEM_ROUTES = new Set([
 ]);
 
 function auditLink(sourceSlug: string, targetUrl: string) {
-  let cleanTarget = targetUrl.split('#')[0]; // strip anchors
+  const cleanTarget = targetUrl.split('#')[0]; // strip anchors
   
   if (cleanTarget.startsWith('/blog/')) {
     const targetSlug = cleanTarget.replace('/blog/', '');
@@ -545,7 +545,7 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
   const matchingParagraphs = $(allowedSelector);
   const totalParagraphsCount = matchingParagraphs.length;
   
-  let anchorRotationIndices: Record<string, number> = {};
+  const anchorRotationIndices: Record<string, number> = {};
 
   matchingParagraphs.each((paragraphIndex, element) => {
     if (insertedCount >= linkBudget) return;
@@ -561,7 +561,7 @@ function executeAdvancedLinking(post: PostMeta, allPosts: PostMeta[]): string {
       if (insertedCount >= linkBudget) return;
       if (node.type !== 'text') return; 
 
-      let text = $(node).text();
+      const text = $(node).text();
       let modified = false;
       
       // Try entity mappings
