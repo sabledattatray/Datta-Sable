@@ -1,0 +1,17 @@
+{
+  "words": 6078,
+  "estimatedReadMinutes": 28,
+  "titleCharacters": 58,
+  "descriptionCharacters": 160,
+  "sections": 19,
+  "tables": 4,
+  "codeBlocks": 9,
+  "internalLinks": 10,
+  "officialReferenceLinks": 13,
+  "image": {
+    "width": 1200,
+    "height": 630,
+    "bytes": 89882
+  },
+  "draft": true
+}
