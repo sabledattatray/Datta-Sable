@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ShieldCheck } from 'lucide-react';
-import { getDynamicPage } from '@/lib/dynamic-page';
-import DynamicPageRenderer from '@/components/DynamicPageRenderer';
 
 export const metadata: Metadata = {
   title: 'Cookie Policy | Datta Sable',
@@ -13,10 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default async function CookiesPage() {
-  const dynamicPage = await getDynamicPage('cookies');
-  if (dynamicPage) {
-    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
-  }
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -28,7 +22,7 @@ export default async function CookiesPage() {
         </div>
         <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '3rem' }}>Cookie Policy</h1>
         <div className="prose prose-invert" style={{ color: 'var(--muted)', lineHeight: 1.8 }}>
-          <p>Last Updated: May 01, 2026</p>
+          <p>Last Updated: October 20, 2026</p>
           <p>This Cookie Policy explains how Datta Sable ("we", "us", or "our") uses cookies and similar technologies when you visit our website at <a href="https://dattasable.com" style={{ color: 'var(--accent)' }}>dattasable.com</a>.</p>
           
           <h2 style={{ color: 'var(--text)', marginTop: '2rem' }}>1. What are cookies?</h2>
@@ -46,7 +40,7 @@ export default async function CookiesPage() {
           <p>In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the service and deliver advertisements on and through the service (e.g., Google AdSense).</p>
 
           <h2 style={{ color: 'var(--text)', marginTop: '2rem' }}>4. Managing your cookies</h2>
-          <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+          <p>Use Cookie preferences in the footer to accept or reject optional analytics at any time. Optional analytics and first-party visit tracking stay off until accepted. Withdrawing consent reloads the page to stop active analytics scripts; you can delete previously stored cookies through your browser. Essential sign-in storage and theme preferences are separate. This analytics control is not a certified advertising consent platform. Before advertising is enabled, advertising consent must be configured separately where required, including a Google-certified CMP for visitors in the EEA, UK and Switzerland.</p>
         </div>
       </div>
       <Footer />

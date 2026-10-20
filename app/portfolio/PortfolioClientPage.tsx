@@ -1259,7 +1259,7 @@ function PortfolioContent() {
               </h2>
               <p style={{ color: 'var(--muted)', fontSize: '0.98rem', lineHeight: 1.7, marginTop: '0.5rem' }}>
                 I avoid fragile, one-off spreadsheets and decorative mockups. Every engagement follows a disciplined
-                five-phase pipeline designed to guarantee data reconciliation, low query latency, and clear operational ownership.
+                five-phase pipeline designed to support data reconciliation, query-performance review, and clear operational ownership.
               </p>
             </div>
 

@@ -8,22 +8,20 @@ import FeaturedSeries from '@/components/home/FeaturedSeries';
 import AboutAuthor from '@/components/home/AboutAuthor';
 import StatsGrid from '@/components/home/StatsGrid';
 import ProjectsGrid from '@/components/home/ProjectsGrid';
-import Testimonials from '@/components/home/Testimonials';
 import FinalCTA from '@/components/home/FinalCTA';
 import FAQ from '@/components/home/FAQ';
 
-export default function BelowTheFold({ posts }: { posts: any[] }) {
+export default function BelowTheFold({ posts, articleCount, categoryCount }: { posts: any[]; articleCount: number; categoryCount: number }) {
   return (
     <>
       <StartHere />
       <LatestInsights posts={posts} />
-      <RecentlyUpdated />
+      <RecentlyUpdated posts={posts} />
       <BrowseCategories />
       <FeaturedSeries />
       <AboutAuthor />
-      <StatsGrid />
+      <StatsGrid articleCount={articleCount} categoryCount={categoryCount} />
       <ProjectsGrid />
-      <Testimonials />
       <FinalCTA />
       <FAQ />
     </>

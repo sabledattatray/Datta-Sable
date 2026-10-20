@@ -54,7 +54,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'aura-capital-sales',
     slug: 'aura-capital-sales',
     title: "Aura Capital & FinTech Group \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,036 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,036 sample transactions.",
     clientOrOrg: "Aura Capital & FinTech Group",
     category: "FinTech & Commercial BI",
     industry: "FinTech & Capital Markets",
@@ -68,10 +68,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1036,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,036 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,036 sample transactions.",
     businessProblem: "Fragmented regional spreadsheets led to inconsistent gross margin visibility, unverified commission payouts, and delayed risk exposure calculations across tier-1 institutional trading clients.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$3.88M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$2.53M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "65.3%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "958", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Risk & Compliance software (AML Engine & Credit Risk Evaluator) accounts for 45.5% of total gross revenue.", "EMEA and LATAM theaters exceeded sales quotas by 102.0% and 109.9% respectively.", "Direct Enterprise and Partner Ecosystem channels deliver 78% of operating profit with deal sizes 2.3x larger than inside sales.", "Top 4 institutional accounts (London Capital, Tokyo Sovereign, SingaTrade, Zurich Bank) maintain 100% contract retention."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$3.88M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$2.53M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "65.3%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "958", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Reconcile transaction amounts with the ledger total before interpreting margin.","Compare commission calculations with the documented rule and the correct period.","Check that a region selection filters records without changing their grain."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -87,9 +87,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,036 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,036 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,036 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,036 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -151,10 +151,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/aura-capital/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,036 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,036 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,036 sample Rows',
+        description: 'The foundational transactional ledger containing 1,036 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,036 Certified Institutional Ledger Records',
+          '1,036 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -199,7 +199,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'biosynex-healthcare',
     slug: 'biosynex-healthcare',
     title: "BioSynex Healthcare Technologies \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "BioSynex Healthcare Technologies",
     category: "Healthcare & Life Sciences",
     industry: "Healthcare & Medical Devices",
@@ -213,10 +213,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Hospital networks and sovereign health authorities operated across disjointed diagnostic procurement systems, delaying critical ICU equipment shipments and causing inventory stockouts in high-demand surgical theaters.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$26.01M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$16.46M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "63.3%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Rapid Molecular PCR Diagnostic Suites and ICU Continuous Monitors represent 54% of hospital enterprise billings.", "North American university hospitals and private clinic chains drove 104.2% quota attainment in Q3/Q4.", "Institutional clinical contracts achieved an average gross margin spread of 63.3% across all regional hubs.", "Integrated reagent recurring supply agreements generated $8.2M in predictable annual contract volume."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$26.01M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$16.46M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "63.3%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Distinguish procurement, shipment and delivery dates before measuring lead time.","Check product and facility keys for duplicates before aggregating amounts.","Use fictional or properly authorized records; avoid exposing patient or buyer information."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -232,9 +232,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -296,10 +296,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/biosynex-healthcare/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -344,7 +344,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'helios-cleanenergy',
     slug: 'helios-cleanenergy',
     title: "Helios CleanEnergy & Power Grid AG \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     clientOrOrg: "Helios CleanEnergy & Power Grid AG",
     category: "Energy & Utilities",
     industry: "Renewable Energy & Power Grid AG",
@@ -358,10 +358,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 2502,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     businessProblem: "Utility operators struggled to balance volatile grid feed-in tariffs, cross-border transmission margins, and commercial microgrid power purchase agreements (PPAs) across decentralized wind and solar assets.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$273.88M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$162.78M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "59.4%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Utility-Scale Lithium Storage and High-Voltage Solar Grid Inverters accounted for 61.8% of capital delivery.", "Central European municipal utilities and industrial parks exceeded energy delivery contracts by 108.4%.", "Automated peak-shaving tariff modeling expanded average contract margin spreads from 48% to 62.5%.", "2,502 audited telemetry billing rows confirmed zero transmission settlement discrepancies across 12 quarters."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$273.88M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$162.78M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "59.4%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Check that energy quantities use compatible units before comparing assets.","Separate tariff assumptions from observed transaction amounts.","Reconcile source periods before treating a grid or region total as current."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -377,9 +377,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '2,502 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '2,502 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['2,502 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['2,502 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -441,10 +441,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/helios-cleanenergy/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '2,502 Certified Rows',
-        description: 'The foundational transactional ledger containing 2,502 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '2,502 sample Rows',
+        description: 'The foundational transactional ledger containing 2,502 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '2,502 Certified Institutional Ledger Records',
+          '2,502 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -489,7 +489,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'meridian-global-retail',
     slug: 'meridian-global-retail',
     title: "Meridian Global Retailers Inc. \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "Meridian Global Retailers Inc.",
     category: "Retail & E-Commerce",
     industry: "Omnichannel Retail & FMCG",
@@ -503,10 +503,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Global retail operations faced channel cannibalization between flagship retail store distribution, third-party logistics fulfillment, and direct-to-consumer digital marketplace sales.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$992.6K", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$624.8K", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "62.9%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Premium Consumer Electronics and Automated Smart Home categories delivered 52.4% of consolidated gross margin.", "APAC and North American retail distribution hubs delivered 103.7% of target annual volume.", "Unified SKU cost accounting identified 3 underperforming product lines, reallocating $1.4M to high-velocity stock.", "Marketplace channel velocity increased inventory turns from 4.2x to 6.8x per fiscal year."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$992.6K", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$624.8K", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "62.9%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Deduplicate order lines when combining store and online channels.","Separate returns from discounts when reconciling net sales.","Compare product mix using the same period and currency."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -522,9 +522,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -586,10 +586,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/meridian-global-retail/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -634,7 +634,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'nexus-cloud-technologies',
     slug: 'nexus-cloud-technologies',
     title: "Nexus Cloud Technologies Inc. \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "Nexus Cloud Technologies Inc.",
     category: "Enterprise SaaS & Cloud",
     industry: "Enterprise Cloud & SaaS Infrastructure",
@@ -648,10 +648,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Cloud infrastructure providers suffered from opaque multi-cloud compute consumption, unverified enterprise SLA credits, and unpredictable annual recurring revenue (ARR) churn across high-tier enterprise clients.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$9.08M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$5.77M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "63.5%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Managed Kubernetes Clusters and Multi-Cloud Threat Intelligence drove 67.2% of annual recurring contract value.", "Enterprise direct sales reps closed deals with an average contract value (ACV) of $285K across tier-1 banks.", "Blended gross margins stabilized at 71.4% following automated compute node cost optimization.", "Net Revenue Retention (NRR) reached 124% driven by seamless automated compute tier expansion."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$9.08M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$5.77M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "63.5%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Separate recurring charges from one-time charges before calculating a recurring metric.","Reconcile credits with the billing period they affect.","Check whether usage quantities and invoice amounts represent the same grain."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -667,9 +667,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -731,10 +731,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/nexus-cloud-technologies/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -779,7 +779,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'nexus-enterprise-operations',
     slug: 'nexus-enterprise-operations',
     title: "Nexus Enterprise Operations Group \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     clientOrOrg: "Nexus Enterprise Operations Group",
     category: "Operations & Supply Chain",
     industry: "Supply Chain & Operations Group",
@@ -793,10 +793,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 2502,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     businessProblem: "Global freight operations encountered escalating port demurrage fees, untracked multimodal transit delays, and decentralized fleet route procurement across international trade corridors.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$24.84M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$16.03M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "64.6%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Automated Container Logistics and Freight Forwarding services generated $34.2M in cross-border trade volume.", "Trans-Pacific and European logistics corridors achieved a 98.6% on-time container delivery reliability index.", "Dynamic carrier freight rate cross-tabulation reduced spot rate carrier procurement variance by 18.2%.", "2,502 verified operational manifests were consolidated into a single auditable freight billing matrix."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$24.84M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$16.03M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "64.6%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Distinguish a shipment, a shipment leg and an invoice before counting activity.","Check whether delay measures use planned or revised dates.","Reconcile route-level costs without duplicating shared charges."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -812,9 +812,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '2,502 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '2,502 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['2,502 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['2,502 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -876,10 +876,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/nexus-enterprise-operations/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '2,502 Certified Rows',
-        description: 'The foundational transactional ledger containing 2,502 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '2,502 sample Rows',
+        description: 'The foundational transactional ledger containing 2,502 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '2,502 Certified Institutional Ledger Records',
+          '2,502 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -924,7 +924,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'omnimedia-marketing-network',
     slug: 'omnimedia-marketing-network',
     title: "OmniMedia Performance Marketing Network \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     clientOrOrg: "OmniMedia Performance Marketing Network",
     category: "Media & AdTech",
     industry: "AdTech & Performance Marketing",
@@ -938,10 +938,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 2502,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     businessProblem: "Media buying agencies lacked auditable attribution models across programmatic real-time bidding exchanges, connected TV (CTV) inventory, and omnichannel direct sponsor partnerships.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$86.76M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$55.8M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "64.3%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Programmatic CTV campaigns and Automated Social Bidding delivered 58.7% of net media billings.", "Target Return on Ad Spend (ROAS) exceeded corporate benchmarks by 114.2% across global retail brands.", "Cross-channel attribution modeling reduced programmatic ad placement cost-per-acquisition (CPA) by 22.4%.", "Quarterly media pacing reports consolidated 2,502 live advertising campaign records into real-time dashboards."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$86.76M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$55.8M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "64.3%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Define an attribution window before comparing channel results.","Separate observed conversions from causal claims about a campaign.","Reconcile media costs and conversion counts to the same reporting period."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -957,9 +957,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '2,502 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '2,502 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['2,502 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['2,502 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -1021,10 +1021,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/omnimedia-marketing-network/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '2,502 Certified Rows',
-        description: 'The foundational transactional ledger containing 2,502 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '2,502 sample Rows',
+        description: 'The foundational transactional ledger containing 2,502 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '2,502 Certified Institutional Ledger Records',
+          '2,502 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -1069,7 +1069,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'sovereign-resorts-hospitality',
     slug: 'sovereign-resorts-hospitality',
     title: "Sovereign Resorts & Luxury Hospitality \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "Sovereign Resorts & Luxury Hospitality",
     category: "Hospitality & Luxury",
     industry: "Luxury Hospitality & Resorts",
@@ -1083,10 +1083,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Ultra-luxury resort properties faced seasonal occupancy swings, inconsistent food & beverage yield management, and fragmented high-net-worth VIP guest spend tracking.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$11.44M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$8.14M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "71.2%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Private Island Villas and Presidential Suites accounted for 48.2% of total property revenue.", "Average Daily Rate (ADR) grew 14.8% YoY with blended RevPAR (Revenue Per Available Room) exceeding $1,420.", "Direct VIP concierge reservations captured 72% of bookings, completely eliminating third-party OTA commissions.", "Wellness spa and curated culinary dining programs expanded ancillary revenue per guest by 34.5%."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$11.44M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$8.14M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "71.2%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Define available room nights before computing an occupancy ratio.","Separate room revenue from food, beverage and other charges.","Compare equivalent seasonal periods and investigate cancelled bookings."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -1102,9 +1102,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -1166,10 +1166,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/sovereign-resorts-hospitality/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -1214,7 +1214,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'st-andrews-university',
     slug: 'st-andrews-university',
     title: "St. Andrews Collegiate University System \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     clientOrOrg: "St. Andrews Collegiate University System",
     category: "Education & Institutional",
     industry: "Higher Education & Collegiate System",
@@ -1228,10 +1228,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 2502,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 2,502 sample transactions.",
     businessProblem: "Multi-campus university systems struggled to reconcile decentralized academic faculty budgets, endowed research grants, competitive student tuition tiers, and campus housing overhead.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$146.31M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$100.17M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "68.5%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Graduate STEM Degree Programs and Executive MBA Cohorts accounted for 51.2% of institutional tuition cash flows.", "Endowed research chair funding and corporate partnerships exceeded operating budget targets by 106.8%.", "Optimized classroom and laboratory space utilization lowered administrative facility costs by 12.4%.", "2,502 academic department operational budget line items were reconciled into a single unified ledger."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$146.31M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$100.17M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "68.5%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$8.7K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Separate restricted funding from unrestricted operating balances.","Define whether records represent students, enrollments or invoices.","Reconcile department totals with the approved source period."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -1247,9 +1247,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '2,502 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '2,502 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['2,502 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['2,502 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -1311,10 +1311,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/st-andrews-university/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '2,502 Certified Rows',
-        description: 'The foundational transactional ledger containing 2,502 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '2,502 sample Rows',
+        description: 'The foundational transactional ledger containing 2,502 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '2,502 Certified Institutional Ledger Records',
+          '2,502 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -1359,7 +1359,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'talentpulse-people-systems',
     slug: 'talentpulse-people-systems',
     title: "TalentPulse Global People Systems \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "TalentPulse Global People Systems",
     category: "HRTech & Workforce",
     industry: "HRTech & Workforce Intelligence",
@@ -1373,10 +1373,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Global enterprise organizations lacked unified visibility into distributed workforce compensation structures, cross-border contractor taxes, and employee retention health metrics.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$78.4M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$31.67M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "40.4%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Global Payroll Compliance and AI Talent Acquisition suites drove 64% of recurring software contract fees.", "Enterprise clients with over 5,000 employees achieved 100% contract renewal rates across 4 quarters.", "Workforce retention index predictive modeling reduced voluntary engineering department turnover by 28%.", "Dynamic regional tax withholding engines eliminated cross-border compliance penalties across 24 countries."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$78.4M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$31.67M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "40.4%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Define headcount as of a cutoff rather than counting every historical record.","Distinguish employees from assignments and contractors.","Apply access controls before sharing compensation-related examples."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -1392,9 +1392,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -1456,10 +1456,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/talentpulse-people-systems/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -1504,7 +1504,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'titan-industrial-systems',
     slug: 'titan-industrial-systems',
     title: "Titan Industrial Systems AG \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "Titan Industrial Systems AG",
     category: "Manufacturing & Industry",
     industry: "Heavy Manufacturing & Robotics AG",
@@ -1518,10 +1518,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Industrial machinery manufacturers faced extended supply chain lead times, erratic precision component scrap rates, and decentralized OEM service warranty claims.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$50.5M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$30.23M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "59.9%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["High-Precision CNC Machining Centers and Automated Robotic Welding Cells generated 68.4% of total sales revenue.", "OEM aftermarket replacement parts and preventative service maintenance contracts delivered 74.2% gross profit margins.", "Industrial factory floor automation reduced warranty service claim turnaround times from 21 days to 4.2 days.", "Managing director territory quotas across DACH, North America, and East Asia exceeded annual targets by 103.5%."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$50.5M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$30.23M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "59.9%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Distinguish ordered, produced and shipped quantities.","Check units of measure when comparing component scrap.","Reconcile warranty and production costs without double-counting returns."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -1537,9 +1537,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -1601,10 +1601,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/titan-industrial-systems/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'
@@ -1649,7 +1649,7 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     id: 'vanguard-realty-capital',
     slug: 'vanguard-realty-capital',
     title: "Vanguard Realty Capital Partners \u2014 Executive Performance & Commercial Sales Dashboard",
-    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    subtitle: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     clientOrOrg: "Vanguard Realty Capital Partners",
     category: "Real Estate & Investment",
     industry: "Commercial Real Estate & REIT Capital",
@@ -1663,10 +1663,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
     totalRecordsCount: 1002,
     sheetsCount: 6,
     techStack: ['Microsoft Excel 365', 'Dynamic SUMIFS', 'XLOOKUP Engine', 'Pivot Tables & Slicers', 'Automated Quota Scoring'],
-    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 certified transactions.",
+    executiveSummary: "Enterprise multi-sheet commercial intelligence model with quota attainment, dynamic cross-tabulations, and 1,002 sample transactions.",
     businessProblem: "Commercial property funds struggled to model complex tenant lease expirations, triple-net (NNN) operating cost pass-throughs, and portfolio-wide capital capitalization rate (Cap Rate) sensitivities.",
-    keyKPIs: [{"label": "GROSS REVENUE", "value": "$102.12M", "subtext": "\u25cf Certified Actuals"}, {"label": "GROSS PROFIT", "value": "$62.33M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "61.0%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
-    strategicFindings: ["Class-A Life Science Laboratories and High-Density Logistics Warehouses generated 62% of portfolio Net Operating Income (NOI).", "Weighted Average Lease Expiry (WALE) stabilized at 8.4 years across investment-grade corporate tenants.", "Automated CAM (Common Area Maintenance) expense auditing recovered $1.85M in tenant utility chargeback leakage.", "Portfolio capitalization yield averaged an attractive 7.2% spread over sovereign benchmark yields."],
+    keyKPIs: [{"label": "GROSS REVENUE", "value": "$102.12M", "subtext": "\u25cf sample Actuals"}, {"label": "GROSS PROFIT", "value": "$62.33M", "subtext": "\u25cf Net Operating Spread"}, {"label": "BLENDED MARGIN", "value": "61.0%", "subtext": "\u25cf Target Attained"}, {"label": "UNITS SHIPPED", "value": "$3.6K", "subtext": "\u25cf Product Volume"}],
+    strategicFindings: ["Separate occupied area from leased area before using an occupancy measure.","Keep lease expiry assumptions and reporting dates visible.","Distinguish scenario yields from realized investment returns."],
     sheets: [
       {
         name: 'Executive Dashboard',
@@ -1682,9 +1682,9 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
       },
       {
         name: 'Sales Transactions',
-        description: '1,002 certified institutional entries detailing products, reps, client tiers, margins, and dates.',
+        description: '1,002 sample entries detailing products, reps, client tiers, margins, and dates.',
         type: 'Transaction Ledger',
-        highlights: ['1,002 Certified Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
+        highlights: ['1,002 sample Rows', 'Unit Economics & COGS', 'Sales Channel Attribution', 'City & Country Coordinates']
       },
       {
         name: 'Regional Performance',
@@ -1746,10 +1746,10 @@ export const EXCEL_PROJECTS: ExcelProject[] = [
         imageSrc: '/images/projects/vanguard-realty-capital/sales_transactions_ledger.png',
         width: 2298,
         height: 646,
-        badge: '1,002 Certified Rows',
-        description: 'The foundational transactional ledger containing 1,002 certified institutional sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
+        badge: '1,002 sample Rows',
+        description: 'The foundational transactional ledger containing 1,002 sample sales records with transaction IDs, contract dates, client organizations, SKUs, sales reps, list prices, COGS, and city coordinates.',
         keyHighlights: [
-          '1,002 Certified Institutional Ledger Records',
+          '1,002 sample Ledger Records',
           'Standardized Data Taxonomies for Region, Rep, and Channel',
           'Unit Economics, Cost of Goods Sold (COGS), and Margin %',
           'Granular Attribution from Contract Level to Region'

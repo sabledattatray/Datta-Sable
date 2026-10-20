@@ -1,13 +1,13 @@
+import { googleConsentBootstrap } from '@/lib/google-consent';
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import type { Viewport } from 'next';
 import { Providers } from "@/components/Providers";
-import { Suspense } from 'react';
-import Script from 'next/script';
 import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import { headers } from 'next/headers';
+import { getPublishedBlogPost } from '@/lib/blog-posts';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -67,11 +67,18 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const headerList = await headers();
   const nonce = headerList.get('x-nonce') || undefined;
+  const pathname = headerList.get('x-pathname') || '';
+  const articleMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
+  const adsEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
+  const adArticle = adsEnabled && articleMatch ? await getPublishedBlogPost(articleMatch[1]) : null;
+  // Explicitly enable serving only after approval and CMP/account configuration.
+  const serveAds = adsEnabled && Boolean(adArticle);
 
   return (
     <html lang="en" suppressHydrationWarning className="dark" nonce={nonce}>
       <head>
         <meta name="color-scheme" content="light dark" />
+        <meta name="google-adsense-account" content="ca-pub-4242010382827250" />
         {/* Critical font preloads — removes all 4 fonts from the blocking chain */}
         <link rel="preload" href="/fonts/syne-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/syne-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -181,7 +188,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
+              ${googleConsentBootstrap}
               (function() {
                 try {
                   var theme = localStorage.getItem('theme');
@@ -201,12 +208,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Third-Party Integrations preconnect and dns-prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <script
-          async
-          suppressHydrationWarning
+        {serveAds && <script
+          async nonce={nonce}
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
           crossOrigin="anonymous"
-        ></script>
+        />}
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <Providers>
@@ -218,7 +224,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
             {/* High-Performance Third-Party Script Optimization */}
             <PerformanceOptimizer
-              gtmId="GTM-TGNKBFWC"
               googleAnalyticsId="G-Q4GEY4N9WN"
               googleSignInClientId={process.env.GOOGLE_ID || ""}
               nonce={nonce}

@@ -6,46 +6,6 @@ import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
 import Image from 'next/image';
 
-interface Post {
-  slug: string;
-  title: string;
-  category: string;
-  excerpt: string;
-  readTime?: number;
-  date: string;
-  image?: string | null;
-}
-
-const LATEST_POSTS: Post[] = [
-  {
-    slug: 'case-study-n8n-automated-authority-scaling',
-    title: "Case Study: Architecting the 'Auto-Operator' via n8n Orchestration",
-    category: 'Case Study',
-    excerpt: "How we scaled technical distribution for technical creator workflows using n8n and multi-agent AI pipelines.",
-    readTime: 12,
-    date: 'May 14, 2026',
-    image: '/images/blog/case_study_n8n_automation.webp'
-  },
-  {
-    slug: 'precision-prompt-architecture-framework',
-    title: 'Precision Prompt Architecture™: The Blueprint for Precision AI',
-    category: 'Framework',
-    excerpt: 'Master the core technical structure for reliable LLM outputs. Learn how to eliminate hallucination through structured prompt design.',
-    readTime: 15,
-    date: 'May 14, 2026',
-    image: '/images/blog/surgical_prompt_hero.webp'
-  },
-  {
-    slug: 'case-study-precision-prompt-architecture-consistency',
-    title: 'Case Study: Achieving 99.8% Output Consistency via Precision Architecture™',
-    category: 'Case Study',
-    excerpt: 'How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline.',
-    readTime: 12,
-    date: 'May 14, 2026',
-    image: '/images/blog/case_study_prompt_architecture.webp'
-  }
-];
-
 const formatDisplayDate = (dateStr: string) => {
   if (!dateStr) return 'June 2026';
   try {
@@ -65,7 +25,7 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
   const [activeTab, setActiveTab] = useState<'latest' | 'featured' | 'trending'>('latest');
 
   const getFilteredPosts = () => {
-    const rawPosts = posts && posts.length > 0 ? posts : LATEST_POSTS;
+    const rawPosts = posts || [];
     if (activeTab === 'latest') {
       return rawPosts.slice(0, 6);
     }

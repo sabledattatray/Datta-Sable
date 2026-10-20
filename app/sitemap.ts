@@ -1,172 +1,30 @@
 import { MetadataRoute } from 'next';
-import { prisma } from '@/lib/prisma';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
-import { CHAINS } from '@/data/chains';
-import { TEMPLATES } from '@/data/templates';
-import { KNOWLEDGE_ARTICLES } from '@/data/knowledge';
-import { LANDING_PAGES } from '@/data/landing-pages';
-import { GLOSSARY_TERMS } from '@/data/glossary';
 import { EXCEL_PROJECTS } from '@/data/excelProjects';
 
-function isPlaceholderPost(post: { content?: string }) {
-  if (!post) return true;
-  const content = post.content || '';
-  return content.includes('In the rapidly evolving world of digital infrastructure and technology');
-}
+// A build-time database fallback must never freeze an incomplete public sitemap.
+export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://dattasable.com';
-  const baselineDate = new Date('2026-06-25');
-
-  // Reuse the public catalog so database drafts cannot reappear through static fallbacks.
-  const dbPosts = await getPublishedBlogPosts();
-  const filteredDbPosts = dbPosts;
-  const dbBlogUrls = dbPosts.map(post => {
-    const candidate = new Date(post.updatedAt || post.date || baselineDate);
-    return {url: `${baseUrl}/blog/${post.slug}`, lastModified: Number.isFinite(candidate.getTime()) ? candidate : baselineDate, changeFrequency:'weekly' as const, priority:0.8};
-  });
-
-  // 1b. Fetch DB custom pages (High-value custom pages only)
-  const THIN_UTILITY_SLUGS = new Set(['cookies', 'privacy', 'terms', 'disclaimer', 'careers', 'infrastructure', 'faq', 'editorial-policy', 'portfolio']);
-  const dbPages = await prisma.page.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true }
-  }).catch(() => []);
-
-  const filteredDbPages = dbPages.filter(p => !THIN_UTILITY_SLUGS.has(p.slug));
-
-  const dbCustomPageUrls = filteredDbPages.map((page) => ({
-    url: `${baseUrl}/p/${page.slug}`,
-    lastModified: page.updatedAt,
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
-
-  const filteredStaticBlogPosts: typeof dbPosts = [];
-  const staticBlogUrls: typeof dbBlogUrls = [];
-
-  // 2b. Extract unique categories dynamically from DB and Static posts
-  const allPostsForCategories = [
-    ...filteredDbPosts.map(p => ({ category: p.category || 'General' })),
-    ...filteredStaticBlogPosts
+  // Deliberately exclude noindex utility, preview, category and custom-page routes.
+  const routes = ['', '/blog', '/blog/microsoft-fabric', '/about', '/portfolio',
+    '/certification', '/services', '/services/consulting', '/services/dashboards',
+    '/services/web-solutions', '/services/graphic-design', '/services/seo-optimization',
+    '/services/automation', '/services/web-design', '/contact', '/start-here',
+    '/dashboards', '/dashboards/world-business', '/dashboards/aura-capital-sales',
+    '/dashboards/rider-ops', '/privacy', '/terms', '/disclaimer', '/cookies',
+    '/editorial-policy'];
+  const posts = await getPublishedBlogPosts();
+  const urls: MetadataRoute.Sitemap = [
+    ...routes.map(route => ({ url: baseUrl + route })),
+    ...EXCEL_PROJECTS.map(project => ({ url: baseUrl + '/dashboards/' + project.slug })),
+    ...posts.map(post => {
+      const date = new Date(post.updatedAt || post.date || post.createdAt || '');
+      return { url: baseUrl + '/blog/' + post.slug,
+        ...(Number.isFinite(date.getTime()) && date.getTime() <= Date.now() ? { lastModified: date } : {}) };
+    }),
   ];
-  const uniqueCategories = new Set<string>();
-  allPostsForCategories.forEach(post => {
-    const cat = post.category || 'General';
-    uniqueCategories.add(cat.trim().toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and'));
-  });
-
-  const categoryUrls = Array.from(uniqueCategories).map(catSlug => ({
-    url: `${baseUrl}/category/${catSlug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
-
-  // 3. Static main pillar pages (High-value content pages only)
-  const staticUrls = [
-    '',
-    '/blog',
-    '/about',
-    '/portfolio',
-    '/certification',
-    '/services',
-    '/services/consulting',
-    '/services/dashboards',
-    '/services/web-solutions',
-    '/services/graphic-design',
-    '/services/seo-optimization',
-    '/services/automation',
-    '/services/web-design',
-    '/contact',
-    '/start-here',
-    '/dashboards',
-    '/dashboards/world-business',
-    '/dashboards/aura-capital-sales',
-    '/dashboards/rider-ops',
-    '/privacy',
-    '/terms',
-    '/disclaimer',
-    '/cookies',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: baselineDate,
-    changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1.0 : 0.8,
-  }));
-
-  // 4. Execution Chains
-  const chainUrls = CHAINS.map((chain) => ({
-    url: `${baseUrl}/chains/${chain.slug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.9,
-  }));
-
-  // 5. Template Packs
-  const templateUrls = TEMPLATES.map((template) => ({
-    url: `${baseUrl}/templates/${template.slug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  // 6. Knowledge Hub
-  const knowledgeUrls = KNOWLEDGE_ARTICLES.map((article) => ({
-    url: `${baseUrl}/knowledge/${article.slug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  // 7. Micro-Landing Pages
-  const landingPageUrls = LANDING_PAGES.map((lp) => ({
-    url: `${baseUrl}/lp/${lp.slug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.9,
-  }));
-
-  // 8. Glossary Terms
-  const glossaryUrls = GLOSSARY_TERMS.map((term) => ({
-    url: `${baseUrl}/glossary/${term.slug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.75,
-  }));
-
-  // 9. Excel BI Project Showcases
-  const excelProjectUrls = EXCEL_PROJECTS.map((p) => ({
-    url: `${baseUrl}/dashboards/${p.slug}`,
-    lastModified: baselineDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.85,
-  }));
-
-  const allUrls = [
-    ...staticUrls,
-    ...excelProjectUrls,
-    ...dbBlogUrls,
-    ...staticBlogUrls,
-    // ...categoryUrls, // REMOVED: category pages are noindex for AdSense
-  ];
-
-  // De-duplicate by URL to prevent crawler warnings in Search Console
-  const uniqueUrlsMap = new Map<string, typeof allUrls[0]>();
-  for (const item of allUrls) {
-    if (!uniqueUrlsMap.has(item.url)) {
-      uniqueUrlsMap.set(item.url, item);
-    } else {
-      const existing = uniqueUrlsMap.get(item.url)!;
-      // Prefer specific database modification dates over generic baselineDate instances
-      const existingIsBaseline = existing.lastModified.getTime() === baselineDate.getTime();
-      const itemIsBaseline = item.lastModified.getTime() === baselineDate.getTime();
-      
-      if (existingIsBaseline && !itemIsBaseline) {
-        uniqueUrlsMap.set(item.url, item);
-      }
-    }
-  }
-
-  return Array.from(uniqueUrlsMap.values());
+  // Omit invented baseline dates; lastmod must describe real content changes.
+  return [...new Map(urls.map(item => [item.url, item])).values()];
 }

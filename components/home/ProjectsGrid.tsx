@@ -6,44 +6,44 @@ import { BarChart3, Database, Target, Activity, ArrowRight, Shield } from 'lucid
 
 const projects = [
   {
-    title: 'Case Study: Power BI Sales Dashboard',
-    category: 'Case Study',
-    desc: 'Designed a multi-source sales analytics dashboard with high-performance DAX modeling and OneLake integration.',
+    title: 'Sales Reporting Design Exercise',
+    category: 'Guide',
+    desc: 'Work through targets, returns and source reconciliation in a small sales model.',
     tools: ['Power BI', 'DAX', 'Fabric'],
-    impact: '80% Reporting Time Saved',
+    impact: 'Worked reporting example',
     color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <BarChart3 size={20} />,
     href: '/blog/sales-performance-ecosystem-2026'
   },
   {
-    title: 'Case Study: 99.8% Prompt Output Consistency',
-    category: 'Case Study',
-    desc: 'Eliminated LLM hallucinations and stabilized schema outputs for content automation pipelines using Zod and XML scaffolding.',
+    title: 'Structured AI Extraction',
+    category: 'Guide',
+    desc: 'Separate JSON validity, schema conformance and factual accuracy in an extraction evaluation.',
     tools: ['Next.js', 'AI Logic', 'Zod'],
-    impact: '99.8% Schema Consistency',
+    impact: 'Schema and fact checks',
     color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Shield size={20} />,
     href: '/blog/case-study-precision-prompt-architecture-consistency'
   },
   {
-    title: 'Case Study: Enterprise SQL Warehousing',
-    category: 'Case Study',
-    desc: 'Re-engineered transactional reporting tables into partition-pruned columnstore indexes for sub-second query execution.',
+    title: 'SQL Columnstore Design Guide',
+    category: 'Guide',
+    desc: 'Explore columnstore concepts and validate query choices against your own workload.',
     tools: ['SQL Server', 'ETL', 'T-SQL'],
-    impact: '97% Query Time Reduction',
+    impact: 'Query design guidance',
     color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Database size={20} />,
     href: '/blog/sql-server-columnstore-indexes-optimization-guide'
   },
   {
-    title: 'Case Study: n8n Automated Authority Scaling',
-    category: 'Case Study',
-    desc: 'Architected a self-healing automation pipeline that aggregates technical content and posts to marketing channels.',
+    title: 'n8n Editorial Review Workflow',
+    category: 'Guide',
+    desc: 'Design a source-tracked draft queue with explicit editorial review and controlled publication.',
     tools: ['Python', 'n8n', 'AI Agents'],
-    impact: '400+ MIS Hours Saved',
+    impact: 'Draft, review, publish',
     color: 'var(--accent)',
     color2: '#00C9F2',
     icon: <Activity size={20} />,
@@ -64,8 +64,8 @@ export default function ProjectsGrid() {
     <section className="section" style={{ background: 'var(--surface2)', padding: '4rem 0' }}>
       <div className="container">
         <div className="mb-12">
-          <TechLabel>TECHNICAL CASE STUDIES</TechLabel>
-          <h2 className="sr-only">Featured BI Case Studies</h2>
+          <TechLabel>PRACTICAL IMPLEMENTATION GUIDES</TechLabel>
+          <h2 className="sr-only">Featured implementation guides</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((p, i) => (

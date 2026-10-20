@@ -25,8 +25,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${project.title} | Advanced Excel BI Project | Datta Sable`,
-    description: `${project.subtitle} Download the master .xlsx spreadsheet workbook with ${project.totalRecordsCount.toLocaleString()} certified transactions and interactive slicer controls.`,
+    title: `${project.title} | Advanced Excel BI Project`,
+    alternates: { canonical: `https://dattasable.com/dashboards/${project.slug}` },
+    description: `${project.subtitle} Download the master .xlsx spreadsheet workbook with ${project.totalRecordsCount.toLocaleString()} sample records and interactive slicer controls.`,
     keywords: [
       'Excel Dashboard',
       'Business Intelligence',

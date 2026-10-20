@@ -1,3 +1,4 @@
+import CookiePreferencesButton from './CookiePreferencesButton';
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
 import { ArrowUpRight, Mail, MapPin, Clock, Phone, Smartphone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers } from 'lucide-react';
@@ -219,7 +220,7 @@ export default function Footer() {
                     </svg>
                     <div className="flex flex-col text-left">
                       <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
-                        1,500+ Followers
+                        Follow on LinkedIn
                       </span>
                       <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
                         Follow
@@ -247,41 +248,10 @@ export default function Footer() {
                     </svg>
                     <div className="flex flex-col text-left">
                       <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
-                        1K+ Subscribers
+                        Watch on YouTube
                       </span>
                       <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
                         YouTube
-                      </span>
-                    </div>
-                  </a>
-
-                  {/* Google Play */}
-                  <a
-                    href="https://play.google.com/store"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5"
-                    style={{
-                      background: 'var(--playstore-bg)',
-                      border: '1px solid var(--playstore-border)',
-                      padding: '10px 18px',
-                      width: '190px',
-                      height: '56px',
-                      boxSizing: 'border-box',
-                    }}
-                  >
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
-                      <path d="M3.609 1.814C3.218 2.078 3 2.553 3 3.204v17.592c0 .651.218 1.126.609 1.39l.065.037L13.51 12.38 3.674 1.777l-.065.037z" fill="#00c853"/>
-                      <path d="M17.411 16.142l-3.901-3.762 3.901-3.762.083.047 4.636 2.632c.66.375.66.985 0 1.36l-4.636 2.632-.083.053z" fill="#ffd54f"/>
-                      <path d="M17.494 7.865L13.51 11.75 3.674 1.777C4.168 1.332 4.96.166 5.892.694l11.602 6.586.002.585z" fill="#2979ff"/>
-                      <path d="M17.494 16.135l-.002.585-11.602 6.586c-.932.528-1.724-.638-2.218-1.083l9.836-9.973 3.986 3.885z" fill="#ff1744"/>
-                    </svg>
-                    <div className="flex flex-col text-left">
-                      <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--playstore-text)', lineHeight: '11px', marginBottom: '1px' }}>
-                        GET IT ON
-                      </span>
-                      <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: 'var(--playstore-text)', letterSpacing: '-0.3px', lineHeight: '19px' }}>
-                        Google Play
                       </span>
                     </div>
                   </a>
@@ -374,6 +344,9 @@ export default function Footer() {
             <span className="sm:hidden">© {year} Datta Sable. Enterprise BI Architect.</span>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+            <CookiePreferencesButton />
+            <Link href="/editorial-policy" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Editorial policy</Link>
+            <Link href="/disclaimer" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Disclaimer</Link>
             <Link href="/privacy" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
               PRIVACY
             </Link>

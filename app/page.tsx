@@ -40,7 +40,7 @@ export default async function HomePage() {
         <Hero />
 
         {/* ── 2. BELOW THE FOLD COMPONENTS (DEFERRED HYDRATION) ── */}
-        <BelowTheFold posts={recentPosts} />
+        <BelowTheFold posts={recentPosts} articleCount={posts.length} categoryCount={new Set(posts.map(post => post.category)).size} />
 
         <Crosshair position="br" />
       </div>

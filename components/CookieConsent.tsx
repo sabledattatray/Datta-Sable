@@ -1,104 +1,34 @@
 'use client';
-
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ShieldCheck, X } from 'lucide-react';
+import { CONSENT_KEY, OPEN_CONSENT_EVENT, saveAnalyticsConsent } from '@/lib/analytics-consent';
 
+// This controls optional analytics only. Advertising consent must use a Google-certified CMP.
 export default function CookieConsent() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/admin');
-
   useEffect(() => {
-    let consent: string | null = null;
-    try {
-      consent = localStorage.getItem('cookie-consent');
-    } catch (e) {
-      console.warn('Cookie consent check failed:', e);
-    }
-
-    if (!consent) {
-      const timer = setTimeout(() => setIsVisible(true), 2000);
-      return () => clearTimeout(timer);
-    }
+    try { setVisible(!['accepted', 'declined'].includes(localStorage.getItem(CONSENT_KEY) || '')); }
+    catch { setVisible(true); }
+    const open = () => setVisible(true);
+    window.addEventListener(OPEN_CONSENT_EVENT, open);
+    return () => window.removeEventListener(OPEN_CONSENT_EVENT, open);
   }, []);
-
-  const handleAccept = () => {
-    try {
-      localStorage.setItem('cookie-consent', 'accepted');
-    } catch (e) {
-      console.warn('Accept cookies failed:', e);
-    }
-    setIsVisible(false);
+  const choose = (accepted: boolean) => {
+    saveAnalyticsConsent(accepted); setVisible(false);
+    // Reload to stop already-executing vendor scripts when consent is withdrawn.
+    if (!accepted) window.location.reload();
   };
-
-  const handleDecline = () => {
-    try {
-      localStorage.setItem('cookie-consent', 'declined');
-    } catch (e) {
-      console.warn('Decline cookies failed:', e);
-    }
-    setIsVisible(false);
-  };
-
-  if (isAdmin) return null;
-
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed bottom-0 sm:bottom-8 left-0 sm:left-1/2 sm:-translate-x-1/2 w-full sm:w-[calc(100%-48px)] sm:max-w-[640px] bg-[var(--surface2)] border-t sm:border border-[var(--border)] border-l-[4px] sm:border-l-[6px] border-l-[var(--accent)] sm:rounded-2xl z-[9999] flex flex-col gap-6 shadow-[0_-10px_40px_rgba(0,0,0,0.3)] sm:shadow-[0_30px_70px_rgba(0,0,0,0.5)]"
-          style={{ padding: '24px 32px' }}
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="text-[var(--accent)]" size={20} />
-              <span className="mono text-[11px] sm:text-[12px] tracking-[0.2em] font-bold text-[var(--text)] uppercase">PRIVACY_PROTOCOL</span>
-            </div>
-            <button 
-              onClick={() => setIsVisible(false)}
-              className="text-[var(--muted)] hover:text-[var(--text)] transition-colors p-1"
-              aria-label="Close cookie consent"
-            >
-              <X size={18} />
-            </button>
-          </div>
-
-          <div className="text-[13px] sm:text-[14px] text-[var(--muted)] leading-relaxed">
-            We use cookies to enhance your technical experience, analyze traffic, and ensure absolute decision clarity across our BI dashboards. By clicking &ldquo;Accept&rdquo;, you consent to our use of cookies in accordance with our <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link>.
-          </div>
-
-          <div className="flex flex-col xs:flex-row items-center gap-3 sm:gap-4 mt-2">
-            <button 
-              onClick={handleAccept}
-              className="btn-primary w-full xs:w-auto text-[11px] sm:text-[12px]"
-              style={{ padding: '0.6rem 2rem' }}
-            >
-              ACCEPT_ALL
-            </button>
-            <button 
-              onClick={handleDecline}
-              className="btn-outline w-full xs:w-auto text-[11px] sm:text-[12px]"
-              style={{ padding: '0.6rem 2rem', borderColor: 'var(--border)' }}
-            >
-              DECLINE
-            </button>
-            <Link 
-              href="/privacy" 
-              className="mono text-[10px] text-[var(--muted)] hover:text-[var(--accent)] transition-colors uppercase tracking-widest xs:ml-auto text-center w-full xs:w-auto mt-2 xs:mt-0"
-              style={{ textDecoration: 'none' }}
-            >
-              Manage Preferences
-            </Link>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+  if (!visible || pathname?.startsWith('/admin')) return null;
+  return <section aria-label="Cookie preferences" className="fixed bottom-0 left-0 right-0 z-[9999] border-t border-[var(--border)] bg-[var(--surface2)] p-6 shadow-xl">
+    <div style={{ maxWidth: 800, margin: '0 auto' }}>
+      <h2 style={{ fontSize: '1.1rem', marginBottom: 8 }}>Cookie preferences</h2>
+      <p>Essential storage keeps sign-in and your preferences working. Optional analytics helps us understand site use and stays off unless you accept. Advertising choices, when ads are enabled, are managed separately. <Link href="/cookies">Cookie policy</Link> · <Link href="/privacy">Privacy policy</Link></p>
+      <div className="flex flex-wrap gap-4 mt-4">
+        <button type="button" className="btn-primary" onClick={() => choose(true)}>Accept analytics</button>
+        <button type="button" className="btn-primary" onClick={() => choose(false)}>Reject analytics</button>
+      </div>
+    </div>
+  </section>;
 }

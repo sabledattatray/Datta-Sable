@@ -80,7 +80,7 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed mb-8 max-w-2xl mx-auto font-normal">
-            {project.subtitle} Explore authentic screenshots of each worksheet below, or download the master spreadsheet workbook.
+            {project.subtitle} Explore worksheet screenshots and download the demonstration workbook. This page does not assert a customer relationship or independently verified commercial outcomes.
           </p>
 
           {/* Download CTA Buttons */}
@@ -312,31 +312,31 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
         {/* ── 4. COMMERCIAL CONTEXT & TAKEAWAYS ── */}
         <section className="p-6 sm:p-10 border-b border-[var(--border)]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {/* Executive Business Context */}
+            {/* Reporting context */}
             <div className="p-6 border border-[var(--border)] bg-[var(--card)] space-y-4">
               <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent)] font-semibold uppercase tracking-widest">
                 <Globe size={15} />
-                <span>Commercial Background</span>
+                <span>Example scenario</span>
               </div>
               <h3 className="text-lg font-bold text-[var(--text)]">
                 Executive Business Context
               </h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">
-                {project.clientOrOrg} operates complex enterprise systems across multiple international commercial territories.
+                This workbook illustrates a reporting scenario in {project.industry}. Organization labels and figures are presented as examples, not independently certified client results.
               </p>
               <p className="text-sm text-[var(--muted)] leading-relaxed">
-                {project.businessProblem}
+                Example problem to investigate: {project.businessProblem}
               </p>
             </div>
 
-            {/* Key Strategic Findings */}
+            {/* Key Validation questions */}
             <div className="p-6 border border-[var(--border)] bg-[var(--card)] space-y-4">
               <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent)] font-semibold uppercase tracking-widest">
                 <TrendingUp size={15} />
                 <span>Strategic Findings</span>
               </div>
               <h3 className="text-lg font-bold text-[var(--text)]">
-                Commercial Takeaways
+                Checks to perform
               </h3>
               <ul className="space-y-3 text-sm text-[var(--text)]">
                 {project.strategicFindings.map((finding, idx) => (
@@ -383,7 +383,7 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
               <span className="font-mono text-xl font-bold text-[var(--accent)] block">03</span>
               <h4 className="text-base font-bold text-[var(--text)]">Inspect Formulas</h4>
               <p className="text-sm text-[var(--muted)] leading-relaxed">
-                Inspect clean SUMIFS, XLOOKUP, dynamic pivot tables, and {project.totalRecordsCount.toLocaleString()} certified institutional transactions.
+                Inspect clean SUMIFS, XLOOKUP, dynamic pivot tables, and {project.totalRecordsCount.toLocaleString()} sample records.
               </p>
             </div>
           </div>
@@ -394,7 +394,7 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
           <div className="relative z-10 max-w-xl mx-auto space-y-5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-[var(--accent)] border border-[var(--accent)]/30 bg-[var(--accent)]/5">
               <FileSpreadsheet size={13} />
-              <span>Institutional Master Workbook</span>
+              <span>Demonstration Workbook</span>
             </div>
 
             <h3

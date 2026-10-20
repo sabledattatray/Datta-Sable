@@ -26,11 +26,20 @@ const nextConfig = {
     ],
   },
   experimental: {
+    // Keep prerender workers within the hosted database's connection budget.
+    cpus: 1,
+    staticGenerationMaxConcurrency: 1,
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   async redirects() {
     return [
+      {"source":"/blog/microsoft-fabric-architecture-explained-complete-2026-guide","destination":"/blog/microsoft-fabric-architecture-explained-2026","permanent":true},
+      {"source":"/blog/dp-600-study-guide-2026-fabric-analytics-engineer","destination":"/blog/dp-600-study-guide-2026","permanent":true},
+      {"source":"/blog/microsoft-fabric-capacity-sizing-2026","destination":"/blog/microsoft-fabric-capacity-sizing-guide-2026","permanent":true},
+      {"source":"/blog/microsoft-fabric-governance-guide","destination":"/blog/microsoft-fabric-governance-purview-guide-2026","permanent":true},
+      {"source":"/blog/case-study-surgical-prompt-architecture-consistency","destination":"/blog/case-study-precision-prompt-architecture-consistency","permanent":true},
+      {"source":"/blog/surgical-prompt-architecture-framework","destination":"/blog/precision-prompt-architecture-framework","permanent":true},
       {
         source: '/certifications',
         destination: '/certification',

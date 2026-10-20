@@ -1,15 +1,11 @@
+import { cache } from 'react';
 import { mergePublishedPosts, isPlaceholderPost, type CatalogPost } from './blog-catalog';
+import { correctEditorialContent } from './editorial-content';
 export interface PublicBlogPost extends CatalogPost {title:string;category:string;excerpt:string;image?:string|null;tags?:string[];}
 import { prisma } from '@/lib/prisma';
 import { posts as staticPosts } from '@/app/blog/data';
 
 type BlogPost = (typeof staticPosts)[number] | Record<string, any>;
-
-function getPostTimestamp(post: BlogPost) {
-  const date = (post as any).date || (post as any).createdAt || (post as any).updatedAt;
-  const timestamp = new Date(date || 0).getTime();
-  return Number.isFinite(timestamp) ? timestamp : 0;
-}
 
 function serializeDbPost(dbPost: any) {
   if (!dbPost) return null;
@@ -20,13 +16,13 @@ function serializeDbPost(dbPost: any) {
   };
 }
 
-export async function getPublishedBlogPosts() {
+export const getPublishedBlogPosts = cache(async function getPublishedBlogPosts() {
   let databasePosts: any[] = [];
   try {databasePosts = (await prisma.post.findMany({orderBy:{createdAt:'desc'}})).map(serializeDbPost);} catch {console.warn('Database unavailable for blog posts; using source fallback.');}
-  return mergePublishedPosts(staticPosts, databasePosts) as PublicBlogPost[];
-}
+  return mergePublishedPosts(staticPosts, databasePosts).map(correctEditorialContent) as PublicBlogPost[];
+});
 
-export async function getPublishedBlogPost(slug: string) {
+export const getPublishedBlogPost = cache(async function getPublishedBlogPost(slug: string) {
   try {
     const dbPost = await prisma.post.findUnique({
       where: { slug },
@@ -35,7 +31,7 @@ export async function getPublishedBlogPost(slug: string) {
     if (dbPost) {
       // If DB record exists, respect its publication status (AUD-14)
       if (dbPost.published && !isPlaceholderPost(dbPost)) {
-        return serializeDbPost(dbPost);
+        return correctEditorialContent(serializeDbPost(dbPost));
       }
       // If explicitly marked as unpublished in the database, suppress static fallback
       return null;
@@ -46,38 +42,12 @@ export async function getPublishedBlogPost(slug: string) {
 
   // Static posts fallback if no DB record overrides it
   const staticPost = staticPosts.find((post) => post.slug === slug);
-  return staticPost ?? null;
-}
+  return staticPost && (staticPost as CatalogPost).published !== false && !isPlaceholderPost(staticPost) ? correctEditorialContent(staticPost) : null;
+});
 
 export async function getPublishedBlogSlugs() {
-  const dbSlugs: string[] = [];
-  const unpublishedSlugs = new Set<string>();
-
-
-  try {
-    const dbPosts = await prisma.post.findMany({
-      select: { slug: true, published: true, content: true },
-    });
-
-    dbPosts.forEach((post) => {
-      if (post.published && !isPlaceholderPost(post)) {
-        dbSlugs.push(post.slug);
-      } else if (!post.published) {
-        unpublishedSlugs.add(post.slug);
-      }
-    });
-  } catch (error) {
-    console.warn('Database unavailable for blog slugs; using static slugs only.', error);
-  }
-
-  // Suppress static slugs that have been explicitly unpublished in DB
-  const filteredStaticSlugs = staticPosts
-    .filter((post) => !unpublishedSlugs.has(post.slug))
-    .map((post) => post.slug);
-
-  return Array.from(new Set([...filteredStaticSlugs, ...dbSlugs]));
+  return (await getPublishedBlogPosts()).map(post => post.slug);
 }
-
 
 export function filterPostsByCategory(posts: BlogPost[], categoryName: string, slug: string) {
   const targetSlug = slug.toLowerCase();

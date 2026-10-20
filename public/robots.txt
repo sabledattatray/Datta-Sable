@@ -1,127 +1,22 @@
-# ============================================================
-# robots.txt — dattasable.com
-# ============================================================
-
-# --- Default: Allow all search engines on high-value content ---
+# Public content is crawlable by search and advertising crawlers alike.
+# Indexing exclusions belong in page robots metadata, not crawler blocks.
+# robots.txt is not access control; private routes still require authentication.
 User-agent: *
-Allow: /
-Allow: /blog/
-Allow: /dashboards/
-Allow: /portfolio/
-Allow: /services/
-Allow: /about/
-Allow: /contact/
-Allow: /privacy
-Allow: /terms
-Allow: /disclaimer
-Allow: /cookies
-Allow: /glossary/
-Allow: /knowledge/
-Allow: /careers/
-Allow: /faq/
-Allow: /category/
-Allow: /rss.xml
-
-# Private administrative endpoints
-Disallow: /api/
-Disallow: /admin/
-Disallow: /dashboard/
-Disallow: /preview/
-Disallow: /live-dashboard/
-Disallow: /analytics-live/
-
-# Exclude thin utility tools from general indexing to protect domain authority
-Disallow: /tools/
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-
-# --- Google AdSense Bot (Mediapartners-Google): STRICTLY DISALLOW THIN & UTILITY PAGES ---
-# Channelling AdSense review ONLY to comprehensive, high-value editorial content
 User-agent: Mediapartners-Google
-Allow: /
-Allow: /blog/
-Allow: /dashboards/
-Allow: /portfolio/
-Allow: /services/
-Allow: /about/
-Allow: /certification
-Allow: /contact/
-Allow: /privacy
-Allow: /terms
-Allow: /disclaimer
-Allow: /cookies
-Disallow: /tools/
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /glossary/
-Disallow: /knowledge/
-Disallow: /careers/
-Disallow: /p/
-Disallow: /certifications
-Disallow: /api/
-Disallow: /admin/
-Disallow: /dashboard/
-Disallow: /preview/
-Disallow: /live-dashboard/
-Disallow: /analytics-live/
-
 User-agent: Google-Display-Ads-Bot
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
 Allow: /
-Allow: /blog/
-Allow: /dashboards/
-Allow: /portfolio/
-Allow: /services/
-Allow: /about/
-Allow: /certification
-Allow: /contact/
-Allow: /privacy
-Allow: /terms
-Allow: /disclaimer
-Allow: /cookies
-Disallow: /tools/
-Disallow: /chains/
-Disallow: /templates/
-Disallow: /lp/
-Disallow: /infrastructure
-Disallow: /glossary/
-Disallow: /knowledge/
-Disallow: /careers/
-Disallow: /p/
-Disallow: /certifications
 Disallow: /api/
+Disallow: /admin$
 Disallow: /admin/
+Disallow: /dashboard$
 Disallow: /dashboard/
+Disallow: /preview$
 Disallow: /preview/
-Disallow: /live-dashboard/
+Disallow: /analytics-live$
 Disallow: /analytics-live/
+Disallow: /live-dashboard$
+Disallow: /live-dashboard/
 
-# --- Google Image crawler ---
-User-agent: Googlebot-Image
-Allow: /
-
-# --- Bing ---
-User-agent: Bingbot
-Allow: /
-
-# --- AI Training / RAG bots ---
-User-agent: GPTBot
-User-agent: OAI-SearchBot
-User-agent: ClaudeBot
-User-agent: PerplexityBot
-User-agent: Applebot
-User-agent: anthropic-ai
-User-agent: cohere-ai
-User-agent: Googlebot-Extended
-Allow: /
-
-# ============================================================
-# Sitemaps
-# ============================================================
-Sitemap: https://dattasable.com/sitemap.xml
 Sitemap: https://dattasable.com/sitemap-index.xml
