@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
@@ -183,13 +183,32 @@ const navItems = [
   }
 ];
 
-export default function AdminDashboardWrapper({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+export default function AdminDashboardWrapper({ children, previewOnly = false }: { children: React.ReactNode; previewOnly?: boolean }) {
+  const currentPathname = usePathname();
+  const pathname = previewOnly ? "/admin/marketing/campaigns" : currentPathname;
   const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const mobilePanel = useRef<HTMLElement>(null);
+  const mobileTrigger = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const items = () => Array.from(mobilePanel.current?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex="0"]') || []).filter(node => node.getClientRects().length);
+    items()[0]?.focus();
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); setIsMobileOpen(false); }
+      if (event.key === 'Tab') {
+        const nodes = items(), first = nodes[0], last = nodes[nodes.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }
+    };
+    document.addEventListener('keydown', keydown);
+    return () => { document.removeEventListener('keydown', keydown); previous?.focus(); };
+  }, [isMobileOpen]);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -203,6 +222,7 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
 
   useEffect(() => {
     const loadCompanyName = async () => {
+      if (previewOnly) { setCompanyName("Datta Sable"); return; }
       if (typeof window !== 'undefined') {
         const cached = localStorage.getItem('company_name');
         if (cached) setCompanyName(cached);
@@ -340,9 +360,9 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
 
   if (bypassLayout) return <>{children}</>;
 
-  const userName = session?.user?.name || 'Admin';
+  const userName = previewOnly ? 'Preview admin' : session?.user?.name || 'Admin';
   const userInitial = userName.charAt(0).toUpperCase();
-  const userEmail = session?.user?.email || 'admin@dattasable.com';
+  const userEmail = previewOnly ? 'preview@example.test' : session?.user?.email || 'admin@dattasable.com';
 
   const getGlow = (hex: string, alpha: number) => {
     let c = hex.replace('#', '');
@@ -353,23 +373,24 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
     return `rgba(${r},${g},${b},${alpha})`;
   };
 
-  const defaultAccent = isDark ? '#6366f1' : '#4f46e5';
-  const currentAccent = typography.color || defaultAccent;
-  const currentAccentGlow = typography.color ? getGlow(typography.color, isDark ? 0.15 : 0.08) : (isDark ? 'rgba(99,102,241,0.15)' : 'rgba(79,70,229,0.08)');
+  const isCampaign = pathname?.startsWith('/admin/marketing/campaigns');
+  const defaultAccent = isCampaign ? (isDark ? '#c9f31d' : '#526d06') : (isDark ? '#6366f1' : '#4f46e5');
+  const currentAccent = isCampaign ? defaultAccent : typography.color || defaultAccent;
+  const currentAccentGlow = isCampaign ? getGlow(currentAccent, isDark ? 0.13 : 0.08) : typography.color ? getGlow(typography.color, isDark ? 0.15 : 0.08) : (isDark ? 'rgba(99,102,241,0.15)' : 'rgba(79,70,229,0.08)');
 
   // CSS variables for theming
   const css = isDark
     ? {
-        bg: '#000000',
-        surface: '#000000',
-        surface2: '#121212',
-        border: '#1a1a1a',
+        bg: isCampaign ? '#0c1016' : '#000000',
+        surface: isCampaign ? '#131a24' : '#000000',
+        surface2: isCampaign ? '#18212e' : '#121212',
+        border: isCampaign ? '#293446' : '#1a1a1a',
         text: '#f1f5f9',
-        muted: '#64748b',
+        muted: isCampaign ? '#a2b0c2' : '#64748b',
         accent: currentAccent,
         accentGlow: currentAccentGlow,
-        headerBg: 'rgba(0,0,0,0.9)',
-        sidebarBg: 'linear-gradient(180deg, #000000 0%, #000000 100%)',
+        headerBg: isCampaign ? 'rgba(12,16,22,0.96)' : 'rgba(0,0,0,0.9)',
+        sidebarBg: isCampaign ? 'linear-gradient(180deg, #111821 0%, #0c1016 100%)' : 'linear-gradient(180deg, #000000 0%, #000000 100%)',
         cardBg: '#000000',
         badgeBg: currentAccent,
         activeBg: currentAccentGlow,
@@ -429,6 +450,13 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
 
       {/* Mobile sidebar */}
       <aside
+        id="admin-mobile-sidebar"
+        ref={mobilePanel}
+        role="dialog"
+        aria-label="Administration navigation"
+        aria-modal={isMobileOpen || undefined}
+        aria-hidden={!isMobileOpen}
+        inert={!isMobileOpen}
         style={{
           position: 'fixed',
           top: 0,
@@ -544,6 +572,10 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
           {/* Left: hamburger + search */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
+              ref={mobileTrigger}
+              aria-label="Open administration navigation"
+              aria-expanded={isMobileOpen}
+              aria-controls="admin-mobile-sidebar"
               onClick={() => setIsMobileOpen(true)}
               style={{
                 background: 'none',
@@ -634,7 +666,7 @@ export default function AdminDashboardWrapper({ children }: { children: React.Re
                 />
               </span>
               <span style={{ fontSize: 11, fontWeight: 700, color: '#10b981', letterSpacing: '0.05em' }}>
-                LIVE
+                {previewOnly ? "PREVIEW" : "LIVE"}
               </span>
             </div>
 

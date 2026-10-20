@@ -8,7 +8,7 @@ import { CheckCircle2, Mail, ArrowLeft } from 'lucide-react';
 function UnsubscribeContent() {
   const searchParams = useSearchParams();
   const initialEmail = searchParams.get('email') || '';
-  const isConfirmed = searchParams.get('confirmed') === 'true';
+  const isConfirmed = false; // Only a successful POST confirms that suppression was saved.
 
   const [email, setEmail] = useState(initialEmail);
   const [unsubscribed, setUnsubscribed] = useState(isConfirmed);
@@ -33,7 +33,7 @@ function UnsubscribeContent() {
       const res = await fetch('/api/unsubscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, token: searchParams.get('token') || undefined }),
       });
       const data = await res.json();
       if (data.success) {

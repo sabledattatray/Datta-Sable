@@ -55,4 +55,6 @@ surgical-forge-lab/public/staging/*.csv
 # Local fallback data files
 messages.json
 *.json.bak
-
+
+# Isolated verification builds
+/.next-*/

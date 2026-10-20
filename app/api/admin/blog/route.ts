@@ -1,8 +1,9 @@
-import { NextResponse } from 'next/server';
+import { after, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { notifySubscribersOfNewPost } from '@/lib/mail';
+import { ensureCampaignSchema, enqueueCampaign, processCampaignQueue } from '@/lib/campaigns';
+export const maxDuration=300;
 
 export async function GET() {
   try {
@@ -98,7 +99,9 @@ export async function POST(req: Request) {
       year: 'numeric',
     });
 
-    const post = await prisma.post.create({
+    await ensureCampaignSchema();
+    const post = await prisma.$transaction(async tx => {
+    const post = await tx.post.create({
       data: {
         title,
         slug,
@@ -115,11 +118,10 @@ export async function POST(req: Request) {
       },
     });
 
-    if (post.published) {
-      notifySubscribersOfNewPost(post.title, post.slug, post.excerpt || '', post.image).catch(err => {
-        console.error('Failed to notify subscribers of new post:', err);
-      });
-    }
+    if (post.published) await enqueueCampaign({title:post.title,slug:post.slug,shortStory:post.excerpt||`A new article is available: ${post.title}. Read the full story for the details.`,category:post.category,readTime:post.readTime,imageUrl:post.image,takeaways:[]},`publish:${post.slug}`,tx);
+    return post;
+    }, {timeout:20000});
+    if(post.published) after(async()=>{await processCampaignQueue();});
 
     return NextResponse.json(post);
   } catch (error) {

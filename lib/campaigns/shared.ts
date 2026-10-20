@@ -1,0 +1,27 @@
+import { z } from 'zod';
+export const campaignSchema = z.object({
+  slug:z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(240),
+  title:z.string().trim().min(1).max(300), category:z.string().max(120).optional(),
+  readTime:z.union([z.number().nonnegative(),z.string().max(30)]).optional(),
+  imageUrl:z.string().max(2000).nullable().optional(), shortStory:z.string().trim().min(1).max(12000),
+  takeaways:z.array(z.string().trim().max(500)).max(3).default([]), customSubject:z.string().trim().max(200).refine(value=>!/[\r\n]/.test(value),'Use one line for the subject.').optional(),
+});
+export type CampaignContent=z.infer<typeof campaignSchema>;
+export type Recipient={email:string;name:string};
+export const escapeHtml=(value:unknown)=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
+export function eligibleRecipients(users:{email:string|null;name?:string|null}[],subscribers:{email:string}[],suppressed:{email:string}[]):Recipient[]{
+  const excluded=new Set(suppressed.map(r=>r.email.trim().toLowerCase())),recipients=new Map<string,Recipient>();
+  for(const user of [...users,...subscribers]){const email=user.email?.trim().toLowerCase();if(email&&z.string().email().safeParse(email).success&&!excluded.has(email)&&!recipients.has(email))recipients.set(email,{email,name:'name' in user?user.name||'':''});}
+  return [...recipients.values()];
+}
+export function campaignSubject(content:CampaignContent){return content.customSubject?.trim()||`New article: ${content.title}`;}
+export function generateBlogCampaignHtml(params:CampaignContent & {recipientName?:string;recipientEmail?:string;unsubscribeUrl?:string;previewText?:string}){
+  const p=campaignSchema.parse(params),e=escapeHtml;
+  const link=`https://dattasable.com/blog/${p.slug}`;
+  const unsubscribe=params.unsubscribeUrl||`https://dattasable.com/unsubscribe?email=${encodeURIComponent(params.recipientEmail||'')}`;
+  let image='';try{const url=new URL(p.imageUrl||'','https://dattasable.com');if(url.protocol==='https:')image=url.href;}catch{}
+  const paragraphs=p.shortStory.split(/\n\s*\n|\n/).map(s=>s.trim()).filter(Boolean).map(s=>`<p style="margin:0 0 16px;font-size:16px;line-height:1.8;color:#cbd5e1">${e(s)}</p>`).join('');
+  const points=p.takeaways.filter(Boolean).map((s,i)=>`<tr><td style="padding:9px 12px 9px 0;vertical-align:top;color:#c9f31d;font-weight:700">0${i+1}</td><td style="padding:9px 0;color:#cbd5e1;font-size:14px;line-height:1.7">${e(s)}</td></tr>`).join('');
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${e(p.title)}</title></head><body style="margin:0;background:#f1f3f5;font-family:Arial,Helvetica,sans-serif"><div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all">${e(params.previewText||p.shortStory.slice(0,140))}</div><table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="padding:32px 12px"><table role="presentation" width="600" cellspacing="0" cellpadding="0" style="max-width:600px;width:100%;background:#10151e;border-radius:16px;overflow:hidden"><tr><td style="padding:28px;border-bottom:1px solid #2b3442"><a href="https://dattasable.com" style="color:white;text-decoration:none;font-size:20px;font-weight:700;letter-spacing:2px">DATTA SABLE<span style="color:#c9f31d">.</span></a><p style="margin:8px 0 0;color:#a4b2c5;font-size:10px;letter-spacing:1.5px">NOTES ON DATA, CLOUD & ENGINEERING</p></td></tr><tr><td style="padding:32px 28px"><p style="color:#b6c3d6;font-size:14px;margin:0 0 22px">Hello${params.recipientName?' '+e(params.recipientName.split(' ')[0]):''},</p><p style="color:#c9f31d;font-size:11px;letter-spacing:1.2px;line-height:1.7">${e(p.category||'THE ENGINEERING JOURNAL')}${p.readTime?' &middot; '+e(p.readTime)+' MIN READ':''}</p><h1 style="font-size:28px;line-height:1.3;color:white;margin:14px 0 24px">${e(p.title)}</h1>${image?`<img src="${e(image)}" alt="" width="544" style="display:block;width:100%;height:auto;border-radius:10px;margin:0 0 28px">`:''}${paragraphs}${points?`<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:24px 0;border-top:1px solid #2b3442">${points}</table>`:''}<table role="presentation" cellspacing="0" cellpadding="0" style="margin:28px 0"><tr><td bgcolor="#c9f31d" style="border-radius:8px"><a href="${link}" style="display:inline-block;padding:16px 24px;color:#152000;font-size:14px;font-weight:700;text-decoration:none">Read the full article &rarr;</a></td></tr></table><p style="color:#a4b2c5;font-size:12px;line-height:1.8;word-break:break-all">Or open: <a href="${link}" style="color:#c9f31d">${link}</a></p><p style="margin:28px 0 0;padding-top:24px;border-top:1px solid #2b3442;color:#e2e8f0;font-size:14px;line-height:1.8">Thanks for reading,<br><strong>Datta Sable</strong></p></td></tr></table><p style="font-size:11px;line-height:1.8;color:#536174;max-width:520px">You are receiving this update as a member or newsletter subscriber at dattasable.com.<br><a href="${e(unsubscribe)}" style="color:#45566d;text-decoration:underline">Unsubscribe from future article updates</a></p></td></tr></table></body></html>`;
+}
+export function campaignText(p:CampaignContent,unsubscribe:string){return `${p.title}\n\n${p.shortStory}\n\n${p.takeaways.join('\n')}\n\nRead the article: https://dattasable.com/blog/${p.slug}\n\nUnsubscribe: ${unsubscribe}`;}

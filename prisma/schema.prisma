@@ -365,3 +365,42 @@ model Subscriber {
 
 
 
+
+// Campaign outbox: additive tables, initialized by ensureCampaignSchema().
+model MarketingCampaign {
+  id         String              @id
+  dedupeKey  String              @unique
+  postSlug   String
+  subject    String
+  payload    Json
+  lastError  String?
+  createdAt  DateTime            @default(now()) @db.Timestamptz(6)
+  deliveries MarketingDelivery[]
+}
+
+model MarketingDelivery {
+  id          String            @id
+  campaignId  String
+  campaign    MarketingCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  email       String
+  name        String            @default("")
+  status      String            @default("pending")
+  attempts    Int               @default(0)
+  providerId  String?
+  lastError   String?
+  updatedAt   DateTime          @default(now()) @db.Timestamptz(6)
+
+  @@unique([campaignId, email])
+  @@index([status, updatedAt], map: "marketing_delivery_pending")
+}
+
+model MarketingSuppression {
+  email     String   @id
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model MarketingWorker {
+  id         Int       @id
+  owner      String?
+  leaseUntil DateTime? @db.Timestamptz(6)
+}
