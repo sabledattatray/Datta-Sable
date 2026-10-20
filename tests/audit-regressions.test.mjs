@@ -11,7 +11,7 @@ function loader(stubs = {}, env = {}) {
   function load(file) {
     const full = path.resolve(file);
     if (cache.has(full)) return cache.get(full).exports;
-    const module = { exports: {} }; cache.set(full, module);
+    const mod = { exports: {} }; cache.set(full, mod);
     const require = id => {
       if (Object.hasOwn(stubs, id)) return stubs[id];
       if (id.startsWith('@/')) return load(id.slice(2) + '.ts');
@@ -19,8 +19,8 @@ function loader(stubs = {}, env = {}) {
       return native(id);
     };
     const source = ts.transpileModule(fs.readFileSync(full, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
-    vm.runInNewContext(source, { module, exports: module.exports, require, process: { env, cwd: () => process.cwd() }, console: { log() {}, warn() {}, error() {} }, Buffer, URL, Headers, Request, Response, AbortSignal, FormData, File, TextDecoder, setTimeout, clearTimeout }, { filename: full });
-    return module.exports;
+    vm.runInNewContext(source, { module: mod, exports: mod.exports, require, process: { env, cwd: () => process.cwd() }, console: { log() {}, warn() {}, error() {} }, Buffer, URL, Headers, Request, Response, AbortSignal, FormData, File, TextDecoder, setTimeout, clearTimeout }, { filename: full });
+    return mod.exports;
   }
   return load;
 }

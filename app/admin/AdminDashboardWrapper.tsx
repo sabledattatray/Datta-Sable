@@ -7,12 +7,8 @@ import { useTheme } from '@/components/ThemeProvider';
 import { getCompanyProfile } from './org-actions';
 import {
   LayoutDashboard,
-  FileText,
-  MessageSquare,
   Briefcase,
   Settings,
-  Star,
-  Edit,
   Menu,
   X,
   Search,
@@ -25,8 +21,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Layers,
-  Sparkles,
-  Inbox,
   TrendingUp,
   Zap,
   Users,
@@ -211,7 +205,6 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
   }, [isMobileOpen]);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [companyName, setCompanyName] = useState('dattasable.');
   const [typography, setTypography] = useState({
     fontFamily: 'Inter',
@@ -280,7 +273,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
     if (saved) {
       try {
         setTypography(JSON.parse(saved));
-      } catch (e) {}
+      } catch {}
     }
   }, [pathname]);
 
@@ -300,7 +293,6 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
   }, [typography.fontFamily]);
 
   useEffect(() => {
-    setMounted(true);
     const saved = localStorage.getItem('admin_sidebar_collapsed');
     if (saved !== null) setIsCollapsed(saved === 'true');
   }, []);
@@ -485,7 +477,6 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
           userInitial={userInitial}
           onClose={() => setIsMobileOpen(false)}
           onToggleCollapse={toggleCollapse}
-          onSignOut={() => signOut({ callbackUrl: '/' })}
           isMobile={true}
           companyName={companyName}
         />
@@ -521,7 +512,6 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
           userInitial={userInitial}
           onClose={() => setIsMobileOpen(false)}
           onToggleCollapse={toggleCollapse}
-          onSignOut={() => signOut({ callbackUrl: '/' })}
           isMobile={false}
           companyName={companyName}
         />
@@ -987,7 +977,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
 // ─── Sidebar Inner Content (shared between mobile and desktop) ───
 function SidebarContent({
   isCollapsed, isDark, css, pathname, isActive, navItems,
-  userName, userEmail, userInitial, onClose, onToggleCollapse, onSignOut, isMobile,
+  userName, userEmail, userInitial, onClose, onToggleCollapse, isMobile,
   companyName,
 }: {
   isCollapsed: boolean;
@@ -1001,7 +991,6 @@ function SidebarContent({
   userInitial: string;
   onClose: () => void;
   onToggleCollapse: () => void;
-  onSignOut: () => void;
   isMobile: boolean;
   companyName: string;
 }) {

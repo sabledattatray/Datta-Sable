@@ -2,13 +2,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
-import Link from 'next/link';
 import { getCompanyProfile, saveCompanyProfile } from '../org-actions';
 import { 
-  Users, Building, CreditCard, ShoppingBag, BarChart3, Megaphone, 
-  Layers, Settings, Bell, Terminal, LifeBuoy, Plus, Search, 
-  Trash2, Edit, Key, Globe, Eye, Copy, Check, Upload, File,
-  Activity, ArrowUpRight, DollarSign, Clock, Shield, AlertTriangle
+  Terminal, Plus, 
+  Trash2, Key, Globe, Copy, Check, Upload, File,
+  Shield, AlertTriangle
 } from 'lucide-react';
 
 export default function AdminCatchAllPage() {
@@ -721,7 +719,6 @@ export default function AdminCatchAllPage() {
                 >
                   <div style={{ height: 120, background: css.surface2, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderBottom: `1px solid ${css.border}`, position: 'relative' }}>
                     {m.type === 'image' && m.url !== '#' ? (
-                      // eslint-disable-next-line @next/next/no-img-element
                       <img src={m.url} alt={m.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     ) : (
                       <File size={32} color={css.muted} />
