@@ -113,7 +113,7 @@ export default function Newsletter() {
             </button>
           </form>
         )}
-        <div className="mono" style={{ fontSize: '8px', color: 'var(--muted)', marginTop: '1.5rem', opacity: 0.6, letterSpacing: '0.1em' }}>
+        <div className="mono" style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '1.5rem', lineHeight: 1.6, letterSpacing: '0.02em' }}>
           SECURE_ENCRYPTION: AES-256 // ZERO_SPAM_POLICY: TRUE
         </div>
       </div>

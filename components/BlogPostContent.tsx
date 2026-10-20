@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronLeft, Share2, Clock } from 'lucide-react';
+import { ChevronLeft, Share2 } from 'lucide-react';
+import PostMetadata from './PostMetadata';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 import { useTheme } from '@/components/ThemeProvider';
 import DiagramRenderer from '@/components/blog/interactive/DiagramRenderer';
@@ -266,7 +267,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
             <ChevronLeft size={16} /> BACK TO ARTICLES
           </Link>
           
-          <nav className="flex items-center gap-2 mono text-[10px] text-[var(--muted)] opacity-60 uppercase tracking-widest">
+          <nav className="flex items-center gap-2 mono text-[12px] text-[var(--muted)] uppercase tracking-wider" style={{ marginBottom: 16 }}>
             <Link href="/" className="hover:text-[var(--accent)]">HOME</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-[var(--accent)]">BLOG</Link>
@@ -275,18 +276,10 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           </nav>
         </div>
 
-        <div className="flex items-center gap-4 flex-wrap mb-4">
-          <span className="tag" style={{ color: post.color || 'var(--accent)', borderColor: `${post.color || 'var(--accent)'}44` }}>{post.category}</span>
-          <span className="flex items-center gap-1.5 text-[var(--muted)] text-[11px] mono">
-            <Clock size={12} className="text-[var(--accent)]" /> {post.readTime || '5'} min read
-          </span>
-          <span className="text-[var(--muted)] text-[11px] mono uppercase tracking-wider">Published: {post.date}</span>
-          {post.updatedAt && (
-            <span className="text-[var(--muted)] text-[11px] mono uppercase tracking-wider">
-              • Updated: {new Date(post.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </span>
-          )}
+        <div className="flex items-center gap-4 flex-wrap">
+          <span className="tag" style={{ color: 'var(--accent)', borderColor: `${post.color || 'var(--accent)'}44` }}>{post.category}</span>
         </div>
+        <PostMetadata readTime={post.readTime} date={post.date} updatedAt={post.updatedAt} />
 
         <h1 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', lineHeight: 1.2, marginBottom: '2rem' }}>{post.title}</h1>
 
@@ -439,7 +432,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
               {relatedPosts.map(p => (
                 <Link key={p.slug} href={`/blog/${p.slug}`} className="group no-underline block">
                   <div className="card h-full flex flex-col" style={{ padding: '1.25rem', borderLeft: '2px solid var(--border)', background: 'var(--surface2)' }}>
-                    <div className="relative aspect-video mb-4 overflow-hidden">
+                    <div className="relative aspect-video overflow-hidden" style={{ marginBottom: 16 }}>
                       <Image 
                         src={p.image || '/images/dattasable.com.webp'} 
                         alt={p.title} 
@@ -447,7 +440,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
                         className="object-cover group-hover:scale-105 transition-transform duration-500" 
                       />
                     </div>
-                    <span className="text-[10px] text-[var(--muted)] mono opacity-50 uppercase tracking-widest mb-2 block">{p.category}</span>
+                    <span className="text-[12px] text-[var(--muted)] mono uppercase tracking-wider block" style={{ marginBottom: 10 }}>{p.category}</span>
                     <h4 style={{ fontSize: '1rem', lineHeight: 1.3, color: 'var(--text)', marginBottom: '0.5rem' }}>{p.title}</h4>
                     <p style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
                       {p.excerpt}

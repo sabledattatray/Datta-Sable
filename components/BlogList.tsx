@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Clock, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight } from 'lucide-react';
+import PostMetadata from './PostMetadata';
 
 import Newsletter from './Newsletter';
 
@@ -99,7 +100,6 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
   const enrichedPosts = initialPosts.map(p => ({
     ...p,
     difficulty: getPostDifficulty(p),
-    displayDate: `Updated ${p.date}`
   }));
 
   const categoryCounts = enrichedPosts.reduce((acc, p) => {
@@ -264,7 +264,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                       letterSpacing: '0.12em',
                       textAlign: 'right',
                       lineHeight: 1.4,
-                      opacity: 0.8
+                      opacity: 1
                     }}>
                       {item.context}
                     </span>
@@ -465,7 +465,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
             >
               {cat}
               <span style={{ 
-                opacity: 0.6, 
+                opacity: 1,
                 marginLeft: '5px', 
                 fontSize: '8px',
                 padding: '0px 4px',
@@ -480,7 +480,7 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
       </div>
 
       {/* Post Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.5rem', marginBottom: '5rem' }}>
         {filtered.map((p, i) => (
           <Link 
             href={`/blog/${p.slug}`} 
@@ -502,8 +502,8 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
               }}
             >
               <div
-                className="w-full h-48 mb-4 relative overflow-hidden"
-                style={{ borderBottom: `1px solid ${p.color}33` }}
+                className="w-full h-48 relative overflow-hidden"
+                style={{ borderBottom: `1px solid ${p.color}33`, marginBottom: 16 }}
               >
                 {p.image && (
                   <Image 
@@ -524,10 +524,10 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
               </div>
 
               {/* Rich E-E-A-T Metadata Block */}
-              <div className="flex items-center gap-2 mb-3 flex-wrap">
-                <span className="tag" style={{ color: p.color || 'var(--accent)', borderColor: `${p.color}44`, fontSize: '10px' }}>{p.category}</span>
+              <div className="flex items-center gap-2 flex-wrap" style={{ rowGap: 8, marginBottom: 4 }}>
+                <span className="tag" style={{ color: 'var(--accent)', borderColor: `${p.color}44`, fontSize: '11px' }}>{p.category}</span>
                 <span className={`difficulty-badge ${p.difficulty.toLowerCase()}`} style={{
-                  fontSize: '9px',
+                  fontSize: '11px',
                   fontWeight: 700,
                   fontFamily: 'var(--font-mono)',
                   letterSpacing: '0.05em',
@@ -538,14 +538,8 @@ export default function BlogList({ initialPosts, initialCategory = 'All' }: { in
                   color: p.difficulty === 'Advanced' ? '#ef4444' : p.difficulty === 'Intermediate' ? '#f59f0b' : '#10b981',
                   background: p.difficulty === 'Advanced' ? 'rgba(239, 68, 68, 0.05)' : p.difficulty === 'Intermediate' ? 'rgba(245, 158, 11, 0.05)' : 'rgba(16, 185, 129, 0.05)'
                 }}>{p.difficulty}</span>
-                <span className="flex items-center gap-1" style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>
-                  <Clock size={12} /> {p.readTime} min read
-                </span>
-                <span style={{ color: 'var(--muted)', fontSize: '0.75rem', marginLeft: 'auto' }}>By Datta Sable</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '1.25rem', opacity: 0.85 }}>
-                <span>{p.displayDate}</span>
-              </div>
+              <PostMetadata readTime={p.readTime} date={p.date} author="Datta Sable" />
 
               <h3 style={{ fontSize: '1.15rem', marginBottom: '1rem', lineHeight: 1.4, color: 'var(--text)' }}>{p.title}</h3>
               <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>{p.excerpt}</p>

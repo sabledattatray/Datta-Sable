@@ -74,7 +74,7 @@ export default function FinalCTA() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>✓</span> One new resource
                 </div>
-                <div style={{ fontSize: '11px', opacity: 0.6, marginTop: '0.25rem', fontFamily: 'var(--mono)' }}>
+                <div style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '0.25rem', fontFamily: 'var(--font-mono)' }}>
                   No spam · Unsubscribe anytime
                 </div>
               </div>

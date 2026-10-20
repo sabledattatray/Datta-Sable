@@ -1,0 +1,25 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 8px;
+  margin: 14px 0 18px;
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  white-space: normal;
+}
+.item svg { flex-shrink: 0; color: var(--accent); }
+.item time { overflow-wrap: anywhere; }

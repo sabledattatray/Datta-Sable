@@ -2,23 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Clock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-
-const formatDisplayDate = (dateStr: string) => {
-  if (!dateStr) return 'June 2026';
-  try {
-    const d = new Date(dateStr);
-    if (!isNaN(d.getTime())) {
-      // Check if it looks like a formatted text date already (e.g. "May 14, 2026")
-      if (/^[a-zA-Z]+\s+\d{1,2},\s+\d{4}$/.test(dateStr)) {
-        return dateStr;
-      }
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kolkata' });
-    }
-  } catch {}
-  return dateStr;
-};
+import PostMetadata from '@/components/PostMetadata';
 
 export default function LatestInsights({ posts }: { posts?: any[] }) {
   const [activeTab, setActiveTab] = useState<'latest' | 'featured' | 'trending'>('latest');
@@ -99,14 +85,13 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {displayPosts.map((post) => {
             const imageSrc = post.image || '/images/dattasable.com.webp';
-            const displayDate = formatDisplayDate(post.date);
 
             return (
               <div
                 key={post.slug}              >
                 <Link href={`/blog/${post.slug}`} className="group no-underline block h-full">
                   <div className="card h-full flex flex-col" style={{ padding: '1.5rem', borderLeft: '2px solid var(--border)', transition: 'border-color 0.3s ease' }}>
-                    <div className="relative aspect-video mb-6 overflow-hidden">
+                    <div className="relative aspect-video overflow-hidden">
                       <Image
                         src={imageSrc}
                         alt={post.title}
@@ -121,12 +106,7 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 mb-4">
-                      <span className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--muted)] mono">
-                        <Clock size={12} className="text-[var(--accent)]" /> {post.readTime || 8} MIN READ
-                      </span>
-                      <span className="text-[10px] text-[var(--muted)] mono opacity-50 uppercase tracking-widest">{displayDate}</span>
-                    </div>
+                    <PostMetadata readTime={post.readTime} date={post.date} />
 
                     <h3 style={{ fontSize: '1.25rem', lineHeight: 1.3, marginBottom: '1rem', color: 'var(--text)' }}>
                       {post.title}
