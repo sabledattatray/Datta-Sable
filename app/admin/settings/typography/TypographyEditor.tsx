@@ -4,20 +4,23 @@ import { useEffect, useState } from 'react';
 import { ExternalLink, RotateCcw, Save, Type } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import {
-  buildTypographyCss, defaultTypography, emptyTypographyRule, ELEMENT_IDS, ELEMENT_LABELS, FONT_FAMILIES,
+  buildTypographyCss, ELEMENT_IDS, ELEMENT_LABELS, FONT_FAMILIES,
   parseStoredTypography, parseTypography, TYPOGRAPHY_DRAFT_KEY, TYPOGRAPHY_PUBLISHED_KEY,
   type TypographyElement, type TypographyRule, type TypographySettings,
 } from '@/lib/site-typography';
-import { saveWebsiteTypography } from './actions';
+import { segoeTypography, type TypographyTemplateId } from '@/lib/site-typography-templates';
+import { applyWebsiteTypographyTemplate, saveWebsiteTypography } from './actions';
 import styles from './TypographyEditor.module.css';
 
-type Props = { initialSettings: TypographySettings; revision: string | null; notice?: string };
+type Props = { initialSettings: TypographySettings; defaultSettings?: TypographySettings; hasDefaultTemplate?: boolean; revision: string | null; notice?: string };
 const SIZE_HINTS: Record<TypographyElement, number> = { body: 16, paragraph: 16, h1: 56, h2: 40, h3: 28, h4: 24, h5: 20, h6: 16, link: 16, button: 14, small: 12, code: 14 };
 
-export default function TypographyEditor({ initialSettings, revision: initialRevision, notice }: Props) {
+export default function TypographyEditor({ initialSettings, defaultSettings: initialDefault, hasDefaultTemplate: initialHasDefault = false, revision: initialRevision, notice }: Props) {
   const { theme } = useTheme();
   const [draft, setDraft] = useState(initialSettings);
   const [saved, setSaved] = useState(initialSettings);
+  const [defaultTemplate, setDefaultTemplate] = useState(initialDefault ?? initialSettings);
+  const [hasDefaultTemplate, setHasDefaultTemplate] = useState(initialHasDefault);
   const [revision, setRevision] = useState(initialRevision);
   const [element, setElement] = useState<TypographyElement>('h1');
   const [previewTheme, setPreviewTheme] = useState<'dark' | 'light'>('dark');
@@ -76,6 +79,7 @@ export default function TypographyEditor({ initialSettings, revision: initialRev
       else {
         setRevision(result.revision);
         setSaved(result.settings);
+        if (!hasDefaultTemplate) setDefaultTemplate(result.settings);
         setRepairNeeded(false);
         setRecovered(null);
         try { localStorage.setItem(TYPOGRAPHY_PUBLISHED_KEY, JSON.stringify(result.settings)); } catch { /* Server save already succeeded. */ }
@@ -84,6 +88,38 @@ export default function TypographyEditor({ initialSettings, revision: initialRev
     } catch {
       setMessage({ error: true, text: 'Could not reach the server. Your edits are still here; please try again.' });
     } finally { setSaving(false); }
+  }
+
+  async function applyTemplate(template: TypographyTemplateId) {
+    if (saving) return;
+    setSaving(true);
+    setMessage(null);
+    try {
+      const result = await applyWebsiteTypographyTemplate(template, revision);
+      if ('error' in result) setMessage({ error: true, text: result.error || 'Could not apply the template.' });
+      else {
+        setRevision(result.revision);
+        setDraft(result.settings);
+        setSaved(result.settings);
+        setDefaultTemplate(result.defaultSettings);
+        setHasDefaultTemplate(true);
+        setRepairNeeded(false);
+        setRecovered(null);
+        try {
+          localStorage.setItem(TYPOGRAPHY_DRAFT_KEY, JSON.stringify(result.settings));
+          localStorage.setItem(TYPOGRAPHY_PUBLISHED_KEY, JSON.stringify(result.settings));
+        } catch { /* Publication is already saved in the database. */ }
+        setMessage({ text: template === 'segoe' ? 'Segoe UI · Microsoft Style is now published. Your Default Font Template is safely saved; restore it any time with one click.' : 'Default Font Template restored and published. Your website is back to its saved default typography.' });
+      }
+    } catch {
+      setMessage({ error: true, text: 'Could not reach the server. No template was confirmed as published. Please try again.' });
+    } finally { setSaving(false); }
+  }
+
+  function previewTemplate(settings: TypographySettings) {
+    setDraft(settings);
+    setRecovered(null);
+    setMessage({ text: 'Template loaded into the preview only. Apply its template button or Publish typography to make it live.' });
   }
 
   function openPreview() {
@@ -125,10 +161,24 @@ export default function TypographyEditor({ initialSettings, revision: initialRev
 
     <form onSubmit={publish}>
       <fieldset disabled={saving} className={styles.fieldset}>
+        <section className={styles.templates} aria-label="Font templates">
+          <div className={styles.templateIntro}><span className={styles.eyebrow}>Font templates</span><h2>A complete look in one click.</h2><p>Apply publishes immediately. Your saved default is preserved before the first switch. Preview buttons let you try a template without publishing.</p></div>
+          <div className={styles.templateGrid}>
+            <article className={styles.templateCard}>
+              <div className={styles.templateTitle}><h3>Default Font Template</h3>{JSON.stringify(saved) === JSON.stringify(defaultTemplate) && <span className={styles.activeTemplate}>Active</span>}</div>
+              <p>Your saved font settings, kept as a permanent restore point. Switching templates never replaces this default.</p>
+              <div className={styles.templateActions}><button type="button" onClick={() => applyTemplate('default')}><RotateCcw size={15} /> Restore default fonts</button><button type="button" onClick={() => previewTemplate(defaultTemplate)}>Preview default</button></div>
+            </article>
+            <article className={`${styles.templateCard} ${styles.segoeCard}`}>
+              <div className={styles.templateTitle}><h3>Segoe UI · Microsoft Style</h3>{JSON.stringify(saved) === JSON.stringify(segoeTypography()) && <span className={styles.activeTemplate}>Active</span>}</div>
+              <p>Segoe UI headings and text, readable 18px / 17px paragraphs, coordinated theme colors, and JetBrains Mono for code. All recommended sizes, weights, and spacing included.</p>
+              <div className={styles.templateActions}><button type="button" className={styles.primary} onClick={() => applyTemplate('segoe')}><Type size={15} /> Apply Segoe UI</button><button type="button" onClick={() => previewTemplate(segoeTypography())}>Preview Segoe UI</button></div>
+            </article>
+          </div>
+        </section>
         <div className={styles.toolbar}>
           <p>Blank fields keep the current site design. Changes below are a draft until published.</p>
           <div className={styles.actions}>
-            <button type="button" onClick={() => { setDraft(defaultTypography()); setMessage(null); setRecovered(null); }}><RotateCcw size={15} /> Reset all to site defaults</button>
             <button type="button" onClick={() => { setDraft(saved); setRecovered(null); setMessage(null); }} disabled={!dirty}>Discard edits</button>
             <button type="button" onClick={openPreview} disabled={!valid}><ExternalLink size={15} /> Preview website</button>
             <button className={styles.primary} type="submit" disabled={!dirty || !valid || saving}><Save size={16} /> {saving ? 'Publishing…' : 'Publish typography'}</button>
@@ -141,7 +191,7 @@ export default function TypographyEditor({ initialSettings, revision: initialRev
             <div className={styles.elements} role="group" aria-label="Choose text element">
               {ELEMENT_IDS.map(id => <button key={id} type="button" aria-pressed={element === id} onClick={() => setElement(id)}>{id.startsWith('h') ? id.toUpperCase() : ELEMENT_LABELS[id]}</button>)}
             </div>
-            <div className={styles.selectedHeading}><h3>{ELEMENT_LABELS[element]}</h3><button type="button" onClick={() => { setDraft(current => ({ ...current, elements: { ...current.elements, [element]: emptyTypographyRule() } })); setMessage(null); }}>Reset this element</button></div>
+            <div className={styles.selectedHeading}><h3>{ELEMENT_LABELS[element]}</h3><button type="button" onClick={() => { setDraft(current => ({ ...current, elements: { ...current.elements, [element]: { ...defaultTemplate.elements[element] } } })); setMessage(null); }}>Reset this element</button></div>
             <div className={styles.fields}>
               <label className={`${styles.field} ${styles.full}`}><span>Font family</span><select value={rule.fontFamily} onChange={event => update('fontFamily', event.target.value)}><option value="">Site default</option>{FONT_FAMILIES.map(font => <option key={font.name} value={font.name}>{font.name}</option>)}</select></label>
               {numericField('fontSize', 'Desktop font size (px)', 10, 120, 1, `Site default · e.g. ${SIZE_HINTS[element]}`)}
@@ -167,7 +217,7 @@ export default function TypographyEditor({ initialSettings, revision: initialRev
               <div id="typography-sample" className={styles.sample}>
                 <div className={styles.sampleTag}>DATTA SABLE / TYPE SPECIMEN</div>
                 <h1 style={{ fontSize: 'clamp(2rem, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, fontFamily: 'Syne, sans-serif' }}>Ideas worth sharing.</h1>
-                <p style={{ fontSize: 16, lineHeight: 1.75 }}>Practical guides for curious minds. Build your knowledge of Microsoft Fabric, Power BI, and modern data engineering.</p>
+                <p style={{ fontSize: 16, lineHeight: 1.75 }}>Practical guides for curious minds. Build your knowledge of <strong>Microsoft Fabric</strong>, Power BI, and modern data engineering.</p>
                 <h2 style={{ fontSize: 32, fontWeight: 700, fontFamily: 'Syne, sans-serif' }}>A clearer perspective</h2>
                 <h3 style={{ fontSize: 24, fontWeight: 600 }}>Turn knowledge into action</h3>
                 <p style={{ fontSize: 16, lineHeight: 1.75 }}>Good typography makes every article easier to explore. <a href="#typography-preview" onClick={event => event.preventDefault()} style={{ color: previewTheme === 'dark' ? '#c9f31d' : '#0059b3', textDecoration: 'underline' }}>Explore a practical guide</a> and discover what you can create.</p>

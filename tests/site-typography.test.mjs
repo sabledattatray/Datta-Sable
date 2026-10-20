@@ -16,6 +16,7 @@ function load(file, stubs = {}) {
   return mod.exports;
 }
 const typography = load('lib/site-typography.ts');
+const templates = load('lib/site-typography-templates.ts', { './site-typography': typography });
 
 test('original site remains unchanged until individual properties are customized', () => {
   const settings = typography.defaultTypography();
@@ -100,7 +101,7 @@ function actionEnvironment({ role = 'ADMIN', fail = false, row = null } = {}) {
   } };
   const actions = load('app/admin/settings/typography/actions.ts', {
     'next-auth': { getServerSession: async () => role ? { user: { id: 'admin-test', role } } : null },
-    '@/lib/auth': { authOptions: {} }, '@/lib/prisma': { prisma }, '@/lib/site-typography': typography,
+    '@/lib/auth': { authOptions: {} }, '@/lib/prisma': { prisma }, '@/lib/site-typography': typography, '@/lib/site-typography-templates': templates,
     '@/lib/security': { logAudit: async entry => audits.push(entry) },
     'next/cache': { revalidateTag: tag => invalidated.push(tag), revalidatePath: (...args) => invalidated.push(args) },
   });
@@ -113,6 +114,115 @@ test('anonymous and non-admin users cannot publish typography', async () => {
     assert.match((await e.actions.saveWebsiteTypography(typography.defaultTypography(), null)).error, /Administrator/);
     assert.equal(e.getWrites(), 0); assert.equal(e.invalidated.length, 0);
   }
+});
+
+test('Segoe UI template matches all recommended typography values without replacing links or button colors', () => {
+  const settings = templates.segoeTypography();
+  assert.ok(typography.parseTypography(settings));
+  for (const [id, desktop, mobile, weight, height, spacing] of [
+    ['body', 18, 17, 400, 1.75, 0], ['paragraph', 18, 17, 400, 1.75, 0],
+    ['h1', 48, 34, 700, 1.2, -0.025], ['h2', 34, 28, 600, 1.3, -0.015],
+    ['h3', 26, 23, 600, 1.35, -0.01], ['h4', 22, 20, 600, 1.4, 0],
+    ['h5', 19, 18, 600, 1.4, 0], ['h6', 17, 16, 600, 1.5, 0],
+    ['button', 14, 14, 600, 1.4, 0], ['small', 13, 13, 400, 1.6, 0],
+  ]) {
+    const rule = settings.elements[id];
+    assert.equal(rule.fontFamily, 'Segoe UI');
+    assert.deepEqual([rule.fontSize, rule.mobileFontSize, rule.fontWeight, rule.lineHeight, rule.letterSpacing], [desktop, mobile, weight, height, spacing]);
+  }
+  for (const id of ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']) {
+    assert.equal(settings.elements[id].darkColor, '#FAFAFA'); assert.equal(settings.elements[id].lightColor, '#18181B');
+  }
+  assert.equal(settings.elements.paragraph.darkColor, '#D4D4D8'); assert.equal(settings.elements.paragraph.lightColor, '#27272A');
+  assert.equal(settings.elements.small.darkColor, '#A1A1AA'); assert.equal(settings.elements.small.lightColor, '#52525B');
+  for (const id of ['button', 'link', 'code']) { assert.equal(settings.elements[id].lightColor, ''); assert.equal(settings.elements[id].darkColor, ''); }
+  assert.equal(settings.elements.code.fontFamily, 'JetBrains Mono');
+  assert.equal(settings.elements.link.fontSize, null); assert.equal(settings.elements.link.fontWeight, null);
+  settings.elements.h1.fontSize = 100;
+  assert.equal(templates.segoeTypography().elements.h1.fontSize, 48, 'each template application returns fresh settings');
+});
+
+function templateEnvironment({ role = 'ADMIN', current = null, baseline = null, failBackup = false } = {}) {
+  let records = new Map();
+  const invalidated = [];
+  let transactions = 0;
+  if (current) records.set(typography.TYPOGRAPHY_KEY, current);
+  if (baseline) records.set(templates.TYPOGRAPHY_DEFAULT_KEY, baseline);
+  const prisma = { async $transaction(work) {
+    transactions++;
+    const pending = new Map(records);
+    const systemSetting = {
+      findUnique: async ({ where }) => pending.get(where.key) ?? null,
+      create: async ({ data }) => {
+        if (failBackup && data.key === templates.TYPOGRAPHY_DEFAULT_KEY) throw Error('backup failed');
+        if (pending.has(data.key)) throw Object.assign(Error('duplicate'), { code: 'P2002' });
+        const record = { ...data, updatedAt: new Date('2026-10-20T16:00:00.000Z') };
+        pending.set(data.key, record); return record;
+      },
+      updateMany: async ({ where, data }) => {
+        const record = pending.get(where.key);
+        if (!record || record.updatedAt.getTime() !== where.updatedAt.getTime()) return { count: 0 };
+        pending.set(where.key, { ...record, ...data }); return { count: 1 };
+      },
+    };
+    const result = await work({ systemSetting });
+    records = pending;
+    return result;
+  } };
+  const actions = load('app/admin/settings/typography/actions.ts', {
+    'next-auth': { getServerSession: async () => role ? { user: { id: 'admin-test', role } } : null },
+    '@/lib/auth': { authOptions: {} }, '@/lib/prisma': { prisma }, '@/lib/site-typography': typography, '@/lib/site-typography-templates': templates,
+    '@/lib/security': { logAudit: async () => {} },
+    'next/cache': { revalidateTag: tag => invalidated.push(tag), revalidatePath: () => {} },
+  });
+  return { apply: actions.applyWebsiteTypographyTemplate, record: key => records.get(key), invalidated, transactions: () => transactions };
+}
+
+test('one-click templates preserve the original custom default permanently and restore it exactly', async () => {
+  const original = typography.defaultTypography(); original.elements.h1.fontFamily = 'Inter'; original.elements.h1.fontSize = 52;
+  const current = { key: typography.TYPOGRAPHY_KEY, value: JSON.stringify(original), updatedAt: new Date('2026-10-20T15:00:00.000Z') };
+  const e = templateEnvironment({ current });
+  const first = await e.apply('segoe', current.updatedAt.toISOString());
+  assert.equal(first.success, true);
+  assert.equal(e.record(templates.TYPOGRAPHY_DEFAULT_KEY).value, JSON.stringify(original));
+  assert.equal(JSON.parse(e.record(typography.TYPOGRAPHY_KEY).value).elements.h1.fontFamily, 'Segoe UI');
+  const restored = await e.apply('default', first.revision);
+  assert.equal(restored.success, true); assert.equal(e.record(typography.TYPOGRAPHY_KEY).value, JSON.stringify(original));
+  const next = await e.apply('segoe', restored.revision);
+  assert.equal(next.success, true); assert.equal(e.record(templates.TYPOGRAPHY_DEFAULT_KEY).value, JSON.stringify(original));
+  assert.equal((await e.apply('default', next.revision)).success, true);
+  assert.equal(e.record(typography.TYPOGRAPHY_KEY).value, JSON.stringify(original));
+});
+
+test('template switching works on an untouched site and snapshots its unmodified original design', async () => {
+  const e = templateEnvironment();
+  const first = await e.apply('segoe', null);
+  assert.equal(first.success, true);
+  assert.equal(typography.buildTypographyCss(JSON.parse(e.record(templates.TYPOGRAPHY_DEFAULT_KEY).value)), '');
+  assert.equal((await e.apply('default', first.revision)).success, true);
+  assert.equal(typography.buildTypographyCss(JSON.parse(e.record(typography.TYPOGRAPHY_KEY).value)), '');
+});
+
+test('template publication requires admin access, valid template and current revision', async () => {
+  for (const role of [null, 'USER']) {
+    const e = templateEnvironment({ role }); assert.match((await e.apply('segoe', null)).error, /Administrator/); assert.equal(e.transactions(), 0);
+  }
+  const e = templateEnvironment();
+  assert.ok((await e.apply('unknown', null)).error); assert.ok((await e.apply('segoe', 'bad')).error); assert.equal(e.transactions(), 0);
+  const first = await e.apply('segoe', null);
+  const value = e.record(typography.TYPOGRAPHY_KEY).value;
+  assert.ok((await e.apply('default', null)).error);
+  assert.equal(e.record(typography.TYPOGRAPHY_KEY).value, value);
+  assert.equal(e.invalidated.length, 1); assert.equal(first.success, true);
+});
+
+test('a failed default backup rolls back publication so the original fonts remain recoverable', async () => {
+  const original = typography.defaultTypography(); original.elements.h2.fontFamily = 'Syne';
+  const current = { key: typography.TYPOGRAPHY_KEY, value: JSON.stringify(original), updatedAt: new Date('2026-10-20T15:00:00.000Z') };
+  const e = templateEnvironment({ current, failBackup: true });
+  const result = await e.apply('segoe', current.updatedAt.toISOString());
+  assert.ok(result.error); assert.equal(e.record(typography.TYPOGRAPHY_KEY).value, current.value);
+  assert.equal(e.record(templates.TYPOGRAPHY_DEFAULT_KEY), undefined); assert.equal(e.invalidated.length, 0);
 });
 
 test('publish validates input, saves to the shared database, invalidates site cache and audits the change', async () => {

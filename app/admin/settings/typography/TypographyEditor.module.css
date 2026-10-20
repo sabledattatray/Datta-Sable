@@ -7,6 +7,19 @@
 .status, .count { font-size: 11px; padding: 8px 12px; border: 1px solid var(--studio-border); border-radius: 30px; white-space: nowrap; color: var(--studio-muted); }
 .unsaved { color: var(--studio-accent); border-color: var(--studio-accent); }
 .fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.templates { margin-bottom: 24px; }
+.templateIntro { margin-bottom: 18px; }
+.templateIntro h2 { font-size: 22px; font-weight: 600; margin: 5px 0 8px; letter-spacing: -.035em; }
+.templateIntro p, .templateCard p { font-size: 13px; color: var(--studio-muted); line-height: 1.75; margin: 0; }
+.templateGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.templateCard { display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 24px; background: var(--studio-panel); border: 1px solid var(--studio-border); border-radius: 18px; }
+.segoeCard { border-color: var(--studio-accent); background: linear-gradient(135deg, color-mix(in srgb, var(--studio-accent) 8%, var(--studio-panel)), var(--studio-panel)); }
+.templateTitle { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.templateTitle h3 { margin: 0; font-size: 17px; font-weight: 600; }
+.activeTemplate { font-size: 10px; color: var(--studio-accent); border: 1px solid var(--studio-accent); border-radius: 20px; padding: 4px 9px; }
+.templateActions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px; }
+.templateActions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 10px 14px; border: 1px solid var(--studio-border); border-radius: 9px; font-size: 12px; color: var(--studio-text); background: var(--studio-field); }
+.templateActions .primary { background: #6366f1; color: #fff; border-color: #6366f1; font-weight: 600; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 24px; padding: 20px; border: 1px solid var(--studio-border); border-radius: 16px; background: var(--studio-panel); }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .page button { cursor: pointer; }
@@ -57,4 +70,5 @@
 .validation { padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.7; margin-top: 18px; }
 @media (max-width: 1100px) { .workspace { grid-template-columns: 1fr; } .previewPanel { position: static; } }
 @media (max-width: 600px) { .header { flex-direction: column; align-items: flex-start; } .panel { padding: 18px; } .fields { grid-template-columns: 1fr; } .panelHeading { flex-wrap: wrap; } .actions { width: 100%; } .actions button { flex: 1 1 45%; } }
+@media (max-width: 700px) { .templateGrid { grid-template-columns: 1fr; } .templateTitle { flex-wrap: wrap; } .templateCard { padding: 18px; } }
 @media (prefers-reduced-motion: reduce) { .preview { transition: none; } }

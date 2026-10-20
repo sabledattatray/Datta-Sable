@@ -96,13 +96,22 @@ export function buildTypographyCss(input: TypographySettings, scope = '#main-con
   for (const id of ELEMENT_IDS) {
     const rule = settings.elements[id];
     const family = FONT_FAMILIES.find(font => font.name === rule.fontFamily);
-    const selectors = TAGS[id].flatMap(tag => [`${scope} ${tag}`, `${scope} ${tag} :where(span,strong,em,b,i,a)`]);
+    const baseSelectors = TAGS[id].map(tag => `${scope} ${tag}`);
+    // Paragraph settings must not flatten link accents, button colors, or code.
+    const descendants = id === 'body' || id === 'paragraph'
+      ? ':where(span,strong,em,b,i):not(:where(a,button,[role="button"],code,pre) *)'
+      : ':where(span,strong,em,b,i,a)';
+    const selectors = TAGS[id].flatMap(tag => [`${scope} ${tag}`, `${scope} ${tag} ${descendants}`]);
     if (id === 'body') selectors.unshift(scope);
     const selector = selectors.join(',');
     const declarations: string[] = [];
     if (family) declarations.push(`font-family:'${family.name}',${family.fallback}!important`);
     if (rule.fontSize !== null) declarations.push(`font-size:${rule.fontSize / 16}rem!important`);
-    if (rule.fontWeight !== null) declarations.push(`font-weight:${rule.fontWeight}!important`);
+    // Let <strong>/<b> retain semantic emphasis instead of forcing body weight.
+    if (rule.fontWeight !== null) {
+      const weightSelectors = id === 'body' ? [scope, ...baseSelectors] : baseSelectors;
+      rules.push(`${weightSelectors.join(',')}{font-weight:${rule.fontWeight}!important}`);
+    }
     if (rule.lineHeight !== null) declarations.push(`line-height:${rule.lineHeight}!important`);
     if (rule.letterSpacing !== null) declarations.push(`letter-spacing:${rule.letterSpacing}em!important`);
     if (declarations.length) rules.push(`${selector}{${declarations.join(';')}}`);
@@ -112,7 +121,12 @@ export function buildTypographyCss(input: TypographySettings, scope = '#main-con
     }
     for (const theme of ['light', 'dark'] as const) {
       const value = theme === 'light' ? rule.lightColor : rule.darkColor;
-      if (value) rules.push(`${selectors.map(s => `${themeRoot}.${theme} ${s}`).join(',')}{color:${value}!important;-webkit-text-fill-color:${value}!important;background-image:none!important}`);
+      if (value) {
+        // Only headings need to replace gradient text. Applying text-fill to the
+        // content root would also force that color onto links and button labels.
+        const gradientOverride = id.startsWith('h') ? `;-webkit-text-fill-color:${value}!important;background-image:none!important` : '';
+        rules.push(`${selectors.map(s => `${themeRoot}.${theme} ${s}`).join(',')}{color:${value}!important${gradientOverride}}`);
+      }
     }
   }
   return rules.length ? `${typographyFontCss(settings)}\n${rules.join('\n')}` : '';
