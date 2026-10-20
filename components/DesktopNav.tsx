@@ -8,6 +8,7 @@ import { ChevronDown, ArrowUpRight, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import ThemeToggle from './ThemeToggle';
 import HeaderAccount from './HeaderAccount';
+import accountStyles from './HeaderAccount.module.css';
 import { navLinks, megaMenuData } from './navigationData';
 
 const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
@@ -138,17 +139,17 @@ export default function DesktopNav() {
         </div>
       ))}
       
-      <div className="ml-1 pl-1 xl:ml-2 xl:pl-2 2xl:ml-3 2xl:pl-3 border-l border-[var(--border)] flex items-center gap-1.5 xl:gap-2 2xl:gap-3">
+      <div className={accountStyles.headerActions}>
         <ThemeToggle />
         {session ? (
           <HeaderAccount name={session.user?.name} isAdmin={String((session.user as any)?.role).toUpperCase() === 'ADMIN'} onSignOut={() => signOut()} />
         ) : (
           <button 
+            type="button"
             onClick={() => setIsLoginOpen(true)}
-            className="flex items-center gap-1 xl:gap-1.5 h-8 xl:h-9 px-2.5 xl:px-4 rounded-xl bg-[var(--accent)] text-black font-bold text-[10px] xl:text-[11px] tracking-widest uppercase transition-all duration-300 hover:brightness-110 hover:scale-[1.02] active:scale-[0.98]"
-            style={{ fontFamily: 'Syne, sans-serif', whiteSpace: 'nowrap' }}
+            className={accountStyles.signIn}
           >
-            <User size={12} /> Sign In
+            <span className={accountStyles.signInIcon}><User size={14} aria-hidden="true" /></span><span>Sign in</span>
           </button>
         )}
       </div>

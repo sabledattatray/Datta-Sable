@@ -1,4 +1,9 @@
 .root { position: relative; flex-shrink: 0; }
+.headerActions { display: flex; align-items: center; flex-shrink: 0; gap: 10px; margin-left: 10px; padding-left: 12px; border-left: 1px solid var(--border); }
+.signIn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 40px; padding: 4px 14px 4px 5px; border: 1px solid var(--border); border-radius: 24px; background: var(--surface); color: var(--text); font-family: var(--font-inter); font-size: 12px; font-weight: 500; line-height: 1.4; white-space: nowrap; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.signInIcon { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent); }
+.signIn:hover { border-color: var(--accent); background: var(--surface2); }
+.signIn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .trigger { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 4px 8px 4px 4px; border: 1px solid var(--border); border-radius: 24px; color: var(--muted); background: var(--surface); cursor: pointer; }
 .trigger:hover, .trigger[aria-expanded='true'] { border-color: var(--accent); color: var(--accent); }
 .avatar { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); font-size: 12px; font-weight: 600; line-height: 1; }
