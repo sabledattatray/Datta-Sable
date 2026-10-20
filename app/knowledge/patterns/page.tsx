@@ -8,10 +8,7 @@ import { LayoutGrid, Share2, Download, Link as LinkIcon, FileJson, Cpu, Zap, Act
 import Link from 'next/link';
 
 export default function PatternsPage() {
-  const handleDownload = () => {
-    // In a real scenario, this would link to a pre-generated PDF
-    alert('Generating High-Resolution Architecture Reference Poster... The technical PDF will be available for download in a few moments.');
-  };
+  const handleDownload = () => { window.print(); };
 
   const handleShare = () => {
     if (navigator.share) {
@@ -32,7 +29,7 @@ export default function PatternsPage() {
       code: "WP-01",
       desc: "A recursive self-correction pattern where an Auditor Agent validates the output of an Executor Agent before final delivery.",
       useCase: "Data formatting, complex code generation, logical reasoning.",
-      benefits: ["99.8% Schema Fidelity", "Recursive Error Correction"]
+      benefits: ["Schema checks required", "Recursive Error Correction"]
     },
     {
       title: "The Multi-Agent Swarm",
@@ -142,7 +139,7 @@ export default function PatternsPage() {
                   onClick={handleDownload}
                   className="btn-primary py-3 px-8 flex items-center gap-2"
                 >
-                  <Download size={16} /> Download PDF (HQ)
+                  <Download size={16} /> Print reference
                 </button>
                 <button 
                   onClick={handleShare}

@@ -162,11 +162,11 @@ export default function RFC001() {
                 {bibtex}
               </pre>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button className="btn-primary py-2 px-6 flex items-center gap-2 text-[11px] mono">
-                  <Download size={14} /> DOWNLOAD_AS_PDF
+                <button onClick={() => window.print()} className="btn-primary py-2 px-6 flex items-center gap-2 text-[11px] mono">
+                  <Download size={14} /> PRINT_REFERENCE
                 </button>
-                <button className="btn-outline py-2 px-6 flex items-center gap-2 text-[11px] mono">
-                  <Share2 size={14} /> SHARE_SPEC
+                <button onClick={() => copyToClipboard(window.location.href)} className="btn-outline py-2 px-6 flex items-center gap-2 text-[11px] mono">
+                  <Share2 size={14} /> COPY_LINK
                 </button>
               </div>
             </div>

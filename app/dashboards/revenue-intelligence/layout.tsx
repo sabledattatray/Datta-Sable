@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: 'Revenue Intelligence Dashboard — Enterprise Financial Analytics | Datta Sable',
   description:
     'Interactive enterprise revenue intelligence dashboard with real-time financial analytics. Monitor MRR, ARR, churn, customer lifetime value, revenue by segment, and growth trends powered by advanced BI.',

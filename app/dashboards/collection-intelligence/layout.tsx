@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: 'Collection Intelligence Dashboard — EMI & Debt Recovery Analytics | Datta Sable',
   description:
     'Interactive EMI collection and debt recovery analytics dashboard. Track collection efficiency, recovery rates, agent performance, bucket-wise analysis, and delinquency trends across loan portfolios.',

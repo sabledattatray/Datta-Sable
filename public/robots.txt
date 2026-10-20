@@ -1,4 +1,4 @@
-# Public content is crawlable by search and advertising crawlers alike.
+# Public editorial content is crawlable; utility tools are excluded by site preference.
 # Indexing exclusions belong in page robots metadata, not crawler blocks.
 # robots.txt is not access control; private routes still require authentication.
 User-agent: *
@@ -7,6 +7,8 @@ User-agent: Google-Display-Ads-Bot
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
 Allow: /
+Disallow: /tools$
+Disallow: /tools/
 Disallow: /api/
 Disallow: /admin$
 Disallow: /admin/

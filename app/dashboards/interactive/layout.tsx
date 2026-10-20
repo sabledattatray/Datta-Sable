@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: 'Interactive Analytics Demo — Live BI Dashboard Playground | Datta Sable',
   description:
     'Explore an interactive live BI dashboard playground by Datta Sable. Experiment with data visualisations, filter controls, drill-through analytics, and real-time chart interactions in this hands-on analytics demo.',

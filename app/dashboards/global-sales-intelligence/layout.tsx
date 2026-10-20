@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: 'Global Sales Intelligence Dashboard — International Revenue Analytics | Datta Sable',
   description:
     'Interactive global sales intelligence dashboard tracking international revenue performance, regional market share, cross-border deal analytics, currency-adjusted growth metrics, and territory-level KPIs.',

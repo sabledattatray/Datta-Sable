@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "Synthetic Data Forge PRO | Datta Sable",
   description: "Professional-grade synthetic data generator. Create high-fidelity datasets for BFSI, Healthcare, Retail, and Supply Chain testing.",
   keywords: [

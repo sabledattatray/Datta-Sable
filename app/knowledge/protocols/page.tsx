@@ -8,9 +8,7 @@ import { UserCog, Target, Fingerprint, GitMerge, FileCheck, Layers, Link as Link
 import Link from 'next/link';
 
 export default function ProtocolsPage() {
-  const handleDownload = () => {
-    alert('Generating Technical Protocol Document... v1.4.2 will be available for download shortly.');
-  };
+  const handleDownload = () => { window.print(); };
 
   const handleShare = () => {
     if (navigator.share) {
@@ -127,8 +125,7 @@ export default function ProtocolsPage() {
                   <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "'Syne', sans-serif" }}>Technical Moat Analysis</h2>
                   <p style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '3rem' }}>
                     The OIM Protocol creates a "Technical Moat" by encoding your unique professional reasoning 
-                    into the system's logic loop. This ensures that AI-generated assets are indistinguishable 
-                    from expert-level human output.
+                    into the system's logic loop. AI-generated assets still require subject-matter review, factual checks and clear disclosure.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-4 pt-6 border-t border-[var(--border)] border-opacity-60">
@@ -137,7 +134,7 @@ export default function ProtocolsPage() {
                     className="btn-primary flex items-center gap-2.5 font-bold tracking-wider"
                     style={{ padding: '1rem 1.75rem', fontSize: '12px' }}
                   >
-                    <Download size={16} /> DOWNLOAD PDF PROTOCOL
+                    <Download size={16} /> PRINT REFERENCE
                   </button>
                   <button 
                     onClick={handleShare}

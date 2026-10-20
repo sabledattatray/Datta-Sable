@@ -11,22 +11,12 @@ import { LANDING_PAGES as landingPages } from '@/data/landing-pages';
 
 const TEMPLATES = [
   {
-    id: 'pbi-fin-dashboard-v1',
-    title: "Financial Intelligence Blueprint",
-    type: "Power BI",
-    icon: <Layout className="text-blue-500" size={24} />,
-    desc: "Surgical-grade financial dashboard architected for 16M+ row SQL Server 2022 datasets. Features automated GL consolidation, query folding, and zero-latency margin variance tracking.",
-    size: "4.86 MB",
-    category: "Business Intelligence",
-    downloadUrl: "/templates/financial-blueprint.pbit"
-  },
-  {
     id: 'n8n-agentic-workflow-01',
     title: "Multi-Agent AI Orchestrator",
     type: "n8n JSON",
     icon: <Zap className="text-yellow-500" size={24} />,
-    desc: "Advanced n8n workflow orchestrating 5+ specialized LLM agents for technical content distribution. Features automated Gemini deep research, zero-fluff surgical style transfer, viral LinkedIn hook generation, and Google Rich Results JSON-LD schema forging.",
-    size: "5.88 KB",
+    desc: "Example n8n workflow for a content-processing pipeline. Inspect its nodes, configure your own service credentials and test in a separate workspace before use. No distribution or engagement result is guaranteed.",
+    size: "5.95 KB",
     category: "Automation",
     downloadUrl: "/templates/multi-agent-orchestrator.json"
   },
@@ -35,8 +25,8 @@ const TEMPLATES = [
     title: "Data Sanitization Engine",
     type: "Python",
     icon: <Database className="text-cyan-500" size={24} />,
-    desc: "Production-grade Python script engineered for cleaning 10M+ record datasets with zero context loss. Features active memory chunking, automatic dtype downcasting, median/mode imputation, IQR outlier clamping, and direct PyArrow Parquet serialization.",
-    size: "12.98 KB",
+    desc: "Example Python data-cleaning script. Review dependencies and transformation rules, keep an original copy of your input and validate the output on a small non-sensitive sample before adapting it.",
+    size: "13.25 KB",
     category: "Data Engineering",
     downloadUrl: "/templates/data-cleaner.py"
   }

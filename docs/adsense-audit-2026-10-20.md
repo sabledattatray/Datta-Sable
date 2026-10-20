@@ -85,3 +85,7 @@ See [release and account checklist](adsense-release-2026-10-20.md) for the remai
 The earlier Prisma connection failure did not recur: a fresh read-only query returned all 122 published articles, and both production HTTP suites passed against the real CMS connection. No credential or database mutation was needed. The root cause of the earlier outage was not established; ongoing database availability remains an operational dependency. Browser verification confirmed the revised SQL guide, reopening preferences and rejecting analytics. The preview was stopped after checks.
 
 The user added www.dattasable.com in Vercel. A fresh public HTTPS request now validates its certificate and redirects to https://dattasable.com/. The earlier www certificate repair is complete. Source changes remain local; deployment and Google account/CMP/Search Console checks require authenticated access.
+
+## Subsequent tools and thin-page review
+
+At the owner’s request, /tools now has explicit crawl exclusions. This supersedes the earlier public-tool crawl setting above. A separate 242-URL review led to targeted noindex metadata, a services overview rewrite and removal of an advertised placeholder download. See [follow-up findings and verification](adsense-thin-pages-2026-10-20.md). Robots blocking and noindex are not AdSense policy exemptions.

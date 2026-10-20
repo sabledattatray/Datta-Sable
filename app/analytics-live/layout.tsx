@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: 'Live Analytics Dashboard | Real-Time Site Metrics | Datta Sable',
   description: 'Real-time analytics dashboard for dattasable.com. Monitor live visitor data, traffic sources, and performance metrics.',
   openGraph: {

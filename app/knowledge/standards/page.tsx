@@ -13,19 +13,19 @@ export default function StandardsPage() {
       title: "Structural Schema Enforcement",
       code: "PH-S01",
       desc: "Mandatory JSON or Markdown schema definition within the system prompt to force structural fidelity.",
-      impact: "Eliminates 99% of parsing errors in downstream ingestion."
+      impact: "Validate the output against a parser and reject invalid records."
     },
     {
       title: "Deterministic Constraint Mapping",
       code: "PH-S02",
       desc: "Defining absolute boundaries and 'No-Go' zones to prevent model drift and creative hallucination.",
-      impact: "Ensures sub-zero drift in high-volume production cycles."
+      impact: "Check outputs against task constraints; prompts cannot guarantee absence of drift."
     },
     {
       title: "Recursive Validation Nodes",
       code: "PH-S03",
       desc: "Self-correction loops where the model audits its own logic before finalizing the output string.",
-      impact: "Increases reasoning accuracy by 15-20% on complex tasks."
+      impact: "Use an independent labelled evaluation set to measure whether a revision helps."
     },
     {
       title: "Context Window Compression",
@@ -136,13 +136,13 @@ export default function StandardsPage() {
                 </p>
                 <div className="flex items-center gap-6">
                   <div className="flex flex-col">
-                    <span className="text-2xl font-bold text-emerald-500">0.2%</span>
-                    <span className="mono text-[10px] uppercase opacity-40">Failure Rate</span>
+                    <span className="text-2xl font-bold text-emerald-500">Measure</span>
+                    <span className="mono text-[10px] uppercase opacity-40">Failure rate</span>
                   </div>
                   <div className="w-px h-10 bg-[var(--border)]" />
                   <div className="flex flex-col">
-                    <span className="text-2xl font-bold text-emerald-500">100%</span>
-                    <span className="mono text-[10px] uppercase opacity-40">Schema Fidelity</span>
+                    <span className="text-2xl font-bold text-emerald-500">Validate</span>
+                    <span className="mono text-[10px] uppercase opacity-40">Schema conformance</span>
                   </div>
                 </div>
               </div>
