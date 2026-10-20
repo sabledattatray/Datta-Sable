@@ -11,11 +11,11 @@ export const runtime='nodejs';
 export const maxDuration=300;
 const isAdmin=async()=>{const session=await getServerSession(authOptions);return (session?.user as {role?:string}|undefined)?.role==='ADMIN';};
 async function publishedPosts(){
- const db=await prisma.post.findMany({where:{published:true},select:{slug:true,title:true,category:true,excerpt:true,image:true,readTime:true,date:true},orderBy:{createdAt:'desc'},take:200});
+ const db=await prisma.post.findMany({where:{published:true},select:{slug:true,title:true,category:true,excerpt:true,image:true,readTime:true,date:true},orderBy:{createdAt:'desc'}});
  const map=new Map(staticPosts.map(p=>[p.slug,{slug:p.slug,title:p.title,category:p.category||'Engineering',excerpt:p.excerpt||'',image:p.image||null,readTime:undefined as number|undefined,date:p.date}]));
  db.forEach(p=>map.set(p.slug,p));
  const drafts=await prisma.post.findMany({where:{published:false},select:{slug:true}});drafts.forEach(p=>map.delete(p.slug));
- return [...map.values()];
+ return [...map.values()].sort((a,b)=>(Date.parse(b.date||'')||0)-(Date.parse(a.date||'')||0)||a.title.localeCompare(b.title));
 }
 export async function GET(){
  if(!await isAdmin())return NextResponse.json({error:'Unauthorized'},{status:403});

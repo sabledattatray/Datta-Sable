@@ -10,6 +10,10 @@
 - Registered user and subscriber emails are normalized and deduplicated. Persistent opt-outs exclude both sources. Signing out or deleting a subscription does not delete a registered account.
 - Database posts override static article metadata. Drafts are excluded. Static source-code articles can be shared manually; neither CMS publication nor a Git deployment triggers notification.
 
+## Manual article selection
+
+The campaign studio lists every published article, newest first, with title/category search and a Use article action. There is no 200-post cutoff. Selecting an article fills its title, summary, image and link; drafts are excluded. Selection, preview and publishing never send mail. Send a test of the exact draft, then review and explicitly confirm the audience broadcast. Each address receives an individual message.
+
 ## Deployment configuration
 
 Set these server-side variables in Vercel Production, then redeploy:
