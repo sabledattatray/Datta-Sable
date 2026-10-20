@@ -2,3 +2,14 @@
   background: var(--surface2) !important;
   border-color: var(--card-accent, var(--accent)) !important;
 }
+
+.commitment {
+  margin: 8px 0 12px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}

@@ -98,7 +98,7 @@ export default function StartHere() {
                       {t.title}
                     </h3>
 
-                    <div className="mono text-[9px] uppercase tracking-wider mb-3" style={{ color: t.color, opacity: 0.85 }}>
+                    <div className={styles.commitment}>
                       {t.commitment}
                     </div>
                     
