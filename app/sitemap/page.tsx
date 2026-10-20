@@ -23,7 +23,6 @@ export default async function HtmlSitemapPage() {
     { label: 'AI Glossary Hub', href: '/glossary' },
     { label: 'Editorial Policy & Testing Standards', href: '/editorial-policy' },
     { label: 'Frequently Asked Questions (FAQ)', href: '/faq' },
-    { label: 'Careers & Positions', href: '/careers' },
     { label: 'Disclaimer Notice', href: '/disclaimer' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms & Conditions', href: '/terms' },

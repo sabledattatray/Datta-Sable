@@ -17,7 +17,7 @@ export async function generateStaticParams() {
       select: { slug: true },
       where: { published: true }
     });
-    return pages.map(p => ({ slug: p.slug }));
+    return pages.filter(p => p.slug !== 'careers').map(p => ({ slug: p.slug }));
   } catch (e) {
     console.warn('Could not query database slugs for custom pages generateStaticParams:', e);
     return [];
@@ -26,6 +26,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  // Do not expose the withdrawn campaign through its CMS alias.
+  if (slug === 'careers') notFound();
   const baseUrl = 'https://dattasable.com';
 
   const page = await prisma.page.findUnique({
@@ -55,6 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CustomPage({ params }: Props) {
   const { slug } = await params;
+  // Do not expose the withdrawn campaign through its CMS alias.
+  if (slug === 'careers') notFound();
 
   const page = await prisma.page.findUnique({
     where: { slug }

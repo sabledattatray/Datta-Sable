@@ -45,3 +45,7 @@ The advertised financial-blueprint.pbit file was only 64 bytes and contained “
 ## Verification
 
 Production build passed on Next.js 15.5.28. Existing regression suite: 41 passed, 0 failed. Follow-up production HTTP/HTML checks: 24 passed, covering tools robots rules, all 17 newly noindex routes, existing tools noindex, services content, template download links, sitemap exclusion and a revised indexable article. Existing lint warnings remain.
+
+## Career follow-up
+
+The owner subsequently requested withdrawal of all recruitment campaigns. The two duplicate job pages, careers hub and aliases are now retired in source. See [campaign removal](career-campaign-removal-2026-10-20.md) for the exact URLs and validation. This resolves the earlier recommendation to differentiate or consolidate those campaign pages.

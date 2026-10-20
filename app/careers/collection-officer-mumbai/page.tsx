@@ -1,20 +1,7 @@
-import { Metadata } from 'next';
-import CareersContent from '../CareersContent';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Field Collection Officer (FOS) Jobs in Mumbai | Datta Sable Careers',
-  description: 'Apply for Field Collection Officer (FOS) jobs in Mumbai, Navi Mumbai, Thane & Kalyan. Freshers welcome, 10th pass minimum. Attractive commissions, immediate joining.',
-  alternates: {
-    canonical: 'https://dattasable.com/careers/collection-officer-mumbai',
-  },
-  openGraph: {
-    title: 'Field Collection Officer (FOS) Jobs in Mumbai | Datta Sable Careers',
-    description: 'Apply for Field Collection Officer (FOS) jobs in Mumbai, Navi Mumbai, Thane & Kalyan. Freshers welcome, 10th pass minimum. Attractive commissions, immediate joining.',
-    url: 'https://dattasable.com/careers/collection-officer-mumbai',
-    type: 'website',
-  }
-};
+export const metadata: Metadata = { title: 'Page Not Found', robots: { index: false, follow: true } };
 
-export default function CollectionOfficerMumbaiPage() {
-  return <CareersContent defaultJobTitle="Field Collection Officer" />;
-}
+// Recruitment campaign withdrawn by the site owner. Preserve a real 404 for crawlers.
+export default function RetiredRecruitmentPage() { notFound(); }

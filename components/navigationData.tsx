@@ -129,7 +129,6 @@ export const megaMenuData: Record<string, any> = {
     items: [
       { title: 'About Datta',        desc: 'Learn about my background & BI philosophy.', icon: <User size={18} />,      href: '/about',                      color: '#c9f31d' },
       { title: 'Contact Me',         desc: 'Start a project or consult with me.',        icon: <Mail size={18} />,      href: '/contact',                    color: '#60a5fa' },
-      { title: 'Careers',            desc: 'Join the team (hiring Collection Officers).', icon: <Users size={18} />,     href: '/careers',                    color: '#34d399' },
       { title: 'WhatsApp Chat',      desc: 'Direct message on WhatsApp for fast replies.', icon: <PhoneCall size={18} />, href: 'https://wa.me/918010803756?text=Hi%20Datta,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.', color: '#25D366' },
       { title: 'LinkedIn Profile',   desc: 'Professional network & updates.',            icon: <Users size={18} />,     href: 'https://www.linkedin.com/in/dattasable/', color: '#0A66C2' },
       { title: 'Twitter / X',        desc: 'Real-time thoughts & tech updates.',         icon: <MessageSquare size={18} />, href: 'https://x.com/sabledattatray', color: '#1DA1F2' },
