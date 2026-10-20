@@ -1,8 +1,8 @@
-import { after, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { ensureCampaignSchema, enqueueCampaign, processCampaignQueue } from '@/lib/campaigns';
 export const maxDuration=300;
 
 export async function GET(
@@ -54,15 +54,12 @@ export async function PUT(
     if (updateData.readTime !== undefined) {
       updateData.readTime = Number(updateData.readTime) || 3;
     }
-
-    await ensureCampaignSchema();
     const post = await prisma.$transaction(async tx => {
-      const prevPost=await tx.post.findUnique({where:{id}});
       const post=await tx.post.update({where:{id},data:updateData});
-      if(post.published&&!prevPost?.published) await enqueueCampaign({title:post.title,slug:post.slug,shortStory:post.excerpt||`A new article is available: ${post.title}. Read the full story for the details.`,category:post.category,readTime:post.readTime,imageUrl:post.image,takeaways:[]},`publish:${post.slug}`,tx);
       return post;
     },{timeout:20000});
-    if(post.published) after(async()=>{await processCampaignQueue();});
+    // Publishing changes site content only. Email campaigns are sent manually.
+    for (const path of ['/', '/blog', `/blog/${post.slug}`, '/sitemap.xml', '/rss.xml']) revalidatePath(path);
 
     return NextResponse.json(post);
   } catch (error) {

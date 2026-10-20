@@ -3,12 +3,12 @@
 ## What changed
 
 - Resend is the default mail provider. SMTP is used only when explicitly selected with EMAIL_PROVIDER=smtp; credentials no longer silently fall back to Gmail placeholders.
-- Publishing a CMS article for the first time stores the article and its automatic campaign in the same PostgreSQL transaction. The opening is the article excerpt, with an honest title-based fallback. Normal edits and republishing the same slug do not create another automatic campaign.
+- Publishing or editing a CMS article never queues or sends email. Campaigns are manual-only: select a published article, send a test, then explicitly confirm a broadcast in the marketing dashboard.
 - Next.js 15 after() owns the delivery work after the response. Campaigns and recipient outcomes persist in an outbox, instead of disappearing with a detached promise. Routes allow 300 seconds; the worker processes up to 180 messages within a 200-second work budget.
 - The worker sends one message per recipient, at a controlled pace, with a stable Resend idempotency key. A database lease prevents overlapping workers. Accepted messages are never resent by Resume remaining. Failed messages can be retried; ambiguous outcomes and interrupted in-flight messages are held for manual review to avoid duplicates.
 - Manual campaigns use an idempotent request ID and require a successful test of the exact current draft. Provider acceptance is not proof of inbox delivery.
 - Registered user and subscriber emails are normalized and deduplicated. Persistent opt-outs exclude both sources. Signing out or deleting a subscription does not delete a registered account.
-- Database posts override static article metadata. Drafts are excluded. Static source-code articles can be shared manually; automatic notification is triggered by publishing through the CMS API, not a Git deployment.
+- Database posts override static article metadata. Drafts are excluded. Static source-code articles can be shared manually; neither CMS publication nor a Git deployment triggers notification.
 
 ## Deployment configuration
 
@@ -28,7 +28,7 @@ The four additive Marketing tables are represented in prisma/schema.prisma. Runt
 
 ## Recovery scheduling
 
-The initial after() worker starts immediately after a publish or manual broadcast. For recovery after an interrupted invocation, configure a scheduler to GET:
+The after() worker starts only after an explicitly confirmed manual broadcast. Publishing does not invoke it. For recovery after an interrupted invocation, configure a scheduler to GET:
 
 ```text
 https://dattasable.com/api/cron/campaigns
@@ -45,7 +45,7 @@ npx tsc --noEmit
 npm run build
 ```
 
-The campaign tests use an isolated PGlite PostgreSQL engine and mocked provider responses. They do not read production recipients or send actual email. Before broadcasting, send one real test to the owner, check the inbox/spam folder, and confirm the provider activity. The dashboard requires confirmation before a manual audience broadcast. Automatic first-publish notifications are enabled once the code and provider configuration are deployed.
+The campaign tests use an isolated PGlite PostgreSQL engine and mocked provider responses. They do not read production recipients or send actual email. Before broadcasting, send one real test to the owner, check the inbox/spam folder, and confirm the provider activity. The dashboard requires confirmation before a manual audience broadcast. Publication and draft-to-published transitions are tested to produce zero campaigns and zero provider calls.
 
 ## Unsubscribe behaviour
 

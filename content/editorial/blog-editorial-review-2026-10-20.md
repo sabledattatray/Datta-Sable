@@ -47,7 +47,7 @@ The local featured image must be deployed before publishing the CMS draft. The l
 1. Review the article and featured image using the local preview.
 2. Deploy the source assets and preview code; the preview route returns 404 in production.
 3. Verify the featured image URL works on the live domain.
-4. Publish the saved draft through the CMS when ready. That first publication invokes the automatic email campaign; saving this draft did not.
+4. Publish the saved draft through the CMS when ready. Publishing does not send email. Campaigns are manual-only following the owner’s updated instruction.
 5. Inspect the live canonical, title, description, image, article schema and sitemap entry.
 6. Use Google's Rich Results Test and Search Console URL Inspection after publication. Monitor queries, impressions and click-through; improve the page from observed reader behavior.
 
@@ -59,3 +59,7 @@ Google documents people-first content, title links, snippets and article structu
 - https://developers.google.com/search/docs/appearance/structured-data/article
 
 No search ranking, indexing date, traffic total or “100% SEO” score is guaranteed.
+
+## Publication update — 20 October 2026
+
+Published through the dedicated Prisma upsert seed after the featured image returned HTTP 200. Added contextual inbound links from the Fabric architecture, OneLake and capacity articles. The live article returned HTTP 200 with the intended title, description, canonical and image. Following the owner’s updated instruction, publishing does not queue or send email; manual campaign sending remains available.
