@@ -373,16 +373,16 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
   // CSS variables for theming
   const css = isDark
     ? {
-        bg: isCampaign ? '#0c1016' : '#000000',
-        surface: isCampaign ? '#131a24' : '#000000',
-        surface2: isCampaign ? '#18212e' : '#121212',
-        border: isCampaign ? '#293446' : '#1a1a1a',
+        bg: '#000000',
+        surface: '#000000',
+        surface2: '#121212',
+        border: '#1a1a1a',
         text: '#f1f5f9',
         muted: isCampaign ? '#a2b0c2' : '#64748b',
         accent: currentAccent,
         accentGlow: currentAccentGlow,
-        headerBg: isCampaign ? 'rgba(12,16,22,0.96)' : 'rgba(0,0,0,0.9)',
-        sidebarBg: isCampaign ? 'linear-gradient(180deg, #111821 0%, #0c1016 100%)' : 'linear-gradient(180deg, #000000 0%, #000000 100%)',
+        headerBg: 'rgba(0,0,0,0.9)',
+        sidebarBg: 'linear-gradient(180deg, #000000 0%, #000000 100%)',
         cardBg: '#000000',
         badgeBg: currentAccent,
         activeBg: currentAccentGlow,
