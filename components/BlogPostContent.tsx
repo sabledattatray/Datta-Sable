@@ -1,11 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronLeft, Share2 } from 'lucide-react';
 import PostMetadata from './PostMetadata';
+import ArticleToc from './ArticleToc';
+import type { ArticleHeading } from '@/lib/article-navigation';
+import articleStyles from './ArticleLayout.module.css';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 import { useTheme } from '@/components/ThemeProvider';
 import DiagramRenderer from '@/components/blog/interactive/DiagramRenderer';
@@ -90,6 +93,7 @@ interface Post {
   blocks?: any[];
   createdAt?: string;
   updatedAt?: string;
+  headings?: ArticleHeading[];
 }
 
 const extractOutboundLinks = (htmlContent: string) => {
@@ -138,6 +142,8 @@ const getReferencesForPost = (title: string, content: string) => {
 
 export default function BlogPostContent({ post, relatedPosts }: { post: Post; relatedPosts?: any[] }) {
   const [copied, setCopied] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const headings = post.headings ?? [];
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -257,7 +263,9 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
     <>
       <div id="reading-progress" className="reading-progress" style={{ width: '0%', height: '3px', position: 'fixed', top: 0, left: 0, background: 'var(--accent)', zIndex: 101, transition: 'width 0.1s ease' }} />
       
-      <div className="container" style={{ maxWidth: 760 }}>
+      <div className={articleStyles.layout} data-has-toc={headings.length >= 2}>
+        {headings.length >= 2 && <aside className={articleStyles.rail}><ArticleToc key={post.slug} headings={headings} contentRef={contentRef} /></aside>}
+        <div className={articleStyles.article}>
         <div className="flex flex-col gap-6 mb-8">
           <Link
             href="/blog"
@@ -290,7 +298,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           position: 'relative',
           overflow: 'hidden',
           border: '1px solid var(--border)',
-          borderRadius: '4px',
+          borderRadius: '18px',
           background: 'var(--surface2)'
         }}>
           <Image 
@@ -305,7 +313,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.3))', pointerEvents: 'none' }} />
         </div>
 
-        <div className="flex items-center gap-3 mb-8 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="flex items-center gap-3" style={{ borderBottom: '1px solid var(--border)', marginBottom: 32, paddingBottom: 24 }}>
           <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--accent)', flexShrink: 0, position: 'relative' }}>
             <Image 
               src="/images/author.webp" 
@@ -325,10 +333,11 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
             style={{ 
               background: copied ? 'var(--accent)' : 'var(--surface2)', 
               border: '1px solid var(--accent)', 
-              borderRadius: 0, 
+              borderRadius: 10,
+              marginLeft: 'auto',
               padding: '0.4rem 1.2rem', 
               cursor: 'pointer', 
-              color: copied ? '#000' : 'var(--text)', 
+              color: copied ? 'var(--btn-primary-text)' : 'var(--text)',
               fontSize: '10px',
               fontWeight: 700,
               textTransform: 'uppercase',
@@ -339,6 +348,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           </button>
         </div>
 
+        <div ref={contentRef} className={articleStyles.content}>
         {post.blocks && post.blocks.length > 0 ? (
           <BlockRenderer blocks={post.blocks} />
         ) : (
@@ -358,6 +368,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
             })}
           </div>
         )}
+        </div>
 
         {/* ── Technical References & Standards (E-E-A-T Outbound Links) ── */}
         {(() => {
@@ -368,7 +379,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
               padding: '2rem', 
               background: 'var(--surface2)', 
               borderLeft: '2px solid var(--accent)', 
-              borderRadius: '0 4px 4px 0' 
+              borderRadius: '16px'
             }}>
               <h4 className="mono text-[11px] uppercase tracking-wider text-[var(--accent)] mb-3">Technical References &amp; Standards</h4>
               <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }} className="flex flex-col gap-2.5">
@@ -396,6 +407,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           padding: '3rem', 
           background: 'var(--surface2)', 
           border: '1px solid var(--border)',
+          borderRadius: 20,
           position: 'relative',
           overflow: 'hidden'
         }}>
@@ -579,6 +591,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           }
           return null;
         })()}
+        </div>
       </div>
     </>
   );

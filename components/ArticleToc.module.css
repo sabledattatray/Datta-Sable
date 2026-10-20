@@ -1,0 +1,42 @@
+.navigation { position: relative; color: var(--text); }
+.panel { display: flex; flex-direction: column; max-height: calc(100dvh - 190px); background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 12px 36px #0000000c; }
+.heading { display: flex; align-items: center; gap: 10px; padding: 20px 18px 16px; flex-shrink: 0; }
+.eyebrow { font-size: 9px; text-transform: uppercase; letter-spacing: .13em; font-weight: 600; color: var(--accent); }
+.title { display: block; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -.025em; margin: 5px 0 0; }
+.count { display: grid; place-items: center; margin-left: auto; min-width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 9px; color: var(--muted); font-size: 11px; }
+.search { display: flex; align-items: center; gap: 8px; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; margin: 0 14px 12px; padding: 9px 10px; flex-shrink: 0; }
+.search input { min-width: 0; width: 100%; color: var(--text); background: transparent; border: 0; font-size: 12px; line-height: 1.5; outline: none; }
+.search input::placeholder { color: var(--muted); }
+.search:focus-within { border-color: var(--accent); }
+.list { overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 0 10px 10px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.list ol { list-style: none; margin: 0; padding: 0; }
+.list > ol { display: grid; gap: 4px; }
+.linkRow { display: flex; align-items: start; border-radius: 9px; border-left: 2px solid transparent; }
+.linkRow[data-active='true'] { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+.linkRow a { display: flex; align-items: start; gap: 9px; flex: 1; min-width: 0; padding: 11px 7px; color: var(--muted); font-size: 12px; line-height: 1.65; text-decoration: none; overflow-wrap: anywhere; }
+.number { flex-shrink: 0; font-family: var(--font-mono); font-size: 10px; line-height: 2; color: var(--accent); }
+.linkRow[data-active='true'] a, .list a:hover, .list a[aria-current='location'] { color: var(--accent); }
+.expand { flex-shrink: 0; display: grid; place-items: center; margin-top: 4px; width: 32px; min-height: 38px; background: none; color: var(--muted); border: 0; cursor: pointer; }
+.expanded { transform: rotate(90deg); }
+.list .children { margin: 3px 8px 10px 27px; border-left: 1px solid var(--border); padding-left: 10px; }
+.children[hidden] { display: none; }
+.children a { display: block; color: var(--muted); font-size: 11px; line-height: 1.7; padding: 8px 4px; text-decoration: none; overflow-wrap: anywhere; }
+.empty { color: var(--muted); font-size: 12px; padding: 16px 8px; line-height: 1.6; }
+.footer { padding: 12px 18px; color: var(--muted); font-size: 10px; line-height: 1.6; border-top: 1px solid var(--border); flex-shrink: 0; }
+.mobileToggle, .close { display: none; }
+.navigation a:focus-visible, .navigation button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 8px; }
+@media (max-width: 1099px) {
+  .mobileToggle { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: var(--accent); box-shadow: 0 6px 24px #00000012; cursor: pointer; text-align: left; }
+  .mobileToggle > svg { flex-shrink: 0; }
+  .mobileToggle > svg:last-child { margin-left: auto; }
+  .mobileLabel { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .mobileLabel strong { font-size: 12px; line-height: 1.4; font-weight: 600; }
+  .mobileLabel > span { font-size: 11px; line-height: 1.5; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .rotated { transform: rotate(180deg); }
+  .panel { display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; max-height: min(65dvh, 540px); box-shadow: 0 18px 55px #00000030; }
+  .navigation[data-open='true'] .panel { display: flex; }
+  .close { display: grid; place-items: center; width: 36px; min-height: 36px; background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; color: var(--text); cursor: pointer; }
+  .linkRow a { font-size: 13px; padding: 12px 9px; }
+  .children a { font-size: 12px; padding: 10px 6px; }
+  .expand { width: 40px; min-height: 44px; }
+}

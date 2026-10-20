@@ -4,6 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostContent from '@/components/BlogPostContent';
 import { getPublishedBlogPost, getPublishedBlogSlugs, getPublishedBlogPosts } from '@/lib/blog-posts';
+import { prepareArticleNavigation } from '@/lib/article-navigation';
+import articleStyles from '@/components/ArticleLayout.module.css';
 
 export const revalidate = 3600; // Revalidate every 1 hour
 
@@ -129,9 +131,9 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
-          <BlogPostContent post={post as any} relatedPosts={relatedPosts} />
+      <div className={articleStyles.frame}>
+        <section className={articleStyles.section}>
+          <BlogPostContent post={prepareArticleNavigation(post as any)} relatedPosts={relatedPosts} />
         </section>
       </div>
       <Footer />

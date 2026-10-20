@@ -1,0 +1,17 @@
+.frame { width: min(1280px, 100%); margin: 90px auto 40px; background: var(--bg); border: 1px solid var(--border); overflow: clip; }
+.section { padding: 70px 0 64px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 760px); justify-content: center; align-items: start; gap: 36px; padding: 0 32px; margin: 0 auto; }
+.rail { position: sticky; top: 100px; align-self: start; min-width: 0; z-index: 50; }
+.article { min-width: 0; width: 100%; }
+.content { min-width: 0; }
+/* The global html scroll-padding-top already contributes 100px. */
+.content :is(h2,h3) { scroll-margin-top: 20px !important; }
+.content :is(h2,h3):focus { outline: none; }
+.layout[data-has-toc='false'] { display: block; max-width: 824px; }
+@media (max-width: 1099px) {
+  .section { padding-top: 32px; }
+  .layout { display: flex; flex-direction: column; gap: 30px; max-width: 824px; padding: 0 24px; }
+  .rail { top: 78px; width: 100%; }
+  .content :is(h2,h3) { scroll-margin-top: 60px !important; }
+}
+@media (max-width: 540px) { .frame { margin-top: 76px; border-left: 0; border-right: 0; } .layout { padding: 0 18px; gap: 26px; } .section { padding-top: 18px; padding-bottom: 44px; } }

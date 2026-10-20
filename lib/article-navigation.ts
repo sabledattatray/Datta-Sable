@@ -1,0 +1,74 @@
+import { load } from 'cheerio';
+
+export type ArticleHeading = { id: string; text: string; level: 2 | 3 };
+type ContentBlock = { type: string; content: string; [key: string]: unknown };
+type ArticleInput = { content: string; blocks?: ContentBlock[] };
+
+function headingSlug(text: string) {
+  return text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '') || 'section';
+}
+
+function isContentsTitle(text: string) {
+  return /^(table of contents|contents|on this page|in this article|in this guide)(?:\s|$)/i.test(text.replace(/^[^\p{L}]+/u, '').replace(/\s+/g, ' ').trim());
+}
+
+// Normalize the rendered copy only. Stored articles and their authored anchors
+// are retained; the navigator is derived from the headings actually displayed.
+export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & { headings: ArticleHeading[] } {
+  const hasBlocks = Boolean(post.blocks?.length);
+  const renderedBlocks = new Set(['paragraph', 'heading', 'list', 'quote', 'html', 'callout']);
+  const fragments = hasBlocks
+    ? post.blocks!.map((block, index) => ({ index, html: renderedBlocks.has(block.type) ? block.content || '' : '' }))
+    : [{ index: -1, html: post.content || '' }];
+  const documents = fragments.map(fragment => ({ ...fragment, $: load(fragment.html, null, false) }));
+
+  for (const { $ } of documents) {
+    $('.blog-toc, .table-of-contents, nav[aria-label="Table of contents"], nav[aria-label="Table of Contents"]').each((_, element) => {
+      const wrapper = $(element);
+      // Avoid removing a similarly named container that contains article prose.
+      const hasArticleHeadings = wrapper.find('h1,h2,h3').toArray().some(heading => !isContentsTitle($(heading).text()));
+      if (wrapper.find('a[href^="#"]').length && !hasArticleHeadings) wrapper.remove();
+    });
+    $('h1,h2,h3,h4,h5,h6').each((_, element) => {
+      const heading = $(element);
+      if (!isContentsTitle(heading.text())) return;
+      const next = heading.next();
+      if (next.is('ul,ol,nav') && next.find('a[href^="#"]').length) {
+        const parent = heading.parent();
+        // Remove only the contents title and its adjacent link list.
+        next.remove(); heading.remove();
+        if (parent.is('div,nav,section,aside') && !parent.text().trim() && !parent.children().not('hr').length) parent.remove();
+      }
+    });
+  }
+
+  const usedIds = new Set<string>();
+  for (const { $ } of documents) {
+    $('[id]').not('h2,h3').each((_, element) => { const id = $(element).attr('id'); if (id) usedIds.add(id); });
+  }
+  // Reserve authored heading IDs before generating new ones to avoid collisions.
+  const authoredIds = new Set<string>();
+  for (const { $ } of documents) $('h2[id],h3[id]').each((_, element) => { authoredIds.add($(element).attr('id')!); });
+  const headings: ArticleHeading[] = [];
+  for (const { $ } of documents) {
+    $('h2,h3').each((_, element) => {
+      const heading = $(element);
+      if (heading.parents('pre,code,script,style,[data-toc-ignore]').length || heading.is('[data-toc-ignore]')) return;
+      const text = heading.text().replace(/\s+/g, ' ').trim();
+      if (!text || isContentsTitle(text)) return;
+      const original = heading.attr('id');
+      const base = original || headingSlug(text);
+      let id = base;
+      let suffix = 2;
+      while (usedIds.has(id) || (id !== original && authoredIds.has(id))) id = `${base}-${suffix++}`;
+      heading.attr('id', id);
+      usedIds.add(id);
+      headings.push({ id, text, level: element.tagName.toLowerCase() === 'h2' ? 2 : 3 });
+    });
+  }
+  if (!hasBlocks) return { ...post, content: documents[0].$.root().html() || '', headings };
+  const blocks = post.blocks!.map((block, index) => renderedBlocks.has(block.type)
+    ? { ...block, content: documents[index].$.root().html() || '' }
+    : block);
+  return { ...post, blocks, headings };
+}
