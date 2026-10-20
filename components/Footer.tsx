@@ -1,7 +1,8 @@
 import CookiePreferencesButton from './CookiePreferencesButton';
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
-import { ArrowUpRight, Mail, MapPin, Clock, Phone, Smartphone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, Send, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers } from 'lucide-react';
+import styles from './Footer.module.css';
+import { ArrowUpRight, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -90,273 +91,63 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      style={{
-        background: 'var(--footer-bg)',
-        borderTop: '1px solid var(--border)',
-        width: '100%',
-        paddingTop: '3rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Clean Solid Background */}
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.invitation}>
+          <div>
+            <span className={styles.eyebrow}>Clarity in data. Confidence in decisions.</span>
+            <h2>Let’s build something <span>that matters.</span></h2>
+            <p>Thoughtful dashboards, reliable automation, and data systems built around your business.</p>
+          </div>
+          <Link href="/contact" className={styles.cta}>Let’s talk <ArrowUpRight size={19} aria-hidden="true" /></Link>
+        </div>
 
-
-      <div 
-        className="relative z-10 footer-container-pad"
-        style={{ 
-          maxWidth: '1448px', 
-          margin: '0 auto', 
-        }}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-10">
-          <div 
-            className="lg:col-span-4 xl:col-span-4 flex flex-col justify-between rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--footer-card-border)] relative overflow-hidden footer-card-pad"
-            style={{
-              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
-            }}
-          >
-            <div>
-              <Link
-                href="/"
-                className="group no-underline"
-                aria-label="Datta Sable - Home"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  textDecoration: 'none',
-                  marginBottom: '1.75rem',
-                }}
-              >
-                <div className="p-2 bg-white/5 border border-white/10 rounded-sm group-hover:border-[var(--accent)] transition-all duration-300">
-                  <LogoIcon className="w-6 h-6 group-hover:rotate-[30deg] transition-transform duration-500" color="var(--accent)" />
-                </div>
-                <span
-                  style={{
-                    fontFamily: "'Syne', sans-serif",
-                    fontWeight: 700,
-                    fontSize: '1.35rem',
-                    color: 'var(--text)',
-                    letterSpacing: '-0.02em',
-                  }}
-                  className="group-hover:text-[var(--accent)] transition-colors"
-                >
-                  Datta Sable
-                </span>
-              </Link>
-
-              <p
-                style={{
-                  color: 'var(--muted)',
-                  fontSize: '0.95rem',
-                  lineHeight: 1.7,
-                  maxWidth: '90%',
-                  marginBottom: '1.5rem',
-                  fontFamily: "'Syne', sans-serif",
-                }}
-              >
-                Premier <strong className="text-[var(--text)]">Business Intelligence Expert</strong> and <strong className="text-[var(--text)]">Data Strategy Consultant</strong> in India. Specializing in reliable <strong className="text-[var(--text)]">Automated Reporting Solutions</strong> and <strong className="text-[var(--text)]">Data Engineering</strong>.
-              </p>
-              <p className="text-[11px] text-[var(--muted)] leading-relaxed mb-6 border-t border-white/10 pt-3">
-                <em>Brand Notice:</em> Datta Sable is an independent BI consultant. This platform is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed &quot;Datta Able&quot; admin dashboard template.
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1.5rem', paddingTop: '1.5rem' }} className="border-t border-[var(--footer-card-border)]">
-                <a
-                  href="mailto:info@dattasable.com"
-                  className="group/contact flex items-center gap-3 text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline"
-                  style={{
-                    fontSize: '0.85rem',
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  <Mail size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform flex-shrink-0" />
-                  info@dattasable.com
-                </a>
-                <a
-                  href="tel:+918010803756"
-                  className="group/contact flex items-center gap-3 text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline"
-                  style={{
-                    fontSize: '0.85rem',
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  <Phone size={15} className="text-[var(--accent)] group-hover/contact:scale-110 transition-transform flex-shrink-0" />
-                  +91 8010803756
-                </a>
-                <span
-                  className="flex items-center gap-3 text-[var(--muted)]"
-                  style={{
-                    fontSize: '0.85rem',
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  <MapPin size={15} className="text-[var(--accent)] flex-shrink-0" />
-                  Mumbai, Maharashtra, India
-                </span>
-
-                {/* LinkedIn, YouTube & Google Play Buttons */}
-                <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-
-                  {/* LinkedIn Follow */}
-                  <a
-                    href="https://www.linkedin.com/in/dattasable/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(10,102,194,0.4)] group/li"
-                    style={{
-                      background: '#0A66C2',
-                      border: '1px solid rgba(10,102,194,0.5)',
-                      padding: '10px 18px',
-                      width: '190px',
-                      height: '56px',
-                      boxSizing: 'border-box',
-                    }}
-                  >
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 group-hover/li:scale-110 transition-transform">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    <div className="flex flex-col text-left">
-                      <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'rgba(255,255,255,0.85)', lineHeight: '11px', marginBottom: '1px' }}>
-                        Follow on LinkedIn
-                      </span>
-                      <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
-                        Follow
-                      </span>
-                    </div>
-                  </a>
-
-                  {/* YouTube Subscribe */}
-                  <a
-                    href="https://www.youtube.com/@sabledatttatray?sub_confirmation=1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 rounded-[8px] transition-all duration-300 no-underline transform hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] group/yt"
-                    style={{
-                      background: '#C40000',
-                      border: '1px solid rgba(255,0,0,0.4)',
-                      padding: '10px 18px',
-                      width: '190px',
-                      height: '56px',
-                      boxSizing: 'border-box',
-                    }}
-                  >
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 group-hover/yt:scale-110 transition-transform">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                    <div className="flex flex-col text-left">
-                      <span style={{ fontSize: '10px', fontFamily: 'Roboto, sans-serif', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#ffffff', lineHeight: '11px', marginBottom: '1px' }}>
-                        Watch on YouTube
-                      </span>
-                      <span style={{ fontSize: '18px', fontFamily: 'Roboto, sans-serif', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.3px', lineHeight: '19px' }}>
-                        YouTube
-                      </span>
-                    </div>
-                  </a>
-
-                </div>
-              </div>
+        <div className={styles.main}>
+          <div className={styles.brand}>
+            <Link href="/" className={styles.logo} aria-label="Datta Sable — Home">
+              <span className={styles.logoMark}><LogoIcon className={styles.logoIcon} color="var(--accent)" /></span>
+              <span>Datta Sable<span className={styles.brandCaption}>Business intelligence &amp; data strategy</span></span>
+            </Link>
+            <p className={styles.description}>Turning complex data into clear, practical solutions. Independent BI consulting, automated reporting, and data engineering from India.</p>
+            <div className={styles.contact}>
+              <a href="mailto:info@dattasable.com"><Mail size={16} aria-hidden="true" /><span>info@dattasable.com</span><ArrowUpRight size={13} aria-hidden="true" /></a>
+              <a href="tel:+918010803756"><Phone size={16} aria-hidden="true" /><span>+91 8010803756</span></a>
+              <span><MapPin size={16} aria-hidden="true" />Mumbai, Maharashtra, India</span>
+            </div>
+            <div className={styles.socials} aria-label="Follow Datta Sable">
+              <a href="https://www.linkedin.com/in/dattasable/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a>
+              <a href="https://github.com/sabledattatray" target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={13} aria-hidden="true" /></a>
+              <a href="https://www.youtube.com/@sabledatttatray?sub_confirmation=1" target="_blank" rel="noopener noreferrer">YouTube <ArrowUpRight size={13} aria-hidden="true" /></a>
             </div>
           </div>
 
-          {/* Navigation Columns Glass Container */}
-          <div 
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:col-span-8 xl:col-span-8 gap-10 rounded-2xl bg-[var(--footer-card-bg)] border border-[var(--footer-card-border)] footer-card-pad"
-            style={{
-              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
-            }}
-          >
-            {NAV_LINKS.map((col) => (
-              <div key={col.heading} className="flex flex-col">
-                <h3
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    color: 'var(--text)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.2em',
-                    marginBottom: '2rem',
-                  }}
-                  className="flex items-center gap-2"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />
-                  {col.heading}
-                </h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
-                  {col.links.map((lnk) => {
-                    const IconComponent = lnk.icon;
-                    return (
-                      <li key={lnk.label}>
-                        <Link
-                          href={lnk.href}
-                          target={lnk.external ? '_blank' : undefined}
-                          rel={lnk.external ? 'noopener noreferrer' : undefined}
-                          className="group/link flex items-center gap-2.5 text-[var(--muted)] hover:text-[var(--accent)] hover:translate-x-1 transition-all duration-300 no-underline"
-                          style={{
-                            fontSize: '0.9rem',
-                            fontFamily: "'Syne', sans-serif",
-                          }}
-                        >
-                          {IconComponent && (
-                            <IconComponent size={14} className="text-[var(--muted)] group-hover/link:text-[var(--accent)] transition-colors flex-shrink-0 opacity-60 group-hover/link:opacity-100" />
-                          )}
-                          <span>{lnk.label}</span>
-                          {lnk.external && (
-                            <ArrowUpRight size={12} className="opacity-40 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
-                          )}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+          <nav className={styles.navigation} aria-label="Footer navigation">
+            {NAV_LINKS.map(section => (
+              <div key={section.heading} className={styles.column}>
+                <h3>{section.heading}</h3>
+                <ul>{section.links.map(link => (
+                  <li key={link.label}>
+                    <Link href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
+                      <span>{link.label}</span>{link.external && <ArrowUpRight size={12} aria-hidden="true" />}
+                    </Link>
+                  </li>
+                ))}</ul>
               </div>
             ))}
-          </div>
+          </nav>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div
-        className="footer-bottom-pad"
-        style={{
-          background: 'var(--footer-bottom-bg)',
-          borderTop: '1px solid var(--footer-card-border)',
-        }}
-      >
-        <div 
-          className="flex flex-col items-center justify-center text-center gap-4 md:flex-row md:justify-between md:text-left"
-          style={{ 
-            maxWidth: '1448px', 
-            margin: '0 auto', 
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontSize: '0.8rem',
-              color: 'var(--muted)',
-            }}
-          >
-            <span className="hidden sm:inline">© {year} Datta Sable. Built for technical creators & enterprise BI architectures.</span>
-            <span className="sm:hidden">© {year} Datta Sable. Enterprise BI Architect.</span>
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+        <p className={styles.notice}><strong>Independent by design.</strong> Datta Sable is an independent BI consultant and is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed “Datta Able” admin dashboard template.</p>
+        <div className={styles.bottom}>
+          <p>© {year} Datta Sable. All rights reserved.</p>
+          <nav className={styles.legal} aria-label="Legal and privacy">
+            <Link href="/editorial-policy">Editorial policy</Link>
+            <Link href="/disclaimer">Disclaimer</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/cookies">Cookies</Link>
             <CookiePreferencesButton />
-            <Link href="/editorial-policy" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Editorial policy</Link>
-            <Link href="/disclaimer" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Disclaimer</Link>
-            <Link href="/privacy" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
-              PRIVACY
-            </Link>
-            <Link href="/terms" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
-              TERMS
-            </Link>
-            <Link href="/cookies" className="hover:text-[var(--accent)] transition-colors no-underline" style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em', fontWeight: 'bold' }}>
-              COOKIES
-            </Link>
-          </div>
+          </nav>
         </div>
       </div>
     </footer>

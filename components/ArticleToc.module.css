@@ -11,6 +11,7 @@
 .list { overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 0 10px 10px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .list ol { list-style: none; margin: 0; padding: 0; }
 .list > ol { display: grid; gap: 4px; }
+.list a { font-weight: 500; }
 .linkRow { display: flex; align-items: start; border-radius: 9px; border-left: 2px solid transparent; }
 .linkRow[data-active='true'] { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
 .linkRow a { display: flex; align-items: start; gap: 9px; flex: 1; min-width: 0; padding: 11px 7px; color: var(--muted); font-size: 12px; line-height: 1.65; text-decoration: none; overflow-wrap: anywhere; }
@@ -31,7 +32,7 @@
   .mobileToggle > svg:last-child { margin-left: auto; }
   .mobileLabel { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   .mobileLabel strong { font-size: 12px; line-height: 1.4; font-weight: 600; }
-  .mobileLabel > span { font-size: 11px; line-height: 1.5; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .mobileLabel > span { font-size: 11px; font-weight: 500; line-height: 1.5; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .rotated { transform: rotate(180deg); }
   .panel { display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; max-height: min(65dvh, 540px); box-shadow: 0 18px 55px #00000030; }
   .navigation[data-open='true'] .panel { display: flex; }

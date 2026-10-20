@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession, signOut } from 'next-auth/react';
-import { ChevronDown, ArrowUpRight, LogOut, User } from 'lucide-react';
+import { ChevronDown, ArrowUpRight, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import ThemeToggle from './ThemeToggle';
+import HeaderAccount from './HeaderAccount';
 import { navLinks, megaMenuData } from './navigationData';
 
 const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
@@ -140,24 +141,7 @@ export default function DesktopNav() {
       <div className="ml-1 pl-1 xl:ml-2 xl:pl-2 2xl:ml-3 2xl:pl-3 border-l border-[var(--border)] flex items-center gap-1.5 xl:gap-2 2xl:gap-3">
         <ThemeToggle />
         {session ? (
-          <div className="flex items-center gap-2 px-2 py-1 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--accent)]/20 transition-all h-8 xl:h-9">
-            <div className="flex flex-col items-end">
-              <span className="text-[9px] xl:text-[10px] font-bold text-[var(--text)] uppercase tracking-wider leading-none mb-0.5">{session.user?.name}</span>
-              <span className="text-[6px] xl:text-[7px] text-[var(--accent)] font-mono uppercase opacity-60">
-                {(session.user as any)?.role || 'USER'}
-              </span>
-            </div>
-            <div className="w-5.5 h-5.5 xl:w-6 xl:h-6 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)] font-bold text-[9px] xl:text-[10px]">
-              {session.user?.name?.charAt(0).toUpperCase()}
-            </div>
-            <button 
-              onClick={() => signOut()}
-              className="p-1 text-[var(--muted)] hover:text-[var(--accent)] transition-colors border-l border-white/10 pl-2"
-              title="Sign Out"
-            >
-              <LogOut size={12} />
-            </button>
-          </div>
+          <HeaderAccount name={session.user?.name} isAdmin={String((session.user as any)?.role).toUpperCase() === 'ADMIN'} onSignOut={() => signOut()} />
         ) : (
           <button 
             onClick={() => setIsLoginOpen(true)}
