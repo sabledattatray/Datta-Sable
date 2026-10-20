@@ -8,6 +8,8 @@ import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import { headers } from 'next/headers';
 import { getPublishedBlogPost } from '@/lib/blog-posts';
+import { getPublicTypography } from '@/lib/site-typography-store';
+import PublicTypography from '@/components/PublicTypography';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -68,6 +70,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const headerList = await headers();
   const nonce = headerList.get('x-nonce') || undefined;
   const pathname = headerList.get('x-pathname') || '';
+  const typography = await getPublicTypography();
   const articleMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
   const adsEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
   const adArticle = adsEnabled && articleMatch ? await getPublishedBlogPost(articleMatch[1]) : null;
@@ -215,6 +218,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />}
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
+        <PublicTypography settings={typography} nonce={nonce} />
         <Providers>
           <ThemeProvider>
             <main id="main-content">

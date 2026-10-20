@@ -139,6 +139,7 @@ const navItems = [
         icon: Settings,
         submenu: [
           { name: 'General Settings', href: '/admin/settings', exact: false },
+          { name: 'Website Typography', href: '/admin/settings/typography', exact: true },
           { name: 'Security & Auth', href: '/admin/settings/security', exact: false },
           { name: 'Integrations', href: '/admin/settings/integrations', exact: false },
         ]
