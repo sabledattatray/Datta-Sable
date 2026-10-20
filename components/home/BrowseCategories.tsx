@@ -1,7 +1,6 @@
-'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import styles from './HomeCards.module.css';
 import { Database, Zap, BookOpen, Layers, Code, Search, Cpu } from 'lucide-react';
 
 const CATEGORIES = [
@@ -29,21 +28,18 @@ export default function BrowseCategories() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-          {CATEGORIES.map((cat, i) => (
-            <motion.div
+          {CATEGORIES.map((cat) => (
+            <div
               key={cat.slug}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              viewport={{ once: true }}
             >
               <Link
                 href={`/category/${cat.slug}`}
                 className="group block no-underline h-full"
               >
                 <div
-                  className="card h-full flex flex-col justify-between items-center text-center transition-all duration-300 hover:border-opacity-100"
+                  className={`card h-full flex flex-col justify-between items-center text-center transition-all duration-300 ${styles.interactiveCard}`}
                   style={{
+                    ...{ '--card-accent': cat.color },
                     padding: '2rem 1rem',
                     background: 'var(--surface)',
                     border: '1px solid var(--border)',
@@ -51,12 +47,6 @@ export default function BrowseCategories() {
                     borderColor: 'var(--border)',
                     height: '100%',
                     position: 'relative'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = cat.color;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border)';
                   }}
                 >
                   <div 
@@ -81,7 +71,7 @@ export default function BrowseCategories() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

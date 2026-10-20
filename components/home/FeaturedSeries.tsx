@@ -1,6 +1,4 @@
-'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Award, Layers } from 'lucide-react';
 
@@ -48,13 +46,9 @@ export default function FeaturedSeries() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERIES.map((s, i) => (
-            <motion.div
+          {SERIES.map((s) => (
+            <div
               key={s.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
             >
               <Link href={`/category/${s.slug}`} className="group block no-underline h-full">
                 <div 
@@ -92,7 +86,7 @@ export default function FeaturedSeries() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

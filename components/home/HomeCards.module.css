@@ -1,0 +1,4 @@
+.interactiveCard:hover {
+  background: var(--surface2) !important;
+  border-color: var(--card-accent, var(--accent)) !important;
+}

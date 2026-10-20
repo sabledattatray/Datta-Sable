@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
 import Image from 'next/image';
@@ -15,7 +14,7 @@ const formatDisplayDate = (dateStr: string) => {
       if (/^[a-zA-Z]+\s+\d{1,2},\s+\d{4}$/.test(dateStr)) {
         return dateStr;
       }
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kolkata' });
     }
   } catch {}
   return dateStr;
@@ -30,19 +29,19 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
       return rawPosts.slice(0, 6);
     }
     if (activeTab === 'featured') {
-      const featured = rawPosts.filter(p => 
-        p.title.toLowerCase().includes('fabric') || 
-        p.title.toLowerCase().includes('dp-') || 
+      const featured = rawPosts.filter(p =>
+        p.title.toLowerCase().includes('fabric') ||
+        p.title.toLowerCase().includes('dp-') ||
         p.title.toLowerCase().includes('guide') ||
         p.category.toLowerCase().includes('guide')
       );
       return featured.length > 0 ? featured.slice(0, 6) : rawPosts.slice(0, 6);
     }
     if (activeTab === 'trending') {
-      const trending = rawPosts.filter(p => 
-        p.title.toLowerCase().includes('architecture') || 
-        p.title.toLowerCase().includes('n8n') || 
-        p.title.toLowerCase().includes('workflow') || 
+      const trending = rawPosts.filter(p =>
+        p.title.toLowerCase().includes('architecture') ||
+        p.title.toLowerCase().includes('n8n') ||
+        p.title.toLowerCase().includes('workflow') ||
         p.title.toLowerCase().includes('performance')
       );
       return trending.length > 0 ? trending.slice(0, 6) : rawPosts.slice(3, 9);
@@ -65,7 +64,7 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
               In-depth tutorials and architectural breakdowns covering Microsoft Fabric, Power BI, SQL databases, and Next.js SEO.
             </p>
           </div>
-          
+
           <Link href="/blog" className="flex items-center gap-2 group no-underline" style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.1em' }}>
             VIEW ALL ARTICLES <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -98,26 +97,22 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {displayPosts.map((post, i) => {
+          {displayPosts.map((post) => {
             const imageSrc = post.image || '/images/dattasable.com.webp';
             const displayDate = formatDisplayDate(post.date);
 
             return (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <div
+                key={post.slug}              >
                 <Link href={`/blog/${post.slug}`} className="group no-underline block h-full">
                   <div className="card h-full flex flex-col" style={{ padding: '1.5rem', borderLeft: '2px solid var(--border)', transition: 'border-color 0.3s ease' }}>
                     <div className="relative aspect-video mb-6 overflow-hidden">
-                      <Image 
-                        src={imageSrc} 
-                        alt={post.title} 
-                        fill 
-                        className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                      <Image
+                        src={imageSrc}
+                        alt={post.title}
+                        fill
+                        sizes="(max-width: 640px) calc(100vw - 82px), (max-width: 767px) calc(100vw - 98px), (max-width: 1078px) calc((100vw - 112px) / 3 - 50px), 272px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-3 left-3">
                         <div className="tag" style={{ background: 'var(--bg)', backdropFilter: 'blur(10px)', border: '1px solid var(--border)' }}>
@@ -125,7 +120,7 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-4 mb-4">
                       <span className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--muted)] mono">
                         <Clock size={12} className="text-[var(--accent)]" /> {post.readTime || 8} MIN READ
@@ -136,7 +131,7 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
                     <h3 style={{ fontSize: '1.25rem', lineHeight: 1.3, marginBottom: '1rem', color: 'var(--text)' }}>
                       {post.title}
                     </h3>
-                    
+
                     <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
                       {post.excerpt}
                     </p>
@@ -146,7 +141,7 @@ export default function LatestInsights({ posts }: { posts?: any[] }) {
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
         </div>

@@ -1,7 +1,6 @@
-'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import styles from './HomeCards.module.css';
 import { ArrowRight, Layers, BarChart3, Code2, Cpu } from 'lucide-react';
 
 const TRACKS = [
@@ -66,18 +65,15 @@ export default function StartHere() {
 
         {/* Tracks Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {TRACKS.map((t, i) => (
-            <motion.div
+          {TRACKS.map((t) => (
+            <div
               key={t.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              viewport={{ once: true }}
             >
               <Link href={t.href} className="group block no-underline h-full">
                 <div 
-                  className="card h-full flex flex-col justify-between" 
+                  className={`card h-full flex flex-col justify-between ${styles.interactiveCard}`}
                   style={{ 
+                    ...{ '--card-accent': t.color },
                     padding: '2rem 1.5rem', 
                     background: 'var(--surface)', 
                     border: '1px solid var(--border)',
@@ -86,14 +82,6 @@ export default function StartHere() {
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     position: 'relative',
                     overflow: 'hidden'
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = 'var(--surface2)';
-                    (e.currentTarget as HTMLElement).style.borderColor = t.color + '55';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = 'var(--surface)';
-                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
                   }}
                 >
                   <div>
@@ -124,7 +112,7 @@ export default function StartHere() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,4 +1,3 @@
-'use client';
 
 import StartHere from '@/components/home/StartHere';
 import LatestInsights from '@/components/home/LatestInsights';

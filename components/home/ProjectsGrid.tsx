@@ -1,6 +1,4 @@
-'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { BarChart3, Database, Target, Activity, ArrowRight, Shield } from 'lucide-react';
 
@@ -68,13 +66,9 @@ export default function ProjectsGrid() {
           <h2 className="sr-only">Featured implementation guides</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((p, i) => (
-            <motion.div
+          {projects.map((p) => (
+            <div
               key={p.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
               className="card"
               style={{ 
                 position: 'relative', 
@@ -128,7 +122,7 @@ export default function ProjectsGrid() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

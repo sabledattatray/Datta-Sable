@@ -1,6 +1,4 @@
-'use client';
 
-import { motion } from 'framer-motion';
 import { CheckCircle2, Download, BookOpen, Award, FileText } from 'lucide-react';
 import Link from 'next/link';
 

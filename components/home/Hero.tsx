@@ -1,8 +1,15 @@
 import { Pen, Code2, BarChart3, Globe, Cpu, Search } from 'lucide-react';
 import HeroInteraction from './HeroInteraction';
-import Image from 'next/image';
+import { getImageProps } from 'next/image';
 
 export default function Hero() {
+  const { props: { srcSet, sizes, ...heroImage } } = getImageProps({
+    src: '/hero-bg.webp',
+    alt: 'Datta Sable — Content Creator, Web Developer & Digital Marketing Professional',
+    fill: true,
+    quality: 60,
+    sizes: '(max-width: 1960px) 55vw, 1078px',
+  });
   return (
     <section
       className="section hero-grid-inline"
@@ -23,17 +30,19 @@ export default function Hero() {
         className="hidden lg:block absolute top-[45%] right-[1px] -translate-y-1/2 w-[55%] z-0 pointer-events-none overflow-hidden lg:h-[80vh] hero-visual-container"
       >
         <div className="relative w-full h-full">
-          <Image
-            src="/hero-bg.webp"
-            alt="Datta Sable — Content Creator, Web Developer & Digital Marketing Professional"
-            fill
-            priority
-            quality={60}
-            fetchPriority="high"
-            sizes="(max-width: 1024px) 100vw, 55vw"
-            className="object-cover"
-            style={{ objectPosition: 'center top' }}
-          />
+          {/* Only desktop selects the portrait; mobile downloads no hidden hero image. */}
+          <picture>
+            <source media="(min-width: 1024px)" srcSet={srcSet} sizes={sizes} />
+            <img
+              {...heroImage}
+              alt={heroImage.alt}
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              loading="eager"
+              fetchPriority="high"
+              className="object-cover"
+              style={{ ...heroImage.style, objectPosition: 'center top' }}
+            />
+          </picture>
         </div>
         <div className="absolute inset-0 z-10 pointer-events-none hero-gradient-overlay" />
         <div className="block lg:hidden hero-mobile-fade" />

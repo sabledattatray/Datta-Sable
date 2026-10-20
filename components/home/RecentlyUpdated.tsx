@@ -1,4 +1,3 @@
-'use client';
 import Link from 'next/link';
 type RecentPost = { slug: string; title: string; date?: string | Date | null; updatedAt?: string | Date | null };
 export default function RecentlyUpdated({ posts = [] }: { posts?: RecentPost[] }) {
