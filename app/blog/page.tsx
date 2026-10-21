@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogList from '@/components/BlogList';
+import type { PublicBlogPost } from '@/lib/blog-posts';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
   const resolvedParams = await searchParams;
   const category = resolvedParams.category || 'All';
 
-  let posts: any[] = [];
+  let posts: PublicBlogPost[] = [];
   try {
     posts = await getPublishedBlogPosts();
   } catch (error) {
@@ -40,27 +41,13 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        {/* ── Top-left Precision Crosshair ── */}
-        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
-        </div>
-
-        <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
-          <BlogList initialPosts={posts as any} initialCategory={category} />
-        </section>
-
-        {/* ── Bottom-right Precision Crosshair ── */}
-        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-          <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid var(--accent)', borderRadius: '50%', opacity: 0.2 }} />
-          <div style={{ position: 'absolute', width: '1px', height: '24px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '24px', height: '1px', background: 'var(--accent)' }} />
-          <div style={{ position: 'absolute', width: '4px', height: '4px', background: 'var(--accent)', borderRadius: '50%' }} />
-        </div>
-      </div>
+      <main className="boxed-wrapper" style={{ overflow: 'clip', minHeight: '80vh' }}>
+        <BlogList key={category} initialPosts={posts.map(post => ({
+          slug: post.slug, title: post.title, category: post.category, excerpt: post.excerpt,
+          image: post.image, tags: post.tags, date: post.date,
+          readTime: typeof post.readTime === 'number' || typeof post.readTime === 'string' ? post.readTime : null,
+        }))} initialCategory={category} />
+      </main>
       <Footer />
     </div>
   );

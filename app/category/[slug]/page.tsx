@@ -63,7 +63,7 @@ export default async function CategoryPage({ params }: Props) {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
+      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px', overflow: 'clip' }}>
         <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
           <div className="container" style={{ marginBottom: '4rem' }}>
              <div className="label-tech mb-4">
@@ -84,7 +84,7 @@ export default async function CategoryPage({ params }: Props) {
                {subtitleText}
              </p>
           </div>
-          <BlogList initialPosts={posts as any} />
+          <BlogList initialPosts={posts as any} showHero={false} />
         </section>
       </div>
       <Footer />
