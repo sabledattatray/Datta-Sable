@@ -192,4 +192,13 @@ test('Google consent defaults deny advertising and analytics-only acceptance nev
  assert.equal(update[2].ad_storage, undefined); assert.equal(update[2].ad_user_data, undefined); assert.equal(update[2].ad_personalization, undefined);
  const config = Array.from(window.dataLayer[3]);
  assert.equal(config[0], 'config'); assert.equal(config[2].allow_google_signals, false); assert.equal(config[2].allow_ad_personalization_signals, false);
+ assert.equal(config[2].page_referrer, '');
+});
+
+test('analytics removes queries and fragments and excludes account paths', () => {
+ const urls = load('lib/analytics-url.ts');
+ assert.equal(urls.analyticsPath('/knowledge?email=reader@example.com#secret'), '/knowledge');
+ for (const path of ['/admin/users','/api/auth','/profile','/unsubscribe?token=secret','/person%40example.com','//external.test']) assert.equal(urls.analyticsPath(path), null);
+ assert.equal(urls.referrerOrigin('https://example.com/private?email=person@example.com#secret'), 'https://example.com');
+ assert.equal(urls.referrerOrigin('javascript:alert(1)'), '');
 });

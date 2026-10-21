@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-21T06:24:05.749Z",
+  "checkedAt": "2026-10-21T06:41:47.906Z",
   "pageSeeds": 280,
-  "checked": 357,
+  "checked": 353,
   "failures": [
     {
       "url": "https://dattasable.com/article-design-preview",
@@ -11,7 +11,7 @@
       "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
       "headings": 0,
       "ads": 0,
-      "bytes": 22227,
+      "bytes": 21885,
       "referrers": []
     },
     {
@@ -37,17 +37,6 @@
       "referrers": []
     },
     {
-      "url": "https://dattasable.com/careers/collection-team-leader-mumbai",
-      "status": 404,
-      "final": "https://dattasable.com/careers/collection-team-leader-mumbai",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 21865,
-      "referrers": []
-    },
-    {
       "url": "https://dattasable.com/careers/collection-officer-mumbai",
       "status": 404,
       "final": "https://dattasable.com/careers/collection-officer-mumbai",
@@ -56,6 +45,17 @@
       "headings": 0,
       "ads": 0,
       "bytes": 21853,
+      "referrers": []
+    },
+    {
+      "url": "https://dattasable.com/careers/collection-team-leader-mumbai",
+      "status": 404,
+      "final": "https://dattasable.com/careers/collection-team-leader-mumbai",
+      "type": "text/html; charset=utf-8",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 21865,
       "referrers": []
     },
     {
@@ -68,83 +68,9 @@
       "ads": 0,
       "bytes": 21284,
       "referrers": []
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/dp-600-vs-dp-700-certifications",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/dp-600-vs-dp-700-certifications",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28087,
-      "referrers": [
-        {
-          "from": "https://dattasable.com/mentorship",
-          "label": "GUIDE 2DP-600 vs DP-700 CertificationsCompare the Fabric Analytics Engineer and Microsoft "
-        }
-      ]
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/microsoft-fabric-architecture-explained",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/microsoft-fabric-architecture-explained",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28095,
-      "referrers": [
-        {
-          "from": "https://dattasable.com/mentorship",
-          "label": "GUIDE 1Microsoft Fabric Architecture ExplainedA deep dive into OneLake storage, lakehouse "
-        }
-      ]
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/microsoft-fabric-certification-roadmap",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/microsoft-fabric-certification-roadmap",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28094,
-      "referrers": [
-        {
-          "from": "https://dattasable.com/mentorship",
-          "label": "GUIDE 3Microsoft Fabric Certification RoadmapStep-by-step guidance on schedules, modules, "
-        }
-      ]
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/azure-data-engineering-roadmap",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/azure-data-engineering-roadmap",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28086,
-      "referrers": [
-        {
-          "from": "https://dattasable.com/mentorship",
-          "label": "GUIDE 4Azure Data Engineering RoadmapFrom relational databases to Synapse pipelines, Spark"
-        }
-      ]
     }
   ],
   "results": [
-    {
-      "url": "https://dattasable.com/article-design-preview",
-      "status": 404,
-      "final": "https://dattasable.com/article-design-preview",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 22227
-    },
     {
       "url": "https://dattasable.com/analytics-live",
       "status": 200,
@@ -154,6 +80,16 @@
       "headings": 0,
       "ads": 0,
       "bytes": 42307
+    },
+    {
+      "url": "https://dattasable.com/article-design-preview",
+      "status": 404,
+      "final": "https://dattasable.com/article-design-preview",
+      "type": "text/html; charset=utf-8",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 21885
     },
     {
       "url": "https://dattasable.com/about",
@@ -166,24 +102,14 @@
       "bytes": 80773
     },
     {
-      "url": "https://dattasable.com/",
+      "url": "https://dattasable.com",
       "status": 200,
       "final": "https://dattasable.com/",
       "type": "text/html; charset=utf-8",
       "title": "Datta Sable — BI Expert, Data Engineer & Content Creator",
       "headings": 1,
       "ads": 0,
-      "bytes": 685391
-    },
-    {
-      "url": "https://dattasable.com/blog/agentic-shift-autonomous-intelligence-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/agentic-shift-autonomous-intelligence-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Designing an AI Agent with Read-Only Tools and Approval Boundaries",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105899
+      "bytes": 685238
     },
     {
       "url": "https://dattasable.com/blog/7-best-seo-tools-2025",
@@ -193,17 +119,27 @@
       "title": "7 Best SEO Tools in 2025 Every Digital Marketer Must Use",
       "headings": 1,
       "ads": 0,
-      "bytes": 212687
+      "bytes": 212735
     },
     {
-      "url": "https://dattasable.com",
+      "url": "https://dattasable.com/blog/agentic-shift-autonomous-intelligence-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/agentic-shift-autonomous-intelligence-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Designing an AI Agent with Read-Only Tools and Approval Boundaries",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 102221
+    },
+    {
+      "url": "https://dattasable.com/",
       "status": 200,
       "final": "https://dattasable.com/",
       "type": "text/html; charset=utf-8",
       "title": "Datta Sable — BI Expert, Data Engineer & Content Creator",
       "headings": 1,
       "ads": 0,
-      "bytes": 685391
+      "bytes": 685238
     },
     {
       "url": "https://dattasable.com/blog/ai-driven-data-quality-2026",
@@ -213,17 +149,7 @@
       "title": "AI-Assisted Data Quality: Build Rules, Review Exceptions and Measure Errors",
       "headings": 1,
       "ads": 0,
-      "bytes": 105909
-    },
-    {
-      "url": "https://dattasable.com/blog",
-      "status": 200,
-      "final": "https://dattasable.com/blog",
-      "type": "text/html; charset=utf-8",
-      "title": "Blog — Power BI, SQL, AI & Data Engineering Articles | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 3580330
+      "bytes": 102231
     },
     {
       "url": "https://dattasable.com/blog/ai-bi-generative-intelligence-convergence",
@@ -233,7 +159,7 @@
       "title": "The Convergence of Generative AI and Business Intelligence: Beyond Predictive Analytics",
       "headings": 1,
       "ads": 0,
-      "bytes": 244718
+      "bytes": 244766
     },
     {
       "url": "https://dattasable.com/blog/ai-governance-bi",
@@ -243,7 +169,17 @@
       "title": "Ethical AI: Implementing Governance for LLM-Driven Insights",
       "headings": 1,
       "ads": 0,
-      "bytes": 173706
+      "bytes": 173754
+    },
+    {
+      "url": "https://dattasable.com/blog",
+      "status": 200,
+      "final": "https://dattasable.com/blog",
+      "type": "text/html; charset=utf-8",
+      "title": "Blog — Power BI, SQL, AI & Data Engineering Articles | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 3580211
     },
     {
       "url": "https://dattasable.com/blog/architecting-10m-record-fraud-sentinel",
@@ -253,7 +189,7 @@
       "title": "Engineering the Sentinel: Architecting a 10M-Record Fraud Detection System",
       "headings": 1,
       "ads": 0,
-      "bytes": 165202
+      "bytes": 165150
     },
     {
       "url": "https://dattasable.com/blog/architecting-compound-ai-systems-microsoft-fabric",
@@ -263,17 +199,7 @@
       "title": "Most Enterprises Build Fragile RAG Pipelines — Here is How to Architect Compound AI Systems Using Microsoft Fabric and Python",
       "headings": 1,
       "ads": 0,
-      "bytes": 303723
-    },
-    {
-      "url": "https://dattasable.com/blog/architecting-mtd-lmtd-time-intelligence",
-      "status": 200,
-      "final": "https://dattasable.com/blog/architecting-mtd-lmtd-time-intelligence",
-      "type": "text/html; charset=utf-8",
-      "title": "Architecting the Magnum Opus: A 7-Day Sprint into MTD/LMTD Intelligence",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 159861
+      "bytes": 303771
     },
     {
       "url": "https://dattasable.com/blog/architecting-q-commerce-dashboards",
@@ -283,17 +209,17 @@
       "title": "Development Log: Architecting a Q-Commerce Dashboard (Blinkit Dataset)",
       "headings": 1,
       "ads": 0,
-      "bytes": 165758
+      "bytes": 165806
     },
     {
-      "url": "https://dattasable.com/blog/beyond-the-select-advanced-sql-for-bi",
+      "url": "https://dattasable.com/blog/architecting-mtd-lmtd-time-intelligence",
       "status": 200,
-      "final": "https://dattasable.com/blog/beyond-the-select-advanced-sql-for-bi",
+      "final": "https://dattasable.com/blog/architecting-mtd-lmtd-time-intelligence",
       "type": "text/html; charset=utf-8",
-      "title": "Beyond the SELECT: Mastering Advanced SQL for Surgical Business Intelligence",
+      "title": "Architecting the Magnum Opus: A 7-Day Sprint into MTD/LMTD Intelligence",
       "headings": 1,
       "ads": 0,
-      "bytes": 156289
+      "bytes": 159909
     },
     {
       "url": "https://dattasable.com/blog/architecting-production-multi-agent-ai-systems",
@@ -303,17 +229,17 @@
       "title": "Architecting Production-Grade Multi-Agent AI Systems: State Management, Orchestration & Reliability",
       "headings": 1,
       "ads": 0,
-      "bytes": 397512
+      "bytes": 397660
     },
     {
-      "url": "https://dattasable.com/blog/bi-performance-tuning",
+      "url": "https://dattasable.com/blog/beyond-the-select-advanced-sql-for-bi",
       "status": 200,
-      "final": "https://dattasable.com/blog/bi-performance-tuning",
+      "final": "https://dattasable.com/blog/beyond-the-select-advanced-sql-for-bi",
       "type": "text/html; charset=utf-8",
-      "title": "Performance Tuning: How to Make Your Power BI Reports 10x Faster",
+      "title": "Beyond the SELECT: Mastering Advanced SQL for Surgical Business Intelligence",
       "headings": 1,
       "ads": 0,
-      "bytes": 155905
+      "bytes": 156337
     },
     {
       "url": "https://dattasable.com/blog/building-analytics-war-room",
@@ -323,7 +249,17 @@
       "title": "Building the Surgical War Room: Engineering a High-Fidelity Live Analytics Dashboard",
       "headings": 1,
       "ads": 0,
-      "bytes": 169778
+      "bytes": 169826
+    },
+    {
+      "url": "https://dattasable.com/blog/bi-performance-tuning",
+      "status": 200,
+      "final": "https://dattasable.com/blog/bi-performance-tuning",
+      "type": "text/html; charset=utf-8",
+      "title": "Performance Tuning: How to Make Your Power BI Reports 10x Faster",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 156053
     },
     {
       "url": "https://dattasable.com/blog/bi-scraper-python-playwright",
@@ -333,7 +269,7 @@
       "title": "Building a Business Intelligence Scraper with Python and Playwright",
       "headings": 1,
       "ads": 0,
-      "bytes": 215127
+      "bytes": 215075
     },
     {
       "url": "https://dattasable.com/blog/building-enterprise-web-architectures",
@@ -343,7 +279,7 @@
       "title": "Masterclass: Building Scalable Web Infrastructures from Scratch",
       "headings": 1,
       "ads": 0,
-      "bytes": 276070
+      "bytes": 276218
     },
     {
       "url": "https://dattasable.com/blog/building-your-first-website-2025",
@@ -353,17 +289,7 @@
       "title": "The Ultimate Beginner's Guide to Building Your First Website in 2025",
       "headings": 1,
       "ads": 0,
-      "bytes": 171934
-    },
-    {
-      "url": "https://dattasable.com/blog/building-modular-ai-workflow-systems",
-      "status": 200,
-      "final": "https://dattasable.com/blog/building-modular-ai-workflow-systems",
-      "type": "text/html; charset=utf-8",
-      "title": "Building Modular AI Workflow Systems for Scale | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 337683
+      "bytes": 172082
     },
     {
       "url": "https://dattasable.com/blog/case-study-context-compression-token-waste",
@@ -373,7 +299,7 @@
       "title": "Context Reduction: Compare Token Cost Without Losing Requirements",
       "headings": 1,
       "ads": 0,
-      "bytes": 104880
+      "bytes": 101102
     },
     {
       "url": "https://dattasable.com/blog/case-study-precision-prompt-architecture-consistency",
@@ -383,7 +309,17 @@
       "title": "Structured AI Extraction: Validate the Schema and the Facts",
       "headings": 1,
       "ads": 0,
-      "bytes": 105885
+      "bytes": 102207
+    },
+    {
+      "url": "https://dattasable.com/blog/building-modular-ai-workflow-systems",
+      "status": 200,
+      "final": "https://dattasable.com/blog/building-modular-ai-workflow-systems",
+      "type": "text/html; charset=utf-8",
+      "title": "Building Modular AI Workflow Systems for Scale | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 337731
     },
     {
       "url": "https://dattasable.com/blog/case-study-n8n-automated-authority-scaling",
@@ -393,7 +329,7 @@
       "title": "n8n Editorial Workflow: Collect Sources, Prepare Drafts and Require Review",
       "headings": 1,
       "ads": 0,
-      "bytes": 105904
+      "bytes": 102226
     },
     {
       "url": "https://dattasable.com/blog/case-study-workflow-automation-roi",
@@ -403,7 +339,7 @@
       "title": "Automating an MIS Pack: Reconciliation and Exception Handling",
       "headings": 1,
       "ads": 0,
-      "bytes": 104758
+      "bytes": 100980
     },
     {
       "url": "https://dattasable.com/blog/cdo-playbook-2026-strategy",
@@ -413,7 +349,7 @@
       "title": "A Practical CDO Operating Plan: Owners, Decisions and Exceptions",
       "headings": 1,
       "ads": 0,
-      "bytes": 105502
+      "bytes": 101824
     },
     {
       "url": "https://dattasable.com/blog/chatgpt-for-developers-i-replaced-12-developer-tools-for-30-days",
@@ -423,7 +359,7 @@
       "title": "ChatGPT for Developers: I Replaced 12 Developer Tools for 30 Days",
       "headings": 1,
       "ads": 0,
-      "bytes": 457570
+      "bytes": 457618
     },
     {
       "url": "https://dattasable.com/blog/cybersecurity-bi-data-vault-hardening",
@@ -433,7 +369,7 @@
       "title": "Secure BI Access: Restrict Queries, Exports and Service Credentials",
       "headings": 1,
       "ads": 0,
-      "bytes": 104541
+      "bytes": 100763
     },
     {
       "url": "https://dattasable.com/blog/context-compression-framework-benchmarks",
@@ -443,7 +379,7 @@
       "title": "Context Compression™: The Engineering Guide to Information Density",
       "headings": 1,
       "ads": 0,
-      "bytes": 410230
+      "bytes": 410378
     },
     {
       "url": "https://dattasable.com/blog/cybersecurity-cloud-security-guide-2026",
@@ -453,27 +389,7 @@
       "title": "Cybersecurity & Cloud Security in 2026: The Complete Enterprise Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 526362
-    },
-    {
-      "url": "https://dattasable.com/blog/dashboard-ux-principles",
-      "status": 200,
-      "final": "https://dattasable.com/blog/dashboard-ux-principles",
-      "type": "text/html; charset=utf-8",
-      "title": "7 UI/UX Principles for High-Stakes Executive Dashboards",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 240912
-    },
-    {
-      "url": "https://dattasable.com/blog/data-driven-finance-python-bi-alpha-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/data-driven-finance-python-bi-alpha-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Financial CSV Reconciliation in Python: Exact Amounts and Exceptions",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105273
+      "bytes": 526310
     },
     {
       "url": "https://dattasable.com/blog/data-democratization-risk",
@@ -483,7 +399,27 @@
       "title": "Data Democratization: Balancing Access with Security in 2026",
       "headings": 1,
       "ads": 0,
-      "bytes": 170687
+      "bytes": 170735
+    },
+    {
+      "url": "https://dattasable.com/blog/dashboard-ux-principles",
+      "status": 200,
+      "final": "https://dattasable.com/blog/dashboard-ux-principles",
+      "type": "text/html; charset=utf-8",
+      "title": "7 UI/UX Principles for High-Stakes Executive Dashboards",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 240960
+    },
+    {
+      "url": "https://dattasable.com/blog/data-driven-finance-python-bi-alpha-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/data-driven-finance-python-bi-alpha-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Financial CSV Reconciliation in Python: Exact Amounts and Exceptions",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 101595
     },
     {
       "url": "https://dattasable.com/blog/data-driven-product-management-roi",
@@ -493,67 +429,7 @@
       "title": "Product Analytics: Specify a Decision, a Denominator and a Guardrail",
       "headings": 1,
       "ads": 0,
-      "bytes": 104522
-    },
-    {
-      "url": "https://dattasable.com/blog/data-mesh-adoption-trends-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/data-mesh-adoption-trends-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Data Mesh as an Operating Model: Define One Usable Data Product",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105542
-    },
-    {
-      "url": "https://dattasable.com/blog/death-of-static-dashboards-decision-intelligence",
-      "status": 200,
-      "final": "https://dattasable.com/blog/death-of-static-dashboards-decision-intelligence",
-      "type": "text/html; charset=utf-8",
-      "title": "From a Dashboard Alert to a Decision: A Reviewable Workflow",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105040
-    },
-    {
-      "url": "https://dattasable.com/blog/deep-work-protocol-technical-focus-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/deep-work-protocol-technical-focus-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "The Deep Work Protocol: Engineering Cognitive Fidelity in the Age of Digital Noise",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 244947
-    },
-    {
-      "url": "https://dattasable.com/blog/dp-600-exam-questions-and-scenarios",
-      "status": 200,
-      "final": "https://dattasable.com/blog/dp-600-exam-questions-and-scenarios",
-      "type": "text/html; charset=utf-8",
-      "title": "DP-600 Exam Questions & Scenarios: Pass Microsoft Fabric Analytics Engineer Exam",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 325115
-    },
-    {
-      "url": "https://dattasable.com/blog/dp-600-fabric-analytics-engineer-study-companion-notebook",
-      "status": 200,
-      "final": "https://dattasable.com/blog/dp-600-fabric-analytics-engineer-study-companion-notebook",
-      "type": "text/html; charset=utf-8",
-      "title": "DP-600 Fabric Analytics Engineer Study Companion Notebook – Lakehouse, Warehouse, Direct Lake & Semantic Models",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 321605
-    },
-    {
-      "url": "https://dattasable.com/blog/dp-600-study-guide-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/dp-600-study-guide-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "DP-600 Study Plan: Connect the Official Outline to Practical Evidence",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 106612
+      "bytes": 100844
     },
     {
       "url": "https://dattasable.com/blog/data-quality-frameworks",
@@ -563,17 +439,67 @@
       "title": "Building a \"Zero-Trust\" Data Quality Framework for BI",
       "headings": 1,
       "ads": 0,
-      "bytes": 168761
+      "bytes": 168909
     },
     {
-      "url": "https://dattasable.com/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "url": "https://dattasable.com/blog/data-mesh-adoption-trends-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "final": "https://dattasable.com/blog/data-mesh-adoption-trends-2026",
       "type": "text/html; charset=utf-8",
-      "title": "DP-600 vs DP-700 vs DP-800: Which Microsoft Fabric Certification Should You Choose?",
+      "title": "Data Mesh as an Operating Model: Define One Usable Data Product",
       "headings": 1,
       "ads": 0,
-      "bytes": 364067
+      "bytes": 101964
+    },
+    {
+      "url": "https://dattasable.com/blog/deep-work-protocol-technical-focus-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/deep-work-protocol-technical-focus-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "The Deep Work Protocol: Engineering Cognitive Fidelity in the Age of Digital Noise",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 244995
+    },
+    {
+      "url": "https://dattasable.com/blog/dp-600-exam-questions-and-scenarios",
+      "status": 200,
+      "final": "https://dattasable.com/blog/dp-600-exam-questions-and-scenarios",
+      "type": "text/html; charset=utf-8",
+      "title": "DP-600 Exam Questions & Scenarios: Pass Microsoft Fabric Analytics Engineer Exam",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 325163
+    },
+    {
+      "url": "https://dattasable.com/blog/death-of-static-dashboards-decision-intelligence",
+      "status": 200,
+      "final": "https://dattasable.com/blog/death-of-static-dashboards-decision-intelligence",
+      "type": "text/html; charset=utf-8",
+      "title": "From a Dashboard Alert to a Decision: A Reviewable Workflow",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 101262
+    },
+    {
+      "url": "https://dattasable.com/blog/dp-600-study-guide-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/dp-600-study-guide-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "DP-600 Study Plan: Connect the Official Outline to Practical Evidence",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 103034
+    },
+    {
+      "url": "https://dattasable.com/blog/dp-600-fabric-analytics-engineer-study-companion-notebook",
+      "status": 200,
+      "final": "https://dattasable.com/blog/dp-600-fabric-analytics-engineer-study-companion-notebook",
+      "type": "text/html; charset=utf-8",
+      "title": "DP-600 Fabric Analytics Engineer Study Companion Notebook – Lakehouse, Warehouse, Direct Lake & Semantic Models",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 321553
     },
     {
       "url": "https://dattasable.com/blog/dp-700-study-guide-2026",
@@ -583,27 +509,17 @@
       "title": "DP-700 Study Guide 2026: Complete Microsoft Fabric Data Engineer Certification Preparation",
       "headings": 1,
       "ads": 0,
-      "bytes": 187777
+      "bytes": 187825
     },
     {
-      "url": "https://dattasable.com/blog/dp-700-vs-dp-203-comparison",
+      "url": "https://dattasable.com/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
       "status": 200,
-      "final": "https://dattasable.com/blog/dp-700-vs-dp-203-comparison",
+      "final": "https://dattasable.com/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
       "type": "text/html; charset=utf-8",
-      "title": "DP-700 vs DP-203: Which Data Engineering Certification Should You Earn?",
+      "title": "DP-600 vs DP-700 vs DP-800: Which Microsoft Fabric Certification Should You Choose?",
       "headings": 1,
       "ads": 0,
-      "bytes": 180838
-    },
-    {
-      "url": "https://dattasable.com/blog/edge-first-era-web-performance-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/edge-first-era-web-performance-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Edge Rendering Decisions: Measure the Slow Part Before Moving Code",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105865
+      "bytes": 364215
     },
     {
       "url": "https://dattasable.com/blog/dp-800-study-guide",
@@ -613,7 +529,17 @@
       "title": "The Ultimate DP-800 Study Guide 2026: How to Pass Microsoft's SQL AI Developer Associate Certification",
       "headings": 1,
       "ads": 0,
-      "bytes": 257978
+      "bytes": 258026
+    },
+    {
+      "url": "https://dattasable.com/blog/edge-first-era-web-performance-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/edge-first-era-web-performance-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Edge Rendering Decisions: Measure the Slow Part Before Moving Code",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 102087
     },
     {
       "url": "https://dattasable.com/blog/dp-800-career-path-opportunities",
@@ -623,17 +549,17 @@
       "title": "DP-800 Career Path: Opportunities for SQL AI Developers",
       "headings": 1,
       "ads": 0,
-      "bytes": 238185
+      "bytes": 238233
     },
     {
-      "url": "https://dattasable.com/blog/execution-chain-infrastructure-explained",
+      "url": "https://dattasable.com/blog/dp-700-vs-dp-203-comparison",
       "status": 200,
-      "final": "https://dattasable.com/blog/execution-chain-infrastructure-explained",
+      "final": "https://dattasable.com/blog/dp-700-vs-dp-203-comparison",
       "type": "text/html; charset=utf-8",
-      "title": "Execution Chain Infrastructure: The Backbone of Deterministic AI",
+      "title": "DP-700 vs DP-203: Which Data Engineering Certification Should You Earn?",
       "headings": 1,
       "ads": 0,
-      "bytes": 163438
+      "bytes": 180886
     },
     {
       "url": "https://dattasable.com/blog/engineering-10m-row-ai-bi-agent",
@@ -643,17 +569,7 @@
       "title": "How I Engineered a 10M-Row Autonomous AI-BI Agent Using DuckDB",
       "headings": 1,
       "ads": 0,
-      "bytes": 156419
-    },
-    {
-      "url": "https://dattasable.com/blog/first-party-data-strategy-privacy-marketing-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/first-party-data-strategy-privacy-marketing-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "The Sovereign Consumer: Architecting First-Party Data Ecosystems in the Age of Consent",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 213299
+      "bytes": 156367
     },
     {
       "url": "https://dattasable.com/blog/financial-bi-impact",
@@ -663,7 +579,7 @@
       "title": "Receivables Reporting: Reconcile Aging Before Claiming Financial Impact",
       "headings": 1,
       "ads": 0,
-      "bytes": 104476
+      "bytes": 100798
     },
     {
       "url": "https://dattasable.com/blog/fabric-data-agents-vs-power-bi-copilot-vs-fabric-iq",
@@ -673,17 +589,27 @@
       "title": "Fabric Data Agents vs Power BI Copilot vs Fabric IQ: The Ultimate Enterprise Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 182361
+      "bytes": 182409
     },
     {
-      "url": "https://dattasable.com/blog/free-microsoft-certifications-fabric-data-days-2026",
+      "url": "https://dattasable.com/blog/execution-chain-infrastructure-explained",
       "status": 200,
-      "final": "https://dattasable.com/blog/free-microsoft-certifications-fabric-data-days-2026",
+      "final": "https://dattasable.com/blog/execution-chain-infrastructure-explained",
       "type": "text/html; charset=utf-8",
-      "title": "Free Microsoft Fabric Certification Voucher 2026: Complete Guide to DP-600, DP-700 & DP-800 (With Proof)",
+      "title": "Execution Chain Infrastructure: The Backbone of Deterministic AI",
       "headings": 1,
       "ads": 0,
-      "bytes": 378957
+      "bytes": 163486
+    },
+    {
+      "url": "https://dattasable.com/blog/first-party-data-strategy-privacy-marketing-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/first-party-data-strategy-privacy-marketing-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "The Sovereign Consumer: Architecting First-Party Data Ecosystems in the Age of Consent",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 213347
     },
     {
       "url": "https://dattasable.com/blog/feature-engineering-mastery-data-science",
@@ -693,27 +619,7 @@
       "title": "Feature Engineering Mastery: Transforming Raw Data into Strategic Assets",
       "headings": 1,
       "ads": 0,
-      "bytes": 394483
-    },
-    {
-      "url": "https://dattasable.com/blog/global-data-privacy-regulations-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/global-data-privacy-regulations-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Build a Data Handling Inventory Before a Privacy Review",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105438
-    },
-    {
-      "url": "https://dattasable.com/blog/gartner-magic-quadrant-2026-bi",
-      "status": 200,
-      "final": "https://dattasable.com/blog/gartner-magic-quadrant-2026-bi",
-      "type": "text/html; charset=utf-8",
-      "title": "How to Evaluate a BI Platform Beyond Analyst Rankings",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105552
+      "bytes": 394531
     },
     {
       "url": "https://dattasable.com/blog/future-of-web-development-2026",
@@ -723,7 +629,27 @@
       "title": "The Future of Web Development in 2026: Beyond the Hype of AI and Edge Computing",
       "headings": 1,
       "ads": 0,
-      "bytes": 165694
+      "bytes": 165742
+    },
+    {
+      "url": "https://dattasable.com/blog/free-microsoft-certifications-fabric-data-days-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/free-microsoft-certifications-fabric-data-days-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Free Microsoft Fabric Certification Voucher 2026: Complete Guide to DP-600, DP-700 & DP-800 (With Proof)",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 379105
+    },
+    {
+      "url": "https://dattasable.com/blog/gartner-magic-quadrant-2026-bi",
+      "status": 200,
+      "final": "https://dattasable.com/blog/gartner-magic-quadrant-2026-bi",
+      "type": "text/html; charset=utf-8",
+      "title": "How to Evaluate a BI Platform Beyond Analyst Rankings",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 101874
     },
     {
       "url": "https://dattasable.com/blog/generative-ai-bi-dashboards",
@@ -733,17 +659,17 @@
       "title": "Integrating Generative AI into Tableau: The Next Frontier",
       "headings": 1,
       "ads": 0,
-      "bytes": 164161
+      "bytes": 164309
     },
     {
-      "url": "https://dattasable.com/blog/how-ai-agents-are-replacing-apps-2026",
+      "url": "https://dattasable.com/blog/global-data-privacy-regulations-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/how-ai-agents-are-replacing-apps-2026",
+      "final": "https://dattasable.com/blog/global-data-privacy-regulations-2026",
       "type": "text/html; charset=utf-8",
-      "title": "Beyond the Screen: How AI Agents Are Replacing Apps in 2026",
+      "title": "Build a Data Handling Inventory Before a Privacy Review",
       "headings": 1,
       "ads": 0,
-      "bytes": 405674
+      "bytes": 101760
     },
     {
       "url": "https://dattasable.com/blog/how-to-improve-website-performance-100-gtmetrix",
@@ -753,47 +679,17 @@
       "title": "Improve Website Performance Without Chasing a Perfect Score",
       "headings": 1,
       "ads": 0,
-      "bytes": 104450
+      "bytes": 100772
     },
     {
-      "url": "https://dattasable.com/blog/how-mis-reports-drive-business-decisions",
+      "url": "https://dattasable.com/blog/how-ai-agents-are-replacing-apps-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/how-mis-reports-drive-business-decisions",
+      "final": "https://dattasable.com/blog/how-ai-agents-are-replacing-apps-2026",
       "type": "text/html; charset=utf-8",
-      "title": "How MIS Reports Drive Strategic Business Decisions",
+      "title": "Beyond the Screen: How AI Agents Are Replacing Apps in 2026",
       "headings": 1,
       "ads": 0,
-      "bytes": 167834
-    },
-    {
-      "url": "https://dattasable.com/blog/hr-analytics-workforce-intelligence",
-      "status": 200,
-      "final": "https://dattasable.com/blog/hr-analytics-workforce-intelligence",
-      "type": "text/html; charset=utf-8",
-      "title": "HR Analytics: Transforming Workforce Data into Intelligence",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 405962
-    },
-    {
-      "url": "https://dattasable.com/blog/live-performance-benchmarking-2025",
-      "status": 200,
-      "final": "https://dattasable.com/blog/live-performance-benchmarking-2025",
-      "type": "text/html; charset=utf-8",
-      "title": "Web Performance Benchmarking: A Reproducible Comparison Sheet",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 104160
-    },
-    {
-      "url": "https://dattasable.com/blog/keyboard-mastery-ctrl-shortcuts",
-      "status": 200,
-      "final": "https://dattasable.com/blog/keyboard-mastery-ctrl-shortcuts",
-      "type": "text/html; charset=utf-8",
-      "title": "Keyboard Mastery: Every CTRL A-Z Shortcut Explained (Marathi)",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 248463
+      "bytes": 405722
     },
     {
       "url": "https://dattasable.com/blog/importance-of-ms-access-2026",
@@ -803,17 +699,47 @@
       "title": "The Importance of MS Access in 2026: Still Relevant, Still Powerful",
       "headings": 1,
       "ads": 0,
-      "bytes": 168544
+      "bytes": 168592
     },
     {
-      "url": "https://dattasable.com/blog/mastering-autonomous-ai-agents-workflows-2026",
+      "url": "https://dattasable.com/blog/how-mis-reports-drive-business-decisions",
       "status": 200,
-      "final": "https://dattasable.com/blog/mastering-autonomous-ai-agents-workflows-2026",
+      "final": "https://dattasable.com/blog/how-mis-reports-drive-business-decisions",
       "type": "text/html; charset=utf-8",
-      "title": "The Architect’s Dilemma: Mastering Autonomous Intelligence and the Evolution of Agentic Workflows in 2026",
+      "title": "How MIS Reports Drive Strategic Business Decisions",
       "headings": 1,
       "ads": 0,
-      "bytes": 172090
+      "bytes": 167882
+    },
+    {
+      "url": "https://dattasable.com/blog/hr-analytics-workforce-intelligence",
+      "status": 200,
+      "final": "https://dattasable.com/blog/hr-analytics-workforce-intelligence",
+      "type": "text/html; charset=utf-8",
+      "title": "HR Analytics: Transforming Workforce Data into Intelligence",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 405910
+    },
+    {
+      "url": "https://dattasable.com/blog/live-performance-benchmarking-2025",
+      "status": 200,
+      "final": "https://dattasable.com/blog/live-performance-benchmarking-2025",
+      "type": "text/html; charset=utf-8",
+      "title": "Web Performance Benchmarking: A Reproducible Comparison Sheet",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 100482
+    },
+    {
+      "url": "https://dattasable.com/blog/keyboard-mastery-ctrl-shortcuts",
+      "status": 200,
+      "final": "https://dattasable.com/blog/keyboard-mastery-ctrl-shortcuts",
+      "type": "text/html; charset=utf-8",
+      "title": "Keyboard Mastery: Every CTRL A-Z Shortcut Explained (Marathi)",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 248511
     },
     {
       "url": "https://dattasable.com/blog/mastering-dax-patterns-2026",
@@ -823,27 +749,17 @@
       "title": "DAX Measures: Filter Context, Safe Ratios and Useful Variables",
       "headings": 1,
       "ads": 0,
-      "bytes": 106487
+      "bytes": 102709
     },
     {
-      "url": "https://dattasable.com/blog/measuring-bi-roi-financial-framework",
+      "url": "https://dattasable.com/blog/mastering-autonomous-ai-agents-workflows-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/measuring-bi-roi-financial-framework",
+      "final": "https://dattasable.com/blog/mastering-autonomous-ai-agents-workflows-2026",
       "type": "text/html; charset=utf-8",
-      "title": "Measuring BI ROI: A Worked Cost and Adoption Model",
+      "title": "The Architect’s Dilemma: Mastering Autonomous Intelligence and the Evolution of Agentic Workflows in 2026",
       "headings": 1,
       "ads": 0,
-      "bytes": 105740
-    },
-    {
-      "url": "https://dattasable.com/blog/mastering-marathi-typing-windows",
-      "status": 200,
-      "final": "https://dattasable.com/blog/mastering-marathi-typing-windows",
-      "type": "text/html; charset=utf-8",
-      "title": "Digital Localization: Mastering Marathi Input on Windows 10/11",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 246192
+      "bytes": 172238
     },
     {
       "url": "https://dattasable.com/blog/mastering-sql-joins-visual-guide",
@@ -853,7 +769,27 @@
       "title": "The Ultimate Visual Guide to SQL Joins: Mastering Advanced Cases",
       "headings": 1,
       "ads": 0,
-      "bytes": 156177
+      "bytes": 156125
+    },
+    {
+      "url": "https://dattasable.com/blog/mastering-marathi-typing-windows",
+      "status": 200,
+      "final": "https://dattasable.com/blog/mastering-marathi-typing-windows",
+      "type": "text/html; charset=utf-8",
+      "title": "Digital Localization: Mastering Marathi Input on Windows 10/11",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 246340
+    },
+    {
+      "url": "https://dattasable.com/blog/measuring-bi-roi-financial-framework",
+      "status": 200,
+      "final": "https://dattasable.com/blog/measuring-bi-roi-financial-framework",
+      "type": "text/html; charset=utf-8",
+      "title": "Measuring BI ROI: A Worked Cost and Adoption Model",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 102062
     },
     {
       "url": "https://dattasable.com/blog/mastering-surgical-ui-dashboard-engineering",
@@ -863,17 +799,7 @@
       "title": "Mastering the 'Surgical' UI: Principles of Professional Dashboard Engineering",
       "headings": 1,
       "ads": 0,
-      "bytes": 171971
-    },
-    {
-      "url": "https://dattasable.com/blog/microsoft-fabric",
-      "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric",
-      "type": "text/html; charset=utf-8",
-      "title": "Microsoft Fabric Hub: Architecture, Pricing & Certification Guides | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 1735651
+      "bytes": 172019
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-architectural-guide",
@@ -883,7 +809,7 @@
       "title": "The Fabric Architect’s Manifesto: The Unofficial Microsoft Fabric Architectural Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 371869
+      "bytes": 371817
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-architecture-explained-2026",
@@ -893,17 +819,17 @@
       "title": "Microsoft Fabric Architecture Explained: The Complete 2026 Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 774999
+      "bytes": 775147
     },
     {
-      "url": "https://dattasable.com/blog/microsoft-fabric-career-roadmap-2026",
+      "url": "https://dattasable.com/blog/microsoft-fabric",
       "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric-career-roadmap-2026",
+      "final": "https://dattasable.com/blog/microsoft-fabric",
       "type": "text/html; charset=utf-8",
-      "title": "Microsoft Fabric Career Roadmap 2026: Analytics Engineer vs Data Engineer vs BI Developer vs AI Developer",
+      "title": "Microsoft Fabric Hub: Architecture, Pricing & Certification Guides | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 445498
+      "bytes": 1735936
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-capacity-sizing-guide-2026",
@@ -913,7 +839,7 @@
       "title": "Microsoft Fabric Capacity Sizing 2026: The Complete F-SKU Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 450305
+      "bytes": 450253
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-certification-roadmap-2026",
@@ -923,27 +849,17 @@
       "title": "Build a Microsoft Fabric Study Roadmap from Demonstrated Skills",
       "headings": 1,
       "ads": 0,
-      "bytes": 106823
+      "bytes": 103145
     },
     {
-      "url": "https://dattasable.com/blog/microsoft-fabric-medallion-architecture-guide",
+      "url": "https://dattasable.com/blog/microsoft-fabric-career-roadmap-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric-medallion-architecture-guide",
+      "final": "https://dattasable.com/blog/microsoft-fabric-career-roadmap-2026",
       "type": "text/html; charset=utf-8",
-      "title": "Most People Learn Microsoft Fabric Tools — But Nobody Explains the Organizing Principle Behind Them: Medallion Architecture",
+      "title": "Microsoft Fabric Career Roadmap 2026: Analytics Engineer vs Data Engineer vs BI Developer vs AI Developer",
       "headings": 1,
       "ads": 0,
-      "bytes": 280355
-    },
-    {
-      "url": "https://dattasable.com/blog/microsoft-fabric-data-agents-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric-data-agents-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Microsoft Fabric Data Agents in 2026: The Ultimate Enterprise Guide to OneLake MCP & Fabric IQ",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 612071
+      "bytes": 445646
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-governance-purview-guide-2026",
@@ -953,17 +869,27 @@
       "title": "Microsoft Fabric Governance & Purview: Enterprise Security & Compliance Guide 2026",
       "headings": 2,
       "ads": 0,
-      "bytes": 477795
+      "bytes": 477743
     },
     {
-      "url": "https://dattasable.com/blog/microsoft-fabric-security-guide-2026",
+      "url": "https://dattasable.com/blog/microsoft-fabric-data-agents-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric-security-guide-2026",
+      "final": "https://dattasable.com/blog/microsoft-fabric-data-agents-2026",
       "type": "text/html; charset=utf-8",
-      "title": "Microsoft Fabric Security Guide (2026): Private Endpoints, Zero Trust, Networking & Enterprise Best Practices",
+      "title": "Microsoft Fabric Data Agents in 2026: The Ultimate Enterprise Guide to OneLake MCP & Fabric IQ",
       "headings": 1,
       "ads": 0,
-      "bytes": 314229
+      "bytes": 612219
+    },
+    {
+      "url": "https://dattasable.com/blog/microsoft-fabric-medallion-architecture-guide",
+      "status": 200,
+      "final": "https://dattasable.com/blog/microsoft-fabric-medallion-architecture-guide",
+      "type": "text/html; charset=utf-8",
+      "title": "Most People Learn Microsoft Fabric Tools — But Nobody Explains the Organizing Principle Behind Them: Medallion Architecture",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 280403
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-onelake-architecture-guide",
@@ -973,27 +899,17 @@
       "title": "OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)",
       "headings": 1,
       "ads": 0,
-      "bytes": 833158
+      "bytes": 833206
     },
     {
-      "url": "https://dattasable.com/blog/microsoft-fabric-pricing-guide-2026",
+      "url": "https://dattasable.com/blog/microsoft-fabric-security-guide-2026",
       "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric-pricing-guide-2026",
+      "final": "https://dattasable.com/blog/microsoft-fabric-security-guide-2026",
       "type": "text/html; charset=utf-8",
-      "title": "Microsoft Fabric Pricing Guide 2026: F-SKUs & Cost Optimization",
+      "title": "Microsoft Fabric Security Guide (2026): Private Endpoints, Zero Trust, Networking & Enterprise Best Practices",
       "headings": 1,
       "ads": 0,
-      "bytes": 645549
-    },
-    {
-      "url": "https://dattasable.com/blog/microsoft-fabric-real-time-intelligence-guide",
-      "status": 200,
-      "final": "https://dattasable.com/blog/microsoft-fabric-real-time-intelligence-guide",
-      "type": "text/html; charset=utf-8",
-      "title": "Microsoft Fabric Real-Time Intelligence: A Practical Guide",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 682079
+      "bytes": 314277
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-vs-databricks-2026",
@@ -1003,17 +919,27 @@
       "title": "Microsoft Fabric vs Databricks 2026: The Ultimate 4000-Word Technical Comparison & Hybrid Architecture Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 444053
+      "bytes": 444201
     },
     {
-      "url": "https://dattasable.com/blog/natural-language-query-engines",
+      "url": "https://dattasable.com/blog/microsoft-fabric-real-time-intelligence-guide",
       "status": 200,
-      "final": "https://dattasable.com/blog/natural-language-query-engines",
+      "final": "https://dattasable.com/blog/microsoft-fabric-real-time-intelligence-guide",
       "type": "text/html; charset=utf-8",
-      "title": "Natural Language Query: Is \"Chat with your Data\" Finally Ready?",
+      "title": "Microsoft Fabric Real-Time Intelligence: A Practical Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 170514
+      "bytes": 682027
+    },
+    {
+      "url": "https://dattasable.com/blog/microsoft-fabric-pricing-guide-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/microsoft-fabric-pricing-guide-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Microsoft Fabric Pricing Guide 2026: F-SKUs & Cost Optimization",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 645597
     },
     {
       "url": "https://dattasable.com/blog/microsoft-fabric-warehouse-explained-2026",
@@ -1023,27 +949,17 @@
       "title": "Microsoft Fabric Warehouse Explained: Complete Architecture, Performance & Best Practices Guide (2026)",
       "headings": 1,
       "ads": 0,
-      "bytes": 362355
+      "bytes": 362403
     },
     {
-      "url": "https://dattasable.com/blog/modern-bi-stack-2026",
+      "url": "https://dattasable.com/blog/natural-language-query-engines",
       "status": 200,
-      "final": "https://dattasable.com/blog/modern-bi-stack-2026",
+      "final": "https://dattasable.com/blog/natural-language-query-engines",
       "type": "text/html; charset=utf-8",
-      "title": "The 2026 Modern Data Stack: Orchestrating Intelligence at Scale",
+      "title": "Natural Language Query: Is \"Chat with your Data\" Finally Ready?",
       "headings": 1,
       "ads": 0,
-      "bytes": 170901
-    },
-    {
-      "url": "https://dattasable.com/blog/operator-intent-mapping-framework",
-      "status": 200,
-      "final": "https://dattasable.com/blog/operator-intent-mapping-framework",
-      "type": "text/html; charset=utf-8",
-      "title": "Operator Intent Mapping™: Aligning AI Systems with Human Persona",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 339120
+      "bytes": 170562
     },
     {
       "url": "https://dattasable.com/blog/nextjs-15-react-19-performance-manifesto-2026",
@@ -1053,7 +969,17 @@
       "title": "The Performance Manifesto: Architecting the Post-SPA Web with Next.js 15 and React 19",
       "headings": 1,
       "ads": 0,
-      "bytes": 174186
+      "bytes": 173667
+    },
+    {
+      "url": "https://dattasable.com/blog/modern-bi-stack-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/modern-bi-stack-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "The 2026 Modern Data Stack: Orchestrating Intelligence at Scale",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 170849
     },
     {
       "url": "https://dattasable.com/blog/nextjs-vercel-cloudflare-free-stack",
@@ -1063,17 +989,7 @@
       "title": "Hosting Next.js on Vercel behind Cloudflare: The Ultimate Zero-Dollar Production Stack",
       "headings": 1,
       "ads": 0,
-      "bytes": 284766
-    },
-    {
-      "url": "https://dattasable.com/blog/postgres-vs-snowflake-speed",
-      "status": 200,
-      "final": "https://dattasable.com/blog/postgres-vs-snowflake-speed",
-      "type": "text/html; charset=utf-8",
-      "title": "PostgreSQL vs Snowflake: When to Scale Your BI Database",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 156431
+      "bytes": 284645
     },
     {
       "url": "https://dattasable.com/blog/power-automate-financial-reporting-workflow",
@@ -1083,7 +999,27 @@
       "title": "Power Automate for a Financial Close Pack: Approval and Reconciliation",
       "headings": 1,
       "ads": 0,
-      "bytes": 105986
+      "bytes": 102308
+    },
+    {
+      "url": "https://dattasable.com/blog/operator-intent-mapping-framework",
+      "status": 200,
+      "final": "https://dattasable.com/blog/operator-intent-mapping-framework",
+      "type": "text/html; charset=utf-8",
+      "title": "Operator Intent Mapping™: Aligning AI Systems with Human Persona",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 339268
+    },
+    {
+      "url": "https://dattasable.com/blog/postgres-vs-snowflake-speed",
+      "status": 200,
+      "final": "https://dattasable.com/blog/postgres-vs-snowflake-speed",
+      "type": "text/html; charset=utf-8",
+      "title": "PostgreSQL vs Snowflake: When to Scale Your BI Database",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 156216
     },
     {
       "url": "https://dattasable.com/blog/pl-300-vs-dp-600-vs-dp-700-microsoft-certification-guide-2026",
@@ -1093,7 +1029,7 @@
       "title": "PL-300 vs DP-600 vs DP-700: The Definitive Microsoft Power BI & Fabric Certification Guide (2026)",
       "headings": 1,
       "ads": 0,
-      "bytes": 479100
+      "bytes": 479148
     },
     {
       "url": "https://dattasable.com/blog/power-bi-fabric-integration-2026",
@@ -1103,17 +1039,7 @@
       "title": "Connecting Fabric Data to Power BI: Ownership, Grain and Refresh Checks",
       "headings": 1,
       "ads": 0,
-      "bytes": 106787
-    },
-    {
-      "url": "https://dattasable.com/blog/precision-marketing-customer-data-platforms",
-      "status": 200,
-      "final": "https://dattasable.com/blog/precision-marketing-customer-data-platforms",
-      "type": "text/html; charset=utf-8",
-      "title": "Precision Marketing: Using Customer Data Platforms (CDP) for Hyper-Personalized Growth",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 394273
+      "bytes": 103109
     },
     {
       "url": "https://dattasable.com/blog/power-bi-direct-lake-performance-tuning-fabric",
@@ -1123,7 +1049,7 @@
       "title": "Advanced Power BI Direct Lake Performance Tuning & Troubleshooting in Microsoft Fabric",
       "headings": 1,
       "ads": 0,
-      "bytes": 329848
+      "bytes": 329896
     },
     {
       "url": "https://dattasable.com/blog/psychology-of-high-fidelity-dashboard-design",
@@ -1133,7 +1059,17 @@
       "title": "The Cognitive Engine: Exploring the Psychology of High-Fidelity Dashboard Design",
       "headings": 1,
       "ads": 0,
-      "bytes": 241010
+      "bytes": 241058
+    },
+    {
+      "url": "https://dattasable.com/blog/precision-marketing-customer-data-platforms",
+      "status": 200,
+      "final": "https://dattasable.com/blog/precision-marketing-customer-data-platforms",
+      "type": "text/html; charset=utf-8",
+      "title": "Precision Marketing: Using Customer Data Platforms (CDP) for Hyper-Personalized Growth",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 394321
     },
     {
       "url": "https://dattasable.com/blog/precision-prompt-architecture-framework",
@@ -1143,17 +1079,7 @@
       "title": "Precision Prompt Architecture™: The Blueprint for Precision AI Outputs",
       "headings": 1,
       "ads": 0,
-      "bytes": 433212
-    },
-    {
-      "url": "https://dattasable.com/blog/python-automation-data-reconciliation",
-      "status": 200,
-      "final": "https://dattasable.com/blog/python-automation-data-reconciliation",
-      "type": "text/html; charset=utf-8",
-      "title": "Python Automation: Streamlining Complex Data Reconciliation",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 214911
+      "bytes": 432700
     },
     {
       "url": "https://dattasable.com/blog/python-automation-pipelines",
@@ -1163,47 +1089,17 @@
       "title": "Building Robust Data Pipelines with Python and Prefect",
       "headings": 1,
       "ads": 0,
-      "bytes": 156004
+      "bytes": 155952
     },
     {
-      "url": "https://dattasable.com/blog/real-time-streaming-analytics-power-bi",
+      "url": "https://dattasable.com/blog/python-automation-data-reconciliation",
       "status": 200,
-      "final": "https://dattasable.com/blog/real-time-streaming-analytics-power-bi",
+      "final": "https://dattasable.com/blog/python-automation-data-reconciliation",
       "type": "text/html; charset=utf-8",
-      "title": "Streaming Analytics: Measure Freshness, Handle Late Events and Keep a Batch Check",
+      "title": "Python Automation: Streamlining Complex Data Reconciliation",
       "headings": 1,
       "ads": 0,
-      "bytes": 105454
-    },
-    {
-      "url": "https://dattasable.com/blog/retail-analytics-trends-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/retail-analytics-trends-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Predictive Retail: How Analytics is Reshaping Inventory Management",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 166090
-    },
-    {
-      "url": "https://dattasable.com/blog/saas-liquidity-trap-ai-strategy-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/saas-liquidity-trap-ai-strategy-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "AI Feature Unit Economics: Model Variable Cost Before Pricing",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105468
-    },
-    {
-      "url": "https://dattasable.com/blog/sales-performance-ecosystem-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/sales-performance-ecosystem-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Sales Reporting Design: Targets, Returns and Reconciliation",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 104100
+      "bytes": 214959
     },
     {
       "url": "https://dattasable.com/blog/python-selenium-bi-scraper",
@@ -1213,7 +1109,37 @@
       "title": "Building a Business Intelligence Scraper with Python and Selenium",
       "headings": 1,
       "ads": 0,
-      "bytes": 215138
+      "bytes": 215186
+    },
+    {
+      "url": "https://dattasable.com/blog/real-time-streaming-analytics-power-bi",
+      "status": 200,
+      "final": "https://dattasable.com/blog/real-time-streaming-analytics-power-bi",
+      "type": "text/html; charset=utf-8",
+      "title": "Streaming Analytics: Measure Freshness, Handle Late Events and Keep a Batch Check",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 101876
+    },
+    {
+      "url": "https://dattasable.com/blog/retail-analytics-trends-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/retail-analytics-trends-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Predictive Retail: How Analytics is Reshaping Inventory Management",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 166138
+    },
+    {
+      "url": "https://dattasable.com/blog/saas-liquidity-trap-ai-strategy-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/saas-liquidity-trap-ai-strategy-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "AI Feature Unit Economics: Model Variable Cost Before Pricing",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 101790
     },
     {
       "url": "https://dattasable.com/blog/rust-for-data-engineers",
@@ -1223,7 +1149,17 @@
       "title": "Rust for Data Engineers in 2026: Why Python Data Tools Are Moving to Rust",
       "headings": 2,
       "ads": 0,
-      "bytes": 198913
+      "bytes": 198861
+    },
+    {
+      "url": "https://dattasable.com/blog/sales-performance-ecosystem-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/sales-performance-ecosystem-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Sales Reporting Design: Targets, Returns and Reconciliation",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 100522
     },
     {
       "url": "https://dattasable.com/blog/scaling-data-culture-enterprise",
@@ -1233,37 +1169,7 @@
       "title": "Building Data Champions: A Four-Week Evidence-Based Pilot",
       "headings": 1,
       "ads": 0,
-      "bytes": 105384
-    },
-    {
-      "url": "https://dattasable.com/blog/scaling-the-forge-python-data-engineering",
-      "status": 200,
-      "final": "https://dattasable.com/blog/scaling-the-forge-python-data-engineering",
-      "type": "text/html; charset=utf-8",
-      "title": "Python Data Pipelines: Stream Input, Validate Rows and Publish Safely",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 107269
-    },
-    {
-      "url": "https://dattasable.com/blog/self-healing-etl-pipelines",
-      "status": 200,
-      "final": "https://dattasable.com/blog/self-healing-etl-pipelines",
-      "type": "text/html; charset=utf-8",
-      "title": "Recoverable ETL: Idempotency, Checkpoints and Bounded Retries",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105878
-    },
-    {
-      "url": "https://dattasable.com/blog/sql-json-data-warehousing",
-      "status": 200,
-      "final": "https://dattasable.com/blog/sql-json-data-warehousing",
-      "type": "text/html; charset=utf-8",
-      "title": "JSON in SQL Server: Validate, Extract and Preserve the Raw Record",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 105701
+      "bytes": 101706
     },
     {
       "url": "https://dattasable.com/blog/sql-deadlock-prevention-strategies",
@@ -1273,7 +1179,37 @@
       "title": "SQL Server Deadlocks: Diagnose a Cycle Before Adding Retries",
       "headings": 1,
       "ads": 0,
-      "bytes": 106185
+      "bytes": 102607
+    },
+    {
+      "url": "https://dattasable.com/blog/scaling-the-forge-python-data-engineering",
+      "status": 200,
+      "final": "https://dattasable.com/blog/scaling-the-forge-python-data-engineering",
+      "type": "text/html; charset=utf-8",
+      "title": "Python Data Pipelines: Stream Input, Validate Rows and Publish Safely",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 103591
+    },
+    {
+      "url": "https://dattasable.com/blog/self-healing-etl-pipelines",
+      "status": 200,
+      "final": "https://dattasable.com/blog/self-healing-etl-pipelines",
+      "type": "text/html; charset=utf-8",
+      "title": "Recoverable ETL: Idempotency, Checkpoints and Bounded Retries",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 102100
+    },
+    {
+      "url": "https://dattasable.com/blog/sql-json-data-warehousing",
+      "status": 200,
+      "final": "https://dattasable.com/blog/sql-json-data-warehousing",
+      "type": "text/html; charset=utf-8",
+      "title": "JSON in SQL Server: Validate, Extract and Preserve the Raw Record",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 102023
     },
     {
       "url": "https://dattasable.com/blog/sql-server-window-functions-advanced",
@@ -1283,37 +1219,7 @@
       "title": "SQL Window Functions: Running Totals, Ties and Previous Rows",
       "headings": 1,
       "ads": 0,
-      "bytes": 106405
-    },
-    {
-      "url": "https://dattasable.com/blog/sql-window-functions-explained-the-ultimate-guide-2026-rownumber-rank-denserank-over-deep-dive",
-      "status": 200,
-      "final": "https://dattasable.com/blog/sql-window-functions-explained-the-ultimate-guide-2026-rownumber-rank-denserank-over-deep-dive",
-      "type": "text/html; charset=utf-8",
-      "title": "SQL Window Functions Explained: The Ultimate Guide (2026) – ROW_NUMBER, RANK, DENSE_RANK & OVER() Deep Dive",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 334825
-    },
-    {
-      "url": "https://dattasable.com/blog/sql-server-columnstore-indexes-optimization-guide",
-      "status": 200,
-      "final": "https://dattasable.com/blog/sql-server-columnstore-indexes-optimization-guide",
-      "type": "text/html; charset=utf-8",
-      "title": "SQL Server Columnstore Indexes: Architectural Guide & Performance Optimization Patterns",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 331174
-    },
-    {
-      "url": "https://dattasable.com/blog/tableau-lods-tutorial",
-      "status": 200,
-      "final": "https://dattasable.com/blog/tableau-lods-tutorial",
-      "type": "text/html; charset=utf-8",
-      "title": "Mastering Tableau Level of Detail (LOD) Expressions for Complex KPIs",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 187937
+      "bytes": 102727
     },
     {
       "url": "https://dattasable.com/blog/strategic-bi-guide-india-2026",
@@ -1323,7 +1229,37 @@
       "title": "The 2026 Strategic BI Guide: Scaling Automated Reporting Solutions",
       "headings": 1,
       "ads": 0,
-      "bytes": 168383
+      "bytes": 168431
+    },
+    {
+      "url": "https://dattasable.com/blog/sql-server-columnstore-indexes-optimization-guide",
+      "status": 200,
+      "final": "https://dattasable.com/blog/sql-server-columnstore-indexes-optimization-guide",
+      "type": "text/html; charset=utf-8",
+      "title": "SQL Server Columnstore Indexes: Architectural Guide & Performance Optimization Patterns",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 331222
+    },
+    {
+      "url": "https://dattasable.com/blog/sql-window-functions-explained-the-ultimate-guide-2026-rownumber-rank-denserank-over-deep-dive",
+      "status": 200,
+      "final": "https://dattasable.com/blog/sql-window-functions-explained-the-ultimate-guide-2026-rownumber-rank-denserank-over-deep-dive",
+      "type": "text/html; charset=utf-8",
+      "title": "SQL Window Functions Explained: The Ultimate Guide (2026) – ROW_NUMBER, RANK, DENSE_RANK & OVER() Deep Dive",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 331147
+    },
+    {
+      "url": "https://dattasable.com/blog/tableau-lods-tutorial",
+      "status": 200,
+      "final": "https://dattasable.com/blog/tableau-lods-tutorial",
+      "type": "text/html; charset=utf-8",
+      "title": "Mastering Tableau Level of Detail (LOD) Expressions for Complex KPIs",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 187985
     },
     {
       "url": "https://dattasable.com/blog/telecom-collection-optimization-strategies",
@@ -1333,37 +1269,7 @@
       "title": "Telecom Analytics: Optimizing Postpaid Collection Workflows",
       "headings": 1,
       "ads": 0,
-      "bytes": 166515
-    },
-    {
-      "url": "https://dattasable.com/blog/top-5-free-content-creator-tools-2025",
-      "status": 200,
-      "final": "https://dattasable.com/blog/top-5-free-content-creator-tools-2025",
-      "type": "text/html; charset=utf-8",
-      "title": "Top 5 Free Tools Every Content Creator Should Be Using in 2025",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 212697
-    },
-    {
-      "url": "https://dattasable.com/blog/the-surgical-cockpit-bi-ux-design",
-      "status": 200,
-      "final": "https://dattasable.com/blog/the-surgical-cockpit-bi-ux-design",
-      "type": "text/html; charset=utf-8",
-      "title": "The Surgical Cockpit: Why I Built a Standalone BI Lab in Next.js",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 243117
-    },
-    {
-      "url": "https://dattasable.com/blog/video-fabric-end-to-end",
-      "status": 200,
-      "final": "https://dattasable.com/blog/video-fabric-end-to-end",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Implementation Walkthrough: From a CSV Batch to a Checked Report",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 106023
+      "bytes": 165957
     },
     {
       "url": "https://dattasable.com/blog/video-building-c-suite-dashboard",
@@ -1373,7 +1279,27 @@
       "title": "Executive Dashboard Walkthrough: Revenue, Margin and Exceptions",
       "headings": 1,
       "ads": 0,
-      "bytes": 105653
+      "bytes": 102075
+    },
+    {
+      "url": "https://dattasable.com/blog/top-5-free-content-creator-tools-2025",
+      "status": 200,
+      "final": "https://dattasable.com/blog/top-5-free-content-creator-tools-2025",
+      "type": "text/html; charset=utf-8",
+      "title": "Top 5 Free Tools Every Content Creator Should Be Using in 2025",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 212745
+    },
+    {
+      "url": "https://dattasable.com/blog/the-surgical-cockpit-bi-ux-design",
+      "status": 200,
+      "final": "https://dattasable.com/blog/the-surgical-cockpit-bi-ux-design",
+      "type": "text/html; charset=utf-8",
+      "title": "The Surgical Cockpit: Why I Built a Standalone BI Lab in Next.js",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 242485
     },
     {
       "url": "https://dattasable.com/blog/video-sql-tuning-live",
@@ -1383,7 +1309,17 @@
       "title": "SQL Tuning Walkthrough: Preserve Results While Comparing Plans",
       "headings": 1,
       "ads": 0,
-      "bytes": 105431
+      "bytes": 101653
+    },
+    {
+      "url": "https://dattasable.com/blog/video-fabric-end-to-end",
+      "status": 200,
+      "final": "https://dattasable.com/blog/video-fabric-end-to-end",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Implementation Walkthrough: From a CSV Batch to a Checked Report",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 102345
     },
     {
       "url": "https://dattasable.com/blog/what-is-seo-digital-marketing-guide",
@@ -1393,17 +1329,7 @@
       "title": "The Comprehensive 2026 Guide to SEO and Digital Marketing",
       "headings": 1,
       "ads": 0,
-      "bytes": 161976
-    },
-    {
-      "url": "https://dattasable.com/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-      "status": 200,
-      "final": "https://dattasable.com/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
-      "type": "text/html; charset=utf-8",
-      "title": "Why Microsoft Fabric Skills Will Dominate the Data Industry in 2026",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 400039
+      "bytes": 162024
     },
     {
       "url": "https://dattasable.com/campaign-design-preview",
@@ -1416,14 +1342,24 @@
       "bytes": 21627
     },
     {
-      "url": "https://dattasable.com/blog/zero-trust-2-autonomous-cybersecurity",
+      "url": "https://dattasable.com/blog/wordpress-installation-masterclass",
       "status": 200,
-      "final": "https://dattasable.com/blog/zero-trust-2-autonomous-cybersecurity",
+      "final": "https://dattasable.com/blog/wordpress-installation-masterclass",
       "type": "text/html; charset=utf-8",
-      "title": "Zero Trust for an Analytics Service: Identity, Scope and Audit Events",
+      "title": "From Zero to Live: The Definitive WordPress Installation Guide",
       "headings": 1,
       "ads": 0,
-      "bytes": 105608
+      "bytes": 262261
+    },
+    {
+      "url": "https://dattasable.com/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+      "status": 200,
+      "final": "https://dattasable.com/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+      "type": "text/html; charset=utf-8",
+      "title": "Why Microsoft Fabric Skills Will Dominate the Data Industry in 2026",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 400087
     },
     {
       "url": "https://dattasable.com/careers",
@@ -1436,16 +1372,6 @@
       "bytes": 21334
     },
     {
-      "url": "https://dattasable.com/careers/collection-team-leader-mumbai",
-      "status": 404,
-      "final": "https://dattasable.com/careers/collection-team-leader-mumbai",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 21865
-    },
-    {
       "url": "https://dattasable.com/careers/collection-officer-mumbai",
       "status": 404,
       "final": "https://dattasable.com/careers/collection-officer-mumbai",
@@ -1456,14 +1382,24 @@
       "bytes": 21853
     },
     {
-      "url": "https://dattasable.com/blog/wordpress-installation-masterclass",
+      "url": "https://dattasable.com/blog/zero-trust-2-autonomous-cybersecurity",
       "status": 200,
-      "final": "https://dattasable.com/blog/wordpress-installation-masterclass",
+      "final": "https://dattasable.com/blog/zero-trust-2-autonomous-cybersecurity",
       "type": "text/html; charset=utf-8",
-      "title": "From Zero to Live: The Definitive WordPress Installation Guide",
+      "title": "Zero Trust for an Analytics Service: Identity, Scope and Audit Events",
       "headings": 1,
       "ads": 0,
-      "bytes": 262213
+      "bytes": 102030
+    },
+    {
+      "url": "https://dattasable.com/careers/collection-team-leader-mumbai",
+      "status": 404,
+      "final": "https://dattasable.com/careers/collection-team-leader-mumbai",
+      "type": "text/html; charset=utf-8",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 21865
     },
     {
       "url": "https://dattasable.com/certification",
@@ -1474,16 +1410,6 @@
       "headings": 1,
       "ads": 0,
       "bytes": 86251
-    },
-    {
-      "url": "https://dattasable.com/cookies",
-      "status": 200,
-      "final": "https://dattasable.com/cookies",
-      "type": "text/html; charset=utf-8",
-      "title": "Cookie Policy | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 67343
     },
     {
       "url": "https://dattasable.com/contact",
@@ -1503,7 +1429,7 @@
       "title": "Surgical Execution Chains™ | Automated AI Orchestration | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 101928
+      "bytes": 102251
     },
     {
       "url": "https://dattasable.com/certifications",
@@ -1516,16 +1442,6 @@
       "bytes": 86251
     },
     {
-      "url": "https://dattasable.com/dashboards",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 238411
-    },
-    {
       "url": "https://dattasable.com/dashboard",
       "status": 200,
       "final": "https://dattasable.com/dashboard",
@@ -1536,6 +1452,26 @@
       "bytes": 34428
     },
     {
+      "url": "https://dattasable.com/cookies",
+      "status": 200,
+      "final": "https://dattasable.com/cookies",
+      "type": "text/html; charset=utf-8",
+      "title": "Cookie Policy | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 67473
+    },
+    {
+      "url": "https://dattasable.com/dashboards",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards",
+      "type": "text/html; charset=utf-8",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 238401
+    },
+    {
       "url": "https://dattasable.com/dashboards/aura-capital-sales",
       "status": 200,
       "final": "https://dattasable.com/dashboards/aura-capital-sales",
@@ -1543,7 +1479,27 @@
       "title": "Aura Capital & FinTech Group — Executive Sales Dashboard | Advanced Excel BI Project | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 83989
+      "bytes": 83977
+    },
+    {
+      "url": "https://dattasable.com/dashboards/blinkit-sales",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/blinkit-sales",
+      "type": "text/html; charset=utf-8",
+      "title": "Blinkit Sales Intelligence Dashboard — Quick Commerce Analytics Case Study | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 70561
+    },
+    {
+      "url": "https://dattasable.com/dashboards/biosynex-healthcare",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/biosynex-healthcare",
+      "type": "text/html; charset=utf-8",
+      "title": "BioSynex Healthcare Technologies — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 83755
     },
     {
       "url": "https://dattasable.com/dashboards/collection-intelligence",
@@ -1566,36 +1522,6 @@
       "bytes": 56497
     },
     {
-      "url": "https://dattasable.com/dashboards/biosynex-healthcare",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/biosynex-healthcare",
-      "type": "text/html; charset=utf-8",
-      "title": "BioSynex Healthcare Technologies — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 83755
-    },
-    {
-      "url": "https://dattasable.com/dashboards/blinkit-sales",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/blinkit-sales",
-      "type": "text/html; charset=utf-8",
-      "title": "Blinkit Sales Intelligence Dashboard — Quick Commerce Analytics Case Study | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 70220
-    },
-    {
-      "url": "https://dattasable.com/dashboards/helios-cleanenergy",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/helios-cleanenergy",
-      "type": "text/html; charset=utf-8",
-      "title": "Helios CleanEnergy & Power Grid AG — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 83722
-    },
-    {
       "url": "https://dattasable.com/dashboards/interactive",
       "status": 200,
       "final": "https://dattasable.com/dashboards/interactive",
@@ -1604,26 +1530,6 @@
       "headings": 0,
       "ads": 0,
       "bytes": 43127
-    },
-    {
-      "url": "https://dattasable.com/dashboards/meridian-global-retail",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/meridian-global-retail",
-      "type": "text/html; charset=utf-8",
-      "title": "Meridian Global Retailers Inc. — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 83539
-    },
-    {
-      "url": "https://dattasable.com/dashboards/nexus-cloud-technologies",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/nexus-cloud-technologies",
-      "type": "text/html; charset=utf-8",
-      "title": "Nexus Cloud Technologies Inc. — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 83740
     },
     {
       "url": "https://dattasable.com/dashboards/nexus-enterprise-operations",
@@ -1636,14 +1542,34 @@
       "bytes": 83782
     },
     {
-      "url": "https://dattasable.com/dashboards/revenue-intelligence",
+      "url": "https://dattasable.com/dashboards/helios-cleanenergy",
       "status": 200,
-      "final": "https://dattasable.com/dashboards/revenue-intelligence",
+      "final": "https://dattasable.com/dashboards/helios-cleanenergy",
       "type": "text/html; charset=utf-8",
-      "title": "Revenue Intelligence Dashboard — Enterprise Financial Analytics | Datta Sable | Datta Sable",
-      "headings": 0,
+      "title": "Helios CleanEnergy & Power Grid AG — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
+      "headings": 1,
       "ads": 0,
-      "bytes": 43067
+      "bytes": 83722
+    },
+    {
+      "url": "https://dattasable.com/dashboards/nexus-cloud-technologies",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/nexus-cloud-technologies",
+      "type": "text/html; charset=utf-8",
+      "title": "Nexus Cloud Technologies Inc. — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 83740
+    },
+    {
+      "url": "https://dattasable.com/dashboards/meridian-global-retail",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/meridian-global-retail",
+      "type": "text/html; charset=utf-8",
+      "title": "Meridian Global Retailers Inc. — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 83539
     },
     {
       "url": "https://dattasable.com/dashboards/omnimedia-marketing-network",
@@ -1666,6 +1592,16 @@
       "bytes": 106314
     },
     {
+      "url": "https://dattasable.com/dashboards/revenue-intelligence",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/revenue-intelligence",
+      "type": "text/html; charset=utf-8",
+      "title": "Revenue Intelligence Dashboard — Enterprise Financial Analytics | Datta Sable | Datta Sable",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 43067
+    },
+    {
       "url": "https://dattasable.com/dashboards/surgical-ai",
       "status": 200,
       "final": "https://dattasable.com/dashboards/surgical-ai",
@@ -1673,27 +1609,7 @@
       "title": "Surgical AI Dashboard — Enterprise Workflow Intelligence Prototype | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 71226
-    },
-    {
-      "url": "https://dattasable.com/dashboards/sovereign-resorts-hospitality",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/sovereign-resorts-hospitality",
-      "type": "text/html; charset=utf-8",
-      "title": "Sovereign Resorts & Luxury Hospitality — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 83903
-    },
-    {
-      "url": "https://dattasable.com/dashboards/sales-pipeline",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/sales-pipeline",
-      "type": "text/html; charset=utf-8",
-      "title": "Sales Pipeline Velocity Dashboard — B2B Revenue Analytics Case Study | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 70423
+      "bytes": 71565
     },
     {
       "url": "https://dattasable.com/dashboards/st-andrews-university",
@@ -1706,6 +1622,36 @@
       "bytes": 83786
     },
     {
+      "url": "https://dattasable.com/dashboards/sales-pipeline",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/sales-pipeline",
+      "type": "text/html; charset=utf-8",
+      "title": "Sales Pipeline Velocity Dashboard — B2B Revenue Analytics Case Study | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 70765
+    },
+    {
+      "url": "https://dattasable.com/dashboards/sovereign-resorts-hospitality",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/sovereign-resorts-hospitality",
+      "type": "text/html; charset=utf-8",
+      "title": "Sovereign Resorts & Luxury Hospitality — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 83903
+    },
+    {
+      "url": "https://dattasable.com/dashboards/world-business",
+      "status": 200,
+      "final": "https://dattasable.com/dashboards/world-business",
+      "type": "text/html; charset=utf-8",
+      "title": "World Business Intelligence (3M Records) | Datta Sable",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 77084
+    },
+    {
       "url": "https://dattasable.com/dashboards/talentpulse-people-systems",
       "status": 200,
       "final": "https://dattasable.com/dashboards/talentpulse-people-systems",
@@ -1714,16 +1660,6 @@
       "headings": 1,
       "ads": 0,
       "bytes": 83723
-    },
-    {
-      "url": "https://dattasable.com/dashboards/titan-industrial-systems",
-      "status": 200,
-      "final": "https://dattasable.com/dashboards/titan-industrial-systems",
-      "type": "text/html; charset=utf-8",
-      "title": "Titan Industrial Systems AG — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 83515
     },
     {
       "url": "https://dattasable.com/dashboards/vanguard-realty-capital",
@@ -1736,14 +1672,14 @@
       "bytes": 83713
     },
     {
-      "url": "https://dattasable.com/dashboards/world-business",
+      "url": "https://dattasable.com/dashboards/titan-industrial-systems",
       "status": 200,
-      "final": "https://dattasable.com/dashboards/world-business",
+      "final": "https://dattasable.com/dashboards/titan-industrial-systems",
       "type": "text/html; charset=utf-8",
-      "title": "World Business Intelligence (3M Records) | Datta Sable",
-      "headings": 0,
+      "title": "Titan Industrial Systems AG — Executive Performance & Commercial Sales Dashboard | Advanced Excel BI Project | Datta Sable",
+      "headings": 1,
       "ads": 0,
-      "bytes": 76742
+      "bytes": 83515
     },
     {
       "url": "https://dattasable.com/data-forge",
@@ -1773,7 +1709,7 @@
       "title": "Disclaimer | Datta Sable | Datta Sable",
       "headings": 2,
       "ads": 0,
-      "bytes": 71811
+      "bytes": 72127
     },
     {
       "url": "https://dattasable.com/glossary",
@@ -1793,7 +1729,7 @@
       "title": "Frequently Asked Questions (FAQ) | Datta Sable | Datta Sable",
       "headings": 2,
       "ads": 0,
-      "bytes": 81253
+      "bytes": 81625
     },
     {
       "url": "https://dattasable.com/editorial-policy",
@@ -1803,7 +1739,27 @@
       "title": "Editorial Policy & Research Standards | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 89951
+      "bytes": 89727
+    },
+    {
+      "url": "https://dattasable.com/knowledge",
+      "status": 200,
+      "final": "https://dattasable.com/knowledge",
+      "type": "text/html; charset=utf-8",
+      "title": "Technical Knowledge: AI Workflows and Engineering Decisions | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 76454
+    },
+    {
+      "url": "https://dattasable.com/infrastructure",
+      "status": 200,
+      "final": "https://dattasable.com/infrastructure",
+      "type": "text/html; charset=utf-8",
+      "title": "Creator Infrastructure Hub | Surgical AI Systems | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 82312
     },
     {
       "url": "https://dattasable.com/knowledge/architecture",
@@ -1823,27 +1779,17 @@
       "title": "AI Workflows and Agent Loops: A Decision Guide | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 78297
+      "bytes": 78635
     },
     {
-      "url": "https://dattasable.com/knowledge/data-engineering",
+      "url": "https://dattasable.com/knowledge/optimizing-ai-context-windows",
       "status": 200,
-      "final": "https://dattasable.com/knowledge/data-engineering",
+      "final": "https://dattasable.com/knowledge/optimizing-ai-context-windows",
       "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "title": "Optimizing AI Context Windows: A Testable Workflow | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 68187
-    },
-    {
-      "url": "https://dattasable.com/infrastructure",
-      "status": 200,
-      "final": "https://dattasable.com/infrastructure",
-      "type": "text/html; charset=utf-8",
-      "title": "Creator Infrastructure Hub | Surgical AI Systems | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 82033
+      "bytes": 87396
     },
     {
       "url": "https://dattasable.com/knowledge/patterns",
@@ -1856,24 +1802,14 @@
       "bytes": 59095
     },
     {
-      "url": "https://dattasable.com/knowledge/optimizing-ai-context-windows",
+      "url": "https://dattasable.com/knowledge/data-engineering",
       "status": 200,
-      "final": "https://dattasable.com/knowledge/optimizing-ai-context-windows",
+      "final": "https://dattasable.com/knowledge/data-engineering",
       "type": "text/html; charset=utf-8",
-      "title": "Optimizing AI Context Windows: A Testable Workflow | Datta Sable",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
       "headings": 1,
       "ads": 0,
-      "bytes": 87059
-    },
-    {
-      "url": "https://dattasable.com/knowledge",
-      "status": 200,
-      "final": "https://dattasable.com/knowledge",
-      "type": "text/html; charset=utf-8",
-      "title": "Technical Knowledge: AI Workflows and Engineering Decisions | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 76128
+      "bytes": 68187
     },
     {
       "url": "https://dattasable.com/knowledge/protocols",
@@ -1896,26 +1832,6 @@
       "bytes": 50039
     },
     {
-      "url": "https://dattasable.com/knowledge/rfc/003-intent-mapping",
-      "status": 200,
-      "final": "https://dattasable.com/knowledge/rfc/003-intent-mapping",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 49572
-    },
-    {
-      "url": "https://dattasable.com/knowledge/rfc/002-execution-chains",
-      "status": 200,
-      "final": "https://dattasable.com/knowledge/rfc/002-execution-chains",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 49418
-    },
-    {
       "url": "https://dattasable.com/knowledge/rfc/001-prompt-hardening",
       "status": 200,
       "final": "https://dattasable.com/knowledge/rfc/001-prompt-hardening",
@@ -1926,6 +1842,16 @@
       "bytes": 53282
     },
     {
+      "url": "https://dattasable.com/knowledge/rfc/003-intent-mapping",
+      "status": 200,
+      "final": "https://dattasable.com/knowledge/rfc/003-intent-mapping",
+      "type": "text/html; charset=utf-8",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 49572
+    },
+    {
       "url": "https://dattasable.com/knowledge/taxonomy",
       "status": 200,
       "final": "https://dattasable.com/knowledge/taxonomy",
@@ -1934,6 +1860,16 @@
       "headings": 1,
       "ads": 0,
       "bytes": 54162
+    },
+    {
+      "url": "https://dattasable.com/knowledge/rfc/002-execution-chains",
+      "status": 200,
+      "final": "https://dattasable.com/knowledge/rfc/002-execution-chains",
+      "type": "text/html; charset=utf-8",
+      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 49418
     },
     {
       "url": "https://dattasable.com/knowledge/standards",
@@ -1956,16 +1892,6 @@
       "bytes": 42307
     },
     {
-      "url": "https://dattasable.com/knowledge/technical-storytelling-for-founders",
-      "status": 200,
-      "final": "https://dattasable.com/knowledge/technical-storytelling-for-founders",
-      "type": "text/html; charset=utf-8",
-      "title": "Technical Storytelling: Explain an Engineering Decision",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 87466
-    },
-    {
       "url": "https://dattasable.com/mentorship",
       "status": 200,
       "final": "https://dattasable.com/mentorship",
@@ -1973,7 +1899,17 @@
       "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
       "headings": 1,
       "ads": 0,
-      "bytes": 80553
+      "bytes": 80581
+    },
+    {
+      "url": "https://dattasable.com/privacy",
+      "status": 200,
+      "final": "https://dattasable.com/privacy",
+      "type": "text/html; charset=utf-8",
+      "title": "Privacy Policy | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 81548
     },
     {
       "url": "https://dattasable.com/preview",
@@ -1986,6 +1922,56 @@
       "bytes": 35999
     },
     {
+      "url": "https://dattasable.com/knowledge/technical-storytelling-for-founders",
+      "status": 200,
+      "final": "https://dattasable.com/knowledge/technical-storytelling-for-founders",
+      "type": "text/html; charset=utf-8",
+      "title": "Technical Storytelling: Explain an Engineering Decision",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 87803
+    },
+    {
+      "url": "https://dattasable.com/services",
+      "status": 200,
+      "final": "https://dattasable.com/services",
+      "type": "text/html; charset=utf-8",
+      "title": "BI, Dashboard and Data Automation Services | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 68969
+    },
+    {
+      "url": "https://dattasable.com/services/graphic-design",
+      "status": 200,
+      "final": "https://dattasable.com/services/graphic-design",
+      "type": "text/html; charset=utf-8",
+      "title": "Professional Graphic Design & Vector Branding | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 129734
+    },
+    {
+      "url": "https://dattasable.com/services/automation",
+      "status": 200,
+      "final": "https://dattasable.com/services/automation",
+      "type": "text/html; charset=utf-8",
+      "title": "Business Process & Data Automation Solutions | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 130488
+    },
+    {
+      "url": "https://dattasable.com/services/dashboards",
+      "status": 200,
+      "final": "https://dattasable.com/services/dashboards",
+      "type": "text/html; charset=utf-8",
+      "title": "Custom Power BI & Tableau Dashboard Development | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 132549
+    },
+    {
       "url": "https://dattasable.com/portfolio",
       "status": 200,
       "final": "https://dattasable.com/portfolio",
@@ -1996,26 +1982,6 @@
       "bytes": 227871
     },
     {
-      "url": "https://dattasable.com/privacy",
-      "status": 200,
-      "final": "https://dattasable.com/privacy",
-      "type": "text/html; charset=utf-8",
-      "title": "Privacy Policy | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 81080
-    },
-    {
-      "url": "https://dattasable.com/services",
-      "status": 200,
-      "final": "https://dattasable.com/services",
-      "type": "text/html; charset=utf-8",
-      "title": "BI, Dashboard and Data Automation Services | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 68644
-    },
-    {
       "url": "https://dattasable.com/services/consulting",
       "status": 200,
       "final": "https://dattasable.com/services/consulting",
@@ -2023,47 +1989,7 @@
       "title": "Data Analytics & BI Consulting | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 132279
-    },
-    {
-      "url": "https://dattasable.com/services/automation",
-      "status": 200,
-      "final": "https://dattasable.com/services/automation",
-      "type": "text/html; charset=utf-8",
-      "title": "Business Process & Data Automation Solutions | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 130152
-    },
-    {
-      "url": "https://dattasable.com/services/dashboards",
-      "status": 200,
-      "final": "https://dattasable.com/services/dashboards",
-      "type": "text/html; charset=utf-8",
-      "title": "Custom Power BI & Tableau Dashboard Development | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 132213
-    },
-    {
-      "url": "https://dattasable.com/services/graphic-design",
-      "status": 200,
-      "final": "https://dattasable.com/services/graphic-design",
-      "type": "text/html; charset=utf-8",
-      "title": "Professional Graphic Design & Vector Branding | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 129398
-    },
-    {
-      "url": "https://dattasable.com/services/seo-optimization",
-      "status": 200,
-      "final": "https://dattasable.com/services/seo-optimization",
-      "type": "text/html; charset=utf-8",
-      "title": "On-Page SEO Optimization & Technical Audits | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 129731
+      "bytes": 132615
     },
     {
       "url": "https://dattasable.com/services/web-design",
@@ -2073,7 +1999,7 @@
       "title": "Custom Web & UI/UX Design | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 128486
+      "bytes": 128822
     },
     {
       "url": "https://dattasable.com/services/web-solutions",
@@ -2083,27 +2009,17 @@
       "title": "Enterprise Web Solutions & Next.js Development | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 130214
+      "bytes": 130550
     },
     {
-      "url": "https://dattasable.com/start-here",
+      "url": "https://dattasable.com/services/seo-optimization",
       "status": 200,
-      "final": "https://dattasable.com/start-here",
+      "final": "https://dattasable.com/services/seo-optimization",
       "type": "text/html; charset=utf-8",
-      "title": "Start Your Data Journey | BI & Analytics Knowledge Hub | Datta Sable | Datta Sable",
+      "title": "On-Page SEO Optimization & Technical Audits | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 97264
-    },
-    {
-      "url": "https://dattasable.com/terms",
-      "status": 200,
-      "final": "https://dattasable.com/terms",
-      "type": "text/html; charset=utf-8",
-      "title": "Terms of Service | Datta Sable | Datta Sable",
-      "headings": 2,
-      "ads": 0,
-      "bytes": 69208
+      "bytes": 130067
     },
     {
       "url": "https://dattasable.com/templates",
@@ -2116,16 +2032,6 @@
       "bytes": 71073
     },
     {
-      "url": "https://dattasable.com/tools",
-      "status": 200,
-      "final": "https://dattasable.com/tools",
-      "type": "text/html; charset=utf-8",
-      "title": "Surgical AI Workspace | AI Tools for Creators & Developers",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 101569
-    },
-    {
       "url": "https://dattasable.com/sitemap",
       "status": 200,
       "final": "https://dattasable.com/sitemap",
@@ -2133,7 +2039,37 @@
       "title": "HTML Sitemap | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 149082
+      "bytes": 149406
+    },
+    {
+      "url": "https://dattasable.com/terms",
+      "status": 200,
+      "final": "https://dattasable.com/terms",
+      "type": "text/html; charset=utf-8",
+      "title": "Terms of Service | Datta Sable | Datta Sable",
+      "headings": 2,
+      "ads": 0,
+      "bytes": 69519
+    },
+    {
+      "url": "https://dattasable.com/start-here",
+      "status": 200,
+      "final": "https://dattasable.com/start-here",
+      "type": "text/html; charset=utf-8",
+      "title": "Start Your Data Journey | BI & Analytics Knowledge Hub | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 97590
+    },
+    {
+      "url": "https://dattasable.com/tools",
+      "status": 200,
+      "final": "https://dattasable.com/tools",
+      "type": "text/html; charset=utf-8",
+      "title": "Surgical AI Workspace | AI Tools for Creators & Developers",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 101839
     },
     {
       "url": "https://dattasable.com/tools/ai-prompt-generator",
@@ -2146,16 +2082,6 @@
       "bytes": 66465
     },
     {
-      "url": "https://dattasable.com/tools/bi-roi-calculator",
-      "status": 200,
-      "final": "https://dattasable.com/tools/bi-roi-calculator",
-      "type": "text/html; charset=utf-8",
-      "title": "BI ROI Calculator — Measure the Value of Business Intelligence | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 58503
-    },
-    {
       "url": "https://dattasable.com/tools/context-optimizer",
       "status": 200,
       "final": "https://dattasable.com/tools/context-optimizer",
@@ -2166,6 +2092,16 @@
       "bytes": 62981
     },
     {
+      "url": "https://dattasable.com/tools/bi-roi-calculator",
+      "status": 200,
+      "final": "https://dattasable.com/tools/bi-roi-calculator",
+      "type": "text/html; charset=utf-8",
+      "title": "BI ROI Calculator — Measure the Value of Business Intelligence | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 58503
+    },
+    {
       "url": "https://dattasable.com/tools/demo",
       "status": 200,
       "final": "https://dattasable.com/tools/demo",
@@ -2174,6 +2110,16 @@
       "headings": 1,
       "ads": 0,
       "bytes": 49221
+    },
+    {
+      "url": "https://dattasable.com/tools/linkedin-formatter",
+      "status": 200,
+      "final": "https://dattasable.com/tools/linkedin-formatter",
+      "type": "text/html; charset=utf-8",
+      "title": "LinkedIn Formatter — Write Viral LinkedIn Posts That Get Engagement | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 61208
     },
     {
       "url": "https://dattasable.com/tools/mermaid-forge",
@@ -2196,14 +2142,14 @@
       "bytes": 57841
     },
     {
-      "url": "https://dattasable.com/tools/linkedin-formatter",
+      "url": "https://dattasable.com/tools/schema-generator",
       "status": 200,
-      "final": "https://dattasable.com/tools/linkedin-formatter",
+      "final": "https://dattasable.com/tools/schema-generator",
       "type": "text/html; charset=utf-8",
-      "title": "LinkedIn Formatter — Write Viral LinkedIn Posts That Get Engagement | Datta Sable | Datta Sable",
+      "title": "Schema Generator — Create JSON-LD Structured Data for SEO | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 61208
+      "bytes": 59931
     },
     {
       "url": "https://dattasable.com/tools/open-mis",
@@ -2226,6 +2172,16 @@
       "bytes": 55964
     },
     {
+      "url": "https://dattasable.com/tools/word-counter",
+      "status": 200,
+      "final": "https://dattasable.com/tools/word-counter",
+      "type": "text/html; charset=utf-8",
+      "title": "Word Counter — Count Words, Characters & Reading Time | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 59176
+    },
+    {
       "url": "https://dattasable.com/tools/seo-meta-generator",
       "status": 200,
       "final": "https://dattasable.com/tools/seo-meta-generator",
@@ -2236,44 +2192,14 @@
       "bytes": 56452
     },
     {
-      "url": "https://dattasable.com/tools/word-counter",
+      "url": "https://dattasable.com/tools/workspace",
       "status": 200,
-      "final": "https://dattasable.com/tools/word-counter",
+      "final": "https://dattasable.com/tools/workspace",
       "type": "text/html; charset=utf-8",
-      "title": "Word Counter — Count Words, Characters & Reading Time | Datta Sable | Datta Sable",
+      "title": "AI Workspace — Your Command Center for Data & AI Tools | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 59307
-    },
-    {
-      "url": "https://dattasable.com/tools/schema-generator",
-      "status": 200,
-      "final": "https://dattasable.com/tools/schema-generator",
-      "type": "text/html; charset=utf-8",
-      "title": "Schema Generator — Create JSON-LD Structured Data for SEO | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 59931
-    },
-    {
-      "url": "https://excel.dattasable.com/",
-      "status": 200,
-      "final": "https://excel.dattasable.com/",
-      "type": "text/html; charset=utf-8",
-      "title": "Free Excel Dashboard Generator | Automated KPI Reports",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 183623
-    },
-    {
-      "url": "https://excel.dattasable.com/about",
-      "status": 200,
-      "final": "https://excel.dattasable.com/about",
-      "type": "text/html; charset=utf-8",
-      "title": "About Us | Datta Sable — Free Excel Dashboard Generator",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 74698
+      "bytes": 72450
     },
     {
       "url": "https://dattasable.com/unsubscribe",
@@ -2286,34 +2212,44 @@
       "bytes": 28771
     },
     {
+      "url": "https://excel.dattasable.com/about",
+      "status": 200,
+      "final": "https://excel.dattasable.com/about",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://excel.dattasable.com/",
+      "status": 200,
+      "final": "https://excel.dattasable.com/",
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://excel.dattasable.com/amazon-sales-dashboard",
+      "status": 200,
+      "final": "https://excel.dattasable.com/amazon-sales-dashboard",
+      "type": "text/html; charset=utf-8"
+    },
+    {
       "url": "https://excel.dattasable.com/contact",
       "status": 200,
       "final": "https://excel.dattasable.com/contact",
-      "type": "text/html; charset=utf-8",
-      "title": "Contact Us & Grievance Redressal | excel.dattasable.com",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 62328
+      "type": "text/html; charset=utf-8"
     },
     {
       "url": "https://excel.dattasable.com/disclaimer",
       "status": 200,
       "final": "https://excel.dattasable.com/disclaimer",
-      "type": "text/html; charset=utf-8",
-      "title": "Disclaimer & Liability Terms | excel.dattasable.com",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 58987
+      "type": "text/html; charset=utf-8"
     },
     {
-      "url": "https://dattasable.com/tools/workspace",
+      "url": "https://excel.dattasable.com/financial-dashboard",
       "status": 200,
-      "final": "https://dattasable.com/tools/workspace",
+      "final": "https://excel.dattasable.com/financial-dashboard",
       "type": "text/html; charset=utf-8",
-      "title": "AI Workspace — Your Command Center for Data & AI Tools | Datta Sable | Datta Sable",
+      "title": "Excel Financial Dashboard Generator | Banking & Performance Reports",
       "headings": 1,
       "ads": 0,
-      "bytes": 72170
+      "bytes": 85914
     },
     {
       "url": "https://excel.dattasable.com/excel-dashboard-generator",
@@ -2324,6 +2260,16 @@
       "headings": 1,
       "ads": 0,
       "bytes": 54156
+    },
+    {
+      "url": "https://excel.dattasable.com/hr-dashboard",
+      "status": 200,
+      "final": "https://excel.dattasable.com/hr-dashboard",
+      "type": "text/html; charset=utf-8",
+      "title": "Excel HR Dashboard Generator | Workforce & Headcount Analytics",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 71358
     },
     {
       "url": "https://excel.dattasable.com/excel-dashboard-examples",
@@ -2346,6 +2292,16 @@
       "bytes": 90439
     },
     {
+      "url": "https://excel.dattasable.com/privacy",
+      "status": 200,
+      "final": "https://excel.dattasable.com/privacy",
+      "type": "text/html; charset=utf-8",
+      "title": "Privacy Policy | excel.dattasable.com — 100% Client-Side Privacy",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 59706
+    },
+    {
       "url": "https://excel.dattasable.com/mis-report-generator",
       "status": 200,
       "final": "https://excel.dattasable.com/mis-report-generator",
@@ -2354,46 +2310,6 @@
       "headings": 1,
       "ads": 0,
       "bytes": 54164
-    },
-    {
-      "url": "https://excel.dattasable.com/financial-dashboard",
-      "status": 200,
-      "final": "https://excel.dattasable.com/financial-dashboard",
-      "type": "text/html; charset=utf-8",
-      "title": "Excel Financial Dashboard Generator | Banking & Performance Reports",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 85914
-    },
-    {
-      "url": "https://excel.dattasable.com/privacy",
-      "status": 200,
-      "final": "https://excel.dattasable.com/privacy",
-      "type": "text/html; charset=utf-8",
-      "title": "Privacy Policy | excel.dattasable.com — 100% Client-Side Privacy",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 59615
-    },
-    {
-      "url": "https://excel.dattasable.com/refund-policy",
-      "status": 200,
-      "final": "https://excel.dattasable.com/refund-policy",
-      "type": "text/html; charset=utf-8",
-      "title": "Refund & Cancellation Policy | excel.dattasable.com",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 57222
-    },
-    {
-      "url": "https://excel.dattasable.com/terms",
-      "status": 200,
-      "final": "https://excel.dattasable.com/terms",
-      "type": "text/html; charset=utf-8",
-      "title": "Terms of Service | excel.dattasable.com — Commercial & License Terms",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 58086
     },
     {
       "url": "https://excel.dattasable.com/sales-dashboard",
@@ -2406,44 +2322,34 @@
       "bytes": 90428
     },
     {
-      "url": "https://excel.dattasable.com/hr-dashboard",
+      "url": "https://excel.dattasable.com/refund-policy",
       "status": 200,
-      "final": "https://excel.dattasable.com/hr-dashboard",
+      "final": "https://excel.dattasable.com/refund-policy",
       "type": "text/html; charset=utf-8",
-      "title": "Excel HR Dashboard Generator | Workforce & Headcount Analytics",
+      "title": "Refund & Cancellation Policy | excel.dattasable.com",
       "headings": 1,
       "ads": 0,
-      "bytes": 71358
+      "bytes": 57227
     },
     {
-      "url": "https://excel.dattasable.com/amazon-sales-dashboard",
+      "url": "https://excel.dattasable.com/terms",
       "status": 200,
-      "final": "https://excel.dattasable.com/amazon-sales-dashboard",
+      "final": "https://excel.dattasable.com/terms",
       "type": "text/html; charset=utf-8",
-      "title": "Amazon Sales Dashboard & Performance Suite | excel.dattasable.com",
+      "title": "Terms of Service | excel.dattasable.com — Commercial & License Terms",
       "headings": 1,
       "ads": 0,
-      "bytes": 137102
+      "bytes": 58091
     },
     {
-      "url": "https://fabric.dattasable.com/compare/power-bi-premium-vs-fabric",
+      "url": "https://fabric.dattasable.com",
       "status": 200,
-      "final": "https://fabric.dattasable.com/compare/power-bi-premium-vs-fabric",
+      "final": "https://fabric.dattasable.com/",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformPower BI Premium vs Microsoft Fabric Capacity | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 52639
-    },
-    {
-      "url": "https://fabric.dattasable.com/compare/f64-vs-f128",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/compare/f64-vs-f128",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF64 vs F128 Capacity Comparison | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 52080
+      "bytes": 88249
     },
     {
       "url": "https://fabric.dattasable.com/compare/f32-vs-f64",
@@ -2466,14 +2372,14 @@
       "bytes": 37669
     },
     {
-      "url": "https://fabric.dattasable.com",
+      "url": "https://fabric.dattasable.com/compare/f64-vs-f128",
       "status": 200,
-      "final": "https://fabric.dattasable.com/",
+      "final": "https://fabric.dattasable.com/compare/f64-vs-f128",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF64 vs F128 Capacity Comparison | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 88253
+      "bytes": 52080
     },
     {
       "url": "https://fabric.dattasable.com/compare/synapse-vs-fabric",
@@ -2496,24 +2402,14 @@
       "bytes": 52300
     },
     {
-      "url": "https://fabric.dattasable.com/cost-calculator",
+      "url": "https://fabric.dattasable.com/compare/power-bi-premium-vs-fabric",
       "status": 200,
-      "final": "https://fabric.dattasable.com/cost-calculator",
+      "final": "https://fabric.dattasable.com/compare/power-bi-premium-vs-fabric",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric Cost Calculator & FinOps Pricing Estimator | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformPower BI Premium vs Microsoft Fabric Capacity | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 56343
-    },
-    {
-      "url": "https://fabric.dattasable.com/docs/common-mistakes",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/docs/common-mistakes",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformCommon Mistakes | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 31316
+      "bytes": 52639
     },
     {
       "url": "https://fabric.dattasable.com/docs",
@@ -2526,34 +2422,14 @@
       "bytes": 47963
     },
     {
-      "url": "https://fabric.dattasable.com/docs/enterprise-sizing-guide",
+      "url": "https://fabric.dattasable.com/cost-calculator",
       "status": 200,
-      "final": "https://fabric.dattasable.com/docs/enterprise-sizing-guide",
+      "final": "https://fabric.dattasable.com/cost-calculator",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformEnterprise Sizing Guide | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric Cost Calculator & FinOps Pricing Estimator | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 31400
-    },
-    {
-      "url": "https://fabric.dattasable.com/docs/data-factory-pipeline-costs",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/docs/data-factory-pipeline-costs",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformPipeline Cost Planning: Count Work, Retries, and Schedule | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 33928
-    },
-    {
-      "url": "https://fabric.dattasable.com/docs/f128-vs-f256",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/docs/f128-vs-f256",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF128 vs F256 Comparison | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 31362
+      "bytes": 56343
     },
     {
       "url": "https://fabric.dattasable.com/docs/cost-efficiency-strategies",
@@ -2566,24 +2442,34 @@
       "bytes": 33845
     },
     {
-      "url": "https://fabric.dattasable.com/docs/f2-vs-f4",
+      "url": "https://fabric.dattasable.com/docs/data-factory-pipeline-costs",
       "status": 200,
-      "final": "https://fabric.dattasable.com/docs/f2-vs-f4",
+      "final": "https://fabric.dattasable.com/docs/data-factory-pipeline-costs",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF2 vs F4 Comparison | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformPipeline Cost Planning: Count Work, Retries, and Schedule | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 31332
+      "bytes": 33928
     },
     {
-      "url": "https://fabric.dattasable.com/docs/f2-vs-f64",
+      "url": "https://fabric.dattasable.com/docs/common-mistakes",
       "status": 200,
-      "final": "https://fabric.dattasable.com/docs/f2-vs-f64",
+      "final": "https://fabric.dattasable.com/docs/common-mistakes",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F2 vs F64 Comparison | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformCommon Mistakes | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 31483
+      "bytes": 31316
+    },
+    {
+      "url": "https://fabric.dattasable.com/docs/f128-vs-f256",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/docs/f128-vs-f256",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF128 vs F256 Comparison | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 31362
     },
     {
       "url": "https://fabric.dattasable.com/docs/f32-vs-f64",
@@ -2596,6 +2482,36 @@
       "bytes": 31362
     },
     {
+      "url": "https://fabric.dattasable.com/docs/f2-vs-f4",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/docs/f2-vs-f4",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF2 vs F4 Comparison | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 31332
+    },
+    {
+      "url": "https://fabric.dattasable.com/docs/enterprise-sizing-guide",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/docs/enterprise-sizing-guide",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformEnterprise Sizing Guide | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 31400
+    },
+    {
+      "url": "https://fabric.dattasable.com/docs/f2-vs-f64",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/docs/f2-vs-f64",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F2 vs F64 Comparison | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 31483
+    },
+    {
       "url": "https://fabric.dattasable.com/docs/f64-vs-f128",
       "status": 200,
       "final": "https://fabric.dattasable.com/docs/f64-vs-f128",
@@ -2604,16 +2520,6 @@
       "headings": 1,
       "ads": 0,
       "bytes": 31363
-    },
-    {
-      "url": "https://fabric.dattasable.com/docs/f8-vs-f16",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/docs/f8-vs-f16",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF8 vs F16 Comparison | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 31338
     },
     {
       "url": "https://fabric.dattasable.com/docs/fabric-master-api",
@@ -2626,24 +2532,14 @@
       "bytes": 33849
     },
     {
-      "url": "https://fabric.dattasable.com/docs/fabric-throttling-mechanisms",
+      "url": "https://fabric.dattasable.com/docs/f8-vs-f16",
       "status": 200,
-      "final": "https://fabric.dattasable.com/docs/fabric-throttling-mechanisms",
+      "final": "https://fabric.dattasable.com/docs/f8-vs-f16",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformFabric Throttling: Diagnose the Operation and Time Window | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformF8 vs F16 Comparison | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 34228
-    },
-    {
-      "url": "https://fabric.dattasable.com/docs/migrating-to-fabric",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/docs/migrating-to-fabric",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMigration Planning: Prove a Small Slice Before Moving Everything | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 33868
+      "bytes": 31338
     },
     {
       "url": "https://fabric.dattasable.com/docs/getting-started-fabric-master",
@@ -2656,14 +2552,14 @@
       "bytes": 33867
     },
     {
-      "url": "https://fabric.dattasable.com/docs/optimizing-spark-workloads",
+      "url": "https://fabric.dattasable.com/docs/fabric-throttling-mechanisms",
       "status": 200,
-      "final": "https://fabric.dattasable.com/docs/optimizing-spark-workloads",
+      "final": "https://fabric.dattasable.com/docs/fabric-throttling-mechanisms",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformSpark Workloads: Measure Before Changing Capacity | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformFabric Throttling: Diagnose the Operation and Time Window | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 34198
+      "bytes": 34228
     },
     {
       "url": "https://fabric.dattasable.com/docs/how-reserved-capacity-works",
@@ -2674,6 +2570,26 @@
       "headings": 1,
       "ads": 0,
       "bytes": 31454
+    },
+    {
+      "url": "https://fabric.dattasable.com/docs/migrating-to-fabric",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/docs/migrating-to-fabric",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMigration Planning: Prove a Small Slice Before Moving Everything | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 33868
+    },
+    {
+      "url": "https://fabric.dattasable.com/docs/optimizing-spark-workloads",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/docs/optimizing-spark-workloads",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformSpark Workloads: Measure Before Changing Capacity | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 34198
     },
     {
       "url": "https://fabric.dattasable.com/docs/payg-vs-reserved",
@@ -2766,6 +2682,16 @@
       "bytes": 31365
     },
     {
+      "url": "https://fabric.dattasable.com/fsku/f1024",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/fsku/f1024",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F1024 Capacity - Sizing, Pricing & Specs | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 53733
+    },
+    {
       "url": "https://fabric.dattasable.com/fsku-comparisons",
       "status": 200,
       "final": "https://fabric.dattasable.com/fsku-comparisons",
@@ -2776,14 +2702,14 @@
       "bytes": 62353
     },
     {
-      "url": "https://fabric.dattasable.com/fsku/f1024",
+      "url": "https://fabric.dattasable.com/fsku/f128",
       "status": 200,
-      "final": "https://fabric.dattasable.com/fsku/f1024",
+      "final": "https://fabric.dattasable.com/fsku/f128",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F1024 Capacity - Sizing, Pricing & Specs | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F128 Capacity - Sizing, Pricing & Specs | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 53733
+      "bytes": 53578
     },
     {
       "url": "https://fabric.dattasable.com/fsku/f16",
@@ -2806,16 +2732,6 @@
       "bytes": 54129
     },
     {
-      "url": "https://fabric.dattasable.com/fsku/f2048",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/fsku/f2048",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F2048 Capacity - Sizing, Pricing & Specs | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 53665
-    },
-    {
       "url": "https://fabric.dattasable.com/fsku/f256",
       "status": 200,
       "final": "https://fabric.dattasable.com/fsku/f256",
@@ -2826,6 +2742,16 @@
       "bytes": 53674
     },
     {
+      "url": "https://fabric.dattasable.com/fsku/f2048",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/fsku/f2048",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F2048 Capacity - Sizing, Pricing & Specs | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 53665
+    },
+    {
       "url": "https://fabric.dattasable.com/fsku/f32",
       "status": 200,
       "final": "https://fabric.dattasable.com/fsku/f32",
@@ -2834,16 +2760,6 @@
       "headings": 1,
       "ads": 0,
       "bytes": 53633
-    },
-    {
-      "url": "https://fabric.dattasable.com/fsku/f128",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/fsku/f128",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric F128 Capacity - Sizing, Pricing & Specs | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 53578
     },
     {
       "url": "https://fabric.dattasable.com/fsku/f4",
@@ -2896,14 +2812,14 @@
       "bytes": 55008
     },
     {
-      "url": "https://fabric.dattasable.com/pricing",
+      "url": "https://fabric.dattasable.com/reserved-savings",
       "status": 200,
-      "final": "https://fabric.dattasable.com/pricing",
+      "final": "https://fabric.dattasable.com/reserved-savings",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric Pricing Calculator & SKU Cost Guide | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric Reserved Instance Savings Calculator (~41% Off) | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 79901
+      "bytes": 60852
     },
     {
       "url": "https://fabric.dattasable.com/wizard",
@@ -2926,24 +2842,24 @@
       "bytes": 54572
     },
     {
-      "url": "https://fabric.dattasable.com/reserved-savings",
+      "url": "https://fabric.dattasable.com/pricing",
       "status": 200,
-      "final": "https://fabric.dattasable.com/reserved-savings",
+      "final": "https://fabric.dattasable.com/pricing",
       "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric Reserved Instance Savings Calculator (~41% Off) | Fabric Master",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformMicrosoft Fabric Pricing Calculator & SKU Cost Guide | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 59943
+      "bytes": 79901
     },
     {
-      "url": "https://dattasable.com/certs/CertificateOfCompletion_Generative%20AI%20for%20Digital%20Marketers.pdf",
+      "url": "https://dattasable.com/certs/Google%20Analytics%20Certifiacte.pdf",
       "status": 200,
-      "final": "https://dattasable.com/certs/CertificateOfCompletion_Generative%20AI%20for%20Digital%20Marketers.pdf",
+      "final": "https://dattasable.com/certs/Google%20Analytics%20Certifiacte.pdf",
       "type": "application/pdf",
       "title": "",
       "headings": 0,
       "ads": 0,
-      "bytes": 120387
+      "bytes": 38476
     },
     {
       "url": "https://dattasable.com/certs/CertificateOfCompletion_AI%20and%20the%20Future%20of%20the%20Public%20Sector.pdf",
@@ -2976,14 +2892,14 @@
       "bytes": 68907
     },
     {
-      "url": "https://dattasable.com/certs/Google%20Analytics%20Certifiacte.pdf",
+      "url": "https://dattasable.com/certs/CertificateOfCompletion_Generative%20AI%20for%20Digital%20Marketers.pdf",
       "status": 200,
-      "final": "https://dattasable.com/certs/Google%20Analytics%20Certifiacte.pdf",
+      "final": "https://dattasable.com/certs/CertificateOfCompletion_Generative%20AI%20for%20Digital%20Marketers.pdf",
       "type": "application/pdf",
       "title": "",
       "headings": 0,
       "ads": 0,
-      "bytes": 38476
+      "bytes": 120387
     },
     {
       "url": "https://dattasable.com/certs/CertificateOfCompletion_Marketing%20on%20LinkedIn.pdf",
@@ -2996,16 +2912,6 @@
       "bytes": 67770
     },
     {
-      "url": "https://dattasable.com/category/nextjs",
-      "status": 200,
-      "final": "https://dattasable.com/category/nextjs",
-      "type": "text/html; charset=utf-8",
-      "title": "Nextjs Articles | Datta Sable | Datta Sable",
-      "headings": 2,
-      "ads": 0,
-      "bytes": 185313
-    },
-    {
       "url": "https://dattasable.com/category/power-bi",
       "status": 200,
       "final": "https://dattasable.com/category/power-bi",
@@ -3013,17 +2919,7 @@
       "title": "Power Bi Articles | Datta Sable | Datta Sable",
       "headings": 2,
       "ads": 0,
-      "bytes": 419946
-    },
-    {
-      "url": "https://dattasable.com/category/sql",
-      "status": 200,
-      "final": "https://dattasable.com/category/sql",
-      "type": "text/html; charset=utf-8",
-      "title": "Sql Articles | Datta Sable | Datta Sable",
-      "headings": 2,
-      "ads": 0,
-      "bytes": 434791
+      "bytes": 419842
     },
     {
       "url": "https://dattasable.com/category/python",
@@ -3033,7 +2929,7 @@
       "title": "Python Articles | Datta Sable | Datta Sable",
       "headings": 2,
       "ads": 0,
-      "bytes": 318091
+      "bytes": 317987
     },
     {
       "url": "https://dattasable.com/category/seo",
@@ -3043,17 +2939,27 @@
       "title": "Seo Articles | Datta Sable | Datta Sable",
       "headings": 2,
       "ads": 0,
-      "bytes": 190048
+      "bytes": 189944
     },
     {
-      "url": "https://dattasable.com/glossary/n8n-workflow-orchestration",
+      "url": "https://dattasable.com/category/nextjs",
       "status": 200,
-      "final": "https://dattasable.com/glossary/n8n-workflow-orchestration",
+      "final": "https://dattasable.com/category/nextjs",
       "type": "text/html; charset=utf-8",
-      "title": "n8n | AI Workflow Glossary | Datta Sable | Datta Sable",
-      "headings": 1,
+      "title": "Nextjs Articles | Datta Sable | Datta Sable",
+      "headings": 2,
       "ads": 0,
-      "bytes": 75667
+      "bytes": 185109
+    },
+    {
+      "url": "https://dattasable.com/category/sql",
+      "status": 200,
+      "final": "https://dattasable.com/category/sql",
+      "type": "text/html; charset=utf-8",
+      "title": "Sql Articles | Datta Sable | Datta Sable",
+      "headings": 2,
+      "ads": 0,
+      "bytes": 434687
     },
     {
       "url": "https://dattasable.com/category/microsoft-fabric",
@@ -3063,7 +2969,17 @@
       "title": "Microsoft Fabric Articles | Datta Sable | Datta Sable",
       "headings": 2,
       "ads": 0,
-      "bytes": 1858285
+      "bytes": 1858181
+    },
+    {
+      "url": "https://dattasable.com/glossary/n8n-workflow-orchestration",
+      "status": 200,
+      "final": "https://dattasable.com/glossary/n8n-workflow-orchestration",
+      "type": "text/html; charset=utf-8",
+      "title": "n8n | AI Workflow Glossary | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 76003
     },
     {
       "url": "https://fabric.dattasable.com/",
@@ -3073,7 +2989,7 @@
       "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 88253
+      "bytes": 88249
     },
     {
       "url": "https://dattasable.com/glossary/ai-hallucination-risks",
@@ -3083,7 +2999,7 @@
       "title": "AI Hallucination | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75966
+      "bytes": 76302
     },
     {
       "url": "https://dattasable.com/glossary/llm-context-window-limits",
@@ -3093,17 +3009,7 @@
       "title": "Context Window | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75282
-    },
-    {
-      "url": "https://dattasable.com/glossary/agentic-workflow-engineering",
-      "status": 200,
-      "final": "https://dattasable.com/glossary/agentic-workflow-engineering",
-      "type": "text/html; charset=utf-8",
-      "title": "Agentic Workflow | AI Workflow Glossary | Datta Sable | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 75424
+      "bytes": 75618
     },
     {
       "url": "https://dattasable.com/glossary/workflow-orchestration-logic",
@@ -3113,7 +3019,17 @@
       "title": "Workflow Orchestration | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75823
+      "bytes": 76159
+    },
+    {
+      "url": "https://dattasable.com/glossary/agentic-workflow-engineering",
+      "status": 200,
+      "final": "https://dattasable.com/glossary/agentic-workflow-engineering",
+      "type": "text/html; charset=utf-8",
+      "title": "Agentic Workflow | AI Workflow Glossary | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 75760
     },
     {
       "url": "https://dattasable.com/glossary/operator-intent-mapping",
@@ -3123,7 +3039,7 @@
       "title": "Operator Intent Mapping | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75528
+      "bytes": 75864
     },
     {
       "url": "https://dattasable.com/Certificates/Google%20Analytics%20Certifiacte.pdf",
@@ -3136,26 +3052,6 @@
       "bytes": 38476
     },
     {
-      "url": "https://dattasable.com/Certificates/CertificateOfCompletion_AI%20and%20the%20Future%20of%20the%20Public%20Sector.pdf",
-      "status": 200,
-      "final": "https://dattasable.com/Certificates/CertificateOfCompletion_AI%20and%20the%20Future%20of%20the%20Public%20Sector.pdf",
-      "type": "application/pdf",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 70051
-    },
-    {
-      "url": "https://dattasable.com/category/ai-automation",
-      "status": 200,
-      "final": "https://dattasable.com/category/ai-automation",
-      "type": "text/html; charset=utf-8",
-      "title": "Ai Automation Articles | Datta Sable | Datta Sable",
-      "headings": 2,
-      "ads": 0,
-      "bytes": 994828
-    },
-    {
       "url": "https://dattasable.com/Certificates/CertificateOfCompletion_Generative%20AI%20for%20Digital%20Marketers.pdf",
       "status": 200,
       "final": "https://dattasable.com/Certificates/CertificateOfCompletion_Generative%20AI%20for%20Digital%20Marketers.pdf",
@@ -3164,6 +3060,16 @@
       "headings": 0,
       "ads": 0,
       "bytes": 120387
+    },
+    {
+      "url": "https://dattasable.com/Certificates/CertificateOfCompletion_AI%20and%20the%20Future%20of%20the%20Public%20Sector.pdf",
+      "status": 200,
+      "final": "https://dattasable.com/Certificates/CertificateOfCompletion_AI%20and%20the%20Future%20of%20the%20Public%20Sector.pdf",
+      "type": "application/pdf",
+      "title": "",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 70051
     },
     {
       "url": "https://dattasable.com/Certificates/CertificateOfCompletion_Digital%20Marketing%20Tools%20Create%20a%20Marketing%20Campaign%20from%20Start%20to%20Finish.pdf",
@@ -3176,16 +3082,6 @@
       "bytes": 68907
     },
     {
-      "url": "https://dattasable.com/Certificates/CertificateOfCompletion_Content%20Strategy%20for%20Marketers.pdf",
-      "status": 200,
-      "final": "https://dattasable.com/Certificates/CertificateOfCompletion_Content%20Strategy%20for%20Marketers.pdf",
-      "type": "application/pdf",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 69246
-    },
-    {
       "url": "https://dattasable.com/Certificates/CertificateOfCompletion_Marketing%20on%20LinkedIn.pdf",
       "status": 200,
       "final": "https://dattasable.com/Certificates/CertificateOfCompletion_Marketing%20on%20LinkedIn.pdf",
@@ -3196,34 +3092,24 @@
       "bytes": 67770
     },
     {
-      "url": "https://dattasable.com/chains/social-to-search-bridge",
+      "url": "https://dattasable.com/Certificates/CertificateOfCompletion_Content%20Strategy%20for%20Marketers.pdf",
       "status": 200,
-      "final": "https://dattasable.com/chains/social-to-search-bridge",
-      "type": "text/html; charset=utf-8",
-      "title": "Social-to-Search Bridge | Execution Chain | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 76477
-    },
-    {
-      "url": "https://dattasable.com/chains/technical-research-deepdive",
-      "status": 200,
-      "final": "https://dattasable.com/chains/technical-research-deepdive",
-      "type": "text/html; charset=utf-8",
-      "title": "Technical Research Deep-Dive | Execution Chain | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 75457
-    },
-    {
-      "url": "https://dattasable.com/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "final": "https://dattasable.com/Certificates/CertificateOfCompletion_Content%20Strategy%20for%20Marketers.pdf",
+      "type": "application/pdf",
       "title": "",
       "headings": 0,
       "ads": 0,
-      "bytes": 4864356
+      "bytes": 69246
+    },
+    {
+      "url": "https://dattasable.com/category/ai-automation",
+      "status": 200,
+      "final": "https://dattasable.com/category/ai-automation",
+      "type": "text/html; charset=utf-8",
+      "title": "Ai Automation Articles | Datta Sable | Datta Sable",
+      "headings": 2,
+      "ads": 0,
+      "bytes": 994724
     },
     {
       "url": "https://dattasable.com/chains/authority-content-launch",
@@ -3233,7 +3119,17 @@
       "title": "Authority Content Launch | Execution Chain | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 77596
+      "bytes": 78030
+    },
+    {
+      "url": "https://dattasable.com/chains/technical-research-deepdive",
+      "status": 200,
+      "final": "https://dattasable.com/chains/technical-research-deepdive",
+      "type": "text/html; charset=utf-8",
+      "title": "Technical Research Deep-Dive | Execution Chain | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 75891
     },
     {
       "url": "https://dattasable.com/Projects/BioSynex_Healthcare_Technologies_Executive_Sales_Dashboard_2026.xlsx",
@@ -3246,6 +3142,36 @@
       "bytes": 1305614
     },
     {
+      "url": "https://dattasable.com/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx",
+      "status": 200,
+      "final": "https://dattasable.com/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 4864356
+    },
+    {
+      "url": "https://dattasable.com/chains/social-to-search-bridge",
+      "status": 200,
+      "final": "https://dattasable.com/chains/social-to-search-bridge",
+      "type": "text/html; charset=utf-8",
+      "title": "Social-to-Search Bridge | Execution Chain | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 76911
+    },
+    {
+      "url": "https://dattasable.com/Projects/Nexus_Enterprise_Operations_Group_Executive_Sales_Dashboard_2026.xlsx",
+      "status": 200,
+      "final": "https://dattasable.com/Projects/Nexus_Enterprise_Operations_Group_Executive_Sales_Dashboard_2026.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 1552885
+    },
+    {
       "url": "https://dattasable.com/Projects/Helios_CleanEnergy___Power_Grid_AG_Executive_Sales_Dashboard_2026.xlsx",
       "status": 200,
       "final": "https://dattasable.com/Projects/Helios_CleanEnergy___Power_Grid_AG_Executive_Sales_Dashboard_2026.xlsx",
@@ -3254,6 +3180,36 @@
       "headings": 0,
       "ads": 0,
       "bytes": 1553848
+    },
+    {
+      "url": "https://dattasable.com/templates/Hyperlocal_Fleet_Ops_MIS_Dashboard_Template.xlsx",
+      "status": 200,
+      "final": "https://dattasable.com/templates/Hyperlocal_Fleet_Ops_MIS_Dashboard_Template.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 49154
+    },
+    {
+      "url": "https://dattasable.com/Projects/Nexus_Cloud_Technologies_Inc__Executive_Sales_Dashboard_2026.xlsx",
+      "status": 200,
+      "final": "https://dattasable.com/Projects/Nexus_Cloud_Technologies_Inc__Executive_Sales_Dashboard_2026.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 1310111
+    },
+    {
+      "url": "https://dattasable.com/Dashboard/surgical-ai-workspace.html",
+      "status": 200,
+      "final": "https://dattasable.com/Dashboard/surgical-ai-workspace.html",
+      "type": "text/html; charset=utf-8",
+      "title": "Surgical AI Workspace — Enterprise Workflow Intelligence",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 54312
     },
     {
       "url": "https://dattasable.com/Projects/Meridian_Global_Retailers_Inc__Executive_Sales_Dashboard_2026.xlsx",
@@ -3276,36 +3232,6 @@
       "bytes": 1552494
     },
     {
-      "url": "https://dattasable.com/Projects/Nexus_Cloud_Technologies_Inc__Executive_Sales_Dashboard_2026.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/Projects/Nexus_Cloud_Technologies_Inc__Executive_Sales_Dashboard_2026.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 1310111
-    },
-    {
-      "url": "https://dattasable.com/templates/Hyperlocal_Fleet_Ops_MIS_Dashboard_Template.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/templates/Hyperlocal_Fleet_Ops_MIS_Dashboard_Template.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 49154
-    },
-    {
-      "url": "https://dattasable.com/Dashboard/surgical-ai-workspace.html",
-      "status": 200,
-      "final": "https://dattasable.com/Dashboard/surgical-ai-workspace.html",
-      "type": "text/html; charset=utf-8",
-      "title": "Surgical AI Workspace — Enterprise Workflow Intelligence",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 54312
-    },
-    {
       "url": "https://dattasable.com/Projects/Sovereign_Resorts___Luxury_Hospitality_Executive_Sales_Dashboard_2026.xlsx",
       "status": 200,
       "final": "https://dattasable.com/Projects/Sovereign_Resorts___Luxury_Hospitality_Executive_Sales_Dashboard_2026.xlsx",
@@ -3314,46 +3240,6 @@
       "headings": 0,
       "ads": 0,
       "bytes": 1304802
-    },
-    {
-      "url": "https://dattasable.com/Projects/Titan_Industrial_Systems_AG_Executive_Sales_Dashboard_2026.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/Projects/Titan_Industrial_Systems_AG_Executive_Sales_Dashboard_2026.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 1305495
-    },
-    {
-      "url": "https://dattasable.com/Projects/St__Andrews_Collegiate_University_System_Executive_Sales_Dashboard_2026.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/Projects/St__Andrews_Collegiate_University_System_Executive_Sales_Dashboard_2026.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 1553039
-    },
-    {
-      "url": "https://dattasable.com/Projects/TalentPulse_Global_People_Systems_Executive_Sales_Dashboard_2026.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/Projects/TalentPulse_Global_People_Systems_Executive_Sales_Dashboard_2026.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 1303599
-    },
-    {
-      "url": "https://dattasable.com/Projects/Nexus_Enterprise_Operations_Group_Executive_Sales_Dashboard_2026.xlsx",
-      "status": 200,
-      "final": "https://dattasable.com/Projects/Nexus_Enterprise_Operations_Group_Executive_Sales_Dashboard_2026.xlsx",
-      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "title": "",
-      "headings": 0,
-      "ads": 0,
-      "bytes": 1552885
     },
     {
       "url": "https://dattasable.com/Dashboard/world-business-dashboard.html",
@@ -3366,6 +3252,16 @@
       "bytes": 116432
     },
     {
+      "url": "https://dattasable.com/Projects/TalentPulse_Global_People_Systems_Executive_Sales_Dashboard_2026.xlsx",
+      "status": 200,
+      "final": "https://dattasable.com/Projects/TalentPulse_Global_People_Systems_Executive_Sales_Dashboard_2026.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
+      "ads": 0,
+      "bytes": 1303599
+    },
+    {
       "url": "https://dattasable.com/Projects/Vanguard_Realty_Capital_Partners_Executive_Sales_Dashboard_2026.xlsx",
       "status": 200,
       "final": "https://dattasable.com/Projects/Vanguard_Realty_Capital_Partners_Executive_Sales_Dashboard_2026.xlsx",
@@ -3376,14 +3272,14 @@
       "bytes": 1304196
     },
     {
-      "url": "https://dattasable.com/lp/gemini-seo-pipelines-for-marketers",
+      "url": "https://dattasable.com/Projects/St__Andrews_Collegiate_University_System_Executive_Sales_Dashboard_2026.xlsx",
       "status": 200,
-      "final": "https://dattasable.com/lp/gemini-seo-pipelines-for-marketers",
-      "type": "text/html; charset=utf-8",
-      "title": "Expert Gemini AI Prompt Pipelines for Technical SEO",
-      "headings": 1,
+      "final": "https://dattasable.com/Projects/St__Andrews_Collegiate_University_System_Executive_Sales_Dashboard_2026.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
       "ads": 0,
-      "bytes": 79502
+      "bytes": 1553039
     },
     {
       "url": "https://dattasable.com/glossary/few-shot-prompting-strategies",
@@ -3393,27 +3289,27 @@
       "title": "Few-Shot Prompting | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 74897
+      "bytes": 75233
     },
     {
-      "url": "https://dattasable.com/glossary/token-density-optimization",
+      "url": "https://dattasable.com/Projects/Titan_Industrial_Systems_AG_Executive_Sales_Dashboard_2026.xlsx",
       "status": 200,
-      "final": "https://dattasable.com/glossary/token-density-optimization",
-      "type": "text/html; charset=utf-8",
-      "title": "Token Density | AI Workflow Glossary | Datta Sable | Datta Sable",
-      "headings": 1,
+      "final": "https://dattasable.com/Projects/Titan_Industrial_Systems_AG_Executive_Sales_Dashboard_2026.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "title": "",
+      "headings": 0,
       "ads": 0,
-      "bytes": 74791
+      "bytes": 1305495
     },
     {
-      "url": "https://dattasable.com/glossary/prompt-chaining-architecture",
+      "url": "https://dattasable.com/lp/gemini-seo-pipelines-for-marketers",
       "status": 200,
-      "final": "https://dattasable.com/glossary/prompt-chaining-architecture",
+      "final": "https://dattasable.com/lp/gemini-seo-pipelines-for-marketers",
       "type": "text/html; charset=utf-8",
-      "title": "Prompt Chaining | AI Workflow Glossary | Datta Sable | Datta Sable",
+      "title": "Expert Gemini AI Prompt Pipelines for Technical SEO",
       "headings": 1,
       "ads": 0,
-      "bytes": 75563
+      "bytes": 79832
     },
     {
       "url": "https://dattasable.com/templates/high-ctr-meta-structures",
@@ -3423,7 +3319,7 @@
       "title": "High-CTR Meta Structures | Surgical AI Blueprint | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 77753
+      "bytes": 78090
     },
     {
       "url": "https://dattasable.com/glossary/semantic-compression",
@@ -3433,17 +3329,27 @@
       "title": "Semantic Compression | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 76206
+      "bytes": 76542
     },
     {
-      "url": "https://dattasable.com/glossary/surgical-spacing-method",
+      "url": "https://dattasable.com/glossary/prompt-chaining-architecture",
       "status": 200,
-      "final": "https://dattasable.com/glossary/surgical-spacing-method",
+      "final": "https://dattasable.com/glossary/prompt-chaining-architecture",
       "type": "text/html; charset=utf-8",
-      "title": "Surgical Spacing | AI Workflow Glossary | Datta Sable | Datta Sable",
+      "title": "Prompt Chaining | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75502
+      "bytes": 75899
+    },
+    {
+      "url": "https://dattasable.com/glossary/token-density-optimization",
+      "status": 200,
+      "final": "https://dattasable.com/glossary/token-density-optimization",
+      "type": "text/html; charset=utf-8",
+      "title": "Token Density | AI Workflow Glossary | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 75127
     },
     {
       "url": "https://dattasable.com/glossary/technical-authority-signals",
@@ -3453,7 +3359,17 @@
       "title": "Technical Authority | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75743
+      "bytes": 76079
+    },
+    {
+      "url": "https://dattasable.com/glossary/surgical-spacing-method",
+      "status": 200,
+      "final": "https://dattasable.com/glossary/surgical-spacing-method",
+      "type": "text/html; charset=utf-8",
+      "title": "Surgical Spacing | AI Workflow Glossary | Datta Sable | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 75838
     },
     {
       "url": "https://dattasable.com/glossary/zero-shot-prompting-execution",
@@ -3463,17 +3379,7 @@
       "title": "Zero-Shot Prompting | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75047
-    },
-    {
-      "url": "https://dattasable.com/templates/token-saving-system-prompt",
-      "status": 200,
-      "final": "https://dattasable.com/templates/token-saving-system-prompt",
-      "type": "text/html; charset=utf-8",
-      "title": "Token-Saving System Prompt | Surgical AI Blueprint | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 78088
+      "bytes": 75383
     },
     {
       "url": "https://dattasable.com/glossary/data-fidelity-benchmarks",
@@ -3483,67 +3389,17 @@
       "title": "Data Fidelity | AI Workflow Glossary | Datta Sable | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 75661
+      "bytes": 75997
     },
     {
-      "url": "https://dattasable.com/templates/saas-product-schema-blueprint",
+      "url": "https://dattasable.com/templates/token-saving-system-prompt",
       "status": 200,
-      "final": "https://dattasable.com/templates/saas-product-schema-blueprint",
+      "final": "https://dattasable.com/templates/token-saving-system-prompt",
       "type": "text/html; charset=utf-8",
-      "title": "SaaS Product Schema | Surgical AI Blueprint | Datta Sable",
+      "title": "Token-Saving System Prompt | Surgical AI Blueprint | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 79132
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/dp-600-vs-dp-700-certifications",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/dp-600-vs-dp-700-certifications",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28087
-    },
-    {
-      "url": "https://dattasable.com/templates/founder-authority-system",
-      "status": 200,
-      "final": "https://dattasable.com/templates/founder-authority-system",
-      "type": "text/html; charset=utf-8",
-      "title": "Founder Authority System | Surgical AI Blueprint | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 78432
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/microsoft-fabric-architecture-explained",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/microsoft-fabric-architecture-explained",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28095
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/microsoft-fabric-certification-roadmap",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/microsoft-fabric-certification-roadmap",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28094
-    },
-    {
-      "url": "https://dattasable.com/blog/posts/azure-data-engineering-roadmap",
-      "status": 404,
-      "final": "https://dattasable.com/blog/posts/azure-data-engineering-roadmap",
-      "type": "text/html; charset=utf-8",
-      "title": "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 28086
+      "bytes": 78425
     },
     {
       "url": "https://dattasable.com/templates/multi-agent-orchestrator.json",
@@ -3556,16 +3412,6 @@
       "bytes": 0
     },
     {
-      "url": "https://dattasable.com/templates/b2b-retention-post-blueprint",
-      "status": 200,
-      "final": "https://dattasable.com/templates/b2b-retention-post-blueprint",
-      "type": "text/html; charset=utf-8",
-      "title": "B2B Retention Blueprint | Surgical AI Blueprint | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 78447
-    },
-    {
       "url": "https://dattasable.com/Dattatray_Sable_Resume.pdf",
       "status": 200,
       "final": "https://dattasable.com/Dattatray_Sable_Resume.pdf",
@@ -3574,6 +3420,46 @@
       "headings": 0,
       "ads": 0,
       "bytes": 467081
+    },
+    {
+      "url": "https://dattasable.com/templates/saas-product-schema-blueprint",
+      "status": 200,
+      "final": "https://dattasable.com/templates/saas-product-schema-blueprint",
+      "type": "text/html; charset=utf-8",
+      "title": "SaaS Product Schema | Surgical AI Blueprint | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 79469
+    },
+    {
+      "url": "https://dattasable.com/templates/founder-authority-system",
+      "status": 200,
+      "final": "https://dattasable.com/templates/founder-authority-system",
+      "type": "text/html; charset=utf-8",
+      "title": "Founder Authority System | Surgical AI Blueprint | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 78769
+    },
+    {
+      "url": "https://dattasable.com/templates/b2b-retention-post-blueprint",
+      "status": 200,
+      "final": "https://dattasable.com/templates/b2b-retention-post-blueprint",
+      "type": "text/html; charset=utf-8",
+      "title": "B2B Retention Blueprint | Surgical AI Blueprint | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 78784
+    },
+    {
+      "url": "https://dattasable.com/templates/viral-linkedin-hooks-pack",
+      "status": 200,
+      "final": "https://dattasable.com/templates/viral-linkedin-hooks-pack",
+      "type": "text/html; charset=utf-8",
+      "title": "The Viral Hook Pack | Surgical AI Blueprint | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 78333
     },
     {
       "url": "https://dattasable.com/templates/data-cleaner.py",
@@ -3586,16 +3472,6 @@
       "bytes": 0
     },
     {
-      "url": "https://dattasable.com/lp/linkedin-hooks-for-data-analysts",
-      "status": 200,
-      "final": "https://dattasable.com/lp/linkedin-hooks-for-data-analysts",
-      "type": "text/html; charset=utf-8",
-      "title": "Viral LinkedIn Hooks for Data Analysts & Scientists",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 79627
-    },
-    {
       "url": "https://dattasable.com/templates/gemini-research-pipeline",
       "status": 200,
       "final": "https://dattasable.com/templates/gemini-research-pipeline",
@@ -3603,27 +3479,17 @@
       "title": "Gemini Research Pipeline | Surgical AI Blueprint | Datta Sable",
       "headings": 1,
       "ads": 0,
-      "bytes": 78119
+      "bytes": 78456
     },
     {
-      "url": "https://dattasable.com/templates/viral-linkedin-hooks-pack",
+      "url": "https://dattasable.com/lp/linkedin-hooks-for-data-analysts",
       "status": 200,
-      "final": "https://dattasable.com/templates/viral-linkedin-hooks-pack",
+      "final": "https://dattasable.com/lp/linkedin-hooks-for-data-analysts",
       "type": "text/html; charset=utf-8",
-      "title": "The Viral Hook Pack | Surgical AI Blueprint | Datta Sable",
+      "title": "Viral LinkedIn Hooks for Data Analysts & Scientists",
       "headings": 1,
       "ads": 0,
-      "bytes": 77996
-    },
-    {
-      "url": "https://dattasable.com/templates/ai-agent-chain-blueprint",
-      "status": 200,
-      "final": "https://dattasable.com/templates/ai-agent-chain-blueprint",
-      "type": "text/html; charset=utf-8",
-      "title": "AI Agent Chain Blueprint | Surgical AI Blueprint | Datta Sable",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 78029
+      "bytes": 79957
     },
     {
       "url": "https://dattasable.com/lp/linkedin-hooks-for-saas-launches",
@@ -3633,7 +3499,17 @@
       "title": "High-Authority LinkedIn Hooks for SaaS Product Launches",
       "headings": 1,
       "ads": 0,
-      "bytes": 76026
+      "bytes": 76356
+    },
+    {
+      "url": "https://dattasable.com/templates/ai-agent-chain-blueprint",
+      "status": 200,
+      "final": "https://dattasable.com/templates/ai-agent-chain-blueprint",
+      "type": "text/html; charset=utf-8",
+      "title": "AI Agent Chain Blueprint | Surgical AI Blueprint | Datta Sable",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 78366
     },
     {
       "url": "https://fabric.dattasable.com/labs",
@@ -3643,37 +3519,7 @@
       "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 88253
-    },
-    {
-      "url": "https://fabric.dattasable.com/resources/open-source",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/resources/open-source",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 88253
-    },
-    {
-      "url": "https://fabric.dattasable.com/ai-advisor",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/ai-advisor",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 88253
-    },
-    {
-      "url": "https://fabric.dattasable.com/architecture/planner",
-      "status": 200,
-      "final": "https://fabric.dattasable.com/architecture/planner",
-      "type": "text/html; charset=utf-8",
-      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
-      "headings": 1,
-      "ads": 0,
-      "bytes": 88253
+      "bytes": 88249
     },
     {
       "url": "https://fabric.dattasable.com/architecture/onelake",
@@ -3683,7 +3529,37 @@
       "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 88253
+      "bytes": 88249
+    },
+    {
+      "url": "https://fabric.dattasable.com/architecture/planner",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/architecture/planner",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 88249
+    },
+    {
+      "url": "https://fabric.dattasable.com/ai-advisor",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/ai-advisor",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 88249
+    },
+    {
+      "url": "https://fabric.dattasable.com/resources/open-source",
+      "status": 200,
+      "final": "https://fabric.dattasable.com/resources/open-source",
+      "type": "text/html; charset=utf-8",
+      "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformDesign, Size, Cost, and Optimize Microsoft Fabric — All in One Platform | Fabric Master",
+      "headings": 1,
+      "ads": 0,
+      "bytes": 88249
     },
     {
       "url": "https://fabric.dattasable.com/terms",
@@ -3703,7 +3579,8 @@
       "title": "Fabric Master | Microsoft Fabric Engineering, Architecture & FinOps PlatformPrivacy Policy - Fabric Master | Fabric Master",
       "headings": 1,
       "ads": 0,
-      "bytes": 33449
+      "bytes": 33741
     }
-  ]
+  ],
+  "recheckedAt": "2026-10-21T11:07:35.332Z"
 }

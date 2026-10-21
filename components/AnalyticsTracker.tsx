@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { analyticsPath, referrerOrigin } from '@/lib/analytics-url';
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     // Don't track local dev visits in the database to keep logs clean
@@ -15,10 +15,10 @@ export default function AnalyticsTracker() {
 
     const trackView = async () => {
       try {
-        const url = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+        const url = analyticsPath(pathname);
         
         // Don't track admin pages or API routes to keep data clean
-        if (pathname.startsWith('/admin') || pathname.startsWith('/api')) {
+        if (!url) {
           return;
         }
 
@@ -27,7 +27,7 @@ export default function AnalyticsTracker() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             url,
-            referrer: document.referrer || null,
+            referrer: referrerOrigin(document.referrer) || null,
           }),
         });
       } catch (err) {
@@ -42,7 +42,7 @@ export default function AnalyticsTracker() {
     } else {
       setTimeout(trackView, 1000);
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }

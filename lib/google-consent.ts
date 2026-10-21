@@ -13,5 +13,6 @@ export function buildAnalyticsInitialization(id: string) {
     "window.gtag('consent','update',{analytics_storage:'granted'});" +
     "window.gtag('js',new Date());" +
     "window.gtag('config'," + JSON.stringify(id) +
-    ',{allow_google_signals:false,allow_ad_personalization_signals:false});';
+    ',{allow_google_signals:false,allow_ad_personalization_signals:false,' +
+    "page_location:window.location?window.location.origin+window.location.pathname:'',page_referrer:''});";
 }

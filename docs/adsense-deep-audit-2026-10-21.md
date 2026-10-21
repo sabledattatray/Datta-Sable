@@ -39,8 +39,18 @@ For traffic, inspect actual acquisition records and any purchased campaigns with
 
 ## Validation and release status
 
-Main automated suite: 72 passing tests, including the CMP readiness/revocation regression. Both subdomain builds and TypeScript checks passed; Fabric four readiness tests and Excel three readiness tests passed. Main production build and post-release checks are recorded below when complete. `audit-publisher-links.mjs` checks actual destinations; `audit-publisher-assets.mjs` records provenance review entries and file-delivery signatures. Neither audit script transmits file contents to a third-party checker.
+Main automated suite: 73 passing tests, including the CMP readiness/revocation regression. Both subdomain builds and TypeScript checks passed; Fabric four readiness tests and Excel three readiness tests passed. Main production build and post-release checks are recorded below when complete. `audit-publisher-links.mjs` checks actual destinations; `audit-publisher-assets.mjs` records provenance review entries and file-delivery signatures. Neither audit script transmits file contents to a third-party checker.
 
 ### Build and implementation release
 
 The main Next production build completed successfully with network access and generated 327 routes. Fabric implementation commit: `6852bab`; Excel implementation commits: `b7266c1` and `38e9822`. The latter adds a visible independent, simulated marketplace-demo disclosure. Theme palettes were retained. No advertising feature flag, account targeting setting, or pending approval request was changed in this pass.
+
+### Analytics data minimization follow-up
+
+The deeper source review found full query strings in first-party visit tracking and Google's default page-view URL collection. The fix strips queries/fragments, reduces referrers to origins, excludes account/private paths from our explicit tracking, and sanitizes the initial Google Analytics page location/referrer without introducing additional manual page-view events. Advertising purposes remain denied by default. GA account-side enhanced-measurement settings and previously collected history are not audited or certified by this code change. No past analytics records were deleted.
+
+### Final verification
+
+The main production build passed. The complete main suite passed 73 tests; the final simplified initialization was also checked against 18 publisher/privacy regression tests to retain existing page-view behavior while sanitizing the initial URL. Both subdomain deployments succeeded and all 68 route checks passed. Main production checks passed 26/26. After deployment, the follow-up link inventory checked 353 destinations and found no discovered linked 404s; the six remaining 404s are intentionally retired routes with zero discovered incoming links. Five temporary network failures were individually rechecked successfully. The Excel sample page was visually checked at desktop and 390-pixel mobile width; there was no horizontal page overflow.
+
+Rights and historical traffic remain unverified. The AdSense approval decision is still Google's. No new account review was requested and no extra ads were enabled.
