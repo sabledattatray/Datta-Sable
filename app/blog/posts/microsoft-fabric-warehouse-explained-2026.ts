@@ -43,31 +43,6 @@ export const microsoftFabricWarehouseExplained2026Post = {
 
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
 
-<h2 id="toc" style="color: var(--text); font-size: 1.5rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Table of Contents</h2>
-<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
-  <li><a href="#section1" style="color: var(--accent); text-decoration: none;">1. What is Microsoft Fabric Warehouse?</a></li>
-  <li><a href="#section2" style="color: var(--accent); text-decoration: none;">2. How Microsoft Fabric Warehouse Works (Internal Architecture)</a></li>
-  <li><a href="#section3" style="color: var(--accent); text-decoration: none;">3. Core Components Breakdown</a></li>
-  <li><a href="#section4" style="color: var(--accent); text-decoration: none;">4. Warehouse vs Lakehouse: The Definitive Comparison</a></li>
-  <li><a href="#section5" style="color: var(--accent); text-decoration: none;">5. Warehouse vs Synapse Dedicated SQL Pool</a></li>
-  <li><a href="#section6" style="color: var(--accent); text-decoration: none;">6. Warehouse vs Snowflake</a></li>
-  <li><a href="#section7" style="color: var(--accent); text-decoration: none;">7. Warehouse vs Databricks SQL</a></li>
-  <li><a href="#section8" style="color: var(--accent); text-decoration: none;">8. How Queries Execute: Compilation, Cache & Data Movement</a></li>
-  <li><a href="#section9" style="color: var(--accent); text-decoration: none;">9. Performance Optimization: Partitioning, Statistics & V-Order</a></li>
-  <li><a href="#section10" style="color: var(--accent); text-decoration: none;">10. Capacity Planning & SKU Allocation</a></li>
-  <li><a href="#section11" style="color: var(--accent); text-decoration: none;">11. Cost Optimization & Monitoring Budgets</a></li>
-  <li><a href="#section12" style="color: var(--accent); text-decoration: none;">12. Enterprise Security: Workspace Roles, RLS & OLS</a></li>
-  <li><a href="#section13" style="color: var(--accent); text-decoration: none;">13. Monitoring Tools, DMVs & Log Analytics</a></li>
-  <li><a href="#section14" style="color: var(--accent); text-decoration: none;">14. Best Practices: Enterprise Checklist</a></li>
-  <li><a href="#section15" style="color: var(--accent); text-decoration: none;">15. 20 Common Mistakes & How to Fix Them</a></li>
-  <li><a href="#section16" style="color: var(--accent); text-decoration: none;">16. Migration Strategies: Synapse, SQL Server & On-Premises</a></li>
-  <li><a href="#section17" style="color: var(--accent); text-decoration: none;">17. Real Enterprise Architecture Example (Retail Case Study)</a></li>
-  <li><a href="#section18" style="color: var(--accent); text-decoration: none;">18. Frequently Asked Questions (FAQ)</a></li>
-  <li><a href="#section19" style="color: var(--accent); text-decoration: none;">19. Conclusion & Next Steps</a></li>
-</ul>
-
-<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
-
 <h2 id="section1">1. What is Microsoft Fabric Warehouse?</h2>
 <p>The enterprise data warehouse has historically been a monolith. Dedicated compute resources were statically provisioned, and data was stored in proprietary, optimized formats locked inside the database. When Microsoft introduced Azure Synapse Dedicated SQL Pools, they scaled this compute pattern via Massively Parallel Processing (MPP), but storage remained bound to SQL-specific files. <strong>Microsoft Fabric Warehouse</strong> completely rewrites this model. For more details, refer to the <a href="https://learn.microsoft.com/en-us/fabric/data-warehousing/synapse-data-warehouse" target="_blank" rel="noopener noreferrer">official Microsoft Fabric Warehouse documentation</a>.</p>
 

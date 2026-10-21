@@ -36,30 +36,6 @@ export const microsoftFabricSecurityGuide2026Post = {
 
 <hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
 
-<h2 id="toc" style="color: var(--text); font-size: 1.5rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Table of Contents</h2>
-<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
-  <li><a href="#section1" style="color: var(--accent); text-decoration: none;">1. What is Microsoft Fabric Security? (The Shared Responsibility Model)</a></li>
-  <li><a href="#section2" style="color: var(--accent); text-decoration: none;">2. Microsoft Fabric Security Architecture</a></li>
-  <li><a href="#section3" style="color: var(--accent); text-decoration: none;">3. Identity & Authentication (Microsoft Entra ID)</a></li>
-  <li><a href="#section4" style="color: var(--accent); text-decoration: none;">4. Authorization: Workspaces, RBAC, and Item Permissions</a></li>
-  <li><a href="#section5" style="color: var(--accent); text-decoration: none;">5. Microsoft Fabric Private Endpoints Explained</a></li>
-  <li><a href="#section6" style="color: var(--accent); text-decoration: none;">6. Zero Trust in Microsoft Fabric</a></li>
-  <li><a href="#section7" style="color: var(--accent); text-decoration: none;">7. Network Security & Managed Virtual Networks</a></li>
-  <li><a href="#section8" style="color: var(--accent); text-decoration: none;">8. Data Security & Encryption (CMK)</a></li>
-  <li><a href="#section9" style="color: var(--accent); text-decoration: none;">9. OneLake Security & Cross-Workspace Data Access</a></li>
-  <li><a href="#section10" style="color: var(--accent); text-decoration: none;">10. Governance Integration (Microsoft Purview)</a></li>
-  <li><a href="#section11" style="color: var(--accent); text-decoration: none;">11. Monitoring, Auditing, and Threat Detection</a></li>
-  <li><a href="#section12" style="color: var(--accent); text-decoration: none;">12. Compliance (GDPR, HIPAA, SOC, ISO 27001)</a></li>
-  <li><a href="#section13" style="color: var(--accent); text-decoration: none;">13. Enterprise Architecture Example: Global Financial Services</a></li>
-  <li><a href="#section14" style="color: var(--accent); text-decoration: none;">14. Performance vs. Cost Considerations</a></li>
-  <li><a href="#section15" style="color: var(--accent); text-decoration: none;">15. Top 50 Enterprise Security Best Practices Checklist</a></li>
-  <li><a href="#section16" style="color: var(--accent); text-decoration: none;">16. Common Mistakes to Avoid</a></li>
-  <li><a href="#section17" style="color: var(--accent); text-decoration: none;">17. Troubleshooting Security Configurations</a></li>
-  <li><a href="#section18" style="color: var(--accent); text-decoration: none;">18. Frequently Asked Questions (FAQ)</a></li>
-</ul>
-
-<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
-
 <h2 id="section1">1. What is Microsoft Fabric Security?</h2>
 <p>Microsoft Fabric Security encompasses the policies, configurations, technologies, and governance frameworks required to protect data and workloads across the Fabric ecosystem. Because Fabric unifies multiple Azure Data services (Synapse, Data Factory, Power BI, Data Explorer) into a single SaaS product, the security model operates on a <strong>Shared Responsibility Model</strong>.</p>
 

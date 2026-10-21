@@ -9,7 +9,8 @@ function headingSlug(text: string) {
 }
 
 function isContentsTitle(text: string) {
-  return /^(table of contents|contents|on this page|in this article|in this guide)(?:\s|$)/i.test(text.replace(/^[^\p{L}]+/u, '').replace(/\s+/g, ' ').trim());
+  const clean = text.replace(/^[^\p{L}]+/u, '').replace(/\s+/g, ' ').trim();
+  return /^(?:master\s+|article\s+|guide\s+)?(table of contents|contents|on this page|in this article|in this guide)(?:\s|—|-|:|$)/i.test(clean);
 }
 
 // Normalize the rendered copy only. Stored articles and their authored anchors
@@ -27,14 +28,19 @@ export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & {
       const wrapper = $(element);
       // Avoid removing a similarly named container that contains article prose.
       const hasArticleHeadings = wrapper.find('h1,h2,h3').toArray().some(heading => !isContentsTitle($(heading).text()));
-      if (wrapper.find('a[href^="#"]').length && !hasArticleHeadings) wrapper.remove();
+      if (wrapper.find('a[href*="#"]').length && !hasArticleHeadings) wrapper.remove();
     });
     $('h1,h2,h3,h4,h5,h6').each((_, element) => {
       const heading = $(element);
-      if (!isContentsTitle(heading.text())) return;
+      const isTocHeading = isContentsTitle(heading.text()) || heading.attr('id') === 'toc' || heading.attr('id') === 'table-of-contents';
+      if (!isTocHeading) return;
       const next = heading.next();
-      if (next.is('ul,ol,nav') && next.find('a[href^="#"]').length) {
+      if (next.is('ul,ol,nav') && (next.find('a[href*="#"]').length || isTocHeading)) {
         const parent = heading.parent();
+        const prev = heading.prev();
+        if (prev.is('hr')) prev.remove();
+        const afterNext = next.next();
+        if (afterNext.is('hr')) afterNext.remove();
         // Remove only the contents title and its adjacent link list.
         next.remove(); heading.remove();
         if (parent.is('div,nav,section,aside') && !parent.text().trim() && !parent.children().not('hr').length) parent.remove();
@@ -55,7 +61,8 @@ export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & {
       const heading = $(element);
       if (heading.parents('pre,code,script,style,[data-toc-ignore]').length || heading.is('[data-toc-ignore]')) return;
       const text = heading.text().replace(/\s+/g, ' ').trim();
-      if (!text || isContentsTitle(text)) return;
+      const isTocHeading = isContentsTitle(text) || heading.attr('id') === 'toc' || heading.attr('id') === 'table-of-contents';
+      if (!text || isTocHeading) return;
       const original = heading.attr('id');
       const base = original || headingSlug(text);
       let id = base;

@@ -50,26 +50,6 @@ export const pl300VsDp600VsDp700MicrosoftCertificationGuide2026Post = {
   <p><strong>What is the difference between PL-300, DP-600, and DP-700?</strong> In 2026, Microsoft data credentials represent three distinct tiers of the data ecosystem. <strong>PL-300 (Power BI Data Analyst)</strong> evaluates visualization, report design, Power Query data transformation, and fundamental DAX calculations. <strong>DP-600 (Fabric Analytics Engineer)</strong> elevates you into the semantic modeling and lakehouse architecture layer, requiring mastery of Direct Lake mode, OneLake storage, Fabric Warehouses, and Tabular Model Definition Language (TMDL). <strong>DP-700 (Fabric Data Engineer)</strong> tests the foundational data pipeline and storage backbone, focusing heavily on Apache Spark, PySpark transformations, OneLake shortcuts, database mirroring, and enterprise Purview governance.</p>
 </div>
 
-<h2 id="toc" style="color: var(--text); font-size: 1.5rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">Master Table of Contents</h2>
-<ul style="line-height: 1.8; padding-left: 1.5rem; list-style-type: disc; margin-bottom: 2rem;">
-  <li><a href="#section-1" style="color: var(--accent); text-decoration: none;">1. The 2026 Enterprise Context: The Fabric Convergence & The Death of Siloed BI</a></li>
-  <li><a href="#section-2" style="color: var(--accent); text-decoration: none;">2. Executive 30-Second Comparison Matrix</a></li>
-  <li><a href="#section-3" style="color: var(--accent); text-decoration: none;">3. Deep Dive: Exam PL-300 (Microsoft Certified: Power BI Data Analyst Associate)</a></li>
-  <li><a href="#section-4" style="color: var(--accent); text-decoration: none;">4. Deep Dive: Exam DP-600 (Microsoft Certified: Fabric Analytics Engineer Associate)</a></li>
-  <li><a href="#section-5" style="color: var(--accent); text-decoration: none;">5. Deep Dive: Exam DP-700 (Microsoft Certified: Fabric Data Engineer Associate)</a></li>
-  <li><a href="#section-6" style="color: var(--accent); text-decoration: none;">6. Head-to-Head Showdowns: Direct Exam Comparisons</a></li>
-  <li><a href="#section-7" style="color: var(--accent); text-decoration: none;">7. Comprehensive 25-Point Technical Skills Breakdown</a></li>
-  <li><a href="#section-8" style="color: var(--accent); text-decoration: none;">8. Direct Lake Internals, Memory Paging & Fallback Architecture</a></li>
-  <li><a href="#section-9" style="color: var(--accent); text-decoration: none;">9. Apache Spark, Delta Lake & V-Order Optimization Mechanics</a></li>
-  <li><a href="#section-10" style="color: var(--accent); text-decoration: none;">10. Real-World Exam Case Studies: 3 Architectural Scenarios</a></li>
-  <li><a href="#section-11" style="color: var(--accent); text-decoration: none;">11. 2026 Global Compensation & Market Demand Benchmarks</a></li>
-  <li><a href="#section-12" style="color: var(--accent); text-decoration: none;">12. Architectural Decision Tree: Which Certification Should You Target?</a></li>
-  <li><a href="#section-13" style="color: var(--accent); text-decoration: none;">13. The 60-Day First-Attempt Pass Blueprint</a></li>
-  <li><a href="#section-14" style="color: var(--accent); text-decoration: none;">14. Frequently Asked Questions (FAQ)</a></li>
-</ul>
-
-<hr style="border: 0; height: 1px; background: var(--border); margin: 2rem 0;"/>
-
 <h2 id="section-1" style="color: var(--text); font-size: 1.5rem; margin-bottom: 1rem; font-family: Syne, sans-serif;">1. The 2026 Enterprise Context: The Fabric Convergence & The Death of Siloed BI</h2>
 <p>For nearly a decade, the business intelligence landscape operated on clean, isolated fault lines. On one side stood the <strong>BI Developer</strong>, armed with Power BI Desktop, DAX Studio, and Power Query M. Their responsibility ended at the boundary of imported tabular models and scheduled refreshes. On the opposite side stood the <strong>Data Engineer</strong>, residing in Azure Data Factory, Databricks, and Synapse Analytics, orchestrating complex SQL and Spark pipelines to dump data into cloud storage.</p>
 <p>In 2026, that boundary has dissolved entirely. The launch and enterprise adoption of <strong>Microsoft Fabric</strong> has unified storage into a single open format: <strong>OneLake</strong> with Delta Parquet tables. With this unified architecture, reporting layers no longer import data into proprietary VertiPaq files. Instead, semantic models query lakehouses directly at memory-speed through <strong>Direct Lake mode</strong>.</p>

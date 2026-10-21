@@ -100,3 +100,16 @@ test('navigation labels avoid duplicate numbering while preserving meaningful nu
   assert.equal(articleHeadingLabel('3.1 Internal architecture'), 'Internal architecture');
   assert.equal(articleHeadingLabel('2026 Architecture Guide'), '2026 Architecture Guide');
 });
+
+test('removes Master Table of Contents and id="toc" without leaving residual horizontal rules or indexing in sidebar', () => {
+  const content = '<div class="snippet"><p>Intro snippet</p></div><h2 id="toc">Master Table of Contents</h2><ul><li><a href="#section-1">1. The 2026 Enterprise Context</a></li></ul><hr /><h2 id="section-1">1. The 2026 Enterprise Context</h2><p>Article body.</p>';
+  const result = prepare({ content });
+  assert.doesNotMatch(result.content, /Master Table of Contents/);
+  assert.doesNotMatch(result.content, /<hr\s*\/?>/);
+  assert.match(result.content, /Intro snippet/);
+  assert.match(result.content, /Article body\./);
+  assert.equal(result.headings.length, 1);
+  assert.equal(result.headings[0].id, 'section-1');
+  assert.equal(result.headings[0].text, '1. The 2026 Enterprise Context');
+});
+
