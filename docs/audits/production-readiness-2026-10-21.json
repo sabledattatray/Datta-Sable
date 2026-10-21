@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T05:44:29.902Z",
+  "generatedAt": "2026-10-21T06:12:47.595Z",
   "base": "https://dattasable.com",
   "results": [
     {
@@ -8,12 +8,12 @@
       "robots": "noindex, follow"
     },
     {
-      "path": "/knowledge/optimizing-ai-context-windows",
+      "path": "/knowledge/comparisons",
       "passed": true,
       "robots": "noindex, follow"
     },
     {
-      "path": "/knowledge/comparisons",
+      "path": "/knowledge/optimizing-ai-context-windows",
       "passed": true,
       "robots": "noindex, follow"
     },
@@ -48,22 +48,22 @@
       "robots": "noindex, follow"
     },
     {
-      "path": "/knowledge/rfc",
-      "passed": true,
-      "robots": "noindex, follow"
-    },
-    {
       "path": "/knowledge/rfc/002-execution-chains",
       "passed": true,
       "robots": "noindex, follow"
     },
     {
-      "path": "/knowledge/rfc/003-intent-mapping",
+      "path": "/knowledge/rfc",
       "passed": true,
       "robots": "noindex, follow"
     },
     {
       "path": "/knowledge/rfc/001-prompt-hardening",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/rfc/003-intent-mapping",
       "passed": true,
       "robots": "noindex, follow"
     },
@@ -83,17 +83,12 @@
       "robots": "noindex, follow"
     },
     {
-      "path": "/tools",
-      "passed": true,
-      "robots": "noindex, follow"
-    },
-    {
       "path": "/tools/open-mis",
       "passed": true,
       "robots": "noindex, follow"
     },
     {
-      "path": "/infrastructure",
+      "path": "/tools",
       "passed": true,
       "robots": "noindex, follow"
     },
@@ -103,7 +98,7 @@
       "robots": "noindex, follow"
     },
     {
-      "path": "/dashboards/sales-pipeline",
+      "path": "/infrastructure",
       "passed": true,
       "robots": "noindex, follow"
     },
@@ -114,6 +109,11 @@
     },
     {
       "path": "/dashboards/blinkit-sales",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/dashboards/sales-pipeline",
       "passed": true,
       "robots": "noindex, follow"
     },

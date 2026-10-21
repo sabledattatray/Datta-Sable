@@ -100,3 +100,9 @@ The signed-in account shows dattasable.com as Getting ready, ownership verified,
 The European regulations message is published for **biexpert.online**, not dattasable.com. The account's "1 active" badge therefore does not establish consent coverage for this site. Configure and publish an appropriate message for dattasable.com before enabling advertising for visitors subject to Google's consent requirements. This is a consent/advertising readiness item, not evidence of a current rejection. Do not unpublish the existing site's message.
 
 Remaining limitations: no approval can be guaranteed; no media-license or first-hand-experience certification is inferred from code review. Unknown SPA routes retain their pre-existing fallback behavior. No Search Console removals or blanket public AdSense crawler blocks were applied. Noindex controls Search indexing, not access by the AdSense crawler.
+
+### Deployment verification
+
+Pushed implementation commits: main `31f4884`, Fabric `f0cad35`, Excel `45601b6` (includes the static-rendering follow-up). GitHub's Vercel status reports successful deployments for all three. All 68 checked subdomain routes (53 Fabric, 15 Excel) now return HTTP 200, visible main text in initial HTML, primary headings, and canonical/robots metadata matching the built files. The live report is `docs/audits/subdomain-deployment-2026-10-21.json`; rerun with `node scripts/verify-subdomain-deployment.mjs` when the sibling source checkouts are present. The final Excel readiness suite has three passing tests, including a regression preventing hidden Suspense payloads from replacing visible page content. The main production readiness suite passes all 26 checks.
+
+AdSense Policy centre was also inspected and displays "No current issues". This does not mean the pending site review is approved. Permission to create a separate consent message for dattasable.com was requested; account settings remain unchanged pending the user's answer.
