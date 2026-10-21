@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { createRequire } from 'node:module';
 import ts from 'typescript';
 function load(file, stubs = {}) {
  const mod = { exports: {} };
@@ -42,13 +43,17 @@ test('news sitemap uses original publication date, a two-day window and explicit
  assert.doesNotMatch(body, /blog\/(old|tutorial|future|invalid)/);
 });
 test('main sitemap deduplicates real routes and omits invalid or future modification dates', async () => {
- const route = load('app/sitemap.ts', { '@/data/excelProjects': { EXCEL_PROJECTS: [{ slug: 'world-business' }] },
+ const productDetails = load('lib/commerce/product-details.ts', { zod: createRequire(import.meta.url)('zod') });
+ const ready = { id:'ready', slug:'real-product', status:'PUBLISHED', salesEnabled:true, deliveryReady:true, excerpt:'Original resource', resources:[{title:'Real guide'}], updatedAt:new Date() };
+ const route = load('app/sitemap.ts', { '@/lib/commerce/product-details': productDetails, '@/lib/commerce/product-settings': { productDetailsMap: async () => new Map([['ready',productDetails.productDetailsSchema.parse({readiness:'READY_FOR_SALE'})]]) }, '@/lib/prisma': { prisma: { commerceProduct: { findMany: async () => [ready,{...ready,id:'test',slug:'dummy-product',excerpt:'TEST ONLY dummy'}] } } }, '@/data/excelProjects': { EXCEL_PROJECTS: [{ slug: 'world-business' }] },
  '@/lib/blog-posts': { getPublishedBlogPosts: async () => [
  { slug: 'bad-date', updatedAt: 'bad' }, { slug: 'future', updatedAt: new Date(Date.now()+86400000) } ] } });
  assert.equal(route.dynamic, 'force-dynamic');
  const entries = await route.default();
  assert.equal(entries.length, new Set(entries.map(x => x.url)).size);
  assert.ok(entries.some(x => x.url.endsWith('/editorial-policy')));
+ assert.ok(entries.some(x => x.url.endsWith('/products/real-product')));
+ assert.ok(entries.every(x => !x.url.endsWith('/products/dummy-product')));
  assert.ok(entries.filter(x => /blog\/(bad-date|future)$/.test(x.url)).every(x => !('lastModified' in x)));
  assert.ok(entries.every(x => !/\/(p|tools|category|lp)\//.test(x.url)));
 });

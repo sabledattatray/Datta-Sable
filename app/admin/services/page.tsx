@@ -42,8 +42,8 @@ export default function AdminServices() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)' }
-    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)' };
+    ? { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)' }
+    : { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)' };
 
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
@@ -293,7 +293,7 @@ export default function AdminServices() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  style={{ flex: 2, padding: '12px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 11, color: '#fff', fontWeight: 700, fontSize: 14, cursor: saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, opacity: saving ? 0.75 : 1 }}
+                  style={{ flex: 2, padding: '12px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 11, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, opacity: saving ? 0.75 : 1 }}
                 >
                   {saving ? <Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> : <Save size={15} />}
                   {saving ? 'Saving…' : (editing ? 'Update Service' : 'Add Service')}
@@ -315,7 +315,7 @@ export default function AdminServices() {
         </div>
         <button
           onClick={openAdd}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}
         >
           <Plus size={17} /> Add Service
         </button>
@@ -325,7 +325,7 @@ export default function AdminServices() {
       {loading && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 20 }}>
           {[1, 2, 3].map(i => (
-            <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, height: 220, animation: 'pulse 1.6s ease-in-out infinite' }}>
+            <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, height: 220, animation: 'pulse 1.6s ease-in-out infinite' }}>
               <div style={{ width: 48, height: 48, borderRadius: 14, background: css.surface2, marginBottom: 18 }} />
               <div style={{ height: 16, width: '70%', borderRadius: 8, background: css.surface2, marginBottom: 10 }} />
               <div style={{ height: 12, width: '90%', borderRadius: 6, background: css.surface2, marginBottom: 6 }} />
@@ -338,12 +338,12 @@ export default function AdminServices() {
       {/* Empty state */}
       {!loading && services.length === 0 && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 20px', gap: 16 }}>
-          <div style={{ width: 72, height: 72, borderRadius: 20, background: `${css.accent}15`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 72, height: 72, borderRadius: 14, background: `color-mix(in srgb, ${css.accent} 8%, transparent)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Briefcase size={32} color={css.accent} />
           </div>
           <h3 style={{ fontSize: 18, fontWeight: 800, color: css.text, margin: 0 }}>No services yet</h3>
           <p style={{ fontSize: 14, color: css.muted, margin: 0, textAlign: 'center' }}>Add your first service to start building your catalog.</p>
-          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>
+          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>
             <Plus size={17} /> Add First Service
           </button>
         </div>
@@ -355,7 +355,7 @@ export default function AdminServices() {
           {services.map((s, i) => (
             <div
               key={s.id}
-              style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow, display: 'flex', flexDirection: 'column', transition: 'box-shadow 0.2s, transform 0.2s', position: 'relative' }}
+              style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, display: 'flex', flexDirection: 'column', transition: 'box-shadow 0.2s, transform 0.2s', position: 'relative' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = css.hoverShadow; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = css.shadow; }}
             >
@@ -375,7 +375,7 @@ export default function AdminServices() {
                     onClick={() => openEdit(s)}
                     title="Edit service"
                     style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = css.accent; (e.currentTarget as HTMLElement).style.background = `${css.accent}10`; }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = css.accent; (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${css.accent} 6%, transparent)`; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
                   >
                     <Edit2 size={14} />
@@ -396,7 +396,7 @@ export default function AdminServices() {
               <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: '0 0 4px', letterSpacing: '-0.01em' }}>{s.title}</h3>
 
               {s.category && (
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10, fontWeight: 700, color: css.accent, background: `${css.accent}12`, border: `1px solid ${css.accent}25`, padding: '2px 8px', borderRadius: 999, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em', width: 'fit-content' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10, fontWeight: 700, color: css.accent, background: `color-mix(in srgb, ${css.accent} 7%, transparent)`, border: `1px solid color-mix(in srgb, ${css.accent} 15%, transparent)`, padding: '2px 8px', borderRadius: 999, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em', width: 'fit-content' }}>
                   <Tag size={9} /> {s.category}
                 </div>
               )}

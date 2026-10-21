@@ -1,0 +1,1 @@
+export default function Loading() { return <main style={{maxWidth:1120,margin:'120px auto',padding:24}} aria-busy="true" role="status"><h1>Loading digital resources…</h1><p>Preparing the catalog and current product information.</p></main>; }

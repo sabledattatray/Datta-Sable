@@ -54,8 +54,8 @@ export default function AdminMentorship() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { bg: '#000000', surface: '#0d0d0d', border: '#1a1a1a', text: '#f8fafc', muted: '#64748b', accent: '#6366f1', inputBg: '#121212', cardHover: '#161616' }
-    : { bg: '#f8fafc', surface: '#ffffff', border: '#e2e8f0', text: '#0f172a', muted: '#475569', accent: '#4f46e5', inputBg: '#f1f5f9', cardHover: '#f8fafc' };
+    ? { bg: 'var(--bg)', surface: 'var(--surface)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', inputBg: '#121212', cardHover: '#161616' }
+    : { bg: 'var(--bg)', surface: 'var(--surface)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', inputBg: '#f1f5f9', cardHover: '#f8fafc' };
 
   // Core Lists
   const [requests, setRequests] = useState<Request[]>([]);
@@ -361,7 +361,7 @@ export default function AdminMentorship() {
       {activeAdminTab === 'requests' && (
         <div style={{ display: 'grid', gridTemplateColumns: selectedRequest ? '1.7fr 1.3fr' : '1fr', gap: 24 }}>
           {/* List panel */}
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: '0 4px 14px rgba(0,0,0,0.02)' }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: '0 4px 14px rgba(0,0,0,0.02)' }}>
             
             {/* Filters bar */}
             <div style={{ display: 'flex', gap: 14, marginBottom: 20, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -454,7 +454,7 @@ export default function AdminMentorship() {
 
           {/* Edit sidebar drawer */}
           {selectedRequest && (
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, display: 'flex', flexDirection: 'column', gap: 18 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${css.border}`, paddingBottom: 12 }}>
                 <h3 style={{ fontSize: 15, fontWeight: 800, margin: 0 }}>Review: {selectedRequest.fullName}</h3>
                 <button onClick={() => setSelectedRequest(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted }}><X size={16} /></button>
@@ -556,7 +556,7 @@ export default function AdminMentorship() {
 
               <button
                 onClick={handleSaveRequestEdits} disabled={loading}
-                style={{ padding: '10px', background: css.accent, color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}
+                style={{ padding: '10px', background: css.accent, color: 'var(--btn-primary-text)', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}
               >
                 {loading ? 'Saving...' : 'Save All Review Changes'}
               </button>
@@ -569,7 +569,7 @@ export default function AdminMentorship() {
       {activeAdminTab === 'cohorts' && (
         <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.8fr', gap: 30 }}>
           {/* Create form */}
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
             <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 14 }}>Create Cohort Batch</h3>
             <form onSubmit={handleCreateCohort} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
@@ -590,14 +590,14 @@ export default function AdminMentorship() {
                   <option value="COMPLETED">COMPLETED</option>
                 </select>
               </div>
-              <button type="submit" style={{ padding: '10px', background: css.accent, color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: 'pointer' }}>
+              <button type="submit" style={{ padding: '10px', background: css.accent, color: 'var(--btn-primary-text)', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: 'pointer' }}>
                 Create Cohort
               </button>
             </form>
           </div>
 
           {/* List panel */}
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
             <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 14 }}>Active Cohort Batches</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {cohorts.map(c => (
@@ -620,7 +620,7 @@ export default function AdminMentorship() {
       {activeAdminTab === 'resources' && (
         <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 1.7fr', gap: 30 }}>
           {/* Create form */}
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
             <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 14 }}>Upload/Edit Resource File</h3>
             <form onSubmit={handleCreateResource} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
@@ -669,14 +669,14 @@ export default function AdminMentorship() {
                 />
               </div>
 
-              <button type="submit" style={{ padding: '10px', background: css.accent, color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: 'pointer' }}>
+              <button type="submit" style={{ padding: '10px', background: css.accent, color: 'var(--btn-primary-text)', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: 'pointer' }}>
                 Save Resource
               </button>
             </form>
           </div>
 
           {/* List panel */}
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
             <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 14 }}>Active Library Files</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {resources.map(r => (

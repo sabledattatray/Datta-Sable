@@ -21,28 +21,28 @@ export default function AdminCatchAllPage() {
 
   const css = isDark
     ? {
-        bg: '#000000',
-        surface: '#000000',
-        surface2: '#121212',
-        border: '#1a1a1a',
-        text: '#f1f5f9',
-        muted: '#64748b',
-        accent: '#6366f1',
-        accentGlow: 'rgba(99,102,241,0.15)',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
+        accentGlow: 'color-mix(in srgb, var(--accent) 10%, transparent)',
         shadow: '0 4px 24px rgba(0,0,0,0.35)',
-        hoverBg: 'rgba(255,255,255,0.02)',
+        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)',
       }
     : {
-        bg: '#f0f4ff',
-        surface: '#ffffff',
-        surface2: '#f8faff',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
-        accentGlow: 'rgba(79,70,229,0.08)',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
+        accentGlow: 'color-mix(in srgb, var(--accent) 10%, transparent)',
         shadow: '0 4px 24px rgba(0,0,0,0.07)',
-        hoverBg: 'rgba(0,0,0,0.015)',
+        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)',
       };
 
   // State for copied items
@@ -209,13 +209,13 @@ export default function AdminCatchAllPage() {
               </div>
               <button 
                 onClick={() => setUsers([...users, { id: Date.now(), name: 'New Team Member', email: 'new@dattasable.com', role: 'Viewer', status: 'Active', logs: 'Account created just now' }])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}
               >
                 <Plus size={17} /> Add User
               </button>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
@@ -230,7 +230,7 @@ export default function AdminCatchAllPage() {
                       <tr key={u.id} style={{ borderBottom: i < users.length - 1 ? `1px solid ${css.border}` : 'none' }}>
                         <td style={{ padding: '16px 20px' }}>
                           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                            <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 13 }}>
+                            <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--btn-primary-text)', fontWeight: 800, fontSize: 13 }}>
                               {u.name.charAt(0)}
                             </div>
                             <div>
@@ -240,7 +240,7 @@ export default function AdminCatchAllPage() {
                           </div>
                         </td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)', color: css.accent, border: `1px solid ${css.accent}30`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
+                          <span style={{ fontSize: 10, fontWeight: 700, background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)', color: css.accent, border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
                             {u.role}
                           </span>
                         </td>
@@ -283,7 +283,7 @@ export default function AdminCatchAllPage() {
                 { name: 'Moderator', desc: 'Moderate reviews, view leads, and answer support tickets.', users: 1, permissions: ['Read Inbox', 'Write Ticket', 'Approve Testimonial'] },
                 { name: 'Viewer', desc: 'Read-only access to core dashboard stats, logs, and pages.', users: 3, permissions: ['Read Analytics', 'Read CMS'] },
               ].map((role, idx) => (
-                <div key={idx} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow }}>
+                <div key={idx} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                     <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: 0 }}>{role.name}</h3>
                     <span style={{ fontSize: 11, color: css.muted, fontWeight: 600 }}>{role.users} user{role.users !== 1 ? 's' : ''}</span>
@@ -310,7 +310,7 @@ export default function AdminCatchAllPage() {
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure global metadata and profile settings for the brand.</p>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 28, boxShadow: css.shadow }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 28, boxShadow: css.shadow }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Company Name</label>
@@ -333,7 +333,7 @@ export default function AdminCatchAllPage() {
                     ✓ Profile settings saved successfully!
                   </div>
                 )}
-                <button onClick={handleSaveCompanyProfile} style={{ padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', width: 'fit-content' }}>Save Company Profile</button>
+                <button onClick={handleSaveCompanyProfile} style={{ padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 10, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', width: 'fit-content' }}>Save Company Profile</button>
               </div>
             </div>
           </div>
@@ -354,7 +354,7 @@ export default function AdminCatchAllPage() {
                 { city: 'Mumbai', country: 'India', addr: 'Bandra Kurla Complex', status: 'Regional Hub' },
                 { city: 'London', country: 'United Kingdom', addr: 'Canary Wharf', status: 'Support Branch' },
               ].map((b, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow, position: 'relative' }}>
+                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, position: 'relative' }}>
                   <div style={{ position: 'absolute', top: 18, right: 18, fontSize: 9, fontWeight: 700, background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '2px 8px', borderRadius: 999 }}>{b.status}</div>
                   <h3 style={{ fontSize: 17, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{b.city}</h3>
                   <p style={{ fontSize: 12, color: css.muted, margin: '0 0 14px' }}>{b.country}</p>
@@ -383,8 +383,8 @@ export default function AdminCatchAllPage() {
                 { tier: 'Professional Tier', clientsCount: 12, price: '₹14,999/mo', desc: 'Real-time database syncs, multi-user access control, Custom Reports.', featured: true },
                 { tier: 'Enterprise Tier', clientsCount: 3, price: '₹49,999/mo', desc: 'Dedicated cluster, SLA uptime guarantee, custom n8n workflow bridges.' },
               ].map((tier, idx) => (
-                <div key={idx} style={{ background: css.surface, border: tier.featured ? `2px solid ${css.accent}` : `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow, position: 'relative' }}>
-                  {tier.featured && <div style={{ position: 'absolute', top: -11, left: 24, fontSize: 9, fontWeight: 800, background: css.accent, color: '#fff', padding: '2px 10px', borderRadius: 999 }}>POPULAR</div>}
+                <div key={idx} style={{ background: css.surface, border: tier.featured ? `2px solid ${css.accent}` : `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, position: 'relative' }}>
+                  {tier.featured && <div style={{ position: 'absolute', top: -11, left: 24, fontSize: 9, fontWeight: 800, background: css.accent, color: 'var(--btn-primary-text)', padding: '2px 10px', borderRadius: 999 }}>POPULAR</div>}
                   <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{tier.tier}</h3>
                   <div style={{ fontSize: 22, fontWeight: 900, color: css.text, margin: '8px 0' }}>{tier.price}</div>
                   <p style={{ fontSize: 12, color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{tier.desc}</p>
@@ -409,7 +409,7 @@ export default function AdminCatchAllPage() {
                 { type: 'Visa', number: '•••• •••• •••• 4242', exp: '12/28', status: 'Primary Method' },
                 { type: 'Mastercard', number: '•••• •••• •••• 8821', exp: '09/27', status: 'Backup Method' },
               ].map((card, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 22, boxShadow: css.shadow, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
                     <div style={{ width: 48, height: 32, borderRadius: 6, background: css.surface2, border: `1px solid ${css.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: css.text }}>{card.type}</div>
                     <div>
@@ -438,12 +438,12 @@ export default function AdminCatchAllPage() {
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Track and manage active consulting services orders.</p>
               </div>
               <button onClick={() => setOrders([{ id: 'ORD-' + Math.floor(Math.random() * 9000 + 1000), client: 'Priya Verma', service: 'n8n Workflow Automation', price: '₹18,000', status: 'Pending', date: 'Just now' }, ...orders])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Create Order
               </button>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
@@ -484,7 +484,7 @@ export default function AdminCatchAllPage() {
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review payment collection records and billing logs.</p>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
@@ -547,7 +547,7 @@ export default function AdminCatchAllPage() {
               ))}
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow, minHeight: 280 }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, minHeight: 280 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: 0 }}>Realtime Traffic Chart (Last 24 Hours)</h3>
                 <span style={{ fontSize: 10, fontWeight: 800, color: '#10b981', display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} /> Live data syncing</span>
@@ -590,12 +590,12 @@ export default function AdminCatchAllPage() {
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Manage promo codes, discount percentages, and referral campaigns.</p>
               </div>
               <button onClick={() => alert('Simulating Coupon Code Generator')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Create Coupon
               </button>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
@@ -649,14 +649,14 @@ export default function AdminCatchAllPage() {
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Upload and organize assets, images, and files for layouts and posts.</p>
               </div>
               <button onClick={handleMediaUploadClick}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Upload size={15} /> Upload File
               </button>
             </div>
 
             {/* Drag & Drop Simulation area */}
             <div onClick={handleMediaUploadClick}
-              style={{ width: '100%', border: `2px dashed ${css.border}`, borderRadius: 20, background: css.surface, padding: '36px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', marginBottom: 24, transition: 'border-color 0.2s' }}
+              style={{ width: '100%', border: `2px dashed ${css.border}`, borderRadius: 14, background: css.surface, padding: '36px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', marginBottom: 24, transition: 'border-color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = css.accent}
               onMouseLeave={e => e.currentTarget.style.borderColor = css.border}
             >
@@ -667,7 +667,7 @@ export default function AdminCatchAllPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 20 }}>
               {mediaList.map((m) => (
-                <div key={m.id} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow, display: 'flex', flexDirection: 'column', transition: 'transform 0.2s' }}
+                <div key={m.id} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow, display: 'flex', flexDirection: 'column', transition: 'transform 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
                   onMouseLeave={e => e.currentTarget.style.transform = 'none'}
                 >
@@ -723,7 +723,7 @@ export default function AdminCatchAllPage() {
                 { title: 'Two-Factor Authentication (MFA)', desc: 'Add an extra layer of protection by requiring an authenticator code.', status: 'Disabled' },
                 { title: 'Session IP Whitelisting', desc: 'Restrict admin dashboard logging to specific developer IP addresses.', status: 'None' },
               ].map((s, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 22, boxShadow: css.shadow }}>
+                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
                   <h3 style={{ fontSize: 14.5, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{s.title}</h3>
                   <p style={{ fontSize: 12, color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{s.desc}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -752,7 +752,7 @@ export default function AdminCatchAllPage() {
                 { name: 'Nodemailer Payout', desc: 'Handles lead notification mailers and outbound support emails.', status: 'Configured', badgeColor: '#6366f1' },
                 { name: 'n8n Automation', desc: 'Pushes incoming messages and inquiries to Discord/Slack workflows.', status: 'Active', badgeColor: '#10b981' },
               ].map((c, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 22, boxShadow: css.shadow }}>
+                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
                   <h3 style={{ fontSize: 14.5, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{c.name}</h3>
                   <p style={{ fontSize: 12, color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{c.desc}</p>
                   <span style={{ fontSize: 9.5, fontWeight: 700, color: c.badgeColor, background: `${c.badgeColor}0f`, border: `1px solid ${c.badgeColor}25`, padding: '2px 8px', borderRadius: 6, textTransform: 'uppercase' }}>{c.status}</span>
@@ -806,14 +806,14 @@ export default function AdminCatchAllPage() {
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure secure authorization headers for external scripts.</p>
               </div>
               <button onClick={() => setKeys([{ name: 'Sandbox Test Key', key: 'ds_test_' + Math.random().toString(36).substring(2, 15), created: new Date().toISOString().split('T')[0] }, ...keys])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Generate Key
               </button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {keys.map((k, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 22, boxShadow: css.shadow }}>
+                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                     <h3 style={{ fontSize: 14, fontWeight: 800, color: css.text, margin: 0 }}>{k.name}</h3>
                     <span style={{ fontSize: 11, color: css.muted, fontWeight: 500 }}>Generated on {k.created}</span>
@@ -840,12 +840,12 @@ export default function AdminCatchAllPage() {
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure URL endpoints to receive payload notifications on events.</p>
               </div>
               <button onClick={() => alert('Simulating webhook URL creation')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Add Endpoint
               </button>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, boxShadow: css.shadow, textAlign: 'center' }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, textAlign: 'center' }}>
               <Terminal size={32} color={css.muted} style={{ marginBottom: 12, opacity: 0.5 }} />
               <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: '0 0 6px' }}>No active webhook endpoints</h3>
               <p style={{ fontSize: 13, color: css.muted, margin: '0 0 20px' }}>Register an endpoint to receive live event payloads for new leads or reviews.</p>
@@ -868,7 +868,7 @@ export default function AdminCatchAllPage() {
               </div>
             </div>
 
-            <div style={{ background: isDark ? '#050505' : '#1e293b', border: `1px solid ${css.border}`, borderRadius: 20, padding: 20, fontFamily: 'monospace', fontSize: 12.5, color: '#38bdf8', minHeight: 380, maxHeight: '60vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6, boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.5)' }}>
+            <div style={{ background: isDark ? '#050505' : '#1e293b', border: `1px solid ${css.border}`, borderRadius: 14, padding: 20, fontFamily: 'monospace', fontSize: 12.5, color: '#38bdf8', minHeight: 380, maxHeight: '60vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6, boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.5)' }}>
               <div><span style={{ color: '#8b5cf6' }}>[2026-06-11 14:45:00]</span> INFO: Next.js dev server hot-reload triggered successfully.</div>
               <div><span style={{ color: '#8b5cf6' }}>[2026-06-11 14:45:05]</span> PRISMA: Query executed: <span style={{ color: '#10b981' }}>SELECT &quot;public&quot;.&quot;User&quot;.&quot;id&quot;, ... FROM &quot;public&quot;.&quot;User&quot;</span> in 12ms.</div>
               <div><span style={{ color: '#8b5cf6' }}>[2026-06-11 14:45:12]</span> INFO: GET /api/admin/stats 200 - served in 115ms.</div>
@@ -890,12 +890,12 @@ export default function AdminCatchAllPage() {
                 <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Moderate customer requests, server bugs, and contact tickets.</p>
               </div>
               <button onClick={() => setTickets([{ id: 'TCK-' + Math.floor(Math.random() * 800 + 100), subject: 'Automated server alert: High CPU utilization', client: 'System Monitor', status: 'Open', priority: 'High', date: 'Just now' }, ...tickets])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Create Ticket
               </button>
             </div>
 
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
@@ -936,7 +936,7 @@ export default function AdminCatchAllPage() {
           <div style={{ textAlign: 'center', padding: '64px 0' }}>
             <h2 style={{ fontSize: 22, fontWeight: 900, color: css.text, margin: '0 0 10px' }}>Admin Module Placeholder</h2>
             <p style={{ fontSize: 14, color: css.muted, margin: '0 0 24px' }}>Path: <code>/admin/{path}</code></p>
-            <button onClick={() => router.push('/admin')} style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>Back to Dashboard</button>
+            <button onClick={() => router.push('/admin')} style={{ padding: '10px 20px', background: css.accent, color: 'var(--btn-primary-text)', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>Back to Dashboard</button>
           </div>
         );
     }

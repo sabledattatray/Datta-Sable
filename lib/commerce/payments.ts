@@ -89,6 +89,7 @@ export async function reconcilePayment(paymentId: string, expectedOrderId?: stri
     for (const refund of remoteRefunds) {
       if (refund.receipt) await tx.commerceRefund.updateMany({ where: { id: refund.receipt, paymentId: row.id, providerId: null }, data: { providerId: refund.id, status: refund.status.toUpperCase() } });
       await tx.commerceRefund.upsert({ where: { providerId: refund.id }, create: { paymentId: row.id, providerId: refund.id, requestKey: `provider:${refund.id}`, amountMinor: Number(refund.amount), status: refund.status.toUpperCase(), reason: 'Provider reconciliation' }, update: { status: refund.status.toUpperCase() } });
+      if (refund.status === 'processed') await tx.commerceEmail.upsert({ where: { dedupeKey: `refund:${refund.id}` }, create: { orderId: order.id, dedupeKey: `refund:${refund.id}`, kind: 'REFUND', recipient: order.customerEmail }, update: {} });
     }
     const processedRefundTotal = remoteRefunds.filter(r => r.status === 'processed').reduce((total, r) => total + Number(r.amount), 0);
     const fullRefund = processedRefundTotal >= order.totalMinor || (payment.status === 'refunded' && Number(payment.amount_refunded) >= order.totalMinor);

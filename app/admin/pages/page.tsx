@@ -218,29 +218,29 @@ export default function PagesManager() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { 
-        bg: '#000000', 
-        surface: '#000000', 
-        surface2: '#121212', 
-        border: '#1a1a1a', 
-        text: '#f1f5f9', 
-        muted: '#64748b', 
-        accent: '#6366f1', 
-        shadow: '0 4px 24px rgba(0,0,0,0.35)', 
-        hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', 
-        hoverBg: 'rgba(255,255,255,0.02)' 
+    ? {
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
+        shadow: '0 4px 24px rgba(0,0,0,0.35)',
+        hoverShadow: '0 8px 32px rgba(0,0,0,0.5)',
+        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)'
       }
-    : { 
-        bg: '#f0f4ff', 
-        surface: '#ffffff', 
-        surface2: '#f8faff', 
-        border: '#e2e8f0', 
-        text: '#0f172a', 
-        muted: '#64748b', 
-        accent: '#4f46e5', 
-        shadow: '0 4px 24px rgba(0,0,0,0.07)', 
-        hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', 
-        hoverBg: 'rgba(0,0,0,0.015)' 
+    : {
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
+        shadow: '0 4px 24px rgba(0,0,0,0.07)',
+        hoverShadow: '0 8px 32px rgba(0,0,0,0.12)',
+        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)'
       };
 
   const [pages, setPages] = useState<any[]>([]);
@@ -445,7 +445,7 @@ export default function PagesManager() {
           </div>
           <Link 
             href="/admin/pages/editor" 
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40`, textDecoration: 'none', whiteSpace: 'nowrap' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`, textDecoration: 'none', whiteSpace: 'nowrap' }}
           >
             <Plus size={17} /> Add Page
           </Link>
@@ -471,7 +471,7 @@ export default function PagesManager() {
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '64px', color: css.muted, fontSize: 14, fontWeight: 600 }}>Loading custom pages...</div>
       ) : (
-        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
@@ -599,7 +599,7 @@ export default function PagesManager() {
                             href={`/admin/pages/editor?id=${page.id}`}
                             title="Edit"
                             style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = `${css.accent}50`; (e.currentTarget as HTMLElement).style.background = `${css.accent}08`; }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = `color-mix(in srgb, ${css.accent} 31%, transparent)`; (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${css.accent} 3%, transparent)`; }}
                             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
                           >
                             <Edit2 size={14} />

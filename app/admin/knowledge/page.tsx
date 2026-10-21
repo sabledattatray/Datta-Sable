@@ -18,22 +18,22 @@ export default function KnowledgeGraphPage() {
 
   const css = isDark
     ? {
-        bg: '#000000',
-        card: '#0a0a0a',
-        surface: '#121212',
-        border: '#1f1f1f',
-        text: '#f8fafc',
-        muted: '#64748b',
-        accent: '#6366f1',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
       }
     : {
-        bg: '#f8fafc',
-        card: '#ffffff',
-        surface: '#f1f5f9',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
       };
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function KnowledgeGraphPage() {
           </p>
         </div>
 
-        <Link href="/admin/topic-authority" style={{ background: css.accent, color: '#fff', padding: '10px 18px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <Link href="/admin/topic-authority" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '10px 18px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
           <Activity size={14} />
           <span>Interactive SVG Node Map</span>
         </Link>
@@ -91,7 +91,7 @@ export default function KnowledgeGraphPage() {
       </div>
 
       {/* ── CLUSTER AUTHORITY PROGRESS BARS ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, marginBottom: 32 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, marginBottom: 32 }}>
         <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 20px', display: 'flex', alignItems: 'center', gap: 8 }}>
           <Zap size={18} style={{ color: '#f59e0b' }} />
           <span>Topic Cluster Completion Breakdown</span>
@@ -124,7 +124,7 @@ export default function KnowledgeGraphPage() {
       </div>
 
       {/* ── ACTIONABLE CONTENT GAP RECOMMENDER ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
         <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
           <Sparkles size={18} style={{ color: css.accent }} />
           <span>Recommended Articles to Close Content Gaps</span>
@@ -155,7 +155,7 @@ export default function KnowledgeGraphPage() {
                 <div style={{ fontSize: 15, fontWeight: 700, color: css.text, marginBottom: 4 }}>{s.title}</div>
                 <div style={{ fontSize: 12, color: css.muted }}>Target Cluster: <strong style={{ color: css.text }}>{s.topicCluster}</strong> • Estimated Impact: <strong style={{ color: '#10b981' }}>{s.trafficImpact}</strong></div>
               </div>
-              <Link href="/admin/editor" style={{ background: css.accent, color: '#fff', padding: '8px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, textDecoration: 'none' }}>
+              <Link href="/admin/editor" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '8px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, textDecoration: 'none' }}>
                 Write Article
               </Link>
             </div>

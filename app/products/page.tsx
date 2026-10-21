@@ -4,107 +4,72 @@ import { prisma } from '@/lib/prisma';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MarketplaceExplorer, { SerializedProduct } from '@/components/commerce/MarketplaceExplorer';
-import { PRODUCT_CATEGORIES } from '@/lib/commerce/catalog';
+import { categoryCounts as countCategories } from '@/lib/commerce/discovery';
+import { productDetailsMap } from '@/lib/commerce/product-settings';
+import { defaultProductDetails, productReadiness, safeJsonLd } from '@/lib/commerce/product-details';
 import styles from '@/components/commerce/Marketplace.module.css';
-import { 
-  Sparkles, ArrowRight, ShieldCheck, FileCheck, CreditCard, 
+import {
+  ArrowRight, FileCheck, CreditCard,
   DownloadCloud, BookOpen, ArrowUpRight, FolderHeart
 } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Digital Products & Practical Learning Resources | Datta Sable',
-  description: 'Original Microsoft Fabric study packages, Power BI dashboards, SQL analytics templates, and automated tools for data professionals.',
+  title: 'Digital Products & Practical Learning Resources',
+  description: 'Browse published digital resources and clearly labeled test previews from Datta Sable. Learn what is available and what is still in preparation.',
   alternates: {
     canonical: 'https://dattasable.com/products',
   },
   openGraph: {
     title: 'Digital Products & Practical Learning Resources | Datta Sable',
-    description: 'Practical data engineering roadmaps, analytics dashboards, and professional automation tools.',
+    description: 'Published digital resources and transparent test previews for data professionals.',
     url: 'https://dattasable.com/products',
     siteName: 'Datta Sable',
     locale: 'en_US',
     type: 'website',
+    images: ['/products/opengraph-image'],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['/products/opengraph-image'],
     title: 'Digital Products & Practical Learning Resources | Datta Sable',
-    description: 'Practical data engineering roadmaps, analytics dashboards, and professional automation tools.',
+    description: 'Published digital resources and transparent test previews for data professionals.',
     creator: '@sabledattatray',
   },
 };
 
 export default async function ProductsPage() {
-  // Query published products safely
-  let rawProducts: Awaited<ReturnType<typeof prisma.commerceProduct.findMany>> = [];
+  let unavailable = false;
+  let serializedProducts: SerializedProduct[] = [];
   let publishedArticles: Array<{ slug: string; title: string; category: string; excerpt: string; readTime: number }> = [];
-
   try {
-    const [prods, posts] = await Promise.all([
-      prisma.commerceProduct.findMany({
-        where: { status: 'PUBLISHED' },
-        orderBy: { createdAt: 'desc' },
-      }),
-      prisma.post.findMany({
-        where: { published: true },
-        select: { slug: true, title: true, category: true, excerpt: true, readTime: true },
-        take: 3,
-        orderBy: { createdAt: 'desc' },
-      }),
-    ]);
-    rawProducts = prods;
-    publishedArticles = posts;
-  } catch (error) {
-    console.error('Failed to load store data:', error);
-  }
-
-  // Compute actual published category counts
-  const categoryCounts: Record<string, number> = {};
-  PRODUCT_CATEGORIES.forEach(cat => {
-    categoryCounts[cat.slug] = 0;
-  });
-
-  const serializedProducts: SerializedProduct[] = rawProducts.map(p => {
-    // Map to categories
-    PRODUCT_CATEGORIES.forEach(cat => {
-      if (
-        p.category.toLowerCase().includes(cat.title.toLowerCase()) ||
-        p.category.toLowerCase().includes(cat.id.toLowerCase()) ||
-        (cat.id === 'certifications' && (p.category.toLowerCase().includes('fabric') || p.category.toLowerCase().includes('certification')))
-      ) {
-        categoryCounts[cat.slug] = (categoryCounts[cat.slug] || 0) + 1;
-      }
-    });
-
-    return {
-      id: p.id,
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      category: p.category,
-      image: p.image,
-      priceMinor: p.priceMinor,
-      currency: p.currency,
-      status: p.status,
-      salesEnabled: p.salesEnabled,
-      deliveryReady: p.deliveryReady,
-      features: p.features,
-      includedResources: p.includedResources,
-      createdAt: p.createdAt.toISOString(),
-    };
-  });
+    const raw = await prisma.commerceProduct.findMany({ where: { status: 'PUBLISHED' }, select: { id:true, slug:true, title:true, excerpt:true, category:true, image:true, priceMinor:true, currency:true, status:true, salesEnabled:true, deliveryReady:true, createdAt:true, resources: { where: { active: true }, select: { title: true } } }, orderBy: { createdAt: 'desc' } });
+    const settings = await productDetailsMap(raw.map(p => p.id));
+    serializedProducts = raw.map(p => { const details = settings.get(p.id) || defaultProductDetails(); return {
+      id: p.id, slug: p.slug, title: p.title, excerpt: p.excerpt, category: p.category, image: p.image,
+      priceMinor: p.priceMinor, currency: p.currency, status: p.status, createdAt: p.createdAt.toISOString(),
+      technologies: details.technologies.length ? details.technologies : [p.category], readiness: productReadiness(p,details),
+    }; });
+  } catch { unavailable = true; console.error('Store catalog read failed.'); }
+  // Article availability must not determine whether products can be loaded.
+  try {
+    const topics = [...new Set(serializedProducts.flatMap(p => p.technologies))].slice(0, 8);
+    if (topics.length) publishedArticles = await prisma.post.findMany({ where: { published: true, OR: topics.flatMap(topic => [{ title: { contains: topic, mode: 'insensitive' as const } }, { category: { contains: topic, mode: 'insensitive' as const } }]) }, select: { slug: true, title: true, category: true, excerpt: true, readTime: true }, take: 3, orderBy: { createdAt: 'desc' } });
+  } catch { console.error('Store educational links unavailable.'); }
+  const categoryCounts = countCategories(serializedProducts);
+  const featured = serializedProducts[0];
 
   // Schema.org structured data for the catalog
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Digital Products & Practical Learning Resources',
-    description: 'Original Microsoft Fabric study roadmaps, Power BI dashboards, and automation templates by Datta Sable.',
+    description: 'Published digital resources and clearly labeled test previews by Datta Sable.',
     url: 'https://dattasable.com/products',
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: serializedProducts.map((p, index) => ({
+      itemListElement: serializedProducts.filter(p => p.readiness === 'READY_FOR_SALE').map((p, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         url: `https://dattasable.com/products/${p.slug}`,
@@ -144,6 +109,7 @@ export default async function ProductsPage() {
               Hero Section
               ---------------------------------------------------------------- */}
           <section className={styles.hero} aria-labelledby="store-hero-heading">
+            <div className={styles.heroLayout}><div className={styles.heroCopy}>
             <div className={styles.eyebrow}>
               <span className={styles.eyebrowPulse} />
               PROFESSIONAL DIGITAL RESOURCES
@@ -155,7 +121,7 @@ export default async function ProductsPage() {
             </h1>
 
             <p className={styles.heroSubtitle}>
-              Explore original learning resources, analytics templates, dashboards, and practical tools designed to help data professionals learn faster and work smarter.
+              Discover independent resources for working with data. Test previews are clearly labeled; only listed, verified deliverables are included.
             </p>
 
             <div className={styles.heroActions}>
@@ -167,19 +133,27 @@ export default async function ProductsPage() {
                 View My Portfolio
               </Link>
             </div>
+            <div className={styles.heroFootnote}><span>INDEPENDENT BY DESIGN</span><span>MADE FOR DATA PROFESSIONALS</span></div>
+            </div><aside className={styles.resourceDesk} aria-label="Collection preview">
+              <div className={styles.deskGrid} aria-hidden="true" />
+              <div className={styles.deskHeading}><span>THE RESOURCE DESK</span><BookOpen size={17}/></div>
+              <div className={styles.paperBack} aria-hidden="true"/><div className={styles.paperMid} aria-hidden="true"/>
+              <div className={styles.paperFront}><div className={styles.paperLabel}><span>DATTA SABLE / FIELD NOTES</span><ArrowUpRight size={18}/></div><div className={styles.paperArtwork} aria-hidden="true"><span/><span/><span/><i/></div><span className={styles.paperCategory}>{featured?.category || 'Independent resources'}</span><h2>{featured?.title || 'Your next chapter starts here.'}</h2><div className={styles.paperBottom}><span>{featured?.readiness === 'TEST_ONLY' ? 'TEST PREVIEW · DUMMY FILE' : featured ? 'EXPLORE THE COLLECTION' : 'IN PREPARATION'}</span><BookOpen size={17}/></div></div>
+              <div className={styles.deskFooter}><span>Thoughtfully structured.<br/>Clearly documented.</span>{featured && <Link href={'/products/'+featured.slug} aria-label={'Explore '+featured.title}><ArrowUpRight size={20}/></Link>}</div>
+            </aside></div>
           </section>
 
           {/* ----------------------------------------------------------------
               Trust & Value Pillars (4 Genuine Benefits)
               ---------------------------------------------------------------- */}
-          <section className={styles.trustGrid} aria-label="Platform commitments">
+          <section className={styles.trustGrid} aria-labelledby="store-commitments"><h2 id="store-commitments" className="sr-only">Store commitments</h2>
             <div className={styles.trustCard}>
               <div className={styles.trustIcon}>
                 <FileCheck size={20} />
               </div>
               <div className={styles.trustInfo}>
-                <h4>Practical Learning</h4>
-                <p>Engineered around realistic data engineering workloads and production scenarios.</p>
+                <h3>Practical Learning</h3>
+                <p>Review each product’s published contents before deciding whether it fits your needs.</p>
               </div>
             </div>
 
@@ -188,8 +162,8 @@ export default async function ProductsPage() {
                 <BookOpen size={20} />
               </div>
               <div className={styles.trustInfo}>
-                <h4>Clear Documentation</h4>
-                <p>Structured roadmaps, topic-wise study notes, and hands-on implementation checklists.</p>
+                <h3>Clear Documentation</h3>
+                <p>File formats, requirements and delivery information appear on each product page.</p>
               </div>
             </div>
 
@@ -198,8 +172,8 @@ export default async function ProductsPage() {
                 <CreditCard size={20} />
               </div>
               <div className={styles.trustInfo}>
-                <h4>Secure Checkout</h4>
-                <p>Processed through trusted payment methods with verified signature authentication.</p>
+                <h3>Secure Checkout</h3>
+                <p>Test payments are verified on the server. Live payments are not enabled.</p>
               </div>
             </div>
 
@@ -208,7 +182,7 @@ export default async function ProductsPage() {
                 <DownloadCloud size={20} />
               </div>
               <div className={styles.trustInfo}>
-                <h4>Digital Delivery</h4>
+                <h3>Digital Delivery</h3>
                 <p>Direct download access via your account library for eligible, ready resources.</p>
               </div>
             </div>
@@ -217,9 +191,10 @@ export default async function ProductsPage() {
           {/* ----------------------------------------------------------------
               Marketplace Interactive Explorer (Categories, Search, Grid)
               ---------------------------------------------------------------- */}
-          <MarketplaceExplorer 
-            initialProducts={serializedProducts} 
-            categoryCounts={categoryCounts} 
+          <MarketplaceExplorer
+            initialProducts={serializedProducts}
+            categoryCounts={categoryCounts}
+            unavailable={unavailable}
           />
 
           {/* ----------------------------------------------------------------
@@ -247,9 +222,9 @@ export default async function ProductsPage() {
 
               <div className={styles.educationalGrid}>
                 {publishedArticles.map(article => (
-                  <Link 
-                    key={article.slug} 
-                    href={`/blog/${article.slug}`} 
+                  <Link
+                    key={article.slug}
+                    href={`/blog/${article.slug}`}
                     className={styles.articleCard}
                   >
                     <span className={styles.articleCategory}>{article.category}</span>
@@ -288,7 +263,7 @@ export default async function ProductsPage() {
       {/* Structured Data Script */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </>
   );

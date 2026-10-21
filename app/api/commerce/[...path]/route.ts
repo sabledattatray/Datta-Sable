@@ -1,12 +1,14 @@
 import { after, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
-import { put, issueSignedToken, presignUrl } from '@vercel/blob';
+import { put, head, issueSignedToken, presignUrl } from '@vercel/blob';
 import { prisma } from '@/lib/prisma';
 import { logAudit } from '@/lib/security';
 import { customer, ownedOrder, sameOrigin, workerAuth } from '@/lib/commerce/access';
 import { jsonBody, errorResponse } from '@/lib/commerce/http';
-import { paymentConfig, provider, providerCall } from '@/lib/commerce/config';
+import { paymentConfig, provider, providerCall, checkoutConfigurationChecks } from '@/lib/commerce/config';
+import { productDetailsSchema, defaultProductDetails } from '@/lib/commerce/product-details';
+import { productDetailsMap, productSettingKey } from '@/lib/commerce/product-settings';
 import { CommerceError, dp700Draft, productInput, validSignature, resourceFormat } from '@/lib/commerce/shared';
 import { initiate, verifyCallback, reconcileOrder, transaction } from '@/lib/commerce/payments';
 import { processCommerceJobs } from '@/lib/commerce/jobs';
@@ -33,11 +35,16 @@ export async function GET(req: Request, context: Context) {
       if (!resource) throw new CommerceError('Download not available.', 404);
       const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
       if (!token) throw new CommerceError('Private storage is not configured.', 503);
+      if (!/^products\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+$/.test(resource.pathname) || resource.pathname.includes('..')) throw new CommerceError('Download not available.', 404);
+      const key = `download:${user.id}:${Math.floor(Date.now() / 60000)}`;
+      const quota = await prisma.commerceLimit.upsert({ where: { key }, create: { key, expiresAt: new Date(Date.now() + 120000) }, update: { count: { increment: 1 } } });
+      if (quota.count > 20) throw new CommerceError('Too many download requests. Please wait a minute.', 429);
+      try { await head(resource.pathname, { token }); } catch { throw new CommerceError('This file is temporarily unavailable. Please try again later or contact orders@dattasable.com.', 503); }
       const validUntil = Date.now() + 120000;
       const signed = await issueSignedToken({ token, pathname: resource.pathname, operations: ['get'], validUntil });
       const { presignedUrl } = await presignUrl(signed, { access: 'private', operation: 'get', pathname: resource.pathname, validUntil });
       await prisma.commerceDownload.create({ data: { resourceId: resource.id, userId: user.id } });
-      return new NextResponse(null, { status: 303, headers: { Location: presignedUrl, 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer' } });
+      return new NextResponse(null, { status: 303, headers: { Location: presignedUrl, 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer', 'X-Robots-Tag': 'noindex, nofollow' } });
     }
     if (path.join('/') === 'admin') {
       await customer(true);
@@ -61,7 +68,9 @@ export async function GET(req: Request, context: Context) {
       const paymentCounts = await prisma.commercePayment.groupBy({ by: ['status'], _count: true });
       const refundTotals = await prisma.commerceRefund.findMany({ where: { status: 'PROCESSED' }, select: { amountMinor: true, payment: { select: { currency: true } } } });
       if (emails.some(e => ['PENDING', 'RETRY', 'SENDING'].includes(e.status))) kick();
-      return ok({ products, orders, events, emails, refunds, orderCount, totals, refundTotals, paymentCounts, testMode: true });
+      const details = await productDetailsMap(products.map(p => p.id));
+      const publishedPolicies = await prisma.page.count({ where: { slug: { in: ['refund-policy', 'delivery-policy'] }, published: true } });
+      return ok({ products: products.map(p => ({ ...p, details: details.get(p.id) || defaultProductDetails() })), orders, events, emails, refunds, orderCount, totals, refundTotals, paymentCounts, testMode: true, configurationChecks: [...checkoutConfigurationChecks(), { key: 'PUBLISHED_POLICIES', label: 'Both purchase policies published', ready: publishedPolicies === 2 }] });
     }
     throw new CommerceError('Not found.', 404);
   } catch (error) { return errorResponse(error); }
@@ -107,12 +116,13 @@ export async function POST(req: Request, context: Context) {
       if (!token) throw new CommerceError('Private Blob storage is not configured.', 503);
       const form = await req.formData(), file = form.get('file');
       const productId = z.string().min(1).parse(form.get('productId'));
+      const title = z.string().trim().min(1).max(180).parse(form.get('title'));
       if (!(file instanceof File) || file.size < 5 || file.size > 4 * 1024 * 1024) throw new CommerceError('Upload a resource of up to 4 MB.');
       if (!(await prisma.commerceProduct.findUnique({ where: { id: productId } }))) throw new CommerceError('Product not found.', 404);
       const bytes = Buffer.from(await file.arrayBuffer());
       const format = resourceFormat(file.name, bytes);
       const blob = await put(`products/${productId}/${randomUUID()}.${format.extension}`, bytes, { access: 'private', token, contentType: format.contentType, addRandomSuffix: false });
-      const resource = await prisma.commerceResource.create({ data: { productId, title: z.string().min(1).max(180).parse(form.get('title')), pathname: blob.pathname } });
+      const resource = await prisma.commerceResource.create({ data: { productId, title, pathname: blob.pathname } });
       await logAudit({ userId: user.id, action: 'COMMERCE_RESOURCE_UPLOAD', status: 'SUCCESS', details: resource.id });
       return ok({ id: resource.id });
     }
@@ -122,9 +132,23 @@ export async function POST(req: Request, context: Context) {
     let result: unknown = { success: true };
     if (action === 'product') {
       const data = productInput.parse(body.product), id = z.string().optional().parse(body.id);
+      if (id) {
+        const existingProduct = await prisma.commerceProduct.findUniqueOrThrow({ where: { id }, select: { slug: true } });
+        if (existingProduct.slug !== data.slug) throw new CommerceError('Existing product URLs are preserved. Create a new draft instead of changing this slug.');
+      }
+      const detailsInput = (body.product as Record<string, unknown>).details;
+      const details = detailsInput === undefined && id ? (await productDetailsMap([id])).get(id) || defaultProductDetails() : productDetailsSchema.parse(detailsInput || {});
       if (data.salesEnabled && (data.status !== 'PUBLISHED' || !data.deliveryReady)) throw new CommerceError('Sales require a published, ready product.');
       if (data.salesEnabled && (!id || !await prisma.commerceResource.count({ where: { productId: id, active: true } }))) throw new CommerceError('Upload actual resources before enabling sales.');
-      result = id ? await prisma.commerceProduct.update({ where: { id }, data }) : await prisma.commerceProduct.create({ data });
+      if (details.readiness === 'READY_FOR_SALE') {
+        const resources = id ? await prisma.commerceResource.findMany({ where: { productId: id, active: true }, select: { title: true } }) : [];
+        if (!resources.length || resources.some(r => /test[ -]only|dummy/i.test(r.title)) || /test[ -]only|dummy/i.test(data.excerpt) || !details.license || !details.version || !data.deliveryReady) throw new CommerceError('Commercial readiness requires actual non-dummy files, a version, license and confirmed delivery.');
+      }
+      result = await transaction(async tx => {
+        const product = id ? await tx.commerceProduct.update({ where: { id }, data }) : await tx.commerceProduct.create({ data });
+        await tx.systemSetting.upsert({ where: { key: productSettingKey(product.id) }, create: { key: productSettingKey(product.id), value: JSON.stringify(details) }, update: { value: JSON.stringify(details) } });
+        return { id: product.id };
+      });
     }
     if (action === 'seed') result = await prisma.commerceProduct.upsert({ where: { slug: dp700Draft.slug }, create: dp700Draft, update: {} });
     if (action === 'resource') {
@@ -140,7 +164,7 @@ export async function POST(req: Request, context: Context) {
       const job = await prisma.commerceEmail.findUniqueOrThrow({ where: { id: input.id } });
       if (['PENDING', 'RETRY', 'SENDING'].includes(job.status)) throw new CommerceError('This email is already queued.', 409);
       // A deliberate resend is a new audited delivery, never a reset of an accepted receipt.
-      await prisma.commerceEmail.create({ data: { orderId: job.orderId, dedupeKey: `resend:${randomUUID()}`, kind: job.kind, recipient: job.recipient } }); kick();
+      await prisma.commerceEmail.create({ data: { orderId: job.orderId, dedupeKey: job.kind === 'REFUND' ? `${job.dedupeKey}:resend:${randomUUID()}` : `resend:${randomUUID()}`, kind: job.kind, recipient: job.recipient } }); kick();
     }
     if (action === 'refund') {
       paymentConfig();

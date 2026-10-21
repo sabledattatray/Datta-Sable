@@ -18,22 +18,22 @@ export default function CustomReportsPage() {
 
   const css = isDark
     ? {
-        bg: '#000000',
-        card: '#0a0a0a',
-        surface: '#121212',
-        border: '#1f1f1f',
-        text: '#f8fafc',
-        muted: '#64748b',
-        accent: '#6366f1',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
       }
     : {
-        bg: '#f8fafc',
-        card: '#ffffff',
-        surface: '#f1f5f9',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
       };
 
   const handleExport = (reportName: string, format: string) => {
@@ -84,7 +84,7 @@ export default function CustomReportsPage() {
       )}
 
       {/* ── DATE RANGE & FILTER CONTROLS ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 20, marginBottom: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 20, marginBottom: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Calendar size={18} style={{ color: css.accent }} />
           <span style={{ fontSize: 14, fontWeight: 700 }}>Select Time Period:</span>
@@ -140,7 +140,7 @@ export default function CustomReportsPage() {
             format: 'PDF Summary',
           },
         ].map((report, i) => (
-          <div key={i} style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div key={i} style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <div style={{ fontSize: 16, fontWeight: 800, color: css.text, marginBottom: 8 }}>{report.name}</div>
               <div style={{ fontSize: 13, color: css.muted, marginBottom: 20, lineHeight: 1.6 }}>{report.desc}</div>
@@ -152,7 +152,7 @@ export default function CustomReportsPage() {
                 style={{
                   flex: 1,
                   background: css.accent,
-                  color: '#ffffff',
+                  color: 'var(--btn-primary-text)',
                   border: 'none',
                   borderRadius: 10,
                   padding: '10px 14px',

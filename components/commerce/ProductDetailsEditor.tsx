@@ -1,0 +1,13 @@
+'use client';
+import { defaultProductDetails, type ProductDetails } from '@/lib/commerce/product-details';
+export default function ProductDetailsEditor({ value, onChange }: { value?: ProductDetails; onChange: (details: ProductDetails) => void }) {
+  const details = value || defaultProductDetails();
+  const update = (patch: Partial<ProductDetails>) => onChange({ ...details, ...patch });
+  return <fieldset><legend>Readiness and verified product information</legend>
+    <p>Only describe files and rights you have verified. Test delivery does not mean the advertised course is commercially ready. Live checkout remains blocked.</p>
+    <label>Commercial readiness<select value={details.readiness} onChange={e => update({ readiness: e.target.value as ProductDetails['readiness'] })}><option value="TEST_ONLY">Test only — dummy or test files</option><option value="COMING_SOON">Coming soon — no commercial offer</option><option value="READY_FOR_SALE">Ready for sale — verified real deliverables</option></select></label>
+    {(['productType', 'version', 'license', 'updatePolicy', 'previewUrl'] as const).map(key => <label key={key}>{({ productType: 'Product type', version: 'Verified version', license: 'Permitted usage / license', updatePolicy: 'Update policy (no promises unless confirmed)', previewUrl: 'Authorized public sample URL (never a paid file)' })[key]}<input value={details[key]} onChange={e => update({ [key]: e.target.value })} /></label>)}
+    {(['technologies', 'prerequisites', 'audience', 'outcomes', 'gallery'] as const).map(key => <label key={key}>{({ technologies: 'Technology tags', prerequisites: 'Requirements', audience: 'Intended audience', outcomes: 'Outcomes supported by actual contents', gallery: 'Public gallery image URLs' })[key]} — one per line<textarea value={details[key].join('\n')} onChange={e => update({ [key]: e.target.value.split('\n').filter(Boolean) })} /></label>)}
+    <h3>Product-specific questions</h3>{details.faqs.map((faq,i) => <div key={i}><label>Question {i+1}<input value={faq.question} onChange={e => update({ faqs: details.faqs.map((f,j) => i===j ? { ...f, question:e.target.value } : f) })} /></label><label>Answer<textarea value={faq.answer} onChange={e => update({ faqs: details.faqs.map((f,j) => i===j ? { ...f, answer:e.target.value } : f) })} /></label><button type="button" onClick={() => update({ faqs: details.faqs.filter((_,j) => i!==j) })}>Remove question</button></div>)}<button type="button" disabled={details.faqs.length >= 12} onClick={() => update({ faqs: [...details.faqs,{ question:'',answer:'' }] })}>Add question</button>
+  </fieldset>;
+}

@@ -1,0 +1,2 @@
+'use client';
+export default function ErrorPage({reset}:{reset:()=>void}) { return <main style={{maxWidth:900,margin:'120px auto',padding:24}}><h1>Resources are temporarily unavailable.</h1><p role="alert">We couldn’t load this page. Existing purchases remain associated with your account.</p><button onClick={reset}>Try again</button><p><a href="/account/purchases">My purchases</a> · <a href="mailto:orders@dattasable.com">Contact support</a></p></main>; }

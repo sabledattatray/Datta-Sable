@@ -11,23 +11,23 @@ export default function AdminSettingsPage() {
 
   const css = isDark
     ? {
-        bg: '#000000',
-        surface: '#0a0a0a',
-        surface2: '#121212',
-        border: '#1a1a1a',
-        text: '#f1f5f9',
-        muted: '#64748b',
-        accent: '#6366f1',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
         shadow: '0 4px 24px rgba(0,0,0,0.35)',
       }
     : {
-        bg: '#f8fafc',
-        surface: '#ffffff',
-        surface2: '#f1f5f9',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
         shadow: '0 4px 24px rgba(0,0,0,0.07)',
       };
 
@@ -106,7 +106,7 @@ export default function AdminSettingsPage() {
       <div style={{ maxWidth: 640, display: 'flex', flexDirection: 'column', gap: 28 }}>
         
         {/* ── 2FA MFA SECURITY CARD ── */}
-        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, boxShadow: css.shadow, overflow: 'hidden' }}>
+        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, boxShadow: css.shadow, overflow: 'hidden' }}>
           <div style={{ padding: '24px 28px', borderBottom: `1px solid ${css.border}`, display: 'flex', alignItems: 'center', gap: 14 }}>
             <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg, #10b981, #059669)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(16,185,129,0.3)', flexShrink: 0 }}>
               <ShieldCheck size={22} color="#fff" />
@@ -155,9 +155,9 @@ export default function AdminSettingsPage() {
         </div>
 
         {/* ── PASSWORD CHANGE CARD ── */}
-        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, boxShadow: css.shadow, overflow: 'hidden' }}>
+        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, boxShadow: css.shadow, overflow: 'hidden' }}>
           <div style={{ padding: '24px 28px', borderBottom: `1px solid ${css.border}`, display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ width: 44, height: 44, borderRadius: 14, background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 4px 14px ${css.accent}40`, flexShrink: 0 }}>
+            <div style={{ width: 44, height: 44, borderRadius: 14, background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`, flexShrink: 0 }}>
               <Lock size={20} color="#fff" />
             </div>
             <div>
@@ -192,11 +192,11 @@ export default function AdminSettingsPage() {
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: 8,
                     padding: '13px 28px',
-                    background: loading ? css.surface2 : `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
+                    background: loading ? css.surface2 : `linear-gradient(135deg, ${css.accent}, var(--accent2))`,
                     border: 'none', borderRadius: 12,
                     color: loading ? css.muted : '#fff',
                     fontSize: 14, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer',
-                    boxShadow: loading ? 'none' : `0 4px 16px ${css.accent}40`,
+                    boxShadow: loading ? 'none' : `0 4px 16px color-mix(in srgb, ${css.accent} 25%, transparent)`,
                     transition: 'opacity 0.2s',
                     opacity: loading ? 0.7 : 1,
                   }}
@@ -210,7 +210,7 @@ export default function AdminSettingsPage() {
         </div>
 
         {/* ── SECURITY INFO FOOTER ── */}
-        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '20px 24px', boxShadow: css.shadow, display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '20px 24px', boxShadow: css.shadow, display: 'flex', alignItems: 'center', gap: 14 }}>
           <Shield size={18} color={css.muted} style={{ flexShrink: 0 }} />
           <p style={{ fontSize: 12, color: css.muted, margin: 0, lineHeight: 1.6 }}>
             Your admin session is encrypted over TLS 1.3. Use a mix of letters, numbers, and symbols for stronger password protection.

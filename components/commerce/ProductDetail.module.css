@@ -536,3 +536,38 @@
     padding: 22px 16px;
   }
 }
+
+/* Readiness hardening: narrow layouts, real controls, keyboard and motion support. */
+.pageWrapper { overflow-wrap: anywhere; }
+.container { min-width: 0; }
+.pageWrapper :is(a,button,input,select,summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.pageWrapper button, .pageWrapper select, .pageWrapper summary { min-height: 44px; }
+.pageWrapper :is(input,select) { max-width: 100%; }
+.pageWrapper :is(button,a,input,select) { -webkit-tap-highlight-color: transparent; }
+.pageWrapper button:disabled { cursor: not-allowed; opacity: .65; }
+@media (prefers-reduced-motion: reduce) {
+  .pageWrapper *, .pageWrapper *::before, .pageWrapper *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media (max-width: 375px) { .container { padding-inline: 14px; } }
+
+.accountLinks { display: flex; gap: 16px; flex-wrap: wrap; }
+.specsList { display: grid; grid-template-columns: minmax(90px,1fr) minmax(0,3fr); gap: 14px 20px; font-size: 13px; line-height: 1.8; }
+.specsList dt { color: var(--muted); }
+.specsList dd { margin: 0; min-width: 0; }
+.heroMedia, .heroContent { min-width: 0; }
+.infoBlock :is(p,li) { line-height: 1.8; color: var(--muted); font-size: 14px; }
+.infoBlock ul { padding-left: 20px; }
+.infoBlock a { color: var(--accent); }
+@media (max-width: 600px) {
+  .breadcrumbs { flex-wrap: wrap; min-width: 0; }
+  .breadcrumbs span.current { max-width: 100%; white-space: normal; }
+  .purchasePriceRow { flex-wrap: wrap; gap: 12px; }
+  .specsList { grid-template-columns: 1fr; gap: 5px; }
+  .specsList dd { margin-bottom: 15px; }
+  .coverFrame { min-height: 280px; }
+}
+
+.pageWrapper { padding-top: 100px; }
+@media(max-width:600px) { .pageWrapper { padding-top: 85px; } }
+
+.disclaimerBox h2 { font-size:17px; font-weight:650; line-height:1.5; margin:0 0 14px; color:var(--text); }.disclaimerBox p { font-size:13px; line-height:1.85; margin:8px 0; }.coverFrame { background:linear-gradient(135deg,var(--surface2),var(--bg)); }

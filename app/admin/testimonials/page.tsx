@@ -28,8 +28,8 @@ export default function AdminTestimonials() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', overlay: 'rgba(0,0,0,0.7)' }
-    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', overlay: 'rgba(0,0,0,0.4)' };
+    ? { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', overlay: 'rgba(0,0,0,0.7)' }
+    : { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', overlay: 'rgba(0,0,0,0.4)' };
 
   const [items, setItems] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
@@ -263,8 +263,8 @@ export default function AdminTestimonials() {
             style={{
               display: 'flex', alignItems: 'center', gap: 7, padding: '10px 18px',
               background: css.accent, border: 'none', borderRadius: 12,
-              color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer',
-              boxShadow: `0 4px 14px ${css.accent}40`, transition: 'opacity 0.15s',
+              color: 'var(--btn-primary-text)', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+              boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`, transition: 'opacity 0.15s',
             }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
@@ -300,7 +300,7 @@ export default function AdminTestimonials() {
       {loading ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {[1, 2, 3].map(i => (
-            <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '24px 28px', animation: 'shimmer 1.6s ease-in-out infinite' }}>
+            <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '24px 28px', animation: 'shimmer 1.6s ease-in-out infinite' }}>
               <div style={{ height: 16, width: '40%', background: css.surface2, borderRadius: 8, marginBottom: 12 }} />
               <div style={{ height: 12, width: '80%', background: css.surface2, borderRadius: 8, marginBottom: 8 }} />
               <div style={{ height: 12, width: '60%', background: css.surface2, borderRadius: 8 }} />
@@ -310,7 +310,7 @@ export default function AdminTestimonials() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {filtered.length === 0 && (
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '56px 48px', textAlign: 'center' }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '56px 48px', textAlign: 'center' }}>
               <Star size={36} color={css.muted} style={{ marginBottom: 12, opacity: 0.5 }} />
               <p style={{ fontSize: 15, fontWeight: 700, color: css.text, margin: '0 0 6px' }}>
                 {items.length === 0 ? 'No testimonials yet' : 'No results found'}
@@ -323,7 +323,7 @@ export default function AdminTestimonials() {
           {filtered.map(t => (
             <div
               key={t.id}
-              style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '22px 26px', boxShadow: css.shadow, transition: 'box-shadow 0.2s' }}
+              style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '22px 26px', boxShadow: css.shadow, transition: 'box-shadow 0.2s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = css.hoverShadow}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = css.shadow}
             >
@@ -551,7 +551,7 @@ export default function AdminTestimonials() {
           onClick={() => setDeleteId(null)}
         >
           <div
-            style={{ background: css.surface, borderRadius: 20, padding: '28px 32px', width: '100%', maxWidth: 420, boxShadow: '0 24px 80px rgba(0,0,0,0.4)', border: `1px solid ${css.border}`, textAlign: 'center' }}
+            style={{ background: css.surface, borderRadius: 14, padding: '28px 32px', width: '100%', maxWidth: 420, boxShadow: '0 24px 80px rgba(0,0,0,0.4)', border: `1px solid ${css.border}`, textAlign: 'center' }}
             onClick={e => e.stopPropagation()}
           >
             <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(239,68,68,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>

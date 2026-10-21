@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
 import { EXCEL_PROJECTS } from '@/data/excelProjects';
+import { productDetailsMap } from '@/lib/commerce/product-settings';
+import { defaultProductDetails, productReadiness } from '@/lib/commerce/product-details';
 
 // A build-time database fallback must never freeze an incomplete public sitemap.
 export const dynamic = 'force-dynamic';
@@ -19,13 +21,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getPublishedBlogPosts(),
     import('@/lib/prisma').then(m => m.prisma.commerceProduct.findMany({
       where: { status: 'PUBLISHED' },
-      select: { slug: true, updatedAt: true },
+      select: { id: true, slug: true, updatedAt: true, status: true, salesEnabled: true, deliveryReady: true, excerpt: true, resources: { where: { active: true }, select: { title: true } } },
     })).catch(() => []),
   ]);
+  const details = await productDetailsMap(products.map(p => p.id)).catch(() => new Map());
+  const indexableProducts = products.filter(p => productReadiness(p, details.get(p.id) || defaultProductDetails()) === 'READY_FOR_SALE');
   const urls: MetadataRoute.Sitemap = [
     ...routes.map(route => ({ url: baseUrl + route })),
     ...EXCEL_PROJECTS.map(project => ({ url: baseUrl + '/dashboards/' + project.slug })),
-    ...products.map(p => {
+    ...indexableProducts.map(p => {
       const date = new Date(p.updatedAt);
       return {
         url: baseUrl + '/products/' + p.slug,

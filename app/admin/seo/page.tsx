@@ -17,21 +17,21 @@ export default function SeoIntelligencePage() {
 
   const css = isDark
     ? {
-        bg: '#000000',
-        card: '#0a0a0a',
-        border: '#1f1f1f',
-        text: '#f8fafc',
-        muted: '#64748b',
-        accent: '#6366f1',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
         success: '#10b981',
       }
     : {
-        bg: '#f8fafc',
-        card: '#ffffff',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
         success: '#059669',
       };
 
@@ -83,7 +83,7 @@ export default function SeoIntelligencePage() {
             disabled={loadingAction === 'reindex-site'}
             style={{
               background: css.accent,
-              color: '#ffffff',
+              color: 'var(--btn-primary-text)',
               border: 'none',
               borderRadius: 12,
               padding: '10px 18px',
@@ -129,7 +129,7 @@ export default function SeoIntelligencePage() {
       </div>
 
       {/* ── 1-CLICK OPERATIONAL ACTIONS ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, marginBottom: 32 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, marginBottom: 32 }}>
         <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
           <Sparkles size={18} style={{ color: css.accent }} />
           <span>1-Click SEO Repair & Optimization Triggers</span>
@@ -182,7 +182,7 @@ export default function SeoIntelligencePage() {
       </div>
 
       {/* ── HIGH IMPRESSION / LOW CTR OPPORTUNITIES ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
         <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
           <Zap size={18} style={{ color: '#f59e0b' }} />
           <span>High-Impression Search Opportunities (Rankings 5–15)</span>

@@ -13,22 +13,22 @@ export default function TrafficBehaviorPage() {
 
   const css = isDark
     ? {
-        bg: '#000000',
-        card: '#0a0a0a',
-        surface: '#121212',
-        border: '#1f1f1f',
-        text: '#f8fafc',
-        muted: '#64748b',
-        accent: '#6366f1',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
       }
     : {
-        bg: '#f8fafc',
-        card: '#ffffff',
-        surface: '#f1f5f9',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        bg: 'var(--bg)',
+        card: 'var(--surface)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
       };
 
   return (
@@ -55,14 +55,14 @@ export default function TrafficBehaviorPage() {
           <Link href="/admin/analytics" style={{ background: css.surface, color: css.text, border: `1px solid ${css.border}`, padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>
             ← Overview
           </Link>
-          <Link href="/admin/analytics/reports" style={{ background: css.accent, color: '#fff', padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>
+          <Link href="/admin/analytics/reports" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>
             Custom Reports →
           </Link>
         </div>
       </div>
 
       {/* ── TOP VISITED ARTICLES TABLE ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, marginBottom: 32 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, marginBottom: 32 }}>
         <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
           <Eye size={18} style={{ color: css.accent }} />
           <span>Top Visited Articles & Content Engagement</span>
@@ -103,7 +103,7 @@ export default function TrafficBehaviorPage() {
       </div>
 
       {/* ── GEOGRAPHIC TRAFFIC DISTRIBUTION ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24 }}>
+      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
         <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
           <MapPin size={18} style={{ color: '#10b981' }} />
           <span>Geographic Traffic Distribution</span>

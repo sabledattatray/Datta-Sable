@@ -10,7 +10,7 @@ export const productInput = z.object({
   description: z.string().trim().min(20).max(30000), category: z.string().trim().min(1).max(100),
   image: z.string().max(1000).refine(v => !v || /^\/[^/]/.test(v) || (/^https:\/\//.test(v) && (() => { try { const host = new URL(v).hostname; return host === 'images.unsplash.com' || host.endsWith('.public.blob.vercel-storage.com'); } catch { return false; } })())).nullable().optional(),
   priceMinor: z.number().int().positive().max(100000000), currency: z.enum(['USD', 'INR']),
-  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']), salesEnabled: z.boolean(), deliveryReady: z.boolean(),
+  status: z.enum(['DRAFT', 'UNDER_REVIEW', 'PUBLISHED', 'ARCHIVED']), salesEnabled: z.boolean(), deliveryReady: z.boolean(),
   features: z.array(z.string().trim().min(1).max(300)).max(30),
   includedResources: z.array(z.string().trim().min(1).max(300)).max(30),
   deliveryMethod: z.literal('ACCOUNT_DOWNLOAD'),

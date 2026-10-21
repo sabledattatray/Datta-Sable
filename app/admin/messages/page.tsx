@@ -17,8 +17,8 @@ export default function MessagesInbox() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', activeBg: 'rgba(99,102,241,0.08)' }
-    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', activeBg: 'rgba(79,70,229,0.05)' };
+    ? { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.35)', activeBg: 'rgba(99,102,241,0.08)' }
+    : { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.07)', activeBg: 'rgba(79,70,229,0.05)' };
 
   const [messages, setMessages] = useState<any[]>([]);
   const [selected, setSelected] = useState<any | null>(null);
@@ -112,7 +112,7 @@ export default function MessagesInbox() {
           <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>
             Inbox
             {unreadCount > 0 && (
-              <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, background: css.accent, color: '#fff', padding: '2px 9px', borderRadius: 999, verticalAlign: 'middle' }}>
+              <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, background: css.accent, color: 'var(--btn-primary-text)', padding: '2px 9px', borderRadius: 999, verticalAlign: 'middle' }}>
                 {unreadCount} new
               </span>
             )}
@@ -124,7 +124,7 @@ export default function MessagesInbox() {
       {/* Main layout */}
       <div style={{ display: 'grid', gridTemplateColumns: selected ? '340px 1fr' : '1fr', gap: 20, alignItems: 'flex-start' }} className="msg-grid">
         {/* Message list */}
-        <div className={selected ? "msg-list-pane msg-list-pane-hidden" : "msg-list-pane"} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, boxShadow: css.shadow, overflow: 'hidden' }}>
+        <div className={selected ? "msg-list-pane msg-list-pane-hidden" : "msg-list-pane"} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, boxShadow: css.shadow, overflow: 'hidden' }}>
           {/* Search */}
           <div style={{ padding: '16px 16px 0' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 14px' }}>
@@ -178,11 +178,11 @@ export default function MessagesInbox() {
 
         {/* Detail pane */}
         {selected && (
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, boxShadow: css.shadow, overflow: 'hidden' }}>
+          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, boxShadow: css.shadow, overflow: 'hidden' }}>
             {/* Detail header */}
             <div style={{ padding: '20px 24px', borderBottom: `1px solid ${css.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 16 }}>
+                <div style={{ width: 44, height: 44, borderRadius: '50%', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--btn-primary-text)', fontWeight: 800, fontSize: 16 }}>
                   {selected.name.charAt(0)}
                 </div>
                 <div>
@@ -192,7 +192,7 @@ export default function MessagesInbox() {
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <a href={`mailto:${selected.email}?subject=Re: ${selected.subject}`}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '9px 16px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, color: '#fff', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '9px 16px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 10, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>
                   <Reply size={14} /> Reply
                 </a>
                 <button onClick={() => handleDelete(selected.id)} style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 10, padding: '9px 12px', cursor: 'pointer', color: '#ef4444', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600 }}>
@@ -216,7 +216,7 @@ export default function MessagesInbox() {
               </div>
               <div style={{ marginTop: 20 }}>
                 <a href={`mailto:${selected.email}?subject=Re: ${selected.subject}`}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: `0 4px 14px ${css.accent}40` }}>
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                   <Reply size={15} /> Reply via Email
                 </a>
               </div>

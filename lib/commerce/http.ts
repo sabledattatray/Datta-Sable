@@ -8,7 +8,7 @@ export async function jsonBody(req: Request, max = 50000) {
 }
 export function errorResponse(error: unknown) {
   if (error instanceof CommerceError) return NextResponse.json({ error: error.message }, { status: error.status, headers: { 'Cache-Control': 'no-store' } });
-  if (error instanceof ZodError) return NextResponse.json({ error: 'Check the submitted fields.' }, { status: 400 });
+  if (error instanceof ZodError) return NextResponse.json({ error: 'Check the submitted fields.' }, { status: 400, headers: { 'Cache-Control': 'private, no-store' } });
   console.error('Commerce operation failed.', error instanceof Error ? error.name : 'Unknown error');
-  return NextResponse.json({ error: 'This operation is temporarily unavailable. Please retry later or contact support.' }, { status: 503 });
+  return NextResponse.json({ error: 'This operation is temporarily unavailable. Please retry later or contact support.' }, { status: 503, headers: { 'Cache-Control': 'private, no-store' } });
 }

@@ -486,28 +486,28 @@ export default function AdminBlog() {
   // Theme-aware CSS variables
   const css = isDark
     ? {
-        bg: '#000000',
-        surface: '#000000',
-        surface2: '#121212',
-        border: '#1a1a1a',
-        text: '#f1f5f9',
-        muted: '#64748b',
-        accent: '#6366f1',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
         inputBg: '#1e293b',
         shadow: '0 4px 24px rgba(0,0,0,0.35)',
-        hoverBg: 'rgba(255,255,255,0.03)',
+        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)',
       }
     : {
-        bg: '#f0f4ff',
-        surface: '#ffffff',
-        surface2: '#f8faff',
-        border: '#e2e8f0',
-        text: '#0f172a',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
         inputBg: '#f8faff',
         shadow: '0 4px 24px rgba(0,0,0,0.07)',
-        hoverBg: 'rgba(0,0,0,0.02)',
+        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)',
       };
 
   // Renders the clean live preview markup (used in Split & Preview modes)
@@ -521,7 +521,7 @@ export default function AdminBlog() {
               fontSize: 10,
               fontWeight: 700,
               color: css.accent,
-              borderColor: `${css.accent}44`,
+              borderColor: `color-mix(in srgb, ${css.accent} 27%, transparent)`,
               borderWidth: 1,
               borderStyle: 'solid',
               padding: '3px 10px',
@@ -1409,12 +1409,12 @@ export default function AdminBlog() {
               onClick={() => handleOpenEditor()}
               style={{
                 display: 'flex', alignItems: 'center', gap: 8,
-                background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
-                border: 'none', color: '#fff',
+                background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`,
+                border: 'none', color: 'var(--btn-primary-text)',
                 fontWeight: 700, fontSize: 14,
                 padding: '11px 20px', borderRadius: 12,
                 cursor: 'pointer',
-                boxShadow: `0 4px 14px ${css.accent}40`,
+                boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`,
                 transition: 'opacity 0.15s',
               }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.88'}
@@ -1506,7 +1506,7 @@ export default function AdminBlog() {
           className="desktop-only"
           style={{
             background: css.surface, border: `1px solid ${css.border}`,
-            borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow,
+            borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow,
           }}
         >
           <div style={{ overflowX: 'auto' }}>
@@ -1643,7 +1643,7 @@ export default function AdminBlog() {
                           fontSize: 10, fontWeight: 700,
                           background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)',
                           color: css.accent,
-                          border: `1px solid ${css.accent}30`,
+                          border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`,
                           padding: '3px 10px', borderRadius: 999,
                           textTransform: 'uppercase', letterSpacing: '0.07em',
                         }}
@@ -1696,7 +1696,7 @@ export default function AdminBlog() {
                           onMouseEnter={e => {
                             (e.currentTarget as HTMLElement).style.color = css.accent;
                             (e.currentTarget as HTMLElement).style.borderColor = css.accent;
-                            (e.currentTarget as HTMLElement).style.background = `${css.accent}10`;
+                            (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${css.accent} 6%, transparent)`;
                           }}
                           onMouseLeave={e => {
                             (e.currentTarget as HTMLElement).style.color = css.muted;
@@ -1740,7 +1740,7 @@ export default function AdminBlog() {
         {/* Articles Mobile Cards */}
         <div className="mobile-only" style={{ flexDirection: 'column', gap: 14 }}>
           {filtered.length === 0 ? (
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
               No articles found.
             </div>
           ) : (
@@ -1794,7 +1794,7 @@ export default function AdminBlog() {
                       fontSize: 9.5, fontWeight: 700,
                       background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)',
                       color: css.accent,
-                      border: `1px solid ${css.accent}30`,
+                      border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`,
                       padding: '2px 8px', borderRadius: 999,
                       textTransform: 'uppercase', letterSpacing: '0.05em',
                     }}
@@ -1946,9 +1946,9 @@ export default function AdminBlog() {
                 }}
                 style={{
                   width: '100%', padding: '12px', borderRadius: 12,
-                  background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none',
-                  color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 13,
-                  boxShadow: `0 4px 12px ${css.accent}30`,
+                  background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none',
+                  color: 'var(--btn-primary-text)', fontWeight: 700, cursor: 'pointer', fontSize: 13,
+                  boxShadow: `0 4px 12px color-mix(in srgb, ${css.accent} 19%, transparent)`,
                 }}
               >
                 Save as Draft & Exit
@@ -2042,7 +2042,7 @@ export default function AdminBlog() {
                 style={{
                   background: css.accent, border: 'none',
                   borderRadius: 10, padding: '10px 16px',
-                  fontSize: 12, fontWeight: 700, cursor: 'pointer', color: '#fff',
+                  fontSize: 12, fontWeight: 700, cursor: 'pointer', color: 'var(--btn-primary-text)',
                 }}
               >
                 Add
@@ -2241,12 +2241,12 @@ export default function AdminBlog() {
           <button
             onClick={() => handleSave('Published')}
             style={{
-              background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`,
-              border: 'none', color: '#fff',
+              background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`,
+              border: 'none', color: 'var(--btn-primary-text)',
               padding: '8px 20px', borderRadius: 10,
               fontSize: 14, fontWeight: 700, cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: 7,
-              boxShadow: `0 4px 12px ${css.accent}40`,
+              boxShadow: `0 4px 12px color-mix(in srgb, ${css.accent} 25%, transparent)`,
             }}
           >
             <Save size={15} /> Publish
@@ -2290,7 +2290,7 @@ export default function AdminBlog() {
                 {hasAutosaveToRestore && (
                   <div style={{
                     background: isDark ? 'rgba(99,102,241,0.1)' : 'rgba(79,70,229,0.05)',
-                    border: `1px solid ${css.accent}44`,
+                    border: `1px solid color-mix(in srgb, ${css.accent} 27%, transparent)`,
                     borderRadius: 12,
                     padding: '12px 18px',
                     marginBottom: 20,
@@ -2316,7 +2316,7 @@ export default function AdminBlog() {
                         style={{
                           background: css.accent,
                           border: 'none',
-                          color: '#fff',
+                          color: 'var(--btn-primary-text)',
                           padding: '6px 14px',
                           borderRadius: 8,
                           fontSize: 12,
@@ -2721,7 +2721,7 @@ export default function AdminBlog() {
                                 alignItems: 'center',
                                 gap: 6,
                                 padding: '5px 10px',
-                                borderRadius: 20,
+                                borderRadius: 14,
                                 background: tagBg,
                                 border: tagBorder,
                                 color: isActive ? css.text : css.muted,
@@ -2808,7 +2808,7 @@ export default function AdminBlog() {
                               <div style={{
                                 width: 14, height: 14, borderRadius: '50%', background: css.accent,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                color: '#fff', fontSize: 8, fontWeight: 800,
+                                color: 'var(--btn-primary-text)', fontSize: 8, fontWeight: 800,
                               }}>
                                 D
                               </div>

@@ -32,8 +32,8 @@ export default function ProjectsManager() {
   const isDark = theme === 'dark';
 
   const css = isDark
-    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', hoverBg: 'rgba(255,255,255,0.02)' }
-    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', hoverBg: 'rgba(0,0,0,0.015)' };
+    ? { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)' }
+    : { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)' };
 
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -289,7 +289,7 @@ export default function ProjectsManager() {
               {/* Save / Cancel buttons */}
               <div style={{ display: 'flex', gap: 10, paddingTop: 8 }}>
                 <button type="button" onClick={closeModal} style={{ flex: 1, padding: '12px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 11, color: css.text, fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>Cancel</button>
-                <button type="submit" disabled={saving} style={{ flex: 2, padding: '12px', background: saving ? css.border : `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 11, color: '#fff', fontWeight: 700, fontSize: 13, cursor: saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
+                <button type="submit" disabled={saving} style={{ flex: 2, padding: '12px', background: saving ? css.border : `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 11, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
                   {saving ? <><Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> Saving...</> : <><Save size={15} /> {editing ? 'Update' : 'Publish'}</>}
                 </button>
               </div>
@@ -311,7 +311,7 @@ export default function ProjectsManager() {
             <input type="text" placeholder="Search projects..." value={search} onChange={e => setSearch(e.target.value)}
               style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 500, width: 180 }} />
           </div>
-          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px ${css.accent}40`, whiteSpace: 'nowrap' }}>
+          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`, whiteSpace: 'nowrap' }}>
             <Plus size={17} /> Add Project
           </button>
         </div>
@@ -326,12 +326,12 @@ export default function ProjectsManager() {
 
       {/* Table / List */}
       {loading ? (
-        <div style={{ display: 'flex', padding: '48px', justifyContent: 'center', alignItems: 'center', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, color: css.muted }}>
+        <div style={{ display: 'flex', padding: '48px', justifyContent: 'center', alignItems: 'center', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, color: css.muted }}>
           <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', marginRight: 10 }} /> Loading projects...
         </div>
       ) : (
         <>
-          <div className="desktop-only" style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
+          <div className="desktop-only" style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', minWidth: 780, borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
@@ -393,7 +393,7 @@ export default function ProjectsManager() {
           {/* Projects Mobile Cards */}
           <div className="mobile-only" style={{ flexDirection: 'column', gap: 14, marginBottom: 20 }}>
             {filtered.length === 0 ? (
-              <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+              <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
                 No projects found.
               </div>
             ) : (
