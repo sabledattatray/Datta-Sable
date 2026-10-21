@@ -1,8 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
-import fs from 'fs';
-import path from 'path';
 import { rateLimit, logAudit } from '@/lib/security';
 
 const contactSchema = z.object({
@@ -11,33 +9,6 @@ const contactSchema = z.object({
   subject: z.string().nullish().or(z.literal("")),
   message: z.string().min(1, "Message cannot be empty"),
 });
-
-// JSON file fallback path
-const MESSAGES_FILE = path.join(process.cwd(), 'messages.json');
-
-const getJsonMessages = () => {
-  try {
-    if (!fs.existsSync(MESSAGES_FILE)) return [];
-    const data = fs.readFileSync(MESSAGES_FILE, 'utf8');
-    return JSON.parse(data);
-  } catch (e) {
-    return [];
-  }
-};
-
-const saveJsonMessage = (msg: any) => {
-  try {
-    const messages = getJsonMessages();
-    messages.unshift({
-      ...msg,
-      id: Math.random().toString(36).substr(2, 9),
-      createdAt: new Date().toISOString(),
-    });
-    fs.writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2));
-  } catch (e) {
-    console.error("Failed to save to JSON file:", e);
-  }
-};
 
 export async function POST(req: NextRequest) {
   try {
@@ -63,23 +34,16 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      await logAudit({ action: 'CONTACT_FORM_SUBMIT', status: 'SUCCESS', details: `Message from ${validatedData.email}`, req });
+      // Audit logging is secondary to the durable message save. Its failure must
+      // not tell the visitor the saved message failed and invite duplicate sends.
+      await logAudit({ action: 'CONTACT_FORM_SUBMIT', status: 'SUCCESS', details: `Message from ${validatedData.email}`, req }).catch(() => {});
       return NextResponse.json({ message: "Success", id: message.id }, { status: 201 });
-    } catch (dbError) {
-      console.warn("DB Save Failed, falling back to JSON store.");
-      
-      // Fallback: Save to JSON file for immediate visibility in development
-      const newMsg = {
-        name: validatedData.name,
-        email: validatedData.email,
-        subject: validatedData.subject || "No Subject",
-        message: validatedData.message,
-      };
-      saveJsonMessage(newMsg);
-
+    } catch {
+      // Serverless local files are not durable message storage. Never report a
+      // successful send when the database did not accept the message.
       return NextResponse.json(
-        { message: "Success (Stored in JSON Fallback)", status: "fallback" },
-        { status: 201 }
+        { message: "Your message could not be saved. Please try again or email info@dattasable.com." },
+        { status: 503 }
       );
     }
   } catch (error) {

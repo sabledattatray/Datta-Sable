@@ -16,10 +16,25 @@ const stockParagraphs = new Set<string>([
   "Performance optimizations reduced page loading latency by 55% during high-concurrency testing. Database CPU utilization stabilized at 40%, and memory allocation followed a clean linear scale without garbage collection spikes."
 ]);
 const normalize = (html: string) => html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+// Verified corrections for exact legacy passages. Distinct future prose is kept.
+const factualParagraphCorrections = new Map([
+  ["OneLake is built on top of Azure Data Lake Storage Gen2 (ADLS Gen2). This means it inherits Azure's enterprise-grade storage characteristics: 99.9999999999% (12 nines) durability, geo-redundant replication options, 10Gbps+ throughput, and hierarchical namespace support for efficient file system operations.",
+    '<p>OneLake is built on Azure Data Lake Storage. That architectural relationship does not establish a universal durability percentage, throughput guarantee, or replication configuration for every Fabric workload. Verify the applicable service documentation and your configuration before making an availability or performance commitment. See <a href="https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview">Microsoft’s OneLake overview</a>.</p>'],
+  ['A government statistics agency migrated national economic data reporting to Fabric with a 99.9% availability requirement. Rather than one F64, they run two F32 capacities in active-active configuration — Production Workspace on Capacity A, standby on Capacity B. If Capacity A experiences unexpected throttling, an administrator reassigns the public reporting workspace to Capacity B within minutes via the Fabric Admin Portal, without data loss (since data lives in OneLake, not in the capacity).',
+    '<p>Illustrative resilience planning exercise: compare a single-capacity deployment with a design that has an independently tested recovery path. Workspace reassignment is not itself evidence of active-active availability, zero interruption, or zero data loss. Define recovery objectives, supported service behavior, permissions, regional constraints, and a representative failure test before relying on the design. This is a hypothetical exercise, not a verified government engagement.</p>'],
+]);
 export function correctEditorialContent<T extends { slug: string; content?: string | null }>(post: T): T {
   post = applyEditorialRevision(post);
   let content = post.content;
   if (!content) return post;
+  content = content.replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi,
+    paragraph => factualParagraphCorrections.get(normalize(paragraph)) || paragraph);
+  content = content.replace(
+    'Yes, advanced AI capabilities like Copilot, Fabric IQ routing, and Data Agents require a Fabric F64 capacity or higher in 2026.',
+    'Eligibility differs by feature. Copilot can qualify on paid F2 or higher, subject to region, tenant settings, permissions, and feature requirements. Do not use the F64 organizational free-viewer threshold as a blanket AI requirement. Check the current documentation for each feature, starting with <a href="https://learn.microsoft.com/en-us/fabric/fundamentals/copilot-fabric-overview">Microsoft’s Copilot overview</a>.');
+  content = content.replace(
+    'The Fabric Trial provides a shared capacity pool — you share compute resources with other trial users and performance is not guaranteed. A purchased F2 capacity is a dedicated capacity — you have exclusive access to 2 CUs with SLA-backed performance guarantees. For any meaningful testing or development work, a purchased F2 is strongly preferable to the shared trial.',
+    'The Fabric trial is a time-limited capacity with specific feature and capacity conditions; it should not be described as the Power BI shared-capacity model. Check your assigned trial size and current restrictions, including AI-feature restrictions, in <a href="https://learn.microsoft.com/en-us/fabric/fundamentals/fabric-trial">Microsoft’s trial documentation</a>. Compare a paid capacity using the same workload and the applicable offer terms rather than assuming a purchased F2 guarantees a particular performance result.');
   if (post.slug === 'dp-600-fabric-analytics-engineer-study-companion-notebook' &&
       content.includes('delta-store-mechanics')) {
     content = dp600PracticeCompanion;

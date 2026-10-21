@@ -164,6 +164,15 @@ test('public formatting repairs prose emphasis without modifying code or HTML at
  assert.match(result, /<pre><code>x \*\* 2<\/code><\/pre>/);
  assert.match(result, /title="\*\*attribute\*\*"/);
 });
+
+test('legacy AI eligibility wording is corrected without rewriting distinct future CMS guidance', () => {
+ const old = 'Yes, advanced AI capabilities like Copilot, Fabric IQ routing, and Data Agents require a Fabric F64 capacity or higher in 2026.';
+ const result = editorial.correctEditorialContent({ slug: 'eligibility', content: '<p>' + old + '</p>' }).content;
+ assert.match(result, /paid F2 or higher/);
+ assert.doesNotMatch(result, /require a Fabric F64/);
+ const future = '<p>Feature eligibility was checked against the current vendor requirements.</p>';
+ assert.equal(editorial.correctEditorialContent({ slug: 'eligibility', content: future }).content, future);
+});
 test('known missing portrait uses the existing author asset', () => {
  const result = editorial.correctEditorialContent({ slug: 'portrait', content: '<img src="/images/hero/datta-sable-portrait.webp" alt="Author">' }).content;
  assert.match(result, /src="\/images\/author.webp"/);

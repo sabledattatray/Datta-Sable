@@ -80,3 +80,23 @@ These applications are not implemented in this checkout. Their content, styles, 
 - [JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics): distinguish initial HTML from rendered content.
 
 This report supersedes earlier recommendations to block public `/tools` URLs. It does not change the historical audit records.
+
+## Follow-up validation and subdomain implementation (21 October 2026)
+
+The first main-site deployment was verified against production: 26 readiness checks passed. A broader initial-HTML audit inspected 280 distinct URLs across the main, image, Fabric, and Excel sitemaps; findings are recorded in `docs/audits/production-content-2026-10-21.json`. Short word counts are review signals, not Google's acceptance thresholds.
+
+Follow-up changes are implemented in the three source repositories:
+
+- Main: corrected exact legacy editorial passages about OneLake guarantees, hypothetical recovery examples, trial behavior, and Copilot eligibility. Contact submission now returns success only after durable database storage; optional audit-log failure does not invalidate a saved message. Database failure returns an actionable 503 instead of pretending a local fallback was delivered.
+- Fabric: all 25 documentation URLs and original source bodies are retained. Twelve guides now include distinct practical exercises and official references; thirteen short references link to the relevant full guide, carry noindex, and are excluded from the sitemap. All 53 public routes (including references and policies) receive rendered HTML. Canonical URLs use the production host. Removed unsupported ratings and page-wide FAQ markup. Corrected Copilot/free-viewer licensing distinctions, pricing and performance guarantees, and an oversized-demand calculation that could wrap back to F2. Existing theme colors are retained.
+- Excel: all 15 sitemap pages receive actual rendered application content. Added missing route headings; corrected simulated-data labels and unsupported cross-application compatibility promises. Removed automatic analytics loading until an appropriate consent implementation exists. Privacy text distinguishes local spreadsheet processing from hosting requests and support correspondence. Existing theme colors are retained.
+
+Validation: main 71 automated tests and TypeScript passed; isolated Next production build passed using source fallbacks where the sandbox could not reach the database. Fabric production build, four readiness tests, and TypeScript passed. Excel production build, two readiness tests, TypeScript, and its existing suite (52 passed, one skipped) passed. Fabric guide spacing and Excel tool rendering were inspected in local browser previews. The first main-site production deployment passed 26 HTTP/metadata readiness checks. New subdomain deployments require a separate live check after push.
+
+### AdSense account inspection
+
+The signed-in account shows dattasable.com as Getting ready, ownership verified, review requested, and ads.txt Authorised. There is no rejection reason displayed. No new review request was submitted and no account settings were changed.
+
+The European regulations message is published for **biexpert.online**, not dattasable.com. The account's "1 active" badge therefore does not establish consent coverage for this site. Configure and publish an appropriate message for dattasable.com before enabling advertising for visitors subject to Google's consent requirements. This is a consent/advertising readiness item, not evidence of a current rejection. Do not unpublish the existing site's message.
+
+Remaining limitations: no approval can be guaranteed; no media-license or first-hand-experience certification is inferred from code review. Unknown SPA routes retain their pre-existing fallback behavior. No Search Console removals or blanket public AdSense crawler blocks were applied. Noindex controls Search indexing, not access by the AdSense crawler.

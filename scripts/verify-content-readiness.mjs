@@ -51,6 +51,6 @@ for (const path of ['/knowledge', '/robots.txt', '/sitemap.xml']) {
     results.push({ path, passed: true });
   } catch (error) { results.push({ path, passed: false, error: error.message }); }
 }
-await fs.writeFile('docs/audits/local-readiness-2026-10-21.json', JSON.stringify({ generatedAt: new Date().toISOString(), base, results }, null, 2));
+await fs.writeFile(process.env.AUDIT_REPORT_PATH || 'docs/audits/local-readiness-2026-10-21.json', JSON.stringify({ generatedAt: new Date().toISOString(), base, results }, null, 2));
 console.log(JSON.stringify({ passed: results.filter(result => result.passed).length, failed: results.filter(result => !result.passed) }, null, 2));
 if (results.some(result => !result.passed)) process.exitCode = 1;

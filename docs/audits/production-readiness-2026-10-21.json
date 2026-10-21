@@ -1,0 +1,133 @@
+{
+  "generatedAt": "2026-10-21T05:44:29.902Z",
+  "base": "https://dattasable.com",
+  "results": [
+    {
+      "path": "/knowledge/technical-storytelling-for-founders",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/optimizing-ai-context-windows",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/comparisons",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/protocols",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/patterns",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/standards",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/taxonomy",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/architecture",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/data-engineering",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/rfc",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/rfc/002-execution-chains",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/rfc/003-intent-mapping",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge/rfc/001-prompt-hardening",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/templates/high-ctr-meta-structures",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/templates/b2b-retention-post-blueprint",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/templates/saas-product-schema-blueprint",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/tools",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/tools/open-mis",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/infrastructure",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/chains",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/dashboards/sales-pipeline",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/dashboards/surgical-ai",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/dashboards/blinkit-sales",
+      "passed": true,
+      "robots": "noindex, follow"
+    },
+    {
+      "path": "/knowledge",
+      "passed": true
+    },
+    {
+      "path": "/robots.txt",
+      "passed": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "passed": true
+    }
+  ]
+}

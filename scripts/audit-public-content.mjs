@@ -45,7 +45,7 @@ async function inspect(url, discover = false) {
       } catch {}
     });
     $('script,style,noscript,nav,footer,aside,form').remove();
-    const main = $('article').first().length ? $('article').first() : $('main').last().length ? $('main').last() : $('body');
+    const main = $('.blog-content').length ? $('.blog-content').first() : $('article').first().length ? $('article').first() : $('main').last().length ? $('main').last() : $('body');
     const text = main.text().replace(/\s+/g, ' ').trim();
     const words = text.split(/\s+/).filter(Boolean).length;
     const paragraphs = main.find('p').map((_, el) => $(el).text().replace(/\s+/g, ' ').trim()).get().filter(p => p.split(/\s+/).length >= 25);
@@ -69,5 +69,5 @@ for (const result of results) for (const paragraph of new Set(result.paragraphs 
 const duplicates = [...repeated].filter(([, urls]) => urls.length >= 3).map(([text, urls]) => ({ text, urls }));
 const report = { generatedAt: new Date().toISOString(), scope: 'Submitted sitemaps across three hosts, static source routes, and one knowledge/navigation link pass. Initial HTML only; no account access or interactive validation.', sitemaps: [...maps.values()], results: results.sort((a,b) => a.url.localeCompare(b.url)), repeatedParagraphs: duplicates };
 await fs.mkdir('docs/audits', { recursive: true });
-await fs.writeFile('docs/audits/public-content-2026-10-21.json', JSON.stringify(report, null, 2));
+await fs.writeFile(process.env.AUDIT_REPORT_PATH || 'docs/audits/public-content-2026-10-21.json', JSON.stringify(report, null, 2));
 console.log(JSON.stringify({ pages: results.length, sitemaps: report.sitemaps, triage: results.reduce((counts, result) => ({ ...counts, [result.triage]: (counts[result.triage] || 0) + 1 }), {}), repeatedParagraphs: duplicates.length }, null, 2));
