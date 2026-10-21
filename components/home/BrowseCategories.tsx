@@ -1,80 +1,47 @@
-
 import Link from 'next/link';
-import styles from './HomeCards.module.css';
-import { Database, Zap, BookOpen, Layers, Code, Search, Cpu } from 'lucide-react';
+import { ArrowUpRight, Database, BarChart3, Layers, Code2, Search, Cpu, Workflow, Braces } from 'lucide-react';
+import styles from './BrowseCategories.module.css';
 
-const CATEGORIES = [
-  { slug: 'microsoft-fabric', name: 'Microsoft Fabric', breakdown: '18 Articles · 2 Learning Paths · Updated Weekly', icon: <Layers size={20} />, color: '#00C9F2' },
-  { slug: 'power-bi', name: 'Power BI', breakdown: '24 Articles · 2 Learning Paths · Updated Weekly', icon: <Zap size={20} />, color: 'var(--accent)' },
-  { slug: 'sql', name: 'SQL & Databases', breakdown: '15 Articles · 2 Tools · Updated Monthly', icon: <Database size={20} />, color: '#00d4ff' },
-  { slug: 'python', name: 'Python Engineering', breakdown: '20 Articles · 3 Tools · Updated Monthly', icon: <Cpu size={20} />, color: '#ffd54f' },
-  { slug: 'nextjs', name: 'Next.js 15', breakdown: '17 Articles · 1 Learning Path · Updated Weekly', icon: <Code size={20} />, color: '#ff1744' },
-  { slug: 'seo', name: 'SEO Strategy', breakdown: '14 Articles · 4 Tools · Updated Monthly', icon: <Search size={20} />, color: '#00c853' },
-  { slug: 'ai-automation', name: 'AI & Automation', breakdown: '19 Articles · 2 Learning Paths · Updated Weekly', icon: <BookOpen size={20} />, color: '#a855f7' }
+const topics = [
+  { slug: 'microsoft-fabric', name: 'Microsoft Fabric', detail: 'OneLake / Lakehouse / Real-time', icon: Layers },
+  { slug: 'power-bi', name: 'Power BI', detail: 'DAX / Modeling / Visual storytelling', icon: BarChart3 },
+  { slug: 'sql', name: 'SQL & Databases', detail: 'Queries / Architecture / Performance', icon: Database },
+  { slug: 'python', name: 'Python Engineering', detail: 'Pipelines / Analytics / Data tooling', icon: Braces },
+  { slug: 'nextjs', name: 'Next.js & React', detail: 'Rendering / Web architecture / Speed', icon: Code2 },
+  { slug: 'seo', name: 'SEO Strategy', detail: 'Discovery / Indexing / Search intent', icon: Search },
+  { slug: 'ai-automation', name: 'AI & Automation', detail: 'Connect your stack. Build smarter workflows.', icon: Workflow },
 ];
 
 export default function BrowseCategories() {
-  return (
-    <section className="section" style={{ background: 'var(--surface2)', padding: '5rem 0', borderTop: '1px solid var(--border)' }}>
-      <div className="container">
-        <div className="mb-12">
-          <div className="label-tech mb-4">CONTENT_CLUSTERS // TOPICS</div>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700 }}>
-            Browse by <span className="hero-title">Technical Topic</span>
-          </h2>
-          <p style={{ color: 'var(--muted)', marginTop: '0.5rem', maxWidth: '600px', lineHeight: 1.6 }}>
-            Explore deep-dive technical architectures, benchmarks, and optimization tutorials organized by core engineering stacks.
-          </p>
+  return <section className={styles.section} aria-labelledby="technical-topics-title"><div className="container">
+    <div className={styles.layout}>
+      <div className={styles.editorial}>
+        <span className={styles.eyebrow}><span /> THE KNOWLEDGE INDEX</span>
+        <h2 id="technical-topics-title">Go deeper.<br /><span>By design.</span></h2>
+        <p>Follow your curiosity through the tools, systems, and ideas that shape better engineering.</p>
+        <div className={styles.map} aria-hidden="true">
+          <div className={styles.mapGrid} />
+          <div className={styles.ring} />
+          <div className={styles.core}><Cpu size={30} strokeWidth={1.25} /></div>
+          <span className={`${styles.node} ${styles.nodeTop}`}><Database size={16} /></span>
+          <span className={`${styles.node} ${styles.nodeRight}`}><Code2 size={16} /></span>
+          <span className={`${styles.node} ${styles.nodeBottom}`}><Workflow size={16} /></span>
+          <span className={styles.mapLabel}>CONNECTED KNOWLEDGE</span>
+          <span className={styles.coordinates}>07 / DOMAINS</span>
         </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-          {CATEGORIES.map((cat) => (
-            <div
-              key={cat.slug}
-            >
-              <Link
-                href={`/category/${cat.slug}`}
-                className="group block no-underline h-full"
-              >
-                <div
-                  className={`card h-full flex flex-col justify-between items-center text-center transition-all duration-300 ${styles.interactiveCard}`}
-                  style={{
-                    ...{ '--card-accent': cat.color },
-                    padding: '2rem 1rem',
-                    background: 'var(--surface)',
-                    border: '1px solid var(--border)',
-                    borderRadius: '4px',
-                    borderColor: 'var(--border)',
-                    height: '100%',
-                    position: 'relative'
-                  }}
-                >
-                  <div 
-                    className="p-3 rounded-full mb-4 flex items-center justify-center transition-colors duration-300"
-                    style={{
-                      background: 'var(--surface2)',
-                      color: cat.color
-                    }}
-                  >
-                    {cat.icon}
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: '13px', fontWeight: 700, margin: '0 0 0.5rem 0', color: 'var(--text)' }}>
-                      {cat.name}
-                    </h3>
-                    <span 
-                      className="mono text-[9px] uppercase font-bold"
-                      style={{ color: 'var(--muted)' }}
-                    >
-                      {cat.breakdown}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <Link href="/blog" className={styles.browse}>View the full library <ArrowUpRight size={16} /></Link>
       </div>
-    </section>
-  );
+      <div className={styles.directory}>
+        <div className={styles.directoryHeader}><span>EXPLORE A DOMAIN</span><span>INDEX / 01—07</span></div>
+        <div className={styles.topics}>
+          {topics.map(({ slug, name, detail, icon: Icon }, i) => <Link className={`${styles.topic} ${i === 6 ? styles.wide : ''}`} href={`/category/${slug}`} key={slug}>
+            <div className={styles.topicTop}><span className={styles.topicIcon}><Icon size={19} strokeWidth={1.5} /></span><span className={styles.index}>0{i + 1}</span><ArrowUpRight className={styles.arrow} size={17} /></div>
+            <div className={styles.topicText}><h3>{name}</h3><p>{detail}</p></div>
+            {i === 6 && <span className={styles.connection} aria-hidden="true"><i /><b /><i /><b /><i /></span>}
+          </Link>)}
+        </div>
+        <div className={styles.directoryFooter}><span className={styles.status} /> Pick a topic. Find your next idea.</div>
+      </div>
+    </div>
+  </div></section>;
 }

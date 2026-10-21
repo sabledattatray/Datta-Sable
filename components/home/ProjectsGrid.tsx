@@ -1,131 +1,20 @@
-
 import Link from 'next/link';
-import { BarChart3, Database, Target, Activity, ArrowRight, Shield } from 'lucide-react';
+import { ArrowUpRight, BarChart3, Database, Workflow, ShieldCheck } from 'lucide-react';
+import styles from './HomeFinish.module.css';
 
 const projects = [
-  {
-    title: 'Sales Reporting Design Exercise',
-    category: 'Guide',
-    desc: 'Work through targets, returns and source reconciliation in a small sales model.',
-    tools: ['Power BI', 'DAX', 'Fabric'],
-    impact: 'Worked reporting example',
-    color: 'var(--accent)',
-    color2: '#00C9F2',
-    icon: <BarChart3 size={20} />,
-    href: '/blog/sales-performance-ecosystem-2026'
-  },
-  {
-    title: 'Structured AI Extraction',
-    category: 'Guide',
-    desc: 'Separate JSON validity, schema conformance and factual accuracy in an extraction evaluation.',
-    tools: ['Next.js', 'AI Logic', 'Zod'],
-    impact: 'Schema and fact checks',
-    color: 'var(--accent)',
-    color2: '#00C9F2',
-    icon: <Shield size={20} />,
-    href: '/blog/case-study-precision-prompt-architecture-consistency'
-  },
-  {
-    title: 'SQL Columnstore Design Guide',
-    category: 'Guide',
-    desc: 'Explore columnstore concepts and validate query choices against your own workload.',
-    tools: ['SQL Server', 'ETL', 'T-SQL'],
-    impact: 'Query design guidance',
-    color: 'var(--accent)',
-    color2: '#00C9F2',
-    icon: <Database size={20} />,
-    href: '/blog/sql-server-columnstore-indexes-optimization-guide'
-  },
-  {
-    title: 'n8n Editorial Review Workflow',
-    category: 'Guide',
-    desc: 'Design a source-tracked draft queue with explicit editorial review and controlled publication.',
-    tools: ['Python', 'n8n', 'AI Agents'],
-    impact: 'Draft, review, publish',
-    color: 'var(--accent)',
-    color2: '#00C9F2',
-    icon: <Activity size={20} />,
-    href: '/blog/case-study-n8n-automated-authority-scaling'
-  },
+  { title:'Sales reporting, thoughtfully modeled',desc:'Work through targets, returns, and source reconciliation in a small sales model.',tools:['Power BI','DAX','Fabric'],label:'ANALYTICS',icon:BarChart3,href:'/blog/sales-performance-ecosystem-2026',steps:['Source','Model','Report'] },
+  { title:'AI extraction you can evaluate',desc:'Separate valid JSON, schema conformance, and factual accuracy in an extraction workflow.',tools:['Next.js','AI','Zod'],label:'STRUCTURED AI',icon:ShieldCheck,href:'/blog/case-study-precision-prompt-architecture-consistency',steps:['Extract','Validate','Review'] },
+  { title:'A closer look at columnstore',desc:'Explore storage choices and validate query performance against your own workload.',tools:['SQL Server','ETL','T-SQL'],label:'DATA SYSTEMS',icon:Database,href:'/blog/sql-server-columnstore-indexes-optimization-guide',steps:['Store','Query','Measure'] },
+  { title:'A workflow with review built in',desc:'Design a source-tracked draft queue with explicit editorial review before publication.',tools:['Python','n8n','AI agents'],label:'AUTOMATION',icon:Workflow,href:'/blog/case-study-n8n-automated-authority-scaling',steps:['Draft','Review','Publish'] },
 ];
 
-function TechLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-4 mb-6">
-      <p className="label-tech">{children}</p>
-    </div>
-  );
-}
-
 export default function ProjectsGrid() {
-  return (
-    <section className="section" style={{ background: 'var(--surface2)', padding: '4rem 0' }}>
-      <div className="container">
-        <div className="mb-12">
-          <TechLabel>PRACTICAL IMPLEMENTATION GUIDES</TechLabel>
-          <h2 className="sr-only">Featured implementation guides</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((p) => (
-            <div
-              key={p.title}
-              className="card"
-              style={{ 
-                position: 'relative', 
-                overflow: 'hidden', 
-                opacity: 0.95,
-                borderLeftWidth: '2px',
-                borderLeftStyle: 'solid'
-              }}
-            >
-              <div 
-                className="dark:block hidden"
-                style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(to right, ${p.color}, ${p.color2})`, opacity: 0.5 }} 
-              />
-              <div className="flex justify-between items-start mb-8" style={{ marginTop: '0.5rem' }}>
-                <div style={{ color: 'var(--accent)' }}>{p.icon}</div>
-                <span className="mono text-[12px] py-1 px-3 border text-[var(--muted)]"
-                  style={{ borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--surface2)' }}>
-                  {p.category.toUpperCase()}
-                </span>
-              </div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem' }}>{p.title}</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', height: '3.2rem', overflow: 'hidden' }}>{p.desc}</p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {p.tools.map(t => (
-                  <span key={t} className="mono text-[12px] py-1 px-2 border"
-                    style={{ color: 'var(--accent)', background: 'var(--surface2)', borderColor: 'var(--border)' }}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-[var(--border)] pt-6 gap-3">
-                <div className="flex items-center gap-2">
-                  <Target size={14} style={{ color: 'var(--accent)' }} />
-                  <span className="mono text-[11px] font-normal" style={{ color: 'var(--accent)' }}>{p.impact}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Link 
-                    href={p.href || "/portfolio"} 
-                    className="mono text-[10px] font-medium text-[var(--muted)] hover:text-[var(--accent)] transition-colors no-underline uppercase"
-                    aria-label={`View architecture for ${p.title}`}
-                  >
-                    View Architecture
-                  </Link>
-                  <span style={{ color: 'var(--border)', fontSize: '10px' }}>|</span>
-                  <Link 
-                    href={p.href || "/portfolio"} 
-                    className="mono text-[10px] font-bold text-[var(--accent)] hover:underline flex items-center gap-1 no-underline uppercase"
-                    aria-label={`Read case study for ${p.title}`}
-                  >
-                    Read Case Study <ArrowRight size={12} className="flex-shrink-0" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section className={styles.section} aria-labelledby="implementation-title"><div className="container">
+    <div className={styles.sectionHeading}><div><span className={styles.eyebrow}>THE IMPLEMENTATION NOTEBOOK</span><h2 className={styles.title} id="implementation-title">Ideas, put <span>to work.</span></h2></div><p>Go beyond the overview.<br/>See how the pieces fit together.</p></div>
+    <div className={styles.projectGrid}>{projects.map(({title,desc,tools,label,icon:Icon,href,steps},i)=><Link href={href} key={href} className={styles.project}>
+      <div className={styles.projectVisual} aria-hidden="true"><span className={styles.projectIcon}><Icon size={25} strokeWidth={1.5}/></span><div className={styles.flow}>{steps.map((step,j)=><span key={step}><i>{j+1}</i>{step}</span>)}</div><span className={styles.projectNumber}>0{i+1}</span></div>
+      <div className={styles.projectBody}><span className={styles.projectLabel}>{label}</span><h3>{title}</h3><p>{desc}</p><div className={styles.projectBottom}><div className={styles.tags}>{tools.map(t=><span key={t}>{t}</span>)}</div><span className={styles.projectArrow}><ArrowUpRight size={18}/></span></div></div>
+    </Link>)}</div>
+  </div></section>;
 }

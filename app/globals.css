@@ -121,6 +121,7 @@ input:-webkit-autofill:active {
   --hero-overlay-end: rgba(5, 5, 8, 0.4);
   --grid-color: #12121a;
   --radius: 12px;
+  --content-width: 1280px;
   --grid-size: 100px;
   --crosshair-offset: -20px;
   --hero-title-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 30%, #00f0ff 70%);
@@ -165,7 +166,8 @@ input:-webkit-autofill:active {
   --accent2: #006BD6;
   --accent3: #00478F;
   --text: #000000;
-  --muted: #3f3f46;
+  --muted: #303038;
+  --label-opacity: 1;
   --tag-bg: #e5e7eb;
   --navbar-bg: rgba(252, 252, 252, 0.98);
   --hero-overlay-start: #fcfcfc;
@@ -269,8 +271,8 @@ body {
 
 /* Technical Boxed Wrapper */
 .boxed-wrapper {
-  width: 100%;
-  max-width: 1077.88px;
+  width: calc(100% - 3rem);
+  max-width: var(--content-width);
   margin: 90px auto 40px;
   min-height: calc(100vh - 90px);
   background: var(--bg);
@@ -325,7 +327,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1077.88px;
+  max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -1306,3 +1308,23 @@ body:has(.admin-layout-root) {
   }
 }
 
+
+/* Light-theme readability: secondary text stays legible without flattening
+   image overlays, disabled controls, decorative graphics, or the dark theme. */
+.light :where(small, time, label, figcaption, .mono, .font-mono, .label-tech) {
+  font-weight: 500;
+}
+.light :is(.mono, .font-mono, .text-theme-muted, [class~="text-[var(--muted)]"]):is(.opacity-30, .opacity-40, .opacity-50, .opacity-60, .opacity-70):not(:disabled):not([aria-disabled="true"]) {
+  opacity: 1;
+}
+.light :is([style*="color: var(--muted)"], [style*="color:var(--muted)"])[style*="opacity"]:not(:disabled):not([aria-disabled="true"]) {
+  opacity: 1 !important;
+}
+.light :is(input, textarea)::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+/* Inline category badges use the same light-only readability treatment. */
+.light .tag.mono[style*="opacity"] {
+  opacity: 1 !important;
+}

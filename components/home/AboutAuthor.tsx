@@ -1,112 +1,33 @@
-
-import { CheckCircle2, Download, BookOpen, Award, FileText } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowUpRight, BookOpen, Compass, Code2, FlaskConical, ArrowRight } from 'lucide-react';
+import styles from './HomeFinish.module.css';
+
+const resources = [
+  ['Microsoft Fabric roadmap', 'Architecture & certification', '/blog/microsoft-fabric-certification-roadmap-2026'],
+  ['DP-600 study guide', 'Analytics engineering', '/blog/dp-600-study-guide-2026'],
+  ['Beyond the SELECT', 'SQL patterns & query design', '/blog/beyond-the-select-advanced-sql-for-bi'],
+  ['DAX performance patterns', 'Sharper analytical models', '/blog/mastering-dax-patterns-2026'],
+  ['Next.js performance guide', 'Rendering & discoverability', '/blog/nextjs-15-react-19-performance-manifesto-2026'],
+];
 
 export default function AboutAuthor() {
-  const learningTracks = [
-    "Microsoft Fabric: architecture & scaling",
-    "Power BI: performance optimization & DAX",
-    "SQL & Databases: logical query profiling",
-    "Next.js 15: production deployments & SEO",
-    "AI Automation: cloud workflow systems",
-    "Data Engineering: real-world case studies"
-  ];
-
-  const resources = [
-    { title: "Microsoft Fabric Roadmap Guide", desc: "Step-by-step master plan for capacity provisioning and OneLake architectures.", file: "/blog/microsoft-fabric-certification-roadmap-2026" },
-    { title: "DP-600 Analytics Study Guide", desc: "Detailed study guide & test preparation topics for Microsoft certification.", file: "/blog/dp-600-study-guide-2026" },
-    { title: "Enterprise SQL Tuning Guide", desc: "Top 10 index optimizations & execution plan analysis commands.", file: "/blog/beyond-the-select-advanced-sql-for-bi" },
-    { title: "Power BI DAX Performance Patterns", desc: "Standard formulas for lightning-fast incremental refreshes.", file: "/blog/mastering-dax-patterns-2026" },
-    { title: "Next.js 15 SEO Production Guide", desc: "Core Web Vitals auditing steps & schema structured markup guide.", file: "/blog/nextjs-15-react-19-performance-manifesto-2026" }
-  ];
-
-  return (
-    <section className="section" style={{ background: 'var(--bg)', padding: '5rem 0', borderTop: '1px solid var(--border)' }}>
-      <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Column 1: What You'll Learn (7cols) */}
-          <div className="lg:col-span-7">
-            <div className="label-tech mb-6 text-[var(--accent)]">EDUCATIONAL_MISSION // PATH</div>
-            <h2 style={{ fontSize: '2.5rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, marginBottom: '1.5rem' }}>
-              What You&apos;ll <span className="hero-title">Learn Here</span>
-            </h2>
-            <p style={{ color: 'var(--muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2.5rem' }}>
-              A growing collection of practical tutorials, architecture guides, certification resources, and real-world implementation examples.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {learningTracks.map((track, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={16} className="text-[var(--accent)] mt-1 flex-shrink-0" />
-                  <span style={{ fontSize: '14px', lineHeight: 1.5, color: 'var(--text)' }}>
-                    {track}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm max-w-xl">
-              <h3 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Award size={16} className="text-[var(--accent)]" /> Rooted in Experience
-              </h3>
-              <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '1rem' }}>
-                Everything published on this website comes from:
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                {[
-                  "✔ client implementations",
-                  "✔ personal experiments",
-                  "✔ certification studies",
-                  "✔ production projects",
-                  "✔ documented benchmarks"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-[12px] text-[var(--text)] font-semibold mono">
-                    <span className="text-[var(--accent)] font-bold">{item.split(' ')[0]}</span>
-                    <span>{item.substring(2)}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Column 2: Free Resource Sheets (5cols) */}
-          <div className="lg:col-span-5 bg-[var(--surface2)] border border-[var(--border)] rounded-sm p-8">
-            <h3 style={{ fontSize: '1.25rem', fontFamily: "'Syne', sans-serif", fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <FileText size={20} className="text-[var(--accent)]" /> Featured Resources
-            </h3>
-            <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '2rem', lineHeight: 1.5 }}>
-              Access our curated technical roadmap checklists, cheat sheets, and deep-dive optimization tutorials.
-            </p>
-
-            <div className="flex flex-col gap-4">
-              {resources.map((res, i) => (
-                <Link
-                  key={i}
-                  href={res.file}
-                  className="group flex items-start gap-4 p-4 border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] transition-all duration-300 rounded-sm no-underline"
-                >
-                  <div className="p-2 bg-[var(--surface2)] text-[var(--muted)] group-hover:text-[var(--accent)] rounded transition-colors mt-0.5">
-                    <BookOpen size={15} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: '13px', fontWeight: 700, margin: '0 0 0.25rem 0', color: 'var(--text)' }}>
-                      {res.title}
-                    </h4>
-                    <p style={{ fontSize: '11px', color: 'var(--muted)', margin: '0 0 0.5rem 0', lineHeight: 1.4 }}>
-                      {res.desc}
-                    </p>
-                    <div className="inline-flex items-center gap-1 text-[9px] mono uppercase font-bold text-[var(--accent)]">
-                      <BookOpen size={10} /> Read Free Guide
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
+  return <section className={styles.section} aria-labelledby="learning-approach-title"><div className="container">
+    <div className={styles.resourceLayout}>
+      <div className={styles.approach}>
+        <span className={styles.eyebrow}>FROM CONCEPT TO CONFIDENCE</span>
+        <h2 id="learning-approach-title" className={styles.title}>Understand it.<br />Build it.<br /><span>Make it yours.</span></h2>
+        <p className={styles.intro}>Practical ideas deserve practical next steps. Explore the reasoning, try the implementation, and adapt it to your own work.</p>
+        <div className={styles.method}>
+          {[{icon:Compass,title:'Find the why',text:'Architecture, context, and tradeoffs.'},{icon:Code2,title:'Explore the how',text:'Patterns, examples, and implementation.'},{icon:FlaskConical,title:'Test your thinking',text:'Measure results in your own environment.'}].map(({icon:Icon,title,text},i)=><div key={title}><span className={styles.methodIcon}><Icon size={17}/></span><div><h3>{title}</h3><p>{text}</p></div><span className={styles.smallIndex}>0{i+1}</span></div>)}
         </div>
+        <Link href="/about" className={styles.textLink}>Meet the person behind the guides <ArrowUpRight size={15}/></Link>
       </div>
-    </section>
-  );
+      <div className={styles.resourceShelf}>
+        <div className={styles.shelfHeading}><span className={styles.shelfIcon}><BookOpen size={21}/></span><div><span className={styles.eyebrow}>KEEP THESE CLOSE</span><h3>Your reference shelf</h3></div><span className={styles.shelfCount}>05</span></div>
+        <p className={styles.shelfIntro}>A few useful places to return to when you need a clearer answer.</p>
+        <div className={styles.resourceList}>{resources.map(([title,detail,href],i)=><Link href={href} key={href}><span className={styles.resourceNumber}>0{i+1}</span><div><h4>{title}</h4><p>{detail}</p></div><ArrowUpRight size={16}/></Link>)}</div>
+        <Link href="/blog" className={styles.shelfFooter}>Open the full library <ArrowRight size={15}/></Link>
+      </div>
+    </div>
+  </div></section>;
 }

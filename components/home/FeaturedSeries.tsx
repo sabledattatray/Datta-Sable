@@ -1,95 +1,39 @@
-
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Award, Layers } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, BookOpen, Layers, BarChart3, Code2 } from 'lucide-react';
+import styles from './FeaturedSeries.module.css';
 
-const SERIES = [
-  {
-    title: 'Learn Microsoft Fabric',
-    parts: 'Fabric learning path',
-    desc: 'Master Microsoft Fabric. Walk through OneLake architecture, capacity optimization, Direct Lake mode, and data pipelines.',
-    color: '#00C9F2',
-    icon: <Layers size={20} />,
-    slug: 'microsoft-fabric'
-  },
-  {
-    title: 'Master Power BI',
-    parts: 'Power BI tutorials',
-    desc: 'Advanced DAX modeling, query folding optimizations, incremental refreshes, and enterprise scale architectures.',
-    color: 'var(--accent)',
-    icon: <Award size={20} />,
-    slug: 'power-bi'
-  },
-  {
-    title: 'Next.js 15 SEO & Performance',
-    parts: 'Next.js guides',
-    desc: 'Complete developer guide to React Server Components, metadata management, fast indexing, and PageSpeed optimizations.',
-    color: '#ff1744',
-    icon: <BookOpen size={20} />,
-    slug: 'nextjs'
-  }
+const series = [
+  { title: 'Inside Microsoft Fabric', label: 'THE DATA PLATFORM', desc: 'Understand how OneLake, Direct Lake, and pipelines fit together.', chapters: ['OneLake architecture', 'Capacity & performance', 'Data pipelines'], slug: 'microsoft-fabric', icon: Layers },
+  { title: 'The Power BI playbook', label: 'THE ANALYTICS STACK', desc: 'Build sharper models and dashboards that make complex data useful.', chapters: ['DAX & semantic models', 'Query folding', 'Refresh strategies'], slug: 'power-bi', icon: BarChart3 },
+  { title: 'Build a faster web', label: 'THE WEB ENGINEERING SERIES', desc: 'Connect rendering, discoverability, and performance in Next.js.', chapters: ['Server Components', 'Metadata & indexing', 'Core Web Vitals'], slug: 'nextjs', icon: Code2 },
 ];
 
+function CoverArt({ variant }: { variant: number }) {
+  return <svg viewBox="0 0 240 100" fill="none" aria-hidden="true" className={styles.art}>
+    <defs><pattern id={`series-grid-${variant}`} width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" stroke="currentColor" strokeOpacity=".07" /></pattern></defs>
+    <rect width="240" height="100" fill={`url(#series-grid-${variant})`} />
+    {variant === 0 ? <>
+      <path d="M45 49H195M83 49V24H157V49M83 49V76H157V49" stroke="currentColor" opacity=".25" />
+      {[45,120,195].map((x,i)=><g key={x}><rect x={x-15} y="34" width="30" height="30" rx="7" fill="var(--surface)" stroke="currentColor" strokeOpacity={i===1?'.8':'.25'} /><path d={`M${x-7} 46l7-4 7 4-7 4-7-4zm0 5l7 4 7-4`} stroke="currentColor" strokeOpacity={i===1?'1':'.45'} /></g>)}
+      <circle cx="83" cy="24" r="3" fill="currentColor" /><circle cx="157" cy="76" r="3" fill="currentColor" />
+    </> : variant === 1 ? <>
+      <path d="M42 78H199" stroke="currentColor" opacity=".2" />
+      {[27,43,35,60,51,69].map((h,i)=><g key={i}><rect x={50+i*24} y={78-h} width="8" height={h} rx="2" fill="currentColor" opacity={.25+i*.1} /><rect x={60+i*24} y={84-h} width="5" height={h-6} rx="2" fill="currentColor" opacity=".12" /></g>)}
+      <path d="M47 38l30-8 26 5 25-16 25 6 38-16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 4" opacity=".6" />
+    </> : <>
+      <rect x="46" y="15" width="148" height="72" rx="7" fill="var(--surface)" stroke="currentColor" strokeOpacity=".25" /><path d="M46 31H194" stroke="currentColor" opacity=".18" />
+      {[55,62,69].map(x=><circle key={x} cx={x} cy="23" r="1.5" fill="currentColor" opacity=".5" />)}
+      <path d="M76 45l-9 9 9 9m18-18l9 9-9 9m-7-22l-6 26" stroke="currentColor" strokeWidth="1.5" /><path d="M118 46h49m-49 9h32m-32 9h43" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity=".2" /><path d="M148 76h29" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity=".6" />
+    </>}
+  </svg>;
+}
+
 export default function FeaturedSeries() {
-  return (
-    <section className="section" style={{ background: 'var(--bg)', padding: '5rem 0', borderTop: '1px solid var(--border)' }}>
-      <div className="container">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div style={{ maxWidth: 550 }}>
-            <div className="label-tech mb-4 text-[var(--accent)]">CURATED // LEARNING JOURNEYS</div>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700 }}>
-              Curated <span className="hero-title">Learning Series</span>
-            </h2>
-            <p style={{ color: 'var(--muted)', marginTop: '0.5rem', lineHeight: 1.6 }}>
-              Follow structured paths designed to take you from core concepts to practical execution.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERIES.map((s) => (
-            <div
-              key={s.title}
-            >
-              <Link href={`/category/${s.slug}`} className="group block no-underline h-full">
-                <div 
-                  className="card h-full flex flex-col justify-between" 
-                  style={{ 
-                    padding: '2.5rem 2rem', 
-                    background: 'var(--surface2)', 
-                    border: '1px solid var(--border)',
-                    borderTop: `3px solid ${s.color}`,
-                    borderRadius: '4px',
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="p-3 bg-[var(--surface)] rounded-sm" style={{ color: s.color }}>
-                        {s.icon}
-                      </div>
-                      <span className="mono text-[10px] uppercase font-bold text-[var(--accent)] border border-[var(--accent)]/30 px-2 py-0.5 rounded-sm bg-[var(--surface)]">
-                        {s.parts}
-                      </span>
-                    </div>
-                    
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text)' }}>
-                      {s.title}
-                    </h3>
-                    
-                    <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem' }}>
-                      {s.desc}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-[var(--accent)] font-bold text-[11px] mono tracking-widest group-hover:translate-x-1 transition-transform">
-                    START SERIES <ArrowRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section className={styles.section} aria-labelledby="learning-series-title"><div className="container">
+    <div className={styles.heading}><div><span className={styles.eyebrow}><BookOpen size={14} /> THE DEEPER READ</span><h2 id="learning-series-title">Less searching.<br /><span>More understanding.</span></h2></div><p>Explore a subject from the inside out.<br />Three focused collections for your next deep dive.</p></div>
+    <div className={styles.grid}>{series.map(({ title, label, desc, chapters, slug, icon: Icon }, i) => <Link href={`/category/${slug}`} className={styles.card} key={slug}>
+      <div className={styles.cover}><div className={styles.coverTop}><span>COLLECTION / 0{i+1}</span><Icon size={16} strokeWidth={1.5} /></div><CoverArt variant={i} /><span className={styles.coverLabel}>{label}</span></div>
+      <div className={styles.body}><h3>{title}</h3><p>{desc}</p><div className={styles.chapters}>{chapters.map((chapter,j)=><div key={chapter}><span>0{j+1}</span>{chapter}<ArrowRight size={11} /></div>)}</div><div className={styles.footer}><span>Explore collection</span><span className={styles.arrow}><ArrowUpRight size={17} /></span></div></div>
+    </Link>)}</div>
+  </div></section>;
 }

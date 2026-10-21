@@ -2,129 +2,78 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import PostMetadata from '@/components/PostMetadata';
+import { ArrowUpRight, ArrowRight, Clock3, Layers, Sparkles, TrendingUp } from 'lucide-react';
+import { formatPostDate, formatReadTime } from '@/lib/post-metadata';
+import styles from './LatestInsights.module.css';
 
-export default function LatestInsights({ posts }: { posts?: any[] }) {
-  const [activeTab, setActiveTab] = useState<'latest' | 'featured' | 'trending'>('latest');
+type InsightPost = {
+  slug: string; title: string; category: string; excerpt: string;
+  image?: string | null; readTime?: number | string | null; date?: string | Date | null;
+};
+type Filter = 'latest' | 'bi' | 'ai';
+const filters = [
+  { id: 'latest' as const, label: 'Latest', icon: Clock3 },
+  { id: 'bi' as const, label: 'Power BI & Fabric', icon: TrendingUp },
+  { id: 'ai' as const, label: 'AI & Automation', icon: Sparkles },
+];
 
-  const getFilteredPosts = () => {
-    const rawPosts = posts || [];
-    if (activeTab === 'latest') {
-      return rawPosts.slice(0, 6);
-    }
-    if (activeTab === 'featured') {
-      const featured = rawPosts.filter(p =>
-        p.title.toLowerCase().includes('fabric') ||
-        p.title.toLowerCase().includes('dp-') ||
-        p.title.toLowerCase().includes('guide') ||
-        p.category.toLowerCase().includes('guide')
-      );
-      return featured.length > 0 ? featured.slice(0, 6) : rawPosts.slice(0, 6);
-    }
-    if (activeTab === 'trending') {
-      const trending = rawPosts.filter(p =>
-        p.title.toLowerCase().includes('architecture') ||
-        p.title.toLowerCase().includes('n8n') ||
-        p.title.toLowerCase().includes('workflow') ||
-        p.title.toLowerCase().includes('performance')
-      );
-      return trending.length > 0 ? trending.slice(0, 6) : rawPosts.slice(3, 9);
-    }
-    return rawPosts.slice(0, 6);
-  };
-
-  const displayPosts = getFilteredPosts();
+export default function LatestInsights({ posts = [] }: { posts?: InsightPost[] }) {
+  const [activeTab, setActiveTab] = useState<Filter>('latest');
+  const matches = activeTab === 'latest' ? posts : posts.filter(post => {
+    const text = `${post.title} ${post.category}`.toLowerCase();
+    return activeTab === 'bi'
+      ? /\bfabric\b|power bi|\bdax\b|\bonelake\b/.test(text)
+      : /\bai\b|automation|\bn8n\b|\bllm\b|prompt|agent|workflow/.test(text);
+  });
+  const displayPosts = matches.slice(0, 6);
 
   return (
-    <section className="section" style={{ borderTop: '1px solid var(--border)', paddingBottom: '6rem', paddingTop: '5rem' }}>
+    <section className={`section ${styles.section}`} aria-labelledby="home-articles-title">
       <div className="container">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div style={{ maxWidth: 500 }}>
-            <div className="label-tech mb-4 text-[var(--accent)]">LATEST-ARTICLES-V1.0</div>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>
-              Technical <span className="hero-title">Guides &amp; Articles</span>
-            </h2>
-            <p style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
-              In-depth tutorials and architectural breakdowns covering Microsoft Fabric, Power BI, SQL databases, and Next.js SEO.
-            </p>
+        <div className={styles.heading}>
+          <div>
+            <span className={styles.eyebrow}><Layers size={13} /> THE READING ROOM</span>
+            <h2 id="home-articles-title">Ideas worth <span>building on.</span></h2>
+            <p>Practical guides on data, intelligent workflows, and the systems behind them.</p>
           </div>
-
-          <Link href="/blog" className="flex items-center gap-2 group no-underline" style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.1em' }}>
-            VIEW ALL ARTICLES <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <Link href="/blog" className={styles.allArticles}>All articles <ArrowUpRight size={16} /></Link>
         </div>
-
-        {/* Tab Filters */}
-        <div className="flex gap-6 mb-8 border-b border-[var(--border)] pb-2 overflow-x-auto no-scrollbar" style={{ borderBottomWidth: '1px' }}>
-          {[
-            { id: 'latest', label: '🆕 Latest' },
-            { id: 'featured', label: '🔥 Popular' },
-            { id: 'trending', label: '⭐ Editor\'s Picks' }
-          ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className="mono text-[11px] uppercase tracking-wider font-bold transition-all duration-300"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: activeTab === tab.id ? 'var(--accent)' : 'var(--muted)',
-                borderBottom: activeTab === tab.id ? '2px solid var(--accent)' : '2px solid transparent',
-                paddingBottom: '0.75rem',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div className={styles.filterBar}>
+          <div className={styles.filters} role="group" aria-label="Filter articles">
+            {filters.map(({ id, label, icon: Icon }) => <button key={id} type="button" aria-pressed={activeTab === id} className={activeTab === id ? styles.active : ''} onClick={() => setActiveTab(id)}><Icon size={13} /><span>{label}</span></button>)}
+          </div>
+          <span className={styles.count}>{String(displayPosts.length).padStart(2, '0')} selected reads</span>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {displayPosts.map((post) => {
-            const imageSrc = post.image || '/images/dattasable.com.webp';
-
-            return (
-              <div
-                key={post.slug}              >
-                <Link href={`/blog/${post.slug}`} className="group no-underline block h-full">
-                  <div className="card h-full flex flex-col" style={{ padding: '1.5rem', borderLeft: '2px solid var(--border)', transition: 'border-color 0.3s ease' }}>
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={imageSrc}
-                        alt={post.title}
-                        fill
-                        sizes="(max-width: 640px) calc(100vw - 82px), (max-width: 767px) calc(100vw - 98px), (max-width: 1078px) calc((100vw - 112px) / 3 - 50px), 272px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute top-3 left-3">
-                        <div className="tag" style={{ background: 'var(--bg)', backdropFilter: 'blur(10px)', border: '1px solid var(--border)' }}>
-                          {post.category}
-                        </div>
-                      </div>
-                    </div>
-
-                    <PostMetadata readTime={post.readTime} date={post.date} />
-
-                    <h3 style={{ fontSize: '1.25rem', lineHeight: 1.3, marginBottom: '1rem', color: 'var(--text)' }}>
-                      {post.title}
-                    </h3>
-
-                    <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center gap-2 text-[var(--accent)] font-bold text-[11px] mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                      READ FULL LOG <ArrowRight size={14} />
-                    </div>
+        <div className={styles.grid} aria-live="polite" aria-atomic="true">
+          {displayPosts.map(post => {
+            const published = formatPostDate(post.date);
+            const duration = formatReadTime(post.readTime);
+            return <article key={post.slug} className={styles.article}>
+              <Link href={`/blog/${post.slug}`} className={styles.card} aria-labelledby={`insight-${post.slug}`}>
+                <div className={styles.image}>
+                  <div className={`${styles.thumbnail} ${/cybersecurity/i.test(post.title) ? styles.securityThumbnail : ''}`}>
+                  <Image src={post.image || '/images/editorial-placeholder.svg'} alt="" fill sizes="(max-width: 480px) 112px, (max-width: 800px) 32vw, (max-width: 1100px) 21vw, 235px" />
                   </div>
-                </Link>
-              </div>
-            );
+                  <span className={styles.imageArrow} aria-hidden="true"><ArrowUpRight size={16} /></span>
+                </div>
+                <div className={styles.content}>
+                  <span className={styles.category}>{post.category}</span>
+                  <h3 id={`insight-${post.slug}`} title={post.title}>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                  <div className={styles.footer}>
+                    <div className={styles.metadata}>
+                      {duration && <span><Clock3 size={11} />{duration}</span>}
+                      {published && <time dateTime={published.dateTime}>{published.label}</time>}
+                    </div>
+                    <ArrowRight size={15} className={styles.readArrow} aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>;
           })}
         </div>
+        {!displayPosts.length && <p className={styles.empty}>New guides are on their way. <Link href="/blog">Explore the blog.</Link></p>}
       </div>
     </section>
   );

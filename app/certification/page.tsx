@@ -214,8 +214,8 @@ export default function CertificationPage() {
           
           {/* Header Hero */}
           <div className="relative mb-14 text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-5 border border-lime-400/30 bg-lime-400/10 text-lime-400 shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-lime-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-5 border border-[color-mix(in_srgb,var(--accent)_30%,var(--border))] dark:border-lime-400/30 bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] dark:bg-lime-400/10 text-[var(--accent)] dark:text-lime-400 shadow-sm">
+              <ShieldCheck className="w-4 h-4 text-[var(--accent)] dark:text-lime-400" />
               <span>100% Authenticated &bull; Verified Industry Accreditations</span>
             </div>
 
@@ -223,29 +223,29 @@ export default function CertificationPage() {
               Professional <span style={{ color: "var(--accent)" }}>Certifications</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-[var(--muted)] dark:text-zinc-400 leading-relaxed">
               Official industry credentials in Artificial Intelligence, Google Analytics 4 (GA4), Enterprise Prompt Architecture, and Digital Marketing Strategy.
             </p>
 
             {/* Quick Stats Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 text-xs font-mono text-zinc-300">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                <Award className="w-4 h-4 text-lime-400" />
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 text-xs font-mono text-[var(--text)] dark:text-zinc-300">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--surface2)] dark:bg-zinc-900/60 border border-[var(--border)] dark:border-zinc-800">
+                <Award className="w-4 h-4 text-[var(--accent)] dark:text-lime-400" />
                 <span><strong>6</strong> Verified Credentials</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                <CheckCircle2 className="w-4 h-4 text-sky-400" />
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--surface2)] dark:bg-zinc-900/60 border border-[var(--border)] dark:border-zinc-800">
+                <CheckCircle2 className="w-4 h-4 text-[var(--accent)] dark:text-sky-400" />
                 <span><strong>Google &amp; LinkedIn</strong> Certified</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                <Clock className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--surface2)] dark:bg-zinc-900/60 border border-[var(--border)] dark:border-zinc-800">
+                <Clock className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
                 <span>Completed <strong>April 2025</strong></span>
               </div>
             </div>
           </div>
 
           {/* Filter Bar & Search */}
-          <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4 p-2 rounded-2xl bg-zinc-900/40 border border-zinc-800/80">
+          <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4 p-2 rounded-2xl bg-[var(--surface2)] dark:bg-zinc-900/40 border border-[var(--border)] dark:border-zinc-800/80">
             {/* Category Pills */}
             <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
               {[
@@ -260,8 +260,8 @@ export default function CertificationPage() {
                   onClick={() => setActiveCategory(tab.id)}
                   className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
                     activeCategory === tab.id
-                      ? "bg-lime-400 text-black shadow-sm font-bold"
-                      : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+                      ? "bg-[var(--accent)] dark:bg-lime-400 text-[var(--btn-primary-text)] dark:text-black shadow-sm font-bold"
+                      : "text-[var(--muted)] dark:text-zinc-400 hover:text-[var(--text)] dark:hover:text-white hover:bg-[var(--surface2)] dark:hover:bg-zinc-800/60"
                   }`}
                 >
                   {tab.label}
@@ -271,13 +271,13 @@ export default function CertificationPage() {
 
             {/* Search Input */}
             <div className="relative w-full md:w-72">
-              <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-[var(--muted)] dark:text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 placeholder="Search skills, titles, or IDs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-xs bg-zinc-950/80 border border-zinc-800 rounded-xl text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-lime-400"
+                className="w-full pl-9 pr-4 py-2 text-xs bg-[var(--surface)] dark:bg-zinc-950/80 border border-[var(--border)] dark:border-zinc-800 rounded-xl text-[var(--text)] dark:text-zinc-200 placeholder-[var(--muted)] dark:placeholder-zinc-500 focus:outline-none focus:border-[color-mix(in_srgb,var(--accent)_30%,var(--border))] dark:focus:border-lime-400"
               />
             </div>
           </div>
@@ -287,29 +287,29 @@ export default function CertificationPage() {
             {filteredCerts.map((cert) => (
               <div
                 key={cert.id}
-                className="group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 border border-zinc-800/80 hover:border-zinc-700 bg-zinc-950/60 hover:bg-zinc-900/40 shadow-lg hover:shadow-2xl"
+                className="group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 border border-[var(--border)] dark:border-zinc-800/80 hover:border-[var(--border)] dark:hover:border-zinc-700 bg-[var(--surface)] dark:bg-zinc-950/60 hover:bg-[var(--surface2)] dark:hover:bg-zinc-900/40 shadow-lg hover:shadow-2xl"
               >
                 <div>
                   {/* Top Bar with Issuer & Status Badge */}
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-zinc-900 border border-zinc-700 text-zinc-200">
-                      <Award className="w-3.5 h-3.5 text-lime-400" />
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[var(--surface2)] dark:bg-zinc-900 border border-[var(--border)] dark:border-zinc-700 text-[var(--text)] dark:text-zinc-200">
+                      <Award className="w-3.5 h-3.5 text-[var(--accent)] dark:text-lime-400" />
                       <span>{cert.issuerBadge}</span>
                     </span>
 
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
                       <CheckCircle2 className="w-3 h-3" />
                       <span>Verified</span>
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-lg font-bold text-white group-hover:text-lime-400 transition-colors leading-snug mb-2 font-display">
+                  <h2 className="text-lg font-bold text-[var(--text)] dark:text-white group-hover:text-[var(--accent)] dark:group-hover:text-lime-400 transition-colors leading-snug mb-2 font-display">
                     {cert.title}
                   </h2>
 
                   {/* Description */}
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-4 line-clamp-3">
+                  <p className="text-xs text-[var(--muted)] dark:text-zinc-400 leading-relaxed mb-4 line-clamp-3">
                     {cert.description}
                   </p>
 
@@ -318,13 +318,13 @@ export default function CertificationPage() {
                     {cert.skills.slice(0, 4).map((skill, sIdx) => (
                       <span
                         key={sIdx}
-                        className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900/80 text-zinc-300 border border-zinc-800"
+                        className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-[var(--surface2)] dark:bg-zinc-900/80 text-[var(--text)] dark:text-zinc-300 border border-[var(--border)] dark:border-zinc-800"
                       >
                         {skill}
                       </span>
                     ))}
                     {cert.skills.length > 4 && (
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900/80 text-zinc-500 border border-zinc-800">
+                      <span className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-[var(--surface2)] dark:bg-zinc-900/80 text-[var(--muted)] dark:text-zinc-500 border border-[var(--border)] dark:border-zinc-800">
                         +{cert.skills.length - 4} more
                       </span>
                     )}
@@ -334,35 +334,35 @@ export default function CertificationPage() {
                 {/* Card Bottom Meta & Actions */}
                 <div className="pt-4 border-t border-zinc-800/70 space-y-4">
                   {/* Metadata Row */}
-                  <div className="flex items-center justify-between text-[11px] text-zinc-400 font-mono">
+                  <div className="flex items-center justify-between text-[11px] text-[var(--muted)] dark:text-zinc-400 font-mono">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3 text-zinc-500" />
+                      <Calendar className="w-3 h-3 text-[var(--muted)] dark:text-zinc-500" />
                       {cert.issueDate}
                     </span>
                     {cert.duration && (
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-zinc-500" />
+                        <Clock className="w-3 h-3 text-[var(--muted)] dark:text-zinc-500" />
                         {cert.duration}
                       </span>
                     )}
                   </div>
 
                   {/* Credential ID Copy Button */}
-                  <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-zinc-900/80 border border-zinc-800/80 text-[10px] font-mono">
-                    <div className="truncate text-zinc-400">
-                      <span className="text-zinc-500 mr-1">ID:</span>
-                      <span className="text-zinc-300">{cert.credentialId}</span>
+                  <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-[var(--surface2)] dark:bg-zinc-900/80 border border-[var(--border)] dark:border-zinc-800/80 text-[10px] font-mono">
+                    <div className="truncate text-[var(--muted)] dark:text-zinc-400">
+                      <span className="text-[var(--muted)] dark:text-zinc-500 mr-1">ID:</span>
+                      <span className="text-[var(--text)] dark:text-zinc-300">{cert.credentialId}</span>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleCopyId(cert.id, cert.credentialId)}
-                      className="px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors shrink-0 flex items-center gap-1 text-[10px]"
+                      className="px-2 py-1 rounded bg-[var(--surface2)] dark:bg-zinc-800 hover:bg-[var(--surface2)] dark:hover:bg-zinc-700 text-[var(--text)] dark:text-zinc-300 hover:text-[var(--text)] dark:hover:text-white transition-colors shrink-0 flex items-center gap-1 text-[10px]"
                       title="Copy Credential ID"
                     >
                       {copiedId === cert.id ? (
                         <>
-                          <Check className="w-3 h-3 text-lime-400" />
-                          <span className="text-lime-400">Copied</span>
+                          <Check className="w-3 h-3 text-[var(--accent)] dark:text-lime-400" />
+                          <span className="text-[var(--accent)] dark:text-lime-400">Copied</span>
                         </>
                       ) : (
                         <>
@@ -378,7 +378,7 @@ export default function CertificationPage() {
                     <button
                       type="button"
                       onClick={() => setActivePdfModal(cert)}
-                      className="flex-1 py-2.5 px-3 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                      className="flex-1 py-2.5 px-3 rounded-xl bg-[var(--accent)] dark:bg-lime-400 hover:bg-[var(--accent2)] dark:hover:bg-lime-300 text-[var(--btn-primary-text)] dark:text-black font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>View PDF</span>
@@ -388,7 +388,7 @@ export default function CertificationPage() {
                       href={cert.pdfFile}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition-colors"
+                      className="p-2.5 rounded-xl bg-[var(--surface2)] dark:bg-zinc-900 hover:bg-[var(--surface2)] dark:hover:bg-zinc-800 text-[var(--text)] dark:text-zinc-300 hover:text-[var(--text)] dark:hover:text-white border border-[var(--border)] dark:border-zinc-800 transition-colors"
                       title="Open in New Tab"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -397,7 +397,7 @@ export default function CertificationPage() {
                     <a
                       href={cert.pdfFile}
                       download
-                      className="p-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition-colors"
+                      className="p-2.5 rounded-xl bg-[var(--surface2)] dark:bg-zinc-900 hover:bg-[var(--surface2)] dark:hover:bg-zinc-800 text-[var(--text)] dark:text-zinc-300 hover:text-[var(--text)] dark:hover:text-white border border-[var(--border)] dark:border-zinc-800 transition-colors"
                       title="Download PDF"
                     >
                       <Download className="w-4 h-4" />
@@ -409,16 +409,16 @@ export default function CertificationPage() {
           </div>
 
           {/* Verification & Trust Banner */}
-          <div className="mt-16 p-8 rounded-3xl bg-zinc-900/50 border border-zinc-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="mt-16 p-8 rounded-3xl bg-zinc-900/50 border border-[var(--border)] dark:border-zinc-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1.5 max-w-2xl">
-              <div className="flex items-center gap-2 text-lime-400 text-xs font-semibold">
+              <div className="flex items-center gap-2 text-[var(--accent)] dark:text-lime-400 text-xs font-semibold">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Third-Party Verification Guarantee</span>
               </div>
-              <h3 className="text-lg font-bold text-white font-display">
+              <h3 className="text-lg font-bold text-[var(--text)] dark:text-white font-display">
                 Verifiable Official Records
               </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
+              <p className="text-xs text-[var(--muted)] dark:text-zinc-400 leading-relaxed">
                 All certificates listed are stored in original, uncompressed PDF format with immutable cryptographic Certificate IDs issued by Google Skillshop and LinkedIn Learning.
               </p>
             </div>
@@ -426,14 +426,14 @@ export default function CertificationPage() {
             <div className="flex items-center gap-3 shrink-0">
               <a
                 href="/portfolio"
-                className="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-semibold text-xs border border-zinc-700 transition-colors flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-[var(--surface2)] dark:bg-zinc-800 hover:bg-[var(--surface2)] dark:hover:bg-zinc-700 text-[var(--text)] dark:text-white font-semibold text-xs border border-[var(--border)] dark:border-zinc-700 transition-colors flex items-center gap-1.5"
               >
                 <span>View Project Portfolio</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
               <a
                 href="/contact"
-                className="px-5 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-bold text-xs transition-colors"
+                className="px-5 py-2.5 rounded-xl bg-[var(--accent)] dark:bg-lime-400 hover:bg-[var(--accent2)] dark:hover:bg-lime-300 text-[var(--btn-primary-text)] dark:text-black font-bold text-xs transition-colors"
               >
                 Get in Touch
               </a>
@@ -446,18 +446,18 @@ export default function CertificationPage() {
       {/* Interactive Fullscreen PDF Modal */}
       {activePdfModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-5xl bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
+          <div className="relative w-full max-w-5xl bg-[var(--surface)] dark:bg-zinc-950 border border-[var(--border)] dark:border-zinc-800 rounded-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
             {/* Modal Header */}
-            <div className="p-4 sm:px-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/80">
+            <div className="p-4 sm:px-6 border-b border-[var(--border)] dark:border-zinc-800 flex items-center justify-between bg-[var(--surface2)] dark:bg-zinc-900/80">
               <div className="flex items-center gap-3 truncate pr-4">
-                <div className="w-8 h-8 rounded-lg bg-lime-400/10 text-lime-400 border border-lime-400/20 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] dark:bg-lime-400/10 text-[var(--accent)] dark:text-lime-400 border border-lime-400/20 flex items-center justify-center shrink-0">
                   <Award className="w-4 h-4" />
                 </div>
                 <div className="truncate">
-                  <h3 className="text-sm font-bold text-white truncate font-display">
+                  <h3 className="text-sm font-bold text-[var(--text)] dark:text-white truncate font-display">
                     {activePdfModal.title}
                   </h3>
-                  <span className="text-[11px] text-zinc-400 font-mono">
+                  <span className="text-[11px] text-[var(--muted)] dark:text-zinc-400 font-mono">
                     Issuer: {activePdfModal.issuer} &bull; ID: {activePdfModal.credentialId}
                   </span>
                 </div>
@@ -467,7 +467,7 @@ export default function CertificationPage() {
                 <a
                   href={activePdfModal.pdfFile}
                   download
-                  className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold transition-colors flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-lg bg-[var(--surface2)] dark:bg-zinc-800 hover:bg-[var(--surface2)] dark:hover:bg-zinc-700 text-[var(--text)] dark:text-zinc-200 text-xs font-semibold transition-colors flex items-center gap-1"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Download</span>
@@ -476,7 +476,7 @@ export default function CertificationPage() {
                   href={activePdfModal.pdfFile}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold transition-colors flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-lg bg-[var(--surface2)] dark:bg-zinc-800 hover:bg-[var(--surface2)] dark:hover:bg-zinc-700 text-[var(--text)] dark:text-zinc-200 text-xs font-semibold transition-colors flex items-center gap-1"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Full Tab</span>
@@ -484,7 +484,7 @@ export default function CertificationPage() {
                 <button
                   type="button"
                   onClick={() => setActivePdfModal(null)}
-                  className="p-1.5 rounded-lg bg-zinc-800 hover:bg-red-500/20 hover:text-red-400 text-zinc-400 transition-colors"
+                  className="p-1.5 rounded-lg bg-[var(--surface2)] dark:bg-zinc-800 hover:bg-red-500/20 hover:text-red-700 dark:hover:text-red-400 text-[var(--muted)] dark:text-zinc-400 transition-colors"
                   aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
@@ -493,7 +493,7 @@ export default function CertificationPage() {
             </div>
 
             {/* Modal PDF Viewer Body */}
-            <div className="flex-1 bg-zinc-900 overflow-hidden relative min-h-[60vh]">
+            <div className="flex-1 bg-[var(--surface2)] dark:bg-zinc-900 overflow-hidden relative min-h-[60vh]">
               <iframe
                 src={`${activePdfModal.pdfFile}#toolbar=1&navpanes=0`}
                 className="w-full h-full min-h-[65vh] border-0"
@@ -502,12 +502,12 @@ export default function CertificationPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-3 sm:px-6 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+            <div className="p-3 sm:px-6 bg-[var(--surface)] dark:bg-zinc-950 border-t border-[var(--border)] dark:border-zinc-800 flex items-center justify-between text-xs text-[var(--muted)] dark:text-zinc-400">
               <span>Recipient: <strong>{activePdfModal.recipient}</strong></span>
               <button
                 type="button"
                 onClick={() => setActivePdfModal(null)}
-                className="text-xs text-lime-400 hover:underline font-semibold"
+                className="text-xs text-[var(--accent)] dark:text-lime-400 hover:underline font-semibold"
               >
                 Close Viewer
               </button>

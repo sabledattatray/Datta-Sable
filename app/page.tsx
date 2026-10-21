@@ -27,7 +27,12 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const posts = await getPublishedBlogPosts().catch(() => []);
-  const recentPosts = posts.slice(0, 6);
+  // Send card metadata only; category tabs need more than the latest six posts.
+  const insightPosts = posts.map(({ slug, title, category, excerpt, image, readTime, date }) => ({
+    slug, title, category, excerpt, image,
+    readTime: typeof readTime === 'number' || typeof readTime === 'string' ? readTime : null,
+    date,
+  }));
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -40,7 +45,7 @@ export default async function HomePage() {
         <Hero />
 
         {/* ── 2. BELOW THE FOLD COMPONENTS (DEFERRED HYDRATION) ── */}
-        <BelowTheFold posts={recentPosts} articleCount={posts.length} categoryCount={new Set(posts.map(post => post.category)).size} />
+        <BelowTheFold posts={insightPosts} articleCount={posts.length} categoryCount={new Set(posts.map(post => post.category)).size} />
 
         <Crosshair position="br" />
       </div>

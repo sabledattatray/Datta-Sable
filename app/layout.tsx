@@ -59,7 +59,7 @@ export const metadata: Metadata = {
       { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
     ],
     shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
     google: "XV8qSN_qy63Tsmx3naTd1yXZr5CbLhaT22Xsmhf5cAw",

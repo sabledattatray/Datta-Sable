@@ -1,10 +1,12 @@
+import { ArrowUpRight, Library } from 'lucide-react';
+import Link from 'next/link';
+import styles from './HomeFinish.module.css';
+
 export default function StatsGrid({ articleCount, categoryCount }: { articleCount: number; categoryCount: number }) {
-  return <section className="section" style={{ background: 'var(--surface2)', padding: '3rem 0' }}>
-    <div className="container"><h2 style={{ fontSize: '2rem', marginBottom: 24 }}>Explore the publication</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div className="card p-8"><p style={{ fontSize: '2.5rem', color: 'var(--accent)' }}>{articleCount}</p><p>Published articles</p></div>
-        <div className="card p-8"><p style={{ fontSize: '2.5rem', color: 'var(--accent)' }}>{categoryCount}</p><p>Article categories</p></div>
-      </div>
-    </div>
-  </section>;
+  return <section className={styles.statsSection} aria-labelledby="publication-title"><div className="container"><div className={styles.statsStrip}>
+    <div className={styles.statsLead}><Library size={23}/><div><span className={styles.eyebrow}>THE PUBLICATION</span><h2 id="publication-title">Room to keep exploring.</h2></div></div>
+    <div className={styles.stat}><strong>{articleCount.toLocaleString('en-IN')}</strong><span>Published articles</span></div>
+    <div className={styles.stat}><strong>{categoryCount.toLocaleString('en-IN')}</strong><span>Article categories</span></div>
+    <Link className={styles.statsLink} href="/blog" aria-label="Explore the publication"><ArrowUpRight size={23}/></Link>
+  </div></div></section>;
 }

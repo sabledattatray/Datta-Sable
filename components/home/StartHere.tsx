@@ -1,121 +1,32 @@
-
 import Link from 'next/link';
-import styles from './HomeCards.module.css';
-import { ArrowRight, Layers, BarChart3, Code2, Cpu } from 'lucide-react';
+import { ArrowUpRight, Layers, BarChart3, Code2, Cpu, Route } from 'lucide-react';
+import styles from './StartHere.module.css';
 
-const TRACKS = [
-  {
-    title: 'New to Microsoft Fabric?',
-    commitment: 'Beginner · 18 Articles · 4 Hours',
-    action: 'Read the Fundamentals Guide',
-    desc: 'Deep-dive into OneLake architecture, Direct Lake mode, capacity provisioning, and DP-600 study tracks.',
-    href: '/blog/microsoft-fabric-certification-roadmap-2026',
-    icon: <Layers size={20} />,
-    color: '#00C9F2',
-    badge: 'FABRIC'
-  },
-  {
-    title: 'Learning Power BI?',
-    commitment: 'Intermediate · 24 Articles · 6 Hours',
-    action: 'Start with the Beginner Series',
-    desc: 'Master dashboard psychology, advanced DAX performance models, query folding, and enterprise architecture.',
-    href: '/blog/psychology-of-high-fidelity-dashboard-design',
-    icon: <BarChart3 size={20} />,
-    color: 'var(--accent)',
-    badge: 'POWER BI'
-  },
-  {
-    title: 'Interested in Next.js SEO?',
-    commitment: 'Intermediate · 17 Articles · 5 Hours',
-    action: 'Follow the 12-part Guide',
-    desc: 'Learn React Server Components, metadata optimization, crawler indexing, and Core Web Vitals profiling.',
-    href: '/blog/nextjs-15-react-19-performance-manifesto-2026',
-    icon: <Code2 size={20} />,
-    color: '#ff1744',
-    badge: 'NEXT.JS'
-  },
-  {
-    title: 'Exploring AI Automation?',
-    commitment: 'Advanced · 19 Articles · 8 Hours',
-    action: 'Begin with MCP & n8n Tutorials',
-    desc: 'Build self-healing n8n orchestrators, custom Model Context Protocol (MCP) servers, and autonomous agent workflows.',
-    href: '/blog/case-study-n8n-automated-authority-scaling',
-    icon: <Cpu size={20} />,
-    color: '#a855f7',
-    badge: 'AI AUTOMATION'
-  }
+const tracks = [
+  { title: 'Microsoft Fabric', level: 'Start with the foundations', desc: 'Connect the dots between OneLake, Direct Lake, and your Fabric certification roadmap.', topics: ['OneLake', 'Architecture', 'DP-600'], href: '/blog/microsoft-fabric-certification-roadmap-2026', icon: Layers },
+  { title: 'Power BI & analytics', level: 'Design with purpose', desc: 'Turn complex data into clear decisions with thoughtful dashboards and stronger analytical models.', topics: ['Dashboard design', 'DAX', 'Data modeling'], href: '/blog/psychology-of-high-fidelity-dashboard-design', icon: BarChart3 },
+  { title: 'Next.js & performance', level: 'Build for the modern web', desc: 'Explore rendering, technical SEO, and the performance decisions behind fast web experiences.', topics: ['React', 'Technical SEO', 'Performance'], href: '/blog/nextjs-15-react-19-performance-manifesto-2026', icon: Code2 },
+  { title: 'AI & automation', level: 'Make your workflows work', desc: 'Discover practical orchestration patterns for connecting tools, agents, and repeatable workflows.', topics: ['n8n', 'AI agents', 'Orchestration'], href: '/blog/case-study-n8n-automated-authority-scaling', icon: Cpu },
 ];
 
 export default function StartHere() {
-  return (
-    <section className="section" style={{ background: 'var(--bg)', padding: '5rem 0 2.5rem 0' }}>
-      <div className="container">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div style={{ maxWidth: 550 }}>
-            <div className="label-tech mb-4 text-[var(--accent)]">GUIDED PATHWAYS // START HERE</div>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontFamily: "'Syne', sans-serif", fontWeight: 700 }}>
-              Where Should You <span className="hero-title">Start?</span>
-            </h2>
-            <p style={{ color: 'var(--muted)', marginTop: '0.5rem', lineHeight: 1.6 }}>
-              Select your engineering domain below to access structured roadmap check-lists, core pillars, and curated tutorial streams.
-            </p>
-          </div>
+  return <section className={styles.section} aria-labelledby="learning-paths-title">
+    <div className="container">
+      <div className={styles.heading}>
+        <div>
+          <span className={styles.eyebrow}><Route size={14} /> FIND YOUR NEXT STEP</span>
+          <h2 id="learning-paths-title">A clearer path.<br /><span>A stronger skill set.</span></h2>
         </div>
-
-        {/* Tracks Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {TRACKS.map((t) => (
-            <div
-              key={t.title}
-            >
-              <Link href={t.href} className="group block no-underline h-full">
-                <div 
-                  className={`card h-full flex flex-col justify-between ${styles.interactiveCard}`}
-                  style={{ 
-                    ...{ '--card-accent': t.color },
-                    padding: '2rem 1.5rem', 
-                    background: 'var(--surface)', 
-                    border: '1px solid var(--border)',
-                    borderLeft: `3px solid ${t.color}`,
-                    borderRadius: '4px',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    position: 'relative',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="p-2.5 bg-[var(--surface2)] rounded-sm" style={{ color: t.color }}>
-                        {t.icon}
-                      </div>
-                      <span className="mono text-[8px] uppercase font-bold tracking-widest text-[var(--muted)] border border-[var(--border)] px-2 py-0.5 rounded-sm bg-[var(--tag-bg)]">
-                        {t.badge}
-                      </span>
-                    </div>
-                    
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.25rem', color: 'var(--text)', lineHeight: 1.4 }}>
-                      {t.title}
-                    </h3>
-
-                    <div className={styles.commitment}>
-                      {t.commitment}
-                    </div>
-                    
-                    <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '2rem', minHeight: '4.8rem' }}>
-                      {t.desc}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-[var(--accent)] font-bold text-[11px] mono tracking-widest group-hover:translate-x-1 transition-transform mt-auto" style={{ color: t.color }}>
-                    {t.action.toUpperCase()} <ArrowRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <div className={styles.intro}><p>Choose what you want to build. Find a practical starting point, then go deeper at your own pace.</p><span>04 pathways <i /> One place to begin</span></div>
       </div>
-    </section>
-  );
+      <div className={styles.grid}>
+        {tracks.map(({ title, level, desc, topics, href, icon: Icon }, index) => <Link key={href} href={href} className={styles.card}>
+          <div className={styles.visual} aria-hidden="true"><div className={styles.orbit} /><div className={styles.icon}><Icon size={28} strokeWidth={1.5} /></div><span className={styles.number}>0{index + 1}</span></div>
+          <div className={styles.body}><span className={styles.level}>{level}</span><h3>{title}</h3><p>{desc}</p><div className={styles.topics}>{topics.map(topic => <span key={topic}>{topic}</span>)}</div></div>
+          <span className={styles.arrow} aria-hidden="true"><ArrowUpRight size={18} /></span>
+        </Link>)}
+      </div>
+      <div className={styles.foot}><span>Curiosity is the only prerequisite.</span><Link href="/blog">Explore all guides <ArrowUpRight size={14} /></Link></div>
+    </div>
+  </section>;
 }
