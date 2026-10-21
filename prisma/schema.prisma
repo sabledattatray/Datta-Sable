@@ -382,7 +382,7 @@ model MarketingCampaign {
 model MarketingDelivery {
   id          String            @id
   campaignId  String
-  campaign    MarketingCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaign    MarketingCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   email       String
   name        String            @default("")
   status      String            @default("pending")

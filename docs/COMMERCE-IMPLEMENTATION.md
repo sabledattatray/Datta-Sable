@@ -1,5 +1,13 @@
 # Commerce implementation status
 
+## Catalog rollout — 21 October 2026
+
+After the user's request to fix the public catalog, the connected database was checked read-only and a verified private record snapshot was saved under the ignored `storage/backups/` directory (29 existing tables, 11,236 records). The existing marketing foreign-key update action was reflected in the baseline and Prisma schema; the database constraint itself was preserved. A second schema comparison found no baseline drift.
+
+The existing baseline was recorded as already applied, without executing its SQL. The additive commerce migration was applied in a transaction, creating 11 commerce tables. The DP-700 product was published as an upcoming listing with `salesEnabled=false` and `deliveryReady=false`; no materials, payment, email or live checkout were created. All original tables retained at least their prior record counts, and all 122 published blogs remained present.
+
+The public catalog and product detail URLs both returned HTTP 200 with the product visible; the database fallback disappeared and checkout remained unavailable. The initial implementation limitations below describe the earlier handoff; database migration and product creation have now been completed as described here. Real provider acceptance testing remains pending.
+
 ## Delivered locally
 
 - Additive Prisma commerce schema and two reviewed-in-staging migration files (existing baseline plus commerce addition).

@@ -1,3 +1,6 @@
+-- Apply the additive commerce schema atomically; existing records are untouched.
+BEGIN;
+
 -- CreateTable
 CREATE TABLE "CommerceProduct" (
     "id" TEXT NOT NULL,
@@ -262,3 +265,4 @@ ALTER TABLE "CommerceOrder" ADD CONSTRAINT "commerce_order_amount_positive" CHEC
 ALTER TABLE "CommerceOrderItem" ADD CONSTRAINT "commerce_item_amount_positive" CHECK ("unitPriceMinor" > 0 AND quantity = 1);
 ALTER TABLE "CommercePayment" ADD CONSTRAINT "commerce_payment_amount_positive" CHECK ("amountMinor" > 0);
 ALTER TABLE "CommerceRefund" ADD CONSTRAINT "commerce_refund_amount_positive" CHECK ("amountMinor" > 0);
+COMMIT;

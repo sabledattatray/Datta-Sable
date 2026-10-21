@@ -1,5 +1,9 @@
 # Commerce setup and operations
 
+## Connected database update — 21 October 2026
+
+The missing commerce tables have now been installed following explicit user authorization to fix the catalog. A private record snapshot and a no-drift baseline comparison preceded the change. The baseline was marked applied (never executed against existing tables), and the additive commerce migration completed successfully. The DP-700 listing is published with sales and delivery disabled. Both public catalog routes were checked successfully; the 122 published blogs remain intact. See `COMMERCE-IMPLEMENTATION.md` for the rollout record. The original implementation boundaries below are historical; do not repeat the baseline or migration setup on this database.
+
 ## Current release boundaries
 
 This implementation is TEST MODE ONLY. The server rejects non-`rzp_test_` keys, and the database migration adds a test-only order constraint. There is no live activation switch in this release. Do not remove these controls without a separate approved go-live change.

@@ -520,4 +520,4 @@ ALTER TABLE "MentorshipProgress" ADD CONSTRAINT "MentorshipProgress_mentorshipId
 ALTER TABLE "SubmittedProject" ADD CONSTRAINT "SubmittedProject_mentorshipId_fkey" FOREIGN KEY ("mentorshipId") REFERENCES "MentorshipRequest"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MarketingDelivery" ADD CONSTRAINT "MarketingDelivery_campaignId_fkey" FOREIGN KEY ("campaignId") REFERENCES "MarketingCampaign"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "MarketingDelivery" ADD CONSTRAINT "MarketingDelivery_campaignId_fkey" FOREIGN KEY ("campaignId") REFERENCES "MarketingCampaign"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
