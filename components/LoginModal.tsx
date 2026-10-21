@@ -8,15 +8,16 @@ import OfficialGoogleButton from './OfficialGoogleButton';
 
 interface LoginModalProps {
   isOpen: boolean;
+  callbackUrl?: string;
   onClose: () => void;
 }
 
-export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
+export default function LoginModal({ isOpen, onClose, callbackUrl }: LoginModalProps) {
   const [isLoading, setIsLoading] = useState<string | null>(null);
 
   const handleLogin = async (provider: string) => {
     setIsLoading(provider);
-    await signIn(provider, { callbackUrl: window.location.origin });
+    await signIn(provider, { callbackUrl: callbackUrl || window.location.origin });
     setIsLoading(null);
   };
 

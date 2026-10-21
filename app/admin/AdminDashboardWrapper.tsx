@@ -67,6 +67,10 @@ const navItems = [
   {
     category: 'Sales & Finance',
     links: [
+      { name: 'Payments Overview', href: '/admin/payments', icon: CreditCard, exact: false },
+      { name: 'Digital Products', href: '/admin/products', icon: ShoppingBag, exact: false },
+      { name: 'Refunds', href: '/admin/refunds', icon: CreditCard, exact: false },
+      { name: 'Receipt Email Logs', href: '/admin/email-logs', icon: Megaphone, exact: false },
       {
         name: 'Billing & Subscriptions',
         icon: CreditCard,

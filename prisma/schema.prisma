@@ -20,6 +20,7 @@ model User {
   role          String    @default("USER") // USER, ADMIN
   createdAt     DateTime  @default(now())
   lastLoginAt   DateTime?
+  commerceOrders CommerceOrder[]
   accounts      Account[]
   sessions      Session[]
 }
@@ -403,4 +404,181 @@ model MarketingWorker {
   id         Int       @id
   owner      String?
   leaseUntil DateTime? @db.Timestamptz(6)
+}
+
+// Commerce is additive. Never cascade-delete financial history.
+model CommerceProduct {
+  id                String                @id @default(cuid())
+  slug              String                @unique
+  title             String
+  excerpt           String                @db.Text
+  description       String                @db.Text
+  category          String
+  image             String?
+  priceMinor        Int
+  currency          String                @default("USD")
+  status            String                @default("DRAFT")
+  salesEnabled      Boolean               @default(false)
+  deliveryReady     Boolean               @default(false)
+  features          String[]
+  includedResources String[]
+  deliveryMethod    String                @default("ACCOUNT_DOWNLOAD")
+  seoTitle          String?
+  seoDescription    String?
+  createdAt         DateTime              @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime              @updatedAt @db.Timestamptz(6)
+  resources         CommerceResource[]
+  items             CommerceOrderItem[]
+  entitlements      CommerceEntitlement[]
+}
+
+model CommerceResource {
+  id        String             @id @default(cuid())
+  productId String
+  product   CommerceProduct    @relation(fields: [productId], references: [id], onDelete: Restrict)
+  title     String
+  pathname  String             @unique
+  active    Boolean            @default(true)
+  createdAt DateTime           @default(now()) @db.Timestamptz(6)
+  downloads CommerceDownload[]
+
+  @@index([productId, active])
+}
+
+model CommerceOrder {
+  id                String                @id @default(cuid())
+  number            String                @unique
+  userId            String?
+  user              User?                 @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerEmail     String
+  customerName      String
+  requestKey        String                @unique
+  mode              String                @default("test")
+  status            String                @default("PENDING")
+  totalMinor        Int
+  currency          String
+  displayedMinor    Int
+  displayedCurrency String
+  razorpayOrderId   String?               @unique
+  lastError         String?
+  paidAt            DateTime?             @db.Timestamptz(6)
+  createdAt         DateTime              @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime              @updatedAt @db.Timestamptz(6)
+  items             CommerceOrderItem[]
+  payments          CommercePayment[]
+  entitlements      CommerceEntitlement[]
+  emails            CommerceEmail[]
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+model CommerceOrderItem {
+  id             String          @id @default(cuid())
+  orderId        String
+  order          CommerceOrder   @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  productId      String
+  product        CommerceProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+  title          String
+  unitPriceMinor Int
+  currency       String
+  quantity       Int             @default(1)
+
+  @@unique([orderId, productId])
+}
+
+model CommercePayment {
+  id          String           @id @default(cuid())
+  orderId     String
+  order       CommerceOrder    @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  providerId  String           @unique
+  amountMinor Int
+  currency    String
+  status      String
+  method      String?
+  verifiedAt  DateTime?        @db.Timestamptz(6)
+  createdAt   DateTime         @default(now()) @db.Timestamptz(6)
+  refunds     CommerceRefund[]
+
+  @@index([orderId])
+}
+
+model CommerceRefund {
+  id          String          @id @default(cuid())
+  paymentId   String
+  payment     CommercePayment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  requestKey  String          @unique
+  providerId  String?         @unique
+  amountMinor Int
+  status      String          @default("PENDING")
+  reason      String
+  actorId     String?
+  createdAt   DateTime        @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime        @updatedAt @db.Timestamptz(6)
+}
+
+model CommerceWebhook {
+  id            String    @id @default(cuid())
+  eventId       String    @unique
+  type          String
+  payload       Json
+  status        String    @default("PENDING")
+  attempts      Int       @default(0)
+  nextAttemptAt DateTime  @default(now()) @db.Timestamptz(6)
+  leaseUntil    DateTime? @db.Timestamptz(6)
+  leaseOwner    String?
+  lastError     String?
+  receivedAt    DateTime  @default(now()) @db.Timestamptz(6)
+  processedAt   DateTime? @db.Timestamptz(6)
+
+  @@index([status, nextAttemptAt])
+}
+
+model CommerceEntitlement {
+  id        String          @id @default(cuid())
+  orderId   String
+  order     CommerceOrder   @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  productId String
+  product   CommerceProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+  status    String          @default("ACTIVE")
+  grantedAt DateTime        @default(now()) @db.Timestamptz(6)
+  revokedAt DateTime?       @db.Timestamptz(6)
+
+  @@unique([orderId, productId])
+}
+
+model CommerceEmail {
+  id             String        @id @default(cuid())
+  orderId        String
+  order          CommerceOrder @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  dedupeKey      String        @unique
+  kind           String
+  recipient      String
+  status         String        @default("PENDING")
+  attempts       Int           @default(0)
+  providerId     String?
+  lastError      String?
+  nextAttemptAt  DateTime      @default(now()) @db.Timestamptz(6)
+  leaseUntil     DateTime?     @db.Timestamptz(6)
+  leaseOwner     String?
+  firstAttemptAt DateTime?     @db.Timestamptz(6)
+  acceptedAt     DateTime?     @db.Timestamptz(6)
+  deliveredAt    DateTime?     @db.Timestamptz(6)
+  createdAt      DateTime      @default(now()) @db.Timestamptz(6)
+
+  @@index([status, nextAttemptAt])
+}
+
+model CommerceDownload {
+  id         String           @id @default(cuid())
+  resourceId String
+  resource   CommerceResource @relation(fields: [resourceId], references: [id], onDelete: Restrict)
+  userId     String
+  createdAt  DateTime         @default(now()) @db.Timestamptz(6)
+}
+
+model CommerceLimit {
+  key       String   @id
+  count     Int      @default(1)
+  expiresAt DateTime @db.Timestamptz(6)
 }
