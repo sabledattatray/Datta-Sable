@@ -11,6 +11,7 @@ export const navLinks = [
   { label: 'Start Here', href: '/start-here' },
   { label: 'Services',   href: '/services',   mega: true },
   { label: 'Portfolio',  href: '/portfolio',  mega: true },
+  { label: 'Products',   href: '/products' },
   { label: 'Dashboards', href: '/dashboards', mega: true },
   { label: 'Workspace',  href: '/tools',      mega: true },
   { label: 'Blog',       href: '/blog',       mega: true },
@@ -105,6 +106,7 @@ export const megaMenuData: Record<string, any> = {
       tag: 'Flagship Tool',
     },
     items: [
+      { title: 'Digital Products',     desc: 'Fabric study packages & BI toolkits.',   icon: <ShoppingCart size={18} />, href: '/products',                  color: '#c9f31d' },
       { title: 'Excel Generator',      desc: 'Free browser-side KPI & MIS builder.', icon: <BarChart3 size={18} />, href: 'https://excel.dattasable.com/', color: '#10b981' },
       { title: 'Open MIS',            desc: 'Free browser-side Excel dashboard builder.', icon: <BarChart3 size={18} />,     href: '/tools/open-mis',             color: '#c9f31d' },
       { title: 'Surgical Tools',      desc: 'Generators, formatting & counter tools.', icon: <Zap size={18} />,          href: '/tools',                      color: '#c9f31d' },

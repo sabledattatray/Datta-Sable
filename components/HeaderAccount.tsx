@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, LayoutDashboard, LogOut, User } from 'lucide-react';
+import { ChevronDown, LayoutDashboard, LogOut, User, FolderHeart, ShoppingBag } from 'lucide-react';
 import styles from './HeaderAccount.module.css';
 
 export default function HeaderAccount({ name, isAdmin, onSignOut }: { name?: string | null; isAdmin: boolean; onSignOut: () => void }) {
@@ -28,6 +28,8 @@ export default function HeaderAccount({ name, isAdmin, onSignOut }: { name?: str
       <div className={styles.identity}><span>Signed in as</span><strong>{name?.trim() || 'Your account'}</strong></div>
       <div className={styles.actions}>
         <Link href={isAdmin ? '/admin' : '/dashboard'} onClick={() => setOpen(false)}><LayoutDashboard size={16} aria-hidden="true" />{isAdmin ? 'Admin dashboard' : 'Your dashboard'}</Link>
+        <Link href="/account/purchases" onClick={() => setOpen(false)}><FolderHeart size={16} aria-hidden="true" />My Purchases</Link>
+        <Link href="/account/orders" onClick={() => setOpen(false)}><ShoppingBag size={16} aria-hidden="true" />My Orders</Link>
         <button type="button" onClick={() => { setOpen(false); onSignOut(); }}><LogOut size={16} aria-hidden="true" />Sign out</button>
       </div>
     </div>}

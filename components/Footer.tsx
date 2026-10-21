@@ -23,6 +23,7 @@ const NAV_LINKS: NavSection[] = [
     links: [
       { label: 'Start Here',    href: '/start-here', icon: Sparkles },
       { label: 'Portfolio',     href: '/portfolio', icon: BarChart3 },
+      { label: 'Digital Products', href: '/products', icon: Sparkles },
       { label: 'Certifications',  href: '/certification', icon: Sparkles },
       { label: 'Case Studies',  href: '/portfolio?category=Analysis', icon: BookOpen },
       { label: 'Dashboards',    href: '/portfolio?category=Dashboard', icon: LayoutDashboard },
@@ -146,6 +147,8 @@ export default function Footer() {
             <Link href="/disclaimer">Disclaimer</Link>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
+            <Link href="/refund-policy">Refund policy</Link>
+            <Link href="/delivery-policy">Delivery policy</Link>
             <Link href="/cookies">Cookies</Link>
             <CookiePreferencesButton />
             <AdvertisingPreferencesButton />
