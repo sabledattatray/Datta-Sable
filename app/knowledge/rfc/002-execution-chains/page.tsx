@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import KnowledgePractice from '@/components/KnowledgePractice';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { motion } from 'framer-motion';
@@ -59,7 +60,7 @@ export default function RFC002() {
               "Logic without structure is entropy. ECT provides the structural integrity required for mission-critical AI operations."
             </div>
 
-            <div className="space-y-16 mb-32">
+            <div className="space-y-16 mb-12">
               {sections.map((section) => (
                 <div key={section.id} id={section.id}>
                   <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
@@ -104,7 +105,7 @@ export default function RFC002() {
               </div>
             </div>
 
-            <div className="p-12 border border-[var(--border)] bg-[var(--surface2)] rounded-sm mb-32">
+            <div className="p-12 border border-[var(--border)] bg-[var(--surface2)] rounded-sm mb-12">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold">Cite ECT Standard</h2>
                 <button 
@@ -124,6 +125,7 @@ export default function RFC002() {
         <Crosshair position="br" />
       </div>
       
+      <KnowledgePractice topic="chains" />
       <Footer />
     </div>
   );

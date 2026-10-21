@@ -36,16 +36,16 @@ export const ARCHITECTURES: Architecture[] = [
       "Generate platform-specific distribution assets..."
     ],
     outcomes: [
-      "Reduced content turnaround from 48h to 2h.",
-      "Achieved 99.5% schema consistency across 1k+ runs.",
-      "Scalable distribution across 5+ platforms simultaneously."
+      "Check each generated claim against the supplied source material.",
+      "Validate output structure and route unsupported claims for review.",
+      "Review platform-specific formatting before publication."
     ],
     caseStudySlug: 'case-study-n8n-automated-authority-scaling'
   },
   {
     id: 'bi-data-orchestrator',
     title: 'BI Data Orchestrator',
-    description: 'Infrastructure for real-time sales intelligence and revenue forecasting using SQL Server 2022 (SSMS) and Power BI integration over 16M+ row datasets.',
+    description: 'An illustrative flow from source data through a warehouse to a Power BI reporting layer. Adapt schemas, refresh behavior, and permissions to the actual environment.',
     category: 'BI',
     diagram: `graph LR
     A[Stripe/SQL] --> B[ETL Pipeline]
@@ -58,10 +58,10 @@ export const ARCHITECTURES: Architecture[] = [
       "Optimize the query for indexing and performance..."
     ],
     outcomes: [
-      "Engineered query folding over 16M+ row SQL Server 2022 datasets.",
-      "Eliminated 40+ manual reporting hours per week.",
-      "Zero-latency visibility for global stakeholders.",
-      "Identified $200k in unoptimized revenue leakage."
+      "Verify source row counts and transformation rules on a sample.",
+      "Compare automated figures with an independently calculated baseline.",
+      "Display the latest successful refresh timestamp.",
+      "Investigate reconciliation differences before publishing a report."
     ],
     caseStudySlug: 'case-study-workflow-automation-roi'
   }

@@ -58,12 +58,12 @@ export default function ArchitecturePage() {
               Surgical AI <span style={{ color: 'var(--accent)' }}>Architecture.</span>
             </h1>
             <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
-              A technical deep-dive into the deterministic infrastructure powering modern AI workflows.
-              Our architecture moves beyond "chatting" into high-fidelity execution systems.
+              Illustrative design sketches for organizing AI and reporting workflows.
+              These examples need implementation, source-specific configuration, and validation before use.
             </p>
 
             {/* Visual Blueprint */}
-            <div className="relative mb-32 p-8 lg:p-16 border border-[var(--border)] bg-[var(--surface2)] rounded-sm overflow-hidden">
+            <div className="relative mb-12 p-8 lg:p-16 border border-[var(--border)] bg-[var(--surface2)] rounded-sm overflow-hidden">
               <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, var(--accent) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
@@ -97,13 +97,13 @@ export default function ArchitecturePage() {
             </div>
 
             {/* Architecture Library (Link Magnets) */}
-            <div className="mb-32">
+            <div className="mb-12">
               <div className="label-tech mb-8 text-cyan-500">Architecture Library</div>
               <h2 className="text-4xl font-bold mb-12" style={{ fontFamily: 'Syne, sans-serif' }}>Downloadable <span className="text-cyan-500">Blueprints</span></h2>
 
               <div className="grid grid-cols-1 gap-12">
                 {ARCHITECTURES.map((arch) => (
-                  <div key={arch.id} className="border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card shadow-[0_0_30px_rgba(0,0,0,0.2)]" style={{ padding: '3rem' }}>
+                  <div key={arch.id} id={arch.id} className="border border-[var(--border)] bg-[var(--surface1)] rounded-sm group/card shadow-[0_0_30px_rgba(0,0,0,0.2)]" style={{ padding: '3rem' }}>
                     <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
                       <div className="flex-1 w-full">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -132,7 +132,7 @@ export default function ArchitecturePage() {
                           </div>
                           <div>
                             <h4 className="mono text-[11px] uppercase tracking-wider text-emerald-500 mb-5 font-bold flex items-center gap-2">
-                              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" /> Measured Outcomes:
+                              <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full" /> Validation checklist:
                             </h4>
                             <div className="flex flex-col gap-4">
                               {arch.outcomes.map((outcome, idx) => (
@@ -147,15 +147,15 @@ export default function ArchitecturePage() {
 
                         <div className="flex flex-wrap gap-4 border-t border-[var(--border)] border-opacity-60" style={{ paddingTop: '2.5rem', marginTop: '1rem' }}>
                           <button
-                            onClick={() => handleDownload(arch.template, `${arch.id}-blueprint.json`)}
+                            onClick={() => handleDownload(arch.template, `${arch.id}-design.${arch.template.trim().startsWith('--') ? 'sql' : 'json'}`)}
                             className="btn-primary flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
                           >
-                            <Download size={16} /> Download Blueprint
+                            <Download size={16} /> Download Design Sketch
                           </button>
                           <button
                             onClick={(e) => {
                               const btn = e.currentTarget;
-                              const embedCode = `<iframe src="https://dattasable.com/knowledge/architecture?embed=${arch.id}" width="100%" height="600" frameborder="0"></iframe>`;
+                              const embedCode = `https://dattasable.com/knowledge/architecture#${arch.id}`;
 
                               const handleSuccess = () => {
                                 const originalText = btn.innerHTML;
@@ -173,15 +173,15 @@ export default function ArchitecturePage() {
                                 navigator.clipboard.writeText(embedCode)
                                   .then(handleSuccess)
                                   .catch(() => {
-                                    window.prompt("Copy this embed code:", embedCode);
+                                    window.prompt("Copy this reference link:", embedCode);
                                   });
                               } else {
-                                window.prompt("Copy this embed code:", embedCode);
+                                window.prompt("Copy this reference link:", embedCode);
                               }
                             }}
                             className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px] transition-all duration-300"
                           >
-                            <Code size={16} /> Embed
+                            <Code size={16} /> Copy Reference Link
                           </button>
                           <a
                             href={`https://github.com/sabledattatray/dattasable`}
@@ -212,7 +212,7 @@ export default function ArchitecturePage() {
                           </pre>
                         </div>
                         <div className="mt-8 flex items-center justify-between text-[11px] mono uppercase opacity-60 font-bold border-t border-[var(--border)] pt-4">
-                          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Status: Production</span>
+                          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[var(--accent)]" /> Status: Design example</span>
                           <span>Ver: 1.0.4</span>
                         </div>
                       </div>

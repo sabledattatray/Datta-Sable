@@ -28,21 +28,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!template) return { title: 'Template Not Found' };
   
-  // Holistic evaluation of indexability (word count, utility role, search intent)
-  const wordCount = ((template.detailedExplanation || '') + ' ' + (template.description || '')).split(/\s+/).filter(Boolean).length;
-  const isUtility = (template as any).isUtility ?? false;
-  const hasUniqueValue = (template as any).hasUniqueValue ?? true;
-  const hasSearchIntent = (template as any).hasSearchIntent ?? true;
-  const isLandingPage = (template as any).isLandingPage ?? true;
-  
-  const noindex = (template as any).noindex === true || (
-    isUtility && wordCount < 200 && !isLandingPage && !hasSearchIntent
-  );
+  // Copyable library entries need an editorial review before search promotion.
   
   return {
     title: `${template.title} | Surgical AI Blueprint`,
     description: template.description,
-    ...(noindex ? { robots: { index: false, follow: true } } : {}),
+    robots: { index: false, follow: true },
+    alternates: { canonical: `https://dattasable.com/templates/${template.slug}` },
   };
 }
 
@@ -128,9 +120,14 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
                   </div>
                 </div>
 
+                {template.references && <section className="mb-10 space-y-4">
+                  <h2 className="text-xl font-bold">Primary references</h2>
+                  <ul className="list-disc pl-5 space-y-3">{template.references.map(reference => <li key={reference.href}><a href={reference.href} className="underline">{reference.label}</a></li>)}</ul>
+                </section>}
+
                 <div className="flex items-center gap-2 text-xs text-[var(--muted)] mono p-4 border border-dashed border-[var(--border)] mb-12">
                   <Sparkles size={14} className="text-[var(--accent)]" /> 
-                  System Note: This blueprint is a static-generated knowledge asset. 100% crawlable for maximum authority.
+                  Example starting point: replace placeholders, verify factual claims, and test the result before publishing or using it in production.
                 </div>
               </div>
 
@@ -147,11 +144,11 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
                     href={`${template.targetModule}?template=${template.id}`}
                     className="btn-primary w-full flex items-center justify-center gap-2 py-4 no-underline"
                   >
-                    DEPLOY_TO_WORKSPACE <ChevronRight size={14} />
+                    OPEN RELATED TOOL <ChevronRight size={14} />
                   </Link>
                   
                   <div className="mt-6 p-4 bg-[var(--bg)] border border-[var(--border)] rounded text-[9px] mono text-[var(--muted)] leading-relaxed">
-                    USAGE_INFO: This blueprint is optimized for high-performance creative workflows. Click deploy to start execution in the precision workspace.
+                    Open the related tool to adapt this example. Review any populated fields; a template does not validate your claims or publish the result.
                   </div>
                 </div>
               </div>

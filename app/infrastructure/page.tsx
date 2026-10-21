@@ -109,17 +109,17 @@ export default async function InfrastructureHub() {
               <div className="label-tech mb-6 text-cyan-500">Asset 1</div>
               <h2 className="text-4xl font-bold mb-6" style={{ fontFamily: 'Syne, sans-serif' }}>Downloadable <span className="text-cyan-500">Frameworks</span></h2>
               <p className="text-[var(--muted)] mb-8 text-lg">
-                Access our library of n8n blueprints, Python automation scripts, and prompt chain JSON files ready for immediate deployment.
+                Inspect example workflow sketches, SQL schemas, and prompt sequences. Configure credentials separately and validate each step on non-sensitive sample data before adapting a design.
               </p>
               <ul className="space-y-4 mb-10">
                 <li className="flex items-center gap-3 text-sm">
-                  <Download size={16} className="text-cyan-500" /> Multi-Agent Publishing Chain (v2.1)
+                  <Download size={16} className="text-[var(--accent)]" /> Content workflow design sketch
                 </li>
                 <li className="flex items-center gap-3 text-sm">
                   <Download size={16} className="text-cyan-500" /> Revenue Intelligence SQL Schema
                 </li>
                 <li className="flex items-center gap-3 text-sm">
-                  <Download size={16} className="text-cyan-500" /> Dynamic Prompt Injector Script
+                  <Download size={16} className="text-[var(--accent)]" /> Example prompt sequences
                 </li>
               </ul>
               <Link href="/knowledge/architecture" className="btn-minimal">Browse Full Library</Link>

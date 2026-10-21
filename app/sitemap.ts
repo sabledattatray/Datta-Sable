@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services/automation', '/services/web-design', '/contact', '/start-here',
     '/dashboards', '/dashboards/world-business', '/dashboards/aura-capital-sales',
     '/dashboards/rider-ops', '/privacy', '/terms', '/disclaimer', '/cookies',
-    '/editorial-policy'];
+    '/editorial-policy', '/knowledge'];
   const posts = await getPublishedBlogPosts();
   const urls: MetadataRoute.Sitemap = [
     ...routes.map(route => ({ url: baseUrl + route })),

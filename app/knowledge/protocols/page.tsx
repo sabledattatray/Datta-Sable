@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import KnowledgePractice from '@/components/KnowledgePractice';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { motion } from 'framer-motion';
@@ -164,6 +165,7 @@ export default function ProtocolsPage() {
         <Crosshair position="br" />
       </div>
       
+      <KnowledgePractice topic="protocols" />
       <Footer />
     </div>
   );

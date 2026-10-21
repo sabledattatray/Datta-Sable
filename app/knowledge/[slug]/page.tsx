@@ -30,10 +30,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   const finalTitle = article.title.length > 50 ? article.title : `${article.title} | Datta Sable`;
   
-  // These two brief reference notes are not standalone search articles.
+  // Keep reference notes excluded while the library is being editorially reviewed.
   return {
     title: { absolute: finalTitle },
     description: article.description,
+    alternates: { canonical: `https://dattasable.com/knowledge/${article.slug}` },
     robots: { index: false, follow: true },
   };
 }
@@ -78,8 +79,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                   </div>
 
                   <div className="knowledge-content text-[var(--text)] leading-relaxed mb-16">
-                     {/* In a real app we'd use a markdown renderer, but for this MVP we use a simple structure */}
-                     <div dangerouslySetInnerHTML={{ __html: article.content.replace(/\n/g, '<br/>') }} style={{ fontSize: '1.1rem', opacity: 0.9 }} />
+                     <div className="space-y-6 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_ul]:list-disc [&_ul]:pl-6 [&_a]:underline" dangerouslySetInnerHTML={{ __html: article.content }} style={{ fontSize: '1.1rem', opacity: 0.9 }} />
                   </div>
 
                   {/* Founder Layer: Operator Note */}

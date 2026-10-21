@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "Surgical AI Workspace (Interactive Prototype) | Datta Sable",
   description: "Enterprise-grade AI workflow infrastructure prototype. Monitor intelligent execution chains and automation fidelity simulations.",
   openGraph: {

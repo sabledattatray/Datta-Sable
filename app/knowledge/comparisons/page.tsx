@@ -1,126 +1,56 @@
-'use client';
-
+import type { Metadata } from 'next';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Crosshair from '@/components/Crosshair';
-import { motion } from 'framer-motion';
-import { Scale, ArrowRight, Zap, Shield, Target, Activity, FileText } from 'lucide-react';
-import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'AI Workflows and Agent Loops: A Decision Guide | Datta Sable',
+  description: 'Compare fixed workflows and model-directed agent loops using task boundaries, failure recovery, cost controls, and a worked invoice example.',
+  alternates: { canonical: 'https://dattasable.com/knowledge/comparisons' },
+  robots: { index: false, follow: true },
+};
+
+const comparisons = [
+  ['Control flow', 'Application code chooses the next step.', 'The model chooses its next action within tool and policy boundaries.'],
+  ['Good starting task', 'A repeatable process with known inputs and checks.', 'An investigation where the next useful step depends on new evidence.'],
+  ['Failure recovery', 'Retry or resume a named step with recorded state.', 'Record actions, limit retries, and detect repeated or unproductive actions.'],
+  ['Budget control', 'Set limits per stage and across the complete run.', 'Set tool-call, token, time, and spending limits across the loop.'],
+  ['Important limitation', 'A fixed path can miss an unexpected case.', 'Flexible exploration can increase variability and operational cost.'],
+];
 
 export default function ComparisonsPage() {
-  const comparisons = [
-    {
-      title: "Prompt Hardening vs. Engineering",
-      id: "PH-GE",
-      abstract: "Analyzing the transition from creative prompt engineering to structural logic hardening for enterprise stability.",
-      left: { label: "Prompt Engineering", points: ["Non-deterministic output", "Natural language bias", "High drift potential", "Art-based"] },
-      right: { label: "Prompt Hardening", points: ["Deterministic logic", "Schema-enforced", "Zero-drift target", "Engineering-based"] }
-    },
-    {
-      title: "Execution Chains vs. Agent Loops",
-      id: "EC-AL",
-      abstract: "Why linear execution chains outperform autonomous agent loops in high-fidelity production environments.",
-      left: { label: "Agent Loops", points: ["Recursive hallucination", "High token waste", "Logic fragmentation", "Opaque process"] },
-      right: { label: "Execution Chains", points: ["Hardened nodes", "Token efficient", "State persistence", "Transparent audit"] }
-    },
-    {
-      title: "Deterministic vs. Autonomous",
-      id: "DT-AT",
-      abstract: "A comparative framework for choosing between surgical precision and autonomous exploration in AI systems.",
-      left: { label: "Autonomous AI", points: ["Exploration focused", "Creative discovery", "Broad intent", "Variable reliability"] },
-      right: { label: "Deterministic AI", points: ["Execution focused", "Structural fidelity", "Mapped intent", "Extreme reliability"] }
-    }
-  ];
-
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      
-      <div className="boxed-wrapper pt-32 pb-24">
-        <Crosshair position="tl" />
-        
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <div className="label-tech mb-8 text-amber-500">Engineering Analysis</div>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontFamily: "'Syne', sans-serif", fontWeight: 600, marginBottom: '2rem', lineHeight: 1.1 }}>
-              Framework <span className="text-amber-500">Comparisons.</span>
-            </h1>
-            <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
-              A technical analysis positioning Surgical AI standards against broader industry 
-              methodologies. We prioritize deterministic reliability over autonomous exploration.
-            </p>
-
-            <div className="space-y-24 mb-32">
-              {comparisons.map((c, i) => (
-                <motion.div
-                  key={c.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <h2 className="text-2xl font-bold mb-4">{c.title}</h2>
-                  <p className="text-sm text-[var(--muted)] mb-12 leading-relaxed max-w-2xl">{c.abstract}</p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-sm overflow-hidden">
-                    <div className="p-8 bg-[var(--surface1)]">
-                      <div className="flex items-center gap-2 mb-8 opacity-40">
-                        <Scale size={14} />
-                        <span className="mono text-[10px] uppercase font-bold tracking-widest">{c.left.label}</span>
-                      </div>
-                      <ul className="space-y-4">
-                        {c.left.points.map(p => (
-                          <li key={p} className="flex items-center gap-3 text-[13px] text-[var(--muted)]">
-                            <div className="w-1 h-1 rounded-full bg-[var(--border)]" /> {p}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="p-8 bg-[var(--surface2)]">
-                      <div className="flex items-center gap-2 mb-8 text-amber-500">
-                        <Scale size={14} />
-                        <span className="mono text-[10px] uppercase font-bold tracking-widest">{c.right.label}</span>
-                      </div>
-                      <ul className="space-y-4">
-                        {c.right.points.map(p => (
-                          <li key={p} className="flex items-center gap-3 text-[13px]">
-                            <Zap size={14} className="text-amber-500" /> {p}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="p-12 border border-[var(--border)] bg-[var(--surface1)] rounded-sm mb-32">
-              <div className="flex flex-col lg:flex-row gap-12 items-center">
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold mb-6">Detailed Whitepapers</h2>
-                  <p className="text-[var(--muted)] leading-relaxed mb-6">
-                    Looking for a more granular engineering breakdown? Our whitepapers explore the 
-                    mathematical and logical foundations of deterministic AI systems.
-                  </p>
-                  <button className="btn-primary py-3 px-8 flex items-center gap-2">
-                    <FileText size={16} /> View Whitepapers
-                  </button>
-                </div>
-                <div className="w-full lg:w-1/3 grid grid-cols-2 gap-4">
-                  <div className="aspect-square bg-[var(--surface2)] border border-[var(--border)] flex items-center justify-center p-4 text-center">
-                    <span className="mono text-[10px] opacity-40">LATENCY_ANALYSIS.pdf</span>
-                  </div>
-                  <div className="aspect-square bg-[var(--surface2)] border border-[var(--border)] flex items-center justify-center p-4 text-center">
-                    <span className="mono text-[10px] opacity-40">SCHEMA_FIDELITY.pdf</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <main className="boxed-wrapper pt-32 pb-24">
+        <article className="container max-w-4xl space-y-8 leading-relaxed">
+          <div className="label-tech">Engineering decision guide</div>
+          <h1 className="text-4xl font-bold">Fixed AI workflows or agent loops?</h1>
+          <p>A workflow follows a path chosen by application code. An agent loop lets a model choose actions based on the current state. Both can use the same language model and tools. Neither architecture guarantees correct results. Choose the amount of flexibility the task requires, then validate the system against representative inputs.</p>
+          <h2 className="text-2xl font-bold">Compare the operational tradeoffs</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <caption className="text-left mb-4">Design considerations, not measured performance benchmarks.</caption>
+              <thead><tr>{['Criterion', 'Fixed workflow', 'Agent loop'].map(label => <th key={label} scope="col" className="p-4 border border-[var(--border)]">{label}</th>)}</tr></thead>
+              <tbody>{comparisons.map(([label, workflow, agent]) => <tr key={label}><th scope="row" className="p-4 border border-[var(--border)]">{label}</th><td className="p-4 border border-[var(--border)]">{workflow}</td><td className="p-4 border border-[var(--border)]">{agent}</td></tr>)}</tbody>
+            </table>
           </div>
-        </div>
-        
-        <Crosshair position="br" />
-      </div>
-      
+          <h2 className="text-2xl font-bold">Worked example: invoice extraction</h2>
+          <p>Suppose a system receives an invoice and must extract supplier, currency, date, and total. A fixed workflow can parse the file, request structured extraction, validate field types, compare totals, and route exceptions to a person. If the currency is missing, the system should record an exception instead of silently guessing it from the supplier name. This example describes a proposed design, not a deployed client result.</p>
+          <p>Now suppose the task is investigating why a supplier's totals changed over several months. The next action may depend on previous findings: inspect line items, check a contract, or compare exchange-rate assumptions. A bounded agent loop may fit this investigation better. It should cite the evidence used for each conclusion, stop when evidence is insufficient, and request approval before sending messages or modifying financial records.</p>
+          <h2 className="text-2xl font-bold">Use a hybrid when the boundaries differ</h2>
+          <p>The outer workflow can enforce permissions, budgets, and final validation while an inner agent investigates one exception. For example, the agent may inspect an approved set of read-only documents and propose a reason for the discrepancy. Application code still decides whether required evidence exists and routes the proposal for review. Tool access should match the task; exploration does not require unrestricted write access.</p>
+          <p>Record intermediate state in either design. Keep the original input, tool results, validation errors, and final decision linked to the same run. Retries must not create duplicate invoices or repeat a paid action. Use an idempotency strategy at the application boundary instead of relying on a model to remember whether an action has already occurred.</p>
+          <h2 className="text-2xl font-bold">Test the choice before expanding it</h2>
+          <p>Build a small evaluation set with normal invoices, missing fields, conflicting totals, duplicate submissions, and text that attempts to override the extraction instructions. Define the expected behavior for each case before running either design. Compare task completion, unsupported conclusions, human-review frequency, latency, and total resource use. Inspect failures individually; an average score can hide a serious permission error.</p>
+          <p>Set an explicit stopping rule for the loop, such as a maximum number of actions and a requirement to return an unresolved status when evidence remains missing. For the fixed workflow, define what happens when a stage fails. Both systems need tests for timeouts, unavailable tools, malformed responses, and recovery after interruption.</p>
+          <h2 className="text-2xl font-bold">What validation does and does not establish</h2>
+          <p>A valid JSON response establishes structure, not truth. A supplier total can have the correct numeric type and still be wrong. Likewise, a fixed sequence does not make model output deterministic. Use source checks, calculations, and human review where the consequences require them. Claims that one architecture is always faster or more reliable need a defined workload and reproducible measurements.</p>
+          <p>Start with the smallest design that handles the task. Add model-directed exploration only where the evaluation shows a useful gain. Keep a record of the tradeoff so future maintainers understand why that flexibility exists.</p>
+          <p>Further reading: <a className="underline" href="https://www.anthropic.com/research/building-effective-agents">Anthropic's explanation of workflows and agents</a> gives the architectural distinction and discusses when additional complexity is useful. The invoice scenario and its verification checklist above are illustrative applications of that distinction.</p>
+          <p>Continue with the <Link href="/knowledge/optimizing-ai-context-windows" className="underline">context-packet workflow</Link> to prepare task evidence, or the <Link href="/knowledge/rfc/002-execution-chains" className="underline">execution-chain reference</Link> for the site's internal design notes.</p>
+        </article>
+      </main>
       <Footer />
     </div>
   );

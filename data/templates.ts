@@ -4,11 +4,12 @@ export interface Template {
   title: string;
   description: string;
   category: 'LinkedIn' | 'AI Prompts' | 'SEO' | 'Creator';
-  targetModule: string; // The tool this template injects into
+  targetModule: string; // Related editing tool; supported tools can load template data.
   content: any; // The data to inject
   detailedExplanation: string;
   bestPractices: string[];
   useCases: string[];
+  references?: { label: string; href: string }[];
 }
 
 export const TEMPLATES: Template[] = [
@@ -137,13 +138,13 @@ export const TEMPLATES: Template[] = [
     id: 'li-b2b-retention',
     slug: 'b2b-retention-post-blueprint',
     title: 'B2B Retention Blueprint',
-    description: 'Learn the exact post structure and psychological angles to showcase B2B client success stories, retention rates, and ROI metrics to generate inbound leads.',
+    description: 'Draft a B2B retention update with a defined reporting period, supported figures, implementation details, and clear limitations.',
     category: 'LinkedIn',
     targetModule: '/tools/linkedin-formatter',
     content: {
-      text: "Why do 90% of SaaS companies struggle with churn?\n\nBecause they focus on acquisition, not infrastructure.\n\nWe recently helped [Client] achieve a [Percentage]% retention rate increase.\n\nThe Secret: [Specific technical move].\n\nHere's the data: [Data Point 1], [Data Point 2].\n\nConsistency > Intensity."
+      text: "What changed in our retention workflow?\n\nProblem: [Observed issue].\nChange: [Specific implementation].\nEvidence: [Metric definition, period, sample size, and source].\nResult: [Verified outcome, or explicitly labelled estimate].\nLimitation: [What this comparison cannot establish].\nNext check: [Follow-up measurement].\n\nUse a clearly labelled fictional example if you cannot share real data."
     },
-    detailedExplanation: "Retention metrics are the ultimate signal of product-market fit. This blueprint helps enterprise founders and marketers showcase client successes through a technical lens. By explaining the exact engineering or operational change that led to the metric boost, it attracts high-value enterprise leads.",
+    detailedExplanation: "Explain a retention-related change without implying that one change caused every observed outcome. State whether the figure measures customer retention, revenue retention, or another definition. Use comparable cohorts and reporting periods, disclose sample size, and record other changes that may affect the comparison. Obtain permission before identifying a client. If the evidence is incomplete, publish the implementation lesson and its limits rather than inventing a success statistic.",
     useCases: [
       "Sharing client success stories and case studies",
       "Highlighting product improvements that reduced user friction and churn",
@@ -161,21 +162,21 @@ export const TEMPLATES: Template[] = [
     id: 'seo-high-ctr',
     slug: 'high-ctr-meta-structures',
     title: 'High-CTR Meta Structures',
-    description: 'Deploy these pre-tested search engine optimization templates for titles and meta descriptions engineered to capture maximum clicks and dominate search results.',
+    description: 'Draft descriptive page titles and summaries that match the visible content. Preview and review them before publishing; click-through improvements are not guaranteed.',
     category: 'SEO',
     targetModule: '/tools/seo-meta-generator',
     content: {
       title: "How to [Action] in 2026: The Surgical Guide for [Audience]",
-      description: "Stop wasting time on [Common Mistake]. Learn the precision-engineered system to [Result] with 100% accuracy. Read the expert breakdown now.",
+      description: "Learn how to [Action] with a worked example for [Audience]. Covers [Scope], verification steps, and limitations.",
     },
-    detailedExplanation: "Winning clicks on Google Search requires meta tags that promise speed, specificity, and authority. This structure utilizes active verbs and defines a specific target audience. It is optimized to stay within search engine display limits while maximizing search engine click-through rates.",
+    detailedExplanation: "A useful title identifies the page's task and audience. A useful description summarizes what the page actually provides. Remove claims such as guaranteed accuracy, fastest results, or pre-tested improvements unless you can substantiate them. Search engines may display different titles or snippets, so the preview is an editing aid rather than a promise of the final search appearance. Compare changes using a meaningful observation period and account for traffic and position changes.",
     useCases: [
       "Optimizing landing page title tags for search rankings",
       "Updating old blog post meta descriptions to improve CTR",
       "Structuring content distribution assets for technical target keywords"
     ],
     bestPractices: [
-      "Keep titles under 60 characters and descriptions under 155 characters to avoid truncation.",
+      "Preview concise titles and descriptions; character counts do not guarantee how a search engine displays them.",
       "Include the primary keyword near the beginning of both the title and description.",
       "Add a clear, compelling call to action at the end of the description."
     ]
@@ -184,14 +185,21 @@ export const TEMPLATES: Template[] = [
     id: 'seo-jsonld-product',
     slug: 'saas-product-schema-blueprint',
     title: 'SaaS Product Schema',
-    description: 'Optimize your software landing pages with this compliant JSON-LD schema blueprint designed to secure rich search results snippets and boost click-through rates.',
+    references: [
+      { label: 'Google software-app structured-data requirements', href: 'https://developers.google.com/search/docs/appearance/structured-data/software-app' },
+      { label: 'Schema.org SoftwareApplication vocabulary', href: 'https://schema.org/SoftwareApplication' },
+    ],
+    description: 'Inspect a minimal SoftwareApplication JSON-LD example, replace the placeholders with visible page facts, and validate it before use.',
     category: 'SEO',
-    targetModule: '/tools/seo-meta-generator',
+    targetModule: '/tools/schema-generator',
     content: {
-      title: "Product Schema for [Product Name]",
-      description: "Generate structured data for products including price, rating, and availability to dominate Google search results.",
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: '[Actual software name]',
+      description: '[Accurate description visible on the page]',
+      url: 'https://example.com/your-software',
     },
-    detailedExplanation: "JSON-LD schema structured data translates your product features directly into search engine syntax. This helps search engine crawlers understand your product's pricing model, user reviews, and brand details, which can trigger rich snippet placements like review stars and pricing badges in Google search results.",
+    detailedExplanation: "This is a minimal vocabulary example, not a complete guarantee of eligibility for any search feature. Replace the name, description, and URL with facts that visitors can verify on the actual page. Add pricing or ratings only when they exist, are visible, and meet the relevant requirements; never invent reviews to fill a field. Check the current software-app structured-data documentation and test the completed markup. The related general schema tool produces other starting examples and does not validate this application's eligibility.",
     useCases: [
       "Adding structured data to SaaS marketing homepages",
       "Improving the organic search visibility of product pages",

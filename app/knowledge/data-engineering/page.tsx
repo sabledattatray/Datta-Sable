@@ -47,7 +47,7 @@ export default function DataEngineeringPillar() {
           <Breadcrumbs />
 
           {/* Hero Section */}
-          <div className="mb-20">
+          <div className="mb-10">
             <div className="flex items-center gap-3 mb-6">
               <Database className="text-[var(--accent)]" size={24} />
               <span className="label-tech">PILLAR_HUB // DATA_ENGINEERING</span>

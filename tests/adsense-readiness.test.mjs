@@ -78,6 +78,15 @@ test('editorial correction removes only exact stock text and preserves useful ne
  const unique = { slug: 'other', content: '<p>A measured 55% change in our specific dataset.</p>' };
  assert.equal(editorial.correctEditorialContent(unique).content, unique.content);
 });
+
+test('repeated unsupported automation benchmark is removed from CMS and source HTML without deleting unique results', () => {
+ const benchmark = 'Benchmarking <a href="/glossary/n8n-workflow-orchestration">n8n</a> in queue mode with 3 active worker nodes demonstrated an execution throughput of 250 workflows per second. Webhook response latency dropped from 450ms to 92ms when caching static API responses in Redis. Database lock contention was reduced by 60% after indexing execution log tables.';
+ const result = editorial.correctEditorialContent({ slug: 'automation', content: '<p>Specific implementation details remain.</p><h2 id="performance-benchmarks">Benchmarks</h2><p>' + benchmark + '</p>' }).content;
+ assert.match(result, /Specific implementation details remain/);
+ assert.doesNotMatch(result, /250 workflows|450ms|60%|id="performance-benchmarks"/);
+ const unique = '<p>In a documented experiment, 250 workflows completed over a ten-minute observation window.</p>';
+ assert.equal(editorial.correctEditorialContent({ slug: 'measured-result', content: unique }).content, unique);
+});
 test('mismatched DP-600 guide gets topic-correct practice content without overriding a future corrected CMS article', () => {
  const slug = 'dp-600-fabric-analytics-engineer-study-companion-notebook';
  const replaced = editorial.correctEditorialContent({ slug, content: '<h2 id="delta-store-mechanics">Old wrong topic</h2>' }).content;

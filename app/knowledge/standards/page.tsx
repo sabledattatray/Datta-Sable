@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import KnowledgePractice from '@/components/KnowledgePractice';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { motion } from 'framer-motion';
@@ -31,7 +32,7 @@ export default function StandardsPage() {
       title: "Context Window Compression",
       code: "PH-S04",
       desc: "Semantic pruning of redundant tokens to increase information density and reduce latency.",
-      impact: "Reduces token cost by up to 40% per execution."
+      impact: "Measure token usage and task accuracy before and after compression."
     }
   ];
 
@@ -45,7 +46,7 @@ export default function StandardsPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <div className="label-tech text-emerald-500">Industry Standards v1.2.4</div>
+              <div className="label-tech text-emerald-500">Internal design notes</div>
               <div className="flex items-center gap-2 mono text-[10px] opacity-40">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> DEPLOYED_STABLE
               </div>
@@ -54,12 +55,12 @@ export default function StandardsPage() {
               Prompt <span className="text-emerald-500">Hardening™</span> Standards.
             </h1>
             <p style={{ color: 'var(--muted)', fontSize: '1.2rem', marginBottom: '5rem', lineHeight: 1.6 }}>
-              A technical framework for converting "natural language prompts" into production-grade 
-              logic processors. These standards define the benchmark for Surgical AI execution.
+              Local conventions for defining output contracts, testing task constraints, and handling
+              failures. These notes are design guidance, not an industry certification.
             </p>
 
             {/* Semantic Links */}
-            <div className="flex flex-wrap gap-4 mb-20 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
+            <div className="flex flex-wrap gap-4 mb-10 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
               <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Technical References:</span>
               <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[11px] mono hover:text-emerald-500 transition-colors">
                 <LinkIcon size={12} /> EXECUTION_TAXONOMY_V2
@@ -93,7 +94,7 @@ export default function StandardsPage() {
               ))}
             </div>
 
-            <div className="mb-32">
+            <div className="mb-12">
               <h2 className="text-3xl font-bold mb-12" style={{ fontFamily: 'Syne, sans-serif' }}>Implementation <span className="text-emerald-500">Blueprint</span></h2>
               <div className="bg-[var(--surface1)] border border-[var(--border)] rounded-sm overflow-hidden">
                 <div className="p-4 border-b border-[var(--border)] bg-[var(--surface2)] flex items-center justify-between">
@@ -155,7 +156,7 @@ export default function StandardsPage() {
                   "Sable, D. (2026). Prompt Hardening™: A Structural Framework for Deterministic AI. 
                   Surgical AI Workspace Standards v2.1."
                 </p>
-                <button className="w-full btn-outline py-3 text-[12px] mono uppercase tracking-widest">
+                <button onClick={() => navigator.clipboard.writeText("Sable, D. (2026). Prompt hardening: internal design notes. https://dattasable.com/knowledge/standards")} className="w-full btn-outline py-3 text-[12px] mono uppercase tracking-widest">
                   Copy Citation (APA)
                 </button>
               </div>
@@ -166,6 +167,7 @@ export default function StandardsPage() {
         <Crosshair position="br" />
       </div>
       
+      <KnowledgePractice topic="standards" />
       <Footer />
     </div>
   );

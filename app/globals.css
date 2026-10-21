@@ -234,10 +234,14 @@ input:-webkit-autofill:active {
   }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Resets must stay below utility classes in the cascade. An unlayered reset
+   overrides Tailwind v4 spacing utilities, collapsing page and card gutters. */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {

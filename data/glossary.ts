@@ -17,7 +17,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     definition: 'The technical process of reducing prompt token count while preserving core logical meaning. Critical for optimizing Large Language Model (LLM) context windows.',
     category: 'AI',
     operatorsPerspective: 'In high-throughput agentic workflows, every token represents direct computational cost and latency. Semantic compression is the practice of stripping natural language redundancy down to symbolic, structural instructions. An operator must design prompts that instruct the LLM using key concepts and abbreviation mapping. When done right, it results in cleaner, faster reasoning passes without losing context.',
-    founderNote: 'I pioneered this approach while building dense data parsing pipelines. By swapping boilerplate instructions for symbolic schema rules, our execution costs dropped by 45% while accuracy improved.',
+    founderNote: 'Preserve the original prompt and compare a compressed version against the same labelled examples. Record token usage and missed constraints before drawing conclusions about cost or quality.',
     technicalApplication: 'Utilize symbol shorthand (e.g., using \'fn\' for function, \'args\' for arguments) and eliminate grammatical filler words (articles, auxiliary verbs) in system messages. Map a data structure key-value schema rather than writing conversational explanations.'
   },
   {
@@ -27,7 +27,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     definition: 'A framework for aligning AI system outputs with professional technical personas to ensure execution fidelity and brand consistency.',
     category: 'Workflow',
     operatorsPerspective: 'Intent mapping bridges the gap between raw LLM capacity and specific business requirements. Without precise intent alignment, models default to generic, conversational text. By mapping the exact constraints, inputs, and desired tone to a concrete technical persona, developers can control the output variance and ensure consistent integration into automated downstream tools.',
-    founderNote: 'Consistency is the ultimate metric for production AI. By standardizing our prompt persona mapping across all agents, we removed manual verification checks entirely.',
+    founderNote: 'A consistent role description can clarify the task, but it does not replace verification. Check outputs against the actual requirements and retain human review where needed.',
     technicalApplication: 'Define a schema of strict rules, banned phrases, and formatting rules. Inject this schema as a context boundary at the top of the LLM configuration, and use system variables to dynamically select the active persona.'
   },
   {
@@ -36,7 +36,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Token Density',
     definition: 'The measurement of information per token in a system prompt. High density reduces costs and increases reasoning accuracy.',
     category: 'AI',
-    operatorsPerspective: 'Token density is about engineering efficiency. Every word in a system prompt must earn its place. If a prompt can be shortened by 30% without changing the output behavior, the original was poorly optimized. High-density prompts are parsed faster by LLM attention heads, reducing attention drift and improving long-context recall.',
+    operatorsPerspective: 'A shorter prompt can remove repetition, but compression can also erase constraints. Token counts depend on the model tokenizer. Compare request usage and task results rather than assuming a dense prompt improves recall or accuracy.',
     founderNote: 'Think of token density as writing code. You wouldn\'t write a 100-line function when a 10-line function is cleaner and faster. Treat your system instructions with the same discipline.',
     technicalApplication: 'Perform a prompt cleanup pass: replace wordy descriptions with bulleted lists, use structured JSON configurations for dynamic inputs, and leverage mathematical notation for logical rules.'
   },
@@ -47,7 +47,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     definition: 'A surgical workflow technique where the output of one AI model call is used as the input for the next to solve complex, multi-step tasks.',
     category: 'Workflow',
     operatorsPerspective: 'Trying to make an LLM solve a complex, multi-stage task in a single prompt is a recipe for hallucinations. Prompt chaining decomposes a complex task into discrete, manageable steps. The first prompt generates an outline, the second fills in details, and the third performs quality checks. This modular architecture makes debugging and updates significantly easier.',
-    founderNote: 'Chaining saved our automated coding pipeline. Instead of asking one LLM to write, test, and style a component, we split it into three nodes. The reliability went from 40% to 98%.',
+    founderNote: 'Try separating generation and verification when the task benefits from distinct checks. Measure failures at each stage; adding another model call does not itself establish reliability.',
     technicalApplication: 'Use orchestration tools like n8n or LangChain to design pipeline paths. Each node in the pipeline takes the output of the preceding node, parses it, and feeds it into the next LLM call with a specialized system prompt.'
   },
   {
@@ -67,7 +67,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     definition: 'The formatting technique of using double line breaks and minimalist characters to ensure high mobile readability for technical LinkedIn content.',
     category: 'Workflow',
     operatorsPerspective: 'Most technical writing on professional networks is ignored because it is presented in walls of text. Surgical spacing formats technical breakdowns to optimize readability on mobile screens. By inserting double line breaks, short punchy sentences, and precise bullet points, you structure the reading experience for high engagement and scanability.',
-    founderNote: 'When I switched to surgical spacing, my LinkedIn post impressions grew by 300%. The technical depth remained the same, but the formatting made it digestible for busy executives.',
+    founderNote: 'Preview paragraph breaks on a small screen and keep the explanation readable. Formatting changes presentation; audience growth depends on many factors and is not guaranteed.',
     technicalApplication: 'Limit paragraphs to a maximum of two sentences. Use a double line break between blocks, and utilize simple characters (e.g., *, -, or →) instead of heavy emojis to maintain a professional design aesthetic.'
   },
   {

@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import KnowledgePractice from '@/components/KnowledgePractice';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { motion } from 'framer-motion';
@@ -36,14 +37,14 @@ export default function PatternsPage() {
       code: "WP-02",
       desc: "Parallel execution of specialized nodes (Research, Synthesis, Formatting) managed by a central Orchestrator.",
       useCase: "High-volume content production, enterprise ETL pipelines.",
-      benefits: ["Massive Parallelization", "Specialized Accuracy"]
+      benefits: ["Massive Parallelization", "Task-specific checks"]
     },
     {
       title: "Dynamic Context Injection",
       code: "WP-03",
       desc: "An optimization pattern that prunes and injects context based on the current execution node's specific needs.",
       useCase: "Large-scale RAG systems, complex documentation synthesis.",
-      benefits: ["40% Token Cost Reduction", "Increased Logic Density"]
+      benefits: ["Measure token usage", "Increased Logic Density"]
     },
     {
       title: "The State Transition Map",
@@ -79,7 +80,7 @@ export default function PatternsPage() {
             </p>
 
             {/* Semantic Interlinking */}
-            <div className="flex flex-wrap gap-4 mb-20 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
+            <div className="flex flex-wrap gap-4 mb-10 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
               <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Technical Dependencies:</span>
               <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[11px] mono hover:text-cyan-500 transition-colors">
                 <LinkIcon size={12} /> EC_TAXONOMY_V2
@@ -94,7 +95,7 @@ export default function PatternsPage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               {patterns.map((p, i) => (
                 <motion.div
                   key={p.code}
@@ -126,7 +127,7 @@ export default function PatternsPage() {
               ))}
             </div>
 
-            <div className="p-12 border border-[var(--border)] bg-[var(--surface1)] rounded-sm text-center mb-32">
+            <div className="p-12 border border-[var(--border)] bg-[var(--surface1)] rounded-sm text-center mb-12">
               <div className="w-16 h-16 mx-auto mb-8 bg-cyan-500/10 border border-cyan-500/20 rounded-full flex items-center justify-center">
                 <LayoutGrid className="text-cyan-500" size={24} />
               </div>
@@ -155,6 +156,7 @@ export default function PatternsPage() {
         <Crosshair position="br" />
       </div>
       
+      <KnowledgePractice topic="patterns" />
       <Footer />
     </div>
   );

@@ -1,3 +1,4 @@
+import WorkspaceFrame from '@/components/WorkspaceFrame';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function KnowledgeLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <WorkspaceFrame>{children}</WorkspaceFrame>;
 }

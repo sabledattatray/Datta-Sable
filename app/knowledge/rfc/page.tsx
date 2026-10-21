@@ -59,7 +59,7 @@ export default function RFCHub() {
               protocols, and standards of the Surgical AI Workspace.
             </p>
 
-            <div className="space-y-6 mb-32">
+            <div className="space-y-6 mb-12">
               {rfcs.map((rfc, i) => (
                 <motion.div
                   key={rfc.id}
@@ -96,7 +96,7 @@ export default function RFCHub() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-12">
               <div className="p-10 border border-[var(--border)] bg-[var(--bg)] flex flex-col justify-between">
                 <div>
                   <h2 className="text-2xl font-bold mb-6">Contribute to RFCs</h2>

@@ -1,0 +1,134 @@
+.workspace {
+  --workspace-gutter: clamp(1.25rem, 4vw, 3rem);
+  --surface1: var(--surface);
+  color: var(--text);
+  background: var(--bg);
+}
+
+.workspace :global(.hero-title) {
+  background: none;
+  color: var(--accent);
+  -webkit-text-fill-color: currentColor;
+}
+
+.workspace :global(.boxed-wrapper) {
+  max-width: 1180px;
+  margin-top: 96px;
+  margin-bottom: 48px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 12px;
+}
+
+.workspace :global(.boxed-wrapper > .container) {
+  max-width: 1080px;
+  padding: clamp(2rem, 5vw, 4rem) var(--workspace-gutter);
+}
+
+.workspace :global(.boxed-wrapper > section > .container) {
+  max-width: 1080px;
+  padding-inline: var(--workspace-gutter);
+}
+
+.workspace :global(.boxed-wrapper > section:first-of-type) {
+  padding-top: clamp(2.5rem, 5vw, 4rem) !important;
+}
+
+.workspace :global(.boxed-wrapper h1) {
+  font-size: clamp(2rem, 4.5vw, 3.25rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.workspace :global(.boxed-wrapper h2),
+.workspace :global(.boxed-wrapper h3) {
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.workspace :global(.boxed-wrapper p) {
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+.workspace :global(.boxed-wrapper .grid > *),
+.workspace :global(.boxed-wrapper .flex > *) {
+  min-width: 0;
+}
+
+.workspace :global(.boxed-wrapper pre) {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1.25rem;
+  line-height: 1.65;
+}
+
+/* The global card rule uses position:relative, which otherwise turns a
+   sticky sidebar's top offset into an unwanted downward displacement. */
+.workspace :global(.boxed-wrapper .card.sticky) {
+  position: sticky;
+  align-self: start;
+}
+
+.workspace :global(.knowledge-content) {
+  max-width: 72ch;
+}
+
+.workspace :global(.knowledge-content h2) {
+  margin-block: 2rem 1rem;
+}
+
+.workspace :global(.knowledge-content p + p),
+.workspace :global(.knowledge-content ul) {
+  margin-top: 1rem;
+}
+
+.workspace :global(.knowledge-content li + li) {
+  margin-top: 0.625rem;
+}
+
+.workspace :global(.knowledge-practice) {
+  width: calc(100% - 3rem);
+  max-width: 1080px;
+  margin: 2rem auto 3rem;
+  padding: var(--workspace-gutter);
+}
+
+/* Legacy utility accents use the site's existing semantic theme tokens. */
+.workspace :is([class*='text-blue-'], [class*='text-emerald-'], [class*='text-amber-'], [class*='text-purple-'], [class*='text-indigo-'], [class*='text-cyan-'], [class*='text-green-'], [class*='text-yellow-'], [class*='text-orange-'], [class*='text-red-'], [class*='text-rose-'], [class*='text-pink-'], [class*='text-teal-'], [class*='text-sky-'], [class*='text-violet-']) {
+  color: var(--accent) !important;
+}
+
+.workspace :is([class*='bg-blue-'], [class*='bg-emerald-'], [class*='bg-amber-'], [class*='bg-purple-'], [class*='bg-indigo-'], [class*='bg-cyan-'], [class*='bg-green-'], [class*='bg-yellow-'], [class*='bg-orange-'], [class*='bg-red-'], [class*='bg-rose-'], [class*='bg-pink-'], [class*='bg-teal-'], [class*='bg-sky-'], [class*='bg-violet-']) {
+  background-color: var(--surface2) !important;
+}
+
+.workspace :is([class*='border-blue-'], [class*='border-emerald-'], [class*='border-amber-'], [class*='border-purple-'], [class*='border-indigo-'], [class*='border-cyan-'], [class*='border-green-'], [class*='border-yellow-'], [class*='border-orange-'], [class*='border-red-'], [class*='border-rose-'], [class*='border-pink-'], [class*='border-teal-'], [class*='border-sky-'], [class*='border-violet-']) {
+  border-color: var(--border) !important;
+}
+
+@media (max-width: 767px) {
+  .workspace :global(.boxed-wrapper) {
+    width: calc(100% - 1.5rem);
+    margin-top: 80px;
+    margin-bottom: 24px;
+  }
+
+  .workspace :global(.boxed-wrapper .card) {
+    padding: 1.25rem !important;
+  }
+
+  .workspace :global(.boxed-wrapper .sticky),
+  .workspace :global(.boxed-wrapper .card.sticky) {
+    position: static;
+  }
+
+  .workspace :global(.boxed-wrapper button),
+  .workspace :global(.boxed-wrapper .btn-primary),
+  .workspace :global(.boxed-wrapper .btn-outline) {
+    max-width: 100%;
+    white-space: normal;
+  }
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import KnowledgePractice from '@/components/KnowledgePractice';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { motion } from 'framer-motion';
@@ -14,21 +15,21 @@ export default function TaxonomyPage() {
       title: "Stateless Execution",
       desc: "Atomic operations with no memory persistence between cycles. High-speed, low-overhead triggers.",
       useCase: "Basic intent classification, single-pass formatting.",
-      latency: "< 500ms"
+      latency: "Measure per workload"
     },
     {
       code: "EC-02",
       title: "Stateful Iteration",
       desc: "Recursive logic loops that maintain session context. Necessary for multi-turn reasoning chains.",
       useCase: "Deep research, iterative code debugging.",
-      latency: "1.5s - 5s"
+      latency: "Measure per workload"
     },
     {
       code: "EC-03",
       title: "Validated Multi-Agent",
       desc: "Parallel execution across specialized nodes with a central validation supervisor.",
       useCase: "Enterprise-grade content engines, complex ETL.",
-      latency: "Variable (10s+)"
+      latency: "Measure per workload"
     },
     {
       code: "EC-04",
@@ -63,7 +64,7 @@ export default function TaxonomyPage() {
             </p>
 
             {/* Semantic Links */}
-            <div className="flex flex-wrap gap-4 mb-20 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
+            <div className="flex flex-wrap gap-4 mb-10 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
               <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Linked Frameworks:</span>
               <Link href="/knowledge/standards" className="flex items-center gap-2 text-[11px] mono hover:text-[var(--accent)] transition-colors">
                 <LinkIcon size={12} /> PROMPT_HARDENING_V1
@@ -109,13 +110,13 @@ export default function TaxonomyPage() {
               ))}
             </div>
 
-            <div className="p-12 border-2 border-dashed border-[var(--border)] bg-[var(--surface2)]/30 rounded-sm mb-32">
+            <div className="p-12 border-2 border-dashed border-[var(--border)] bg-[var(--surface2)]/30 rounded-sm mb-12">
               <h2 className="text-2xl font-bold mb-6">Standardizing the AI Interface</h2>
               <div className="prose prose-invert max-w-none">
                 <p className="text-[var(--muted)] leading-relaxed mb-6">
                   Without a standard taxonomy, AI integration remains a "black box" operation. By classifying 
-                  execution chains into these four distinct tiers, technical founders can accurately estimate 
-                  latency, cost, and reliability before the first line of code is written.
+                  execution chains into these four distinct tiers, builders can identify the state and validation needs
+                  they must test before setting latency, cost, or reliability targets.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
                   <div className="p-6 bg-[var(--bg)] border border-[var(--border)]">
@@ -124,7 +125,7 @@ export default function TaxonomyPage() {
                   </div>
                   <div className="p-6 bg-[var(--bg)] border border-[var(--border)]">
                     <h4 className="mono text-[10px] text-[var(--accent)] uppercase mb-4">Citation Standards</h4>
-                    <p className="text-[12px] opacity-70">These standards are compatible with ISO/IEC and IEEE AI ethics and reliability guidelines.</p>
+                    <p className="text-[12px] opacity-70">These are local conventions. No external certification or standards compatibility has been established.</p>
                   </div>
                 </div>
               </div>
@@ -132,10 +133,10 @@ export default function TaxonomyPage() {
 
             <div className="text-center">
               <div className="label-tech mb-4">Call for Collaboration</div>
-              <p className="text-[var(--muted)] mb-8">Building the next standard in AI reliability. Join the discussion on GitHub.</p>
-              <button className="btn-primary py-3 px-8">
-                <GitBranch size={16} className="inline mr-2" /> Contribute to Standards
-              </button>
+              <p className="text-[var(--muted)] mb-8">Have a correction or implementation question? Send it through the contact page.</p>
+              <Link href="/contact" className="btn-primary py-3 px-8 inline-flex items-center">
+                <GitBranch size={16} className="inline mr-2" /> Discuss these design notes
+              </Link>
             </div>
           </div>
         </div>
@@ -143,6 +144,7 @@ export default function TaxonomyPage() {
         <Crosshair position="br" />
       </div>
       
+      <KnowledgePractice topic="taxonomy" />
       <Footer />
     </div>
   );

@@ -5,12 +5,12 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Sales Pipeline Velocity Dashboard — B2B Revenue Analytics Case Study | Datta Sable',
   description:
-    'Interactive B2B sales pipeline dashboard built with Power BI. Track deal velocity, pipeline stages, win/loss rates, revenue forecasting, and team performance metrics in a live analytics showcase.',
+    'Explore a browser-based sales pipeline interface with generated demonstration data, validation questions, and an illustrative weighted-pipeline calculation.',
   keywords: ['sales pipeline dashboard', 'B2B revenue analytics', 'Power BI sales dashboard', 'pipeline velocity', 'CRM analytics', 'sales performance BI'],
   alternates: { canonical: 'https://dattasable.com/dashboards/sales-pipeline' },
   openGraph: {
     title: 'Sales Pipeline Velocity Dashboard — B2B Revenue Analytics Case Study',
-    description: 'Interactive Power BI showcase: B2B pipeline velocity, deal stages, win/loss rates, and revenue forecasting.',
+    description: 'Sales pipeline interface demonstration with simulated values and a practical validation checklist.',
     url: 'https://dattasable.com/dashboards/sales-pipeline',
     siteName: 'Datta Sable',
     type: 'website',
@@ -26,16 +26,16 @@ export default function SalesPipelineDashboardPage() {
         <header className="mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--accent)] to-green-600 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(201,243,29,0.2)]">📈</div>
+              <div className="w-12 h-12 bg-[var(--surface2)] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(201,243,29,0.2)]">📈</div>
               <div>
-                <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Pipeline <span className="text-[var(--accent)]">Velocity</span></div>
+                <h1 className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Pipeline <span className="text-[var(--accent)]">Velocity</span></h1>
                 <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Technical Showcase: B2B Revenue Analytics</div>
               </div>
             </div>
             <div className="flex items-center gap-4">
                <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-full text-[var(--accent)] font-medium text-xs">
                  <div className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-pulse shadow-[0_0_6px_var(--accent)]"></div>
-                 LIVE DATA
+                 SIMULATED DEMO
                </div>
             </div>
           </div>
@@ -59,30 +59,22 @@ export default function SalesPipelineDashboardPage() {
           <div className="space-y-6 text-sm text-[var(--muted)] leading-relaxed">
             <div>
               <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">1. Executive Summary & Objective</h3>
-              <p>
-                In enterprise B2B sales operations, understanding funnel leakage and pipeline velocity is crucial to hitting quarterly revenue forecasts. This dashboard tracks simulated deal flows, deal sizes, historical win rates, and pipeline aging buckets. By identifying sales bottlenecks and predicting closure probabilities, the platform allows sales leadership to allocate resources efficiently and adjust sales targets dynamically.
-              </p>
+              <p>This is a browser-based sales analytics demonstration with generated sample values. It illustrates how a team might arrange pipeline summaries, stage comparisons, and deal-level detail. The displayed figures are not a live CRM feed, a customer engagement result, or a validated revenue forecast.</p>
             </div>
 
             <div>
-              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">2. Analytical Pipeline & Data Architecture</h3>
-              <p>
-                The backend utilizes PostgreSQL database queries mapped via Prisma ORM to retrieve transaction and sales progression histories. Raw CRM exports are cleaned, normalized, and loaded into an optimized database instance. The client-side dashboard consumes these records to calculate velocity metrics (e.g. stage-to-stage transition duration, overall deal cycle duration, and conversion ratios) across regional divisions and sales representatives.
-              </p>
+              <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">2. Demo implementation and production requirements</h3>
+              <p>The page embeds a local HTML dashboard. Its JavaScript generates demonstration values for the interface. The showcase does not establish a PostgreSQL or Prisma reporting pipeline. A production integration would need authenticated data access, a documented source model, refresh monitoring, and reconciliation against the CRM before its numbers could support business decisions.</p>
             </div>
 
             <div>
               <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">3. Visual Interface & User Experience (UX)</h3>
-              <p>
-                Designed for C-suite decision making, the dashboard features a dark, modern theme that highlights critical performance metrics. High-level summaries (Total Pipeline Value, Weighted Target Achievement, Funnel Velocity, and Win Ratios) sit at the top. The middle grid uses interactive charts to break down deal distribution across regional stages (Prospecting, Qualification, Proposal, Negotiation, Closed-Won/Lost). A detailed, drilldown list at the bottom allows managers to review individual high-value accounts.
-              </p>
+              <p>When reviewing the interface, start with the reporting period and currency. Then inspect whether a selected region or stage is reflected consistently in the summary and detail views. Generated values can change during interaction, so this demo is suitable for layout exploration rather than financial reconciliation. Record the expected filter behavior before implementing a real version.</p>
             </div>
 
             <div>
               <h3 className="text-xs font-mono font-bold text-[var(--text)] uppercase tracking-wider mb-2">4. Pipeline Calculations & Forecasting Logic</h3>
-              <p>
-                The forecasting engine calculates both Unweighted Pipeline (total contract value of all open deals) and Weighted Pipeline (contract value multiplied by the historical win-probability of the active sales stage). Average sales cycle duration is calculated programmatically by measuring the date differential between opportunity creation and final closure, giving teams an objective view of their actual pipeline velocity.
-              </p>
+              <p>For a separate illustrative weighted-pipeline calculation, a 10,000 deal at 30% and a 20,000 deal at 60% contribute 3,000 and 12,000, totaling 15,000. Those probabilities are assumptions, not promises. In a real model, test missing amounts, duplicate deals, closed stages, and the historical calibration of probabilities before using the result.</p>
             </div>
           </div>
         </section>

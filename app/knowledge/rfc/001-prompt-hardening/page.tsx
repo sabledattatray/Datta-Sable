@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import KnowledgePractice from '@/components/KnowledgePractice';
 import Footer from '@/components/Footer';
 import Crosshair from '@/components/Crosshair';
 import { motion } from 'framer-motion';
@@ -9,8 +10,8 @@ import Link from 'next/link';
 
 export default function RFC001() {
   const sections = [
-    { id: "abstract", title: "Abstract", content: "Prompt Hardening is a technical framework designed to transform non-deterministic natural language prompts into structural, deterministic logic processors. This RFC specifies the standards for schema enforcement, hallucination gating, and context compression within agentic AI systems." },
-    { id: "terminology", title: "Terminology", content: "Determinisitc Node (DN): An AI execution point with fixed schema output. Hallucination Gate (HG): A recursive validation loop. Surgical Schema: A JSON-strict structural definition." },
+    { id: "abstract", title: "Abstract", content: "This site-authored proposal describes output contracts, independent validation, bounded retries, and context preparation. It does not make a model deterministic or guarantee factual accuracy." },
+    { id: "terminology", title: "Terminology", content: "Validation node: an application stage that checks an output contract. Evidence gate: a source check with an unresolved outcome when support is missing. Neither check proves every field correct." },
     { id: "specification", title: "Specification", content: "Systems MUST enforce output schemas via structural markers. Systems SHOULD implement recursive self-audit cycles. Systems MAY prune redundant semantic tokens for latency optimization." }
   ];
 
@@ -59,7 +60,7 @@ export default function RFC001() {
               "To scale AI infrastructure, we must treat the prompt not as a request, but as an engineered circuit."
             </div>
 
-            <div className="space-y-16 mb-32">
+            <div className="space-y-16 mb-12">
               {sections.map((section) => (
                 <div key={section.id} id={section.id}>
                   <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
@@ -112,20 +113,20 @@ export default function RFC001() {
                       <p className="text-[11px] text-[var(--muted)] leading-relaxed mb-4">
                         A pre-configured system prompt template with structural markers and logical boundaries.
                       </p>
-                      <button className="text-[10px] mono text-blue-500 font-bold hover:underline">
-                        DOWNLOAD_TEMPLATE.txt
-                      </button>
+                      <Link href="/templates/token-saving-system-prompt" className="text-[10px] mono text-[var(--accent)] font-bold underline">
+                        VIEW PROMPT EXAMPLE
+                      </Link>
                     </div>
                     <div className="p-6 border border-[var(--border)] bg-[var(--surface2)]">
                       <h4 className="font-bold mb-3 flex items-center gap-2">
                         <Zap size={14} className="text-blue-500" /> Reference App
                       </h4>
                       <p className="text-[11px] text-[var(--muted)] leading-relaxed mb-4">
-                        A Python-based implementation of RFC-001 for automated schema validation.
+                        A worked guide to preparing source context and checking the result.
                       </p>
-                      <button className="text-[10px] mono text-blue-500 font-bold hover:underline">
-                        VIEW_ON_GITHUB
-                      </button>
+                      <Link href="/knowledge/optimizing-ai-context-windows" className="text-[10px] mono text-[var(--accent)] font-bold underline">
+                        READ WORKED GUIDE
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -148,7 +149,7 @@ export default function RFC001() {
               </div>
             </div>
 
-            <div className="p-12 border border-[var(--border)] bg-[var(--surface2)] rounded-sm mb-32">
+            <div className="p-12 border border-[var(--border)] bg-[var(--surface2)] rounded-sm mb-12">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold">Cite This Specification</h2>
                 <button 
@@ -176,6 +177,7 @@ export default function RFC001() {
         <Crosshair position="br" />
       </div>
       
+      <KnowledgePractice topic="hardening" />
       <Footer />
     </div>
   );

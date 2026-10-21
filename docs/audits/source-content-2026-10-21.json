@@ -1,0 +1,734 @@
+{
+  "generatedAt": "2026-10-21T05:23:15.265Z",
+  "scope": "All app page source paths and source-managed dynamic libraries. Blog counts use the public editorial correction pipeline. Live CMS overrides and subdomain source projects are outside this inventory. Counts are triage, not Google requirements.",
+  "pageSources": [
+    "app/about/page.tsx",
+    "app/admin/analytics/page.tsx",
+    "app/admin/analytics/reports/page.tsx",
+    "app/admin/analytics/traffic/page.tsx",
+    "app/admin/blog/page.tsx",
+    "app/admin/careers/page.tsx",
+    "app/admin/editor/page.tsx",
+    "app/admin/fabric/page.tsx",
+    "app/admin/knowledge/page.tsx",
+    "app/admin/login/page.tsx",
+    "app/admin/marketing/campaigns/page.tsx",
+    "app/admin/marketing/page.tsx",
+    "app/admin/mentorship/page.tsx",
+    "app/admin/messages/page.tsx",
+    "app/admin/page.tsx",
+    "app/admin/pages/editor/page.tsx",
+    "app/admin/pages/page.tsx",
+    "app/admin/projects/page.tsx",
+    "app/admin/seo/page.tsx",
+    "app/admin/services/page.tsx",
+    "app/admin/settings/page.tsx",
+    "app/admin/settings/typography/page.tsx",
+    "app/admin/testimonials/page.tsx",
+    "app/admin/topic-authority/page.tsx",
+    "app/admin/users/page.tsx",
+    "app/admin/[...catchall]/page.tsx",
+    "app/analytics-live/page.tsx",
+    "app/article-design-preview/page.tsx",
+    "app/blog/microsoft-fabric/page.tsx",
+    "app/blog/page.tsx",
+    "app/blog/[slug]/page.tsx",
+    "app/campaign-design-preview/page.tsx",
+    "app/careers/collection-officer-mumbai/page.tsx",
+    "app/careers/collection-team-leader-mumbai/page.tsx",
+    "app/careers/page.tsx",
+    "app/category/[slug]/page.tsx",
+    "app/certification/page.tsx",
+    "app/certifications/page.tsx",
+    "app/chains/page.tsx",
+    "app/chains/[slug]/page.tsx",
+    "app/contact/page.tsx",
+    "app/cookies/page.tsx",
+    "app/dashboard/page.tsx",
+    "app/dashboards/aura-capital-sales/page.tsx",
+    "app/dashboards/blinkit-sales/page.tsx",
+    "app/dashboards/collection-intelligence/page.tsx",
+    "app/dashboards/global-sales-intelligence/page.tsx",
+    "app/dashboards/interactive/page.tsx",
+    "app/dashboards/page.tsx",
+    "app/dashboards/revenue-intelligence/page.tsx",
+    "app/dashboards/rider-ops/page.tsx",
+    "app/dashboards/sales-pipeline/page.tsx",
+    "app/dashboards/surgical-ai/page.tsx",
+    "app/dashboards/world-business/page.tsx",
+    "app/dashboards/[slug]/page.tsx",
+    "app/data-forge/page.tsx",
+    "app/disclaimer/page.tsx",
+    "app/editorial-policy/page.tsx",
+    "app/faq/page.tsx",
+    "app/glossary/page.tsx",
+    "app/glossary/[slug]/page.tsx",
+    "app/hiring/page.tsx",
+    "app/infrastructure/page.tsx",
+    "app/knowledge/architecture/page.tsx",
+    "app/knowledge/comparisons/page.tsx",
+    "app/knowledge/data-engineering/page.tsx",
+    "app/knowledge/page.tsx",
+    "app/knowledge/patterns/page.tsx",
+    "app/knowledge/protocols/page.tsx",
+    "app/knowledge/rfc/001-prompt-hardening/page.tsx",
+    "app/knowledge/rfc/002-execution-chains/page.tsx",
+    "app/knowledge/rfc/003-intent-mapping/page.tsx",
+    "app/knowledge/rfc/page.tsx",
+    "app/knowledge/standards/page.tsx",
+    "app/knowledge/taxonomy/page.tsx",
+    "app/knowledge/[slug]/page.tsx",
+    "app/live-dashboard/page.tsx",
+    "app/lp/[slug]/page.tsx",
+    "app/mentorship/page.tsx",
+    "app/p/[slug]/page.tsx",
+    "app/page.tsx",
+    "app/portfolio/page.tsx",
+    "app/preview/page.tsx",
+    "app/privacy/page.tsx",
+    "app/services/page.tsx",
+    "app/services/[slug]/page.tsx",
+    "app/sitemap/page.tsx",
+    "app/start-here/page.tsx",
+    "app/templates/page.tsx",
+    "app/templates/[slug]/page.tsx",
+    "app/terms/page.tsx",
+    "app/tools/ai-prompt-generator/page.tsx",
+    "app/tools/bi-roi-calculator/page.tsx",
+    "app/tools/context-optimizer/page.tsx",
+    "app/tools/demo/page.tsx",
+    "app/tools/image-blade/page.tsx",
+    "app/tools/linkedin-formatter/page.tsx",
+    "app/tools/mermaid-forge/page.tsx",
+    "app/tools/open-mis/page.tsx",
+    "app/tools/page.tsx",
+    "app/tools/prompt-auditor/page.tsx",
+    "app/tools/schema-generator/page.tsx",
+    "app/tools/seo-meta-generator/page.tsx",
+    "app/tools/word-counter/page.tsx",
+    "app/tools/workspace/page.tsx",
+    "app/unsubscribe/page.tsx"
+  ],
+  "dynamicContent": [
+    {
+      "route": "/blog/microsoft-fabric-real-time-intelligence-guide",
+      "words": 6205,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/cybersecurity-cloud-security-guide-2026",
+      "words": 7519,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/pl-300-vs-dp-600-vs-dp-700-microsoft-certification-guide-2026",
+      "words": 5136,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-vs-databricks-2026",
+      "words": 3712,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-capacity-sizing-guide-2026",
+      "words": 3756,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-governance-purview-guide-2026",
+      "words": 6591,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-security-guide-2026",
+      "words": 3424,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-warehouse-explained-2026",
+      "words": 5991,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-pricing-guide-2026",
+      "words": 10210,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-onelake-architecture-guide",
+      "words": 9005,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-architecture-explained-2026",
+      "words": 16647,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/chatgpt-for-developers-i-replaced-12-developer-tools-for-30-days",
+      "words": 6907,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/why-microsoft-fabric-skills-will-dominate-the-data-industry-in-2026",
+      "words": 2591,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-architectural-guide",
+      "words": 1804,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-medallion-architecture-guide",
+      "words": 1990,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/architecting-compound-ai-systems-microsoft-fabric",
+      "words": 2665,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-600-study-guide-2026",
+      "words": 345,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-700-study-guide-2026",
+      "words": 1135,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-800-study-guide",
+      "words": 1779,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-600-exam-questions-and-scenarios",
+      "words": 936,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-700-vs-dp-203-comparison",
+      "words": 639,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-800-career-path-opportunities",
+      "words": 516,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-certification-roadmap-2026",
+      "words": 348,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-600-fabric-analytics-engineer-study-companion-notebook",
+      "words": 903,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-career-roadmap-2026",
+      "words": 5347,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison",
+      "words": 1623,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/free-microsoft-certifications-fabric-data-days-2026",
+      "words": 2581,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/nextjs-vercel-cloudflare-free-stack",
+      "words": 729,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/how-ai-agents-are-replacing-apps-2026",
+      "words": 1372,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/architecting-compound-ai-systems-microsoft-fabric",
+      "words": 2419,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/microsoft-fabric-medallion-architecture-guide",
+      "words": 1661,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/execution-chain-infrastructure-explained",
+      "words": 689,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/building-modular-ai-workflow-systems",
+      "words": 645,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/case-study-n8n-automated-authority-scaling",
+      "words": 294,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/case-study-precision-prompt-architecture-consistency",
+      "words": 293,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/case-study-context-compression-token-waste",
+      "words": 282,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/case-study-workflow-automation-roi",
+      "words": 280,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/precision-prompt-architecture-framework",
+      "words": 1464,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/operator-intent-mapping-framework",
+      "words": 684,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/context-compression-framework-benchmarks",
+      "words": 630,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/future-of-web-development-2026",
+      "words": 622,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/mastering-surgical-ui-dashboard-engineering",
+      "words": 673,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/how-to-improve-website-performance-100-gtmetrix",
+      "words": 269,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/architecting-10m-record-fraud-sentinel",
+      "words": 808,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/the-surgical-cockpit-bi-ux-design",
+      "words": 773,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/engineering-10m-row-ai-bi-agent",
+      "words": 541,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/strategic-bi-guide-india-2026",
+      "words": 592,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/building-analytics-war-room",
+      "words": 623,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/building-enterprise-web-architectures",
+      "words": 631,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/wordpress-installation-masterclass",
+      "words": 516,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/live-performance-benchmarking-2025",
+      "words": 250,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/sales-performance-ecosystem-2026",
+      "words": 252,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/telecom-collection-optimization-strategies",
+      "words": 586,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/architecting-q-commerce-dashboards",
+      "words": 584,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/architecting-mtd-lmtd-time-intelligence",
+      "words": 508,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/modern-bi-stack-2026",
+      "words": 595,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/postgres-vs-snowflake-speed",
+      "words": 527,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/python-automation-pipelines",
+      "words": 531,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/mastering-sql-joins-visual-guide",
+      "words": 551,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/tableau-lods-tutorial",
+      "words": 1683,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/bi-performance-tuning",
+      "words": 510,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/data-quality-frameworks",
+      "words": 595,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/financial-bi-impact",
+      "words": 267,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/retail-analytics-trends-2026",
+      "words": 575,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/data-democratization-risk",
+      "words": 726,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/generative-ai-bi-dashboards",
+      "words": 525,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/natural-language-query-engines",
+      "words": 597,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/ai-governance-bi",
+      "words": 763,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/dashboard-ux-principles",
+      "words": 574,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/hr-analytics-workforce-intelligence",
+      "words": 570,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/bi-scraper-python-playwright",
+      "words": 529,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/python-selenium-bi-scraper",
+      "words": 521,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/python-automation-data-reconciliation",
+      "words": 500,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/what-is-seo-digital-marketing-guide",
+      "words": 550,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/7-best-seo-tools-2025",
+      "words": 525,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/how-mis-reports-drive-business-decisions",
+      "words": 582,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/keyboard-mastery-ctrl-shortcuts",
+      "words": 780,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/mastering-marathi-typing-windows",
+      "words": 732,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/building-your-first-website-2025",
+      "words": 621,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/importance-of-ms-access-2026",
+      "words": 594,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/top-5-free-content-creator-tools-2025",
+      "words": 488,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/beyond-the-select-advanced-sql-for-bi",
+      "words": 510,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/psychology-of-high-fidelity-dashboard-design",
+      "words": 584,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/scaling-the-forge-python-data-engineering",
+      "words": 366,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/ai-bi-generative-intelligence-convergence",
+      "words": 586,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/cybersecurity-bi-data-vault-hardening",
+      "words": 262,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/data-driven-product-management-roi",
+      "words": 254,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/feature-engineering-mastery-data-science",
+      "words": 505,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/precision-marketing-customer-data-platforms",
+      "words": 498,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/mastering-autonomous-ai-agents-workflows-2026",
+      "words": 591,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/nextjs-15-react-19-performance-manifesto-2026",
+      "words": 794,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/first-party-data-strategy-privacy-marketing-2026",
+      "words": 496,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/deep-work-protocol-technical-focus-2026",
+      "words": 584,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/data-driven-finance-python-bi-alpha-2026",
+      "words": 301,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/power-bi-direct-lake-performance-tuning-fabric",
+      "words": 1103,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/architecting-production-multi-agent-ai-systems",
+      "words": 929,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/blog/sql-server-columnstore-indexes-optimization-guide",
+      "words": 1127,
+      "kind": "source-fallback-article"
+    },
+    {
+      "route": "/knowledge/optimizing-ai-context-windows",
+      "words": 727,
+      "kind": "noindex-guide"
+    },
+    {
+      "route": "/knowledge/technical-storytelling-for-founders",
+      "words": 724,
+      "kind": "noindex-guide"
+    },
+    {
+      "route": "/templates/viral-linkedin-hooks-pack",
+      "words": 128,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/founder-authority-system",
+      "words": 132,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/gemini-research-pipeline",
+      "words": 116,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/token-saving-system-prompt",
+      "words": 123,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/ai-agent-chain-blueprint",
+      "words": 116,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/b2b-retention-post-blueprint",
+      "words": 147,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/high-ctr-meta-structures",
+      "words": 161,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/templates/saas-product-schema-blueprint",
+      "words": 160,
+      "kind": "noindex-library-entry"
+    },
+    {
+      "route": "/glossary/semantic-compression",
+      "words": 137,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/operator-intent-mapping",
+      "words": 130,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/token-density-optimization",
+      "words": 107,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/prompt-chaining-architecture",
+      "words": 144,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/agentic-workflow-engineering",
+      "words": 127,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/surgical-spacing-method",
+      "words": 128,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/llm-context-window-limits",
+      "words": 132,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/zero-shot-prompting-execution",
+      "words": 116,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/few-shot-prompting-strategies",
+      "words": 114,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/technical-authority-signals",
+      "words": 110,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/ai-hallucination-risks",
+      "words": 137,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/data-fidelity-benchmarks",
+      "words": 129,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/n8n-workflow-orchestration",
+      "words": 122,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/glossary/workflow-orchestration-logic",
+      "words": 118,
+      "kind": "noindex-glossary"
+    },
+    {
+      "route": "/chains/authority-content-launch",
+      "words": 17,
+      "kind": "noindex-interactive-chain"
+    },
+    {
+      "route": "/chains/technical-research-deepdive",
+      "words": 14,
+      "kind": "noindex-interactive-chain"
+    },
+    {
+      "route": "/chains/social-to-search-bridge",
+      "words": 16,
+      "kind": "noindex-interactive-chain"
+    }
+  ]
+}
