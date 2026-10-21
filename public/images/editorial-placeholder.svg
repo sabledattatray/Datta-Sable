@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Abstract data workflow illustration">
+  <rect width="1200" height="675" fill="#161b22"/>
+  <g stroke="#8b949e" stroke-width="3" fill="none">
+    <rect x="150" y="230" width="200" height="200" rx="20"/>
+    <rect x="500" y="230" width="200" height="200" rx="20"/>
+    <rect x="850" y="230" width="200" height="200" rx="20"/>
+    <path d="M350 330h150m200 0h150M200 285h100m-100 45h100m-100 45h70M550 285h100m-100 45h100m-100 45h70M900 285h100m-100 45h100m-100 45h70"/>
+  </g>
+</svg>

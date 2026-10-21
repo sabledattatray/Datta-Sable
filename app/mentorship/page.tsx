@@ -481,10 +481,10 @@ export default function MentorshipPage() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
                 {[
-                  { title: 'Microsoft Fabric Architecture Explained', desc: 'A deep dive into OneLake storage, lakehouse architecture, and compute engine abstraction.', url: '/blog/posts/microsoft-fabric-architecture-explained' },
-                  { title: 'DP-600 vs DP-700 Certifications', desc: 'Compare the Fabric Analytics Engineer and Microsoft Fabric Solution Architect exams.', url: '/blog/posts/dp-600-vs-dp-700-certifications' },
-                  { title: 'Microsoft Fabric Certification Roadmap', desc: 'Step-by-step guidance on schedules, modules, practice tests, and voucher preparation.', url: '/blog/posts/microsoft-fabric-certification-roadmap' },
-                  { title: 'Azure Data Engineering Roadmap', desc: 'From relational databases to Synapse pipelines, Spark scripting, and Delta lakehouses.', url: '/blog/posts/azure-data-engineering-roadmap' }
+                  { title: 'Microsoft Fabric Architecture Explained', desc: 'A deep dive into OneLake storage, lakehouse architecture, and compute engine abstraction.', url: '/blog/microsoft-fabric-architecture-explained-2026' },
+                  { title: 'Microsoft Data Certification Comparison', desc: 'Compare Fabric analytics engineering, data engineering, and SQL AI development credentials.', url: '/blog/dp-600-vs-dp-700-vs-dp-800-microsoft-fabric-certification-comparison' },
+                  { title: 'Microsoft Fabric Certification Roadmap', desc: 'Step-by-step guidance on schedules, modules, practice tests, and voucher preparation.', url: '/blog/microsoft-fabric-certification-roadmap-2026' },
+                  { title: 'Python Data Engineering', desc: 'Practical Python engineering patterns for data pipelines and automation.', url: '/blog/scaling-the-forge-python-data-engineering' }
                 ].map((art, i) => (
                   <Link href={art.url} key={i} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20, display: 'flex', flexDirection: 'column', gap: 10, height: '100%', transition: 'border-color 0.2s' }}

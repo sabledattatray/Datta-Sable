@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default async function PrivacyPage() {
 
-  const lastUpdated = "October 20, 2026";
+  const lastUpdated = "October 21, 2026";
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
@@ -85,13 +85,13 @@ export default async function PrivacyPage() {
               <div style={{ background: 'var(--surface2)', border: '1px solid var(--accent)', borderRadius: '8px', padding: '1rem 1.25rem', marginBottom: '1.25rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                 <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>📢</span>
                 <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text)', lineHeight: 1.7 }}>
-                  <strong>Advertising Disclosure:</strong> This website, <strong>dattasable.com</strong>, has applied to the <strong>Google AdSense programme</strong>. Google, as a third-party vendor, uses cookies to serve ads on this site. Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your prior visits to this and other websites.
+                  <strong>Advertising Disclosure:</strong> This website, <strong>dattasable.com</strong>, has applied to the <strong>Google AdSense programme</strong>. When advertising is enabled, Google and its partners may use advertising cookies and identifiers to serve and measure ads, including ads based on prior visits to this and other websites, subject to your consent choices where required.
                 </p>
               </div>
 
               <p>If advertising is enabled, Google AdSense, a third-party service provided by Google, may use cookies and similar identifiers to deliver and measure advertisements. Advertising is disabled by default while the site is prepared for review.</p>
               <p style={{ marginTop: '1rem' }}>Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visit to our site and/or other sites on the Internet. These cookies allow Google and its partners to show you relevant ads across the web.</p>
-              <p style={{ marginTop: '1rem' }}>Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites. Google&apos;s advertising cookies enable Google and its partners to serve ads based on visits to this site and/or other sites on the Internet.</p>
+              <p style={{ marginTop: '1rem' }}>Where the Google consent message is available, use Advertising privacy choices in the footer or Google&apos;s Privacy and cookie settings link to reopen the message and change or withdraw advertising consent. These controls appear when the messaging service is ready. Analytics choices do not grant advertising consent.</p>
               <p style={{ marginTop: '1rem' }}>You may opt out of personalized advertising in the following ways:</p>
               <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
                 <li>Visit <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Google Ads Settings</a></li>

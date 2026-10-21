@@ -1,0 +1,2534 @@
+{
+  "checkedAt": "2026-10-21T06:29:12.626Z",
+  "ownerResponse": "Owner does not remember permissions or traffic history; no ownership attestation inferred.",
+  "inventory": [
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/aurora-free-preview.webp",
+      "bytes": 85478,
+      "sha256": "b0394aa33d6235079b70f84040570aff6d55f607fecd463acd4b67585cf33432",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/cta-bg.svg",
+      "bytes": 3543,
+      "sha256": "c353f7f75dfa2b659cb81aeddb555caccf98a2893e1fd3d188295076981e208e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/illustrations/1.webp",
+      "bytes": 33478,
+      "sha256": "5898ce4e4c5edce6c2a85c58636910799e36db679ecb9653c4a5687755564a7e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/illustrations/2.webp",
+      "bytes": 6052,
+      "sha256": "ae44f36fbc216e33197cc5ee83025f4901093b56917c01e2409d4ebf1a8fc90c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/illustrations/3.webp",
+      "bytes": 22030,
+      "sha256": "469903197d6a66b3fa6f6eaaeb77619c8479372e462ed3b2bddb515e43a8f0cb",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/illustrations/4.webp",
+      "bytes": 7332,
+      "sha256": "bb1a80396626043cba31ab8b0ca3d0ed5b78ed885703f8476240f3b250bf771a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/assets/images/illustrations/5.webp",
+      "bytes": 16190,
+      "sha256": "9fdf004e7ca279bc9a578b0b4c45d0361e81459a5bfe6f35d5cc623e632514e8",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/aurora.svg",
+      "bytes": 4048,
+      "sha256": "56f81cedf24cdb5d74cb6c93648067c22181037a2e94cf920f07248a8bba5a9f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/auth-bg.webp",
+      "bytes": 97356,
+      "sha256": "e6f62b93da553de4ab9c2181b460c29896c8fc5a54038b3c03cc566ab9bec8b7",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Certificates/CertificateOfCompletion_AI and the Future of the Public Sector.pdf",
+      "bytes": 70051,
+      "sha256": "d0949324c09c8cc3f281c7ce2319e2593d5bfd3264213309a2bf8011d8b93300",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Certificates/CertificateOfCompletion_Content Strategy for Marketers.pdf",
+      "bytes": 69246,
+      "sha256": "64dfaac569f759c279e1b73f822be89ee5063474b312293549126b082f5b06fa",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Certificates/CertificateOfCompletion_Digital Marketing Tools Create a Marketing Campaign from Start to Finish.pdf",
+      "bytes": 68907,
+      "sha256": "7e29d57f0610ef384c5d4b7fce3aedd82741659b107c34e6ad53fb797fe19e2a",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Certificates/CertificateOfCompletion_Generative AI for Digital Marketers.pdf",
+      "bytes": 120387,
+      "sha256": "8f5c3ac1dd8da872dd2d3d45a594c23e52831c7a34c1d27d2d1e8c20a171645b",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Certificates/CertificateOfCompletion_Marketing on LinkedIn.pdf",
+      "bytes": 67770,
+      "sha256": "5b5da269c518fe520bcf72062993c01ee83b2ddd7ac86bc53be5ca0f78654330",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Certificates/Google Analytics Certifiacte.pdf",
+      "bytes": 38476,
+      "sha256": "d4475de90673d27e3f1f17107f0ac92d398935b1040784d80c51c35aad0024bb",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/certs/CertificateOfCompletion_AI and the Future of the Public Sector.pdf",
+      "bytes": 70051,
+      "sha256": "d0949324c09c8cc3f281c7ce2319e2593d5bfd3264213309a2bf8011d8b93300",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/certs/CertificateOfCompletion_Content Strategy for Marketers.pdf",
+      "bytes": 69246,
+      "sha256": "64dfaac569f759c279e1b73f822be89ee5063474b312293549126b082f5b06fa",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/certs/CertificateOfCompletion_Digital Marketing Tools Create a Marketing Campaign from Start to Finish.pdf",
+      "bytes": 68907,
+      "sha256": "7e29d57f0610ef384c5d4b7fce3aedd82741659b107c34e6ad53fb797fe19e2a",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/certs/CertificateOfCompletion_Generative AI for Digital Marketers.pdf",
+      "bytes": 120387,
+      "sha256": "8f5c3ac1dd8da872dd2d3d45a594c23e52831c7a34c1d27d2d1e8c20a171645b",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/certs/CertificateOfCompletion_Marketing on LinkedIn.pdf",
+      "bytes": 67770,
+      "sha256": "5b5da269c518fe520bcf72062993c01ee83b2ddd7ac86bc53be5ca0f78654330",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/certs/Google Analytics Certifiacte.pdf",
+      "bytes": 38476,
+      "sha256": "d4475de90673d27e3f1f17107f0ac92d398935b1040784d80c51c35aad0024bb",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Dattatray_Sable_Resume.pdf",
+      "bytes": 467081,
+      "sha256": "1f32d936a26cee6c223fb6daed2dbed9ccb1dacbf21bd47be0a45ecdc474e77b",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/favicon.svg",
+      "bytes": 277,
+      "sha256": "938f433436d7c6bc3a10d6f85c05fb7cf8891474b6da7f89328458567f2b5aeb",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/file.svg",
+      "bytes": 391,
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/globe.svg",
+      "bytes": 1035,
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/GTmetrix-report-dattasable.com-20260506T083218-U79ZcZDG.pdf",
+      "bytes": 2480332,
+      "sha256": "d8410d67d62dabad9dcf81f83d3634943a5c4896a4d31f1ecd7decc011b1450a",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/hero-bg.webp",
+      "bytes": 304072,
+      "sha256": "92abae4b6e8b79cf81b0c30643cd121c9d7cceb52a120834e04cafb4182e74b6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/author.webp",
+      "bytes": 100986,
+      "sha256": "594cede0ec77976ffc2b4fdcacc973b0d6884a5a7f2ef42af1e9065c91c8c26d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/add_post_page_bottom_1777383043565.webp",
+      "bytes": 26346,
+      "sha256": "b65ca0e25e98e21b8f359394b316094e2c1d353a4b9655a99b4df79a731fc35a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/add_post_page_check_1777383232831.webp",
+      "bytes": 25700,
+      "sha256": "2e6421d1f4aea8cb91c3d156e4dc6c45e90184b4054fe267014455c3a6e189aa",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/advanced-excel.webp",
+      "bytes": 84650,
+      "sha256": "40408c7e2ead11fb94b38c42adddc4afcae04e4c28b6f455e5caeb7d4a047f8c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/advanced-power-bi-direct-lake-performance-tuning.webp",
+      "bytes": 183710,
+      "sha256": "532f9ee9a1ad99b7aafbbdfb2a6d047780425e5a2a577c8edffd8d0f11ede72b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/ai-agents-replacing-apps.webp",
+      "bytes": 96190,
+      "sha256": "25970170b88a0bdfe5a8ed198c93cc17e500c291672251469deb8cd42d9525a4",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/ai_bi_agent_hero.webp",
+      "bytes": 166640,
+      "sha256": "1e7c88ff0afd44d52f5cf33f41dfecc0766142450e7c608db39beaf399f40f56",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/ai_bi_convergence_2026.webp",
+      "bytes": 176822,
+      "sha256": "f76456832615cf714231f94b69a3da5be8828b76502359c8d20509942a954df0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/ai_governance_hero_1777410191025.webp",
+      "bytes": 75338,
+      "sha256": "8f2e3d6a6b58c9b504e73d552e30587bfb17c979f6076c485c8c4a08ded86b46",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/analytics_war_room_hero.webp",
+      "bytes": 92708,
+      "sha256": "086aa9948c83186394fe6e867f504a485222f72a66b3d3dcda3004522369d609",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/architecting-production-multi-agent-ai-systems-featured.webp",
+      "bytes": 267876,
+      "sha256": "6f0453ab6e4414960db9b09814646b155fc45295324ff14f5723860b22939fa2",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Beyond the Screen How AI Agents Are Replacing Apps in 2026.webp",
+      "bytes": 122476,
+      "sha256": "1c0ca45a813e9cae7b329f8d536f414e317f43466f0ea6d6ab61dd8dd6b47011",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/bi-career.webp",
+      "bytes": 81086,
+      "sha256": "ea862057209823e529bef3dba341576d3a77bd153d4ac6b84f44743c128742d9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/bi_performance_hero_1777410226286.webp",
+      "bytes": 91214,
+      "sha256": "faddb2d2c0bfb9c3bc5b502ddb9fc2b8e61ac0fce7ed13a74682349007347930",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/bi_performance_unique.webp",
+      "bytes": 84602,
+      "sha256": "f9eaf71c5d5da569d77604c9fde0e9851e7093c0c4f3cebd2714d50c1bfea781",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/bi_strategy_unique.webp",
+      "bytes": 150492,
+      "sha256": "a9ed9edf0a2ae31e766b6d9d758d87e4e5a376340bcc8c0a23d1f082ed374158",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/blog_compression_realistic.webp",
+      "bytes": 84678,
+      "sha256": "0cab05382164ef1f71a26a9a864796225e66d2f562f661fb315071e7d208b06d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/blog_n8n_realistic.webp",
+      "bytes": 163890,
+      "sha256": "ee1de6e93cfff9a9cd237d392cf963aad4a5c853e9d34044173ecfea8f48c2e7",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/blog_prompt_realistic.webp",
+      "bytes": 117852,
+      "sha256": "e906d9e030b01acf7f8bee663065836d719c229a2add9049245eb6445ff98727",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/blog_telemetry_realistic.webp",
+      "bytes": 112818,
+      "sha256": "fcca693a5d28dab180e68563e40522a9704795e2bec479544a1f6c3bcf57785a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/case_study_mis_automation.webp",
+      "bytes": 135472,
+      "sha256": "17e49a863334b1d664ff7614f71bb080f0d41f3742b8e897320410c02fb189a2",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/case_study_n8n_automation.webp",
+      "bytes": 74036,
+      "sha256": "be2ec46975191ff4ba7c49d96ea901c501f5a4825af3b3bd63fbb7c14ed58c28",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/case_study_prompt_architecture.webp",
+      "bytes": 85316,
+      "sha256": "9f7c6e50a0c1a1d418382730928ef20074cd9ec86c15b095d254efb9e19eb7cf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/case_study_token_compression.webp",
+      "bytes": 122142,
+      "sha256": "a9ab9482d128661ef7bd0f56ea96cffa4fd4c56ee1458988d2a4b3c035faebc7",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/chatgpt_dev_tools.webp",
+      "bytes": 58018,
+      "sha256": "de2d6babdacc2c13bbedd8c837396faca5f6cc80ec40d9f291c74cab88ca05ce",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/compound_ai_fabric_hero.webp",
+      "bytes": 106122,
+      "sha256": "db8e8cacfbbd005b55c06611c4328c56471b88b940e915c2945bc70cb874d52d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/context_window_optimization.webp",
+      "bytes": 195444,
+      "sha256": "5d5cda82b6355b0eb99c796bdcf1e0406efed235df293021e68276497cccb4cd",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/creative_tools_unique.webp",
+      "bytes": 74766,
+      "sha256": "ef6f570ca1fb9b74c1f3ecf2b21745bf8f737c5d9b50216c3e9c8f2894819637",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Cybersecurity & Cloud Security in 2026 The Complete Enterprise Guide.webp",
+      "bytes": 297156,
+      "sha256": "6f0340fef0a97449d9b8c4c15e850299335fd23088176d330ca80b8cd8ba26e1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/cybersecurity-cloud-security-guide-2026.webp",
+      "bytes": 297156,
+      "sha256": "6f0340fef0a97449d9b8c4c15e850299335fd23088176d330ca80b8cd8ba26e1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/cybersecurity_data_vault.webp",
+      "bytes": 160526,
+      "sha256": "8f408bc5395f410cf3af2196d26539a0d011b36d452e8d4fe8b68255b128443c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/dashboard_psychology_hero.webp",
+      "bytes": 92496,
+      "sha256": "4122787359fd74ed94d0fd161eb590eb40a75c14256cc1334d962fe86706f585",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/dashboard_ux_hero_1777410208497.webp",
+      "bytes": 88778,
+      "sha256": "156ceddde2b5b4c7dcadd431692fcbbffa3cdbf12c3b99a78df67d4e843ec563",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/data-driven-finance-python-portfolio.webp",
+      "bytes": 83568,
+      "sha256": "79ecb82356f97a7ee7689cc87bfd06ad6893ff6cca3ceb9c22ab1aa73a3674be",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/data-mesh-adoption-trends-2026.webp",
+      "bytes": 185368,
+      "sha256": "9d8ab5fb690217c2afe189b176b38f3103609767ec2078670f1af3876a8363ab",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/data-storytelling.webp",
+      "bytes": 92792,
+      "sha256": "e7afee186c9a821dcf09f9f5d564d98adc2115db02c1cfb51abe9c57c66038b8",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/data_democratization_hero_1777410089898.webp",
+      "bytes": 120014,
+      "sha256": "84971c8aca005c506e78435306e9c07b0fd082d46eb5d2c82fba5ac3359c0d53",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/data_quality_hero_1777410243821.webp",
+      "bytes": 215936,
+      "sha256": "1d3cf032936b8fef9c41be75076fe95494a77a5ca21423fdd0dfee2901bdd1c3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/data_quality_realistic_hero.webp",
+      "bytes": 107022,
+      "sha256": "6f6b7adc50ece2855000be25cfe7473eb247e8eb753d4693de8cc06c0eefc4ab",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/deep-work-productivity-setup.webp",
+      "bytes": 82634,
+      "sha256": "376026546fcbb36f50360265897a8e445cc39d5515761feaf88d9258fff7b744",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/dp-600-fabric-analytics-engineer-study-companion-notebook.webp",
+      "bytes": 165422,
+      "sha256": "ac737485994da5d93d5c92ad695458de0d9e951ba34085507cb2f946b470e524",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/dp-600-vs-dp-700-vs-dp-800-comparative-guide.webp",
+      "bytes": 121188,
+      "sha256": "4e7060091703e618532e1d0fa1654ef1611e1f9aa2bc6173992175d15e79a603",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/dp-800-study-guide.webp",
+      "bytes": 138788,
+      "sha256": "1520576bbfb489bc560e709a2aa57b7a0184251e28ef3ccab2cae46a11fd2921",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/enterprise_web_unique.webp",
+      "bytes": 134580,
+      "sha256": "dd1740ccccad920732e38e9e09820ed752ffd1d0a12d09d56406f09ba1d6e311",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/execution_chains_hero.webp",
+      "bytes": 147426,
+      "sha256": "54e1996473856d52ac1f3fa471bd26815d2f30b15bf89a1cbf4d6dad733fd4a9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/fabric-data-agents-vs-power-bi-copilot-vs-fabric-iq.webp",
+      "bytes": 99100,
+      "sha256": "f755cdab6eb7d6a4b8ff1d1942a1a68ed050f6b4edd7de3709201874af972166",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/fabric-governance-maturity-model.webp",
+      "bytes": 97674,
+      "sha256": "40902496b464f1571595a352db8564aa5d9ba7a26f22868c9fb1a8a0ab9eadb3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/fabric-purview-integration-architecture.webp",
+      "bytes": 97932,
+      "sha256": "b39d415ed19f0ad12f80f0f1cfe858bd35a994e3e6a5d25ec38a72c95ea7ac30",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/fabric-rbac-least-privilege-model.webp",
+      "bytes": 91718,
+      "sha256": "90eacd6c6021ffbe88d850b1f36d97a533c270fba183553e33746f7fc5c49274",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/fabric_medallion_architecture.webp",
+      "bytes": 102476,
+      "sha256": "d24dbad8edd55313377786ccea26167def1836abf91130f3ec03b72a1c0a0647",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/feature_engineering.webp",
+      "bytes": 196174,
+      "sha256": "f7ade2dfb61f85d812a1f45f68eb8ed84cf44ff4bba8f7d27cb3f117036500cd",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/financial_bi_hero_1777410069046.webp",
+      "bytes": 77912,
+      "sha256": "9c3839ed777fb8e6fbcab88c75f033bbea4a6d3c7f2ac72d7ed31fc58385c503",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/first-party-data-marketing-strategy.webp",
+      "bytes": 98772,
+      "sha256": "b89b992481119f3a05b835e62d3ee0d5a455d43f83fdd66225b6272e51500b92",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/first_website_unique.webp",
+      "bytes": 143930,
+      "sha256": "888f40e04c4be62bbf45f93fdaa7f075129c795894931eb957ca1843e4c160b0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/fraud_sentinel_hero.webp",
+      "bytes": 162154,
+      "sha256": "a8fab9dc3f766f4930cc6a6e92b25c000d37b6c51a7dad2c210bd9490ca0c0c9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/free-microsoft-certifications-fabric-data-days.webp",
+      "bytes": 62004,
+      "sha256": "19dd22480bbedcc2f4c03deed637d3c39344dd8f4d124581e96eccf17d321380",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/full_page_post_add_1777383311699.webp",
+      "bytes": 27724,
+      "sha256": "494b46e561130b800bbf2be9bd2d6e97d05d70d47f1e0a77e1d349a12a4591ad",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/generative_ai_hero_1777410154583.webp",
+      "bytes": 95126,
+      "sha256": "85423171b1b37183342d1fdb35f851f392fcf59e76d53d9664cef2716bf5d8c1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/growth_marketing_cdp.webp",
+      "bytes": 157032,
+      "sha256": "ae68b6f787153f59ac94d5e1c3ef61e5c117859cbb12ccfb1a6a36c3c1090a8a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/gtm_100.webp",
+      "bytes": 65684,
+      "sha256": "df1dae93e3b267364dd7e67293c1026326ba1d9056d1f2a6448609b3e348c4fe",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Hosting Next.js on Vercel behind Cloudflare The Ultimate Zero-Dollar Production Stack.webp",
+      "bytes": 152786,
+      "sha256": "4c6a4488a8544c8fc5349c1226e768b0ecaa23f076eaf56dcdc309fb771b581a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/intent_mapping_hero.webp",
+      "bytes": 67632,
+      "sha256": "301333afe4119bb5540004f35e5a4beeb5abe15d08ee3892f64facb68fcf8de0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Live SQL Tuning From 10 Minutes to 10 Seconds.webp",
+      "bytes": 150520,
+      "sha256": "25f9fbfac84fec48aaf3328e7bfd0b59eca2be35cc7ec148bda9dcfd107503be",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777399742723.webp",
+      "bytes": 17640,
+      "sha256": "a598f4401832f2756a28249860afdd4fd3ab7e63376cb930d8d3c86185090093",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777400868908.webp",
+      "bytes": 15736,
+      "sha256": "b354205a77dbd1f767f1de0c2ac0371b0199228f795601de275adbea740679e0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777401244615.webp",
+      "bytes": 17216,
+      "sha256": "cfdfab2f70bdf6bb18bb2f344be01070a557a1bc6463a3d9c6b9d85bb4eea61a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777401497113.webp",
+      "bytes": 39906,
+      "sha256": "a46e4dbdd376b06e0900ce307c2dbb589ed91d0faaaa780ed9f32003f4afb38a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777406326956.webp",
+      "bytes": 7200,
+      "sha256": "65883571bbe7fe9cf6a8cb03c8d59af0a0494c20af6d096a8eff83c5dfa3b31b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777406611159.webp",
+      "bytes": 9192,
+      "sha256": "e97a471932fd5126b245bafcca694397811447bafa01b05cd3c673d111708390",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/media__1777407074378.webp",
+      "bytes": 7704,
+      "sha256": "96259a838630110535a459b35ab071c0ad8e9e6ef49501fad1d97e390cadf2e5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Microsoft Fabric Governance.webp",
+      "bytes": 145156,
+      "sha256": "de7e579e1e8d50553f6f0aafa923a6d67e8e1bec732f0bcad307beab38689794",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Microsoft Fabric Warehouse Guide.png",
+      "bytes": 716210,
+      "sha256": "41ca3aaf8e20cea6e0ec92c3188c3c185305c148718c9a487fdae93d04d4b572",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Microsoft Fabric Warehouse Guide.webp",
+      "bytes": 140988,
+      "sha256": "844ec79b3cd548454eaec32faf0c553e7f1da3c83c305a1d49924be612be659d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-architecture-explained-2026.webp",
+      "bytes": 213936,
+      "sha256": "05027e60d6b0f0ba7ac1b3baef48c9ce092655e87034b3793566dc40036cd1cf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-capacity-sizing-guide-2026.webp",
+      "bytes": 160040,
+      "sha256": "711c1e7fad14f4092314e8ea3c9e08ae4363b2f4602fcf105d51f28e2b842891",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-career-roadmap-2026.webp",
+      "bytes": 164566,
+      "sha256": "ddcd814f23e49e34dad495ddd34f46b76ece6f0b397b34e7c5a30609ae909c4a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-data-agents-2026.webp",
+      "bytes": 139848,
+      "sha256": "612f3f737addccaeae09023fef1d954f260d805a5a1c323a61f1209acbb5fe9d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-enterprise-governance-architecture.webp",
+      "bytes": 145156,
+      "sha256": "de7e579e1e8d50553f6f0aafa923a6d67e8e1bec732f0bcad307beab38689794",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-governance-reference-architecture.webp",
+      "bytes": 74020,
+      "sha256": "a49c47e505f12ca32eed92ac6d6ca5441d52f61a8213850931ada7e501005c59",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-pricing-guide-2026-f-sku-capacity-planning.webp",
+      "bytes": 174764,
+      "sha256": "dbe6e0a322945410da5c9e3a7687da474eab6016368cb4e4a5935204e5921477",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-real-time-intelligence-guide.webp",
+      "bytes": 89882,
+      "sha256": "bbea0d165ceaaa94be209f6387c907879a99d5636d26324fb694b5e850c61f06",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-security-guide-2026.webp",
+      "bytes": 158674,
+      "sha256": "28a256372207782d93083e9f6d60016c3ea2745f2bcc34adb0c16da0bbf2e2d6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-skills-dominate-2026.webp",
+      "bytes": 202586,
+      "sha256": "e992353032f5a35a5fc0528735bfd2109be4fbc8b75a037a822f5edb9c189c82",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-ultimate-guide.webp",
+      "bytes": 202364,
+      "sha256": "50d7b91f4f4194fca35cf92617adf60995ff7e82feef0496980c4a826dca4a9d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/microsoft-fabric-vs-databricks-2026.webp",
+      "bytes": 170242,
+      "sha256": "84fa5fcb4d154fdcb9dad597c891b116f0a808453268e3b7b615b086dca415b0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/mis_reports_unique.webp",
+      "bytes": 108186,
+      "sha256": "847b2e2af53f520b01f7dc37aa326dd03ee214aec9034f0d36479123c304c03f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/modular_ai_hero.webp",
+      "bytes": 181750,
+      "sha256": "34f16706b9e2a0f8c6efe66b8f2a633f13859de9c3327bb6e484283ca758ad81",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/ms_access_unique.webp",
+      "bytes": 63068,
+      "sha256": "d7f37c009b26f89f1a1b61e6546deffe86cde158aa23707d7da385691a72f873",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/nextjs-15-react-19-enterprise-architecture.webp",
+      "bytes": 77250,
+      "sha256": "79ff0908583f59d351343332fd5a84e2b412e24b44d7fad2a329af1b9891ced1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/nlq_engines_hero_1777410174899.webp",
+      "bytes": 52370,
+      "sha256": "6dca1aee3a41de817cd5941835cb8f79ac03585df30b047db4becc99ab5241b1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/OneLake a data lake.webp",
+      "bytes": 158882,
+      "sha256": "6b641abf5a8deb1309e0eadd04fb630b165083f9c9c48ec02a802b106336861c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/onelake-governance-controls.webp",
+      "bytes": 75806,
+      "sha256": "d330e9314d2d1e350a6f0d2c411e19747c57a7d053d867b5364a8041c11ab0b6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/postgres_snowflake_unique.webp",
+      "bytes": 154202,
+      "sha256": "dd52786594ba62c59d7ab690e56eb9d53034d2c8e528f653ea22efc5a434ab75",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/postgres_vs_snowflake_hero_1777410017107.webp",
+      "bytes": 117604,
+      "sha256": "92db3a9757bb6741c7c135fb73e59589fe8f7de89327a71e98521a753a51ee02",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/product_manager_roi.webp",
+      "bytes": 90640,
+      "sha256": "59002766d35a421d0a2397071d8764c12337a487fc706a3d0ce09fb8e329d8f7",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/professional-ai-agent-architecture-2026.webp",
+      "bytes": 110882,
+      "sha256": "8b6f2741c8d2dce1c5df6c2bbf33558a877a6258b5a63174df31aa5cbbdcab45",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/psi_94.webp",
+      "bytes": 35334,
+      "sha256": "50fcd5fa03a018aa0f88c273ac2ad4c054c35fe090aaed7a78b406ac43829d9b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/psi_desk_100.webp",
+      "bytes": 38448,
+      "sha256": "982c93e182a5be5be4b2f6357910bf8ba3b1681040fd116b9e4b89aea3a4100f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/publish_settings_card_close_up_1777383362173.webp",
+      "bytes": 26154,
+      "sha256": "f03491ae04a0f9c9d15f70533ce1d0767676fdeb0ffe57c4eef08eeda723ea05",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/python-pandas.webp",
+      "bytes": 91768,
+      "sha256": "4715503be16bf1c540b8cf489f7a9e2b4705bc63dc904b5b425f02d0ba5bf3ef",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/python_automation_hero_1777410033671.webp",
+      "bytes": 71388,
+      "sha256": "dafd2b2e634ec430ada03f36da7d7a2c660111d004ee2d25c73fff7583fbbd73",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/python_engineering_hero.webp",
+      "bytes": 85404,
+      "sha256": "a106b728fb6cb13f688f072465fb91b6bb8eb2cacb0b1902cdd36f6708215f3d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/python_scraper_hero_1777410123458.webp",
+      "bytes": 86214,
+      "sha256": "6982ae0b2ed9fbb8773e0cb639d21a70f5029b1ded98a1c8dfe63bec6fff2e33",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/q_commerce_unique.webp",
+      "bytes": 121278,
+      "sha256": "d6a53270bb93597bc1d05c665ee6614cc9fe8062bf2030e5823ad0f11acec68e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/retail_analytics_hero_1777410051638.webp",
+      "bytes": 101138,
+      "sha256": "03188f77ec10fcff75eb8cdf13b736c0aa1cb59070efbf874a50f705e9932bf5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Rust for Data Engineers in 2026.webp",
+      "bytes": 127136,
+      "sha256": "0764d37de1d8da8e862573b55e0cd918e843d6da1a771f5c6c83a51b39235895",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/sales_ecosystem_unique.webp",
+      "bytes": 101470,
+      "sha256": "b7c5e29595042fc4c52b420afc04ce89c38f24d9befb5f56ef403548cc29ad78",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/seo_masterclass_unique.webp",
+      "bytes": 129914,
+      "sha256": "5fd88d8fbe3b1d240f13f892bf26a13a9704e62b867c9b344be1ef0206656353",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/seo_tools_unique.webp",
+      "bytes": 109548,
+      "sha256": "c1ef5dec95a74b9cdbf6c15ba92c2134faa68d009826a7356c38ca46e5bc64b6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/sidebar_inputs_check_1777383436895.webp",
+      "bytes": 28786,
+      "sha256": "ca163d1f309b89c14e608294b6c51aa77b78596a9a8dbbaaf0c4d8c144ea2992",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/sql-server-columnstore-indexes-optimization-guide.webp",
+      "bytes": 184546,
+      "sha256": "92a48ca3d7fa931dbdc1107955cb9e5f09cd71a329cca7782ff95277bc7523ff",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/sql-window.webp",
+      "bytes": 68398,
+      "sha256": "46515a46475138828dc4dd3cb6814d175f9e58c4cd2f366783f85af4349b540c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/sql_joins_hero_1777410104986.webp",
+      "bytes": 80632,
+      "sha256": "fc3b4b6df11635bc1a55167522a6077ff1245d03082095c8dde5f990bc429054",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/sql_mastery_hero.webp",
+      "bytes": 145414,
+      "sha256": "1a6ba68765c3fcb244995120bbd5687a1eae9d4e1e87a89324b8105177b92e44",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_bi_hero.webp",
+      "bytes": 84270,
+      "sha256": "5767d1cf7071eaff9ad797b076a571b55f884130099d699302f6a26c5ca7731d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_bi_hero_1600x840.webp",
+      "bytes": 104742,
+      "sha256": "fe8f009e58b3f1f0a5ddba9b8d1bc289c4b614f2a1a3e8fb7556ca6cfbaba1e3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_bi_logo_dark.webp",
+      "bytes": 56108,
+      "sha256": "8bfdc63d42bab0a3f1cb89d76c25e9ce64f3f274d8b249608260f563fd5bbff1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_bi_thumb_400x400.webp",
+      "bytes": 43114,
+      "sha256": "2ade58c555ce669fe48e631d8cf3ff0e4eb35c53e793e925c75c6396c694f0ed",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_cockpit_hero.webp",
+      "bytes": 110028,
+      "sha256": "de1033697baf455d286b5f45e9ed691756feb7006a700b6a459979893782e16f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_prompt_hero.webp",
+      "bytes": 145508,
+      "sha256": "6fd1af261bc20621b5c2761d4944384953651ff3a9a88327f916fd2f852ebaa1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/surgical_ui_mastery.webp",
+      "bytes": 100708,
+      "sha256": "b699a9787caa0110cd36b1888ba165e1d98a4cb7d21698d206be6589f30697e3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/tableau-vs-powerbi.webp",
+      "bytes": 85606,
+      "sha256": "a85c5c28604757fef12296590fcfefb6aec838dee1690c40b7a7e95751a239d3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/tableau_lods_hero_1777410139358.webp",
+      "bytes": 86920,
+      "sha256": "c003827df3656f4409c12b59828205d5e8ebdcccb7874ce444e8f211192d259b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/tech_stack_2026_hero_1777409998596.webp",
+      "bytes": 86636,
+      "sha256": "fea7ad05c0124fce4242b07463584c47d68737ee1351f7e5023b51c5340065d5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/telecom_analytics_unique.webp",
+      "bytes": 135668,
+      "sha256": "f7719838be43e38938d76f914f0bc524743202adeb5ee2180e3c0a36e9790fa9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/The Fabric Architect’s Manifesto.webp",
+      "bytes": 253588,
+      "sha256": "341e92aa6e929b4a171c2afd5e59ce0907f9d66b30e43c2c95ad4bc9d68f94c0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/web_dev_2026_future.webp",
+      "bytes": 147278,
+      "sha256": "e99f3b14264ebb666cf9a3ea27dd8425fed8b0e7e4a12d74e277dea1f2153d92",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/wordpress_unique.webp",
+      "bytes": 190084,
+      "sha256": "1f3f20dbddf827e5bf33f973f5627971cad9fb15717dc32cd737544fc65f7a0a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/blog/Your Data Days free exam voucher!.webp",
+      "bytes": 99236,
+      "sha256": "ec7a599360447fb9b175da25644324dae9ab6ceb942cf43ddd3a68693cb5b154",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/blinkit_sales_dashboard.webp",
+      "bytes": 60946,
+      "sha256": "be87208e11c1f8acef4ac9389f65ceab1380a23cf1e2a5fdc7ea0bb473ff957d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/cash_flow_forecasting.webp",
+      "bytes": 141240,
+      "sha256": "9954b6c0c4c241b8c7d6d0b06ffa0d6558b08352c0799274f78b2db5c94e9275",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/customer_churn_prediction.webp",
+      "bytes": 94796,
+      "sha256": "b6e9e9bfb5c58beea199465a588e8ea300049316b7d20b0c614501398b286887",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/dashboard_1.webp",
+      "bytes": 86214,
+      "sha256": "06c89ff6eddca81fb14a67682304d0b138292b01151897c929e0e25d9dde9567",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/dashboard_2.webp",
+      "bytes": 122386,
+      "sha256": "a8c0f48c07c3ef48ae8107e7350d78a2e6009320a3bbc81493f39a6bc1002c64",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/dashboard_3.webp",
+      "bytes": 88778,
+      "sha256": "156ceddde2b5b4c7dcadd431692fcbbffa3cdbf12c3b99a78df67d4e843ec563",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/dashboard_4.webp",
+      "bytes": 101138,
+      "sha256": "03188f77ec10fcff75eb8cdf13b736c0aa1cb59070efbf874a50f705e9932bf5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/dashboard_5.webp",
+      "bytes": 77912,
+      "sha256": "9c3839ed777fb8e6fbcab88c75f033bbea4a6d3c7f2ac72d7ed31fc58385c503",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/dashboard_6.webp",
+      "bytes": 86636,
+      "sha256": "fea7ad05c0124fce4242b07463584c47d68737ee1351f7e5023b51c5340065d5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/ecommerce_journey.webp",
+      "bytes": 146382,
+      "sha256": "0992d1a5110ee4bdaa0ba778bcd2ca4a4264d1a0fb46c35d59469004da0c9a93",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/emi_collection_intelligence.webp",
+      "bytes": 283578,
+      "sha256": "a6de129ae6a14c3e217cc669c3b52af3b3e4270e7ddb72aa02915d9a54ca6816",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/employee_performance.webp",
+      "bytes": 139850,
+      "sha256": "f663f416d328c37044a3ad8435a748ff0466761d76737469f8ea18be0a8d21c5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/expense_audit.webp",
+      "bytes": 154416,
+      "sha256": "f9c2e085c251d1b4e7b2efb05b3ef5de49b4c9d7785ba4be700058f5006de778",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/financial_pnl.webp",
+      "bytes": 111568,
+      "sha256": "01d57296cc55f14515532bf866c941a9742152cf0823f6fb39eb3407498e107e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/fleet_logistics.webp",
+      "bytes": 196804,
+      "sha256": "822594ea5aef6a3eaef3df58db2954f81462e21daf4211592bca37f530997fe9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/global_sales_intelligence.webp",
+      "bytes": 124386,
+      "sha256": "11b41cede736b37a3b718c04b0463f529485896d3793bfd255b4ad954e58a225",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/global_sales_kpi.webp",
+      "bytes": 85932,
+      "sha256": "c96638402ff6c7bd206b1c686247e55a80d901d4542fa1fb175dcb3322524fe9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/hr_workforce.webp",
+      "bytes": 98040,
+      "sha256": "76993b3cc621ef3df83e22ddc1aae790623aabf475c8faeccd1fe2aa2a709c57",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/predictive_maintenance.webp",
+      "bytes": 196028,
+      "sha256": "fcc6e4425e79c1c95ce93dee32b48cbf3093ef159f1f87a128baa5f5842a60e1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/regional_sales_performance.webp",
+      "bytes": 130728,
+      "sha256": "b0e715548459b39b7b116f8617757d617611dba12f70f63757a458f70e4d309c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/saas_economics.webp",
+      "bytes": 102008,
+      "sha256": "802672c578bd77d88290eee1e34c37305df962b98977032848dc7c0e30036600",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/sales_pipeline_preview.webp",
+      "bytes": 76318,
+      "sha256": "c052693df9a5cdbd755d4b8592dc00516a953d185bc7c5a9ca935c1a94dec41e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/sales_pipeline_velocity.webp",
+      "bytes": 96138,
+      "sha256": "3417e714805d9d58be20f18fb3b1958ad1dcb0b068d739e0bc72b3faa468a240",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/supply_chain_performance.webp",
+      "bytes": 135470,
+      "sha256": "5cef24cc9ad4320a9f7e960893e887e35e68fd152c5d37ff4ca5b8ae6d8d5069",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/surgical_ai_preview.webp",
+      "bytes": 88300,
+      "sha256": "1c5835dd72deec950ffb7d9be39c8f082e5c468a467f87b9cd271172c908903e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/talent_acquisition.webp",
+      "bytes": 110716,
+      "sha256": "62d09c5b780fd457dfd696f8b0b568cbf5f6c6ffc94019871e6a3541664553b1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/telecom_collection_delinquency.webp",
+      "bytes": 283578,
+      "sha256": "a6de129ae6a14c3e217cc669c3b52af3b3e4270e7ddb72aa02915d9a54ca6816",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/warehouse_throughput.webp",
+      "bytes": 166208,
+      "sha256": "c3239a640df5e36b5ffda795db7c9c31d8d269a9a44a5205ac1af8b89127039b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/workplace_diversity.webp",
+      "bytes": 112942,
+      "sha256": "942ed3361946fc950d7efa957c747f6f401bfef845d0e14602a5421c2784420d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dashboards/world_business_intelligence.webp",
+      "bytes": 105104,
+      "sha256": "8064544eda52f25b63ddb6a82a0f5e339e8d751716801c54ecd90dd3e760bfd4",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/datta.webp",
+      "bytes": 114034,
+      "sha256": "26c954d0b1620d75341ce38698ce62af1f4c5e5e891d64ba42191f6038256975",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/dattasable.com.webp",
+      "bytes": 142688,
+      "sha256": "973a036255bfe603735966e6eb4926e41cf5bd9d8c241e2777b7bce290992e09",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/editorial-placeholder.svg",
+      "bytes": 568,
+      "sha256": "3f2e307d811c4304f5e350f9b5b7b3e3afc8a38ae378ef0d5c35a3e7e1359a6b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/logo.webp",
+      "bytes": 20664,
+      "sha256": "a125b9cf77212f06fe2859461bb784fd49975102547ea999ce488a6168eaf24d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/og-main.webp",
+      "bytes": 41658,
+      "sha256": "c2ac696164ec74cf46fc2ac426e130021c6d2b5843d6344ece990f7e38e8c4a0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/energy.webp",
+      "bytes": 19176,
+      "sha256": "e9dfb4d77ac55c3da8dbaedc2cb4aac7e1bc08c63b1fde97251bf5d14224792f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/finance.webp",
+      "bytes": 28998,
+      "sha256": "92d51c65ac0b628a99939f378f05a3976045f8a1f83fe500fae74c95cca4bcc3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/healthcare.webp",
+      "bytes": 32406,
+      "sha256": "d90462cdabd76c63be30feb84a27a4b57ef0e7939daa4c0f8c9975ce67ad9cca",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/hr.webp",
+      "bytes": 33474,
+      "sha256": "e2d7260f87cca58b1349fee85669140b7dd117799da5b53531dcf2eb2d744acf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/iot.webp",
+      "bytes": 39964,
+      "sha256": "49978ffff7fd1f5cf3e894d1e1f7a211695190e9f3f0ab0ed8e727991b9e8294",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/legal.webp",
+      "bytes": 31206,
+      "sha256": "589bc2ea8700e03ffcf3940d57cb8ab6683b89144264a9cc6e9130e68371a51a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/marketing.webp",
+      "bytes": 51504,
+      "sha256": "b7d01123482b435d4f9d1e228d0619b2c4c1d3f62762438958507266440cc4fc",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/retail.webp",
+      "bytes": 52112,
+      "sha256": "edbafac6e7c37546e43386f5dfd5b78bd749ff98bedd2e90fd0a3f9179f702ae",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/saas.webp",
+      "bytes": 56816,
+      "sha256": "0e581b22f0ff39cc59057ec2f7921595ea76b2d93696b4db75a68d52e139d56a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/supply_chain.webp",
+      "bytes": 120406,
+      "sha256": "dd2cb4b3bb6a8bb5105145b044176d20d95871aebcac867cbd8f2a660cf2122e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/portfolio/surgical_forge.webp",
+      "bytes": 51146,
+      "sha256": "59274229e9c7250c41994ecbc59221717091d5924bc17cee854e3039e70c659d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/customer_accounts_sheet.png",
+      "bytes": 23805,
+      "sha256": "fe5dc4634f74b245cbcfe0f8263a7b6f0278debc984d1d2f6251918f8a1e03ca",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/executive_dashboard_full.png",
+      "bytes": 177191,
+      "sha256": "bc7bb0be9e5abb7ddab2f8148e531e6be6a1830e1e23501e2fbb43982dabb83f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/executive_dashboard_sheet.png",
+      "bytes": 105453,
+      "sha256": "ada3dd20045903cc49f47138396a46178432aaba15066a7820d075e9bcd7a2fe",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/pivot_table_analysis_sheet.png",
+      "bytes": 82196,
+      "sha256": "8006147ce9714b3c49ef1e4c2a5881b6cc9f700f3ee0fa2ebcb8f3c751cc77ab",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/regional_performance_sheet.png",
+      "bytes": 21638,
+      "sha256": "35fad8c295194edebba4ae846092bef0d8f498c1f028418ce1502aa0520f4b3f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/runrate_and_quota_scorecard.png",
+      "bytes": 86983,
+      "sha256": "a849ab1f24f578d5bb2ff6f10c64500fa93a7d29c1f62d79f6cacff8dd262539",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/aura-capital/sales_transactions_ledger.png",
+      "bytes": 148698,
+      "sha256": "dcc9986923f44f377875d5e45f6970284ce848545cfe30040e618afbe08dbf14",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/biosynex-healthcare/customer_accounts_sheet.png",
+      "bytes": 24990,
+      "sha256": "b8ef27e969696a96883218aed2499715e6c6514802cc61602fb606b9ac4f1faf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/biosynex-healthcare/executive_dashboard_full.png",
+      "bytes": 172615,
+      "sha256": "b135c7d37d7b1e28c0aba8ee1aa20d239a5bdea9b328f8ce460b3e2ec1e750d1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/biosynex-healthcare/pivot_table_analysis_sheet.png",
+      "bytes": 91752,
+      "sha256": "d05c50fdb7b5f2fbff5a2e3eb654639da3544d75cdc17b1c926a3b3be457a325",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/biosynex-healthcare/regional_performance_sheet.png",
+      "bytes": 22944,
+      "sha256": "90f66c47f999d595094fbf78bfa05c73d76d4bdb28dde259d95d25a435796b2b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/biosynex-healthcare/sales_transactions_ledger.png",
+      "bytes": 152669,
+      "sha256": "e2b07cf2c164162baf5aa232672ab8f9619cda254bc61b9dd7b2f4fd433bbdc1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/excel-dashboard-generator/executive_dashboard_full.png",
+      "bytes": 912521,
+      "sha256": "8aa3eb3175098b320fd0ee02fe4417f49b59ecc8dd9014138280d7ce6f1e646c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/helios-cleanenergy/customer_accounts_sheet.png",
+      "bytes": 24118,
+      "sha256": "b3072c90f8542d07c1622b7bb238da0117dd163353afb5ec38001db7fbd1ccf7",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/helios-cleanenergy/executive_dashboard_full.png",
+      "bytes": 177725,
+      "sha256": "6e46ccde0931c203489af0fa7057d273ed6b6fba5d1c45d23ddaa85864f9c469",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/helios-cleanenergy/pivot_table_analysis_sheet.png",
+      "bytes": 91732,
+      "sha256": "8e24cd7105f04d4ac76a2e83264278eeba099693d0e5632c2a1b40cc58e15018",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/helios-cleanenergy/regional_performance_sheet.png",
+      "bytes": 23313,
+      "sha256": "780b413d58cc88c9a90c987e1cecf31f861da39727e6f41020c2b4cac87ea822",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/helios-cleanenergy/sales_transactions_ledger.png",
+      "bytes": 143932,
+      "sha256": "66c625b95178aaf325fb5a246b99040901b9245df058b58993e99b8a1802e87d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/meridian-global-retail/customer_accounts_sheet.png",
+      "bytes": 26284,
+      "sha256": "2201a9718981cb57e4a56b4b1ea0bc19315cd44ef24acf45ac621e94759ebd1e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/meridian-global-retail/executive_dashboard_full.png",
+      "bytes": 170061,
+      "sha256": "09b9b53bce7a05c70b97789247799852c9d280ca61afd43f5395d713a1195be3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/meridian-global-retail/pivot_table_analysis_sheet.png",
+      "bytes": 87173,
+      "sha256": "8989aceba1e1d8f84e5819226b3932688dbb53e2ca079dc7a25c1acec5aa65db",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/meridian-global-retail/regional_performance_sheet.png",
+      "bytes": 22178,
+      "sha256": "69e5c276d240e0a5a0611d60715290c80d117cbfb532e01a3faa26d41a0b6ddd",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/meridian-global-retail/sales_transactions_ledger.png",
+      "bytes": 145949,
+      "sha256": "c8233b8ed1971d2273742dabc92f747363d3d73aaa3086d0d867f5c0b41c0677",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-cloud-technologies/customer_accounts_sheet.png",
+      "bytes": 26215,
+      "sha256": "26828b913991a082a876ece1e8506e24192c75d60eb6ff99515b2080a2d59bc0",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-cloud-technologies/executive_dashboard_full.png",
+      "bytes": 169740,
+      "sha256": "4fa089df817ac7ae84da01d39442e134d03a3a0ffe5326cd5a8e0c7d24317e9d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-cloud-technologies/pivot_table_analysis_sheet.png",
+      "bytes": 88488,
+      "sha256": "af691da782618fad38079dc2cd1aded827438081eeb4b2e4aafc1a164c8e02f4",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-cloud-technologies/regional_performance_sheet.png",
+      "bytes": 22460,
+      "sha256": "21b54a7c2fa1d897f78855c48bed2db7ecd645cf7a42bb55d48b2a04869b1220",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-cloud-technologies/sales_transactions_ledger.png",
+      "bytes": 145666,
+      "sha256": "026a0217f4940cdc10b3229380543a0ca287aaf0163c4b53469b7ae8ab111f30",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-enterprise-operations/customer_accounts_sheet.png",
+      "bytes": 23490,
+      "sha256": "ab0a8a98ea3294ac86ee4021d4b660a7fc12b28208322d364f58a427392d0d0d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-enterprise-operations/executive_dashboard_full.png",
+      "bytes": 176858,
+      "sha256": "3288cb32463b9bcfb30fa97d9d34e17fdd30a3ca5f5dcd16a750ea3a3666c30f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-enterprise-operations/pivot_table_analysis_sheet.png",
+      "bytes": 91500,
+      "sha256": "7f000a133ae5e9b0d2d7dd7781df1ef055a9c40922896707c2b6b7d2760e4f5b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-enterprise-operations/regional_performance_sheet.png",
+      "bytes": 23008,
+      "sha256": "dbba53f4a20d8c6e4648980bed00f24d5d91fbe0ebd4180f4c2f55fd452012e9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/nexus-enterprise-operations/sales_transactions_ledger.png",
+      "bytes": 143770,
+      "sha256": "4bf3bdf983d3300e5e307728126205304b8962428f97fa44b9d3c78d9ab76da3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/omnimedia-marketing-network/customer_accounts_sheet.png",
+      "bytes": 25119,
+      "sha256": "7834cf5bbade037b8d9b4b51266fcc5698a7a300fe3f4680b632d9e84a8da64c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/omnimedia-marketing-network/executive_dashboard_full.png",
+      "bytes": 176763,
+      "sha256": "9578e122d6ec8581addf4c9a57e74da7d50141b95745c25257d2cd2ac1710d06",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/omnimedia-marketing-network/pivot_table_analysis_sheet.png",
+      "bytes": 91550,
+      "sha256": "1549ed9b00cb33cc471963d3e9f21caff3ed28a9f7fe7737082316b89a753d72",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/omnimedia-marketing-network/regional_performance_sheet.png",
+      "bytes": 23055,
+      "sha256": "7bdfbbbfb6c31fc5f2668ce50d77dddcea39d6955530786f6d8be8e201d82212",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/omnimedia-marketing-network/sales_transactions_ledger.png",
+      "bytes": 152763,
+      "sha256": "fb10baea9733582f6ea10dd303c5b2a07ef5c2e0d25bfba148cb66db024b2c81",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/sovereign-resorts-hospitality/customer_accounts_sheet.png",
+      "bytes": 24472,
+      "sha256": "1750c45fdb0608ab0fcfb5777bcdfa75548082ef52fe7ee1a6c331863a279919",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/sovereign-resorts-hospitality/executive_dashboard_full.png",
+      "bytes": 169179,
+      "sha256": "585ce31cce7a28dc97abe28296a13d195d63224f4dc5919004cc3c39bcf58d7c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/sovereign-resorts-hospitality/pivot_table_analysis_sheet.png",
+      "bytes": 88229,
+      "sha256": "9f7c774cb91ddc4c7016b7909ff00d5a50d70637fb5dcfffebd13712f85b99f4",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/sovereign-resorts-hospitality/regional_performance_sheet.png",
+      "bytes": 22868,
+      "sha256": "e989851ae3cd1ee73dcb4c58a36a41800d873d1eff58b2eb2bbac76578a34006",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/sovereign-resorts-hospitality/sales_transactions_ledger.png",
+      "bytes": 146930,
+      "sha256": "36a4f09b43efba5807c9b8ae1917ef31322477f3217702b9334b995c6b1d1b1f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/st-andrews-university/customer_accounts_sheet.png",
+      "bytes": 24474,
+      "sha256": "6c9698acaada1dd07b343308c3ba682b353408052ff5f69bf6efe239ecddb4b8",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/st-andrews-university/executive_dashboard_full.png",
+      "bytes": 178240,
+      "sha256": "0b3e61167a91c311fa385bddc5dbe8aba9d2263ffdd29a76ddc49592c4621a79",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/st-andrews-university/pivot_table_analysis_sheet.png",
+      "bytes": 93488,
+      "sha256": "d5c7216406e153fabb8aa585233ac9b88c72b5fbad3600a04e7c8ee94d148e23",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/st-andrews-university/regional_performance_sheet.png",
+      "bytes": 23160,
+      "sha256": "491b5d407367d715a6cd8cecba7155a99862057bd424689392acdfffc7833577",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/st-andrews-university/sales_transactions_ledger.png",
+      "bytes": 149034,
+      "sha256": "8a70ba037201869c7095777aa2bf3ea5f8250a4b8550234016e3d800e3dcdb8f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/talentpulse-people-systems/customer_accounts_sheet.png",
+      "bytes": 24491,
+      "sha256": "821a45bb41fd1f62b58ebac0b87462f7504a041ca014c9be3aa604b11777fb58",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/talentpulse-people-systems/executive_dashboard_full.png",
+      "bytes": 172127,
+      "sha256": "a5a8c344e83555270595ad112d1b0d7238cacd217b58c5c328a48fb7b993cd48",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/talentpulse-people-systems/pivot_table_analysis_sheet.png",
+      "bytes": 90478,
+      "sha256": "eabdacbefc83358a6cf4140cf3fefc6dcf3a68ab980e2e70cfa692f8f571054b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/talentpulse-people-systems/regional_performance_sheet.png",
+      "bytes": 23113,
+      "sha256": "17d01bd9a964d774a9fbd3517689fab5dcdd2d9781d1b27320fbca3b8b68e580",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/talentpulse-people-systems/sales_transactions_ledger.png",
+      "bytes": 143976,
+      "sha256": "6fc843851a84ccf1f1508b7784558a1cd170b10cf7f666c37ea6ffbe70254d83",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/titan-industrial-systems/customer_accounts_sheet.png",
+      "bytes": 24476,
+      "sha256": "ed83867c3540fd4279036690e692c03bcbd88dbf5e2ee409355a6feec3aab843",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/titan-industrial-systems/executive_dashboard_full.png",
+      "bytes": 175977,
+      "sha256": "7afd63019c912e6b920ae5541dc1008a0280aa4347f132d2b825b4a75859a484",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/titan-industrial-systems/pivot_table_analysis_sheet.png",
+      "bytes": 91414,
+      "sha256": "40b81fda9698db4d43550cc52d70ac99b89111dbaead596d0a72f115ceb9038d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/titan-industrial-systems/regional_performance_sheet.png",
+      "bytes": 23091,
+      "sha256": "09735302973c0b9872c4895d516d85f188f820c4147dce8d6bf5f33a56728fd6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/titan-industrial-systems/sales_transactions_ledger.png",
+      "bytes": 147075,
+      "sha256": "84a9238652fc0451cfe1fe42c6db208c5f7d3839d56083469984ba62a5019dad",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/vanguard-realty-capital/customer_accounts_sheet.png",
+      "bytes": 24303,
+      "sha256": "46bc111d6a8caf019eeab0ac5752f1f7263e04450f810d67923257cace5bffa8",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/vanguard-realty-capital/executive_dashboard_full.png",
+      "bytes": 175050,
+      "sha256": "9eddb008be471de14ebd2d90b0dc917c70b3dfa533fcb8e186966f8de50d3bc2",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/vanguard-realty-capital/pivot_table_analysis_sheet.png",
+      "bytes": 91388,
+      "sha256": "7df3215023f1843ab6297bd90137735ab86a3fa9dbe07f79f0614d2cead1112f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/vanguard-realty-capital/regional_performance_sheet.png",
+      "bytes": 23052,
+      "sha256": "2df48b251e5e310843fb5db861750e34f8c94fc0d9901c6e02e6edbd09fda731",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/projects/vanguard-realty-capital/sales_transactions_ledger.png",
+      "bytes": 142278,
+      "sha256": "b9d04abe2cc0103a6dced4c0d48f99f4c488fc89063d7f455456cf9c769adc86",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/readme/admin_preview.webp",
+      "bytes": 75114,
+      "sha256": "09b469f7f180541f1e4e0c451b0ead560abc0e201a30473fa025f90abf8dc1a8",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/readme/dashboard_preview.webp",
+      "bytes": 79242,
+      "sha256": "2e39b32bb3b322e82efa82f09658b2a11496c5fc357740dd53553bdd37e6a21f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/images/readme/hero_preview.webp",
+      "bytes": 69192,
+      "sha256": "fb549fd61e2b6114d0dcf4d6581adebdf47d08d20c017d9b8a5cb7b9f5e6181a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/logo-icon.webp",
+      "bytes": 11526,
+      "sha256": "4bbe0bad4bebe798a3d0ff732a2381a23ead35e89cb98fff924f92a57ed65fbe",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/next.svg",
+      "bytes": 1375,
+      "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/angular.jpg",
+      "bytes": 22527,
+      "sha256": "f08a630bff8df172a51cd2a94fa7938235fa859cfdab50046edf327ba29f8a0d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/bootstrap.jpg",
+      "bytes": 18083,
+      "sha256": "92b15f3b032b34675d9b9c5f493905d27b50d065e8a5c39623dca82638502461",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/component-btn-pink.webp",
+      "bytes": 1562,
+      "sha256": "ae910318959ee58794c7ef5b51904a1b5374256f441757b5f81e98a41b2e76cf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/component-btn.webp",
+      "bytes": 1670,
+      "sha256": "863106b06010ca0d5ac17bf130bd30f9a368984e0d9c3a0d12ff24a2cc2c4f7e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/component-info-2.webp",
+      "bytes": 14010,
+      "sha256": "57861c1609135672e27c36bdd2983ac4687c34e94dc27a98a7a6634a597efeb6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/component-info-card.webp",
+      "bytes": 12446,
+      "sha256": "e6a9caa98bd66e53e1b4ee01bc1412401e92f36333d3c929b1e9838bb14c7e52",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/component-menu.webp",
+      "bytes": 3136,
+      "sha256": "270456cd967df6272a2b146a5f1331aa3d77242e2bc42b5e4677145f8017be16",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/component-profile-card.webp",
+      "bytes": 21232,
+      "sha256": "9151ed5ba0a41ade1805dac3bc0d03ddf158004ca2884f39eb6d27ab1885cc9f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/documentation.webp",
+      "bytes": 68126,
+      "sha256": "5aacec4d5c7194fb03ce8fcc833e4a8b104e4c24aa5928504ed94665e1b99455",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/github.svg",
+      "bytes": 2164,
+      "sha256": "bb1ed2ea6122050ebc27c4fe253dd38c33dd6d023b2c1538f6d4f57ffbc46fbf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/google.svg",
+      "bytes": 2232,
+      "sha256": "fd52295b110830fdc6eb50b1ea195dc6a82c4e4651ec7bf1ddb151edeb5ba860",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/ill_header.webp",
+      "bytes": 65936,
+      "sha256": "6eb5a343d0b02ab44c998766906e5015900f830bca7f2ea264d96087495f1ff3",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/landing.jpg",
+      "bytes": 106874,
+      "sha256": "eb5eab7f207f8663e61979998621478f481d7cdb4083ff22df99c088968beaad",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/login.jpg",
+      "bytes": 54476,
+      "sha256": "b30d6e760d31c0953bb8f6a6bc94f1d237dbf06ef4c25fc2f9ec6d957906efd5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/pattern_react.webp",
+      "bytes": 56906,
+      "sha256": "e62d9943a921bf3d2102cd9586c75ae6df540b2481c341fd6966b1f8a8dffe31",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/profile.jpg",
+      "bytes": 87996,
+      "sha256": "c7602dcc428c4c2c025d1a0f6be8f1fcea7d62a22ffca40e72107ca59920464b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/react.jpg",
+      "bytes": 25566,
+      "sha256": "3a3234283b58bfc6a2860a83f15f8f41d89461337d525649bcc14146616d3728",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/register_bg_2.webp",
+      "bytes": 41796,
+      "sha256": "30700c8f7a09709b1bb8485830dec022d67d1968e33db2b8692bef02f097edb7",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/sketch.jpg",
+      "bytes": 22085,
+      "sha256": "1e76078776f77d5713037a73059cb3279ee0238615d126e171379c8c87c443e9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/team-1-800x800.jpg",
+      "bytes": 166436,
+      "sha256": "fdfd85ef24ffd6a3783190511a7d462e4e18dd6957f356125b9c2d22888601d5",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/team-2-800x800.jpg",
+      "bytes": 197074,
+      "sha256": "0cfaaf1dcb61d72eb52bce3cbdc36b6bde9e333af12ad4599ec06d137889da5c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/team-3-800x800.jpg",
+      "bytes": 118232,
+      "sha256": "f6678378b7fad73f452399ce829fba749731a0bed3753ef4c10bba71bc5fe1ef",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/notus/img/vue.jpg",
+      "bytes": 18469,
+      "sha256": "5d6995b619c0dccd289d0dd86fdb1b1b0cd2baefcb8b245885f71a00384f27cd",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Aura_Capital___FinTech_Group_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 4864356,
+      "sha256": "a59ba1d996207e3450d94f390a8addf80b8d45c69ff32e7ba01b7e2e221610c0",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/BioSynex_Healthcare_Technologies_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1305614,
+      "sha256": "b6a95291a10f0274b5a3b79c21ed9702a70a9781605bc07794a1af19451d1094",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Blinkit_Sales_49500_2023_2026.xlsx",
+      "bytes": 17143665,
+      "sha256": "49393b00593af38c65d4f6ce311a679d56f26333d28c839191b4fbef37db60e3",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Helios_CleanEnergy___Power_Grid_AG_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1553848,
+      "sha256": "9c0a28202033bdade9001f560472723f71e0ef3c4b1d3f36965c74e71d7a4ba6",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Meridian_Global_Retailers_Inc__Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1309617,
+      "sha256": "193b588fd9229ef3b4d1bfefdefb4c0d812833bf14cf1369657ef8317c19bbb8",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Nexus_Cloud_Technologies_Inc__Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1310111,
+      "sha256": "e8078cf0d555fca3391744accb82bdeef94b40885fcb499ff3ee4885239dd09c",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Nexus_Enterprise_Operations_Group_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1552885,
+      "sha256": "cd95046b4dd33c07d36f8782ad2d42cdd125cd787b77338cce5c5a5237863fcd",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/OmniMedia_Performance_Marketing_Network_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1552494,
+      "sha256": "3abfc35b4ef9486db0d66d85841deca5c01b5f6aae332a78aa7f94d78400d7c3",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Project Management Dashboard.pbix",
+      "bytes": 10076462,
+      "sha256": "6c42e9907a4b62d218e5cb4a16bd761fcc1e8dacab804ab6532f271d9bedb936",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/octet-stream",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Sovereign_Resorts___Luxury_Hospitality_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1304802,
+      "sha256": "4bbab7a44afd2ad10cb1e15d483713da69bf247379ee8e193a3be88e5148aa34",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/St__Andrews_Collegiate_University_System_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1553039,
+      "sha256": "0e944ea1d811e77da3fb342cfbc592c903b6cf20dfc164b3820cbc17ae213945",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/TalentPulse_Global_People_Systems_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1303599,
+      "sha256": "f57196b92cd4b08bf61e5e923c2c1b9d0f6d455e639e5496be2c0161f7b62c4e",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Titan_Industrial_Systems_AG_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1305495,
+      "sha256": "3ce3ba84fa261e70cf34b793672c757d196110b9aca3008d6a0c7253fa9dd874",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Projects/Vanguard_Realty_Capital_Partners_Executive_Sales_Dashboard_2026.xlsx",
+      "bytes": 1304196,
+      "sha256": "7ffaa175fbeb10a74958d2dab7c386a08f81b742d6c86d0075840fd5ae81cfc8",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Resume_Design/Dattatray_Sable.pdf",
+      "bytes": 467081,
+      "sha256": "1f32d936a26cee6c223fb6daed2dbed9ccb1dacbf21bd47be0a45ecdc474e77b",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/Resume_Design/Dattatray_Sable_Resume.pdf",
+      "bytes": 467081,
+      "sha256": "1f32d936a26cee6c223fb6daed2dbed9ccb1dacbf21bd47be0a45ecdc474e77b",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/pdf",
+        "signature": "25504446"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/screenshots/admin_preview.webp",
+      "bytes": 69974,
+      "sha256": "1be868e3c31cf2dfe87269b998dda9d42430df02251d82baa70af8beb89ebecd",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/screenshots/dashboard_preview.webp",
+      "bytes": 74140,
+      "sha256": "cf3adec65aabf6818c9dbacb55795268c0172044c31c7c8d91ea4e29a6d5e05e",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/screenshots/hero_preview.webp",
+      "bytes": 63614,
+      "sha256": "d4bcf779ce9929698c0ff71cb8fce440719b7c9263a13c5c9e97990ef52a49f2",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/screenshots/Screenshot 2026-04-29 031545.webp",
+      "bytes": 73282,
+      "sha256": "1dd5dd6947e3c31fed3964ee68eb483ac28c24edfb75e7a70b7a0e916caccfbd",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/templates/Hyperlocal_Fleet_Ops_MIS_Dashboard_Template.xlsx",
+      "bytes": 49154,
+      "sha256": "e21924b22be1c261f3e75a450f974d58569b469401cbf892d6a52ef184feb297",
+      "rightsStatus": "unverified: repository presence does not establish permission",
+      "delivery": {
+        "status": 200,
+        "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "signature": "504b0304"
+      }
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/vercel.svg",
+      "bytes": 128,
+      "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://dattasable.com",
+      "path": "public/window.svg",
+      "bytes": 385,
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://fabric.dattasable.com",
+      "path": "public/author.webp",
+      "bytes": 100986,
+      "sha256": "594cede0ec77976ffc2b4fdcacc973b0d6884a5a7f2ef42af1e9065c91c8c26d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://fabric.dattasable.com",
+      "path": "public/favicon.svg",
+      "bytes": 219,
+      "sha256": "8bdf91f0b4de6d0102e6b949f9a50267f2a1d74c45a54692b90a9674474015f6",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://fabric.dattasable.com",
+      "path": "public/images/author.webp",
+      "bytes": 100986,
+      "sha256": "594cede0ec77976ffc2b4fdcacc973b0d6884a5a7f2ef42af1e9065c91c8c26d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://fabric.dattasable.com",
+      "path": "public/og-image.jpg",
+      "bytes": 100986,
+      "sha256": "594cede0ec77976ffc2b4fdcacc973b0d6884a5a7f2ef42af1e9065c91c8c26d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/amazon-logo.svg",
+      "bytes": 5530,
+      "sha256": "60a60cfd55864e76a5fec5c851ca9898363bac5027e081b9ce6c4a4325fd197a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/biexpert-og.png",
+      "bytes": 320449,
+      "sha256": "e500f51b906b72d47e3cd7549f9b098a99327ec18a52fea6a113bbcaa63e34ea",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/biexpert-og.webp",
+      "bytes": 39824,
+      "sha256": "e95506f741364b362ea3550c9d1c77d632c60ae61b6c501056f43cf6c5dc5435",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/datta.png",
+      "bytes": 1257682,
+      "sha256": "1d2089fd37e665f4eee4fa0be3b58dfe16a1f1fdd86041acd4bda2e54e6a9874",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/datta.webp",
+      "bytes": 114034,
+      "sha256": "26c954d0b1620d75341ce38698ce62af1f4c5e5e891d64ba42191f6038256975",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/dattasable.com.png",
+      "bytes": 1086822,
+      "sha256": "3bad35ce0b22266e7376d86d47c990553f34d9754d919003dc78a025e5295ecc",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/dattasable.com.webp",
+      "bytes": 99598,
+      "sha256": "46a9379c2b8db6389c34d948b32ccd7d60ff2ac4360d347a1e5c9125dd58674a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/dattasable.com_about.webp",
+      "bytes": 138322,
+      "sha256": "b2dd0f8d8f3bad3ec31f482672a00e5c87c6fe6f757a8b79b6df2c848d294a8b",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/dattasable.webp",
+      "bytes": 159268,
+      "sha256": "85fb0a11378d35fd30efb88c46f90caf2eca07ee085f8b372ce0acccd7565867",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/favicon.svg",
+      "bytes": 1946,
+      "sha256": "be49049dad9da54c1e36c2dfd495ca186438b265c8bccbfd7699e9d5f24db80f",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/og-main.jpg",
+      "bytes": 74446,
+      "sha256": "2b3e4a407fd2d0dcbd24327b3b9042e3a6c0ee868ef94e7b8fcee88ce0bef0a9",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/og-main.png",
+      "bytes": 723817,
+      "sha256": "1e868a2782daca072a5fddfada07b4fd83a75c572d1fdaf256bc947d089ac966",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/og-main.webp",
+      "bytes": 44536,
+      "sha256": "1f014a47bea26e962c997ff3299af4e128a64e432e3093a7fb6fcf9aaf1f214a",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/payment-qr.jpg",
+      "bytes": 51378,
+      "sha256": "24db64a979a2a0bf70f86943cb23ba641bb3f6e853b415706535af29387d6715",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/payment-qr.webp",
+      "bytes": 16186,
+      "sha256": "2bbcd94449c4663519e3e955d07ab744caf38f4347100a10ff3b045be594a9cf",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/youtube-banner-full.jpg",
+      "bytes": 2321145,
+      "sha256": "cd00afdf844c70cd3eaa664a0171c130d5e24d9eb57f0a9130491d58e8f2197d",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/youtube-banner-full.webp",
+      "bytes": 185804,
+      "sha256": "a1ebc635826c7e4ca65f43519ecd9f49cd77c9eb39cf17fd19bf3dd2c361520c",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/youtube-banner.jpg",
+      "bytes": 119163,
+      "sha256": "d9d0cb8913a9594ed1eaaff03866abd69f1539ee6809f9b9e1d98371eecc8c67",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    },
+    {
+      "site": "https://excel.dattasable.com",
+      "path": "public/youtube-banner.webp",
+      "bytes": 69176,
+      "sha256": "a52d12ea35d3f24ec074d1638ec0833fda8362175444e624d6d2dcc779d2ee18",
+      "rightsStatus": "unverified: repository presence does not establish permission"
+    }
+  ]
+}

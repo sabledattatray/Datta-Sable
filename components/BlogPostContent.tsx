@@ -302,7 +302,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           background: 'var(--surface2)'
         }}>
           <Image 
-            src={post.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop'} 
+            src={post.image || '/images/editorial-placeholder.svg'}
             alt={post.title}
             width={1200}
             height={675}

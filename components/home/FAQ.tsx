@@ -17,7 +17,7 @@ const faqs = [
     tag: "Certifications",
     icon: <Terminal size={16} className="text-[#00C9F2]" />,
     question: "Which Microsoft Fabric certification should I take first?",
-    answer: "If you are focusing on data engineering and analytics engineering within Fabric, the DP-600 (Microsoft Fabric Analytics Engineer Associate) is the standard and most relevant certification. For broader data platform architectural designs, you can prepare for the DP-700 or DP-800 tracks."
+    answer: "Choose by role: DP-600 covers Fabric analytics engineering, DP-700 covers Fabric data engineering, and DP-800 covers AI-enabled database development across Microsoft SQL platforms. Compare the current Microsoft Learn study guides with the work you want to do."
   },
   {
     id: "STOR-03",

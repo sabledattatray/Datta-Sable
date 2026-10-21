@@ -40,7 +40,8 @@ export default async function CookiesPage() {
           <p>In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the service and deliver advertisements on and through the service (e.g., Google AdSense).</p>
 
           <h2 style={{ color: 'var(--text)', marginTop: '2rem' }}>4. Managing your cookies</h2>
-          <p>Use Cookie preferences in the footer to accept or reject optional analytics at any time. Optional analytics and first-party visit tracking stay off until accepted. Withdrawing consent reloads the page to stop active analytics scripts; you can delete previously stored cookies through your browser. Essential sign-in storage and theme preferences are separate. This analytics control is not a certified advertising consent platform. Before advertising is enabled, advertising consent must be configured separately where required, including a Google-certified CMP for visitors in the EEA, UK and Switzerland.</p>
+          <p>Use Cookie preferences in the footer to accept or reject optional analytics at any time. Optional analytics and first-party visit tracking stay off until accepted. Withdrawing consent reloads the page to stop active analytics scripts; you can delete previously stored cookies through your browser. Essential sign-in storage and theme preferences are separate.</p>
+          <p>Advertising choices are separate from analytics. Where the Google consent message is available, use Advertising privacy choices in the footer or Google&apos;s Privacy and cookie settings link to reopen it, change your choices, or withdraw consent. These advertising controls appear when the messaging service is ready. A Google-certified consent management platform is required for personalized advertising to visitors in the EEA, UK and Switzerland. Publishing a consent message does not itself enable advertising.</p>
         </div>
       </div>
       <Footer />

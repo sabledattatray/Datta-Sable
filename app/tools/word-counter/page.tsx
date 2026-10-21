@@ -187,7 +187,7 @@ export default function WordCounter() {
           <div style={{ marginBottom: '3rem', borderLeft: '3px solid var(--border)', paddingLeft: '1.5rem' }}>
             <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1rem' }}>Topical Authority and GSC Benchmarks</h3>
             <p style={{ fontSize: '0.98rem', color: 'var(--muted)', lineHeight: 1.8 }} className="font-sans">
-              Google Search Console (GSC) metrics show that pages with comprehensive coverage of a topic receive significantly more impressions and higher click-through rates (CTR). To build topical authority, group your articles into semantic clusters. Link short-form glossary entries back to long-form pillar articles. Use this word counter to verify that your pillar pages have the required depth (1,500+ words) to compete for high-volume keywords.
+              Use word count as an editing aid, not a ranking or AdSense approval threshold. Check whether the page answers its stated question, includes useful examples and sources, and avoids repetition. Link a short reference to a fuller guide when that helps the reader. Adding words alone does not establish quality.
             </p>
           </div>
 

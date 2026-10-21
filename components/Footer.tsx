@@ -1,4 +1,5 @@
 import CookiePreferencesButton from './CookiePreferencesButton';
+import AdvertisingPreferencesButton from './AdvertisingPreferencesButton';
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
 import styles from './Footer.module.css';
@@ -147,6 +148,7 @@ export default function Footer() {
             <Link href="/terms">Terms</Link>
             <Link href="/cookies">Cookies</Link>
             <CookiePreferencesButton />
+            <AdvertisingPreferencesButton />
           </nav>
         </div>
       </div>
