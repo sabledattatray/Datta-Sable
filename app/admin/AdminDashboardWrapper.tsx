@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { useTheme } from '@/components/ThemeProvider';
 import { getCompanyProfile } from './org-actions';
+import { readLocalStorage, writeLocalStorage } from '@/lib/browser-storage';
 import {
   LayoutDashboard,
   Briefcase,
@@ -76,7 +77,7 @@ const navItems = [
         icon: CreditCard,
         submenu: [
           { name: 'Subscriptions', href: '/admin/billing/subs', exact: false },
-          { name: 'Invoices', href: '/admin/billing/invoices', exact: false },
+          { name: 'Purchase Receipts', href: '/admin/billing/invoices', exact: false },
           { name: 'Payment Methods', href: '/admin/billing/methods', exact: false },
         ]
       },
@@ -222,7 +223,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
     const loadCompanyName = async () => {
       if (previewOnly) { setCompanyName("Datta Sable"); return; }
       if (typeof window !== 'undefined') {
-        const cached = localStorage.getItem('company_name');
+        const cached = readLocalStorage('company_name');
         if (cached) setCompanyName(cached);
       }
 
@@ -230,7 +231,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
       if (profile && profile.company_name) {
         setCompanyName(profile.company_name);
         if (typeof window !== 'undefined') {
-          localStorage.setItem('company_name', profile.company_name);
+          writeLocalStorage('company_name', profile.company_name);
         }
       }
     };
@@ -239,7 +240,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
 
     const handleProfileChange = () => {
       if (typeof window !== 'undefined') {
-        const cached = localStorage.getItem('company_name');
+        const cached = readLocalStorage('company_name');
         if (cached) setCompanyName(cached);
       }
     };
@@ -256,7 +257,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
   // Load typography from localStorage
   useEffect(() => {
     const loadTypography = () => {
-      const saved = localStorage.getItem('admin_typography');
+      const saved = readLocalStorage('admin_typography');
       if (saved) {
         try {
           setTypography(JSON.parse(saved));
@@ -274,7 +275,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
 
   // Sync typography on route changes
   useEffect(() => {
-    const saved = localStorage.getItem('admin_typography');
+    const saved = readLocalStorage('admin_typography');
     if (saved) {
       try {
         setTypography(JSON.parse(saved));
@@ -298,7 +299,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
   }, [typography.fontFamily]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('admin_sidebar_collapsed');
+    const saved = readLocalStorage('admin_sidebar_collapsed');
     if (saved !== null) setIsCollapsed(saved === 'true');
   }, []);
 
@@ -344,7 +345,7 @@ export default function AdminDashboardWrapper({ children, previewOnly = false }:
   const toggleCollapse = () => {
     const next = !isCollapsed;
     setIsCollapsed(next);
-    localStorage.setItem('admin_sidebar_collapsed', String(next));
+    writeLocalStorage('admin_sidebar_collapsed', String(next));
   };
 
   const isActive = (href: string, exact: boolean) =>

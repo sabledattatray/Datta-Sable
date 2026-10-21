@@ -395,52 +395,6 @@ export default function AdminCatchAllPage() {
           </div>
         );
 
-      case 'billing/invoices':
-        return (
-          <div>
-            <div style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
-              <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Invoices</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Monitor client payment receipts and download invoice PDFs.</p>
-            </div>
-
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, overflow: 'hidden', boxShadow: css.shadow }}>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
-                  <thead>
-                    <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
-                      {['Invoice ID', 'Client', 'Amount', 'Date Issued', 'Status', 'Actions'].map(h => (
-                        <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      { id: 'INV-2026-0042', client: 'RetailMax Solutions', amount: '₹14,999', date: 'June 01, 2026', status: 'Paid' },
-                      { id: 'INV-2026-0041', client: 'Global Manufacturing Ltd.', amount: '₹25,000', date: 'May 28, 2026', status: 'Paid' },
-                      { id: 'INV-2026-0040', client: 'Fintech Corp LLC', amount: '₹35,000', date: 'May 15, 2026', status: 'Paid' },
-                      { id: 'INV-2026-0039', client: 'Sarah Johnson', amount: '₹4,999', date: 'May 01, 2026', status: 'Refunded' },
-                    ].map((inv, i) => (
-                      <tr key={i} style={{ borderBottom: i < 3 ? `1px solid ${css.border}` : 'none' }}>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{inv.id}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.text }}>{inv.client}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{inv.amount}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted }}>{inv.date}</td>
-                        <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, background: inv.status === 'Paid' ? 'rgba(16,185,129,0.1)' : 'rgba(100,116,139,0.1)', color: inv.status === 'Paid' ? '#10b981' : css.muted, border: `1px solid ${inv.status === 'Paid' ? '#10b98125' : '#1e293b25'}`, padding: '3px 10px', borderRadius: 999 }}>{inv.status}</span>
-                        </td>
-                        <td style={{ padding: '16px 20px' }}>
-                          <button onClick={() => alert('Simulating invoice PDF download')} style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: '6px 12px', cursor: 'pointer', color: css.text, fontSize: 11, fontWeight: 700 }}>Download PDF</button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        );
-
       case 'billing/methods':
         return (
           <div style={{ maxWidth: 540 }}>
