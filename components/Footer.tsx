@@ -3,7 +3,13 @@ import AdvertisingPreferencesButton from './AdvertisingPreferencesButton';
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
 import styles from './Footer.module.css';
-import { ArrowUpRight, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers, ShieldCheck, Lock, Award, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers, ShieldCheck } from 'lucide-react';
+import {
+  MicrosoftCertifiedBadge,
+  SslSecurityBadge,
+  ConfidentialityBadge,
+  QualityAssuranceBadge,
+} from './TrustBadgeIcons';
 
 interface NavLink {
   label: string;
@@ -18,7 +24,7 @@ interface NavSection {
 }
 
 interface TrustPillar {
-  icon: LucideIcon;
+  badgeComponent: React.ComponentType<{ className?: string; size?: number }>;
   title: string;
   desc: string;
   badge: string;
@@ -26,25 +32,25 @@ interface TrustPillar {
 
 const TRUST_PILLARS: TrustPillar[] = [
   {
-    icon: ShieldCheck,
+    badgeComponent: MicrosoftCertifiedBadge,
     title: 'Certified BI Specialist',
     desc: 'Microsoft Certified Power BI & Data Analyst with 10+ years delivering production-grade enterprise intelligence.',
     badge: 'Microsoft Certified',
   },
   {
-    icon: Lock,
+    badgeComponent: SslSecurityBadge,
     title: 'Bank-Grade 256-Bit SSL',
     desc: 'End-to-end TLS security across all sessions, authenticated digital downloads, and protected payment transactions.',
     badge: '256-Bit SSL / TLS',
   },
   {
-    icon: CheckCircle2,
+    badgeComponent: ConfidentialityBadge,
     title: 'Strict Client Confidentiality',
     desc: '100% data privacy guarantee. Enterprise NDA standard with zero third-party telemetry or client data sharing.',
     badge: 'NDA & Privacy',
   },
   {
-    icon: Award,
+    badgeComponent: QualityAssuranceBadge,
     title: 'Production Quality Assured',
     desc: 'Battle-tested formulas, verified DAX models, automated ETL workflows, and transparent audit documentation.',
     badge: 'Quality Guarantee',
@@ -161,12 +167,12 @@ export default function Footer() {
 
           <div className={styles.trustGrid}>
             {TRUST_PILLARS.map(item => {
-              const Icon = item.icon;
+              const BadgeComponent = item.badgeComponent;
               return (
                 <div key={item.title} className={styles.trustCard}>
                   <div className={styles.trustCardTop}>
                     <div className={styles.trustIconWrap}>
-                      <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                      <BadgeComponent size={46} />
                     </div>
                     <span className={styles.trustTag}>{item.badge}</span>
                   </div>
@@ -189,7 +195,7 @@ export default function Footer() {
             {/* Brand Card Trust Badge */}
             <div className={styles.brandTrustBadge}>
               <div className={styles.brandTrustIcon}>
-                <ShieldCheck size={16} aria-hidden="true" />
+                <MicrosoftCertifiedBadge size={32} />
               </div>
               <div className={styles.brandTrustText}>
                 <strong>Verified BI &amp; Analytics Practice</strong>

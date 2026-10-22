@@ -163,15 +163,17 @@
 }
 
 .trustIconWrap {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
-  color: var(--accent);
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trustCard:hover .trustIconWrap {
+  transform: scale(1.06);
 }
 
 .trustTag {
@@ -217,14 +219,11 @@
 }
 
 .brandTrustIcon {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
-  color: var(--accent);
-  display: grid;
-  place-items: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
