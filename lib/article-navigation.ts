@@ -20,9 +20,11 @@ export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & {
   const hasBlocks = Boolean(post.blocks?.length);
   let rawContent = post.content || '';
 
-  const isMarkdown = !hasBlocks && (
-    /^#{1,6}\s|[^\n]\n#{1,6}\s/m.test(rawContent) ||
-    (!rawContent.includes('<h2') && !rawContent.includes('<p>') && rawContent.includes('##'))
+  // Only parse markdown if the content is NOT already HTML.
+  // If the content already contains HTML tags (<p, <h2, <div, <section, <pre), never re-parse with marked.
+  const hasHtml = /<(?:p|h[1-6]|div|section|article|pre|ul|ol|blockquote)\b/i.test(rawContent);
+  const isMarkdown = !hasBlocks && !hasHtml && (
+    /^#{1,6}\s/m.test(rawContent) || rawContent.includes('##')
   );
 
   if (isMarkdown) {

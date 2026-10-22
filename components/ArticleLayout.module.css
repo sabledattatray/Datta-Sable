@@ -2,8 +2,8 @@
 .section { padding: 70px 0 64px; }
 .layout { display: grid; grid-template-columns: 250px minmax(0, 760px); justify-content: center; align-items: start; gap: 36px; padding: 0 32px; margin: 0 auto; }
 .rail { position: sticky; top: 100px; align-self: start; min-width: 0; z-index: 50; }
-.article { min-width: 0; width: 100%; }
-.content { min-width: 0; }
+.article { min-width: 0; width: 100%; max-width: 100%; overflow: hidden; }
+.content { min-width: 0; width: 100%; max-width: 100%; }
 /* The global html scroll-padding-top already contributes 100px. */
 .content :is(h2,h3) { scroll-margin-top: 20px !important; }
 .content :is(h2,h3):focus { outline: none; }

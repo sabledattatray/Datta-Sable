@@ -56,18 +56,18 @@ export function formatArticleContent(
 ): string {
   let processed = rawContent || '';
 
-  // 1. Inject internal links into content
-  if (internalLinks && Array.isArray(internalLinks) && internalLinks.length > 0) {
-    processed = injectInternalLinks(processed, internalLinks);
-  }
-
-  // 2. Parse Markdown to HTML if needed
-  const isMarkdown = /^#{1,6}\s|[^\n]\n#{1,6}\s/m.test(processed) ||
-    (!processed.includes('<h2') && !processed.includes('<p>') && processed.includes('##'));
+  // 1. Parse Markdown to HTML if needed (only if not already HTML)
+  const hasHtml = /<(?:p|h[1-6]|div|section|article|pre|ul|ol|blockquote)\b/i.test(processed);
+  const isMarkdown = !hasHtml && (/^#{1,6}\s/m.test(processed) || processed.includes('##'));
 
   if (isMarkdown) {
     processed = marked.parse(processed, { gfm: true, breaks: false }) as string;
     processed = processed.replace(/<p>\s*(\[\[diagram:[a-zA-Z0-9-_]+\]\])\s*<\/p>/g, '$1');
+  }
+
+  // 2. Inject internal links into the clean HTML
+  if (internalLinks && Array.isArray(internalLinks) && internalLinks.length > 0) {
+    processed = injectInternalLinks(processed, internalLinks);
   }
 
   return processed;
