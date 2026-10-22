@@ -53,6 +53,7 @@ const MCP_TOOLS = [
         briefId: { type: 'string', description: 'Optional research brief ID' },
         tier: { type: 'string', enum: ['STANDARD', 'COMPREHENSIVE', 'DEEP_TECHNICAL'], description: 'Word count target tier' },
         operatingMode: { type: 'string', enum: ['MANUAL', 'ASSISTED', 'AUTONOMOUS'], description: 'Publishing workflow mode' },
+        targetKeywords: { type: 'array', items: { type: 'string' }, description: 'Optional list of custom target SEO keywords to prioritize' },
       },
       required: ['topic', 'category'],
     },
@@ -400,6 +401,7 @@ export async function POST(req: Request) {
             briefId: args.briefId,
             tier: args.tier || 'COMPREHENSIVE',
             operatingMode: args.operatingMode || 'ASSISTED',
+            targetKeywords: Array.isArray(args.targetKeywords) ? args.targetKeywords : undefined,
           });
           break;
 
