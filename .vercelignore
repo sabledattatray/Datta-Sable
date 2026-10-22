@@ -1,0 +1,18 @@
+# Vercel Deployment Ignore
+# Prevents non-production files, heavy audits, and test suites from bloating Vercel serverless functions and deployment bundle
+
+# Audit reports and internal documentation
+docs/
+tests/
+scripts/
+scratch/
+coverage/
+
+# Redundant documentation files
+*.md
+!README.md
+
+# Tooling and IDE
+.vscode/
+.github/
+surgical-forge-lab/

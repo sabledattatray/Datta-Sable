@@ -23,7 +23,7 @@ export const dashboards: DashboardItem[] = [
     tool: 'ExcelJS / Web App',
     color: '#10b981',
     icon: '📊',
-    image: '/images/projects/excel-dashboard-generator/executive_dashboard_full.png',
+    image: '/images/projects/excel-dashboard-generator/executive_dashboard_full.webp',
     desc: 'Free client-side automated Excel KPI & MIS report generator. Multi-sheet workbook exports with live formulas, dynamic charts, and instant analytics. 100% private in-browser.',
     embed: null,
     link: 'https://excel.dattasable.com/',
