@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { timingSafeEqual } from 'node:crypto';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -10,7 +11,7 @@ import { generateArticleDraft } from '@/lib/ai/article-writer';
 import { detectDuplicateContent } from '@/lib/ai/duplicate-detector';
 import { generateSeoIntelligence } from '@/lib/ai/seo-intelligence';
 import { approveAndPublishDraft, scheduleDraftForPublishing } from '@/lib/ai/publishing';
-import { submitUrlToGoogleIndexing, inspectUrlInGoogleSearchConsole } from '@/lib/ai/google-indexing';
+import { submitUrlToGoogleIndexing, inspectUrlInGoogleSearchConsole, submitSitemapToGoogleSearchConsole } from '@/lib/ai/google-indexing';
 import { AI_SETTING_KEYS } from '@/lib/ai/config';
 import { logAiAudit } from '@/lib/ai/audit';
 
@@ -164,6 +165,16 @@ const MCP_TOOLS = [
       required: ['url'],
     },
   },
+  {
+    name: 'update_and_submit_sitemap',
+    description: 'Revalidates the dynamic sitemap cache and notifies Google Search Console via the Sitemaps API to crawl all published blog posts.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        sitemapUrl: { type: 'string', description: 'Optional sitemap URL (defaults to https://dattasable.com/sitemap.xml)' },
+      },
+    },
+  },
   // Operations & Status Tools
   {
     name: 'get_automation_status',
@@ -201,6 +212,7 @@ const ADMIN_MUTATION_TOOLS = new Set([
   'publish_approved_article',
   'schedule_approved_article',
   'pause_automation',
+  'update_and_submit_sitemap',
 ]);
 
 const GENERATIVE_TOOLS = new Set([
@@ -500,6 +512,18 @@ export async function POST(req: Request) {
         case 'inspect_google_search_console_url':
           responseData = await inspectUrlInGoogleSearchConsole(args.url);
           break;
+
+        case 'update_and_submit_sitemap': {
+          try {
+            revalidatePath('/sitemap.xml');
+          } catch (revalErr) {
+            console.warn('Revalidate /sitemap.xml warning:', revalErr);
+          }
+          responseData = await submitSitemapToGoogleSearchConsole(
+            args.sitemapUrl || 'https://dattasable.com/sitemap.xml'
+          );
+          break;
+        }
 
         case 'get_automation_status': {
           const now = new Date();

@@ -548,6 +548,43 @@ export default function AdminBlog() {
     }
   };
 
+  const [sitemapLoading, setSitemapLoading] = useState(false);
+
+  const handleSubmitSitemap = async () => {
+    setSitemapLoading(true);
+    setGscStatusModal({
+      open: true,
+      title: 'Google Sitemaps Submission',
+      content: null,
+      loading: true,
+      url: 'https://dattasable.com/sitemap.xml',
+    });
+    try {
+      const res = await fetch('/api/admin/google-indexing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'submit_sitemap' }),
+      });
+      const data = await res.json();
+      setGscStatusModal({
+        open: true,
+        title: 'Google Sitemaps Submission',
+        content: data,
+        loading: false,
+        url: 'https://dattasable.com/sitemap.xml',
+      });
+    } catch (err: any) {
+      setGscStatusModal({
+        open: true,
+        title: 'Sitemap Submission Error',
+        content: { error: err?.message || 'Network error' },
+        loading: false,
+        url: 'https://dattasable.com/sitemap.xml',
+      });
+    } finally {
+      setSitemapLoading(false);
+    }
+  };
 
   // Theme-aware CSS variables
   const css = isDark
@@ -1556,7 +1593,7 @@ export default function AdminBlog() {
                       <Sparkles size={13} /> Request Indexing
                     </button>
                     <a
-                      href={`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Adattasable.com&id=${encodeURIComponent(gscStatusModal.url)}`}
+                      href={gscStatusModal.content?.inspectionResult?.inspectionResultLink || 'https://search.google.com/search-console?resource_id=sc-domain%3Adattasable.com'}
                       target="_blank"
                       rel="noreferrer"
                       className={adminStyles.secondary}
@@ -1594,6 +1631,17 @@ export default function AdminBlog() {
             </p>
           </div>
           <div className={adminStyles.headerActions}>
+            <button
+              type="button"
+              onClick={handleSubmitSitemap}
+              disabled={sitemapLoading}
+              className={adminStyles.secondary}
+              title="Ping Google Search Console Sitemaps API to re-crawl sitemap.xml for all blog articles"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <Globe size={15} style={{ color: '#38bdf8' }} className={sitemapLoading ? 'animate-spin' : ''} />
+              {sitemapLoading ? 'Submitting Sitemap...' : 'Submit Sitemap to GSC'}
+            </button>
             <Link
               href="/admin/marketing/campaigns"
               className={adminStyles.secondary}
@@ -1846,10 +1894,10 @@ export default function AdminBlog() {
                                 <Search size={13} />
                               </button>
                               <a
-                                href={`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Adattasable.com&id=${encodeURIComponent(`https://dattasable.com/blog/${post.slug}`)}`}
+                                href="https://search.google.com/search-console?resource_id=sc-domain%3Adattasable.com"
                                 target="_blank"
                                 rel="noreferrer"
-                                title="Open in Google Search Console Web Portal"
+                                title="Open Google Search Console Dashboard"
                                 className={adminStyles.secondary}
                                 style={{ minHeight: 30, padding: '4px 8px', display: 'inline-flex', alignItems: 'center' }}
                               >

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { submitUrlToGoogleIndexing, inspectUrlInGoogleSearchConsole } from '@/lib/ai/google-indexing';
+import { submitUrlToGoogleIndexing, inspectUrlInGoogleSearchConsole, submitSitemapToGoogleSearchConsole } from '@/lib/ai/google-indexing';
 
 export const maxDuration = 60;
 
@@ -14,6 +15,15 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json().catch(() => ({}));
     const { action, url, slug } = body;
+
+    if (action === 'submit_sitemap') {
+      try {
+        revalidatePath('/sitemap.xml');
+      } catch {}
+      const sitemapTarget = url || 'https://dattasable.com/sitemap.xml';
+      const result = await submitSitemapToGoogleSearchConsole(sitemapTarget);
+      return NextResponse.json(result);
+    }
 
     const targetUrl = url || (slug ? `https://dattasable.com/blog/${slug}` : null);
     if (!targetUrl) {
@@ -30,7 +40,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(result);
     }
 
-    return NextResponse.json({ error: 'Invalid action. Must be "submit" or "inspect"' }, { status: 400 });
+    return NextResponse.json({ error: 'Invalid action. Must be "submit", "inspect", or "submit_sitemap"' }, { status: 400 });
   } catch (error: any) {
     console.error('Admin Google Indexing API error:', error);
     return NextResponse.json({ error: error?.message || 'Internal Server Error' }, { status: 500 });

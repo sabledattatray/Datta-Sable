@@ -4,7 +4,7 @@ import { prisma } from '../prisma';
 import { ensureAiStudioSchema } from './schema';
 import { logAiAudit } from './audit';
 import { AI_SETTING_KEYS, OPERATING_MODES } from './config';
-import { submitUrlToGoogleIndexing } from './google-indexing';
+import { submitUrlToGoogleIndexing, submitSitemapToGoogleSearchConsole } from './google-indexing';
 
 export function injectInternalLinks(
   content: string,
@@ -206,6 +206,9 @@ export async function approveAndPublishDraft({
     try {
       submitUrlToGoogleIndexing(`https://dattasable.com/blog/${post.slug}`).catch((err) => {
         console.warn('Google Indexing API notice:', err);
+      });
+      submitSitemapToGoogleSearchConsole().catch((err) => {
+        console.warn('Google Sitemaps API notice:', err);
       });
     } catch {}
   }

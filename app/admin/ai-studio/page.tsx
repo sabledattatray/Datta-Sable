@@ -708,12 +708,12 @@ export default function AiStudioPage() {
                             {actionLoading === 'inspect-' + d.slug ? 'Inspecting...' : 'Inspect in GSC'}
                           </button>
                           <a
-                            href={`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Adattasable.com&id=${encodeURIComponent(`https://dattasable.com/blog/${d.slug}`)}`}
+                            href="https://search.google.com/search-console?resource_id=sc-domain%3Adattasable.com"
                             target="_blank"
                             rel="noreferrer"
                             className={adminStyles.secondary}
                             style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                            title="Open URL inspection in Google Search Console web portal"
+                            title="Open Google Search Console dashboard"
                           >
                             <Globe size={13} /> GSC Portal
                           </a>
@@ -1542,7 +1542,7 @@ export default function AiStudioPage() {
                     <Sparkles size={13} /> Request Indexing
                   </button>
                   <a
-                    href={`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Adattasable.com&id=${encodeURIComponent(gscModalData.url)}`}
+                    href={gscModalData.data?.inspectionResult?.inspectionResultLink || 'https://search.google.com/search-console?resource_id=sc-domain%3Adattasable.com'}
                     target="_blank"
                     rel="noreferrer"
                     className={adminStyles.secondary}

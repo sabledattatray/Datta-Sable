@@ -178,3 +178,40 @@ export async function inspectUrlInGoogleSearchConsole(url: string, siteUrl = 'sc
     return { error: err?.message || 'Failed to inspect URL in Google Search Console' };
   }
 }
+
+/**
+ * Submits the sitemap to Google Search Console via the official Webmasters Sitemaps API.
+ */
+export async function submitSitemapToGoogleSearchConsole(
+  sitemapUrl = 'https://dattasable.com/sitemap.xml',
+  siteUrl = 'sc-domain:dattasable.com'
+): Promise<{ success: boolean; sitemapUrl: string; status?: number; error?: string }> {
+  const token = await getGoogleAccessToken(['https://www.googleapis.com/auth/webmasters']);
+  if (!token) {
+    return { success: false, sitemapUrl, error: 'Google Service Account credentials not available.' };
+  }
+
+  try {
+    const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/sitemaps/${encodeURIComponent(sitemapUrl)}`;
+    const res = await fetch(endpoint, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok || res.status === 204) {
+      return { success: true, sitemapUrl, status: res.status };
+    }
+
+    const data = await res.json().catch(() => ({}));
+    return {
+      success: false,
+      sitemapUrl,
+      status: res.status,
+      error: data?.error?.message || `Google Sitemaps API responded with status ${res.status}`,
+    };
+  } catch (err: any) {
+    return { success: false, sitemapUrl, error: err?.message || 'Failed to submit sitemap' };
+  }
+}
