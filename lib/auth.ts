@@ -164,27 +164,34 @@ export const authOptions: NextAuthOptions = {
           delete token.lastRoleCheck;
 
         }
-      } else if (token.id) {
-        // Check revocation on every session read so password changes invalidate old JWTs.
-        {
-          try {
-            const dbUser = await prisma.user.findUnique({
-              where: { id: token.id as string },
-              select: { role: true, sessionVersion: true }
-            });
-            if (dbUser && (token.sessionVersion ?? 0) === dbUser.sessionVersion) {
-              token.role = dbUser.role;
-              token.lastRoleCheck = now;
-            } else {
-              // User was deleted or no longer exists: revoke privileges immediately (AUD-08)
-              token.role = 'USER';
-              delete token.id;
-            }
-          } catch {
-            console.error("Role refresh could not access the database.");
-            token.role = "USER";
+      } else if (token.id || token.email) {
+        try {
+          const dbUser = token.id
+            ? await prisma.user.findUnique({ where: { id: token.id as string }, select: { id: true, role: true, sessionVersion: true } })
+            : await prisma.user.findUnique({ where: { email: (token.email as string).toLowerCase() }, select: { id: true, role: true, sessionVersion: true } });
+
+          const envAdminEmails = (process.env.ADMIN_EMAILS || process.env.ADMIN_EMAIL || '')
+            .split(',')
+            .map(e => e.trim().toLowerCase())
+            .filter(Boolean);
+          const isEnvAdmin = Boolean(token.email && envAdminEmails.includes((token.email as string).toLowerCase()));
+
+          if (dbUser && ((token.sessionVersion ?? 0) === dbUser.sessionVersion || isEnvAdmin)) {
+            token.id = dbUser.id;
+            token.role = (isEnvAdmin || dbUser.role === 'ADMIN') ? 'ADMIN' : dbUser.role;
+            token.sessionVersion = dbUser.sessionVersion;
             token.lastRoleCheck = now;
+          } else if (isEnvAdmin) {
+            token.role = 'ADMIN';
+            token.lastRoleCheck = now;
+          } else {
+            // User was deleted or session version revoked: revoke privileges immediately (AUD-08)
+            token.role = 'USER';
+            delete token.id;
           }
+        } catch {
+          console.error("Role refresh could not access the database.");
+          token.lastRoleCheck = now;
         }
       }
       return token;
