@@ -23,7 +23,18 @@ const kick = () => after(async () => { try { await processCommerceJobs(); } catc
 export async function GET(req: Request, context: Context) {
   try {
     const path = (await context.params).path;
-    if (path.join('/') === 'worker') { workerAuth(req); return ok(await processCommerceJobs()); }
+    if (path.join('/') === 'worker') {
+      workerAuth(req);
+      const commerce = await processCommerceJobs();
+      let aiPublisher: { publishedCount: number; errors: string[] } | null = null;
+      try {
+        const { processDueSchedules } = await import('@/lib/ai/publishing');
+        aiPublisher = await processDueSchedules();
+      } catch (aiErr) {
+        console.error('AI publishing scheduler deferred in commerce worker:', aiErr);
+      }
+      return ok({ commerce, aiPublisher });
+    }
     if (path[0] === 'orders' && path[1]) {
       const order = await ownedOrder(path[1]);
       if (order.status === 'PENDING' || order.emails.some(e => ['PENDING', 'RETRY', 'SENDING'].includes(e.status))) kick();

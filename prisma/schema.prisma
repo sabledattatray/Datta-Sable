@@ -596,3 +596,144 @@ model CommerceLimit {
   count     Int      @default(1)
   expiresAt DateTime @db.Timestamptz(6)
 }
+
+// AI Content Studio Models (Additive, Non-Destructive)
+model AiTopicOpportunity {
+  id                  String   @id @default(cuid())
+  topic               String
+  category            String
+  targetAudience      String?
+  searchIntent        String   @default("INFORMATIONAL")
+  opportunityScore    Float    @default(0)
+  searchDemand        String?
+  competition         String?
+  contentGapRationale String?  @db.Text
+  source              String   @default("DISCOVERY")
+  status              String   @default("IDENTIFIED")
+  createdAt           DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt           DateTime @updatedAt @db.Timestamptz(6)
+
+  @@index([category, status])
+}
+
+model AiResearchBrief {
+  id                 String   @id @default(cuid())
+  topicId            String?
+  proposedTitle      String
+  readerIntent       String
+  targetAudience     String
+  primaryQuestions   String[]
+  verifiedClaims     Json     @default("[]")
+  documentationUrls  String[]
+  sourceCitations    Json     @default("[]")
+  potentialConflicts String?  @db.Text
+  suggestedOutline   Json     @default("[]")
+  status             String   @default("READY")
+  createdAt          DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime @updatedAt @db.Timestamptz(6)
+}
+
+model AiContentDraft {
+  id                   String            @id @default(cuid())
+  briefId              String?
+  title                String
+  slug                 String            @unique
+  category             String
+  excerpt              String            @db.Text
+  content              String            @db.Text
+  blocks               Json?
+  readTime             Int               @default(5)
+  wordCount            Int               @default(0)
+  targetKeywords       String[]
+  featuredImage        String?
+  seoTitle             String?
+  seoDescription       String?
+  canonicalUrl         String?
+  jsonLd               Json?
+  internalLinks        Json?             @default("[]")
+  status               String            @default("DRAFT")
+  operatingMode        String            @default("ASSISTED")
+  qualityScore         Float?
+  factualAccuracyScore Float?
+  seoScore             Float?
+  originalityScore     Float?
+  scheduledFor         DateTime?         @db.Timestamptz(6)
+  publishedAt          DateTime?         @db.Timestamptz(6)
+  promotedPostId       String?
+  lastError            String?
+  createdAt            DateTime          @default(now()) @db.Timestamptz(6)
+  updatedAt            DateTime          @updatedAt @db.Timestamptz(6)
+  qualityReports       AiQualityReport[]
+  versions             AiContentVersion[]
+
+  @@index([status, scheduledFor])
+  @@index([category])
+}
+
+model AiQualityReport {
+  id                        String         @id @default(cuid())
+  draftId                   String
+  draft                     AiContentDraft @relation(fields: [draftId], references: [id], onDelete: Cascade)
+  score                     Float          @default(0)
+  factualVerificationStatus String         @default("PENDING")
+  duplicateRiskScore        Float          @default(0)
+  duplicateMatches          Json?          @default("[]")
+  seoChecks                 Json           @default("{}")
+  readabilityMetrics        Json?          @default("{}")
+  blockers                  String[]
+  recommendations           String[]
+  checkedAt                 DateTime       @default(now()) @db.Timestamptz(6)
+
+  @@index([draftId])
+}
+
+model AiContentVersion {
+  id          String         @id @default(cuid())
+  draftId     String
+  draft       AiContentDraft @relation(fields: [draftId], references: [id], onDelete: Cascade)
+  version     Int            @default(1)
+  title       String
+  content     String         @db.Text
+  excerpt     String         @db.Text
+  changedBy   String         @default("AI")
+  changeNotes String?
+  createdAt   DateTime       @default(now()) @db.Timestamptz(6)
+
+  @@index([draftId, version])
+}
+
+model AiPublishingSchedule {
+  id                String    @id @default(cuid())
+  draftId           String    @unique
+  scheduledTime     DateTime  @db.Timestamptz(6)
+  timezone          String    @default("Asia/Kolkata")
+  status            String    @default("SCHEDULED")
+  mode              String    @default("ASSISTED")
+  attempts          Int       @default(0)
+  publishedPostSlug String?
+  lastError         String?
+  createdAt         DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime  @updatedAt @db.Timestamptz(6)
+
+  @@index([status, scheduledTime])
+}
+
+model AiProviderUsage {
+  id               String   @id @default(cuid())
+  provider         String   @default("GEMINI")
+  model            String   @default("gemini-2.5-flash")
+  task             String
+  promptTokens     Int      @default(0)
+  completionTokens Int      @default(0)
+  totalTokens      Int      @default(0)
+  estimatedCostUsd Float    @default(0)
+  latencyMs        Int      @default(0)
+  success          Boolean  @default(true)
+  errorMessage     String?
+  draftId          String?
+  createdAt        DateTime @default(now()) @db.Timestamptz(6)
+
+  @@index([createdAt, provider])
+  @@index([task])
+}
+
