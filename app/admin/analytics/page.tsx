@@ -1,39 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTheme } from '@/components/ThemeProvider';
 import {
-  BarChart3, TrendingUp, Users, Eye, Clock, ArrowUpRight,
-  Globe, Smartphone, Laptop, PieChart, Activity
+  BarChart3, TrendingUp, Users, Eye, Clock,
+  Globe, Smartphone, Laptop, PieChart
 } from 'lucide-react';
 import Link from 'next/link';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 export default function AnalyticsOverviewPage() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   const [metrics, setMetrics] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
-  const css = isDark
-    ? {
-        bg: 'var(--bg)',
-        card: 'var(--surface)',
-        surface: 'var(--surface)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-      }
-    : {
-        bg: 'var(--bg)',
-        card: 'var(--surface)',
-        surface: 'var(--surface)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-      };
 
   useEffect(() => {
     fetch('/api/admin/stats')
@@ -46,74 +23,81 @@ export default function AnalyticsOverviewPage() {
   }, []);
 
   return (
-    <div style={{ background: css.bg, minHeight: '100vh', padding: '32px 24px', color: css.text }}>
+    <div className={adminStyles.page}>
       
       {/* ── HEADER BANNER ── */}
-      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <BarChart3 size={18} style={{ color: css.accent }} />
-            <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: css.accent }}>
-              Telemetry & Analytics Overview
-            </span>
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} /> GROWTH &amp; INTELLIGENCE
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>
-            Analytics Overview & Audience Performance
+          <h1 className={adminStyles.title}>
+            Analytics Overview &amp; <span className={adminStyles.titleAccent}>Audience Performance</span>
           </h1>
-          <p style={{ color: css.muted, margin: '6px 0 0', fontSize: 14 }}>
-            Real-time Pageviews, Unique Visitors, Traffic Channels, and Device Telemetry.
+          <p className={adminStyles.subtitle}>
+            Real-time page views, unique visitors, traffic channels, and device telemetry.
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: 10 }}>
-          <Link href="/admin/analytics/traffic" style={{ background: css.surface, color: css.text, border: `1px solid ${css.border}`, padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>
-            Traffic & Behavior →
+        <div className={adminStyles.headerActions}>
+          <Link href="/admin/analytics/traffic" className={adminStyles.secondary}>
+            Traffic &amp; Behavior →
           </Link>
-          <Link href="/admin/analytics/reports" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>
+          <Link href="/admin/analytics/reports" className={adminStyles.primary}>
             Custom Reports →
           </Link>
         </div>
       </div>
 
       {/* ── METRICS GRID ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
+      <div className={adminStyles.metricGrid}>
         {[
-          { label: 'Total Pageviews', value: metrics ? (metrics.totalViews || 5180).toLocaleString() : '5,180', sub: '+18.4% vs last month', color: '#6366f1' },
-          { label: 'Unique Visitors', value: metrics ? (metrics.uniqueVisitors || 1581).toLocaleString() : '1,581', sub: '+12.1% new visitors', color: '#06b6d4' },
-          { label: 'Avg Session Duration', value: metrics ? metrics.avgSessionDuration || '3m 24s' : '3m 24s', sub: 'High engagement', color: '#10b981' },
-          { label: 'Bounce Rate', value: metrics ? metrics.bounceRate || '32.1%' : '32.1%', sub: 'Healthy threshold', color: '#f59e0b' },
-        ].map((m, i) => (
-          <div key={i} style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', marginBottom: 6 }}>{m.label}</div>
-            <div style={{ fontSize: 28, fontWeight: 900, color: m.color, marginBottom: 4 }}>{m.value}</div>
-            <div style={{ fontSize: 12, color: css.muted }}>{m.sub}</div>
-          </div>
-        ))}
+          { label: 'Total Pageviews', value: metrics ? (metrics.totalViews || 5180).toLocaleString() : '5,180', sub: '+18.4% vs last month', icon: Eye },
+          { label: 'Unique Visitors', value: metrics ? (metrics.uniqueVisitors || 1581).toLocaleString() : '1,581', sub: '+12.1% new visitors', icon: Users },
+          { label: 'Avg Session Duration', value: metrics ? metrics.avgSessionDuration || '3m 24s' : '3m 24s', sub: 'High engagement', icon: Clock },
+          { label: 'Bounce Rate', value: metrics ? metrics.bounceRate || '32.1%' : '32.1%', sub: 'Healthy threshold', icon: TrendingUp },
+        ].map((m, i) => {
+          const Icon = m.icon;
+          return (
+            <div key={i} className={adminStyles.metricCard}>
+              <div className={adminStyles.metricTop}>
+                <span>{m.label}</span>
+                <Icon size={16} />
+              </div>
+              <span className={adminStyles.metricValue}>{m.value}</span>
+              <div className={adminStyles.metricBottom}>
+                <span>{m.sub}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* ── TRAFFIC CHANNELS & DEVICE BREAKDOWN ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 20 }}>
         
         {/* Traffic Channels */}
-        <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Globe size={18} style={{ color: css.accent }} />
-            <span>Traffic Source Channels</span>
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div className={adminStyles.panel}>
+          <div className={adminStyles.panelHeading}>
+            <h2>
+              <Globe size={17} style={{ color: 'var(--accent)', marginRight: 8, verticalAlign: 'middle' }} />
+              Traffic Source Channels
+            </h2>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {[
-              { channel: 'Google Organic Search', percentage: 74, color: '#4285f4' },
-              { channel: 'Bing Organic Search', percentage: 16, color: '#008373' },
-              { channel: 'Direct Traffic', percentage: 6, color: '#6366f1' },
-              { channel: 'LinkedIn & Social', percentage: 4, color: '#0a66c2' },
+              { channel: 'Google Organic Search', percentage: 74 },
+              { channel: 'Bing Organic Search', percentage: 16 },
+              { channel: 'Direct Traffic', percentage: 6 },
+              { channel: 'LinkedIn & Social', percentage: 4 },
             ].map((ch, i) => (
               <div key={i}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, fontWeight: 500, marginBottom: 7, color: 'var(--text)' }}>
                   <span>{ch.channel}</span>
-                  <span>{ch.percentage}%</span>
+                  <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{ch.percentage}%</span>
                 </div>
-                <div style={{ width: '100%', height: 8, background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)', borderRadius: 999, overflow: 'hidden' }}>
-                  <div style={{ width: `${ch.percentage}%`, height: '100%', background: ch.color, borderRadius: 999 }} />
+                <div style={{ width: '100%', height: 4, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
+                  <div style={{ width: `${ch.percentage}%`, height: '100%', background: 'var(--accent)', borderRadius: 999, opacity: 0.85 }} />
                 </div>
               </div>
             ))}
@@ -121,25 +105,29 @@ export default function AnalyticsOverviewPage() {
         </div>
 
         {/* Device Breakdown */}
-        <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Laptop size={18} style={{ color: '#06b6d4' }} />
-            <span>Device Category Distribution</span>
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div className={adminStyles.panel}>
+          <div className={adminStyles.panelHeading}>
+            <h2>
+              <Laptop size={17} style={{ color: 'var(--accent)', marginRight: 8, verticalAlign: 'middle' }} />
+              Device Category Distribution
+            </h2>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
-              { device: 'Desktop / Workstation', percentage: 62, icon: Laptop, color: '#6366f1' },
-              { device: 'Mobile Phones', percentage: 34, icon: Smartphone, color: '#ec4899' },
-              { device: 'Tablet & Others', percentage: 4, icon: PieChart, color: '#f59e0b' },
+              { device: 'Desktop / Workstation', percentage: 62, icon: Laptop },
+              { device: 'Mobile Phones', percentage: 34, icon: Smartphone },
+              { device: 'Tablet & Others', percentage: 4, icon: PieChart },
             ].map((d, i) => {
               const DevIcon = d.icon;
               return (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: css.surface, padding: '14px 16px', borderRadius: 14, border: `1px solid ${css.border}` }}>
+                <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg)', padding: '12px 14px', borderRadius: 10, border: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <DevIcon size={18} style={{ color: d.color }} />
-                    <span style={{ fontSize: 14, fontWeight: 700 }}>{d.device}</span>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: 'var(--surface2)', border: '1px solid var(--border)', display: 'grid', placeItems: 'center', color: 'var(--accent)' }}>
+                      <DevIcon size={16} />
+                    </div>
+                    <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)' }}>{d.device}</span>
                   </div>
-                  <span style={{ fontSize: 16, fontWeight: 900, color: d.color }}>{d.percentage}%</span>
+                  <span className={adminStyles.badge}>{d.percentage}%</span>
                 </div>
               );
             })}

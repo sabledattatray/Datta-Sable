@@ -6,8 +6,9 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, Briefcase, Award, CheckCircle, AlertCircle, FileSpreadsheet, 
-  Search, Eye, Edit, ChevronDown, Filter, FileText, ArrowUpRight, ShieldAlert, Sparkles, X
+  Search, Eye, Edit, ChevronDown, Filter, FileText, ArrowUpRight, ShieldAlert, Sparkles, X, CheckCheck, TrendingUp
 } from 'lucide-react';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 interface Job {
   id: string;
@@ -95,14 +96,12 @@ export default function AdminCareersPage() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      // Fetch open jobs
       const jobsRes = await fetch('/api/jobs');
       if (jobsRes.ok) {
         const jobsData = await jobsRes.json();
         setJobs(jobsData);
       }
 
-      // Fetch applicants
       const url = `/api/admin/careers?jobId=${filterJob}&experience=${filterExperience}&status=${filterStatus}&search=${encodeURIComponent(search)}`;
       const appRes = await fetch(url);
       if (appRes.ok) {
@@ -117,12 +116,10 @@ export default function AdminCareersPage() {
   };
 
   useEffect(() => {
-    // If not logged in and not loading, we can check node environment to allow dev bypass
     if (sessionStatus === 'unauthenticated' && process.env.NODE_ENV !== 'development') {
       router.push('/admin/login');
       return;
     }
-
     fetchData();
   }, [sessionStatus, filterJob, filterExperience, filterStatus]);
 
@@ -142,7 +139,6 @@ export default function AdminCareersPage() {
       });
 
       if (res.ok) {
-        // Refresh local lists
         setApplicants(prev => prev.map(a => a.id === id ? { ...a, status: newStatus } : a));
         if (selectedApplicant && selectedApplicant.id === id) {
           setSelectedApplicant(prev => prev ? { ...prev, status: newStatus } : null);
@@ -249,7 +245,6 @@ export default function AdminCareersPage() {
     document.body.removeChild(link);
   };
 
-  // Metrics Calculations
   const metrics = {
     total: applicants.length,
     today: applicants.filter(a => {
@@ -264,7 +259,6 @@ export default function AdminCareersPage() {
       : 0
   };
 
-  // Position chart calculations (Custom CSS Bar chart)
   const positionDistribution = applicants.reduce((acc: Record<string, number>, curr) => {
     const title = curr.job?.title || 'Other';
     acc[title] = (acc[title] || 0) + 1;
@@ -274,96 +268,124 @@ export default function AdminCareersPage() {
   const maxPositionCount = Math.max(...Object.values(positionDistribution), 1);
 
   if (sessionStatus === 'loading') {
-    return <div style={{ background: 'var(--bg)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)' }}>Loading session details...</div>;
+    return (
+      <div className={adminStyles.page} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', color: 'var(--muted)' }}>
+        Loading session details...
+      </div>
+    );
   }
 
-  // Developer Bypass Check
   const bypassBanner = sessionStatus === 'unauthenticated' && process.env.NODE_ENV === 'development';
 
   return (
-    <div style={{ width: '100%' }}>
-      {/* Bypass Dev Alert */}
+    <div className={adminStyles.page}>
+      {/* Dev Alert */}
       {bypassBanner && (
-        <div className="flex items-center justify-between gap-3 mb-6 px-4 py-3 rounded-xl" style={{ background: 'rgba(201, 243, 29, 0.05)', border: '1px solid rgba(201, 243, 29, 0.3)', color: 'var(--accent)' }}>
-          <div className="flex items-center gap-2">
-            <ShieldAlert size={18} />
-            <span style={{ fontSize: '0.85rem' }}><strong>Development Bypass</strong>: Access granted to admin portal without active authentication session.</span>
-          </div>
+        <div className={adminStyles.notice}>
+          <ShieldAlert size={16} />
+          <span><strong>Development Access</strong>: Active bypass enabled for administrative career candidate tracking.</span>
         </div>
       )}
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-        <div>
-          <div className="label-tech mb-2" style={{ letterSpacing: '0.2em' }}>ATS-ADMIN-PANEL</div>
-          <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 36px)', fontWeight: 700, letterSpacing: '-0.02em' }}>Careers Management</h1>
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Talent & Recruitment Pipeline
+          </div>
+          <h1 className={adminStyles.title}>
+            Careers <span className={adminStyles.titleAccent}>Management</span>
+          </h1>
+          <p className={adminStyles.subtitle}>
+            Applicant tracking system, candidate scoring, recruitment pipelines, and role distribution.
+          </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className={adminStyles.headerActions}>
           <button 
             onClick={handleExportExcel}
             disabled={applicants.length === 0}
-            className="mono flex items-center gap-2" 
-            style={{ padding: '0.65rem 1.25rem', border: '1px solid var(--border)', background: 'var(--surface2)', color: 'var(--text)', fontSize: '10px', letterSpacing: '0.1em', cursor: 'pointer', opacity: applicants.length === 0 ? 0.5 : 1 }}
+            className={adminStyles.secondary}
           >
-            <FileSpreadsheet size={14} /> Export to Excel
+            <FileSpreadsheet size={15} /> Export Candidates to CSV
           </button>
         </div>
       </div>
 
-      {/* Metrics cards grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div className="flex justify-between items-start mb-2">
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Applicants</span>
-            <Users size={16} style={{ color: 'var(--accent)' }} />
+      {/* Metrics Cards Grid */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Candidates</span>
+            <Users size={16} />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700 }}>{metrics.total}</div>
+          <div className={adminStyles.metricValue}>{metrics.total}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>All active submissions</span>
+            <span>All time</span>
+          </div>
         </div>
         
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div className="flex justify-between items-start mb-2">
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Applications Today</span>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent3)', boxShadow: '0 0 6px var(--accent3)', marginTop: '4px' }} />
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Received Today</span>
+            <TrendingUp size={16} />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700 }}>{metrics.today}</div>
+          <div className={adminStyles.metricValue}>{metrics.today}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>New applications today</span>
+            <span>24h activity</span>
+          </div>
         </div>
 
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div className="flex justify-between items-start mb-2">
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Shortlisted</span>
-            <CheckCircle size={16} style={{ color: '#10b981' }} />
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Shortlisted</span>
+            <CheckCheck size={16} />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#10b981' }}>{metrics.shortlisted}</div>
+          <div className={adminStyles.metricValue}>{metrics.shortlisted}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Qualified candidates</span>
+            <span>{metrics.rejected} rejected</span>
+          </div>
         </div>
 
-        <div className="card" style={{ padding: '1.25rem' }}>
-          <div className="flex justify-between items-start mb-2">
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Avg Match Score</span>
-            <Sparkles size={16} style={{ color: 'var(--accent)' }} />
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Avg Match Score</span>
+            <Sparkles size={16} />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--accent)' }}>{metrics.avgScore} <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>/ 100</span></div>
+          <div className={adminStyles.metricValue}>
+            {metrics.avgScore}<span style={{ fontSize: 14, color: 'var(--muted)', fontWeight: 400 }}>%</span>
+          </div>
+          <div className={adminStyles.metricBottom}>
+            <span>Algorithmic fit score</span>
+            <span>Benchmark: 70%+</span>
+          </div>
         </div>
       </div>
 
-      {/* Position chart & Filters layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '2.5rem', alignItems: 'start' }}>
+      {/* Position Chart & Filters layout */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16, marginBottom: 24, alignItems: 'stretch' }}>
         {/* Analytics Graph Card */}
-        <div className="card" style={{ padding: '1.5rem', minHeight: '260px' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem', color: 'var(--text)' }}>Applications by Position</h3>
+        <div className={adminStyles.panel} style={{ marginBottom: 0 }}>
+          <div className={adminStyles.panelHeading}>
+            <h2>Applications by Position</h2>
+          </div>
           {Object.keys(positionDistribution).length === 0 ? (
-            <div style={{ textAlign: 'center', color: 'var(--muted)', padding: '2rem' }}>No data to visualize yet.</div>
+            <div style={{ textAlign: 'center', color: 'var(--muted)', padding: '32px 0', fontSize: 12 }}>No role data to visualize yet.</div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {Object.entries(positionDistribution).map(([position, count]) => {
                 const percentage = Math.round((count / maxPositionCount) * 100);
                 return (
-                  <div key={position} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <span style={{ width: '130px', fontSize: '0.8rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={position}>{position}</span>
-                    <div style={{ flex: 1, height: '8px', background: 'var(--tag-bg)', borderRadius: '4px', overflow: 'hidden' }}>
-                      <div style={{ width: `${percentage}%`, height: '100%', background: 'var(--accent)' }} />
+                  <div key={position} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <span style={{ width: 140, fontSize: 11, color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={position}>{position}</span>
+                    <div style={{ flex: 1, height: 6, background: 'var(--surface2)', borderRadius: 999, overflow: 'hidden' }}>
+                      <div style={{ width: `${percentage}%`, height: '100%', background: 'var(--accent)', borderRadius: 999 }} />
                     </div>
-                    <span style={{ width: '25px', fontSize: '0.8rem', fontWeight: 600, textAlign: 'right' }}>{count}</span>
+                    <span style={{ width: 28, fontSize: 11, fontWeight: 600, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{count}</span>
                   </div>
                 );
               })}
@@ -372,23 +394,30 @@ export default function AdminCareersPage() {
         </div>
 
         {/* Filter controls */}
-        <div className="card" style={{ padding: '1.5rem', minHeight: '260px' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem', color: 'var(--text)' }}>Filter Candidates</h3>
+        <div className={adminStyles.panel} style={{ marginBottom: 0 }}>
+          <div className={adminStyles.panelHeading}>
+            <h2>Filter Candidates</h2>
+          </div>
           
-          <form onSubmit={handleSearchSubmit} className="flex flex-col gap-4">
-            <div className="flex gap-2">
+          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <div className={adminStyles.searchBar}>
+              <Search size={14} style={{ color: 'var(--muted)', flexShrink: 0 }} />
               <input 
-                type="text" value={search} onChange={(e) => setSearch(e.target.value)} 
-                placeholder="Search name, email, mobile..."
-                style={{ flex: 1, padding: '0.65rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.9rem' }}
+                type="text" 
+                value={search} 
+                onChange={(e) => setSearch(e.target.value)} 
+                placeholder="Search candidate name, email, phone..."
               />
-              <button type="submit" style={{ padding: '0.65rem 1rem', background: 'var(--surface2)', border: '1px solid var(--border)', color: 'var(--text)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><Search size={16} /></button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Position</label>
-                <select value={filterJob} onChange={(e) => setFilterJob(e.target.value)} style={{ width: '100%', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+                <label className={adminStyles.label}>Position</label>
+                <select 
+                  value={filterJob} 
+                  onChange={(e) => setFilterJob(e.target.value)} 
+                  className={adminStyles.select}
+                >
                   <option value="all">All Positions</option>
                   {jobs.map(j => (
                     <option key={j.id} value={j.id}>{j.title}</option>
@@ -396,9 +425,13 @@ export default function AdminCareersPage() {
                 </select>
               </div>
 
-              <div>
-                <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Experience</label>
-                <select value={filterExperience} onChange={(e) => setFilterExperience(e.target.value)} style={{ width: '100%', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }}>
+              <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+                <label className={adminStyles.label}>Experience</label>
+                <select 
+                  value={filterExperience} 
+                  onChange={(e) => setFilterExperience(e.target.value)} 
+                  className={adminStyles.select}
+                >
                   <option value="all">All Experience</option>
                   <option value="0-2 Years">0-2 Years</option>
                   <option value="3-5 Years">3-5 Years</option>
@@ -407,9 +440,13 @@ export default function AdminCareersPage() {
               </div>
             </div>
 
-            <div>
-              <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hiring Status</label>
-              <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} style={{ width: '100%', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }}>
+            <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+              <label className={adminStyles.label}>Hiring Status</label>
+              <select 
+                value={filterStatus} 
+                onChange={(e) => setFilterStatus(e.target.value)} 
+                className={adminStyles.select}
+              >
                 <option value="all">All Statuses</option>
                 <option value="New">New</option>
                 <option value="Under Review">Under Review</option>
@@ -424,127 +461,131 @@ export default function AdminCareersPage() {
       </div>
 
       {/* Applicants Grid Table */}
-      <div className="card desktop-only" style={{ padding: '1.5rem', overflowX: 'auto' }}>
+      <div className="desktop-only">
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)' }}>Fetching candidate profiles...</div>
+          <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+            Fetching candidate profiles...
+          </div>
         ) : applicants.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)' }}>No applicant applications match the filters.</div>
+          <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+            No candidate applications match the filter criteria.
+          </div>
         ) : (
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid var(--border)', color: 'var(--muted)', textAlign: 'left' }}>
-                <th style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>Application ID</th>
-                <th style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>Candidate</th>
-                <th style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>Position</th>
-                <th style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>Experience</th>
-                <th style={{ padding: '0.75rem 0.5rem', textAlign: 'center', whiteSpace: 'nowrap' }}>Match Score</th>
-                <th style={{ padding: '0.75rem 0.5rem', textAlign: 'center', whiteSpace: 'nowrap' }}>Status</th>
-                <th style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>Date Applied</th>
-                <th style={{ padding: '0.75rem 0.5rem', textAlign: 'right', whiteSpace: 'nowrap' }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {applicants.map((app) => (
-                <tr key={app.id} style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.2s' }} className="hover:bg-[var(--surface2)]">
-                  <td style={{ padding: '1rem 0.5rem', fontWeight: 600, color: 'var(--accent)', whiteSpace: 'nowrap' }}>{app.applicationId}</td>
-                  <td style={{ padding: '1rem 0.5rem' }}>
-                    <div style={{ fontWeight: 600, color: 'var(--text)' }}>{app.fullName}</div>
-                    <div style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>{app.email}</div>
-                  </td>
-                  <td style={{ padding: '1rem 0.5rem' }}>{app.job?.title || 'Unknown'}</td>
-                  <td style={{ padding: '1rem 0.5rem', whiteSpace: 'nowrap' }}>{app.totalExperience}</td>
-                  <td style={{ padding: '1rem 0.5rem', textAlign: 'center' }}>
-                    <span style={{ 
-                      padding: '0.2rem 0.4rem', borderRadius: '4px', fontWeight: 600,
-                      background: app.matchScore >= 80 ? 'rgba(16,185,129,0.1)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
-                      color: app.matchScore >= 80 ? '#10b981' : app.matchScore >= 50 ? '#f59e0b' : '#ef4444'
-                    }}>
-                      {app.matchScore}%
-                    </span>
-                  </td>
-                  <td style={{ padding: '1rem 0.5rem', textAlign: 'center' }}>
-                    <span style={{ 
-                      padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600,
-                      background: app.status === 'Selected' ? '#10b98122' : app.status === 'Rejected' ? '#ef444422' : 'var(--tag-bg)',
-                      color: app.status === 'Selected' ? '#10b981' : app.status === 'Rejected' ? '#ef4444' : 'var(--accent)',
-                      border: '1px solid var(--border)'
-                    }}>
-                      {app.status}
-                    </span>
-                  </td>
-                  <td style={{ padding: '1rem 0.5rem', whiteSpace: 'nowrap' }}>{new Date(app.createdAt).toLocaleDateString()}</td>
-                  <td style={{ padding: '1rem 0.5rem', textAlign: 'right', whiteSpace: 'nowrap' }}>
-                    <button 
-                      onClick={() => setSelectedApplicant(app)}
-                      style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer', display: 'inline-flex', padding: '0.25rem' }}
-                      title="View Details"
-                    >
-                      <Eye size={16} className="hover:text-[var(--accent)]" />
-                    </button>
-                  </td>
+          <div className={adminStyles.tableWrapper} style={{ marginTop: 0 }}>
+            <table className={adminStyles.table}>
+              <thead>
+                <tr>
+                  <th className={adminStyles.th}>Application ID</th>
+                  <th className={adminStyles.th}>Candidate</th>
+                  <th className={adminStyles.th}>Position</th>
+                  <th className={adminStyles.th}>Experience</th>
+                  <th className={adminStyles.th} style={{ textAlign: 'center' }}>Match Score</th>
+                  <th className={adminStyles.th} style={{ textAlign: 'center' }}>Status</th>
+                  <th className={adminStyles.th}>Date Applied</th>
+                  <th className={adminStyles.th} style={{ textAlign: 'right' }}>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {applicants.map((app) => (
+                  <tr key={app.id} className={adminStyles.tr}>
+                    <td className={adminStyles.td} style={{ fontWeight: 600, color: 'var(--accent)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}>
+                      {app.applicationId}
+                    </td>
+                    <td className={adminStyles.td}>
+                      <div style={{ fontWeight: 600, color: 'var(--text)' }}>{app.fullName}</div>
+                      <div style={{ color: 'var(--muted)', fontSize: 10 }}>{app.email}</div>
+                    </td>
+                    <td className={adminStyles.td} style={{ color: 'var(--muted)' }}>{app.job?.title || 'Unknown'}</td>
+                    <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>{app.totalExperience}</td>
+                    <td className={adminStyles.td} style={{ textAlign: 'center' }}>
+                      <span 
+                        style={{ 
+                          padding: '2px 8px', borderRadius: 999, fontSize: 10, fontWeight: 600,
+                          background: app.matchScore >= 80 ? 'rgba(16,185,129,0.1)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
+                          color: app.matchScore >= 80 ? '#34d399' : app.matchScore >= 50 ? '#fbbf24' : '#f87171',
+                          border: `1px solid ${app.matchScore >= 80 ? 'rgba(16,185,129,0.25)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`
+                        }}
+                      >
+                        {app.matchScore}%
+                      </span>
+                    </td>
+                    <td className={adminStyles.td} style={{ textAlign: 'center' }}>
+                      {app.status === 'Selected' || app.status === 'Shortlisted' ? (
+                        <span className={adminStyles.badge}>
+                          <span className={adminStyles.badgeLiveDot} /> {app.status}
+                        </span>
+                      ) : (
+                        <span className={adminStyles.badgeNeutral}>
+                          {app.status}
+                        </span>
+                      )}
+                    </td>
+                    <td className={adminStyles.td} style={{ whiteSpace: 'nowrap', color: 'var(--muted)', fontSize: 11 }}>
+                      {new Date(app.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className={adminStyles.td} style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <button 
+                        onClick={() => setSelectedApplicant(app)}
+                        className={adminStyles.secondary}
+                        style={{ minHeight: 30, padding: '4px 10px' }}
+                        title="View Details"
+                      >
+                        <Eye size={13} /> Review
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 
       {/* Applicants Mobile Cards */}
-      <div className="mobile-only" style={{ flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
+      <div className={adminStyles.mobileOnly} style={{ flexDirection: 'column', gap: 12, marginBottom: 24 }}>
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)' }}>Fetching candidate profiles...</div>
+          <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '32px 16px', color: 'var(--muted)' }}>Fetching candidate profiles...</div>
         ) : applicants.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)' }}>No applicant applications match the filters.</div>
+          <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '32px 16px', color: 'var(--muted)' }}>No candidate applications match the filters.</div>
         ) : (
           applicants.map((app) => (
-            <div key={app.id} className="card" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
+            <div key={app.id} className={adminStyles.panel} style={{ padding: 16, marginBottom: 0 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8, marginBottom: 8 }}>
                 <div>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.05em' }}>{app.applicationId}</span>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text)', marginTop: '0.2rem' }}>{app.fullName}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{app.email}</div>
+                  <span style={{ fontSize: 10, color: 'var(--accent)', fontWeight: 600 }}>{app.applicationId}</span>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginTop: 2 }}>{app.fullName}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>{app.email}</div>
                 </div>
                 <span style={{ 
-                  padding: '0.2rem 0.4rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600,
+                  padding: '2px 8px', borderRadius: 999, fontSize: 10, fontWeight: 600,
                   background: app.matchScore >= 80 ? 'rgba(16,185,129,0.1)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
-                  color: app.matchScore >= 80 ? '#10b981' : app.matchScore >= 50 ? '#f59e0b' : '#ef4444',
+                  color: app.matchScore >= 80 ? '#34d399' : app.matchScore >= 50 ? '#fbbf24' : '#f87171',
                   flexShrink: 0
                 }}>
                   {app.matchScore}% Match
                 </span>
               </div>
 
-              <div style={{ fontSize: '0.85rem', color: 'var(--text)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '0.5rem 0' }} className="grid grid-cols-2 gap-2">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '8px 0', margin: '8px 0', fontSize: 11 }}>
                 <div>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Position</span>
-                  <strong style={{ fontSize: '0.8rem' }}>{app.job?.title || 'Unknown'}</strong>
+                  <span style={{ fontSize: 9, color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Position</span>
+                  <strong>{app.job?.title || 'Unknown'}</strong>
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Experience</span>
-                  <strong style={{ fontSize: '0.8rem' }}>{app.totalExperience}</strong>
+                  <span style={{ fontSize: 9, color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Experience</span>
+                  <strong>{app.totalExperience}</strong>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem' }}>
-                <span style={{ 
-                  padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 600,
-                  background: app.status === 'Selected' ? '#10b98122' : app.status === 'Rejected' ? '#ef444422' : 'var(--tag-bg)',
-                  color: app.status === 'Selected' ? '#10b981' : app.status === 'Rejected' ? '#ef4444' : 'var(--accent)',
-                  border: '1px solid var(--border)'
-                }}>
-                  {app.status}
-                </span>
-
-                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{new Date(app.createdAt).toLocaleDateString()}</span>
-                  <button 
-                    onClick={() => setSelectedApplicant(app)}
-                    style={{ background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', cursor: 'pointer', display: 'inline-flex', padding: '0.4rem' }}
-                    title="View Details"
-                  >
-                    <Eye size={14} className="hover:text-[var(--accent)]" />
-                  </button>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span className={adminStyles.badgeNeutral}>{app.status}</span>
+                <button 
+                  onClick={() => setSelectedApplicant(app)}
+                  className={adminStyles.secondary}
+                  style={{ minHeight: 28, padding: '4px 8px' }}
+                >
+                  <Eye size={12} /> Review
+                </button>
               </div>
             </div>
           ))
@@ -556,30 +597,34 @@ export default function AdminCareersPage() {
         {selectedApplicant && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} 
-            className="modal-overlay" 
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 1000, display: 'flex', justifyContent: 'flex-end' }}
+            className={adminStyles.modalOverlay}
+            onClick={() => setSelectedApplicant(null)}
           >
             <motion.div 
               initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'tween' }}
-              className="card p-4 sm:p-8"
-              style={{ width: '100%', maxWidth: '580px', height: '100vh', overflowY: 'auto', borderRadius: 0, borderLeft: '1px solid var(--border)' }}
+              className={adminStyles.modalContent}
+              style={{ maxWidth: 640, height: '90vh', overflowY: 'auto' }}
+              onClick={e => e.stopPropagation()}
             >
               {/* Sidebar Header */}
-              <div className="flex justify-between items-center mb-6 pb-4" style={{ borderBottom: '1px solid var(--border)' }}>
+              <div className={adminStyles.modalHeader}>
                 <div>
-                  <span className="mono" style={{ fontSize: '10px', color: 'var(--accent)', letterSpacing: '0.05em' }}>{selectedApplicant.applicationId}</span>
-                  <h2 style={{ fontSize: '1.4rem', fontWeight: 600, marginTop: '0.25rem' }}>{selectedApplicant.fullName}</h2>
+                  <span style={{ fontSize: 10, color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.08em' }}>{selectedApplicant.applicationId}</span>
+                  <h3 style={{ marginTop: 2 }}>{selectedApplicant.fullName}</h3>
                 </div>
-                <button onClick={() => setSelectedApplicant(null)} style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer' }}><X size={20} /></button>
+                <button onClick={() => setSelectedApplicant(null)} className={adminStyles.modalClose}>
+                  <X size={18} />
+                </button>
               </div>
 
               {/* Recruiter Workflow Status Card */}
-              <div style={{ padding: '1rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <div>
-                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Recruiter Workflow Status</label>
+              <div style={{ padding: 16, background: 'var(--surface2)', borderRadius: 10, border: '1px solid var(--border)', marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+                  <label className={adminStyles.label}>Recruiter Workflow Status</label>
                   <select 
                     value={selectedApplicant.recruitmentStatus || "Application Received"} 
                     disabled={updatingStatus}
+                    className={adminStyles.select}
                     onChange={(e) => {
                       const val = e.target.value;
                       let syncStatus = selectedApplicant.status;
@@ -596,7 +641,6 @@ export default function AdminCareersPage() {
                         status: syncStatus 
                       });
                     }}
-                    style={{ width: '100%', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }}
                   >
                     <option value="Application Received">Application Received</option>
                     <option value="Screening Pending">Screening Pending</option>
@@ -608,137 +652,123 @@ export default function AdminCareersPage() {
                   </select>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                  <div>
-                    <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Interview Date</label>
+                <div className={adminStyles.modalGrid2}>
+                  <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+                    <label className={adminStyles.label}>Interview Date</label>
                     <input 
                       type="date"
                       value={selectedApplicant.interviewDate || ""}
                       onChange={(e) => handleUpdateWorkflowField(selectedApplicant.id, { interviewDate: e.target.value })}
-                      style={{ width: '100%', padding: '0.4rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.85rem' }}
+                      className={adminStyles.input}
                     />
                   </div>
-                  <div>
-                    <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Joining Date</label>
+                  <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+                    <label className={adminStyles.label}>Joining Date</label>
                     <input 
                       type="date"
                       value={selectedApplicant.joiningDate || ""}
                       onChange={(e) => handleUpdateWorkflowField(selectedApplicant.id, { joiningDate: e.target.value })}
-                      style={{ width: '100%', padding: '0.4rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.85rem' }}
+                      className={adminStyles.input}
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Recruiter Remarks</label>
+                <div className={adminStyles.field} style={{ marginBottom: 0 }}>
+                  <label className={adminStyles.label}>Recruiter Remarks</label>
                   <textarea 
                     value={selectedApplicant.remarks || ""}
-                    placeholder="Enter candidate notes here..."
+                    placeholder="Enter internal candidate notes here..."
                     onBlur={(e) => handleUpdateWorkflowField(selectedApplicant.id, { remarks: e.target.value })}
                     onChange={(e) => setApplicants(prev => prev.map(a => a.id === selectedApplicant.id ? { ...a, remarks: e.target.value } : a))}
-                    style={{ width: '100%', minHeight: '60px', padding: '0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none', fontSize: '0.85rem', resize: 'vertical' }}
+                    className={adminStyles.textarea}
+                    rows={2}
                   />
-                  <div style={{ fontSize: '0.7rem', color: 'var(--muted)', textAlign: 'right', marginTop: '2px' }}>Autosaves on blur</div>
+                  <div style={{ fontSize: 9, color: 'var(--muted)', textAlign: 'right', marginTop: 3 }}>Autosaves on blur</div>
                 </div>
               </div>
 
               {/* Technical Profile Details */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', fontSize: '0.9rem', lineHeight: 1.6 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 18, fontSize: 12, lineHeight: 1.6 }}>
                 
                 {/* Score */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1rem', background: 'rgba(201,243,29,0.03)', border: '1px solid rgba(201,243,29,0.15)', borderRadius: '8px' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Candidate Match Rating Score</span>
-                  <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)' }}>{selectedApplicant.matchScore}%</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: 'color-mix(in srgb, var(--accent) 5%, var(--surface2))', border: '1px solid color-mix(in srgb, var(--accent) 25%, var(--border))', borderRadius: 10 }}>
+                  <span style={{ fontSize: 11, fontWeight: 600 }}>Candidate Match Rating Score</span>
+                  <span style={{ fontSize: 16, fontWeight: 600, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{selectedApplicant.matchScore}%</span>
                 </div>
 
                 {/* Personal Section */}
                 <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Contact Info</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><strong>Email:</strong> {selectedApplicant.email}</div>
-                    <div><strong>Phone:</strong> {selectedApplicant.mobile}</div>
-                    <div><strong>WhatsApp:</strong> {selectedApplicant.whatsappNumber || 'N/A'}</div>
-                    <div><strong>Date of Birth:</strong> {selectedApplicant.dateOfBirth || 'N/A'}</div>
-                    <div><strong>Gender:</strong> {selectedApplicant.gender || 'N/A'}</div>
-                    <div><strong>Location:</strong> {selectedApplicant.currentLocation}</div>
-                    <div><strong>Address:</strong> {selectedApplicant.currentAddress || 'N/A'}</div>
-                    <div><strong>Pref Location:</strong> {selectedApplicant.preferredLocation || 'None Specified'}</div>
-                  </div>
-                </div>
-
-                {/* Collections Specific Fields */}
-                <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Collections Eligibility & Details</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><strong>10th Pass Confirmed:</strong> {selectedApplicant.is10thPass ? 'Yes' : 'No'}</div>
-                    <div><strong>Collection Exp:</strong> {selectedApplicant.hasCollectionExperience ? 'Yes' : 'No'}</div>
-                    <div><strong>Team Handling Exp:</strong> {selectedApplicant.hasTeamHandlingExperience ? 'Yes' : 'No'}</div>
-                    <div><strong>Area Familiarity:</strong> {selectedApplicant.areaFamiliarity || 'N/A'}</div>
-                    <div><strong>Two Wheeler Available:</strong> {selectedApplicant.hasTwoWheeler ? 'Yes' : 'No'}</div>
-                    <div><strong>Driving License Available:</strong> {selectedApplicant.hasDrivingLicense ? 'Yes' : 'No'}</div>
-                    <div><strong>Immediate Joiner:</strong> {selectedApplicant.isImmediateJoiner ? 'Yes' : 'No'}</div>
-                    <div><strong>Candidate Source:</strong> <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{selectedApplicant.candidateSource || 'Direct'}</span></div>
-                  </div>
-                </div>
-
-                {/* Secure Documents Links */}
-                <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Candidate Uploads (Secure Storage)</h3>
-                  <div className="flex flex-col gap-2">
-                    <a 
-                      href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.resumeUrl)}`} target="_blank" rel="noopener noreferrer"
-                      className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
-                    >
-                      <FileText size={14} /> Open Candidate Resume <ArrowUpRight size={12} />
-                    </a>
-                    {selectedApplicant.aadhaarUrl && (
-                      <a 
-                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.aadhaarUrl)}`} target="_blank" rel="noopener noreferrer"
-                        className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
-                      >
-                        <FileText size={14} /> Open Aadhaar Card <ArrowUpRight size={12} />
-                      </a>
-                    )}
-                    {selectedApplicant.photoUrl && (
-                      <a 
-                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.photoUrl)}`} target="_blank" rel="noopener noreferrer"
-                        className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
-                      >
-                        <FileText size={14} /> Open Candidate Photo <ArrowUpRight size={12} />
-                      </a>
-                    )}
-                    {selectedApplicant.portfolioFileUrl && (
-                      <a 
-                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.portfolioFileUrl)}`} target="_blank" rel="noopener noreferrer"
-                        className="mono" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface2)', padding: '0.5rem 1rem', border: '1px solid var(--border)', fontSize: '11px', color: 'var(--accent)' }}
-                      >
-                        <FileSpreadsheet size={14} /> Open Portfolio Archive <ArrowUpRight size={12} />
-                      </a>
-                    )}
+                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Contact Info</h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8 }}>
+                    <div><span style={{ color: 'var(--muted)' }}>Email:</span> {selectedApplicant.email}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Phone:</span> {selectedApplicant.mobile}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>WhatsApp:</span> {selectedApplicant.whatsappNumber || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>DOB:</span> {selectedApplicant.dateOfBirth || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Gender:</span> {selectedApplicant.gender || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Location:</span> {selectedApplicant.currentLocation}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Address:</span> {selectedApplicant.currentAddress || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Pref Location:</span> {selectedApplicant.preferredLocation || 'None Specified'}</div>
                   </div>
                 </div>
 
                 {/* Professional Info */}
                 <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Professional Experience</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><strong>Current Employer:</strong> {selectedApplicant.currentCompany || 'N/A'}</div>
-                    <div><strong>Designation:</strong> {selectedApplicant.currentDesignation || 'N/A'}</div>
-                    <div><strong>Total Exp:</strong> {selectedApplicant.totalExperience}</div>
-                    <div><strong>Rel Exp:</strong> {selectedApplicant.relevantExperience}</div>
-                    <div><strong>Current Salary:</strong> {selectedApplicant.currentSalary || 'N/A'}</div>
-                    <div><strong>Expected Salary:</strong> {selectedApplicant.expectedSalary}</div>
-                    <div><strong>Notice Period:</strong> {selectedApplicant.noticePeriod}</div>
-                    <div><strong>Available From:</strong> {selectedApplicant.availableFrom || 'Immediate'}</div>
+                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Professional Experience</h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8 }}>
+                    <div><span style={{ color: 'var(--muted)' }}>Employer:</span> {selectedApplicant.currentCompany || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Designation:</span> {selectedApplicant.currentDesignation || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Total Exp:</span> {selectedApplicant.totalExperience}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Rel Exp:</span> {selectedApplicant.relevantExperience}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Current Comp:</span> {selectedApplicant.currentSalary || 'N/A'}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Expected:</span> {selectedApplicant.expectedSalary}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Notice:</span> {selectedApplicant.noticePeriod}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Available:</span> {selectedApplicant.availableFrom || 'Immediate'}</div>
+                  </div>
+                </div>
+
+                {/* Secure Documents Links */}
+                <div>
+                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Candidate Documents</h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <a 
+                      href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.resumeUrl)}`} target="_blank" rel="noopener noreferrer"
+                      className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                    >
+                      <FileText size={13} style={{ color: 'var(--accent)' }} /> Open Candidate Resume <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
+                    </a>
+                    {selectedApplicant.aadhaarUrl && (
+                      <a 
+                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.aadhaarUrl)}`} target="_blank" rel="noopener noreferrer"
+                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                      >
+                        <FileText size={13} style={{ color: 'var(--accent)' }} /> Open Aadhaar Card <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
+                      </a>
+                    )}
+                    {selectedApplicant.photoUrl && (
+                      <a 
+                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.photoUrl)}`} target="_blank" rel="noopener noreferrer"
+                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                      >
+                        <FileText size={13} style={{ color: 'var(--accent)' }} /> Open Candidate Photo <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
+                      </a>
+                    )}
+                    {selectedApplicant.portfolioFileUrl && (
+                      <a 
+                        href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.portfolioFileUrl)}`} target="_blank" rel="noopener noreferrer"
+                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                      >
+                        <FileSpreadsheet size={13} style={{ color: 'var(--accent)' }} /> Open Portfolio Archive <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
+                      </a>
+                    )}
                   </div>
                 </div>
 
                 {/* Skills tags */}
                 <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Expertise Tags</h3>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Expertise Skills</h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {selectedApplicant.skills.split(',').map(s => (
-                      <span key={s} style={{ padding: '0.2rem 0.5rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', fontSize: '0.75rem' }}>
+                      <span key={s} className={adminStyles.badgeNeutral}>
                         {s.trim()}
                       </span>
                     ))}
@@ -747,61 +777,26 @@ export default function AdminCareersPage() {
 
                 {/* Education */}
                 <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Education Details</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><strong>Highest Degree:</strong> {selectedApplicant.highestQualification}</div>
-                    <div><strong>University:</strong> {selectedApplicant.university}</div>
-                    <div><strong>Passing Year:</strong> {selectedApplicant.passingYear}</div>
-                    <div><strong>CGPA/Grade:</strong> {selectedApplicant.cgpa}</div>
+                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Education</h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8 }}>
+                    <div><span style={{ color: 'var(--muted)' }}>Highest Degree:</span> {selectedApplicant.highestQualification}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>University:</span> {selectedApplicant.university}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Graduation:</span> {selectedApplicant.passingYear}</div>
+                    <div><span style={{ color: 'var(--muted)' }}>Grade/CGPA:</span> {selectedApplicant.cgpa}</div>
                   </div>
                 </div>
-
-                {/* Social Profiles */}
-                <div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Social Networks</h3>
-                  <div className="flex flex-wrap gap-4 text-xs">
-                    {selectedApplicant.linkedin && <a href={selectedApplicant.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>LinkedIn</a>}
-                    {selectedApplicant.github && <a href={selectedApplicant.github} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>GitHub</a>}
-                    {selectedApplicant.portfolio && <a href={selectedApplicant.portfolio} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Portfolio</a>}
-                    {selectedApplicant.kaggle && <a href={selectedApplicant.kaggle} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Kaggle</a>}
-                  </div>
-                </div>
-
-                {/* Short answers */}
-                {selectedApplicant.whyJoin && (
-                  <div>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem' }}>Q: Why join us?</h3>
-                    <p style={{ color: 'var(--muted)', background: 'var(--surface2)', padding: '0.75rem 1rem', borderRadius: '6px', fontSize: '0.85rem' }}>{selectedApplicant.whyJoin}</p>
-                  </div>
-                )}
-
-                {selectedApplicant.achievement && (
-                  <div>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem', marginBottom: '0.5rem' }}>Q: Strongest Achievement</h3>
-                    <p style={{ color: 'var(--muted)', background: 'var(--surface2)', padding: '0.75rem 1rem', borderRadius: '6px', fontSize: '0.85rem' }}>{selectedApplicant.achievement}</p>
-                  </div>
-                )}
-
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <style>{`
-        .desktop-only {
-          display: block !important;
-        }
-        .mobile-only {
-          display: none !important;
-        }
+      <style jsx global>{`
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
         @media (max-width: 768px) {
-          .desktop-only {
-            display: none !important;
-          }
-          .mobile-only {
-            display: flex !important;
-          }
+          .desktop-only { display: none; }
+          .mobile-only { display: flex; }
         }
       `}</style>
     </div>

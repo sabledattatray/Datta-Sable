@@ -1,15 +1,28 @@
 import Link from 'next/link';
 import SalesPage from '@/components/commerce/SalesPage';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 export const dynamic = 'force-dynamic';
 
 export default function Page() {
-  return <>
-    <section style={{ marginBottom: 24 }}>
-      <h1>Purchase receipts</h1>
-      <p>Review receipt delivery for recorded purchases below. <Link href="/admin/orders">View orders and payment details</Link>.</p>
-      <p>PDF invoices are not available. Payment receipts are sent by email; test receipts are marked TEST and are not tax invoices.</p>
-    </section>
-    <SalesPage tab="emails" />
-  </>;
+  return (
+    <div className={adminStyles.page}>
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Commerce & Financial Records
+          </div>
+          <h1 className={adminStyles.title}>
+            Purchase <span className={adminStyles.titleAccent}>Receipts</span>
+          </h1>
+          <p className={adminStyles.subtitle}>
+            Review receipt delivery for recorded purchases. <Link href="/admin/orders" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>View orders and payment details</Link>.
+          </p>
+        </div>
+      </div>
+      <SalesPage tab="emails" />
+    </div>
+  );
 }
+

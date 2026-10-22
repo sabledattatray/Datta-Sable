@@ -1,40 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTheme } from '@/components/ThemeProvider';
 import {
-  Zap, Network, CheckCircle2, AlertTriangle, ArrowUpRight,
-  BookOpen, Layers, RefreshCw, Sparkles, ChevronRight, Activity
+  Zap, Network, Activity, Sparkles, ArrowUpRight
 } from 'lucide-react';
 import Link from 'next/link';
 import { KnowledgeGraphDTO } from '@/lib/admin/dto/metrics.dto';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 export default function KnowledgeGraphPage() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   const [metrics, setMetrics] = useState<KnowledgeGraphDTO | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const css = isDark
-    ? {
-        bg: 'var(--bg)',
-        card: 'var(--surface)',
-        surface: 'var(--surface)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-      }
-    : {
-        bg: 'var(--bg)',
-        card: 'var(--surface)',
-        surface: 'var(--surface)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-      };
 
   useEffect(() => {
     fetch('/api/admin/stats')
@@ -49,54 +25,86 @@ export default function KnowledgeGraphPage() {
   }, []);
 
   return (
-    <div style={{ background: css.bg, minHeight: '100vh', padding: '32px 24px', color: css.text }}>
-      
-      {/* ── HEADER BANNER ── */}
-      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <Network size={18} style={{ color: css.accent }} />
-            <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: css.accent }}>
-              Knowledge Graph Telemetry
-            </span>
+    <div className={adminStyles.page}>
+      {/* Header */}
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Knowledge Graph Telemetry
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>
-            Knowledge Graph & Topic Authority Control Center
+          <h1 className={adminStyles.title}>
+            Knowledge Graph & <span className={adminStyles.titleAccent}>Topic Authority</span>
           </h1>
-          <p style={{ color: css.muted, margin: '6px 0 0', fontSize: 14 }}>
-            327 Entity Nodes • 912 Relationships • 91% Domain Knowledge Coverage
+          <p className={adminStyles.subtitle}>
+            327 Entity Nodes • 912 Semantic Relationships • 91% Domain Knowledge Coverage
           </p>
         </div>
 
-        <Link href="/admin/topic-authority" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '10px 18px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Activity size={14} />
-          <span>Interactive SVG Node Map</span>
-        </Link>
+        <div className={adminStyles.headerActions}>
+          <Link href="/admin/topic-authority" className={adminStyles.primary}>
+            <Activity size={14} /> Interactive Node Map
+          </Link>
+        </div>
       </div>
 
-      {/* ── SUMMARY STATS GRID ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
-        {[
-          { label: 'Knowledge Graph Nodes', value: metrics ? metrics.nodesCount : 327, sub: 'Entity Nodes Indexed', color: '#6366f1' },
-          { label: 'Topic Relationships', value: metrics ? metrics.relationshipsCount : 912, sub: 'Parent-Child Edges', color: '#06b6d4' },
-          { label: 'Overall Graph Coverage', value: metrics ? `${metrics.coveragePercentage}%` : '91%', sub: 'High Authority Status', color: '#10b981' },
-          { label: 'Topic Clusters', value: metrics ? metrics.clusters.length : 8, sub: 'Domain Categories', color: '#f59e0b' },
-        ].map((m, i) => (
-          <div key={i} style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', marginBottom: 6 }}>{m.label}</div>
-            <div style={{ fontSize: 28, fontWeight: 900, color: m.color, marginBottom: 4 }}>{m.value}</div>
-            <div style={{ fontSize: 12, color: css.muted }}>{m.sub}</div>
+      {/* Summary KPI Grid */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Indexed Nodes</span>
+            <Network size={16} />
           </div>
-        ))}
+          <div className={adminStyles.metricValue}>{metrics ? metrics.nodesCount : 327}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Entity nodes in graph</span>
+            <span>Total indexed</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Topic Relationships</span>
+            <Activity size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{metrics ? metrics.relationshipsCount : 912}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Parent-child graph edges</span>
+            <span>Bidirectional links</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Graph Coverage</span>
+            <Zap size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{metrics ? `${metrics.coveragePercentage}%` : '91%'}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>High authority domain status</span>
+            <span>SEO footprint</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Topic Clusters</span>
+            <Sparkles size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{metrics ? metrics.clusters.length : 8}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Domain core verticals</span>
+            <span>Knowledge pillars</span>
+          </div>
+        </div>
       </div>
 
-      {/* ── CLUSTER AUTHORITY PROGRESS BARS ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, marginBottom: 32 }}>
-        <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 20px', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Zap size={18} style={{ color: '#f59e0b' }} />
-          <span>Topic Cluster Completion Breakdown</span>
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
+      {/* Cluster Authority Progress Bars */}
+      <div className={adminStyles.panel}>
+        <div className={adminStyles.panelHeading}>
+          <h2>Topic Cluster Completion Breakdown</h2>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
           {(metrics?.clusters || [
             { name: 'Microsoft Fabric', completionPercentage: 100, status: 'Complete' },
             { name: 'Architecture & BI', completionPercentage: 100, status: 'Complete' },
@@ -107,29 +115,28 @@ export default function KnowledgeGraphPage() {
             { name: 'Governance & Purview', completionPercentage: 29, status: 'Needs Content' },
             { name: 'Real-Time Intelligence', completionPercentage: 18, status: 'Needs Content' },
           ]).map((c, i) => (
-            <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 18 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <span style={{ fontSize: 14, fontWeight: 700 }}>{c.name}</span>
-                <span style={{ fontSize: 13, fontWeight: 800, color: c.completionPercentage >= 90 ? '#10b981' : c.completionPercentage >= 50 ? '#f59e0b' : '#ef4444' }}>
+            <div key={i} style={{ background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10, padding: 16 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{c.name}</span>
+                <span style={{ fontSize: 12, fontWeight: 600, color: c.completionPercentage >= 90 ? '#34d399' : c.completionPercentage >= 50 ? '#fbbf24' : '#f87171', fontVariantNumeric: 'tabular-nums' }}>
                   {c.completionPercentage}%
                 </span>
               </div>
-              <div style={{ width: '100%', height: 10, background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)', borderRadius: 999, overflow: 'hidden', marginBottom: 8 }}>
-                <div style={{ width: `${c.completionPercentage}%`, height: '100%', background: c.completionPercentage >= 90 ? '#10b981' : c.completionPercentage >= 50 ? '#f59e0b' : '#ef4444', borderRadius: 999 }} />
+              <div style={{ width: '100%', height: 6, background: 'var(--surface)', borderRadius: 999, overflow: 'hidden', marginBottom: 8, border: '1px solid var(--border)' }}>
+                <div style={{ width: `${c.completionPercentage}%`, height: '100%', background: 'var(--accent)', borderRadius: 999 }} />
               </div>
-              <div style={{ fontSize: 11, color: css.muted, fontWeight: 600 }}>Status: {c.status}</div>
+              <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 500 }}>Status: {c.status}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── ACTIONABLE CONTENT GAP RECOMMENDER ── */}
-      <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
-        <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Sparkles size={18} style={{ color: css.accent }} />
-          <span>Recommended Articles to Close Content Gaps</span>
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {/* Actionable Content Gap Recommender */}
+      <div className={adminStyles.panel} style={{ marginBottom: 0 }}>
+        <div className={adminStyles.panelHeading}>
+          <h2>Recommended Articles to Close Content Gaps</h2>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {(metrics?.suggestedArticles || [
             {
               title: 'Microsoft Fabric Governance & Purview Integration: Enterprise Compliance Guide',
@@ -150,19 +157,20 @@ export default function KnowledgeGraphPage() {
               trafficImpact: 'Medium',
             },
           ]).map((s, i) => (
-            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 18 }}>
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 18px' }}>
               <div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: css.text, marginBottom: 4 }}>{s.title}</div>
-                <div style={{ fontSize: 12, color: css.muted }}>Target Cluster: <strong style={{ color: css.text }}>{s.topicCluster}</strong> • Estimated Impact: <strong style={{ color: '#10b981' }}>{s.trafficImpact}</strong></div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 3 }}>{s.title}</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)' }}>
+                  Target Cluster: <strong style={{ color: 'var(--text)' }}>{s.topicCluster}</strong> &bull; Estimated Impact: <strong style={{ color: 'var(--accent)' }}>{s.trafficImpact}</strong>
+                </div>
               </div>
-              <Link href="/admin/editor" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '8px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, textDecoration: 'none' }}>
-                Write Article
+              <Link href="/admin/editor" className={adminStyles.primary} style={{ minHeight: 32, padding: '4px 14px' }}>
+                Write Story <ArrowUpRight size={12} />
               </Link>
             </div>
           ))}
         </div>
       </div>
-
     </div>
   );
 }

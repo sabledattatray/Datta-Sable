@@ -1,14 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Plus, Search, Edit2, Trash2, Eye, X, Save, Loader2, AlertCircle } from 'lucide-react';
-import { useTheme } from '@/components/ThemeProvider';
+import { Plus, Search, Edit2, Trash2, Eye, X, Save, Loader2, AlertCircle, FolderKanban, CheckCircle2, TrendingUp } from 'lucide-react';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
-const toolColors: Record<string, { bg: string; color: string }> = {
-  Tableau:  { bg: 'rgba(59,130,246,0.1)',  color: '#3b82f6' },
-  'Power BI': { bg: 'rgba(245,158,11,0.1)', color: '#f59e0b' },
-  Excel:    { bg: 'rgba(16,185,129,0.1)',  color: '#10b981' },
-  Python:   { bg: 'rgba(99,102,241,0.1)',  color: '#6366f1' },
-  Looker:   { bg: 'rgba(168,85,247,0.1)',  color: '#a855f7' },
+const toolColors: Record<string, { bg: string; color: string; border: string }> = {
+  Tableau:    { bg: 'rgba(59,130,246,0.1)',  color: '#60a5fa', border: 'rgba(59,130,246,0.25)' },
+  'Power BI': { bg: 'rgba(245,158,11,0.1)', color: '#fbbf24', border: 'rgba(245,158,11,0.25)' },
+  Excel:      { bg: 'rgba(16,185,129,0.1)',  color: '#34d399', border: 'rgba(16,185,129,0.25)' },
+  Python:     { bg: 'rgba(99,102,241,0.1)',  color: '#818cf8', border: 'rgba(99,102,241,0.25)' },
+  Looker:     { bg: 'rgba(168,85,247,0.1)',  color: '#c084fc', border: 'rgba(168,85,247,0.25)' },
 };
 
 const emptyForm = {
@@ -28,13 +28,6 @@ const emptyForm = {
 };
 
 export default function ProjectsManager() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
-  const css = isDark
-    ? { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)', hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)' }
-    : { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)', hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)' };
-
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -156,141 +149,394 @@ export default function ProjectsManager() {
     (p.client && p.client.toLowerCase().includes(search.toLowerCase()))
   );
 
-  const InputStyle = {
-    width: '100%',
-    padding: '11px 14px',
-    background: css.surface2,
-    border: `1.5px solid ${css.border}`,
-    borderRadius: 11,
-    fontSize: 13,
-    color: css.text,
-    outline: 'none',
-    boxSizing: 'border-box' as const,
-    fontFamily: 'inherit',
-  };
-
-  const LabelStyle = {
-    display: 'block',
-    fontSize: 10,
-    fontWeight: 700,
-    color: css.muted,
-    textTransform: 'uppercase' as const,
-    letterSpacing: '0.08em',
-    marginBottom: 6,
-  };
+  const publishedCount = projects.filter(p => p.published).length;
+  const totalViews = projects.reduce((acc, p) => acc + (p.views || 0), 0);
 
   return (
-    <div style={{ padding: '32px 28px', minHeight: '100%' }}>
+    <div className={adminStyles.page}>
+      {/* Header */}
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Portfolio & Case Studies
+          </div>
+          <h1 className={adminStyles.title}>
+            Projects <span className={adminStyles.titleAccent}>Portfolio</span>
+          </h1>
+          <p className={adminStyles.subtitle}>
+            Manage your analytics showcases, case studies, client deliverables, and interactive dashboards.
+          </p>
+        </div>
+        <div className={adminStyles.headerActions}>
+          <div className={adminStyles.searchBar} style={{ minWidth: 220 }}>
+            <Search size={14} />
+            <input
+              type="text"
+              placeholder="Search projects or clients..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
+          <button onClick={openAdd} className={adminStyles.primary}>
+            <Plus size={15} /> Add Project
+          </button>
+        </div>
+      </div>
+
+      {/* KPI Metric Cards */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Projects</span>
+            <FolderKanban size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{projects.length}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>All repository items</span>
+            <span>{filtered.length} showing</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Published</span>
+            <CheckCircle2 size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{publishedCount}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Live on public portfolio</span>
+            <span>{projects.length - publishedCount} drafts</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Impressions</span>
+            <TrendingUp size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{totalViews.toLocaleString()}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Cumulative project views</span>
+            <span>All-time</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Error banner */}
+      {error && (
+        <div className={adminStyles.notice} style={{ borderColor: 'rgba(239,68,68,0.3)', borderLeftColor: '#ef4444', color: '#f87171' }}>
+          <AlertCircle size={16} /> {error}
+        </div>
+      )}
+
+      {/* Table / List */}
+      {loading ? (
+        <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+          <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 12px' }} />
+          <div>Loading projects...</div>
+        </div>
+      ) : (
+        <>
+          <div className="desktop-only">
+            <div className={adminStyles.tableWrapper}>
+              <table className={adminStyles.table}>
+                <thead>
+                  <tr>
+                    <th className={adminStyles.th}>Project</th>
+                    <th className={adminStyles.th}>Client</th>
+                    <th className={adminStyles.th}>Primary Tool</th>
+                    <th className={adminStyles.th}>Status</th>
+                    <th className={adminStyles.th} style={{ textAlign: 'right' }}>Views</th>
+                    <th className={adminStyles.th} style={{ textAlign: 'right' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className={adminStyles.td} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+                        No projects matching criteria.
+                      </td>
+                    </tr>
+                  ) : (
+                    filtered.map(p => {
+                      const primaryTool = p.tools && p.tools.length > 0 ? p.tools[0] : 'Other';
+                      const tool = toolColors[primaryTool] || { bg: 'var(--surface2)', color: 'var(--muted)', border: 'var(--border)' };
+                      return (
+                        <tr key={p.id} className={adminStyles.tr}>
+                          <td className={adminStyles.td}>
+                            <div style={{ fontWeight: 600, color: 'var(--text)', marginBottom: 2 }}>{p.title}</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.04em' }}>{p.category}</div>
+                          </td>
+                          <td className={adminStyles.td} style={{ color: 'var(--muted)', fontWeight: 500 }}>
+                            {p.client || '—'}
+                          </td>
+                          <td className={adminStyles.td}>
+                            <span
+                              style={{
+                                display: 'inline-block',
+                                fontSize: 9.5,
+                                fontWeight: 600,
+                                background: tool.bg,
+                                color: tool.color,
+                                border: `1px solid ${tool.border}`,
+                                padding: '2px 8px',
+                                borderRadius: 999,
+                                letterSpacing: '0.04em',
+                              }}
+                            >
+                              {primaryTool}
+                            </span>
+                          </td>
+                          <td className={adminStyles.td}>
+                            {p.published ? (
+                              <span className={adminStyles.badge}>
+                                <span className={adminStyles.badgeLiveDot} /> Published
+                              </span>
+                            ) : (
+                              <span className={adminStyles.badgeNeutral}>
+                                Draft
+                              </span>
+                            )}
+                          </td>
+                          <td className={adminStyles.td} style={{ textAlign: 'right', fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+                            {p.views || 0}
+                          </td>
+                          <td className={adminStyles.td} style={{ textAlign: 'right' }}>
+                            <div style={{ display: 'inline-flex', gap: 6, justifyContent: 'flex-end' }}>
+                              <button
+                                onClick={() => openEdit(p)}
+                                title="Edit"
+                                className={adminStyles.secondary}
+                                style={{ minHeight: 32, padding: '6px 10px' }}
+                              >
+                                <Edit2 size={13} />
+                              </button>
+                              <button
+                                onClick={() => handleDelete(p.id)}
+                                title="Delete"
+                                className={adminStyles.danger}
+                                style={{ minHeight: 32, padding: '6px 10px' }}
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Mobile view */}
+          <div className={adminStyles.mobileOnly} style={{ flexDirection: 'column', gap: 12, marginTop: 16 }}>
+            {filtered.map(p => (
+              <div key={p.id} className={adminStyles.panel} style={{ padding: 18, marginBottom: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
+                  <div>
+                    <div style={{ fontWeight: 600, color: 'var(--text)', fontSize: 14 }}>{p.title}</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>{p.category} &bull; {p.client}</div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button onClick={() => openEdit(p)} className={adminStyles.secondary} style={{ minHeight: 30, padding: '4px 8px' }}>
+                      <Edit2 size={12} />
+                    </button>
+                    <button onClick={() => handleDelete(p.id)} className={adminStyles.danger} style={{ minHeight: 30, padding: '4px 8px' }}>
+                      <Trash2 size={12} />
+                    </button>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
+                  {p.published ? (
+                    <span className={adminStyles.badge}><span className={adminStyles.badgeLiveDot} /> Published</span>
+                  ) : (
+                    <span className={adminStyles.badgeNeutral}>Draft</span>
+                  )}
+                  <span style={{ fontSize: 11, color: 'var(--muted)' }}>👁️ {p.views || 0} views</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Modal */}
       {modalOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: isDark ? 'rgba(0,0,0,0.75)' : 'rgba(15,23,42,0.4)', backdropFilter: 'blur(8px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 24, padding: '28px 32px', width: '100%', maxWidth: 680, maxHeight: '90vh', overflowY: 'auto', boxShadow: css.hoverShadow }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-              <h3 style={{ fontSize: 20, fontWeight: 800, color: css.text, margin: 0 }}>{editing ? 'Edit Project' : 'New Project'}</h3>
-              <button onClick={closeModal} style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted, padding: 4, display: 'flex' }}><X size={20} /></button>
+        <div className={adminStyles.modalOverlay} onClick={closeModal}>
+          <div className={adminStyles.modalContent} onClick={e => e.stopPropagation()}>
+            <div className={adminStyles.modalHeader}>
+              <h3>{editing ? 'Edit Project' : 'New Project'}</h3>
+              <button onClick={closeModal} className={adminStyles.modalClose}>
+                <X size={18} />
+              </button>
             </div>
+
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              
-              {/* Row 1: Title & Client */}
-              <div className="projects-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div>
-                  <label style={LabelStyle}>Project Title *</label>
-                  <input required value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder="e.g. Sales Dashboard" style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Project Title *</label>
+                  <input
+                    required
+                    className={adminStyles.input}
+                    value={form.title}
+                    onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+                    placeholder="e.g. Sales Performance Dashboard"
+                  />
                 </div>
-                <div>
-                  <label style={LabelStyle}>Client *</label>
-                  <input required value={form.client} onChange={e => setForm(f => ({ ...f, client: e.target.value }))} placeholder="Client name" style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Client *</label>
+                  <input
+                    required
+                    className={adminStyles.input}
+                    value={form.client}
+                    onChange={e => setForm(f => ({ ...f, client: e.target.value }))}
+                    placeholder="e.g. Retail Corp"
+                  />
                 </div>
               </div>
 
-              {/* Row 2: Category & Primary Tools */}
-              <div className="projects-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div>
-                  <label style={LabelStyle}>Category</label>
-                  <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))} style={InputStyle}>
-                    {['Dashboard', 'Analysis', 'Report', 'Automation', 'AI Infrastructure'].map(o => <option key={o}>{o}</option>)}
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Category</label>
+                  <select
+                    className={adminStyles.select}
+                    value={form.category}
+                    onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
+                  >
+                    {['Dashboard', 'Analysis', 'Report', 'Automation', 'AI Infrastructure'].map(o => (
+                      <option key={o} value={o}>{o}</option>
+                    ))}
                   </select>
                 </div>
-                <div>
-                  <label style={LabelStyle}>Tools (Comma separated) *</label>
-                  <input required value={form.toolsString} onChange={e => setForm(f => ({ ...f, toolsString: e.target.value }))} placeholder="e.g. Power BI, DAX, SQL" style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Tools (Comma separated) *</label>
+                  <input
+                    required
+                    className={adminStyles.input}
+                    value={form.toolsString}
+                    onChange={e => setForm(f => ({ ...f, toolsString: e.target.value }))}
+                    placeholder="e.g. Power BI, DAX, SQL"
+                  />
                 </div>
               </div>
 
-              {/* Row 3: Colors & Image Url */}
-              <div className="projects-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div>
-                  <label style={LabelStyle}>Accent Color (hex or css var)</label>
-                  <input value={form.color} onChange={e => setForm(f => ({ ...f, color: e.target.value }))} placeholder="e.g. var(--accent) or #6366f1" style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Accent Color</label>
+                  <input
+                    className={adminStyles.input}
+                    value={form.color}
+                    onChange={e => setForm(f => ({ ...f, color: e.target.value }))}
+                    placeholder="var(--accent) or #bef264"
+                  />
                 </div>
-                <div>
-                  <label style={LabelStyle}>Image Path / URL</label>
-                  <input value={form.imageUrl} onChange={e => setForm(f => ({ ...f, imageUrl: e.target.value }))} placeholder="e.g. /images/portfolio/supply_chain.jpg" style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Image Path / URL</label>
+                  <input
+                    className={adminStyles.input}
+                    value={form.imageUrl}
+                    onChange={e => setForm(f => ({ ...f, imageUrl: e.target.value }))}
+                    placeholder="/images/portfolio/project.jpg"
+                  />
                 </div>
               </div>
 
-              {/* Row 4: Status & Impact */}
-              <div className="projects-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div>
-                  <label style={LabelStyle}>Status</label>
-                  <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))} style={InputStyle}>
-                    <option>Published</option>
-                    <option>Draft</option>
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Status</label>
+                  <select
+                    className={adminStyles.select}
+                    value={form.status}
+                    onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
+                  >
+                    <option value="Published">Published</option>
+                    <option value="Draft">Draft</option>
                   </select>
                 </div>
-                <div>
-                  <label style={LabelStyle}>Impact / Metrics</label>
-                  <input value={form.impact} onChange={e => setForm(f => ({ ...f, impact: e.target.value }))} placeholder="e.g. -18% Inventory Cost, $72K Saved" style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Impact / Metrics</label>
+                  <input
+                    className={adminStyles.input}
+                    value={form.impact}
+                    onChange={e => setForm(f => ({ ...f, impact: e.target.value }))}
+                    placeholder="-18% Inventory Cost, $72K Saved"
+                  />
                 </div>
               </div>
 
-              {/* Description */}
-              <div>
-                <label style={LabelStyle}>Short Description *</label>
-                <textarea required value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Brief summary of the project..." rows={2} style={{ ...InputStyle, resize: 'vertical', lineHeight: 1.5 }}
-                  onFocus={e => (e.target as HTMLTextAreaElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLTextAreaElement).style.borderColor = css.border} />
+              <div className={adminStyles.field}>
+                <label className={adminStyles.label}>Short Description *</label>
+                <textarea
+                  required
+                  rows={2}
+                  className={adminStyles.textarea}
+                  value={form.description}
+                  onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
+                  placeholder="Executive summary of the project deliverable..."
+                />
               </div>
 
-              {/* Case Study details */}
-              <div className="projects-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div>
-                  <label style={LabelStyle}>The Problem</label>
-                  <textarea value={form.problem} onChange={e => setForm(f => ({ ...f, problem: e.target.value }))} placeholder="What business challenge was addressed?" rows={3} style={{ ...InputStyle, resize: 'vertical', lineHeight: 1.5 }}
-                    onFocus={e => (e.target as HTMLTextAreaElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLTextAreaElement).style.borderColor = css.border} />
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>The Problem</label>
+                  <textarea
+                    rows={3}
+                    className={adminStyles.textarea}
+                    value={form.problem}
+                    onChange={e => setForm(f => ({ ...f, problem: e.target.value }))}
+                    placeholder="What business challenge was addressed?"
+                  />
                 </div>
-                <div>
-                  <label style={LabelStyle}>The Solution</label>
-                  <textarea value={form.solution} onChange={e => setForm(f => ({ ...f, solution: e.target.value }))} placeholder="How was it resolved?" rows={3} style={{ ...InputStyle, resize: 'vertical', lineHeight: 1.5 }}
-                    onFocus={e => (e.target as HTMLTextAreaElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLTextAreaElement).style.borderColor = css.border} />
-                </div>
-              </div>
-
-              {/* GitHub / Live Links */}
-              <div className="projects-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <div>
-                  <label style={LabelStyle}>GitHub URL</label>
-                  <input value={form.github} onChange={e => setForm(f => ({ ...f, github: e.target.value }))} placeholder="https://github.com/..." style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
-                </div>
-                <div>
-                  <label style={LabelStyle}>Live Link / Embed URL</label>
-                  <input value={form.live} onChange={e => setForm(f => ({ ...f, live: e.target.value }))} placeholder="https://..." style={InputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent} onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border} />
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>The Solution</label>
+                  <textarea
+                    rows={3}
+                    className={adminStyles.textarea}
+                    value={form.solution}
+                    onChange={e => setForm(f => ({ ...f, solution: e.target.value }))}
+                    placeholder="How was it resolved?"
+                  />
                 </div>
               </div>
 
-              {/* Save / Cancel buttons */}
-              <div style={{ display: 'flex', gap: 10, paddingTop: 8 }}>
-                <button type="button" onClick={closeModal} style={{ flex: 1, padding: '12px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 11, color: css.text, fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>Cancel</button>
-                <button type="submit" disabled={saving} style={{ flex: 2, padding: '12px', background: saving ? css.border : `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 11, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
-                  {saving ? <><Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> Saving...</> : <><Save size={15} /> {editing ? 'Update' : 'Publish'}</>}
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>GitHub URL</label>
+                  <input
+                    className={adminStyles.input}
+                    value={form.github}
+                    onChange={e => setForm(f => ({ ...f, github: e.target.value }))}
+                    placeholder="https://github.com/..."
+                  />
+                </div>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Live Demo URL</label>
+                  <input
+                    className={adminStyles.input}
+                    value={form.live}
+                    onChange={e => setForm(f => ({ ...f, live: e.target.value }))}
+                    placeholder="https://app.powerbi.com/..."
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', paddingTop: 10, borderTop: '1px solid var(--border)' }}>
+                <button type="button" onClick={closeModal} className={adminStyles.secondary}>
+                  Cancel
+                </button>
+                <button type="submit" disabled={saving} className={adminStyles.primary}>
+                  {saving ? (
+                    <>
+                      <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Save size={14} /> {editing ? 'Update Project' : 'Publish Project'}
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -298,194 +544,13 @@ export default function ProjectsManager() {
         </div>
       )}
 
-      {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
-        <div>
-          <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Content</p>
-          <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Projects</h1>
-          <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>{filtered.length} project{filtered.length !== 1 ? 's' : ''}</p>
-        </div>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 16px' }}>
-            <Search size={14} color={css.muted} />
-            <input type="text" placeholder="Search projects..." value={search} onChange={e => setSearch(e.target.value)}
-              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 500, width: 180 }} />
-          </div>
-          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`, whiteSpace: 'nowrap' }}>
-            <Plus size={17} /> Add Project
-          </button>
-        </div>
-      </div>
-
-      {/* Error banner */}
-      {error && (
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '14px 18px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 12, marginBottom: 20, color: '#ef4444', fontSize: 13, fontWeight: 600 }}>
-          <AlertCircle size={16} />{error}
-        </div>
-      )}
-
-      {/* Table / List */}
-      {loading ? (
-        <div style={{ display: 'flex', padding: '48px', justifyContent: 'center', alignItems: 'center', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, color: css.muted }}>
-          <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', marginRight: 10 }} /> Loading projects...
-        </div>
-      ) : (
-        <>
-          <div className="desktop-only" style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', minWidth: 780, borderCollapse: 'collapse', textAlign: 'left' }}>
-                <thead>
-                  <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
-                    {['Project', 'Client', 'Tool', 'Status', 'Views', 'Actions'].map(h => (
-                      <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.length === 0 && (
-                    <tr><td colSpan={6} style={{ padding: '48px', textAlign: 'center', color: css.muted, fontSize: 14 }}>No projects found.</td></tr>
-                  )}
-                  {filtered.map((p, i) => {
-                    const primaryTool = p.tools && p.tools.length > 0 ? p.tools[0] : 'Other';
-                    const tool = toolColors[primaryTool] || { bg: 'rgba(100,116,139,0.1)', color: '#64748b' };
-                    return (
-                      <tr key={p.id}
-                        style={{ borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none', transition: 'background 0.15s' }}
-                        onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = css.hoverBg}
-                        onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
-                      >
-                        <td style={{ padding: '16px 20px', maxWidth: 300 }}>
-                          <div style={{ fontSize: 13.5, fontWeight: 700, color: css.text, marginBottom: 3 }}>{p.title}</div>
-                          <div style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{p.category}</div>
-                        </td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.muted, whiteSpace: 'nowrap' }}>{p.client}</td>
-                        <td style={{ padding: '16px 20px' }}>
-                          <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, background: tool.bg, color: tool.color, border: `1px solid ${tool.color}30`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em' }}>{primaryTool}</span>
-                        </td>
-                        <td style={{ padding: '16px 20px' }}>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, background: p.published ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', color: p.published ? '#10b981' : '#f59e0b', border: `1px solid ${p.published ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                            <span style={{ width: 5, height: 5, borderRadius: '50%', background: p.published ? '#10b981' : '#f59e0b' }} />{p.published ? 'Published' : 'Draft'}
-                          </span>
-                        </td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{p.views}</td>
-                        <td style={{ padding: '16px 20px' }}>
-                          <div style={{ display: 'flex', gap: 6 }}>
-                            {[
-                              { Icon: Edit2, action: () => openEdit(p), title: 'Edit', hoverColor: css.accent },
-                              { Icon: Trash2, action: () => handleDelete(p.id), title: 'Delete', hoverColor: '#ef4444' },
-                            ].map(({ Icon, action, title, hoverColor }) => (
-                              <button key={title} onClick={action} title={title}
-                                style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = hoverColor; (e.currentTarget as HTMLElement).style.borderColor = `${hoverColor}50`; (e.currentTarget as HTMLElement).style.background = `${hoverColor}08`; }}
-                                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
-                              ><Icon size={14} /></button>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Projects Mobile Cards */}
-          <div className="mobile-only" style={{ flexDirection: 'column', gap: 14, marginBottom: 20 }}>
-            {filtered.length === 0 ? (
-              <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
-                No projects found.
-              </div>
-            ) : (
-              filtered.map((p) => {
-                const primaryTool = p.tools && p.tools.length > 0 ? p.tools[0] : 'Other';
-                const tool = toolColors[primaryTool] || { bg: 'rgba(100,116,139,0.1)', color: '#64748b' };
-                return (
-                  <div
-                    key={p.id}
-                    style={{
-                      background: css.surface,
-                      border: `1px solid ${css.border}`,
-                      borderRadius: 16,
-                      padding: 16,
-                      boxShadow: css.shadow,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 12,
-                    }}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 700, color: css.text, lineHeight: 1.45 }}>
-                          {p.title}
-                        </div>
-                        <div style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 4 }}>
-                          {p.category}
-                        </div>
-                      </div>
-                      <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
-                        {[
-                          { Icon: Edit2, action: () => openEdit(p), title: 'Edit', hoverColor: css.accent },
-                          { Icon: Trash2, action: () => handleDelete(p.id), title: 'Delete', hoverColor: '#ef4444' },
-                        ].map(({ Icon, action, title }) => (
-                          <button
-                            key={title}
-                            onClick={action}
-                            title={title}
-                            style={{
-                              background: 'none', border: `1px solid ${css.border}`,
-                              borderRadius: 8, padding: 6, cursor: 'pointer',
-                              color: css.muted, display: 'flex', alignItems: 'center',
-                            }}
-                          >
-                            <Icon size={13} />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-                      <span style={{ display: 'inline-block', fontSize: 9.5, fontWeight: 700, background: tool.bg, color: tool.color, border: `1px solid ${tool.color}30`, padding: '2px 8px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        {primaryTool}
-                      </span>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 9.5, fontWeight: 700, background: p.published ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', color: p.published ? '#10b981' : '#f59e0b', border: `1px solid ${p.published ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, padding: '2px 8px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: p.published ? '#10b981' : '#f59e0b' }} />
-                        {p.published ? 'Published' : 'Draft'}
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: `1px solid ${css.border}`, paddingTop: 10, fontSize: 11, color: css.muted }}>
-                      <span>Client: <strong>{p.client}</strong></span>
-                      <span style={{ fontWeight: 700, color: css.text }}>👁️ {p.views} views</span>
-                    </div>
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </>
-      )}
-
-      <style>{`
+      <style jsx global>{`
         @keyframes spin { to { transform: rotate(360deg); } }
-        .desktop-only {
-          display: block !important;
-        }
-        .mobile-only {
-          display: none !important;
-        }
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
         @media (max-width: 768px) {
-          .desktop-only {
-            display: none !important;
-          }
-          .mobile-only {
-            display: flex !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .projects-modal-grid {
-            grid-template-columns: 1fr !important;
-          }
+          .desktop-only { display: none; }
+          .mobile-only { display: flex; }
         }
       `}</style>
     </div>

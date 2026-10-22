@@ -26,10 +26,23 @@ const nextConfig = {
     ],
   },
   experimental: {
-    // Keep prerender workers within the hosted database's connection budget.
-    cpus: 1,
-    staticGenerationMaxConcurrency: 1,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    // Keep prerender workers within the hosted database's connection budget during production builds only.
+    ...(process.env.NODE_ENV === 'production'
+      ? {
+          cpus: 1,
+          staticGenerationMaxConcurrency: 1,
+        }
+      : {}),
+    optimizePackageImports: [
+      'lucide-react',
+      'framer-motion',
+      '@mui/material',
+      '@mui/x-data-grid',
+      '@iconify/react',
+      'dayjs',
+      'echarts',
+      'echarts-for-react',
+    ],
   },
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   async redirects() {

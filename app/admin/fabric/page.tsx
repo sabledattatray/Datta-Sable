@@ -1,51 +1,25 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTheme } from '@/components/ThemeProvider';
 import {
-  Layers, Calculator, Zap, Cpu, ArrowUpRight, CheckCircle2,
-  TrendingUp, BarChart3, Database, ShieldCheck, DollarSign, Activity
+  Layers, Calculator, Cpu, Activity, TrendingUp, Zap
 } from 'lucide-react';
 import Link from 'next/link';
 import { FabricTelemetryDTO } from '@/lib/admin/services/fabric.service';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 export default function FabricMasterPage() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   const [telemetry, setTelemetry] = useState<FabricTelemetryDTO | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const css = isDark
-    ? {
-        bg: 'var(--bg)',
-        card: 'var(--surface)',
-        surface: 'var(--surface)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-      }
-    : {
-        bg: 'var(--bg)',
-        card: 'var(--surface)',
-        surface: 'var(--surface)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-      };
 
   useEffect(() => {
     fetch('/api/admin/stats')
       .then(res => res.json())
-      .then(data => {
-        // Fetch telemetry
+      .then(() => {
         fetch('/api/admin/fabric-telemetry')
           .then(r => r.json())
           .then(t => setTelemetry(t))
           .catch(() => {
-            // Fallback default
             setTelemetry({
               totalToolVisits: 1450,
               capacityCalculatorUsage: 620,
@@ -73,65 +47,104 @@ export default function FabricMasterPage() {
   }, []);
 
   return (
-    <div style={{ background: css.bg, minHeight: '100vh', padding: '32px 24px', color: css.text }}>
-      
-      {/* ── HEADER BANNER ── */}
-      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <Layers size={18} style={{ color: css.accent }} />
-            <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: css.accent }}>
-              Microsoft Fabric Operations Hub
-            </span>
+    <div className={adminStyles.page}>
+      {/* Header */}
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Capacity Telemetry & Workloads
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>
-            Fabric Master & Capacity Telemetry Control Center
+          <h1 className={adminStyles.title}>
+            Fabric Master & <span className={adminStyles.titleAccent}>Capacity Hub</span>
           </h1>
-          <p style={{ color: css.muted, margin: '6px 0 0', fontSize: 14 }}>
+          <p className={adminStyles.subtitle}>
             F-SKU Cost Calculators, Capacity Sizing Sessions, and Spark Workload Telemetry.
           </p>
         </div>
 
-        <Link href="/tools/bi-roi-calculator" target="_blank" style={{ background: css.accent, color: 'var(--btn-primary-text)', padding: '10px 18px', borderRadius: 12, fontSize: 13, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Calculator size={14} />
-          <span>Launch ROI Calculator ↗</span>
-        </Link>
+        <div className={adminStyles.headerActions}>
+          <Link href="/tools/bi-roi-calculator" target="_blank" className={adminStyles.primary}>
+            <Calculator size={14} /> Launch ROI Calculator
+          </Link>
+        </div>
       </div>
 
-      {/* ── SUMMARY METRICS GRID ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
-        {[
-          { label: 'Total Calculator Sessions', value: telemetry ? telemetry.totalToolVisits.toLocaleString() : '1,450', sub: 'Interactive User Visits', color: '#6366f1' },
-          { label: 'Capacity Calculator Runs', value: telemetry ? telemetry.capacityCalculatorUsage : 620, sub: 'F-SKU Sizing Runs', color: '#06b6d4' },
-          { label: 'Cost Calculator Runs', value: telemetry ? telemetry.costCalculatorUsage : 480, sub: 'Monthly Cost Audits', color: '#10b981' },
-          { label: 'Spark Workload Runs', value: telemetry ? telemetry.sparkEstimatorUsage : 210, sub: 'CU / VCore Estimations', color: '#f59e0b' },
-        ].map((m, i) => (
-          <div key={i} style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', marginBottom: 6 }}>{m.label}</div>
-            <div style={{ fontSize: 28, fontWeight: 900, color: m.color, marginBottom: 4 }}>{m.value}</div>
-            <div style={{ fontSize: 12, color: css.muted }}>{m.sub}</div>
+      {/* Summary KPI Metrics Grid */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Sessions</span>
+            <Layers size={16} />
           </div>
-        ))}
+          <div className={adminStyles.metricValue}>
+            {telemetry ? telemetry.totalToolVisits.toLocaleString() : '1,450'}
+          </div>
+          <div className={adminStyles.metricBottom}>
+            <span>Interactive User Visits</span>
+            <span>All-time</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Capacity Runs</span>
+            <Cpu size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>
+            {telemetry ? telemetry.capacityCalculatorUsage : 620}
+          </div>
+          <div className={adminStyles.metricBottom}>
+            <span>F-SKU Sizing Runs</span>
+            <span>Interactive</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Cost Audits</span>
+            <TrendingUp size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>
+            {telemetry ? telemetry.costCalculatorUsage : 480}
+          </div>
+          <div className={adminStyles.metricBottom}>
+            <span>Monthly Cost Audits</span>
+            <span>Completed</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Spark Estimations</span>
+            <Zap size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>
+            {telemetry ? telemetry.sparkEstimatorUsage : 210}
+          </div>
+          <div className={adminStyles.metricBottom}>
+            <span>CU / VCore Estimations</span>
+            <span>Engineering</span>
+          </div>
+        </div>
       </div>
 
-      {/* ── POPULAR RECOMMENDED SKUs BREAKDOWN ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, marginBottom: 32 }}>
-        
+      {/* Popular Recommended SKUs & Calculations */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
         {/* SKU Recommendations Distribution */}
-        <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Cpu size={18} style={{ color: css.accent }} />
-            <span>Most Commonly Recommended Fabric SKUs</span>
-          </h2>
+        <div className={adminStyles.panel}>
+          <div className={adminStyles.panelHeading}>
+            <h2>Most Recommended Fabric SKUs</h2>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {(telemetry?.popularSkus || []).map((sku, i) => (
               <div key={i}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
-                  <span>{sku.sku}</span>
-                  <span>{sku.monthlyCost} ({sku.percentage}%)</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, fontWeight: 600, marginBottom: 6 }}>
+                  <span style={{ color: 'var(--text)' }}>{sku.sku}</span>
+                  <span style={{ color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>{sku.monthlyCost} ({sku.percentage}%)</span>
                 </div>
-                <div style={{ width: '100%', height: 8, background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)', borderRadius: 999, overflow: 'hidden' }}>
-                  <div style={{ width: `${sku.percentage}%`, height: '100%', background: i === 0 ? '#6366f1' : i === 1 ? '#06b6d4' : i === 2 ? '#10b981' : '#f59e0b', borderRadius: 999 }} />
+                <div style={{ width: '100%', height: 6, background: 'var(--surface2)', borderRadius: 999, overflow: 'hidden' }}>
+                  <div style={{ width: `${sku.percentage}%`, height: '100%', background: 'var(--accent)', borderRadius: 999 }} />
                 </div>
               </div>
             ))}
@@ -139,29 +152,28 @@ export default function FabricMasterPage() {
         </div>
 
         {/* Live Calculation Log */}
-        <div style={{ background: css.card, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Activity size={18} style={{ color: '#10b981' }} />
-            <span>Recent User Calculation Stream</span>
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div className={adminStyles.panel}>
+          <div className={adminStyles.panelHeading}>
+            <h2>Recent User Calculation Stream</h2>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {(telemetry?.recentCalculations || []).map((calc) => (
-              <div key={calc.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: css.surface, padding: '14px 16px', borderRadius: 14, border: `1px solid ${css.border}` }}>
+              <div key={calc.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface2)', padding: '12px 14px', borderRadius: 8, border: '1px solid var(--border)' }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 700 }}>{calc.tool}</div>
-                  <div style={{ fontSize: 11, color: css.muted }}>Recommended: <strong style={{ color: css.accent }}>{calc.skuRecommended}</strong></div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{calc.tool}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>
+                    Recommended: <strong style={{ color: 'var(--accent)' }}>{calc.skuRecommended}</strong>
+                  </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: '#10b981' }}>{calc.estMonthlyCost}</div>
-                  <div style={{ fontSize: 11, color: css.muted }}>{calc.timestamp}</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{calc.estMonthlyCost}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>{calc.timestamp}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
       </div>
-
     </div>
   );
 }

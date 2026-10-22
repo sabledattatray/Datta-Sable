@@ -21,9 +21,15 @@ function EditorContent() {
   const [editorHtml, setEditorHtml] = useState('');
   const [autoSaveLabel, setAutoSaveLabel] = useState('');
 
-  const css = isDark
-    ? { bg: '#000000', surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1' }
-    : { bg: '#f0f4ff', surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5' };
+  const css = {
+    bg: 'var(--bg)',
+    surface: 'var(--surface)',
+    surface2: 'var(--surface2)',
+    border: 'var(--border)',
+    text: 'var(--text)',
+    muted: 'var(--muted)',
+    accent: 'var(--accent)',
+  };
 
   // Load existing post for editing
   useEffect(() => {
@@ -130,20 +136,14 @@ function EditorContent() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <ThemeToggle />
-            <button onClick={() => setPreviewMode(true)} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.borderColor = css.accent; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; }}
-            >
-              <Eye size={15} /> Preview
+            <button onClick={() => setPreviewMode(true)} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4, fontSize: 11, fontWeight: 600, color: 'var(--text)', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <Eye size={13} /> Preview
             </button>
-            <button onClick={() => handlePublish('Draft')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 14px', background: 'none', border: `1px solid ${css.border}`, borderRadius: 10, fontSize: 13, fontWeight: 600, color: css.muted, cursor: 'pointer', transition: 'all 0.15s', opacity: loading ? 0.5 : 1 }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.background = css.surface2; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.background = 'none'; }}
-            >
-              <Save size={15} /> Save Draft
+            <button onClick={() => handlePublish('Draft')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4, fontSize: 11, fontWeight: 600, color: 'var(--text)', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: loading ? 0.5 : 1 }}>
+              <Save size={13} /> Save Draft
             </button>
-            <button onClick={() => handlePublish('Published')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '8px 18px', background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', boxShadow: `0 4px 12px ${css.accent}40`, opacity: loading ? 0.5 : 1 }}>
-              <Send size={15} /> {loading ? 'Saving...' : 'Publish'}
+            <button onClick={() => handlePublish('Published')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 16px', background: 'var(--accent)', border: 'none', borderRadius: 4, fontSize: 11, fontWeight: 700, color: '#000', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: loading ? 0.5 : 1 }}>
+              <Send size={13} /> {loading ? 'Saving...' : 'Publish'}
             </button>
           </div>
         </header>

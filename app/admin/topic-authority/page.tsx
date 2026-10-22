@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Layers, AlertCircle, CheckCircle2, ChevronRight, Activity, TrendingUp, Network } from 'lucide-react';
+import { Layers, AlertCircle, CheckCircle2, ChevronRight, Activity, TrendingUp, Network, Link as LinkIcon, Compass, Sparkles } from 'lucide-react';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 interface CoverageStats {
   name: string;
@@ -41,7 +40,7 @@ export default function TopicAuthorityDashboard() {
     fetch('/api/admin/topic-authority')
       .then(res => res.json())
       .then(resData => {
-        if (resData.success) {
+        if (resData?.success) {
           setData(resData);
         }
         setLoading(false);
@@ -66,10 +65,12 @@ export default function TopicAuthorityDashboard() {
 
   if (loading) {
     return (
-      <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', fontFamily: 'monospace' }}>
-          <Activity className="animate-spin" size={32} style={{ color: 'var(--accent)', marginBottom: '1rem' }} />
-          Calculating Topical Link Equity Graph...
+      <div className={adminStyles.page}>
+        <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '60px 20px' }}>
+          <Activity className="animate-spin" size={28} style={{ color: 'var(--accent)', margin: '0 auto 12px' }} />
+          <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '0.82rem', color: 'var(--muted)' }}>
+            Calculating Topical Link Equity Graph...
+          </div>
         </div>
       </div>
     );
@@ -77,233 +78,256 @@ export default function TopicAuthorityDashboard() {
 
   if (!data) {
     return (
-      <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', color: '#ef4444' }}>
-          <AlertCircle size={32} style={{ marginBottom: '1rem' }} />
-          Failed to process knowledge base linking graph metrics.
+      <div className={adminStyles.page}>
+        <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '60px 20px', borderColor: 'rgba(239,68,68,0.3)' }}>
+          <AlertCircle size={32} style={{ color: '#ef4444', margin: '0 auto 12px' }} />
+          <div style={{ color: '#ef4444', fontWeight: 600, fontSize: '0.9rem' }}>
+            Failed to process knowledge base linking graph metrics.
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
-      <Navbar />
-
-      <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)', maxWidth: '1200px', margin: '0 auto', paddingLeft: '1.5rem', paddingRight: '1.5rem', paddingBottom: '6rem' }}>
-        
-        {/* Header Section */}
-        <div style={{ marginBottom: '3.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '2.5rem' }}>
-          <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.25em' }}>Platform Management Center</span>
-          <h1 style={{ fontSize: '2.8rem', fontWeight: 800, marginTop: '0.5rem', marginBottom: '1rem', fontFamily: 'Syne, sans-serif' }}>
-            Topic Authority <span style={{ color: 'var(--accent)' }}>Dashboard</span>
+    <div className={adminStyles.page}>
+      {/* ── HEADER ── */}
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Knowledge Graph & Authority Engine
+          </div>
+          <h1 className={adminStyles.title}>
+            Topic Authority <span className={adminStyles.titleAccent}>Map</span>
           </h1>
-          <p style={{ color: 'var(--muted)', maxWidth: '800px', fontSize: '1.05rem', lineHeight: 1.6 }}>
+          <p className={adminStyles.subtitle}>
             Programmatically audit and optimize your content ecosystem. Build linking paths, balance link weights, find topical coverage gaps, and inspect node click depths.
           </p>
         </div>
+      </div>
 
-        {/* ── METRIC TILES GRID ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+      {/* ── METRICS GRID ── */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Articles</span>
+            <Layers size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{data.totalArticles}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Indexed nodes</span>
+            <span>Content corpus</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Internal Links</span>
+            <LinkIcon size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{data.totalLinks}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Graph edges</span>
+            <span>Semantic links</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Avg Link Weight</span>
+            <TrendingUp size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{data.averageLinksPerArticle}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Per article average</span>
+            <span>Cluster density</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Avg Click Depth</span>
+            <Compass size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{data.avgClickDepth}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Max depth: {data.worstClickDepth}</span>
+            <span>Crawl efficiency</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 2-COLUMN MAIN CONTENT ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 380px) 1fr', gap: '16px', alignItems: 'start' }}>
+        
+        {/* LEFT COLUMN: COVERAGE & SUGGESTIONS */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           
-          <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Total Articles</span>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', marginTop: '0.5rem' }}>{data.totalArticles}</div>
+          {/* Topical Coverage Panel */}
+          <div className={adminStyles.panel}>
+            <div className={adminStyles.panelHeading}>
+              <Layers size={14} style={{ color: 'var(--accent)' }} />
+              Topical Coverage
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {data.categoryCoverage.map(cat => (
+                <div key={cat.name}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', marginBottom: '5px' }}>
+                    <span style={{ color: 'var(--text)', fontWeight: 500 }}>{cat.name}</span>
+                    <span style={{ color: 'var(--accent)' }}>{cat.percentage}% ({cat.matched}/{cat.total})</span>
+                  </div>
+                  <div style={{ width: '100%', height: '5px', background: 'var(--surface2)', borderRadius: '3px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+                    <div style={{ width: `${cat.percentage}%`, height: '100%', background: 'var(--accent)', borderRadius: '2px', transition: 'width 0.4s ease' }} />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Internal Links</span>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', marginTop: '0.5rem' }}>{data.totalLinks}</div>
-          </div>
-
-          <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Avg Link Weight</span>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', marginTop: '0.5rem' }}>{data.averageLinksPerArticle}</div>
-          </div>
-
-          <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Avg Click Depth</span>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', marginTop: '0.5rem' }}>{data.avgClickDepth}</div>
+          {/* Link Recommendations Panel */}
+          <div className={adminStyles.panel}>
+            <div className={adminStyles.panelHeading}>
+              <Sparkles size={14} style={{ color: 'var(--accent)' }} />
+              Link Recommendations
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {data.suggestions.map((suggestion, index) => (
+                <div key={index} style={{ display: 'flex', gap: '8px', alignItems: 'start', fontSize: '0.78rem', lineHeight: 1.5 }}>
+                  <ChevronRight size={13} style={{ color: 'var(--accent)', marginTop: '3px', flexShrink: 0 }} />
+                  <span style={{ color: 'var(--muted)' }}>{suggestion}</span>
+                </div>
+              ))}
+              {data.suggestions.length === 0 && (
+                <div style={{ fontSize: '0.78rem', color: 'var(--muted)', textAlign: 'center', padding: '16px 0' }}>
+                  <CheckCircle2 size={16} style={{ color: 'var(--accent)', margin: '0 auto 6px' }} />
+                  All topic linking structures are optimal!
+                </div>
+              )}
+            </div>
           </div>
 
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr lg(2fr)', gap: '2rem', marginBottom: '4rem' }} className="grid grid-cols-1 lg:grid-cols-3">
-          
-          {/* ── LEFT COLUMN: COVERAGE & SUGGESTIONS ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }} className="lg:col-span-1">
-            
-            {/* Category Coverage Card */}
-            <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px', padding: '1.75rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', fontFamily: 'Syne, sans-serif', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Layers size={18} style={{ color: 'var(--accent)' }} /> Topical Coverage
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                {data.categoryCoverage.map(cat => (
-                  <div key={cat.name}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontFamily: 'monospace', marginBottom: '0.4rem' }}>
-                      <span style={{ color: 'var(--text)' }}>{cat.name}</span>
-                      <span style={{ color: 'var(--accent)' }}>{cat.percentage}% ({cat.matched}/{cat.total})</span>
-                    </div>
-                    <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
-                      <div style={{ width: `${cat.percentage}%`, height: '100%', background: 'var(--accent)', borderRadius: '3px', transition: 'width 0.5s' }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Optimization Suggestions Card */}
-            <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '6px', padding: '1.75rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', fontFamily: 'Syne, sans-serif', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <TrendingUp size={18} style={{ color: 'var(--accent)' }} /> Link Recommendations
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {data.suggestions.map((suggestion, index) => (
-                  <div key={index} style={{ display: 'flex', gap: '0.75rem', alignItems: 'start', fontSize: '0.8rem', lineHeight: 1.5 }}>
-                    <ChevronRight size={14} style={{ color: 'var(--accent)', marginTop: '2px', flexShrink: 0 }} />
-                    <span style={{ color: 'var(--muted)' }}>{suggestion}</span>
-                  </div>
-                ))}
-                {data.suggestions.length === 0 && (
-                  <div style={{ fontSize: '0.8rem', color: 'var(--muted)', textAlign: 'center' }}>
-                    <CheckCircle2 size={16} style={{ color: 'var(--accent)', margin: '0 auto 0.5rem auto' }} />
-                    All topics link structures are optimized!
-                  </div>
-                )}
-              </div>
-            </div>
-
+        {/* RIGHT COLUMN: INTERACTIVE VISUAL NODE GRAPH */}
+        <div className={adminStyles.panel} style={{ position: 'relative' }}>
+          <div className={adminStyles.panelHeading}>
+            <Network size={14} style={{ color: 'var(--accent)' }} />
+            Topic Link Network Map
           </div>
 
-          {/* ── RIGHT COLUMN: INTERACTIVE VISUAL NODE GRAPH ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }} className="lg:col-span-2">
-            
-            <div style={{ 
-              background: 'var(--surface2)', 
-              border: '1px solid var(--border)', 
-              borderRadius: '6px', 
-              padding: '1.75rem',
-              position: 'relative'
-            }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', fontFamily: 'Syne, sans-serif', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Network size={18} style={{ color: 'var(--accent)' }} /> Topic Link Network map
-              </h3>
+          <div style={{ 
+            background: 'var(--surface2)', 
+            border: '1px solid var(--border)', 
+            borderRadius: '4px', 
+            height: '420px', 
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden'
+          }}>
+            <svg viewBox="0 0 600 360" style={{ width: '100%', height: '100%', maxWidth: '600px' }}>
+              {/* Connectors */}
+              {data.nodes.map(node => {
+                if (!node.parent) return null;
+                const parentPos = nodePositions[node.parent];
+                const currentPos = nodePositions[node.id];
+                if (!parentPos || !currentPos) return null;
 
-              <div style={{ 
-                background: 'rgba(0,0,0,0.3)', 
-                border: '1px solid var(--border)', 
-                borderRadius: '4px', 
-                height: '360px', 
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden'
+                const isHighlighted = hoveredNode?.id === node.id || hoveredNode?.id === node.parent;
+
+                return (
+                  <g key={`edge-${node.id}`}>
+                    <line
+                      x1={parentPos.x}
+                      y1={parentPos.y}
+                      x2={currentPos.x}
+                      y2={currentPos.y}
+                      stroke={isHighlighted ? 'var(--accent)' : 'var(--border)'}
+                      strokeWidth={isHighlighted ? '2' : '1'}
+                      style={{ transition: 'stroke 0.2s, stroke-width 0.2s' }}
+                    />
+                  </g>
+                );
+              })}
+
+              {/* Node Circles */}
+              {data.nodes.map(node => {
+                const pos = nodePositions[node.id];
+                if (!pos) return null;
+
+                const radius = 9 + Math.min(node.incoming * 1.5, 18);
+                const isHovered = hoveredNode?.id === node.id;
+
+                return (
+                  <g 
+                    key={node.id} 
+                    transform={`translate(${pos.x}, ${pos.y})`}
+                    onMouseEnter={() => setHoveredNode(node)}
+                    onMouseLeave={() => setHoveredNode(null)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <circle
+                      r={radius}
+                      fill={isHovered ? 'var(--accent)' : 'var(--surface)'}
+                      stroke={isHovered ? 'var(--accent)' : 'var(--border)'}
+                      strokeWidth="1.5"
+                      style={{ transition: 'fill 0.2s, stroke 0.2s' }}
+                    />
+                    <text
+                      y={radius + 14}
+                      textAnchor="middle"
+                      fill={isHovered ? 'var(--text)' : 'var(--muted)'}
+                      style={{ 
+                        fontSize: '0.65rem', 
+                        fontFamily: 'var(--font-mono, monospace)', 
+                        fontWeight: isHovered ? '700' : '400',
+                        transition: 'fill 0.2s'
+                      }}
+                    >
+                      {node.title.split(' ')[0]}
+                    </text>
+                  </g>
+                );
+              })}
+            </svg>
+
+            {/* Floating Node Data Inspect Box */}
+            {hoveredNode && (
+              <div style={{
+                position: 'absolute',
+                bottom: '14px',
+                right: '14px',
+                background: 'var(--surface)',
+                border: '1px solid var(--accent)',
+                borderRadius: '4px',
+                padding: '12px 14px',
+                width: '210px',
+                fontSize: '0.75rem',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+                backdropFilter: 'blur(8px)',
+                zIndex: 10
               }}>
-                <svg viewBox="0 0 600 360" style={{ width: '100%', height: '100%', maxWidth: '600px' }}>
-                  {/* Connectors */}
-                  {data.nodes.map(node => {
-                    if (!node.parent) return null;
-                    const parentPos = nodePositions[node.parent];
-                    const currentPos = nodePositions[node.id];
-                    if (!parentPos || !currentPos) return null;
-
-                    const isHighlighted = hoveredNode?.id === node.id || hoveredNode?.id === node.parent;
-
-                    return (
-                      <g key={`edge-${node.id}`}>
-                        <line
-                          x1={parentPos.x}
-                          y1={parentPos.y}
-                          x2={currentPos.x}
-                          y2={currentPos.y}
-                          stroke={isHighlighted ? 'var(--accent)' : 'var(--border)'}
-                          strokeWidth={isHighlighted ? '2' : '1'}
-                          style={{ transition: 'stroke 0.2s, stroke-width 0.2s' }}
-                        />
-                      </g>
-                    );
-                  })}
-
-                  {/* Node Circles */}
-                  {data.nodes.map(node => {
-                    const pos = nodePositions[node.id];
-                    if (!pos) return null;
-
-                    const radius = 10 + Math.min(node.incoming * 1.5, 20); // Scale radius by incoming link authority
-                    const isHovered = hoveredNode?.id === node.id;
-
-                    return (
-                      <g 
-                        key={node.id} 
-                        transform={`translate(${pos.x}, ${pos.y})`}
-                        onMouseEnter={() => setHoveredNode(node)}
-                        onMouseLeave={() => setHoveredNode(null)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <circle
-                          r={radius}
-                          fill={isHovered ? 'var(--accent)' : 'var(--surface2)'}
-                          stroke={isHovered ? 'var(--accent)' : 'var(--border)'}
-                          strokeWidth="2"
-                          style={{ transition: 'fill 0.2s, stroke 0.2s' }}
-                        />
-                        <text
-                          y={radius + 15}
-                          textAnchor="middle"
-                          fill={isHovered ? 'var(--text)' : 'var(--muted)'}
-                          style={{ 
-                            fontSize: '0.65rem', 
-                            fontFamily: 'monospace', 
-                            fontWeight: isHovered ? '700' : '400',
-                            transition: 'fill 0.2s'
-                          }}
-                        >
-                          {node.title.split(' ')[0]}
-                        </text>
-                      </g>
-                    );
-                  })}
-                </svg>
-
-                {/* Floating Node Data Inspect Box */}
-                {hoveredNode && (
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '1rem',
-                    right: '1rem',
-                    background: 'rgba(20,20,20,0.95)',
-                    border: '1px solid var(--accent)',
-                    borderRadius: '4px',
-                    padding: '1rem',
-                    width: '220px',
-                    fontSize: '0.75rem',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-                    backdropFilter: 'blur(10px)'
-                  }}>
-                    <div style={{ fontWeight: 'bold', marginBottom: '0.4rem', color: 'var(--text)' }}>{hoveredNode.title}</div>
-                    <div style={{ color: 'var(--muted)', marginBottom: '0.5rem', fontFamily: 'monospace', textTransform: 'uppercase', fontSize: '0.65rem' }}>{hoveredNode.category}</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', borderTop: '1px solid var(--border)', paddingTop: '0.5rem' }}>
-                      <div>
-                        <span style={{ color: 'var(--muted)' }}>Inbound:</span> <strong>{hoveredNode.incoming}</strong>
-                      </div>
-                      <div>
-                        <span style={{ color: 'var(--muted)' }}>Outbound:</span> <strong>{hoveredNode.outgoing}</strong>
-                      </div>
-                    </div>
+                <div style={{ fontWeight: 600, marginBottom: '2px', color: 'var(--text)', fontSize: '0.8rem' }}>{hoveredNode.title}</div>
+                <div style={{ color: 'var(--muted)', marginBottom: '8px', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', fontSize: '0.62rem' }}>{hoveredNode.category}</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', borderTop: '1px solid var(--border)', paddingTop: '8px' }}>
+                  <div>
+                    <span style={{ color: 'var(--muted)', display: 'block', fontSize: '0.65rem' }}>Inbound</span>
+                    <strong style={{ color: 'var(--accent)', fontSize: '0.85rem' }}>{hoveredNode.incoming}</strong>
                   </div>
-                )}
+                  <div>
+                    <span style={{ color: 'var(--muted)', display: 'block', fontSize: '0.65rem' }}>Outbound</span>
+                    <strong style={{ color: 'var(--text)', fontSize: '0.85rem' }}>{hoveredNode.outgoing}</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-
+            )}
           </div>
-
         </div>
 
-      </section>
-
-      <Footer />
+      </div>
     </div>
   );
 }
+

@@ -4,7 +4,8 @@ import {
   FileText, Plus, Search, Trash2, Edit2,
   ChevronLeft, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
   Type, Highlighter, Save, Settings, Image as ImageIcon,
-  Eye, EyeOff, Columns, Globe, Laptop, Smartphone, CheckCircle2, XCircle, AlertCircle, Sparkles, Megaphone
+  Eye, EyeOff, Columns, Globe, Laptop, Smartphone, CheckCircle2, XCircle, AlertCircle, Sparkles, Megaphone,
+  BookOpen, TrendingUp, CheckCheck
 } from 'lucide-react';
 import { posts as mainPosts } from '@/app/blog/data';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import Image from 'next/image';
 import { useTheme } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
 import FullEditor from '@/components/editor/FullEditor';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 function calculateWordCount(content: string): number {
   if (!content) return 0;
@@ -1304,69 +1306,46 @@ export default function AdminBlog() {
   //  BLOG LIST VIEW
   // ═══════════════════════════════════════════════════════
   if (!isEditing) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '4px 0' }}>
+    const publishedCount = posts.filter((p: any) => p.status === 'Published').length;
+    const totalReach = posts.reduce((acc: number, p: any) => acc + (parseInt(p.views || '0', 10) || 0), 0);
 
+    return (
+      <div className={adminStyles.page}>
         {/* Delete Confirmation Modal */}
         {showDeleteModal && (
-          <div
-            style={{
-              position: 'fixed', inset: 0,
-              background: isDark ? 'rgba(0,0,0,0.7)' : 'rgba(15,23,42,0.3)',
-              backdropFilter: 'blur(8px)',
-              zIndex: 2000,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
-            }}
-          >
-            <div
-              style={{
-                background: css.surface,
-                border: `1px solid ${css.border}`,
-                borderRadius: 24,
-                padding: '2.5rem',
-                maxWidth: 400,
-                width: '100%',
-                textAlign: 'center',
-                boxShadow: css.shadow,
-              }}
-            >
+          <div className={adminStyles.modalOverlay} onClick={() => setShowDeleteModal(false)}>
+            <div className={adminStyles.modalContent} style={{ maxWidth: 420, textAlign: 'center' }} onClick={e => e.stopPropagation()}>
               <div
                 style={{
-                  width: 64, height: 64, borderRadius: '50%',
+                  width: 52, height: 52, borderRadius: 12,
                   background: 'rgba(239,68,68,0.1)',
                   color: '#ef4444',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  margin: '0 auto 20px',
-                  fontSize: 28,
+                  margin: '0 auto 16px',
                 }}
               >
-                🗑️
+                <Trash2 size={24} />
               </div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, color: css.text, margin: '0 0 10px' }}>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>
                 Delete this article?
               </h3>
-              <p style={{ color: css.muted, fontSize: 14, lineHeight: 1.6, margin: '0 0 28px' }}>
+              <p style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.6, margin: '0 0 24px' }}>
                 This action is permanent and cannot be undone. The story will be removed from your public blog.
               </p>
-              <div style={{ display: 'flex', gap: 12 }}>
+              <div style={{ display: 'flex', gap: 10 }}>
                 <button
+                  type="button"
                   onClick={() => setShowDeleteModal(false)}
-                  style={{
-                    flex: 1, padding: '12px', borderRadius: 12,
-                    background: css.surface2, border: `1px solid ${css.border}`,
-                    color: css.text, fontWeight: 600, cursor: 'pointer', fontSize: 14,
-                    transition: 'opacity 0.15s',
-                  }}
+                  className={adminStyles.secondary}
+                  style={{ flex: 1 }}
                 >
                   Cancel
                 </button>
                 <button
+                  type="button"
                   onClick={confirmDelete}
-                  style={{
-                    flex: 1, padding: '12px', borderRadius: 12,
-                    background: '#ef4444', border: 'none',
-                    color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 14,
-                  }}
+                  className={adminStyles.danger}
+                  style={{ flex: 1 }}
                 >
                   Delete
                 </button>
@@ -1376,85 +1355,90 @@ export default function AdminBlog() {
         )}
 
         {/* Page Header */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>
-              Content
-            </p>
-            <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>
-              Blog Articles
+        <div className={adminStyles.header}>
+          <div className={adminStyles.headerCopy}>
+            <div className={adminStyles.eyebrow}>
+              <span className={adminStyles.eyebrowDot} />
+              Editorial & Insights
+            </div>
+            <h1 className={adminStyles.title}>
+              Blog <span className={adminStyles.titleAccent}>Articles</span>
             </h1>
-            <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0', fontWeight: 500 }}>
-              {filtered.length} article{filtered.length !== 1 ? 's' : ''} {search ? 'found' : 'published'}
+            <p className={adminStyles.subtitle}>
+              Manage technical publications, case studies, tutorials, and SEO performance metrics.
             </p>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div className={adminStyles.headerActions}>
             <Link
               href="/admin/marketing/campaigns"
-              style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                background: 'rgba(201, 243, 29, 0.12)',
-                border: '1px solid rgba(201, 243, 29, 0.35)',
-                color: '#c9f31d',
-                fontWeight: 700, fontSize: 13,
-                padding: '11px 18px', borderRadius: 12,
-                cursor: 'pointer',
-                textDecoration: 'none',
-                transition: 'all 0.15s',
-              }}
+              className={adminStyles.secondary}
             >
-              <Megaphone size={16} /> Email Broadcast Hub
+              <Megaphone size={15} style={{ color: 'var(--accent)' }} /> Email Broadcast Hub
             </Link>
             <button
               onClick={() => handleOpenEditor()}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`,
-                border: 'none', color: 'var(--btn-primary-text)',
-                fontWeight: 700, fontSize: 14,
-                padding: '11px 20px', borderRadius: 12,
-                cursor: 'pointer',
-                boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`,
-                transition: 'opacity 0.15s',
-              }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.88'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
+              className={adminStyles.primary}
             >
-              <Plus size={17} /> Write New Story
+              <Plus size={15} /> Write New Story
             </button>
           </div>
         </div>
 
+        {/* KPI Metric Cards */}
+        <div className={adminStyles.metricGrid}>
+          <div className={adminStyles.metricCard}>
+            <div className={adminStyles.metricTop}>
+              <span>Total Articles</span>
+              <BookOpen size={16} />
+            </div>
+            <div className={adminStyles.metricValue}>{posts.length}</div>
+            <div className={adminStyles.metricBottom}>
+              <span>All articles in database</span>
+              <span>{filtered.length} showing</span>
+            </div>
+          </div>
+
+          <div className={adminStyles.metricCard}>
+            <div className={adminStyles.metricTop}>
+              <span>Published Stories</span>
+              <CheckCheck size={16} />
+            </div>
+            <div className={adminStyles.metricValue}>{publishedCount}</div>
+            <div className={adminStyles.metricBottom}>
+              <span>Live on public website</span>
+              <span>{posts.length - publishedCount} drafts</span>
+            </div>
+          </div>
+
+          <div className={adminStyles.metricCard}>
+            <div className={adminStyles.metricTop}>
+              <span>Total Reach</span>
+              <TrendingUp size={16} />
+            </div>
+            <div className={adminStyles.metricValue}>{totalReach.toLocaleString()}</div>
+            <div className={adminStyles.metricBottom}>
+              <span>Cumulative readers & views</span>
+              <span>All-time</span>
+            </div>
+          </div>
+        </div>
+
         {/* Search & Sort Controls */}
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          {/* Search Bar */}
-          <div
-            style={{
-              flex: 1,
-              minWidth: 280,
-              background: css.surface, border: `1px solid ${css.border}`,
-              borderRadius: 16, padding: '14px 20px',
-              display: 'flex', alignItems: 'center', gap: 12,
-              boxShadow: css.shadow,
-            }}
-          >
-            <Search size={16} color={css.muted} style={{ flexShrink: 0 }} />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
+          <div className={adminStyles.searchBar} style={{ flex: 1, minWidth: 260 }}>
+            <Search size={14} style={{ color: 'var(--muted)', flexShrink: 0 }} />
             <input
               type="text"
               placeholder="Search articles by title..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              style={{
-                flex: 1, background: 'none', border: 'none', outline: 'none',
-                fontSize: 14, color: css.text, fontWeight: 500,
-              }}
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  color: css.muted, fontSize: 13, fontWeight: 600,
+                  color: 'var(--muted)', fontSize: 11, fontWeight: 600,
                 }}
               >
                 Clear
@@ -1462,39 +1446,28 @@ export default function AdminBlog() {
             )}
           </div>
 
-          {/* Sort Controls */}
-          <div
-            style={{
-              background: css.surface, border: `1px solid ${css.border}`,
-              borderRadius: 16, padding: '10px 16px',
-              display: 'flex', alignItems: 'center', gap: 8,
-              boxShadow: css.shadow,
-            }}
-          >
-            <span style={{ fontSize: 11, fontWeight: 800, color: css.muted, whiteSpace: 'nowrap', letterSpacing: '0.05em' }}>SORT BY:</span>
-            <select
-              value={sortBy}
-              onChange={e => setSortBy(e.target.value as any)}
-              style={{
-                background: 'none', border: 'none', outline: 'none',
-                fontSize: 13, color: css.text, fontWeight: 700,
-                cursor: 'pointer',
-              }}
-            >
-              <option value="date">Date Created</option>
-              <option value="status">Status</option>
-              <option value="reach">Reach (Real Views)</option>
-              <option value="wordCount">Word Count</option>
-              <option value="seoScore">SEO Score</option>
-            </select>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '0 10px', minHeight: 38 }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>SORT:</span>
+              <select
+                value={sortBy}
+                onChange={e => setSortBy(e.target.value as any)}
+                style={{
+                  background: 'transparent', border: 'none', outline: 'none',
+                  fontSize: 11, color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit',
+                }}
+              >
+                <option value="date">Date Created</option>
+                <option value="status">Status</option>
+                <option value="reach">Reach (Views)</option>
+                <option value="wordCount">Word Count</option>
+                <option value="seoScore">SEO Score</option>
+              </select>
+            </div>
             <button
               onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                color: css.accent, fontSize: 12, fontWeight: 800,
-                padding: '4px 8px', borderRadius: 8,
-                transition: 'background 0.15s',
-              }}
+              className={adminStyles.secondary}
+              style={{ minHeight: 38, padding: '0 12px', fontSize: 11 }}
             >
               {sortOrder === 'desc' ? '▼ DESC' : '▲ ASC'}
             </button>
@@ -1502,22 +1475,11 @@ export default function AdminBlog() {
         </div>
 
         {/* Articles Table */}
-        <div
-          className="desktop-only"
-          style={{
-            background: css.surface, border: `1px solid ${css.border}`,
-            borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow,
-          }}
-        >
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', minWidth: 860, borderCollapse: 'collapse', textAlign: 'left' }}>
+        <div className="desktop-only">
+          <div className={adminStyles.tableWrapper} style={{ marginTop: 0 }}>
+            <table className={adminStyles.table}>
               <thead>
-                <tr
-                  style={{
-                    background: css.surface2,
-                    borderBottom: `1px solid ${css.border}`,
-                  }}
-                >
+                <tr>
                   {[
                     { key: 'date', label: 'STORY' },
                     { key: 'wordCount', label: 'WORD COUNT' },
@@ -1529,12 +1491,9 @@ export default function AdminBlog() {
                   ].map(h => (
                     <th
                       key={h.label}
+                      className={adminStyles.th}
                       onClick={() => h.sortable !== false && handleSort(h.key as any)}
                       style={{
-                        padding: '14px 20px',
-                        fontSize: 10, fontWeight: 800,
-                        color: css.muted, letterSpacing: '0.1em',
-                        whiteSpace: 'nowrap',
                         cursor: h.sortable !== false ? 'pointer' : 'default',
                         userSelect: 'none',
                       }}
@@ -1542,7 +1501,7 @@ export default function AdminBlog() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                         {h.label}
                         {h.sortable !== false && sortBy === h.key && (
-                          <span style={{ color: css.accent }}>
+                          <span style={{ color: 'var(--accent)' }}>
                             {sortOrder === 'desc' ? '▼' : '▲'}
                           </span>
                         )}
@@ -1552,334 +1511,171 @@ export default function AdminBlog() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.length === 0 && (
+                {filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={7} style={{ padding: '48px 20px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+                    <td colSpan={7} className={adminStyles.td} style={{ padding: '48px 20px', textAlign: 'center', color: 'var(--muted)' }}>
                       No articles found.
                     </td>
                   </tr>
+                ) : (
+                  filtered.map(post => (
+                    <tr key={post.id} className={adminStyles.tr}>
+                      {/* Title */}
+                      <td className={adminStyles.td} style={{ maxWidth: 420 }}>
+                        <div
+                          style={{
+                            fontWeight: 600, color: 'var(--text)',
+                            lineHeight: 1.4,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                            marginBottom: 3,
+                          }}
+                          title={post.title}
+                        >
+                          {post.title}
+                        </div>
+                        <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 500 }}>
+                          {post.date} &bull; /blog/{post.slug}
+                        </div>
+                      </td>
+
+                      {/* Word Count */}
+                      <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>
+                        <span style={{ fontWeight: 600 }}>{(post.wordCount || 0).toLocaleString()}</span>
+                        <span style={{ color: 'var(--muted)', fontSize: 11 }}> words</span>
+                      </td>
+
+                      {/* SEO Score */}
+                      <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>
+                        {getKeyword(post) ? (
+                          <span
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 4,
+                              fontSize: 10,
+                              fontWeight: 600,
+                              color: post.seoScore >= 80 ? '#34d399' : post.seoScore >= 50 ? '#fbbf24' : '#f87171',
+                              background: post.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
+                              border: `1px solid ${post.seoScore >= 80 ? 'rgba(16,185,129,0.25)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`,
+                              padding: '2px 8px',
+                              borderRadius: 6,
+                            }}
+                          >
+                            <Sparkles size={10} /> {post.seoScore || 0}/100
+                          </span>
+                        ) : (
+                          <span style={{ color: 'var(--muted)', fontSize: 11 }}>--</span>
+                        )}
+                      </td>
+
+                      {/* Category */}
+                      <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>
+                        <span className={adminStyles.badgeNeutral}>
+                          {post.category}
+                        </span>
+                      </td>
+
+                      {/* Status */}
+                      <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>
+                        {post.status === 'Published' ? (
+                          <span className={adminStyles.badge}>
+                            <span className={adminStyles.badgeLiveDot} /> Published
+                          </span>
+                        ) : (
+                          <span className={adminStyles.badgeNeutral}>
+                            Draft
+                          </span>
+                        )}
+                      </td>
+
+                      {/* Views */}
+                      <td className={adminStyles.td} style={{ whiteSpace: 'nowrap', fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+                        {parseInt(post.views || '0', 10).toLocaleString()}
+                      </td>
+
+                      {/* Actions */}
+                      <td className={adminStyles.td}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <button
+                            onClick={() => handleOpenEditor(post)}
+                            title="Edit"
+                            className={adminStyles.secondary}
+                            style={{ minHeight: 30, padding: '4px 8px' }}
+                          >
+                            <Edit2 size={13} />
+                          </button>
+                          <button
+                            onClick={() => { setDeleteId(post.id); setShowDeleteModal(true); }}
+                            title="Delete"
+                            className={adminStyles.danger}
+                            style={{ minHeight: 30, padding: '4px 8px' }}
+                          >
+                            <Trash2 size={13} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
                 )}
-                {filtered.map((post, i) => (
-                  <tr
-                    key={post.id}
-                    style={{
-                      borderBottom: i < filtered.length - 1 ? `1px solid ${css.border}` : 'none',
-                      transition: 'background 0.15s',
-                    }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = css.hoverBg}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
-                  >
-                    {/* Title */}
-                    <td style={{ padding: '16px 20px', maxWidth: 420 }}>
-                      <div
-                        style={{
-                          fontSize: 13.5, fontWeight: 700, color: css.text,
-                          lineHeight: 1.45,
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
-                        } as any}
-                        title={post.title}
-                      >
-                        {post.title}
-                      </div>
-                      <div style={{ fontSize: 11, color: css.muted, marginTop: 4, fontWeight: 500 }}>
-                        {post.date} &bull; /blog/{post.slug}
-                      </div>
-                    </td>
-
-                    {/* Word Count */}
-                    <td style={{ padding: '16px 20px', fontSize: 13, color: css.text, whiteSpace: 'nowrap' }}>
-                      <span style={{ fontWeight: 600 }}>{(post.wordCount || 0).toLocaleString()}</span>
-                      <span style={{ color: css.muted, fontSize: 11 }}> words</span>
-                    </td>
-
-                    {/* SEO Score */}
-                    <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
-                      {getKeyword(post) ? (
-                        <span
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: 4,
-                            fontSize: 11,
-                            fontWeight: 800,
-                            color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
-                            background: post.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
-                            border: `1px solid ${post.seoScore >= 80 ? '#10b98130' : post.seoScore >= 50 ? '#f59e0b30' : '#ef444430'}`,
-                            padding: '4px 10px',
-                            borderRadius: '6px',
-                          }}
-                        >
-                          <Sparkles size={11} /> {post.seoScore || 0}/100
-                        </span>
-                      ) : (
-                        <span
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: 4,
-                            fontSize: 11,
-                            fontWeight: 600,
-                            color: css.muted,
-                            background: css.hoverBg,
-                            border: `1px solid ${css.border}`,
-                            padding: '4px 10px',
-                            borderRadius: '6px',
-                          }}
-                          title="No focus keyword set"
-                        >
-                          --
-                        </span>
-                      )}
-                    </td>
-
-                    {/* Category */}
-                    <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
-                      <span
-                        style={{
-                          display: 'inline-block',
-                          fontSize: 10, fontWeight: 700,
-                          background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)',
-                          color: css.accent,
-                          border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`,
-                          padding: '3px 10px', borderRadius: 999,
-                          textTransform: 'uppercase', letterSpacing: '0.07em',
-                        }}
-                      >
-                        {post.category}
-                      </span>
-                    </td>
-
-                    {/* Status */}
-                    <td style={{ padding: '16px 20px', whiteSpace: 'nowrap' }}>
-                      <span
-                        style={{
-                          display: 'inline-flex', alignItems: 'center', gap: 6,
-                          fontSize: 10, fontWeight: 700,
-                          background: post.status === 'Published'
-                            ? 'rgba(16,185,129,0.1)' : 'rgba(59,130,246,0.1)',
-                          color: post.status === 'Published' ? '#10b981' : '#3b82f6',
-                          border: `1px solid ${post.status === 'Published' ? '#10b98130' : '#3b82f630'}`,
-                          padding: '3px 10px', borderRadius: 999,
-                          textTransform: 'uppercase', letterSpacing: '0.07em',
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: 6, height: 6, borderRadius: '50%',
-                            background: post.status === 'Published' ? '#10b981' : '#3b82f6',
-                          }}
-                        />
-                        {post.status}
-                      </span>
-                    </td>
-
-                    {/* Views */}
-                    <td style={{ padding: '16px 20px', fontSize: 14, fontWeight: 700, color: css.text, whiteSpace: 'nowrap' }}>
-                      {parseInt(post.views || '0').toLocaleString()}
-                    </td>
-
-                    {/* Actions */}
-                    <td style={{ padding: '16px 20px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <button
-                          onClick={() => handleOpenEditor(post)}
-                          title="Edit"
-                          style={{
-                            background: 'none', border: `1px solid ${css.border}`,
-                            borderRadius: 9, padding: '7px', cursor: 'pointer',
-                            color: css.muted, display: 'flex', alignItems: 'center',
-                            transition: 'all 0.15s',
-                          }}
-                          onMouseEnter={e => {
-                            (e.currentTarget as HTMLElement).style.color = css.accent;
-                            (e.currentTarget as HTMLElement).style.borderColor = css.accent;
-                            (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${css.accent} 6%, transparent)`;
-                          }}
-                          onMouseLeave={e => {
-                            (e.currentTarget as HTMLElement).style.color = css.muted;
-                            (e.currentTarget as HTMLElement).style.borderColor = css.border;
-                            (e.currentTarget as HTMLElement).style.background = 'none';
-                          }}
-                        >
-                          <Edit2 size={14} />
-                        </button>
-                        <button
-                          onClick={() => { setDeleteId(post.id); setShowDeleteModal(true); }}
-                          title="Delete"
-                          style={{
-                            background: 'none', border: `1px solid ${css.border}`,
-                            borderRadius: 9, padding: '7px', cursor: 'pointer',
-                            color: css.muted, display: 'flex', alignItems: 'center',
-                            transition: 'all 0.15s',
-                          }}
-                          onMouseEnter={e => {
-                            (e.currentTarget as HTMLElement).style.color = '#ef4444';
-                            (e.currentTarget as HTMLElement).style.borderColor = '#ef444440';
-                            (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.06)';
-                          }}
-                          onMouseLeave={e => {
-                            (e.currentTarget as HTMLElement).style.color = css.muted;
-                            (e.currentTarget as HTMLElement).style.borderColor = css.border;
-                            (e.currentTarget as HTMLElement).style.background = 'none';
-                          }}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </div>
         </div>
 
         {/* Articles Mobile Cards */}
-        <div className="mobile-only" style={{ flexDirection: 'column', gap: 14 }}>
+        <div className={adminStyles.mobileOnly} style={{ flexDirection: 'column', gap: 12 }}>
           {filtered.length === 0 ? (
-            <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: '32px 16px', textAlign: 'center', color: css.muted, fontSize: 14 }}>
+            <div className={adminStyles.panel} style={{ textAlign: 'center', color: 'var(--muted)', padding: '32px 16px' }}>
               No articles found.
             </div>
           ) : (
-            filtered.map((post) => (
-              <div
-                key={post.id}
-                style={{
-                  background: css.surface,
-                  border: `1px solid ${css.border}`,
-                  borderRadius: 16,
-                  padding: 16,
-                  boxShadow: css.shadow,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 12,
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: css.text, lineHeight: 1.45 }}>
+            filtered.map(post => (
+              <div key={post.id} className={adminStyles.panel} style={{ padding: 16, marginBottom: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8, marginBottom: 10 }}>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', lineHeight: 1.4 }}>
                     {post.title}
                   </div>
                   <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
                     <button
                       onClick={() => handleOpenEditor(post)}
-                      title="Edit"
-                      style={{
-                        background: 'none', border: `1px solid ${css.border}`,
-                        borderRadius: 8, padding: 6, cursor: 'pointer',
-                        color: css.muted, display: 'flex', alignItems: 'center',
-                      }}
+                      className={adminStyles.secondary}
+                      style={{ minHeight: 28, padding: '4px 8px' }}
                     >
-                      <Edit2 size={13} />
+                      <Edit2 size={12} />
                     </button>
                     <button
                       onClick={() => { setDeleteId(post.id); setShowDeleteModal(true); }}
-                      title="Delete"
-                      style={{
-                        background: 'none', border: `1px solid ${css.border}`,
-                        borderRadius: 8, padding: 6, cursor: 'pointer',
-                        color: css.muted, display: 'flex', alignItems: 'center',
-                      }}
+                      className={adminStyles.danger}
+                      style={{ minHeight: 28, padding: '4px 8px' }}
                     >
-                      <Trash2 size={13} />
+                      <Trash2 size={12} />
                     </button>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-                  <span
-                    style={{
-                      fontSize: 9.5, fontWeight: 700,
-                      background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)',
-                      color: css.accent,
-                      border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`,
-                      padding: '2px 8px', borderRadius: 999,
-                      textTransform: 'uppercase', letterSpacing: '0.05em',
-                    }}
-                  >
-                    {post.category}
-                  </span>
-                  <span
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 5,
-                      fontSize: 9.5, fontWeight: 700,
-                      background: post.status === 'Published'
-                        ? 'rgba(16,185,129,0.1)' : 'rgba(59,130,246,0.1)',
-                      color: post.status === 'Published' ? '#10b981' : '#3b82f6',
-                      border: `1px solid ${post.status === 'Published' ? '#10b98130' : '#3b82f630'}`,
-                      padding: '2px 8px', borderRadius: 999,
-                      textTransform: 'uppercase', letterSpacing: '0.05em',
-                    }}
-                  >
-                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: post.status === 'Published' ? '#10b981' : '#3b82f6' }} />
-                    {post.status}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 9.5, fontWeight: 700,
-                      background: 'rgba(100, 116, 139, 0.08)',
-                      color: css.muted,
-                      border: `1px solid ${css.border}`,
-                      padding: '2px 8px', borderRadius: 999,
-                    }}
-                  >
-                    📝 {post.wordCount || 0} words
-                  </span>
-                  {getKeyword(post) ? (
-                    <span
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 3,
-                        fontSize: 9.5, fontWeight: 700,
-                        color: post.seoScore >= 80 ? '#10b981' : post.seoScore >= 50 ? '#f59e0b' : '#ef4444',
-                        background: post.seoScore >= 80 ? 'rgba(16,185,129,0.08)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.08)' : 'rgba(239,68,68,0.08)',
-                        border: `1px solid ${post.seoScore >= 80 ? '#10b98125' : post.seoScore >= 50 ? '#f59e0b25' : '#ef444425'}`,
-                        padding: '2px 8px', borderRadius: 999,
-                      }}
-                    >
-                      ⚡ SEO: {post.seoScore || 0}/100
-                    </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginBottom: 12 }}>
+                  <span className={adminStyles.badgeNeutral}>{post.category}</span>
+                  {post.status === 'Published' ? (
+                    <span className={adminStyles.badge}><span className={adminStyles.badgeLiveDot} /> Published</span>
                   ) : (
-                    <span
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 3,
-                        fontSize: 9.5, fontWeight: 700,
-                        color: css.muted,
-                        background: css.hoverBg,
-                        border: `1px solid ${css.border}`,
-                        padding: '2px 8px', borderRadius: 999,
-                      }}
-                    >
-                      ⚡ SEO: --
-                    </span>
+                    <span className={adminStyles.badgeNeutral}>Draft</span>
                   )}
+                  <span style={{ fontSize: 10, color: 'var(--muted)' }}>
+                    📝 {(post.wordCount || 0).toLocaleString()} words
+                  </span>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: `1px solid ${css.border}`, paddingTop: 10, fontSize: 11, color: css.muted }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: 10, fontSize: 11, color: 'var(--muted)' }}>
                   <span>{post.date}</span>
-                  <span style={{ fontWeight: 700, color: css.text }}>👁️ {parseInt(post.views || '0').toLocaleString()} views</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text)' }}>👁️ {parseInt(post.views || '0', 10).toLocaleString()} views</span>
                 </div>
               </div>
             ))
           )}
         </div>
-        <style>{`
-          .desktop-only {
-            display: block !important;
-          }
-          .mobile-only {
-            display: none !important;
-          }
-          @media (max-width: 768px) {
-            .desktop-only {
-              display: none !important;
-            }
-            .mobile-only {
-              display: flex !important;
-            }
-          }
-        `}</style>
       </div>
     );
   }

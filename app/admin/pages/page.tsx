@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Plus, Search, Edit2, Trash2, Eye, X, Layers, AlertCircle, CheckCircle2, Globe, EyeOff } from 'lucide-react';
-import { useTheme } from '@/components/ThemeProvider';
+import { Plus, Search, Edit2, Trash2, Eye, X, Layers, AlertCircle, CheckCircle2, Globe, EyeOff, FileText, CheckCheck, BookOpen } from 'lucide-react';
 import Link from 'next/link';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 function calculateWordCount(content: string): number {
   if (!content) return 0;
@@ -60,11 +60,6 @@ function getFallbackKeyword(title: string, slug: string): string {
 function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, isFallback: boolean = true) {
   if (!keyword) return { score: 0 };
 
-  const basicChecks: any[] = [];
-  const additionalChecks: any[] = [];
-  const titleChecks: any[] = [];
-  const contentChecks: any[] = [];
-  
   let earnedPoints = 0;
   let maxPoints = 0;
   
@@ -99,150 +94,18 @@ function calculateSeoScore(title: string, slug: string, content: string, excerpt
   const kwInExcerpt = isFallback ? true : cleanExcerpt.includes(kw);
   addCheck('basic', 'excerpt_kw', 'Focus keyword in meta description', kwInExcerpt, 10);
 
-  const cleanText = textContent.trim();
-  const firstParagraph = cleanText.split('\n')[0] || '';
-  const first300Chars = cleanText.slice(0, 300);
-  const kwInBeginning = isFallback ? true : (firstParagraph.toLowerCase().includes(kw) || first300Chars.toLowerCase().includes(kw));
-  addCheck('basic', 'beginning_kw', 'Focus keyword at beginning of content', kwInBeginning, 15);
+  const kwCount = (cleanContent.match(new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+  const kwDensity = wordCount > 0 ? (kwCount / wordCount) * 100 : 0;
+  addCheck('basic', 'kw_density', 'Focus Keyword Density', kwDensity >= 0.8 && kwDensity <= 2.5, 10);
 
-  const wordCountOk = wordCount >= 600;
-  addCheck('basic', 'word_count', `Content length`, wordCountOk, 10);
+  addCheck('content', 'word_count', 'Content Word Count', wordCount >= 600, 15);
 
-  const subheadingRegex = /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi;
-  let matches;
-  let kwInSubheading = false;
-  while ((matches = subheadingRegex.exec(content)) !== null) {
-    const text = matches[1].replace(/<[^>]*>/g, '').toLowerCase();
-    if (text.includes(kw)) {
-      kwInSubheading = true;
-      break;
-    }
-  }
-  addCheck('additional', 'subheading_kw', 'Focus keyword in subheadings', isFallback ? true : kwInSubheading, 10);
-
-  const imgRegex = /<img([^>]+)>/gi;
-  let imgMatch;
-  let hasImages = false;
-  let kwInAlt = false;
-  while ((imgMatch = imgRegex.exec(content)) !== null) {
-    hasImages = true;
-    const attributes = imgMatch[1];
-    const altMatch = /alt=["']([^"']*)["']/i.exec(attributes);
-    if (altMatch && altMatch[1].toLowerCase().includes(kw)) {
-      kwInAlt = true;
-    }
-  }
-  addCheck('additional', 'image_alt_kw', 'Images ALT', isFallback ? true : (hasImages && kwInAlt), 5);
-
-  let densityOk = false;
-  if (wordCount > 0 && cleanContent.includes(kw)) {
-    const matchesCount = cleanContent.split(kw).length - 1;
-    const density = (matchesCount / wordCount) * 100;
-    densityOk = density >= 0.5 && density <= 2.5;
-  }
-  addCheck('additional', 'density', 'Density', isFallback ? true : densityOk, 5);
-
-  const linkRegex = /href=["']([^"']*)["']/gi;
-  let hasInternalLink = false;
-  let hasExternalLink = false;
-  let linkMatch;
-  while ((linkMatch = linkRegex.exec(content)) !== null) {
-    const url = linkMatch[1];
-    if (url.startsWith('/') || url.includes('dattasable.com') || url.startsWith('#')) {
-      if (!url.startsWith('#')) {
-        hasInternalLink = true;
-      }
-    } else if (url.startsWith('http://') || url.startsWith('https://')) {
-      hasExternalLink = true;
-    }
-  }
-  addCheck('additional', 'internal_link', 'Internal links', hasInternalLink, 5);
-  addCheck('additional', 'external_link', 'External links', hasExternalLink, 5);
-
-  const kwStartsTitle = cleanTitle.startsWith(kw) || cleanTitle.indexOf(kw) < 15;
-  addCheck('title', 'title_start', 'Focus keyword placement', kwInTitle && kwStartsTitle, 5);
-
-  const sentimentWords = [
-    'best', 'great', 'easy', 'simple', 'ultimate', 'perfect', 'top', 'amazing', 'awesome', 'guide',
-    'master', 'successful', 'build', 'high', 'performance', 'smart', 'clean', 'power', 'premium',
-    'worst', 'bad', 'fix', 'avoid', 'mistake', 'error', 'warning', 'problem', 'fail', 'critical',
-    'failure', 'issue', 'bottleneck', 'threat', 'risky', 'hard', 'difficult', 'troubleshooting',
-    'tuning', 'comparison', 'choose', 'opportunities', 'career', 'roadmap', 'pass', 'exam', 'certification',
-    'how'
-  ];
-  const hasSentiment = sentimentWords.some(word => cleanTitle.includes(word));
-  addCheck('title', 'title_sentiment', 'Sentiment', hasSentiment, 5);
-
-  const powerWords = [
-    'proven', 'guaranteed', 'powerful', 'secret', 'hack', 'ultimate', 'expert', 'advanced',
-    'breakthrough', 'shocking', 'magic', 'instant', 'free', 'today', 'now', 'masterclass',
-    'professional', 'enterprise', 'production-grade', 'architecting', 'reliability', 'troubleshooting',
-    'tuning', 'complete', 'pass', 'preparation', 'questions', 'scenarios', 'certified', 'optimization',
-    'guide', 'roadmap', 'mastery', 'manifesto'
-  ];
-  const hasPowerWord = powerWords.some(word => cleanTitle.includes(word));
-  addCheck('title', 'title_power_word', 'Power word', hasPowerWord, 5);
-
-  const hasNumber = /\d+/.test(title);
-  addCheck('title', 'title_number', 'Number in title', hasNumber, 5);
-
-  const hasTocLabel = cleanContent.includes('table of contents') || cleanContent.includes('toc') || cleanContent.includes('what we will cover');
-  const hasAnchorLinks = /href=["']#[a-z0-9-_]+["']/i.test(content);
-  const hasToc = hasTocLabel || (hasAnchorLinks && (content.includes('<ul>') || content.includes('<ol>')));
-  addCheck('content', 'content_toc', 'TOC', hasToc, 5);
-
-  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
-  let pMatch;
-  let paragraphCount = 0;
-  let longParagraphCount = 0;
-  while ((pMatch = pRegex.exec(content)) !== null) {
-    paragraphCount++;
-    const text = pMatch[1].replace(/<[^>]*>/g, '').trim();
-    const words = text.split(/\s+/).filter(Boolean).length;
-    if (words > 120) {
-      longParagraphCount++;
-    }
-  }
-  const shortParagraphsOk = paragraphCount === 0 || (longParagraphCount / paragraphCount) <= 0.2;
-  addCheck('content', 'content_short_paragraphs', 'Short paragraphs', shortParagraphsOk, 5);
-
-  const hasMedia = content.includes('<img') || content.includes('<video') || content.includes('<iframe');
-  addCheck('content', 'content_media', 'Media', hasMedia, 5);
-
-  const score = maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0;
-  return { score };
+  return {
+    score: maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0,
+  };
 }
 
 export default function PagesManager() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
-  const css = isDark
-    ? {
-        bg: 'var(--bg)',
-        surface: 'var(--surface)',
-        surface2: 'var(--surface2)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-        shadow: '0 4px 24px rgba(0,0,0,0.35)',
-        hoverShadow: '0 8px 32px rgba(0,0,0,0.5)',
-        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)'
-      }
-    : {
-        bg: 'var(--bg)',
-        surface: 'var(--surface)',
-        surface2: 'var(--surface2)',
-        border: 'var(--border)',
-        text: 'var(--text)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-        shadow: '0 4px 24px rgba(0,0,0,0.07)',
-        hoverShadow: '0 8px 32px rgba(0,0,0,0.12)',
-        hoverBg: 'color-mix(in srgb, var(--accent) 5%, transparent)'
-      };
-
   const [pages, setPages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -250,7 +113,6 @@ export default function PagesManager() {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   
-  // Delete confirm state
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -373,27 +235,34 @@ export default function PagesManager() {
     return 0;
   });
 
-  return (
-    <div style={{ padding: '32px 28px', minHeight: '100%' }}>
+  const publishedCount = pages.filter(p => p.published).length;
+  const totalWords = pages.reduce((acc, p) => acc + calculateWordCount(p.content), 0);
 
+  return (
+    <div className={adminStyles.page}>
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
-        <div style={{ position: 'fixed', inset: 0, background: isDark ? 'rgba(0,0,0,0.75)' : 'rgba(15,23,42,0.35)', backdropFilter: 'blur(8px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 24, padding: '32px', width: '100%', maxWidth: 440, boxShadow: css.hoverShadow }}>
-            <h3 style={{ fontSize: 18, fontWeight: 800, color: css.text, margin: '0 0 12px' }}>Confirm Delete</h3>
-            <p style={{ fontSize: 13, color: css.muted, margin: '0 0 24px', lineHeight: 1.5 }}>
-              Are you sure you want to permanently delete this page? This action cannot be undone, and the page will no longer be accessible.
+        <div className={adminStyles.modalOverlay} onClick={() => { setShowDeleteModal(false); setDeleteId(null); }}>
+          <div className={adminStyles.modalContent} style={{ maxWidth: 420, textAlign: 'center' }} onClick={e => e.stopPropagation()}>
+            <div style={{ width: 50, height: 50, borderRadius: 12, background: 'rgba(239,68,68,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#ef4444' }}>
+              <Trash2 size={22} />
+            </div>
+            <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>Confirm Page Deletion</h3>
+            <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 20px', lineHeight: 1.6 }}>
+              Are you sure you want to permanently delete this page? This action cannot be undone.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
               <button 
                 onClick={() => { setShowDeleteModal(false); setDeleteId(null); }} 
-                style={{ flex: 1, padding: '12px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 11, color: css.text, fontWeight: 600, fontSize: 13, cursor: 'pointer' }}
+                className={adminStyles.secondary}
+                style={{ flex: 1 }}
               >
                 Cancel
               </button>
               <button 
                 onClick={handleDelete} 
-                style={{ flex: 1, padding: '12px', background: '#ef4444', border: 'none', borderRadius: 11, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}
+                className={adminStyles.danger}
+                style={{ flex: 1 }}
               >
                 Delete Page
               </button>
@@ -403,206 +272,241 @@ export default function PagesManager() {
       )}
 
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <Layers size={14} color={css.muted} />
-            <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0 }}>Content</p>
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Content Management System
           </div>
-          <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Pages</h1>
-          <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>{filtered.length} dynamic page{filtered.length !== 1 ? 's' : ''}</p>
+          <h1 className={adminStyles.title}>
+            Custom <span className={adminStyles.titleAccent}>Pages</span>
+          </h1>
+          <p className={adminStyles.subtitle}>
+            Create, publish, and optimize static and modular landing pages with integrated SEO score checks.
+          </p>
         </div>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 16px' }}>
-            <span style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
-            <select 
-              value={sortBy} 
-              onChange={e => setSortBy(e.target.value as any)}
-              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 600, cursor: 'pointer' }}
-            >
-              <option value="updatedAt">Last Updated</option>
-              <option value="title">Page Title</option>
-              <option value="wordCount">Word Count</option>
-              <option value="seoScore">SEO Score</option>
-              <option value="published">Status</option>
-            </select>
-            <button 
-              onClick={() => setSortOrder(o => o === 'asc' ? 'desc' : 'asc')}
-              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', marginLeft: 4 }}
-            >
-              {sortOrder === 'asc' ? '▲' : '▼'}
-            </button>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: css.surface, border: `1px solid ${css.border}`, borderRadius: 12, padding: '10px 16px' }}>
-            <Search size={14} color={css.muted} />
+
+        <div className={adminStyles.headerActions}>
+          <div className={adminStyles.searchBar} style={{ minWidth: 200 }}>
+            <Search size={14} style={{ color: 'var(--muted)', flexShrink: 0 }} />
             <input 
               type="text" 
               placeholder="Search custom pages..." 
               value={search} 
               onChange={e => setSearch(e.target.value)}
-              style={{ background: 'none', border: 'none', outline: 'none', fontSize: 13, color: css.text, fontWeight: 500, width: 150 }} 
             />
           </div>
-          <Link 
-            href="/admin/pages/editor" 
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)`, textDecoration: 'none', whiteSpace: 'nowrap' }}
-          >
-            <Plus size={17} /> Add Page
+
+          <Link href="/admin/pages/editor" className={adminStyles.primary}>
+            <Plus size={15} /> Add Page
           </Link>
         </div>
       </div>
 
       {/* Alert Messages */}
       {message && (
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 10,
-          padding: '12px 16px', borderRadius: 12, marginBottom: 20,
-          background: message.type === 'success' ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)',
-          border: `1px solid ${message.type === 'success' ? 'rgba(16,185,129,0.25)' : 'rgba(239,68,68,0.25)'}`,
-          color: message.type === 'success' ? '#10b981' : '#ef4444',
-        }}>
+        <div className={adminStyles.notice} style={{ borderColor: message.type === 'success' ? 'var(--accent)' : 'rgba(239,68,68,0.3)', borderLeftColor: message.type === 'success' ? 'var(--accent)' : '#ef4444', color: message.type === 'success' ? 'var(--accent)' : '#f87171' }}>
           {message.type === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-          <span style={{ fontSize: 13, fontWeight: 600 }}>{message.text}</span>
+          <span>{message.text}</span>
           <button onClick={() => setMessage(null)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', padding: 2 }}><X size={14} /></button>
         </div>
       )}
 
+      {/* Metric Cards */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Pages</span>
+            <Layers size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{pages.length}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>All system routes</span>
+            <span>{filtered.length} showing</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Published</span>
+            <CheckCheck size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{publishedCount}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Live on public website</span>
+            <span>Active URLs</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Draft Pages</span>
+            <FileText size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{pages.length - publishedCount}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Unpublished drafts</span>
+            <span>Staging status</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Word Count</span>
+            <BookOpen size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{totalWords.toLocaleString()}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Cumulative page content</span>
+            <span>All routes</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Sort Controls Bar */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '0 10px', minHeight: 36 }}>
+          <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
+          <select 
+            value={sortBy} 
+            onChange={e => setSortBy(e.target.value as any)}
+            style={{ background: 'transparent', border: 'none', outline: 'none', fontSize: 11, color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            <option value="updatedAt">Last Updated</option>
+            <option value="title">Page Title</option>
+            <option value="wordCount">Word Count</option>
+            <option value="seoScore">SEO Score</option>
+            <option value="published">Status</option>
+          </select>
+        </div>
+        <button 
+          onClick={() => setSortOrder(o => o === 'asc' ? 'desc' : 'asc')}
+          className={adminStyles.secondary}
+          style={{ minHeight: 36, padding: '0 10px', fontSize: 11 }}
+        >
+          {sortOrder === 'asc' ? '▲ ASC' : '▼ DESC'}
+        </button>
+      </div>
+
       {/* Table / List View */}
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '64px', color: css.muted, fontSize: 14, fontWeight: 600 }}>Loading custom pages...</div>
+        <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+          Loading custom pages...
+        </div>
       ) : (
-        <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', minWidth: 700, borderCollapse: 'collapse', textAlign: 'left' }}>
-              <thead>
-                <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
-                  {[
-                    { key: 'title', label: 'Page Title' },
-                    { key: 'slug', label: 'URL Route', sortable: false },
-                    { key: 'wordCount', label: 'Word Count' },
-                    { key: 'seoScore', label: 'SEO Score' },
-                    { key: 'published', label: 'Status' },
-                    { key: 'updatedAt', label: 'Last Updated' },
-                    { key: 'actions', label: 'Actions', sortable: false }
-                  ].map(h => (
-                    <th 
-                      key={h.label} 
-                      onClick={() => h.sortable !== false && handleSort(h.key as any)}
-                      style={{ 
-                        padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, 
-                        letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap',
-                        cursor: h.sortable !== false ? 'pointer' : 'default', userSelect: 'none'
-                      }}
-                    >
-                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                        {h.label}
-                        {h.sortable !== false && sortBy === h.key && (
-                          <span style={{ color: css.accent, fontSize: 8 }}>
-                            {sortOrder === 'desc' ? ' ▼' : ' ▲'}
-                          </span>
-                        )}
-                      </div>
-                    </th>
-                  ))}
+        <div className={adminStyles.tableWrapper} style={{ marginTop: 0 }}>
+          <table className={adminStyles.table}>
+            <thead>
+              <tr>
+                {[
+                  { key: 'title', label: 'Page Title' },
+                  { key: 'slug', label: 'URL Route', sortable: false },
+                  { key: 'wordCount', label: 'Word Count' },
+                  { key: 'seoScore', label: 'SEO Score' },
+                  { key: 'published', label: 'Status' },
+                  { key: 'updatedAt', label: 'Last Updated' },
+                  { key: 'actions', label: 'Actions', sortable: false }
+                ].map(h => (
+                  <th 
+                    key={h.label}
+                    className={adminStyles.th}
+                    onClick={() => h.sortable !== false && handleSort(h.key as any)}
+                    style={{ 
+                      cursor: h.sortable !== false ? 'pointer' : 'default',
+                      userSelect: 'none'
+                    }}
+                  >
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                      {h.label}
+                      {h.sortable !== false && sortBy === h.key && (
+                        <span style={{ color: 'var(--accent)' }}>
+                          {sortOrder === 'desc' ? '▼' : '▲'}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className={adminStyles.td} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+                    No custom pages found. Click "+ Add Page" to create one.
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {sorted.length === 0 && (
-                  <tr><td colSpan={7} style={{ padding: '48px', textAlign: 'center', color: css.muted, fontSize: 14 }}>No custom pages created yet. Click "Add Page" to create one!</td></tr>
-                )}
-                {sorted.map((page, i) => {
-                  const updateDate = new Date(page.updatedAt).toLocaleDateString('en-IN', {
+              ) : (
+                sorted.map(page => {
+                  const updateDate = new Date(page.updatedAt).toLocaleDateString('en-US', {
                     day: 'numeric', month: 'short', year: 'numeric'
                   });
-                  const wordCount = page.wordCount;
-                  const seoScore = page.seoScore;
 
                   return (
-                    <tr key={page.id}
-                      style={{ borderBottom: i < sorted.length - 1 ? `1px solid ${css.border}` : 'none', transition: 'background 0.15s' }}
-                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = css.hoverBg}
-                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
-                    >
-                      <td style={{ padding: '16px 20px' }}>
-                        <div style={{ fontSize: 13.5, fontWeight: 700, color: css.text }}>{page.title}</div>
-                        {page.excerpt && <div style={{ fontSize: 11, color: css.muted, marginTop: 4, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 280 }}>{page.excerpt}</div>}
+                    <tr key={page.id} className={adminStyles.tr}>
+                      <td className={adminStyles.td}>
+                        <div style={{ fontWeight: 600, color: 'var(--text)' }}>{page.title}</div>
+                        {page.excerpt && <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 280 }}>{page.excerpt}</div>}
                       </td>
-                      <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.muted }}>
-                        <code style={{ fontSize: 12, background: css.surface2, padding: '2px 6px', borderRadius: 6, color: css.accent }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontFamily: 'monospace', fontSize: 11 }}>
+                        <span style={{ background: 'var(--surface2)', padding: '2px 6px', borderRadius: 4, color: 'var(--accent)', border: '1px solid var(--border)' }}>
                           {['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? '' : '/p'}/{page.slug}
-                        </code>
+                        </span>
                       </td>
-                      <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.muted }}>
-                        {wordCount} words
+                      <td className={adminStyles.td} style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 500, color: 'var(--text)' }}>
+                        {page.wordCount} words
                       </td>
-                      <td style={{ padding: '16px 20px' }}>
+                      <td className={adminStyles.td}>
                         <span style={{ 
-                          display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, 
-                          background: seoScore >= 80 ? 'rgba(16,185,129,0.1)' : seoScore >= 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)', 
-                          color: seoScore >= 80 ? '#10b981' : seoScore >= 60 ? '#f59e0b' : '#ef4444', 
-                          border: `1px solid ${seoScore >= 80 ? 'rgba(16,185,129,0.25)' : seoScore >= 60 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`, 
-                          padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em' 
+                          display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 10, fontWeight: 600, 
+                          background: page.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)', 
+                          color: page.seoScore >= 80 ? '#34d399' : page.seoScore >= 60 ? '#fbbf24' : '#f87171', 
+                          border: `1px solid ${page.seoScore >= 80 ? 'rgba(16,185,129,0.25)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`, 
+                          padding: '2px 8px', borderRadius: 999
                         }}>
-                          {seoScore}/100
+                          {page.seoScore}/100
                         </span>
                       </td>
-                      <td style={{ padding: '16px 20px' }}>
-                        <span 
-                          onClick={() => togglePublish(page.id, page.published)}
-                          title={`Click to ${page.published ? 'Unpublish (set to Draft)' : 'Publish'}`}
-                          style={{ 
-                            display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, 
-                            background: page.published ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)', 
-                            color: page.published ? '#10b981' : '#f59e0b', 
-                            border: `1px solid ${page.published ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`, 
-                            padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em',
-                            cursor: 'pointer', userSelect: 'none', transition: 'all 0.15s'
-                          }}
-                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '0.8'; }}
-                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
-                        >
-                          <span style={{ width: 5, height: 5, borderRadius: '50%', background: page.published ? '#10b981' : '#f59e0b' }} />
-                          {page.published ? 'Published' : 'Draft'}
-                        </span>
+                      <td className={adminStyles.td}>
+                        {page.published ? (
+                          <span 
+                            onClick={() => togglePublish(page.id, page.published)}
+                            className={adminStyles.badge}
+                            style={{ cursor: 'pointer' }}
+                            title="Click to toggle Draft"
+                          >
+                            <span className={adminStyles.badgeLiveDot} /> Published
+                          </span>
+                        ) : (
+                          <span 
+                            onClick={() => togglePublish(page.id, page.published)}
+                            className={adminStyles.badgeNeutral}
+                            style={{ cursor: 'pointer' }}
+                            title="Click to toggle Published"
+                          >
+                            Draft
+                          </span>
+                        )}
                       </td>
-                      <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted, fontWeight: 500 }}>{updateDate}</td>
-                      <td style={{ padding: '16px 20px' }}>
+                      <td className={adminStyles.td} style={{ fontSize: 11, color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
+                        {updateDate}
+                      </td>
+                      <td className={adminStyles.td}>
                         <div style={{ display: 'flex', gap: 6 }}>
                           <button 
                             onClick={() => togglePublish(page.id, page.published)}
                             title={page.published ? 'Unpublish (Set to Draft)' : 'Publish Page'}
-                            style={{ 
-                              background: 'none', 
-                              border: `1px solid ${css.border}`, 
-                              borderRadius: 9, 
-                              padding: 7, 
-                              cursor: 'pointer', 
-                              color: page.published ? '#f59e0b' : '#10b981', 
-                              display: 'flex', 
-                              alignItems: 'center', 
-                              transition: 'all 0.15s' 
-                            }}
-                            onMouseEnter={e => { 
-                              (e.currentTarget as HTMLElement).style.color = page.published ? '#f59e0b' : '#10b981'; 
-                              (e.currentTarget as HTMLElement).style.borderColor = page.published ? 'rgba(245,158,11,0.5)' : 'rgba(16,185,129,0.5)'; 
-                              (e.currentTarget as HTMLElement).style.background = page.published ? 'rgba(245,158,11,0.08)' : 'rgba(16,185,129,0.08)'; 
-                            }}
-                            onMouseLeave={e => { 
-                              (e.currentTarget as HTMLElement).style.color = page.published ? '#f59e0b' : '#10b981'; 
-                              (e.currentTarget as HTMLElement).style.borderColor = css.border; 
-                              (e.currentTarget as HTMLElement).style.background = 'none'; 
-                            }}
+                            className={adminStyles.secondary}
+                            style={{ minHeight: 30, padding: '4px 8px' }}
                           >
-                            {page.published ? <EyeOff size={14} /> : <Globe size={14} />}
+                            {page.published ? <EyeOff size={13} style={{ color: '#fbbf24' }} /> : <Globe size={13} style={{ color: 'var(--accent)' }} />}
                           </button>
                           <Link 
                             href={`/admin/pages/editor?id=${page.id}`}
                             title="Edit"
-                            style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = `color-mix(in srgb, ${css.accent} 31%, transparent)`; (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${css.accent} 3%, transparent)`; }}
-                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
+                            className={adminStyles.secondary}
+                            style={{ minHeight: 30, padding: '4px 8px' }}
                           >
-                            <Edit2 size={14} />
+                            <Edit2 size={13} />
                           </Link>
                           {page.published && (
                             <a 
@@ -610,30 +514,28 @@ export default function PagesManager() {
                               target="_blank"
                               rel="noopener noreferrer"
                               title="View Page"
-                              style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#10b981'; (e.currentTarget as HTMLElement).style.borderColor = `rgba(16,185,129,0.5)`; (e.currentTarget as HTMLElement).style.background = `rgba(16,185,129,0.08)`; }}
-                              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
+                              className={adminStyles.secondary}
+                              style={{ minHeight: 30, padding: '4px 8px' }}
                             >
-                              <Eye size={14} />
+                              <Eye size={13} />
                             </a>
                           )}
                           <button 
                             onClick={() => { setDeleteId(page.id); setShowDeleteModal(true); }}
                             title="Delete"
-                            style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#ef4444'; (e.currentTarget as HTMLElement).style.borderColor = `rgba(239,68,68,0.5)`; (e.currentTarget as HTMLElement).style.background = `rgba(239,68,68,0.08)`; }}
-                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
+                            className={adminStyles.danger}
+                            style={{ minHeight: 30, padding: '4px 8px' }}
                           >
-                            <Trash2 size={14} />
+                            <Trash2 size={13} />
                           </button>
                         </div>
                       </td>
                     </tr>
                   );
-                })}
-              </tbody>
-            </table>
-          </div>
+                })
+              )}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -12,17 +12,18 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
-    const posts = await prisma.post.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-
-    // Group page views by URL to get real REACH/view counts
-    const pageViews = await prisma.pageView.groupBy({
-      by: ['url'],
-      _count: {
-        id: true,
-      },
-    });
+    // Group page views and posts in parallel to minimize round-trip database latency
+    const [posts, pageViews] = await Promise.all([
+      prisma.post.findMany({
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.pageView.groupBy({
+        by: ['url'],
+        _count: {
+          id: true,
+        },
+      }),
+    ]);
 
     // Build URL view counts map (lowercased)
     const viewMap: Record<string, number> = {};

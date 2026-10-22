@@ -1,15 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { Briefcase, Plus, Edit2, Trash2, Clock, X, Save, Loader2, AlertCircle, CheckCircle2, Tag, Star } from 'lucide-react';
-import { useTheme } from '@/components/ThemeProvider';
-
-const serviceGradients = [
-  'linear-gradient(135deg, #6366f1, #8b5cf6)',
-  'linear-gradient(135deg, #06b6d4, #0891b2)',
-  'linear-gradient(135deg, #10b981, #059669)',
-  'linear-gradient(135deg, #f59e0b, #d97706)',
-  'linear-gradient(135deg, #ec4899, #db2777)',
-];
+import { Briefcase, Plus, Edit2, Trash2, Clock, X, Save, Loader2, AlertCircle, CheckCircle2, Tag, Star, Layers, CheckCheck } from 'lucide-react';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 interface Service {
   id: string;
@@ -38,13 +30,6 @@ const emptyForm: FormState = { title: '', desc: '', price: '', status: 'Active',
 type Toast = { type: 'success' | 'error'; message: string } | null;
 
 export default function AdminServices() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
-  const css = isDark
-    ? { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.35)', hoverShadow: '0 8px 32px rgba(0,0,0,0.5)' }
-    : { bg: 'var(--bg)', surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', shadow: '0 4px 24px rgba(0,0,0,0.07)', hoverShadow: '0 8px 32px rgba(0,0,0,0.12)' };
-
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -118,7 +103,7 @@ export default function AdminServices() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Delete this service? This cannot be undone.')) return;
+    if (!confirm('Delete this service permanently? This cannot be undone.')) return;
     setDeleting(id);
     try {
       const res = await fetch(`/api/admin/services/${id}`, { method: 'DELETE' });
@@ -132,171 +117,306 @@ export default function AdminServices() {
     }
   };
 
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '11px 14px',
-    background: css.surface2,
-    border: `1.5px solid ${css.border}`,
-    borderRadius: 11,
-    fontSize: 13,
-    color: css.text,
-    outline: 'none',
-    boxSizing: 'border-box',
-  };
+  const activeCount = services.filter(s => s.status === 'Active').length;
+  const featuredCount = services.filter(s => s.featured).length;
+  const totalOrders = services.reduce((acc, s) => acc + (s.orders || 0), 0);
 
   return (
-    <div style={{ padding: '32px 28px', minHeight: '100%', position: 'relative' }}>
-
-      {/* Toast */}
+    <div className={adminStyles.page}>
+      {/* Toast Notification */}
       {toast && (
         <div style={{
           position: 'fixed', top: 24, right: 24, zIndex: 9999,
           display: 'flex', alignItems: 'center', gap: 10,
-          background: toast.type === 'success' ? 'rgba(16,185,129,0.95)' : 'rgba(239,68,68,0.95)',
-          color: '#fff', padding: '12px 20px', borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-          backdropFilter: 'blur(12px)', fontSize: 13, fontWeight: 600,
-          animation: 'slideInRight 0.3s ease',
+          background: toast.type === 'success' ? 'var(--surface)' : 'rgba(239,68,68,0.15)',
+          color: toast.type === 'success' ? 'var(--accent)' : '#f87171',
+          border: `1px solid ${toast.type === 'success' ? 'var(--accent)' : 'rgba(239,68,68,0.3)'}`,
+          padding: '12px 20px', borderRadius: 10, boxShadow: '0 12px 36px rgba(0,0,0,0.4)',
+          backdropFilter: 'blur(12px)', fontSize: 12, fontWeight: 600,
         }}>
           {toast.type === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
           {toast.message}
         </div>
       )}
 
-      {/* Modal */}
-      {showModal && (
-        <div style={{ position: 'fixed', inset: 0, background: isDark ? 'rgba(0,0,0,0.75)' : 'rgba(15,23,42,0.4)', backdropFilter: 'blur(8px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-          <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 24, padding: 32, width: '100%', maxWidth: 500, boxShadow: css.hoverShadow }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-              <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>
-                  {editing ? 'Editing service' : 'New service'}
-                </p>
-                <h3 style={{ fontSize: 20, fontWeight: 800, color: css.text, margin: 0 }}>
-                  {editing ? 'Edit Service' : 'Add Service'}
+      {/* Header */}
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} />
+            Offerings & Packages
+          </div>
+          <h1 className={adminStyles.title}>
+            Service <span className={adminStyles.titleAccent}>Catalog</span>
+          </h1>
+          <p className={adminStyles.subtitle}>
+            Manage consulting packages, custom analytics offerings, fixed scopes, and client pricing.
+          </p>
+        </div>
+        <div className={adminStyles.headerActions}>
+          <button onClick={openAdd} className={adminStyles.primary}>
+            <Plus size={15} /> Add Service
+          </button>
+        </div>
+      </div>
+
+      {/* KPI Cards */}
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Catalog</span>
+            <Layers size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{services.length}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>All offerings</span>
+            <span>Active: {activeCount}</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Featured Offerings</span>
+            <Star size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{featuredCount}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Pinned to homepage & pricing</span>
+            <span>Highlight tier</span>
+          </div>
+        </div>
+
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Orders Delivered</span>
+            <CheckCheck size={16} />
+          </div>
+          <div className={adminStyles.metricValue}>{totalOrders}</div>
+          <div className={adminStyles.metricBottom}>
+            <span>Cumulative fulfillment count</span>
+            <span>Lifetime</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Loading Skeleton */}
+      {loading && (
+        <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '48px', color: 'var(--muted)' }}>
+          <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 12px' }} />
+          <div>Loading service catalog...</div>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {!loading && services.length === 0 && (
+        <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '64px 20px' }}>
+          <div style={{ width: 56, height: 56, borderRadius: 12, background: 'var(--surface2)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <Briefcase size={26} color="var(--accent)" />
+          </div>
+          <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>No services published</h3>
+          <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 20px' }}>Create your first service offering to start building your catalog.</p>
+          <button onClick={openAdd} className={adminStyles.primary}>
+            <Plus size={15} /> Add Service
+          </button>
+        </div>
+      )}
+
+      {/* Service Cards Grid */}
+      {!loading && services.length > 0 && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+          {services.map((s) => (
+            <div
+              key={s.id}
+              className={adminStyles.panel}
+              style={{
+                marginBottom: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                transition: 'transform 0.2s, border-color 0.2s',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'color-mix(in srgb, var(--accent) 12%, var(--surface2))', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Briefcase size={18} color="var(--accent)" />
+                </div>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <button
+                    onClick={() => openEdit(s)}
+                    title="Edit service"
+                    className={adminStyles.secondary}
+                    style={{ minHeight: 30, padding: '4px 8px' }}
+                  >
+                    <Edit2 size={12} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(s.id)}
+                    disabled={deleting === s.id}
+                    title="Delete service"
+                    className={adminStyles.danger}
+                    style={{ minHeight: 30, padding: '4px 8px' }}
+                  >
+                    {deleting === s.id ? <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> : <Trash2 size={12} />}
+                  </button>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.02em' }}>
+                  {s.title}
                 </h3>
               </div>
-              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted, padding: 4, display: 'flex' }}>
-                <X size={20} />
+
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 10 }}>
+                {s.category && (
+                  <span className={adminStyles.badgeNeutral}>
+                    <Tag size={9} /> {s.category}
+                  </span>
+                )}
+                {s.featured && (
+                  <span className={adminStyles.badge}>
+                    <Star size={9} /> Featured
+                  </span>
+                )}
+              </div>
+
+              <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 16px', lineHeight: 1.6, flex: 1 }}>
+                {s.desc || 'No description provided.'}
+              </p>
+
+              <div style={{ fontSize: 24, fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.03em', fontVariantNumeric: 'tabular-nums', margin: '0 0 16px' }}>
+                {s.price}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 14, borderTop: '1px solid var(--border)' }}>
+                {s.status === 'Active' ? (
+                  <span className={adminStyles.badge}>
+                    <span className={adminStyles.badgeLiveDot} /> Active
+                  </span>
+                ) : (
+                  <span className={adminStyles.badgeNeutral}>
+                    Inactive
+                  </span>
+                )}
+                <span style={{ fontSize: 11, color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                  <Clock size={11} /> {s.orders} order{s.orders !== 1 ? 's' : ''}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Modal */}
+      {showModal && (
+        <div className={adminStyles.modalOverlay} onClick={() => setShowModal(false)}>
+          <div className={adminStyles.modalContent} onClick={e => e.stopPropagation()}>
+            <div className={adminStyles.modalHeader}>
+              <h3>{editing ? 'Edit Service' : 'Add New Service'}</h3>
+              <button onClick={() => setShowModal(false)} className={adminStyles.modalClose}>
+                <X size={18} />
               </button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {/* Title */}
-              <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
-                  Service Title *
-                </label>
+              <div className={adminStyles.field}>
+                <label className={adminStyles.label}>Service Title *</label>
                 <input
                   type="text"
+                  className={adminStyles.input}
                   value={form.title}
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                  placeholder="e.g. Dashboard Development"
-                  style={inputStyle}
-                  onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent}
-                  onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border}
+                  placeholder="e.g. Executive Power BI Dashboard Suite"
                 />
               </div>
 
-              {/* Price + Category row */}
-              <div className="services-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
-                    Price *
-                  </label>
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Price / Rate *</label>
                   <input
                     type="text"
+                    className={adminStyles.input}
                     value={form.price}
                     onChange={e => setForm(f => ({ ...f, price: e.target.value }))}
-                    placeholder="e.g. ₹15,000"
-                    style={inputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent}
-                    onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border}
+                    placeholder="e.g. ₹15,000 or $499"
                   />
                 </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
-                    Category
-                  </label>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Category</label>
                   <input
                     type="text"
+                    className={adminStyles.input}
                     value={form.category}
                     onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    placeholder="e.g. Analytics"
-                    style={inputStyle}
-                    onFocus={e => (e.target as HTMLInputElement).style.borderColor = css.accent}
-                    onBlur={e => (e.target as HTMLInputElement).style.borderColor = css.border}
+                    placeholder="e.g. Business Intelligence"
                   />
                 </div>
               </div>
 
-              {/* Description */}
-              <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
-                  Description
-                </label>
+              <div className={adminStyles.field}>
+                <label className={adminStyles.label}>Description</label>
                 <textarea
+                  rows={3}
+                  className={adminStyles.textarea}
                   value={form.desc}
                   onChange={e => setForm(f => ({ ...f, desc: e.target.value }))}
-                  placeholder="Short description of the service..."
-                  rows={3}
-                  style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.5 }}
-                  onFocus={e => (e.target as HTMLTextAreaElement).style.borderColor = css.accent}
-                  onBlur={e => (e.target as HTMLTextAreaElement).style.borderColor = css.border}
+                  placeholder="Deliverables, scope, tools included, and turnaround timeline..."
                 />
               </div>
 
-              {/* Status + Featured row */}
-              <div className="services-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
-                    Status
-                  </label>
+              <div className={adminStyles.modalGrid2}>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Status</label>
                   <select
+                    className={adminStyles.select}
                     value={form.status}
                     onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
-                    style={{ ...inputStyle, cursor: 'pointer' }}
                   >
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
                   </select>
                 </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
-                    Featured
-                  </label>
+                <div className={adminStyles.field}>
+                  <label className={adminStyles.label}>Featured on Website</label>
                   <button
                     type="button"
                     onClick={() => setForm(f => ({ ...f, featured: !f.featured }))}
+                    className={adminStyles.secondary}
                     style={{
-                      width: '100%', padding: '11px 14px', borderRadius: 11, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                      border: `1.5px solid ${form.featured ? '#f59e0b' : css.border}`,
-                      background: form.featured ? 'rgba(245,158,11,0.1)' : css.surface2,
-                      color: form.featured ? '#f59e0b' : css.muted,
-                      display: 'flex', alignItems: 'center', gap: 7, justifyContent: 'center',
-                      transition: 'all 0.2s',
+                      width: '100%',
+                      minHeight: 38,
+                      borderColor: form.featured ? 'var(--accent)' : 'var(--border)',
+                      color: form.featured ? 'var(--accent)' : 'var(--muted)',
                     }}
                   >
-                    <Star size={14} fill={form.featured ? '#f59e0b' : 'none'} />
-                    {form.featured ? 'Featured' : 'Not featured'}
+                    <Star size={13} fill={form.featured ? 'currentColor' : 'none'} />
+                    {form.featured ? 'Featured Service' : 'Standard Catalog'}
                   </button>
                 </div>
               </div>
 
-              {/* Actions */}
-              <div style={{ display: 'flex', gap: 10, paddingTop: 8 }}>
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', paddingTop: 12, borderTop: '1px solid var(--border)' }}>
                 <button
+                  type="button"
                   onClick={() => setShowModal(false)}
-                  style={{ flex: 1, padding: '12px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 11, color: css.text, fontWeight: 600, fontSize: 14, cursor: 'pointer' }}
+                  className={adminStyles.secondary}
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  style={{ flex: 2, padding: '12px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 11, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, opacity: saving ? 0.75 : 1 }}
+                  className={adminStyles.primary}
                 >
-                  {saving ? <Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> : <Save size={15} />}
-                  {saving ? 'Saving…' : (editing ? 'Update Service' : 'Add Service')}
+                  {saving ? (
+                    <>
+                      <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Save size={14} /> {editing ? 'Update Service' : 'Add Service'}
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -304,136 +424,8 @@ export default function AdminServices() {
         </div>
       )}
 
-      {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
-        <div>
-          <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Offerings</p>
-          <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Service Catalog</h1>
-          <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>
-            {loading ? 'Loading…' : `${services.length} service${services.length !== 1 ? 's' : ''} available`}
-          </p>
-        </div>
-        <button
-          onClick={openAdd}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}
-        >
-          <Plus size={17} /> Add Service
-        </button>
-      </div>
-
-      {/* Loading skeleton */}
-      {loading && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 20 }}>
-          {[1, 2, 3].map(i => (
-            <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, height: 220, animation: 'pulse 1.6s ease-in-out infinite' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: css.surface2, marginBottom: 18 }} />
-              <div style={{ height: 16, width: '70%', borderRadius: 8, background: css.surface2, marginBottom: 10 }} />
-              <div style={{ height: 12, width: '90%', borderRadius: 6, background: css.surface2, marginBottom: 6 }} />
-              <div style={{ height: 12, width: '60%', borderRadius: 6, background: css.surface2 }} />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Empty state */}
-      {!loading && services.length === 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 20px', gap: 16 }}>
-          <div style={{ width: 72, height: 72, borderRadius: 14, background: `color-mix(in srgb, ${css.accent} 8%, transparent)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Briefcase size={32} color={css.accent} />
-          </div>
-          <h3 style={{ fontSize: 18, fontWeight: 800, color: css.text, margin: 0 }}>No services yet</h3>
-          <p style={{ fontSize: 14, color: css.muted, margin: 0, textAlign: 'center' }}>Add your first service to start building your catalog.</p>
-          <button onClick={openAdd} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 22px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>
-            <Plus size={17} /> Add First Service
-          </button>
-        </div>
-      )}
-
-      {/* Cards grid */}
-      {!loading && services.length > 0 && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 20 }}>
-          {services.map((s, i) => (
-            <div
-              key={s.id}
-              style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, display: 'flex', flexDirection: 'column', transition: 'box-shadow 0.2s, transform 0.2s', position: 'relative' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = css.hoverShadow; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = css.shadow; }}
-            >
-              {/* Featured badge */}
-              {s.featured && (
-                <div style={{ position: 'absolute', top: 16, right: 60, display: 'flex', alignItems: 'center', gap: 4, fontSize: 9, fontWeight: 700, background: 'rgba(245,158,11,0.12)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.25)', padding: '2px 8px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  <Star size={8} fill="#f59e0b" /> Featured
-                </div>
-              )}
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18 }}>
-                <div style={{ width: 48, height: 48, borderRadius: 14, background: serviceGradients[i % serviceGradients.length], display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}>
-                  <Briefcase size={20} color="#fff" />
-                </div>
-                <div style={{ display: 'flex', gap: 6 }}>
-                  <button
-                    onClick={() => openEdit(s)}
-                    title="Edit service"
-                    style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = css.accent; (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${css.accent} 6%, transparent)`; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
-                  >
-                    <Edit2 size={14} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(s.id)}
-                    disabled={deleting === s.id}
-                    title="Delete service"
-                    style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: deleting === s.id ? 'not-allowed' : 'pointer', color: css.muted, display: 'flex', alignItems: 'center', transition: 'all 0.15s' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#ef4444'; (e.currentTarget as HTMLElement).style.borderColor = '#ef444440'; (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.06)'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = css.muted; (e.currentTarget as HTMLElement).style.borderColor = css.border; (e.currentTarget as HTMLElement).style.background = 'none'; }}
-                  >
-                    {deleting === s.id ? <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> : <Trash2 size={14} />}
-                  </button>
-                </div>
-              </div>
-
-              <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: '0 0 4px', letterSpacing: '-0.01em' }}>{s.title}</h3>
-
-              {s.category && (
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10, fontWeight: 700, color: css.accent, background: `color-mix(in srgb, ${css.accent} 7%, transparent)`, border: `1px solid color-mix(in srgb, ${css.accent} 15%, transparent)`, padding: '2px 8px', borderRadius: 999, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.06em', width: 'fit-content' }}>
-                  <Tag size={9} /> {s.category}
-                </div>
-              )}
-
-              <p style={{ fontSize: 12, color: css.muted, margin: `${s.category ? '0' : '0'} 0 16px`, lineHeight: 1.6 }}>{s.desc || 'No description provided.'}</p>
-
-              <div style={{ fontSize: 26, fontWeight: 900, color: css.text, letterSpacing: '-0.03em', margin: '0 0 18px', marginTop: 'auto' }}>{s.price}</div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 16, borderTop: `1px solid ${css.border}` }}>
-                <span style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700,
-                  background: s.status === 'Active' ? 'rgba(16,185,129,0.1)' : 'rgba(100,116,139,0.1)',
-                  color: s.status === 'Active' ? '#10b981' : css.muted,
-                  border: `1px solid ${s.status === 'Active' ? 'rgba(16,185,129,0.2)' : 'rgba(100,116,139,0.2)'}`,
-                  padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase', letterSpacing: '0.07em',
-                }}>
-                  <span style={{ width: 5, height: 5, borderRadius: '50%', background: s.status === 'Active' ? '#10b981' : css.muted }} />
-                  {s.status}
-                </span>
-                <span style={{ fontSize: 12, color: css.muted, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <Clock size={12} /> {s.orders} order{s.orders !== 1 ? 's' : ''}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <style>{`
+      <style jsx global>{`
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
-        @keyframes slideInRight { from { transform: translateX(40px); opacity:0; } to { transform: translateX(0); opacity:1; } }
-        @media (max-width: 600px) {
-          .services-modal-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
       `}</style>
     </div>
   );

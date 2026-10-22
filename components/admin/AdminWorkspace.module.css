@@ -77,9 +77,41 @@
 .dropdown a:hover,.dropdown>button:hover { background: var(--surface2); color: var(--accent); }
 .dropdownHeading { display: flex; align-items: center; gap: 8px; padding: 10px; color: var(--accent); }
 .profileDetails { padding: 12px 10px; margin-bottom: 6px; border-bottom: 1px solid var(--border); }.profileDetails :is(strong,span,small) { display: block; }.profileDetails strong { font-size: 13px; }.profileDetails span { font-size: 10px; color: var(--muted); overflow-wrap: anywhere; margin-top: 6px; }.profileDetails small { font-size: 8px; letter-spacing: .1em; color: var(--accent); margin-top: 12px; }
-.content { flex: 1; min-width: 0; padding: 28px 32px; }.content[data-overview=true] { padding: 0; }.content:focus { outline: none; }
+.content { flex: 1; min-width: 0; padding: 0; }
+.content:focus { outline: none; }
+.content > *:not([class*="page"]):not([class*="overview"]):not([class*="adminStudio"]):not([class*="shell"]) {
+  box-sizing: border-box;
+  padding: 34px 32px 28px;
+  max-width: 1700px;
+  margin: 0 auto;
+}
 /* Shared foundations for existing management screens; no public-page overrides. */
-.content :is(input,select,textarea) { max-width: 100%; }.content :is(table) { font-variant-numeric: tabular-nums; }.content :is(th) { font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }.content :is(td,th) { border-color: var(--border); }.content :is(h1) { font-weight: 600; }.content :is(h2,h3) { font-weight: 600; }
+.content :is(input,select,textarea) { max-width: 100%; font-family: inherit; }
+.content :is(table) { font-variant-numeric: tabular-nums; }
+.content :is(th) { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.content :is(td,th) { border-color: var(--border); }
+.content :is(h1) {
+  font-family: var(--font-syne);
+  font-size: clamp(24px, 2.6vw, 36px);
+  font-weight: 600 !important;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+  color: var(--text);
+}
+.content :is(h2) {
+  font-family: var(--font-syne);
+  font-size: 18px;
+  font-weight: 500 !important;
+  letter-spacing: -.03em;
+  color: var(--text);
+}
+.content :is(h3) {
+  font-family: var(--font-syne);
+  font-size: 14px;
+  font-weight: 500 !important;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
 .workspaceFooter { padding: 20px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 12px; color: var(--admin-dim); font-size: 8px; letter-spacing: .1em; }.workspaceFooter>span { display: flex; align-items: center; gap: 8px; }.workspaceFooter>span>span { color: var(--accent); }
 .backdrop,.searchOverlay { position: fixed; inset: 0; background: #0008; backdrop-filter: blur(6px); z-index: 100; }.searchOverlay { display: flex; justify-content: center; align-items: flex-start; padding: min(15vh,120px) 20px 20px; }.searchDialog { width: 580px; max-width: 100%; border: 1px solid var(--border); background: var(--surface); border-radius: 15px; box-shadow: 0 25px 100px #0005; overflow: hidden; }.commandInput { display: flex; gap: 12px; padding: 16px; align-items: center; border-bottom: 1px solid var(--border); color: var(--accent); }.commandInput input { width: 100%; min-width: 0; background: transparent; color: var(--text); border: 0; font: inherit; outline: none; }.commandResults { max-height: 55dvh; overflow: auto; padding: 8px; }.commandResults>a { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px; border-radius: 7px; color: var(--text); text-decoration: none; }.commandResults>a:hover,.commandResults>a:focus-visible { background: var(--admin-soft); color: var(--accent); }.commandResults strong { display: block; font-size: 12px; font-weight: 500; }.commandResults small { display: block; font-size: 9px; color: var(--admin-dim); margin-top: 5px; }.commandResults p { padding: 20px; color: var(--muted); font-size: 12px; }.commandHint { border-top: 1px solid var(--border); color: var(--admin-dim); font-size: 9px; padding: 14px 20px; }
 @media(min-width:1600px) { .content { padding: 36px 42px; }.topbar { padding-inline: 42px; } }

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 import { 
   Users as UsersIcon, 
   Mail, 
@@ -189,209 +190,121 @@ export default function UsersSubscribersAdmin() {
   const localUsersCount = users.filter(u => u.provider === 'local' || u.provider === 'credentials').length;
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className={adminStyles.page}>
       
       {/* Export Success Notification Banner */}
       {exportNotice && (
-        <div style={{
-          background: 'rgba(16, 124, 65, 0.95)',
-          color: '#ffffff',
-          padding: '0.75rem 1.25rem',
-          borderRadius: '6px',
-          marginBottom: '1.5rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.6rem',
-          boxShadow: '0 4px 12px rgba(16, 124, 65, 0.4)',
-          fontSize: '0.9rem',
-          fontWeight: 600
-        }}>
-          <Check size={18} />
-          {exportNotice}
+        <div className={adminStyles.notice}>
+          <Check size={16} />
+          <span>{exportNotice}</span>
         </div>
       )}
 
       {/* Page Header */}
-      <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 800, fontFamily: 'Syne, sans-serif' }}>
-            Users &amp; Subscribers <span style={{ color: 'var(--accent)' }}>Management</span>
+      <div className={adminStyles.header}>
+        <div className={adminStyles.headerCopy}>
+          <div className={adminStyles.eyebrow}>
+            <span className={adminStyles.eyebrowDot} /> PEOPLE &amp; OPERATIONS
+          </div>
+          <h1 className={adminStyles.title}>
+            Users &amp; Subscribers <span className={adminStyles.titleAccent}>Management</span>
           </h1>
-          <p style={{ color: 'var(--muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>
+          <p className={adminStyles.subtitle}>
             Audit active accounts, Google One Tap authentications, and newsletter subscriber contacts.
           </p>
         </div>
         
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+        <div className={adminStyles.headerActions}>
           <button 
             onClick={() => exportToExcel()} 
             disabled={isExporting || (activeTab === 'users' ? users.length === 0 : subscribers.length === 0)}
-            style={{
-              background: '#107c41',
-              color: '#ffffff',
-              border: 'none',
-              padding: '0.55rem 1.15rem',
-              borderRadius: '4px',
-              fontSize: '0.85rem',
-              fontWeight: 700,
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              cursor: isExporting ? 'wait' : 'pointer',
-              boxShadow: '0 2px 10px rgba(16, 124, 65, 0.35)',
-              transition: 'background 0.2s ease',
-              opacity: (activeTab === 'users' ? users.length === 0 : subscribers.length === 0) ? 0.6 : 1
-            }}
-            onMouseEnter={(e) => { if (!isExporting) e.currentTarget.style.background = '#0e6b37'; }}
-            onMouseLeave={(e) => { if (!isExporting) e.currentTarget.style.background = '#107c41'; }}
+            className={adminStyles.primary}
             title={`Export ${activeTab === 'users' ? `all ${users.length} registered users` : `all ${subscribers.length} subscribers`} to Excel (.xlsx)`}
           >
-            <FileSpreadsheet size={16} />
+            <FileSpreadsheet size={15} />
             {isExporting ? 'Generating Excel...' : `Export to Excel (${activeTab === 'users' ? users.length : subscribers.length})`}
           </button>
 
-          <button 
-            onClick={fetchRecords} 
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid var(--border)',
-              padding: '0.55rem 1rem',
-              borderRadius: '4px',
-              fontSize: '0.8rem',
-              fontFamily: 'monospace',
-              cursor: 'pointer'
-            }}
-          >
-            Refresh Data
+          <button onClick={fetchRecords} className={adminStyles.secondary}>
+            <Activity size={14} /> Refresh Data
           </button>
         </div>
       </div>
 
       {/* ── METRICS DASHBOARD TILES ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-        
-        <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Total Accounts</span>
-          <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', marginTop: '0.5rem' }}>{users.length}</div>
-          <div style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.25rem' }}>
-            {googleUsersCount} Google · {localUsersCount} Local
+      <div className={adminStyles.metricGrid}>
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Total Accounts</span>
+            <UsersIcon size={16} />
+          </div>
+          <span className={adminStyles.metricValue}>{users.length}</span>
+          <div className={adminStyles.metricBottom}>
+            <span>{googleUsersCount} Google · {localUsersCount} Local</span>
           </div>
         </div>
 
-        <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Google One Tap Logins</span>
-          <div style={{ fontSize: '2rem', fontWeight: 700, color: '#3b82f6', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Globe size={28} /> {googleUsersCount}
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Google One Tap Logins</span>
+            <Globe size={16} />
           </div>
-          <div style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.25rem' }}>
-            {Math.round((googleUsersCount / (users.length || 1)) * 100)}% of total users
-          </div>
-        </div>
-
-        <div style={{ background: 'var(--surface2)', border: '1px solid var(--border)', padding: '1.5rem', borderRadius: '4px' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', fontFamily: 'monospace' }}>Newsletter Subscribers</span>
-          <div style={{ fontSize: '2rem', fontWeight: 700, color: '#10b981', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Mail size={28} /> {subscribers.length}
-          </div>
-          <div style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.25rem' }}>
-            Active contacts in mailing lists
+          <span className={adminStyles.metricValue}>{googleUsersCount}</span>
+          <div className={adminStyles.metricBottom}>
+            <span>{Math.round((googleUsersCount / (users.length || 1)) * 100)}% of total users</span>
           </div>
         </div>
 
+        <div className={adminStyles.metricCard}>
+          <div className={adminStyles.metricTop}>
+            <span>Newsletter Subscribers</span>
+            <Mail size={16} />
+          </div>
+          <span className={adminStyles.metricValue}>{subscribers.length}</span>
+          <div className={adminStyles.metricBottom}>
+            <span>Active contacts in mailing lists</span>
+          </div>
+        </div>
       </div>
 
       {/* ── CONTROLS & FILTER BAR ── */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        marginBottom: '2rem', 
-        borderBottom: '1px solid var(--border)', 
-        paddingBottom: '1rem',
-        flexWrap: 'wrap',
-        gap: '1rem'
-      }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div className={adminStyles.tabs} style={{ margin: 0 }}>
           <button
             onClick={() => { setActiveTab('users'); setSearchQuery(''); }}
-            style={{
-              background: 'none',
-              border: 'none',
-              borderBottom: activeTab === 'users' ? '2px solid var(--accent)' : '2px solid transparent',
-              color: activeTab === 'users' ? 'var(--text)' : 'var(--muted)',
-              padding: '0.5rem 1rem',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
+            className={`${adminStyles.tabButton} ${activeTab === 'users' ? adminStyles.tabButtonActive : ''}`}
           >
             Registered Users ({users.length})
           </button>
           <button
             onClick={() => { setActiveTab('subscribers'); setSearchQuery(''); }}
-            style={{
-              background: 'none',
-              border: 'none',
-              borderBottom: activeTab === 'subscribers' ? '2px solid var(--accent)' : '2px solid transparent',
-              color: activeTab === 'subscribers' ? 'var(--text)' : 'var(--muted)',
-              padding: '0.5rem 1rem',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              cursor: 'pointer'
-            }}
+            className={`${adminStyles.tabButton} ${activeTab === 'subscribers' ? adminStyles.tabButtonActive : ''}`}
           >
             Newsletter Subscribers ({subscribers.length})
           </button>
         </div>
 
         {/* Search & Quick Export */}
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
-          <div style={{ position: 'relative', minWidth: '260px' }}>
-            <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }}>
-              <Search size={16} />
-            </span>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+          <div className={adminStyles.searchBar} style={{ minWidth: 260 }}>
+            <Search size={14} />
             <input
               type="text"
               placeholder={activeTab === 'users' ? 'Search by name or email...' : 'Search subscriber email...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                background: 'var(--surface2)',
-                border: '1px solid var(--border)',
-                borderRadius: '4px',
-                padding: '0.5rem 1rem 0.5rem 2.25rem',
-                color: 'var(--text)',
-                fontSize: '0.85rem',
-                width: '100%',
-                outline: 'none'
-              }}
             />
           </div>
 
           <button
             onClick={() => exportToExcel(searchQuery ? 'filtered' : 'all')}
             disabled={isExporting}
-            style={{
-              background: 'rgba(16, 124, 65, 0.15)',
-              border: '1px solid rgba(16, 124, 65, 0.4)',
-              color: '#34d399',
-              padding: '0.5rem 0.95rem',
-              borderRadius: '4px',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              cursor: isExporting ? 'wait' : 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'background 0.2s ease'
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(16, 124, 65, 0.25)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(16, 124, 65, 0.15)'; }}
+            className={adminStyles.secondary}
+            style={{ minHeight: 38, padding: '8px 14px' }}
             title="Download current data view directly as Excel .xlsx"
           >
-            <Download size={14} />
+            <Download size={13} />
             {searchQuery 
               ? `Export Filtered (${activeTab === 'users' ? filteredUsers.length : filteredSubscribers.length})` 
               : 'Export (.xlsx)'}
@@ -400,7 +313,7 @@ export default function UsersSubscribersAdmin() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--muted)', fontFamily: 'monospace' }}>
+        <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--muted)' }}>
           <Activity className="animate-spin" style={{ margin: '0 auto 1rem auto', color: 'var(--accent)' }} />
           Loading user logs...
         </div>
@@ -408,24 +321,24 @@ export default function UsersSubscribersAdmin() {
         <div>
           {/* TAB 1: USERS */}
           {activeTab === 'users' && (
-            <div style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: '4px', background: 'var(--surface2)' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'left' }}>
+            <div className={adminStyles.tableWrapper}>
+              <table className={adminStyles.table}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border)', background: 'rgba(255,255,255,0.02)' }}>
-                    <th style={{ padding: '1rem' }}>User Info</th>
-                    <th style={{ padding: '1rem' }}>Auth Provider</th>
-                    <th style={{ padding: '1rem' }}>Role</th>
-                    <th style={{ padding: '1rem' }}>Joined Date</th>
-                    <th style={{ padding: '1rem' }}>Last Active</th>
-                    <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
+                  <tr>
+                    <th className={adminStyles.th}>User Info</th>
+                    <th className={adminStyles.th}>Auth Provider</th>
+                    <th className={adminStyles.th}>Role</th>
+                    <th className={adminStyles.th}>Joined Date</th>
+                    <th className={adminStyles.th}>Last Active</th>
+                    <th className={adminStyles.th} style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredUsers.map(user => (
-                    <tr key={user.id} style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.2s' }} className="hover:bg-[rgba(255,255,255,0.01)]">
-                      <td style={{ padding: '1rem' }}>
+                    <tr key={user.id} className={adminStyles.tr}>
+                      <td className={adminStyles.td}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                          <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--surface2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                             {user.image ? (
                               <img src={user.image} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             ) : (
@@ -433,44 +346,44 @@ export default function UsersSubscribersAdmin() {
                             )}
                           </div>
                           <div>
-                            <div style={{ fontWeight: 'bold' }}>{user.name}</div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{user.email}</div>
+                            <div style={{ fontWeight: 600, color: 'var(--text)' }}>{user.name}</div>
+                            <div style={{ fontSize: '11px', color: 'var(--muted)', marginTop: 2 }}>{user.email}</div>
                           </div>
                         </div>
                       </td>
-                      <td style={{ padding: '1rem' }}>
+                      <td className={adminStyles.td}>
                         {user.provider === 'google' ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: '#3b82f6', background: 'rgba(59,130,246,0.1)', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem', fontWeight: 600, border: '1px solid rgba(59,130,246,0.2)' }}>
-                            <Globe size={12} /> Google One Tap
+                          <span className={adminStyles.badge}>
+                            <Globe size={11} /> Google One Tap
                           </span>
                         ) : (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--muted)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem', fontWeight: 600, border: '1px solid var(--border)' }}>
-                            <Key size={12} /> Local Auth
+                          <span className={adminStyles.badgeNeutral}>
+                            <Key size={11} /> Local Auth
                           </span>
                         )}
                       </td>
-                      <td style={{ padding: '1rem' }}>
+                      <td className={adminStyles.td}>
                         {user.role === 'ADMIN' ? (
-                          <span style={{ color: '#ef4444', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                            <ShieldAlert size={14} /> ADMIN
+                          <span style={{ color: '#ef4444', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '11px' }}>
+                            <ShieldAlert size={13} /> ADMIN
                           </span>
                         ) : (
-                          <span style={{ color: 'var(--muted)' }}>USER</span>
+                          <span style={{ color: 'var(--muted)', fontSize: '11px' }}>USER</span>
                         )}
                       </td>
-                      <td style={{ padding: '1rem', color: 'var(--muted)', fontFamily: 'monospace' }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
                         {new Date(user.createdAt).toLocaleDateString()}
                       </td>
-                      <td style={{ padding: '1rem', color: 'var(--muted)', fontFamily: 'monospace' }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
                         {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'N/A'}
                       </td>
-                      <td style={{ padding: '1rem', textAlign: 'right' }}>
+                      <td className={adminStyles.td} style={{ textAlign: 'right' }}>
                         <button
                           onClick={() => handleDelete('user', user.id)}
-                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }}
+                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px' }}
                           title="Delete User"
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={15} />
                         </button>
                       </td>
                     </tr>
@@ -489,37 +402,37 @@ export default function UsersSubscribersAdmin() {
 
           {/* TAB 2: SUBSCRIBERS */}
           {activeTab === 'subscribers' && (
-            <div style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: '4px', background: 'var(--surface2)' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'left' }}>
+            <div className={adminStyles.tableWrapper}>
+              <table className={adminStyles.table}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border)', background: 'rgba(255,255,255,0.02)' }}>
-                    <th style={{ padding: '1rem' }}>Subscriber Email</th>
-                    <th style={{ padding: '1rem' }}>Status</th>
-                    <th style={{ padding: '1rem' }}>Subscribed Date</th>
-                    <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
+                  <tr>
+                    <th className={adminStyles.th}>Subscriber Email</th>
+                    <th className={adminStyles.th}>Status</th>
+                    <th className={adminStyles.th}>Subscribed Date</th>
+                    <th className={adminStyles.th} style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredSubscribers.map(sub => (
-                    <tr key={sub.id} style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.2s' }} className="hover:bg-[rgba(255,255,255,0.01)]">
-                      <td style={{ padding: '1rem', fontWeight: 600 }}>
+                    <tr key={sub.id} className={adminStyles.tr}>
+                      <td className={adminStyles.td} style={{ fontWeight: 500, color: 'var(--text)' }}>
                         {sub.email}
                       </td>
-                      <td style={{ padding: '1rem' }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: '#10b981', background: 'rgba(16,185,129,0.1)', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem', fontWeight: 600, border: '1px solid rgba(16,185,129,0.2)' }}>
-                          <CheckCircle2 size={12} /> Active
+                      <td className={adminStyles.td}>
+                        <span className={adminStyles.badge}>
+                          <CheckCircle2 size={11} /> Active
                         </span>
                       </td>
-                      <td style={{ padding: '1rem', color: 'var(--muted)', fontFamily: 'monospace' }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
                         {new Date(sub.createdAt).toLocaleString()}
                       </td>
-                      <td style={{ padding: '1rem', textAlign: 'right' }}>
+                      <td className={adminStyles.td} style={{ textAlign: 'right' }}>
                         <button
                           onClick={() => handleDelete('subscriber', sub.id)}
-                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }}
+                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px' }}
                           title="Delete / Unsubscribe"
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={15} />
                         </button>
                       </td>
                     </tr>
