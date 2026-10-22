@@ -39,12 +39,12 @@ export function middleware(request: NextRequest) {
 
   const isDev = process.env.NODE_ENV === 'development';
   // Razorpay permissions are confined to checkout-capable pages.
-  const isCommerce = path.startsWith('/products/') || path.startsWith('/account/orders/') || path.startsWith('/checkout/');
+  const isCommerce = path.startsWith('/products') || path.startsWith('/account/orders') || path.startsWith('/checkout');
   const paymentScript = isCommerce ? ' https://checkout.razorpay.com' : '';
-  const paymentConnect = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com' : '';
+  const paymentConnect = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com https://lumberjack.razorpay.com https://lumberjack-cx.razorpay.com' : '';
   const paymentFrame = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com' : '';
-  const scriptCsp = isDev
-    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google https://*.googleadservices.com https://*.googletagmanager.com;"
+  const scriptCsp = (isDev || isCommerce)
+    ? `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${paymentScript} https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google https://*.googleadservices.com https://*.googletagmanager.com;`
     : `script-src 'self' 'nonce-${nonce}' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google https://*.googleadservices.com https://*.googletagmanager.com;`;
 
   const response = NextResponse.next({
@@ -57,7 +57,7 @@ export function middleware(request: NextRequest) {
   const cspHeader = `
     default-src 'self';
     connect-src 'self' ${paymentConnect} https://*.google.com https://accounts.google.com https://*.tableau.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.adtrafficquality.google https://*.doubleclick.net https://*.google https://*.google.ad https://*.googlesyndication.com https://*.googleadservices.com;
-    ${scriptCsp.replace(';', `${paymentScript};`)}
+    ${isCommerce ? scriptCsp : scriptCsp.replace(';', `${paymentScript};`)}
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://accounts.google.com https://*.google https://*.googlesyndication.com;
     img-src 'self' blob: data: https://*.public.blob.vercel-storage.com https://*.unsplash.com https://images.unsplash.com https://*.googleusercontent.com https://*.tableau.com https://lookerstudio.google.com https://datastudio.google.com https://*.google.com https://*.google-analytics.com https://*.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.adtrafficquality.google https://*.googleadservices.com;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;

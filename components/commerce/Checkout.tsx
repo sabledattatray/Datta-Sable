@@ -12,10 +12,31 @@ type CheckoutOptions = { key: string; amount: number; currency: string; order_id
 declare global { interface Window { Razorpay?: new (options: CheckoutOptions) => { open: () => void; on: (name: string, handler: () => void) => void } } }
 let scriptPromise: Promise<void> | undefined;
 function loadCheckout() {
+  if (typeof window === 'undefined') return Promise.resolve();
   if (window.Razorpay) return Promise.resolve();
+  const existing = document.querySelector<HTMLScriptElement>('script[src*="checkout.razorpay.com"]');
+  if (existing) {
+    if (window.Razorpay) return Promise.resolve();
+    return new Promise<void>((resolve, reject) => {
+      existing.addEventListener('load', () => resolve());
+      existing.addEventListener('error', () => reject(new Error('Checkout could not load. Please check your internet connection or ad blocker.')));
+    });
+  }
   return scriptPromise ??= new Promise<void>((resolve, reject) => {
-    const script = document.createElement('script'); script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-    script.onload = () => resolve(); script.onerror = () => { script.remove(); scriptPromise = undefined; reject(new Error('Checkout could not load. Please try again.')); }; document.head.appendChild(script);
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    const nonceEl = document.querySelector<HTMLScriptElement>('script[nonce]');
+    if (nonceEl?.nonce) {
+      script.nonce = nonceEl.nonce;
+    }
+    script.onload = () => resolve();
+    script.onerror = () => {
+      script.remove();
+      scriptPromise = undefined;
+      reject(new Error('Checkout could not load. Please check your ad blocker or connection and try again.'));
+    };
+    document.head.appendChild(script);
   });
 }
 export default function Checkout({ productId, title, available, requestKey: savedKey, amountMinor, currency, testMode = true }: { productId: string; title: string; available: boolean; requestKey?: string; amountMinor: number; currency: string; testMode?: boolean }) {
