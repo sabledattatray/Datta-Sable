@@ -258,7 +258,7 @@ export function parseArticleDraftJson(rawText: string, topic: string, category: 
     // Proceed to resilient fallback
   }
 
-  // 2. Resilient string extraction if newlines or quotes broke JSON.parse
+  // 2. Resilient string extraction if newlines, control chars, or quotes broke JSON.parse
   try {
     const titleMatch = cleaned.match(/"title"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/);
     const excerptMatch = cleaned.match(/"excerpt"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/);
@@ -270,25 +270,25 @@ export function parseArticleDraftJson(rawText: string, topic: string, category: 
         let contentEnd = cleaned.lastIndexOf('"suggestedKeywords"');
         if (contentEnd === -1) contentEnd = cleaned.lastIndexOf('"keywords"');
         if (contentEnd === -1) contentEnd = cleaned.lastIndexOf('"}');
-        if (contentEnd === -1) contentEnd = cleaned.lastIndexOf('}');
+        if (contentEnd === -1 || contentEnd <= quoteStart) {
+          contentEnd = cleaned.length;
+        }
 
-        if (contentEnd > quoteStart) {
-          let rawContent = cleaned.slice(quoteStart + 1, contentEnd).trim();
-          rawContent = rawContent.replace(/",?\s*$/, '').replace(/"\s*,\s*$/, '');
-          const unescaped = rawContent
-            .replace(/\\n/g, '\n')
-            .replace(/\\"/g, '"')
-            .replace(/\\\\/g, '\\')
-            .replace(/\\t/g, '\t');
+        let rawContent = cleaned.slice(quoteStart + 1, contentEnd).trim();
+        rawContent = rawContent.replace(/",?\s*$/, '').replace(/"\s*,\s*$/, '').replace(/["}\]\s]+$/, '');
+        const unescaped = rawContent
+          .replace(/\\n/g, '\n')
+          .replace(/\\"/g, '"')
+          .replace(/\\\\/g, '\\')
+          .replace(/\\t/g, '\t');
 
-          if (unescaped.length > 250) {
-            return {
-              title: titleMatch ? titleMatch[1].replace(/\\"/g, '"') : topic,
-              excerpt: excerptMatch ? excerptMatch[1].replace(/\\"/g, '"') : `Comprehensive technical guide to ${topic}.`,
-              content: unescaped,
-              suggestedKeywords: [category, 'Enterprise Architecture', 'Implementation Guide'],
-            };
-          }
+        if (unescaped.length > 250) {
+          return {
+            title: titleMatch ? titleMatch[1].replace(/\\"/g, '"') : topic,
+            excerpt: excerptMatch ? excerptMatch[1].replace(/\\"/g, '"') : `Comprehensive technical guide to ${topic}.`,
+            content: unescaped,
+            suggestedKeywords: [category, 'Enterprise Architecture', 'Implementation Guide'],
+          };
         }
       }
     }
@@ -296,8 +296,8 @@ export function parseArticleDraftJson(rawText: string, topic: string, category: 
     console.warn('Resilient extraction error:', extractErr);
   }
 
-  // 3. Check if raw text is already markdown
-  if (cleaned.includes('## ') || cleaned.includes('# ')) {
+  // 3. Check if raw text is already markdown (must not be a raw JSON object)
+  if (!cleaned.startsWith('{') && (cleaned.includes('## ') || cleaned.includes('# '))) {
     return {
       title: `${topic}: Complete Implementation Guide`,
       excerpt: `Comprehensive guide to configuring, optimizing, and monitoring ${topic} in enterprise environments.`,

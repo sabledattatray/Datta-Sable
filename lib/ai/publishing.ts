@@ -57,6 +57,27 @@ export function formatArticleContent(
 ): string {
   let processed = rawContent || '';
 
+  // If content is wrapped in JSON, extract inner markdown
+  if (processed.trim().startsWith('{') && processed.includes('"content":')) {
+    try {
+      const parsed = JSON.parse(processed);
+      if (parsed.content) processed = parsed.content;
+    } catch {
+      const contentIdx = processed.indexOf('"content":');
+      const quoteStart = processed.indexOf('"', contentIdx + 10);
+      if (quoteStart !== -1) {
+        let extracted = processed.slice(quoteStart + 1);
+        extracted = extracted.replace(/"\s*,?\s*"suggestedKeywords"[\s\S]*$/, '');
+        extracted = extracted.replace(/["}\]\s]+$/, '');
+        processed = extracted
+          .replace(/\\n/g, '\n')
+          .replace(/\\"/g, '"')
+          .replace(/\\\\/g, '\\')
+          .replace(/\\t/g, '\t');
+      }
+    }
+  }
+
   // 1. Parse Markdown to HTML if needed (only if not already HTML)
   const hasHtml = /<(?:p|h[1-6]|div|section|article|pre|ul|ol|blockquote)\b/i.test(processed);
   const isMarkdown = !hasHtml && (/^#{1,6}\s/m.test(processed) || processed.includes('##'));

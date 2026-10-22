@@ -322,11 +322,10 @@ export async function executeAiCompletion({
     };
   }
 
-  if (jsonMode) {
-    requestBody.generationConfig = {
-      responseMimeType: 'application/json',
-    };
-  }
+  requestBody.generationConfig = {
+    maxOutputTokens: 8192,
+    ...(jsonMode ? { responseMimeType: 'application/json' } : {}),
+  };
 
   try {
     const res = await fetch(endpoint, {
