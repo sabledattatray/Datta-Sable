@@ -1,0 +1,51 @@
+.page { background: var(--bg); color: var(--text); min-height: 100vh; }
+.container { width: min(1180px, 100%); margin: 0 auto; padding: 118px 32px 88px; }
+.hero { position: relative; padding: 24px 0 44px; max-width: 940px; }
+.eyebrow { display: flex; align-items: center; gap: 9px; color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
+.hero h1 { font-size: clamp(36px, 5vw, 62px); font-weight: 600; line-height: 1.12; letter-spacing: -.045em; margin: 22px 0; }
+.hero h1 span { color: var(--accent); }
+.intro { max-width: 660px; font-size: 18px; color: var(--muted); line-height: 1.8; margin: 0; }
+.updated { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 26px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.updated svg { color: var(--accent); }
+.divider { width: 1px; height: 14px; background: var(--border); margin: 0 6px; }
+.contextNote { display: flex; align-items: flex-start; gap: 18px; padding: 24px 28px; background: color-mix(in srgb, var(--accent) 5%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border)); border-radius: 18px; margin-bottom: 44px; }
+.noteIcon { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border)); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); color: var(--accent); border-radius: 13px; }
+.contextNote h2 { font-size: 17px; font-weight: 600; line-height: 1.5; margin: 0 0 6px; }
+.contextNote p { font-size: 14px; color: var(--muted); line-height: 1.85; margin: 0; max-width: 860px; }
+.layout { display: grid; grid-template-columns: 235px minmax(0, 1fr); gap: 44px; align-items: start; }
+.sidebar { position: sticky; top: 100px; }
+.navLabel { display: block; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 0 12px 16px; }
+.sidebar ol { list-style: none; padding: 0; margin: 0; }
+.sidebar li + li { margin-top: 4px; }
+.sidebar nav a { display: flex; gap: 13px; padding: 12px; border-radius: 10px; color: var(--muted); font-size: 13px; line-height: 1.7; text-decoration: none; transition: color .2s, background .2s; }
+.sidebar nav a:hover { color: var(--text); background: var(--surface2); }
+.navNumber { color: var(--accent); font-family: var(--font-mono); font-size: 10px; line-height: 2.2; flex-shrink: 0; }
+.sidebarNote { margin-top: 28px; padding: 22px 12px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+.sidebarNote > svg { color: var(--accent); }
+.sidebarNote p { margin: 12px 0 8px; line-height: 1.7; }
+.sidebarNote a { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; }
+.standards { display: grid; gap: 20px; min-width: 0; }
+.standard { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px 32px; scroll-margin-top: 100px; }
+.cardTop { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.icon { display: grid; place-items: center; width: 42px; height: 42px; flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; color: var(--accent); }
+.cardLabel { color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.cardNumber { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.standard h2 { font-size: clamp(21px, 2.4vw, 26px); font-weight: 600; line-height: 1.35; margin: 0 0 14px; letter-spacing: -.025em; }
+.standard p { font-size: 15px; line-height: 1.9; color: var(--muted); margin: 0; overflow-wrap: anywhere; }
+.standard p + p { margin-top: 14px; }
+.standard a { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+.standard ul, .standard ol { padding-left: 20px; margin: 14px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.85; }
+.standard li + li { margin-top: 8px; }
+.standard strong { color: var(--text); font-weight: 600; }
+.highlightBox { background: var(--surface2); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-radius: 12px; padding: 18px 20px; margin-top: 16px; font-size: 14px; line-height: 1.75; color: var(--text); }
+.highlightBox p { margin: 0; font-size: 13.5px; color: var(--text); }
+.highlightBox strong { color: var(--accent); }
+.highlightBox a { color: var(--accent); text-decoration: underline; }
+.contact { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; padding: 30px 32px; margin-top: 10px; border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-radius: 20px; background: linear-gradient(130deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface)); scroll-margin-top: 100px; }
+.contact h2 { font-size: 24px; font-weight: 600; line-height: 1.4; margin: 12px 0 10px; letter-spacing: -.025em; }
+.contact p { font-size: 14px; color: var(--muted); line-height: 1.8; margin: 0; max-width: 450px; }
+.contactButton { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; padding: 12px 18px; background: var(--btn-primary-bg); color: var(--btn-primary-text); text-decoration: none; border-radius: 10px; font-size: 13px; font-weight: 600; }
+.page a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 28px; } .sidebar { position: static; } .sidebar ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 12px; } .sidebar li + li { margin-top: 0; } .sidebarNote { display: none; } .navLabel { padding-left: 0; } }
+@media (max-width: 540px) { .container { padding: 90px 18px 56px; } .hero { padding-top: 20px; padding-bottom: 30px; } .hero h1 { font-size: 35px; } .intro { font-size: 16px; } .updated { font-size: 11px; gap: 8px; } .updated > span:last-child { flex-basis: 100%; } .divider { display: none; } .contextNote { padding: 20px; gap: 12px; margin-bottom: 28px; } .noteIcon { width: 36px; height: 36px; border-radius: 10px; } .contextNote h2 { font-size: 16px; } .contextNote p { font-size: 13px; } .sidebar nav a { font-size: 12px; padding: 10px 4px; gap: 9px; } .standard, .contact { padding: 24px 20px; border-radius: 16px; } .standard p { font-size: 14px; line-height: 1.85; } .cardLabel { font-size: 9px; } .contact h2 { font-size: 22px; } .contactButton { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .sidebar nav a { transition: none; } }

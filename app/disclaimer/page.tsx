@@ -1,13 +1,12 @@
-import React from 'react';
 import type { Metadata } from 'next';
+import { Activity, AlertTriangle, ArrowUpRight, CalendarDays, ExternalLink, Info, Layers, Mail, RefreshCw, ShieldAlert, TrendingUp } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getDynamicPage } from '@/lib/dynamic-page';
-import DynamicPageRenderer from '@/components/DynamicPageRenderer';
+import styles from '@/components/LegalPage.module.css';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer | Datta Sable',
-  description: 'Legal disclaimer for dattasable.com — professional, external links, and results disclaimers.',
+  title: 'Disclaimer & Legal Disclosures | Datta Sable',
+  description: 'Legal disclaimer for dattasable.com — technical advice, simulated demonstration metrics, benchmarks, brand disclosures, and external links.',
   openGraph: {
     title: 'Disclaimer | Datta Sable',
     description: 'Legal disclaimer for dattasable.com.',
@@ -20,48 +19,186 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default async function DisclaimerPage() {
-  const dynamicPage = await getDynamicPage('disclaimer');
-  if (dynamicPage) {
-    return <DynamicPageRenderer title={dynamicPage.title} excerpt={dynamicPage.excerpt} content={dynamicPage.content} />;
-  }
+const standards = [
+  {
+    id: 'technical-advice',
+    title: 'Professional Technical & Architectural Disclaimer',
+    label: 'Technical Context',
+    icon: AlertTriangle,
+    content: (
+      <>
+        <p>The technical articles, tutorials, sample DAX calculations, SQL scripts, and architectural patterns published on <strong>dattasable.com</strong> (&quot;the Site&quot;) are created for general educational, illustrative, and professional reference purposes only.</p>
+        <p>Every enterprise database environment, cloud tenant, network configuration, and data schema possesses unique security constraints and workload characteristics. <strong>You should thoroughly test all code snippets and templates in an isolated sandbox or staging environment before deploying them to production systems.</strong></p>
+        <p>Datta Sable accepts no liability for data loss, service degradation, unexpected cloud consumption billing, or system outages resulting from the implementation of technical examples found on this Site.</p>
+      </>
+    ),
+  },
+  {
+    id: 'synthetic-demonstrations',
+    title: 'Interactive Demonstrations & Synthetic Data',
+    label: 'Demonstrations',
+    icon: Layers,
+    content: (
+      <>
+        <p>The interactive dashboards, portfolio showcases, and embedded reporting interfaces presented on this Site are powered by <strong>synthetic, anonymized, or mock datasets</strong> developed strictly to exhibit data modeling, UI/UX aesthetics, and interactive analytical capabilities.</p>
+        <ul>
+          <li>Fictitious company names, customer personas, transactional numbers, and revenue metrics are generated algorithmically for illustrative realism.</li>
+          <li>They do not reflect confidential client records or proprietary enterprise data of any current or previous client engagements.</li>
+          <li>Mock figures should never be cited as actual corporate financial benchmarks.</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    id: 'benchmarks-evidence',
+    title: 'Performance Benchmarks & Measured Outcomes',
+    label: 'Reproducibility',
+    icon: Activity,
+    content: (
+      <>
+        <p>Where performance figures, execution latencies, or query speedup percentages are discussed in technical articles, those outcomes reflect specific observed runs on designated hardware configurations, dataset sizes, and software builds.</p>
+        <p>A percentage improvement or latency reduction achieved in a specific laboratory benchmark does not constitute a contractual warranty or guarantee of identical gains in your production environment. Workload concurrency, cloud capacity tiers, network topology, and schema design dictate real-world outcomes.</p>
+      </>
+    ),
+  },
+  {
+    id: 'external-links',
+    title: 'External Links & Third-Party Platforms',
+    label: 'External Sources',
+    icon: ExternalLink,
+    content: (
+      <>
+        <p>This Site contains links to external documentation, cloud vendor consoles (such as Microsoft Learn, Power BI, GitHub, Snowflake, and PostgreSQL), and third-party developer utilities. These external resources are provided solely for reader convenience and technical context.</p>
+        <p>We do not operate, control, monitor, or endorse third-party websites or their content, terms, or privacy standards. Clicking external hyperlinks is entirely at your own discretion and risk.</p>
+      </>
+    ),
+  },
+  {
+    id: 'brand-disclosures',
+    title: 'Brand Distinctions & Non-Affiliation Disclosures',
+    label: 'Independence',
+    icon: ShieldAlert,
+    content: (
+      <>
+        <div className={styles.highlightBox}>
+          <p>
+            <strong>Independence Notice:</strong> <strong>Datta Sable</strong> is an independent Business Intelligence consultant, Data Engineer, and technical author. This practice is entirely independent and is <strong>not affiliated with, sponsored by, authorized by, or associated with</strong> the CodedThemes / AppSeed &quot;Datta Able&quot; admin dashboard software template.
+          </p>
+        </div>
+        <p>Microsoft Fabric, Power BI, Azure, SQL Server, Excel, and related trademarks referenced in technical guides belong to Microsoft Corporation. Mentions of vendor products, frameworks, and tools are made under nominative fair use for technical educational and comparative evaluation purposes.</p>
+      </>
+    ),
+  },
+  {
+    id: 'outcomes-testimonials',
+    title: 'Client Results, Testimonials & Case Studies',
+    label: 'Real Outcomes',
+    icon: TrendingUp,
+    content: (
+      <>
+        <p>Case studies, testimonials, and consulting impact summaries documented across this Site reflect authentic client experiences and measurable outcomes achieved on individual enterprise engagements.</p>
+        <p>However, past engineering successes are unique to the specific scope, technical debt, organizational alignment, and team execution of those particular projects. We do not claim, warrant, or guarantee that every organization will achieve identical financial or efficiency results.</p>
+      </>
+    ),
+  },
+  {
+    id: 'errors-updates',
+    title: 'Errors, Omissions & Continuous Improvements',
+    label: 'Accountability',
+    icon: RefreshCw,
+    content: (
+      <>
+        <p>While we make every conscientious effort to maintain accuracy, verify technical documentation, and update guides against changing software versions, technical products and cloud APIs evolve rapidly. Information on this Site may occasionally contain unintentional typographical errors, deprecations, or outdated syntax.</p>
+        <p>We encourage readers and practitioners to submit factual corrections or outdated references directly to <a href="mailto:info@dattasable.com">info@dattasable.com</a>. Verified corrections are incorporated promptly into the public knowledge base.</p>
+      </>
+    ),
+  },
+];
 
-  const lastUpdated = "April 30, 2026";
-
+export default function DisclaimerPage() {
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
+    <div className={styles.page}>
       <Navbar />
-      <div className="boxed-wrapper" style={{ position: 'relative', padding: '120px 0' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <div className="label-tech mb-4" style={{ letterSpacing: '0.3em' }}>LEGAL-DOCUMENT</div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 40px)', fontWeight: 600, marginBottom: '1rem' }}>Disclaimer</h1>
-          <p style={{ color: 'var(--muted)', marginBottom: '3rem', fontSize: '0.9rem' }}>Last Updated: {lastUpdated}</p>
+      <div className={styles.container}>
+        <header className={styles.hero}>
+          <div className={styles.eyebrow}>
+            <AlertTriangle size={15} aria-hidden="true" /> Legal &amp; technical disclosures
+          </div>
+          <h1>
+            Legal disclaimer<br />
+            <span>and professional disclosures.</span>
+          </h1>
+          <p className={styles.intro}>
+            Important context regarding technical tutorials, synthetic demonstration data, measured benchmarks, and independent professional standing.
+          </p>
+          <div className={styles.updated}>
+            <CalendarDays size={15} aria-hidden="true" />
+            <span>Updated <time dateTime="2026-10-22">October 22, 2026</time></span>
+            <span className={styles.divider} aria-hidden="true" />
+            <span>Educational intent. Measured evidence. Independent practice.</span>
+          </div>
+        </header>
 
-          <div className="card" style={{ padding: '3rem', lineHeight: '1.8' }}>
-            <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>1. Professional Disclaimer</h2>
-              <p>The information provided by Datta Sable (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) on dattasable.com (the &quot;Site&quot;) is for general informational purposes only. All information on the Site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site.</p>
-              <p style={{ marginTop: '1rem' }}>UNDER NO CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF THE SITE OR RELIANCE ON ANY INFORMATION PROVIDED ON THE SITE. YOUR USE OF THE SITE AND YOUR RELIANCE ON ANY INFORMATION ON THE SITE IS SOLELY AT YOUR OWN RISK.</p>
-            </section>
+        <div className={styles.contextNote}>
+          <span className={styles.noteIcon}>
+            <Info size={22} aria-hidden="true" />
+          </span>
+          <div>
+            <h2>Independent practice, grounded in context.</h2>
+            <p>
+              Our guides, templates, and interactive dashboards reflect real engineering practice. However, enterprise systems demand independent validation. Use our materials as high-quality accelerators, tested in your own staging environments.
+            </p>
+          </div>
+        </div>
 
-            <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>2. External Links Disclaimer</h2>
-              <p>The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or originating from third parties or links to websites and features in banners or other advertising. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us.</p>
-            </section>
+        <div className={styles.layout}>
+          <aside className={styles.sidebar}>
+            <nav aria-label="Disclaimer sections">
+              <span className={styles.navLabel}>On this page</span>
+              <ol>
+                {standards.map((standard, index) => (
+                  <li key={standard.id}>
+                    <a href={`#${standard.id}`}>
+                      <span className={styles.navNumber}>{String(index + 1).padStart(2, '0')}</span>
+                      <span>{standard.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+            <div className={styles.sidebarNote}>
+              <Mail size={18} aria-hidden="true" />
+              <p>Found a broken reference or outdated code snippet?</p>
+              <a href="#disclaimer-contact">
+                Submit a correction <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            </div>
+          </aside>
 
-            <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>3. Professional Results Disclaimer</h2>
-              <p>The Site cannot and does not contain professional financial, legal, or data engineering advice. The technical information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. THE USE OR RELIANCE OF ANY INFORMATION CONTAINED ON THIS SITE IS SOLELY AT YOUR OWN RISK.</p>
-            </section>
+          <div className={styles.standards}>
+            {standards.map(({ id, title, label, icon: Icon, content }, index) => (
+              <section key={id} id={id} aria-labelledby={`${id}-title`} className={styles.standard}>
+                <div className={styles.cardTop}>
+                  <span className={styles.icon}>
+                    <Icon size={21} aria-hidden="true" />
+                  </span>
+                  <span className={styles.cardLabel}>{label}</span>
+                  <span className={styles.cardNumber}>{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <h2 id={`${id}-title`}>{title}</h2>
+                <div>{content}</div>
+              </section>
+            ))}
 
-            <section style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>4. Testimonials Disclaimer</h2>
-              <p>The Site may contain testimonials by users of our products and/or services. These testimonials reflect the real-life experiences and opinions of such users. However, the experiences are personal to those particular users, and may not necessarily be representative of all users of our products and/or services. We do not claim, and you should not assume, that all users will have the same experiences.</p>
-            </section>
-
-            <section>
-              <h2 style={{ fontSize: '1.25rem', color: 'var(--accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>5. Errors and Omissions Disclaimer</h2>
-              <p>While we have made every attempt to ensure that the information contained in this site has been obtained from reliable sources, Datta Sable is not responsible for any errors or omissions, or for the results obtained from the use of this information.</p>
+            <section id="disclaimer-contact" className={styles.contact} aria-labelledby="disclaimer-contact-title">
+              <div>
+                <span className={styles.eyebrow}>Editorial &amp; Verification Desk</span>
+                <h2 id="disclaimer-contact-title">Have feedback or spotted an inaccuracy?</h2>
+                <p>We welcome technical peer review. Share the specific article passage and link so our team can investigate and update.</p>
+              </div>
+              <a href="mailto:info@dattasable.com" className={styles.contactButton}>
+                Submit Technical Feedback <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
             </section>
           </div>
         </div>

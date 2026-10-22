@@ -40,7 +40,7 @@ export default function MobileMenuDrawer({
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        style={{ width: '75vw' }}
+        style={{ width: '75vw', fontFamily: "'Syne', sans-serif" }}
         className="fixed top-0 right-0 bottom-0 z-[200] bg-[var(--bg)] border-l border-[var(--border)] xl:hidden flex flex-col shadow-2xl"
       >
         <div className="flex flex-col h-full overflow-y-auto">
