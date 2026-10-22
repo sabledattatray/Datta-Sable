@@ -105,7 +105,7 @@
 }
 
 .chipActive {
-  color: #000 !important;
+  color: #ffffff !important;
   background: var(--accent) !important;
   font-weight: 700;
   border-color: var(--accent) !important;
