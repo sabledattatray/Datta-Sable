@@ -1,394 +1,633 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Check, ChevronDown, ArrowRight, Shield, Star } from 'lucide-react';
-import Crosshair from '@/components/Crosshair';
+import { servicesData, ServiceItem } from '@/data/servicesData';
+import {
+  BarChart3,
+  BrainCircuit,
+  Workflow,
+  Globe,
+  Sparkles,
+  Palette,
+  PenTool,
+  Check,
+  ArrowRight,
+  ArrowUpRight,
+  ShieldCheck,
+  Clock,
+  Clock3,
+  ChevronDown,
+  Lock,
+  Award,
+  Zap,
+  CheckCircle2,
+  FileSpreadsheet,
+  Database,
+  Search,
+  MessageSquare
+} from 'lucide-react';
+import styles from './ServicesContent.module.css';
 
-const services = [
+// Map icon string or category to Lucide component
+const serviceIcons: Record<string, React.ReactNode> = {
+  dashboards: <BarChart3 size={24} />,
+  consulting: <BrainCircuit size={24} />,
+  'fabric-architecture': <Database size={24} />,
+  automation: <Workflow size={24} />,
+  'database-optimization': <Zap size={24} />,
+  'web-solutions': <Globe size={24} />,
+  'seo-optimization': <Sparkles size={24} />,
+  'web-design': <Palette size={24} />,
+  'graphic-design': <PenTool size={24} />,
+};
+
+// Category mapping for interactive filtering
+const serviceCategories: Record<string, string> = {
+  dashboards: 'bi',
+  consulting: 'bi',
+  'fabric-architecture': 'bi',
+  automation: 'engineering',
+  'database-optimization': 'engineering',
+  'web-solutions': 'web',
+  'web-design': 'web',
+  'graphic-design': 'web',
+  'seo-optimization': 'growth',
+};
+
+// Editorial category kickers matching Blog style
+const serviceKickers: Record<string, string> = {
+  consulting: 'BI STRATEGY & AUDITS',
+  dashboards: 'BUSINESS INTELLIGENCE & DAX',
+  'fabric-architecture': 'MICROSOFT FABRIC & LAKEHOUSE',
+  automation: 'PYTHON ETL & AUTOMATION',
+  'database-optimization': 'SQL & DATABASE TUNING',
+  'web-solutions': 'FULL-STACK WEB & APIS',
+  'web-design': 'UI/UX & DESIGN SYSTEMS',
+  'graphic-design': 'DATA VISUALIZATION & DESIGN',
+  'seo-optimization': 'TECHNICAL SEO & SPEED',
+};
+
+const filterTabs = [
+  { id: 'all', label: 'All Services', count: 9 },
+  { id: 'bi', label: 'BI & Dashboards', count: 3 },
+  { id: 'engineering', label: 'Pipelines & SQL', count: 2 },
+  { id: 'web', label: 'Web & UI/UX', count: 3 },
+  { id: 'growth', label: 'Technical SEO', count: 1 },
+];
+
+const trustCredentials = [
   {
-    icon: '📊',
-    title: 'Dashboard Development',
-    id: 'dashboards',
-    desc: 'Custom, interactive dashboards in Tableau and Power BI that give your team real-time visibility into what matters most.',
-    features: ['KPI tracking & monitoring', 'Drill-down & filter capabilities', 'Cross-platform compatibility', 'Automated data refresh', 'Executive-ready design', 'Mobile responsive'],
-    price: 'Starting at ₹15,000',
-    cta: 'Get a Dashboard',
-    color: 'var(--accent)',
-    popular: false,
+    icon: <Award size={18} />,
+    title: 'Microsoft Fabric & Power BI Certified',
+    desc: 'Expert DAX, dimensional modeling & enterprise capacity tuning',
   },
   {
-    icon: '🔬',
-    title: 'Data Analytics Consulting',
-    id: 'consulting',
-    desc: 'End-to-end analytics strategy — from data audit to insight delivery. I help you understand your data and act on it.',
-    features: ['Data audit & gap analysis', 'KPI framework design', 'SQL query optimization', 'Predictive modeling basics', 'Insight reporting', 'Team upskilling sessions'],
-    price: 'Starting at ₹25,000',
-    cta: 'Get a Dashboard',
-    color: 'var(--accent2)',
-    popular: true,
+    icon: <BarChart3 size={18} />,
+    title: 'Tableau Desktop Specialist',
+    desc: 'Advanced LOD calculations, dashboard actions & performance logic',
   },
   {
-    icon: '⚙️',
-    title: 'Automation Solutions',
-    id: 'automation',
-    desc: 'Eliminate manual reporting forever. Python & Excel VBA automation that runs your reports on autopilot.',
-    features: ['Python ETL pipelines', 'Excel macro automation', 'Email report scheduling', 'API data integration', 'Error monitoring & alerts', 'Documentation & handover'],
-    price: 'Starting at ₹20,000',
-    cta: 'Automate My Reports',
-    color: 'var(--accent3)',
-    popular: false,
+    icon: <Database size={18} />,
+    title: 'PostgreSQL & Python Architecture',
+    desc: 'Automated ETL pipelines, FastAPI endpoints & clean schemas',
   },
   {
-    icon: '🌐',
-    title: 'Enterprise Web Solutions',
-    id: 'web-solutions',
-    desc: 'High-performance WordPress and Next.js development tailored for data-heavy organizations and professional portfolios.',
-    features: ['Custom WordPress Themes', 'Next.js Performance tuning', 'SEO architecture setup', 'Security & Speed optimization', 'Content management training', 'API & Database integration'],
-    price: 'Starting at ₹30,000',
-    cta: 'Build My Platform',
-    color: 'var(--accent)',
-    popular: false,
+    icon: <Lock size={18} />,
+    title: '100% Mutual NDA Protected',
+    desc: 'Confidentiality agreements executed upfront before data access',
   },
   {
-    icon: '🚀',
-    title: 'On-Page SEO Optimization',
-    id: 'seo-optimization',
-    desc: 'Technical SEO audits and on-page optimization strategies that align your content with search engine algorithms for maximum visibility.',
-    features: ['Keyword research & mapping', 'Meta tags & header optimization', 'Content gap analysis', 'Internal linking strategy', 'Image alt-text & compression', 'Core Web Vitals tuning'],
-    price: 'Starting at ₹10,000',
-    cta: 'Boost My Ranking',
-    color: 'var(--accent2)',
-    popular: false,
+    icon: <Zap size={18} />,
+    title: 'Direct Senior Engineer Access',
+    desc: 'Zero account managers or junior delegation — direct communication',
   },
   {
-    icon: '🎨',
-    title: 'Custom Web Design',
-    id: 'web-design',
-    desc: 'Bespoke, high-fidelity UI/UX designs that balance aesthetic excellence with functional performance for a premium digital presence.',
-    features: ['High-fidelity UI/UX design', 'CorelDRAW Asset Creation', 'Responsive & adaptive layouts', 'Custom iconography', 'Brand identity integration', 'Performance-first architecture'],
-    price: 'Starting at ₹25,000',
-    cta: 'Start Designing',
-    color: 'var(--accent3)',
-    popular: false,
-  },
-  {
-    icon: '✒️',
-    title: 'Professional Graphic Design',
-    id: 'graphic-design',
-    desc: 'Expert vector design and branding solutions powered by CorelDRAW, delivering high-impact visual communication for print and digital media.',
-    features: ['Vector logo design', 'Brand identity development', 'Print-ready marketing assets', 'Custom typography & layouts', 'Icon set creation', 'File conversion & vectorization'],
-    price: 'Starting at ₹5,000',
-    cta: 'Get a Quote',
-    color: 'var(--accent2)',
-    popular: false,
+    icon: <ShieldCheck size={18} />,
+    title: '100% Math Reconciliation',
+    desc: 'Zero discrepancy guarantee against audited financial source sheets',
   },
 ];
 
-const faqs = [
-  { q: 'What tools do you use for dashboards?', a: 'I primarily use Tableau and Power BI, connecting to SQL, Excel, and APIs. Tool choice depends on your existing tech stack.' },
-  { q: 'How long does a typical project take?', a: 'Standard projects take 1–2 weeks. Complex pipelines or enterprise platforms take 3–6 weeks. I provide detailed milestones upfront.' },
-  { q: 'Do you offer ongoing support?', a: 'Yes. I offer monthly maintenance packages for data updates and feature additions, starting at ₹5,000/month.' },
-  { q: 'Can you work with our data infrastructure?', a: 'Absolutely. I integrate with AWS, Azure, GCP, Salesforce, SAP, and most modern databases via custom ETL pipelines.' },
-  { q: 'How do you ensure data accuracy?', a: 'I implement automated validation checks at every ETL stage, with error logging and instant alerts to prevent data drift.' },
-  { q: 'Can you integrate custom APIs?', a: 'Yes. I build custom Python scripts to pull data from any REST/SOAP API, transforming it into BI-ready schemas.' },
-  { q: 'Do you provide model documentation?', a: 'Every project includes a technical handbook covering data lineage, schema definitions, and refresh logic for your team.' },
-  { q: 'How do you handle slow dashboards?', a: 'I specialize in performance tuning via SQL optimization, indexing, and efficient calculation logic (DAX/LODs).' },
-  { q: 'Can you assist with data security?', a: 'Yes. I implement Row-Level Security (RLS), role-based access, and governance frameworks to keep your data protected.' },
-  { q: 'Do you sign NDAs?', a: 'Yes. Confidentiality is paramount. I sign NDAs before accessing any sensitive systems or internal data.' },
+const roadmapSteps = [
+  {
+    step: 'PHASE 01',
+    title: 'Discovery & Metric Audit',
+    desc: 'We map grain, measure ownership, source systems, and business questions before building. No assumptions.',
+  },
+  {
+    step: 'PHASE 02',
+    title: 'Star-Schema & Data Model',
+    desc: 'Architecting clean Kimball dimensional models, calculated measure taxonomy, and prototype validation.',
+  },
+  {
+    step: 'PHASE 03',
+    title: 'Engineering & Reconciliation',
+    desc: 'Writing optimized DAX/SQL queries, configuring automated refresh gateways, Row-Level Security (RLS), and testing edge cases.',
+  },
+  {
+    step: 'PHASE 04',
+    title: 'Handover & Team Training',
+    desc: 'Complete schema documentation handbook, video walkthrough, and 30-day post-launch warranty support.',
+  },
 ];
 
-const trustBadges = [
-  { label: 'Microsoft Certified', icon: '🏆' },
-  { label: 'Tableau Specialist', icon: '📊' },
-  { label: 'Google Analytics Certified', icon: '🔍' },
-  { label: '50+ Projects Delivered', icon: '✅' },
-  { label: '5★ Average Rating', icon: '⭐' },
-  { label: 'NDA Protected', icon: '🔒' },
+const comparisonData = [
+  {
+    feature: 'Engineering Ownership',
+    datta: 'Direct Senior Engineer (Datta Sable builds your system)',
+    agencies: 'Account manager translates to revolving junior contractors',
+    freelancers: 'Unverified skills, unpredictable availability',
+  },
+  {
+    feature: 'Data Modeling Standard',
+    datta: 'Kimball Star-Schema with audited dimensional relationships',
+    agencies: 'Often flat, unoptimized datasets with severe query lag',
+    freelancers: 'Brittle Excel formulas and ad-hoc calculated columns',
+  },
+  {
+    feature: 'Calculation Accuracy',
+    datta: '100% mathematical reconciliation against balance sheets',
+    agencies: 'Visual charts delivered without source accounting checks',
+    freelancers: 'Frequent metric discrepancies and unvalidated edge cases',
+  },
+  {
+    feature: 'Delivery Velocity',
+    datta: '1 - 2 weeks rapid production sprints with daily updates',
+    agencies: '6 - 12 weeks bloated timelines with heavy bureaucratic delay',
+    freelancers: 'Irregular schedules with risk of project abandonment',
+  },
+  {
+    feature: 'Handover Documentation',
+    datta: 'Complete schema handbook, measure catalog & video walkthrough',
+    agencies: 'Minimal documentation to force costly ongoing retainer contracts',
+    freelancers: 'Rarely provided, leaving internal teams stranded',
+  },
+  {
+    feature: 'Security & NDAs',
+    datta: 'Mutual enterprise NDA signed upfront; role-based RLS rules',
+    agencies: 'Generic agency terms with third-party offshore exposure',
+    freelancers: 'Reluctant or unprepared to sign formal legal agreements',
+  },
+];
+
+const scopingChecklist = [
+  {
+    number: '01',
+    title: 'Key Business Decision & Target Audience',
+    desc: 'Who will look at this dashboard or report, and what operational or financial decision must they make within 60 seconds?',
+  },
+  {
+    number: '02',
+    title: 'Current Source Systems & Data Grain',
+    desc: 'Where does the truth live? (PostgreSQL, SQL Server, ERP, CRM, Excel exports, or cloud APIs) and at what transaction frequency?',
+  },
+  {
+    number: '03',
+    title: 'Refresh Frequency & Performance SLAs',
+    desc: 'Do you need sub-second real-time streaming, hourly scheduled automated refreshes, or daily consolidated morning packs?',
+  },
+  {
+    number: '04',
+    title: 'Access Control & Row-Level Security (RLS)',
+    desc: 'Are there regional branch managers, department heads, or executive tiers that require restricted, role-based data isolation?',
+  },
+];
+
+const generalFaqs = [
+  {
+    q: 'How does a typical client engagement begin?',
+    a: 'We start with a 30-minute scoping discussion to audit your current data bottlenecks, source schemas, and deliverables. Once approved, I deliver a defined statement of work with milestone timelines and a fixed-price quote.',
+  },
+  {
+    q: 'Are you available for international clients and remote teams?',
+    a: 'Yes. I regularly work with founders, executives, and analytics leads across the US, UK, Europe, Australia, and India. Communication happens via Slack, Teams, email, and scheduled video checkpoints.',
+  },
+  {
+    q: 'Can you work with our existing internal data team or contractors?',
+    a: 'Absolutely. I seamlessly embed into existing engineering workflows — collaborating directly with internal database administrators, business analysts, and product managers to accelerate project delivery.',
+  },
+  {
+    q: 'What is your guarantee on metric accuracy?',
+    a: 'Every dashboard, SQL model, and pipeline goes through a rigorous mathematical reconciliation protocol. Before handover, every KPI total is validated against your audited source accounting records to ensure zero discrepancy.',
+  },
+  {
+    q: 'Do you offer ongoing maintenance after project delivery?',
+    a: 'Yes. Every project includes 30 days of post-handover warranty support. For teams requiring continuous updates, new metrics, and gateway monitoring, I offer flexible monthly sprint retainers.',
+  },
+  {
+    q: 'How do you protect sensitive company data?',
+    a: 'Confidentiality is fundamental. I execute mutual Non-Disclosure Agreements (NDAs) before inspecting any architecture or datasets, follow strict least-privilege access rules, and never retain unmasked customer PII.',
+  },
 ];
 
 export default function ServicesContent() {
+  const [activeTab, setActiveTab] = useState('all');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Smoothly scroll to target card if hash is provided in URL or changed
-  useEffect(() => {
-    const handleHash = () => {
-      if (typeof window !== 'undefined' && window.location.hash) {
-        const hash = window.location.hash.slice(1);
-        const target = document.getElementById(hash);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    };
-
-    if (window.location.hash) {
-      const timer = setTimeout(handleHash, 200);
-      return () => clearTimeout(timer);
-    }
-
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
-  }, []);
+  const filteredServices = servicesData.filter((service: ServiceItem) => {
+    if (activeTab === 'all') return true;
+    return serviceCategories[service.id] === activeTab;
+  });
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        <Crosshair position="tl" />
 
-        <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', justifyContent: 'center' }}>SERVICE-PACKAGES</div>
-            <h1 style={{ 
-              fontSize: 'clamp(2.5rem, 6vw, 48px)', 
-              fontWeight: 600,
-              lineHeight: 1.1,
-              marginBottom: '1.5rem',
-              letterSpacing: '-0.02em'
-            }}>
-              Services & <span className="hero-title">Packages</span>
+      <main id="main-content" className={styles.container}>
+        {/* ==========================================================================
+            Hero Section
+            ========================================================================== */}
+        <section className={styles.hero} aria-labelledby="services-heading">
+          <div className={styles.heroGlow} aria-hidden="true" />
+          <div className={styles.heroContent}>
+            <div className={styles.statusBadge}>
+              <span className={styles.pulseOrb} aria-hidden="true" />
+              <span>ENTERPRISE BI & DATA SYSTEMS • OPEN FOR CLIENTS & ROLES</span>
+            </div>
+
+            <h1 id="services-heading" className={styles.heroTitle}>
+              Turn Complex Data Into{' '}
+              <span className={styles.heroTitleHighlight}>Clear, Confident Decisions.</span>
             </h1>
-            <p style={{ color: 'var(--muted)', maxWidth: 520, margin: '0 auto', lineHeight: 1.8, fontSize: '1.05rem' }}>
-              High-fidelity analytics, technical automation, and scalable dashboard structures built for enterprise-grade growth.
+
+            <p className={styles.heroDesc}>
+              Independent Business Intelligence Consultant, Data Architect & Full-Stack Engineer with 8+ years of enterprise experience. 
+              Delivering executive-ready Power BI & Tableau dashboards, automated Python ETL pipelines, and robust data platforms with guaranteed mathematical accuracy.
             </p>
-          </motion.div>
 
-          {/* Service cards */}
-          <div className="grid-auto-fill-300" style={{ marginBottom: '5rem' }}>
-            {services.map((s, i) => (
-              <motion.div
-                key={s.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                style={{ position: 'relative' }}
+            <div className={styles.heroActions}>
+              <Link href="/contact" className={styles.btnPrimary} id="hero-schedule-cta">
+                <span>Schedule a Scoping Call</span>
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+              <Link href="/portfolio" className={styles.btnSecondary} id="hero-portfolio-cta">
+                <span>Browse Live Portfolio</span>
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </Link>
+              <a
+                href="https://wa.me/918010803756?text=Hi%20Datta%2C%20I%20am%20interested%20in%20discussing%20a%20data%2Fdashboard%20service."
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnWhatsApp}
+                aria-label="Chat directly with Datta Sable on WhatsApp"
               >
-                {/* Anchor aliases for legacy or cross-referenced links */}
-                {s.id === 'web-solutions' && (
-                  <span id="web-dev" style={{ position: 'absolute', top: 0, scrollMarginTop: '110px' }} aria-hidden="true" />
-                )}
-                {s.id === 'automation' && (
-                  <span id="n8n-automation" style={{ position: 'absolute', top: 0, scrollMarginTop: '110px' }} aria-hidden="true" />
-                )}
+                <MessageSquare size={15} aria-hidden="true" />
+                <span>Quick Chat on WhatsApp</span>
+              </a>
+            </div>
 
-                {s.popular && (
-                  <div
-                    style={{
-                      position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)',
-                      background: 'linear-gradient(135deg, var(--accent), #00C9F2)',
-                      color: '#000', fontSize: '10px', fontWeight: 700,
-                      padding: '0.3rem 1.2rem', borderRadius: 0, whiteSpace: 'nowrap', zIndex: 1,
-                      fontFamily: 'var(--mono)', letterSpacing: '0.1em'
-                    }}
-                  >
-                    SYSTEM FAVORITE
-                  </div>
-                )}
-                  <div
-                    className="card"
-                    id={s.id}
-                    style={{
-                    padding: '2.5rem',
-                    borderLeft: '2px solid',
-                    borderImage: `linear-gradient(to bottom, ${s.color}, #00C9F2) 1`,
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    scrollMarginTop: '110px',
-                  }}
-                >
-                  <div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-4"
-                    style={{ background: `linear-gradient(135deg, ${s.color}22, ${s.color}11)`, border: `1px solid ${s.color}33` }}
-                  >
-                    {s.icon}
-                  </div>
-                  <Link href={`/services/${s.id}`} style={{ textDecoration: 'none', color: 'inherit' }} className="group">
-                    <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem' }} className="group-hover:text-[var(--accent)] transition-colors">{s.title}</h3>
-                  </Link>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>{s.desc}</p>
+            {/* In-Hero Proof Numbers Bar */}
+            <div className={styles.proofRow} aria-label="Key delivery metrics">
+              <div className={styles.proofItem}>
+                <div className={styles.proofNumber}>50<span>+</span></div>
+                <div className={styles.proofLabel}>Production Dashboards</div>
+                <div className={styles.proofSub}>Delivered on-time with zero downtime</div>
+              </div>
+              <div className={styles.proofItem}>
+                <div className={styles.proofNumber}>100<span>%</span></div>
+                <div className={styles.proofLabel}>Math Reconciliation</div>
+                <div className={styles.proofSub}>Verified against accounting balance sheets</div>
+              </div>
+              <div className={styles.proofItem}>
+                <div className={styles.proofNumber}>40-60<span>%</span></div>
+                <div className={styles.proofLabel}>Reporting Time Saved</div>
+                <div className={styles.proofSub}>Manual spreadsheet tasks eliminated</div>
+              </div>
+              <div className={styles.proofItem}>
+                <div className={styles.proofNumber}>8<span>+ Yrs</span></div>
+                <div className={styles.proofLabel}>Enterprise Experience</div>
+                <div className={styles.proofSub}>Fabric, Power BI, SQL, Python, Next.js</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.5rem', flex: 1 }}>
-                    {s.features.map(f => (
-                      <li key={f} className="flex items-center gap-2" style={{ fontSize: '0.875rem', color: 'var(--muted)' }}>
-                        <Check size={14} style={{ color: s.color, flexShrink: 0 }} /> {f}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.25rem', marginTop: 'auto' }}>
-                    <div className="mono" style={{ color: s.color, fontWeight: 700, fontSize: '1rem', marginBottom: '0.75rem' }}>{s.price}</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                      <Link
-                        href={`/services/${s.id}`}
-                        className="btn-outline flex items-center justify-center gap-1.5 py-3 font-semibold text-xs transition-all duration-200"
-                        style={{
-                          textDecoration: 'none',
-                          borderRadius: '4px',
-                          border: '1px solid var(--border)',
-                          color: 'var(--text)',
-                        }}
-                      >
-                        Details <ArrowRight size={12} />
-                      </Link>
-                      <Link
-                        href={`/contact?service=${encodeURIComponent(s.title)}`}
-                        className="flex items-center justify-center gap-1.5 py-3 font-semibold text-xs transition-all duration-200"
-                        style={{
-                          background: s.popular ? `linear-gradient(135deg, ${s.color}, var(--accent2))` : 'transparent',
-                          color: s.popular ? '#000' : s.color,
-                          border: s.popular ? 'none' : `1px solid ${s.color}`,
-                          textDecoration: 'none',
-                          borderRadius: '4px',
-                        }}
-                      >
-                        {s.cta}
-                      </Link>
-                    </div>
-                  </div>
+        {/* ==========================================================================
+            Trust & Credentials Strip
+            ========================================================================== */}
+        <section className={styles.trustStrip} aria-label="Credentials and trust assurances">
+          <div className={styles.trustBadgesGrid}>
+            {trustCredentials.map((cred, idx) => (
+              <div key={idx} className={styles.trustBadgeCard}>
+                <div className={styles.trustBadgeIcon} aria-hidden="true">
+                  {cred.icon}
                 </div>
-              </motion.div>
+                <div className={styles.trustBadgeText}>
+                  <strong>{cred.title}</strong>
+                  <span>{cred.desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==========================================================================
+            Service Offerings & Interactive Filter
+            ========================================================================== */}
+        <section aria-labelledby="offerings-title">
+          <div className={styles.sectionHeader}>
+            <div className={styles.kicker}>
+              <span className={styles.kickerDot} aria-hidden="true" />
+              <span>CURATED SPECIALIZATIONS</span>
+            </div>
+            <h2 id="offerings-title" className={styles.sectionTitle}>
+              End-to-End Analytics & Engineering Capabilities
+            </h2>
+            <p className={styles.sectionDesc}>
+              Select a specialized engagement tier based on your technical objectives. Every project includes defined milestone reviews, source code handover, and 30 days of post-launch warranty.
+            </p>
+          </div>
+
+          {/* Category Filter Tabs */}
+          <div className={styles.filterTabs} role="tablist" aria-label="Filter services by specialization">
+            {filterTabs.map(tab => (
+              <button
+                key={tab.id}
+                role="tab"
+                aria-selected={activeTab === tab.id}
+                id={`tab-${tab.id}`}
+                className={`${styles.filterBtn} ${activeTab === tab.id ? styles.filterBtnActive : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                <span>{tab.label}</span>
+                <span className={styles.filterCount}>{tab.count}</span>
+              </button>
             ))}
           </div>
 
-          {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ marginBottom: '5rem' }}
-          >
-            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-              <p className="section-label">Trust & Credibility</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              {trustBadges.map(b => (
-                <div
-                  key={b.label}
-                  className="card flex items-center gap-2"
-                  style={{ borderRadius: '0', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: 'var(--muted)' }}
-                >
-                  <span>{b.icon}</span> {b.label}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* FAQ */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ maxWidth: 720, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <p className="section-label">Frequently Asked Questions</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)' }}>Common Questions</h2>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0', border: '1px solid var(--border)' }}>
-              {faqs.map((faq, i) => (
-                <div
-                  key={i}
-                  className="card"
-                  style={{ overflow: 'hidden' }}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between gap-4"
-                    style={{ 
-                      padding: '0.2rem 0.6rem', 
-                      background: 'none', 
-                      border: 'none', 
-                      borderBottom: i === faqs.length - 1 && openFaq !== i ? 'none' : '1px solid var(--border)',
-                      cursor: 'pointer', 
-                      textAlign: 'left', 
-                      color: 'var(--text)' 
-                    }}
+          {/* Service Cards Grid - 2-column landscape cards matching Blog layout */}
+          <div className={styles.servicesGrid} role="tabpanel" aria-labelledby={`tab-${activeTab}`}>
+            {filteredServices.map(service => {
+              const kicker = serviceKickers[service.id] || 'ENTERPRISE SERVICE';
+              return (
+                <article key={service.id} className={styles.cardItem}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className={styles.card}
+                    id={service.id}
+                    aria-labelledby={`service-title-${service.id}`}
                   >
-                    <span style={{ fontWeight: 600, fontSize: '0.8rem' }}>{faq.q}</span>
-                    <motion.div animate={{ rotate: openFaq === i ? 180 : 0 }} style={{ color: 'var(--accent)', flexShrink: 0 }}>
-                      <ChevronDown size={14} />
-                    </motion.div>
-                  </button>
-                  <AnimatePresence>
-                    {openFaq === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <div style={{ 
-                          padding: '0 0.8rem 0.6rem', 
-                          color: 'var(--muted)', 
-                          fontSize: '0.75rem', 
-                          lineHeight: 1.5,
-                          borderBottom: i === faqs.length - 1 ? 'none' : '1px solid var(--border)'
-                        }}>
-                          {faq.a}
+                    {/* Landscape Left Column: Visual Thumbnail Box */}
+                    <div className={styles.cardImage}>
+                      {service.deliveryTime && (
+                        <span className={styles.imageDuration}>
+                          <Clock3 size={11} aria-hidden="true" />
+                          <span>{service.deliveryTime}</span>
+                        </span>
+                      )}
+
+                      <div className={styles.thumbnail}>
+                        <Image
+                          src={service.image || '/images/editorial-placeholder.svg'}
+                          alt=""
+                          fill
+                          sizes="(max-width: 540px) 110px, (max-width: 1024px) 240px, 220px"
+                          priority={false}
+                        />
+                      </div>
+
+                      <span className={styles.imageArrow} aria-hidden="true">
+                        <ArrowUpRight size={15} />
+                      </span>
+                    </div>
+
+                    {/* Landscape Right Column: Service Details */}
+                    <div className={styles.cardBody}>
+                      <div className={styles.categoryRow}>
+                        <span className={styles.category}>{kicker}</span>
+                        {service.popular && (
+                          <span className={styles.popularBadge}>Most Requested</span>
+                        )}
+                      </div>
+
+                      <h3 id={`service-title-${service.id}`}>
+                        {service.title}
+                      </h3>
+
+                      <p>{service.desc}</p>
+
+                      {/* Technology Pills */}
+                      <div className={styles.techStrip} aria-label="Key Technologies">
+                        {service.technologies.slice(0, 4).map((tech, idx) => (
+                          <span key={idx} className={styles.techPill}>{tech}</span>
+                        ))}
+                      </div>
+
+                      {/* Card Footer with Price and Explore Scope link */}
+                      <div className={styles.cardFooter}>
+                        <div className={styles.cardPricing}>
+                          <span className={styles.priceTag}>{service.price}</span>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+
+                        <span className={styles.readLabel}>
+                          <span>Explore Scope</span>
+                          <ArrowRight size={12} aria-hidden="true" />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ==========================================================================
+            The 4-Step Engineering Protocol (Engagement Roadmap)
+            ========================================================================== */}
+        <section className={styles.protocolSection} aria-labelledby="roadmap-heading">
+          <div className={styles.sectionHeader}>
+            <div className={styles.kicker}>
+              <span className={styles.kickerDot} aria-hidden="true" />
+              <span>THE DELIVERY FRAMEWORK</span>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Editorial Section */}
-      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '5rem 0' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
-            <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>SERVICES_INTELLIGENCE</span>
-          </div>
-          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', fontWeight: 700, marginBottom: '2rem', color: 'var(--text)', lineHeight: 1.25 }}>
-            Why Professional BI Services Deliver Compounding Returns on Investment
-          </h2>
-          <div style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.85 }}>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Business Intelligence is not a cost center — it is the infrastructure that makes every other business function more effective. When your sales team has a live pipeline dashboard that updates every 15 minutes, they close deals faster. When your finance team has an automated variance report instead of a 4-hour Excel consolidation exercise, they catch anomalies before they become write-offs. When your operations team has an OEE dashboard instead of a weekly email from the plant manager, they make decisions on Tuesday instead of waiting for Friday's meeting.
-            </p>
-            <p style={{ marginBottom: '1.5rem' }}>
-              The measurable ROI of professional BI implementation is well-documented. Organizations that move from manual Excel reporting to automated BI dashboards consistently report 40-60% reductions in report preparation time, 25-35% improvements in forecast accuracy (due to better data quality and consistency), and significant reductions in decision lag — the time between a business event occurring and leadership becoming aware of it and responding.
-            </p>
-
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '0.85rem' }}>
-              Dashboard Development: Beyond Visualization
-            </h3>
-            <p style={{ marginBottom: '1.25rem' }}>
-              A professionally built Power BI or Tableau dashboard is much more than a set of charts. It is a data product with a defined architecture: a star-schema data model optimized for fast aggregation, a semantic layer of DAX measures or Tableau calculated fields that enforce consistent business logic, row-level security that ensures each user sees only the data they are authorized to access, and a refresh schedule that keeps every metric current without any manual intervention. When these four layers are built correctly, the dashboard becomes a trusted system of record that reduces the need for ad-hoc analysis requests and frees your analysts for higher-value strategic work.
-            </p>
-
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '0.85rem' }}>
-              Data Automation: Eliminating the Manual Reporting Tax
-            </h3>
-            <p style={{ marginBottom: '1.25rem' }}>
-              Every organization has what I call a "manual reporting tax" — the cumulative hours per week that skilled analysts spend on tasks that should be automated. Copying data from ERP systems into Excel, running the same SQL query every Monday morning, formatting and emailing the same PDF report to 12 stakeholders every Friday. These tasks are not analysis — they are data plumbing. My automation service identifies this manual reporting tax, quantifies it (typically ₹5-15 lakh per year in analyst time for a team of 3-5), and eliminates it with Python ETL pipelines and scheduled reporting workflows that run without human intervention.
-            </p>
-
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginTop: '2.5rem', marginBottom: '0.85rem' }}>
-              Enterprise Web Solutions for Data-Heavy Organizations
-            </h3>
-            <p style={{ marginBottom: '1.25rem' }}>
-              Data organizations have unique web requirements that generic web developers cannot meet: embedded interactive dashboards (Tableau Public, Power BI Embedded), large dataset visualizations using D3.js or Chart.js, API integrations with data platforms, and performance optimization for pages that load complex analytics components. My enterprise web service bridges the gap between data engineering and web development — building platforms that are not just fast and well-designed, but capable of rendering the complex data visualizations that make a data-first organization's web presence distinctive and authoritative.
-            </p>
-
-            <p style={{ fontSize: '0.95rem', fontStyle: 'italic', borderLeft: '4px solid var(--border)', paddingLeft: '1rem', marginTop: '2.5rem', color: 'var(--text)' }}>
-              "The organizations that win the next decade are not those with the most data — they are those with the shortest path from data to decision." — Datta Sable
+            <h2 id="roadmap-heading" className={styles.sectionTitle}>
+              How We Build: The 4-Step Engineering Protocol
+            </h2>
+            <p className={styles.sectionDesc}>
+              A transparent, battle-tested methodology ensuring every project is delivered on schedule, mathematically verified, and fully adopted by your team.
             </p>
           </div>
-        </div>
-      </section>
 
-      <Footer />
-        <Crosshair position="br" />
-      </div>
+          <div className={styles.protocolGrid}>
+            {roadmapSteps.map((item, idx) => (
+              <div key={idx} className={styles.protocolCard}>
+                <span className={styles.protocolStep}>{item.step}</span>
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==========================================================================
+            Value Matrix: Working With Datta vs Typical Alternatives
+            ========================================================================== */}
+        <section className={styles.comparisonSection} aria-labelledby="comparison-heading">
+          <div className={styles.sectionHeader}>
+            <div className={styles.kicker}>
+              <span className={styles.kickerDot} aria-hidden="true" />
+              <span>PROVEN VALUE COMPARISON</span>
+            </div>
+            <h2 id="comparison-heading" className={styles.sectionTitle}>
+              Why Forward-Thinking Teams Hire Datta Directly
+            </h2>
+            <p className={styles.sectionDesc}>
+              Cut through agency bureaucracy and junior trial-and-error. Get enterprise data architecture delivered directly by an engineer who owns the result.
+            </p>
+          </div>
+
+          <div className={styles.tableWrapper}>
+            <table className={styles.comparisonTable}>
+              <thead>
+                <tr>
+                  <th scope="col">Decision Criteria</th>
+                  <th scope="col" className={styles.highlightTh}>Working With Datta</th>
+                  <th scope="col">Traditional Agencies</th>
+                  <th scope="col">Generic Freelancers</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonData.map((row, idx) => (
+                  <tr key={idx}>
+                    <td><strong>{row.feature}</strong></td>
+                    <td className={styles.highlightTd}>{row.datta}</td>
+                    <td>{row.agencies}</td>
+                    <td>{row.freelancers}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* ==========================================================================
+            Scoping Preparation Checklist (Preserving Scoping Content)
+            ========================================================================== */}
+        <section className={styles.scopingSection} aria-labelledby="scoping-heading">
+          <div className={styles.sectionHeader}>
+            <div className={styles.kicker}>
+              <span className={styles.kickerDot} aria-hidden="true" />
+              <span>PROJECT PREPARATION</span>
+            </div>
+            <h2 id="scoping-heading" className={styles.sectionTitle}>
+              What to Prepare Before Our Scoping Call
+            </h2>
+            <p className={styles.sectionDesc}>
+              To make our first conversation immediately productive, having these four core parameters identified helps us arrive at an accurate timeline and milestone price within 24 hours.
+            </p>
+          </div>
+
+          <div className={styles.scopingGrid}>
+            {scopingChecklist.map((item, idx) => (
+              <div key={idx} className={styles.scopingCard}>
+                <div className={styles.scopingNumber} aria-hidden="true">{item.number}</div>
+                <div className={styles.scopingCardContent}>
+                  <h4>{item.title}</h4>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.securityNote}>
+            <Lock size={18} aria-hidden="true" />
+            <div>
+              <strong>Strict Privacy &amp; Data Security Protocol:</strong> Never send production database passwords, unmasked credentials, or raw personal customer records via contact forms. We execute mutual Non-Disclosure Agreements (NDAs) upfront and establish encrypted channels before any schema review.
+            </div>
+          </div>
+        </section>
+
+        {/* ==========================================================================
+            Frequently Asked Questions
+            ========================================================================== */}
+        <section className={styles.faqSection} aria-labelledby="faq-heading">
+          <div className={styles.sectionHeader}>
+            <div className={styles.kicker}>
+              <span className={styles.kickerDot} aria-hidden="true" />
+              <span>FREQUENTLY ASKED QUESTIONS</span>
+            </div>
+            <h2 id="faq-heading" className={styles.sectionTitle}>
+              Common Questions About Working Together
+            </h2>
+            <p className={styles.sectionDesc}>
+              Clear answers regarding turnaround times, data privacy, technical handover, and engagement pricing.
+            </p>
+          </div>
+
+          <div className={styles.faqList}>
+            {generalFaqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`${styles.faqItem} ${openFaq === idx ? styles.faqItemOpen : ''}`}
+              >
+                <button
+                  type="button"
+                  className={styles.faqQuestion}
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  aria-expanded={openFaq === idx}
+                  aria-controls={`faq-answer-${idx}`}
+                  id={`faq-question-${idx}`}
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown
+                    className={styles.faqIcon}
+                    style={{ transform: openFaq === idx ? 'rotate(180deg)' : 'none' }}
+                    size={16}
+                    aria-hidden="true"
+                  />
+                </button>
+                {openFaq === idx && (
+                  <div
+                    id={`faq-answer-${idx}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${idx}`}
+                    className={styles.faqAnswer}
+                  >
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==========================================================================
+            Final High-Impact Conversion Banner
+            ========================================================================== */}
+        <section className={styles.ctaBanner} aria-labelledby="cta-banner-heading">
+          <h2 id="cta-banner-heading">Ready to Turn Your Data Into a Competitive Advantage?</h2>
+          <p>
+            Whether you need an executive dashboard built next week, a fragile pipeline automated, or a senior BI consultant for your team — let’s scope your requirements and build something solid.
+          </p>
+          <div className={styles.ctaButtons}>
+            <Link href="/contact" className={styles.btnPrimary} id="cta-schedule-bottom">
+              <span>Schedule a Scoping Call</span>
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+            <Link href="/portfolio" className={styles.btnSecondary} id="cta-portfolio-bottom">
+              <span>View Case Studies &amp; Dashboards</span>
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </Link>
+            <a
+              href="https://wa.me/918010803756?text=Hi%20Datta%2C%20I%20would%20like%20to%20discuss%20a%20project%2Frole."
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnWhatsApp}
+              aria-label="Connect on WhatsApp"
+            >
+              <MessageSquare size={15} aria-hidden="true" />
+              <span>WhatsApp Direct</span>
+            </a>
+          </div>
+        </section>
+      </main>
+
       <Footer />
     </div>
   );
 }
-

@@ -3,7 +3,7 @@ import SignInExperience from '@/components/SignInExperience';
 
 export const metadata: Metadata = {
   title: 'Create your account',
-  description: 'Create your Datta Sable account with Google, GitHub, or LinkedIn.',
+  description: 'Create your Datta Sable account with email and password or social sign-in.',
   robots: { index: false, follow: false },
 };
 

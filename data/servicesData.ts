@@ -3,6 +3,7 @@ export interface ServiceItem {
   slug: string;
   aliases: string[];
   icon: string;
+  image?: string;
   title: string;
   tagline: string;
   desc: string;
@@ -25,6 +26,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'consulting',
     aliases: ['bi-consulting'],
     icon: '🔬',
+    image: '/images/blog/bi_strategy_unique.webp',
     title: 'Data Analytics & BI Consulting',
     tagline: 'Executive decision systems, data pipeline audits, and strategic KPI architecture.',
     desc: 'End-to-end analytics strategy — from raw data hygiene audits to insight delivery. I help enterprise stakeholders understand data lineage, eliminate reporting bottlenecks, and scale decision velocity.',
@@ -82,6 +84,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'dashboards',
     aliases: ['dashboard-design'],
     icon: '📊',
+    image: '/images/dashboards/global_sales_intelligence.webp',
     title: 'Dashboard Development',
     tagline: 'High-fidelity Power BI & Tableau interactive command centres.',
     desc: 'Custom, interactive dashboards that give leadership and operational teams real-time visibility into mission-critical KPIs. Engineered with audited DAX/LOD calculations, sub-second query rendering, and pixel-perfect design.',
@@ -139,6 +142,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'web-solutions',
     aliases: ['web-dev'],
     icon: '🌐',
+    image: '/images/blog/enterprise_web_unique.webp',
     title: 'Enterprise Web Solutions',
     tagline: 'High-performance Next.js and WordPress platforms tailored for data-heavy organizations.',
     desc: 'Bespoke web development combining modern React/Next.js architectures with ultra-fast database backends. Built for businesses that need high SEO rankings, zero layout shift, and scalable digital infrastructure.',
@@ -192,6 +196,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'graphic-design',
     aliases: [],
     icon: '✒️',
+    image: '/images/blog/creative_tools_unique.webp',
     title: 'Professional Graphic Design',
     tagline: 'Vector design, corporate branding, and print-ready marketing assets powered by CorelDRAW.',
     desc: 'High-impact visual communication for print and digital media. Precision vector logo creation, branding systems, executive presentations, and marketing collateral engineered for maximum brand recall.',
@@ -245,6 +250,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'seo-optimization',
     aliases: ['seo'],
     icon: '🚀',
+    image: '/images/blog/gtm_100.webp',
     title: 'On-Page SEO Optimization',
     tagline: 'Technical audits, semantic content hierarchy, and Core Web Vitals speed tuning.',
     desc: 'Data-driven on-page SEO strategies that systematically position your content at the top of organic search results. We combine technical audits, schema structured data, internal link mapping, and site speed optimization.',
@@ -298,6 +304,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'automation',
     aliases: ['automation-solutions'],
     icon: '⚙️',
+    image: '/images/blog/python_automation_hero_1777410033671.webp',
     title: 'Automation Solutions',
     tagline: 'Eliminate manual spreadsheet busywork with Python ETL, VBA macros, and API pipelines.',
     desc: 'End-to-end automation pipelines that turn hours of tedious copy-pasting into scheduled, hands-off background processes. We build automated data extractors, scheduled email reports, and error-monitored workflows.',
@@ -351,6 +358,7 @@ export const servicesData: ServiceItem[] = [
     slug: 'web-design',
     aliases: ['ui-ux-design'],
     icon: '🎨',
+    image: '/images/blog/surgical_ui_mastery.webp',
     title: 'Custom Web Design',
     tagline: 'Bespoke UI/UX design balancing aesthetic excellence with functional conversions.',
     desc: 'High-fidelity user interface and user experience design for web applications, SaaS dashboards, and marketing websites. Every design is crafted with pixel perfection, intuitive usability, and design system tokens.',
@@ -396,6 +404,114 @@ export const servicesData: ServiceItem[] = [
       {
         q: 'Can you also develop the design into code?',
         a: 'Yes! I specialize in full-stack implementation, turning designs directly into production-grade Next.js or WordPress websites.'
+      }
+    ]
+  },
+  {
+    id: 'fabric-architecture',
+    slug: 'fabric-architecture',
+    aliases: ['microsoft-fabric', 'fabric'],
+    icon: '⚡',
+    image: '/images/blog/microsoft-fabric-architecture-explained-2026.webp',
+    title: 'Microsoft Fabric & Lakehouse Architecture',
+    tagline: 'Enterprise Medallion architecture, OneLake unification, and DirectLake Power BI modeling.',
+    desc: 'Consolidate fragmented analytics silos into a unified Microsoft Fabric tenant. We build scalable Bronze-Silver-Gold Lakehouses, real-time Eventstream ingestion, and sub-second DirectLake semantic models.',
+    metaTitle: 'Microsoft Fabric & Lakehouse Architecture Consulting | Datta Sable',
+    metaDesc: 'Enterprise Microsoft Fabric engineering. Medallion architecture, OneLake, DirectLake semantic modeling, PySpark pipelines, and real-time intelligence.',
+    price: 'Starting at ₹35,000',
+    deliveryTime: '2 - 4 Weeks',
+    cta: 'Architect My Lakehouse',
+    color: 'var(--accent)',
+    popular: true,
+    features: [
+      'Bronze, Silver & Gold Medallion architecture',
+      'OneLake delta table storage & shortcuts',
+      'DirectLake Power BI semantic modeling',
+      'Real-Time Intelligence & KQL eventstreams',
+      'Azure Data Factory & Synapse pipeline migration',
+      'Capacity sizing & CU cost governance'
+    ],
+    capabilities: [
+      {
+        title: 'Medallion Lakehouse Engineering',
+        desc: 'Structuring raw data into cleansed Delta tables with ACID transactions, schema enforcement, and time-travel querying.'
+      },
+      {
+        title: 'DirectLake Semantic Models',
+        desc: 'Eliminating slow import refreshes and DirectQuery latency by querying OneLake Delta Parquet files directly at memory speeds.'
+      },
+      {
+        title: 'Real-Time Intelligence & KQL',
+        desc: 'Setting up Eventstreams, KQL databases, and automated Fabric Reflex alerts for instant anomaly detection.'
+      },
+      {
+        title: 'Fabric Capacity Governance & Cost Control',
+        desc: 'Analyzing Capacity Metrics App, mitigating throttling, and optimizing background job scheduling to minimize compute costs.'
+      }
+    ],
+    technologies: ['Microsoft Fabric', 'OneLake', 'DirectLake', 'PySpark', 'KQL', 'Delta Lake', 'Power BI'],
+    faqs: [
+      {
+        q: 'Why should we migrate our analytics stack to Microsoft Fabric?',
+        a: 'Fabric consolidates data ingestion, transformation, data warehousing, lakehouses, real-time analytics, and Power BI into a unified SaaS experience with zero infrastructure management.'
+      },
+      {
+        q: 'Can we connect existing AWS S3 or Google Cloud storage into Fabric?',
+        a: 'Yes. OneLake Shortcuts allow you to virtualize external data in AWS S3 and ADLS Gen2 without copying or moving data.'
+      }
+    ]
+  },
+  {
+    id: 'database-optimization',
+    slug: 'database-optimization',
+    aliases: ['sql-optimization', 'sql-tuning'],
+    icon: '⚡',
+    image: '/images/blog/Live SQL Tuning From 10 Minutes to 10 Seconds.webp',
+    title: 'SQL & Database Performance Tuning',
+    tagline: 'Execution plan auditing, indexing strategy, and sub-second query latency.',
+    desc: 'Eliminate query timeouts, locking contention, and runaway cloud compute bills. We analyze execution plans, optimize index coverage, refactor complex joins, and tune database servers for high-throughput transactional and analytical workloads.',
+    metaTitle: 'SQL & Database Performance Tuning Services | Datta Sable',
+    metaDesc: 'Specialized SQL query optimization and database tuning for PostgreSQL, MySQL, and SQL Server. Execution plan audits, index strategies, and latency reduction.',
+    price: 'Starting at ₹15,000',
+    deliveryTime: '3 - 7 Business Days',
+    cta: 'Optimize My Queries',
+    color: 'var(--accent2)',
+    popular: false,
+    features: [
+      'Query execution plan analysis & profiling',
+      'Missing index & fragmentation tuning',
+      'Stored procedure & CTE query refactoring',
+      'Connection pooling & lock contention resolution',
+      'Star-schema dimensional indexing',
+      'Cloud compute & memory cost reduction'
+    ],
+    capabilities: [
+      {
+        title: 'Execution Plan Deep-Dives',
+        desc: 'Identifying costly table scans, nested loop spills, and implicit conversions that slow down critical reporting queries.'
+      },
+      {
+        title: 'Targeted Indexing Architecture',
+        desc: 'Designing filtered, covering, and composite indexes that dramatically reduce I/O while eliminating redundant, bloated indexes.'
+      },
+      {
+        title: 'Analytical Query Refactoring',
+        desc: 'Rewriting inefficient correlated subqueries, window functions, and recursive CTEs into performant set-based operations.'
+      },
+      {
+        title: 'Database Capacity & Cost Auditing',
+        desc: 'Tuning buffer pools, query cache, and vacuum settings to allow existing database hardware to handle 3x–5x more concurrent load.'
+      }
+    ],
+    technologies: ['PostgreSQL', 'SQL Server', 'MySQL', 'Execution Plans', 'pg_stat_statements', 'Query Profiler'],
+    faqs: [
+      {
+        q: 'How much performance improvement can we expect?',
+        a: 'Most unoptimized queries see a 70% to 95% reduction in execution time (often dropping from 30+ seconds down to under 500 milliseconds) following indexing and query refactoring.'
+      },
+      {
+        q: 'Do you need direct production write access to tune queries?',
+        a: 'No. I can review execution plans, schema DDL, and sanitized query logs on a staging replica or via screen share, ensuring zero production disruption.'
       }
     ]
   }

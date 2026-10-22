@@ -44,7 +44,7 @@ export default function Navbar() {
   const root = useRef<HTMLElement>(null);
   const mobileTrigger = useRef<HTMLButtonElement>(null);
   const closeMobile = useRef<HTMLButtonElement>(null);
-  const lastTrigger = useRef<HTMLButtonElement|null>(null);
+  const lastTrigger = useRef<HTMLElement|null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout>|null>(null);
   const active = open ? groups[open] : null;
   const intro = open ? introductions[open] : null;
@@ -93,7 +93,7 @@ export default function Navbar() {
     <header ref={root} className={`${styles.header} ${scrolled?styles.scrolled:''} ${open||mobileOpen?styles.expanded:''}`} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={event=>{if(!mobileOpen&&!event.currentTarget.contains(event.relatedTarget as Node|null))setOpen(null);}}>
       <div className={styles.bar}>
         <Link href="/" className={styles.logo} aria-label="Datta Sable — Home" onClick={closeAll}><span className={styles.logoMark}><LogoIcon color="var(--accent)"/></span><span className={styles.wordmark}><strong>Datta Sable</strong><span>DATA / DESIGN / ENGINEERING</span></span></Link>
-        <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<button key={link.label} type="button" className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(current=>event.detail===0&&current===link.label?null:link.label);}} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></button>:<Link key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</Link>)}</nav>
+        <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<Link key={link.label} href={link.href} className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={closeAll} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></Link>:<Link key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</Link>)}</nav>
         <div className={styles.actions}>
           <div className={styles.theme} onFocusCapture={()=>setOpen(null)}><ThemeToggle/></div>
           {session?<HeaderAccount name={session.user?.name} isAdmin={accountRole?.toUpperCase()==='ADMIN'} onSignOut={()=>signOut()}/>:<Link className={styles.signIn} aria-label="Sign in" href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || "/")}`} onClick={closeAll}><User size={14}/><span>Sign in</span></Link>}
