@@ -1,27 +1,35 @@
 import crypto from 'node:crypto';
 import { getGoogleServiceAccountCredentials } from './google-credentials';
 
-let cachedToken: { token: string; expiresAt: number } | null = null;
+const tokenCache = new Map<string, { token: string; expiresAt: number }>();
 
 /**
  * Generates an OAuth2 access token for Google APIs using the Service Account.
  */
-export async function getGoogleAccessToken(scopes: string[] = ['https://www.googleapis.com/auth/indexing', 'https://www.googleapis.com/auth/webmasters.readonly']): Promise<string | null> {
+export async function getGoogleAccessToken(
+  scopes: string[] = [
+    'https://www.googleapis.com/auth/indexing',
+    'https://www.googleapis.com/auth/webmasters',
+    'https://www.googleapis.com/auth/webmasters.readonly',
+  ]
+): Promise<string | null> {
   const credentials = getGoogleServiceAccountCredentials();
   if (!credentials || !credentials.client_email || !credentials.private_key) {
     return null;
   }
 
+  const scopeKey = [...scopes].sort().join(' ');
   const now = Math.floor(Date.now() / 1000);
-  if (cachedToken && cachedToken.expiresAt > now + 60) {
-    return cachedToken.token;
+  const cached = tokenCache.get(scopeKey);
+  if (cached && cached.expiresAt > now + 60) {
+    return cached.token;
   }
 
   const header = Buffer.from(JSON.stringify({ alg: 'RS256', typ: 'JWT' })).toString('base64url');
   const claim = Buffer.from(
     JSON.stringify({
       iss: credentials.client_email,
-      scope: scopes.join(' '),
+      scope: scopeKey,
       aud: 'https://oauth2.googleapis.com/token',
       exp: now + 3600,
       iat: now,
@@ -45,10 +53,10 @@ export async function getGoogleAccessToken(scopes: string[] = ['https://www.goog
 
     const data = await res.json();
     if (data.access_token) {
-      cachedToken = {
+      tokenCache.set(scopeKey, {
         token: data.access_token,
         expiresAt: now + (data.expires_in || 3600),
-      };
+      });
       return data.access_token;
     }
     console.warn('Google OAuth token error:', data);
@@ -143,7 +151,10 @@ export async function submitUrlToGoogleIndexing(url: string, type: 'URL_UPDATED'
  * Inspects a URL using the official Google Search Console URL Inspection API.
  */
 export async function inspectUrlInGoogleSearchConsole(url: string, siteUrl = 'sc-domain:dattasable.com'): Promise<any> {
-  const token = await getGoogleAccessToken(['https://www.googleapis.com/auth/webmasters.readonly']);
+  const token = await getGoogleAccessToken([
+    'https://www.googleapis.com/auth/webmasters.readonly',
+    'https://www.googleapis.com/auth/webmasters',
+  ]);
   if (!token) {
     return { error: 'Google Service Account credentials not available.' };
   }
