@@ -3,7 +3,7 @@ import AdvertisingPreferencesButton from './AdvertisingPreferencesButton';
 import Link from 'next/link';
 import LogoIcon from './LogoIcon';
 import styles from './Footer.module.css';
-import { ArrowUpRight, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers, ShieldCheck, Lock, Award, CheckCircle2 } from 'lucide-react';
 
 interface NavLink {
   label: string;
@@ -16,6 +16,40 @@ interface NavSection {
   heading: string;
   links: NavLink[];
 }
+
+interface TrustPillar {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  badge: string;
+}
+
+const TRUST_PILLARS: TrustPillar[] = [
+  {
+    icon: ShieldCheck,
+    title: 'Certified BI Specialist',
+    desc: 'Microsoft Certified Power BI & Data Analyst with 10+ years delivering production-grade enterprise intelligence.',
+    badge: 'Microsoft Certified',
+  },
+  {
+    icon: Lock,
+    title: 'Bank-Grade 256-Bit SSL',
+    desc: 'End-to-end TLS security across all sessions, authenticated digital downloads, and protected payment transactions.',
+    badge: '256-Bit SSL / TLS',
+  },
+  {
+    icon: CheckCircle2,
+    title: 'Strict Client Confidentiality',
+    desc: '100% data privacy guarantee. Enterprise NDA standard with zero third-party telemetry or client data sharing.',
+    badge: 'NDA & Privacy',
+  },
+  {
+    icon: Award,
+    title: 'Production Quality Assured',
+    desc: 'Battle-tested formulas, verified DAX models, automated ETL workflows, and transparent audit documentation.',
+    badge: 'Quality Guarantee',
+  },
+];
 
 const NAV_LINKS: NavSection[] = [
   {
@@ -104,6 +138,46 @@ export default function Footer() {
           <Link href="/contact" className={styles.cta}>Let’s talk <ArrowUpRight size={19} aria-hidden="true" /></Link>
         </div>
 
+        {/* ── TRUST & SECURITY SHIELD SECTION ── */}
+        <section className={styles.trustBar} aria-label="Enterprise trust and security assurance">
+          <div className={styles.trustHeader}>
+            <div className={styles.trustBadgeWrapper}>
+              <div className={styles.trustShieldPill}>
+                <span className={styles.trustPulseDot} aria-hidden="true" />
+                <ShieldCheck size={14} className={styles.trustShieldIcon} aria-hidden="true" />
+                <span>Enterprise Trust &amp; Security Shield</span>
+              </div>
+            </div>
+            <div className={styles.trustMetaNote}>
+              <span>Verified independent data practice</span>
+              <span className={styles.trustDivider} aria-hidden="true">·</span>
+              <span>256-Bit SSL / TLS Protected</span>
+              <span className={styles.trustDivider} aria-hidden="true">·</span>
+              <Link href="/certification" className={styles.trustCertLink}>
+                View Certifications <ArrowUpRight size={11} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.trustGrid}>
+            {TRUST_PILLARS.map(item => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className={styles.trustCard}>
+                  <div className={styles.trustCardTop}>
+                    <div className={styles.trustIconWrap}>
+                      <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                    </div>
+                    <span className={styles.trustTag}>{item.badge}</span>
+                  </div>
+                  <h4 className={styles.trustTitle}>{item.title}</h4>
+                  <p className={styles.trustDesc}>{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
         <div className={styles.main}>
           <div className={styles.brand}>
             <Link href="/" className={styles.logo} aria-label="Datta Sable — Home">
@@ -111,6 +185,18 @@ export default function Footer() {
               <span>Datta Sable<span className={styles.brandCaption}>Business intelligence &amp; data strategy</span></span>
             </Link>
             <p className={styles.description}>Turning complex data into clear, practical solutions. Independent BI consulting, automated reporting, and data engineering from India.</p>
+
+            {/* Brand Card Trust Badge */}
+            <div className={styles.brandTrustBadge}>
+              <div className={styles.brandTrustIcon}>
+                <ShieldCheck size={16} aria-hidden="true" />
+              </div>
+              <div className={styles.brandTrustText}>
+                <strong>Verified BI &amp; Analytics Practice</strong>
+                <span>Microsoft Certified · End-to-End SSL Protection</span>
+              </div>
+            </div>
+
             <div className={styles.contact}>
               <a href="mailto:info@dattasable.com"><Mail size={16} aria-hidden="true" /><span>info@dattasable.com</span><ArrowUpRight size={13} aria-hidden="true" /></a>
               <a href="tel:+918010803756"><Phone size={16} aria-hidden="true" /><span>+91 8010803756</span></a>
