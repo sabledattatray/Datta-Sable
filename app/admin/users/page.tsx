@@ -15,7 +15,11 @@ import {
   Activity,
   FileSpreadsheet,
   Download,
-  Check
+  Check,
+  Pencil,
+  X,
+  AlertTriangle,
+  Save
 } from 'lucide-react';
 
 interface UserRecord {
@@ -42,6 +46,24 @@ export default function UsersSubscribersAdmin() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Edit User State
+  const [editingUser, setEditingUser] = useState<UserRecord | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editEmail, setEditEmail] = useState('');
+  const [editRole, setEditRole] = useState<'USER' | 'ADMIN'>('USER');
+  const [editSaving, setEditSaving] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
+
+  // Delete Confirmation State
+  const [deletingTarget, setDeletingTarget] = useState<{
+    type: 'user' | 'subscriber';
+    id: string;
+    name?: string;
+    email?: string;
+  } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
   const fetchRecords = () => {
     setLoading(true);
     fetch('/api/admin/users')
@@ -63,23 +85,91 @@ export default function UsersSubscribersAdmin() {
     fetchRecords();
   }, []);
 
-  const handleDelete = async (type: 'user' | 'subscriber', id: string) => {
-    if (!confirm(`Are you sure you want to delete this ${type}?`)) return;
+  const handleOpenEdit = (user: UserRecord) => {
+    setEditingUser(user);
+    setEditName(user.name === 'Anonymous' ? '' : user.name);
+    setEditEmail(user.email || '');
+    setEditRole(user.role === 'ADMIN' ? 'ADMIN' : 'USER');
+    setEditError(null);
+  };
+
+  const handleCloseEdit = () => {
+    if (editSaving) return;
+    setEditingUser(null);
+    setEditError(null);
+  };
+
+  const handleSaveEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingUser) return;
+    setEditSaving(true);
+    setEditError(null);
+
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: editingUser.id,
+          name: editName,
+          email: editEmail,
+          role: editRole
+        })
+      });
+      const data = await res.json();
+      if (data.success && data.user) {
+        setUsers(prev => prev.map(u => u.id === data.user.id ? { ...u, ...data.user } : u));
+        setEditingUser(null);
+        setExportNotice(`User "${data.user.name}" updated successfully!`);
+        setTimeout(() => setExportNotice(null), 4000);
+      } else {
+        setEditError(data.error || 'Failed to update user account.');
+      }
+    } catch (err: any) {
+      console.error('Failed to update user:', err);
+      setEditError(err.message || 'Network error while saving user.');
+    } finally {
+      setEditSaving(false);
+    }
+  };
+
+  const handleOpenDelete = (type: 'user' | 'subscriber', id: string, name?: string, email?: string) => {
+    setDeletingTarget({ type, id, name, email });
+    setDeleteError(null);
+  };
+
+  const handleCloseDelete = () => {
+    if (isDeleting) return;
+    setDeletingTarget(null);
+    setDeleteError(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deletingTarget) return;
+    setIsDeleting(true);
+    setDeleteError(null);
 
     try {
       const res = await fetch('/api/admin/users', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, id })
+        body: JSON.stringify({ type: deletingTarget.type, id: deletingTarget.id })
       });
       const data = await res.json();
       if (data.success) {
+        const deletedLabel = deletingTarget.name || deletingTarget.email || deletingTarget.type;
+        setDeletingTarget(null);
         fetchRecords();
+        setExportNotice(`Successfully deleted ${deletedLabel}!`);
+        setTimeout(() => setExportNotice(null), 4000);
       } else {
-        alert(`Delete failed: ${data.error}`);
+        setDeleteError(data.error || 'Failed to delete record.');
       }
-    } catch (err) {
-      console.error(`Failed to delete ${type}:`, err);
+    } catch (err: any) {
+      console.error(`Failed to delete ${deletingTarget.type}:`, err);
+      setDeleteError(err.message || 'Network error occurred during deletion.');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -377,14 +467,43 @@ export default function UsersSubscribersAdmin() {
                       <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
                         {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'N/A'}
                       </td>
-                      <td className={adminStyles.td} style={{ textAlign: 'right' }}>
-                        <button
-                          onClick={() => handleDelete('user', user.id)}
-                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px' }}
-                          title="Delete User"
-                        >
-                          <Trash2 size={15} />
-                        </button>
+                      <td className={adminStyles.td} style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', justifyContent: 'flex-end' }}>
+                          <button
+                            onClick={() => handleOpenEdit(user)}
+                            className={adminStyles.secondary}
+                            style={{
+                              minHeight: '32px',
+                              padding: '5px 11px',
+                              fontSize: '11px',
+                              borderRadius: '6px',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '5px'
+                            }}
+                            title={`Edit ${user.name}`}
+                          >
+                            <Pencil size={12} />
+                            <span>Edit</span>
+                          </button>
+                          <button
+                            onClick={() => handleOpenDelete('user', user.id, user.name, user.email)}
+                            className={adminStyles.danger}
+                            style={{
+                              minHeight: '32px',
+                              padding: '5px 11px',
+                              fontSize: '11px',
+                              borderRadius: '6px',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '5px'
+                            }}
+                            title={`Delete ${user.name}`}
+                          >
+                            <Trash2 size={12} />
+                            <span>Delete</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -426,13 +545,23 @@ export default function UsersSubscribersAdmin() {
                       <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
                         {new Date(sub.createdAt).toLocaleString()}
                       </td>
-                      <td className={adminStyles.td} style={{ textAlign: 'right' }}>
+                      <td className={adminStyles.td} style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                         <button
-                          onClick={() => handleDelete('subscriber', sub.id)}
-                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px' }}
+                          onClick={() => handleOpenDelete('subscriber', sub.id, undefined, sub.email)}
+                          className={adminStyles.danger}
+                          style={{
+                            minHeight: '32px',
+                            padding: '5px 11px',
+                            fontSize: '11px',
+                            borderRadius: '6px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px'
+                          }}
                           title="Delete / Unsubscribe"
                         >
-                          <Trash2 size={15} />
+                          <Trash2 size={12} />
+                          <span>Delete</span>
                         </button>
                       </td>
                     </tr>
@@ -450,7 +579,307 @@ export default function UsersSubscribersAdmin() {
           )}
         </div>
       )}
-      
+
+      {/* ── EDIT USER MODAL ── */}
+      {editingUser && (
+        <div className={adminStyles.modalOverlay} onClick={handleCloseEdit}>
+          <div 
+            className={adminStyles.modalContent} 
+            style={{ maxWidth: 520 }} 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={adminStyles.modalHeader}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 10,
+                  background: 'color-mix(in srgb, var(--accent) 12%, var(--surface))',
+                  border: '1px solid color-mix(in srgb, var(--accent) 25%, var(--border))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--accent)'
+                }}>
+                  <Pencil size={16} />
+                </div>
+                <div>
+                  <h3 style={{ margin: 0, fontSize: 16 }}>Edit User Account</h3>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
+                    ID: <span style={{ fontFamily: 'monospace' }}>{editingUser.id}</span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={handleCloseEdit} 
+                className={adminStyles.modalClose} 
+                title="Close Modal" 
+                disabled={editSaving}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Account Overview Card */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 14px',
+              background: 'var(--surface2)',
+              border: '1px solid var(--border)',
+              borderRadius: 10,
+              marginBottom: 20
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 8,
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden'
+                }}>
+                  {editingUser.image ? (
+                    <img src={editingUser.image} alt={editingUser.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <User size={15} style={{ color: 'var(--muted)' }} />
+                  )}
+                </div>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
+                    {editingUser.name || 'Anonymous User'}
+                  </div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>
+                    Joined {new Date(editingUser.createdAt).toLocaleDateString()}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                {editingUser.provider === 'google' ? (
+                  <span className={adminStyles.badge}>
+                    <Globe size={11} /> Google One Tap
+                  </span>
+                ) : (
+                  <span className={adminStyles.badgeNeutral}>
+                    <Key size={11} /> Local Auth
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Error Notification inside modal */}
+            {editError && (
+              <div style={{
+                padding: '10px 14px',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                borderRadius: 8,
+                color: '#ef4444',
+                fontSize: 12,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                marginBottom: 16
+              }}>
+                <AlertTriangle size={15} style={{ flexShrink: 0 }} />
+                <span>{editError}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSaveEdit}>
+              <div className={adminStyles.field}>
+                <label className={adminStyles.label}>Full Name</label>
+                <input
+                  type="text"
+                  className={adminStyles.input}
+                  placeholder="e.g. John Doe"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  disabled={editSaving}
+                />
+              </div>
+
+              <div className={adminStyles.field}>
+                <label className={adminStyles.label}>Email Address</label>
+                <input
+                  type="email"
+                  className={adminStyles.input}
+                  placeholder="user@example.com"
+                  value={editEmail}
+                  onChange={(e) => setEditEmail(e.target.value)}
+                  required
+                  disabled={editSaving}
+                />
+              </div>
+
+              <div className={adminStyles.field}>
+                <label className={adminStyles.label}>Access Role</label>
+                <select
+                  className={adminStyles.select}
+                  value={editRole}
+                  onChange={(e) => setEditRole(e.target.value as 'USER' | 'ADMIN')}
+                  disabled={editSaving}
+                >
+                  <option value="USER">USER — Standard Access (Browsing &amp; Purchases)</option>
+                  <option value="ADMIN">ADMIN — Full Administrator Privileges</option>
+                </select>
+                <span style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4 }}>
+                  {editRole === 'ADMIN' 
+                    ? '⚠️ Grants full access to CMS, Orders, Settings, and User Management.' 
+                    : 'Standard user access without administrative privileges.'}
+                </span>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: 10,
+                marginTop: 24,
+                paddingTop: 16,
+                borderTop: '1px solid var(--border)'
+              }}>
+                <button
+                  type="button"
+                  onClick={handleCloseEdit}
+                  className={adminStyles.secondary}
+                  disabled={editSaving}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className={adminStyles.primary}
+                  disabled={editSaving}
+                >
+                  {editSaving ? (
+                    <>
+                      <Activity size={14} className="animate-spin" />
+                      <span>Saving Changes...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save size={14} />
+                      <span>Save Changes</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── DELETE CONFIRMATION MODAL ── */}
+      {deletingTarget && (
+        <div className={adminStyles.modalOverlay} onClick={handleCloseDelete}>
+          <div 
+            className={adminStyles.modalContent} 
+            style={{ maxWidth: 460 }} 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ textAlign: 'center', padding: '10px 0 16px' }}>
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                color: '#ef4444',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 14
+              }}>
+                <AlertTriangle size={24} />
+              </div>
+
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>
+                {deletingTarget.type === 'user' ? 'Delete User Account?' : 'Unsubscribe Contact?'}
+              </h3>
+
+              <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0, lineHeight: 1.6 }}>
+                {deletingTarget.type === 'user' ? (
+                  <>
+                    Are you sure you want to permanently delete{' '}
+                    <strong style={{ color: 'var(--text)' }}>
+                      {deletingTarget.name || deletingTarget.email || 'this user'}
+                    </strong>
+                    {deletingTarget.email && ` (${deletingTarget.email})`}?
+                    <br />
+                    This will delete linked OAuth accounts, active sessions, and revoke all permissions.
+                  </>
+                ) : (
+                  <>
+                    Are you sure you want to remove{' '}
+                    <strong style={{ color: 'var(--text)' }}>{deletingTarget.email}</strong>{' '}
+                    from the newsletter subscriber list?
+                  </>
+                )}
+              </p>
+            </div>
+
+            {deleteError && (
+              <div style={{
+                padding: '10px 14px',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                borderRadius: 8,
+                color: '#ef4444',
+                fontSize: 12,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                margin: '12px 0'
+              }}>
+                <AlertTriangle size={15} style={{ flexShrink: 0 }} />
+                <span>{deleteError}</span>
+              </div>
+            )}
+
+            <div style={{
+              display: 'flex',
+              gap: 10,
+              marginTop: 20,
+              paddingTop: 16,
+              borderTop: '1px solid var(--border)'
+            }}>
+              <button
+                type="button"
+                onClick={handleCloseDelete}
+                className={adminStyles.secondary}
+                style={{ flex: 1 }}
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmDelete}
+                className={adminStyles.danger}
+                style={{ flex: 1 }}
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <>
+                    <Activity size={14} className="animate-spin" />
+                    <span>Deleting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Trash2 size={14} />
+                    <span>Confirm Delete</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
