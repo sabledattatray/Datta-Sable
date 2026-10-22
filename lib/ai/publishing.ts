@@ -35,7 +35,7 @@ export function injectInternalLinks(
         if (lines[l].trim().startsWith('#')) continue;
         const regex = new RegExp(`\\b(${escaped})\\b`, 'i');
         if (regex.test(lines[l])) {
-          lines[l] = lines[l].replace(regex, (match) => `[${match}](/blog/${link.targetSlug})`);
+          lines[l] = lines[l].replace(regex, (match) => `<a href="/blog/${link.targetSlug}">${match}</a>`);
           replaced = true;
           break;
         }
@@ -69,6 +69,9 @@ export function formatArticleContent(
   if (internalLinks && Array.isArray(internalLinks) && internalLinks.length > 0) {
     processed = injectInternalLinks(processed, internalLinks);
   }
+
+  // 3. Convert any remaining unrendered markdown links [text](url) into proper HTML anchors
+  processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 
   return processed;
 }
