@@ -41,7 +41,7 @@ export async function approveAndPublishDraft({
   }
 
   // Ensure unique slug in Post table
-  let finalSlug = draft.slug;
+  const finalSlug = draft.slug;
   const existingPost = await prisma.post.findUnique({
     where: { slug: finalSlug },
   });
