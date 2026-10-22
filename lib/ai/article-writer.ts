@@ -14,6 +14,36 @@ export interface GenerateArticleOptions {
   tier?: ArticleLengthTier;
   operatingMode?: OperatingMode;
   targetKeywords?: string[];
+  featuredImage?: string;
+}
+
+export function resolveFeaturedImage(topic: string, category: string, explicitImage?: string): string {
+  if (explicitImage) return explicitImage;
+  const lowerTopic = (topic || '').toLowerCase();
+  const lowerCat = (category || '').toLowerCase();
+
+  if (lowerTopic.includes('direct lake')) {
+    return '/images/blog/advanced-power-bi-direct-lake-performance-tuning.webp';
+  }
+  if (lowerTopic.includes('warehouse') || lowerTopic.includes('sizing')) {
+    return '/images/blog/Microsoft Fabric Warehouse Guide.webp';
+  }
+  if (lowerCat.includes('fabric') || lowerTopic.includes('fabric') || lowerTopic.includes('onelake')) {
+    return '/images/blog/microsoft-fabric-ultimate-guide.webp';
+  }
+  if (lowerCat.includes('power bi') || lowerTopic.includes('power bi') || lowerTopic.includes('dax')) {
+    return '/images/blog/bi_performance_hero_1777410226286.webp';
+  }
+  if (lowerCat.includes('ai') || lowerTopic.includes('agent') || lowerTopic.includes('prompt') || lowerTopic.includes('llm')) {
+    return '/images/blog/architecting-production-multi-agent-ai-systems-featured.webp';
+  }
+  if (lowerCat.includes('sql') || lowerTopic.includes('sql') || lowerTopic.includes('database')) {
+    return '/images/blog/sql-server-columnstore-indexes-optimization-guide.webp';
+  }
+  if (lowerCat.includes('security') || lowerTopic.includes('security') || lowerTopic.includes('cyber')) {
+    return '/images/blog/cybersecurity-cloud-security-guide-2026.webp';
+  }
+  return '/images/blog/microsoft-fabric-architecture-explained-2026.webp';
 }
 
 export async function generateArticleDraft({
@@ -23,6 +53,7 @@ export async function generateArticleDraft({
   tier = 'COMPREHENSIVE',
   operatingMode = 'ASSISTED',
   targetKeywords = [],
+  featuredImage,
 }: GenerateArticleOptions) {
   await ensureAiStudioSchema();
 
@@ -139,6 +170,7 @@ Respond ONLY with valid JSON:
       content,
       readTime,
       wordCount: words,
+      featuredImage: resolveFeaturedImage(topic, category, featuredImage),
       targetKeywords: [...new Set([...targetKeywords, ...seo.targetKeywords])],
       seoTitle: seo.seoTitle,
       seoDescription: seo.seoDescription,

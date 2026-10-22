@@ -54,6 +54,7 @@ const MCP_TOOLS = [
         tier: { type: 'string', enum: ['STANDARD', 'COMPREHENSIVE', 'DEEP_TECHNICAL'], description: 'Word count target tier' },
         operatingMode: { type: 'string', enum: ['MANUAL', 'ASSISTED', 'AUTONOMOUS'], description: 'Publishing workflow mode' },
         targetKeywords: { type: 'array', items: { type: 'string' }, description: 'Optional list of custom target SEO keywords to prioritize' },
+        featuredImage: { type: 'string', description: 'Optional URL or path to featured cover image' },
       },
       required: ['topic', 'category'],
     },
@@ -402,6 +403,7 @@ export async function POST(req: Request) {
             tier: args.tier || 'COMPREHENSIVE',
             operatingMode: args.operatingMode || 'ASSISTED',
             targetKeywords: Array.isArray(args.targetKeywords) ? args.targetKeywords : undefined,
+            featuredImage: args.featuredImage || undefined,
           });
           break;
 
