@@ -148,6 +148,9 @@ export const authOptions: NextAuthOptions = {
               status: "SUCCESS",
               details: `User logged in via ${account?.provider || 'credentials'}`,
             }
+          }).catch(() => {
+            // Observability failures must not invalidate an authenticated database user.
+            console.error('Failed to record login audit event.');
           });
 
           token.id = dbUser.id;

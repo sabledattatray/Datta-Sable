@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import AdminDashboardWrapper from '@/app/admin/AdminDashboardWrapper';
 
 export default function AdminAccess({ children }: { children: React.ReactNode }) {
@@ -26,31 +26,28 @@ export default function AdminAccess({ children }: { children: React.ReactNode })
       return;
     }
 
-    // If authenticated but not an admin, redirect to home page
-    // Note: We check if status is specifically 'authenticated' to avoid race conditions
-    if (status === 'authenticated' && !isAuthPath && pathname !== '/admin/login') {
-      if ((session?.user as any)?.role !== 'ADMIN') {
-        console.warn('Access denied: User role is not ADMIN. Redirecting to home.');
-        router.push('/');
-      }
-    }
   }, [mounted, status, pathname, router, session, isAuthPath]);
 
   if (!mounted || status === 'loading') return null;
 
   // Allow new auth paths to be rendered with the wrapper (for router context)
   if (isAuthPath) {
-    return (
-      <AdminDashboardWrapper>
-        {children}
-      </AdminDashboardWrapper>
-    );
+    return <>{children}</>;
   }
 
   // Prevent flicker: Do not render admin wrapper if not an admin
   const isAdmin = status === 'authenticated' && (session?.user as any)?.role === 'ADMIN';
 
   if (!isAdmin) {
+    if (status === 'authenticated') {
+      return (
+        <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-8 text-center">
+          <h1>Admin access unavailable</h1>
+          <p>Your current session does not have administrator access. Sign in with your admin account. If this is your admin account, check its role and the production authentication logs.</p>
+          <button onClick={() => signOut({ callbackUrl: '/admin/login' })}>Sign out and try again</button>
+        </main>
+      );
+    }
     return null;
   }
 
