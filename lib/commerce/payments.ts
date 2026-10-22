@@ -36,8 +36,10 @@ export async function initiate(user: { id: string; email: string | null; name: s
     if (!approved.includes(product.currency)) throw new CommerceError('Checkout currency is awaiting account confirmation.', 503);
     if (await tx.commerceEntitlement.findFirst({ where: { productId, status: 'ACTIVE', order: { userId: user.id } } })) throw new CommerceError('You already own this product. Open My Purchases.', 409);
     if (await tx.commerceOrder.findFirst({ where: { userId: user.id, status: 'PENDING', items: { some: { productId } } } })) throw new CommerceError('A pending order already exists. Resume or reconcile it from My Orders before starting another.', 409);
+    const mode = process.env.RAZORPAY_KEY_ID?.startsWith('rzp_live_') ? 'live' : 'test';
     return tx.commerceOrder.create({ data: {
       number: `DS-${new Date().getUTCFullYear()}-${randomUUID()}`, userId: user.id, customerEmail: user.email!, customerName: user.name || 'Customer', requestKey,
+      mode,
       totalMinor: product.priceMinor, currency: product.currency, displayedMinor: product.priceMinor, displayedCurrency: product.currency,
       items: { create: { productId, title: product.title, unitPriceMinor: product.priceMinor, currency: product.currency } },
     } });

@@ -5,23 +5,21 @@ CREATE TABLE IF NOT EXISTS "AiTopicOpportunity" (
   "id" TEXT NOT NULL,
   "topic" TEXT NOT NULL,
   "category" TEXT NOT NULL,
-  "targetAudience" TEXT NOT NULL,
-  "searchIntent" TEXT NOT NULL,
-  "estimatedDemand" INTEGER NOT NULL DEFAULT 50,
-  "competitionScore" INTEGER NOT NULL DEFAULT 50,
-  "contentGapScore" INTEGER NOT NULL DEFAULT 50,
-  "priorityScore" INTEGER NOT NULL DEFAULT 50,
-  "suggestedKeywords" TEXT[] NOT NULL DEFAULT '{}',
-  "status" TEXT NOT NULL DEFAULT 'DISCOVERED',
+  "targetAudience" TEXT,
+  "searchIntent" TEXT NOT NULL DEFAULT 'INFORMATIONAL',
+  "opportunityScore" DOUBLE PRECISION NOT NULL DEFAULT 0,
+  "searchDemand" TEXT,
+  "competition" TEXT,
+  "contentGapRationale" TEXT,
+  "source" TEXT NOT NULL DEFAULT 'DISCOVERY',
+  "status" TEXT NOT NULL DEFAULT 'IDENTIFIED',
   "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   CONSTRAINT "AiTopicOpportunity_pkey" PRIMARY KEY ("id")
 );
 
-CREATE INDEX IF NOT EXISTS "AiTopicOpportunity_category_idx" ON "AiTopicOpportunity"("category");
-CREATE INDEX IF NOT EXISTS "AiTopicOpportunity_priorityScore_idx" ON "AiTopicOpportunity"("priorityScore");
-CREATE INDEX IF NOT EXISTS "AiTopicOpportunity_status_idx" ON "AiTopicOpportunity"("status");
+CREATE INDEX IF NOT EXISTS "AiTopicOpportunity_category_status_idx" ON "AiTopicOpportunity"("category", "status");
 
 CREATE TABLE IF NOT EXISTS "AiResearchBrief" (
   "id" TEXT NOT NULL,
