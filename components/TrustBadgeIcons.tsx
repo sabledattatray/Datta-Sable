@@ -6,77 +6,177 @@ export interface TrustBadgeProps {
 }
 
 /**
- * 1. Microsoft Certified Professional Badge
- * Exactly matches the official Microsoft Certification badge:
- * Circular medallion with top-left ribbon tab, official Microsoft 4-color square logo,
- * MCSE credentials, and official gold Data & Analytics banner.
+ * 1. Microsoft Certified: Power BI Data Analyst Associate Badge
+ * Exactly matches the official Microsoft role-based certification badge:
+ * - Cerulean Blue shield with top gable roof and lower curved point
+ * - Top charcoal slate panel with white "Microsoft CERTIFIED"
+ * - Arched center white ribbon banner with dark charcoal outline and bold "POWER BI DATA ANALYST"
+ * - Bottom Cerulean Blue shield with white "ASSOCIATE" and two 5-point white stars
  */
 export function MicrosoftCertifiedBadge({ className = '', size = 46 }: TrustBadgeProps) {
+  const badgeHeight = Math.round(size * 1.15);
+
   return (
     <svg
-      viewBox="0 0 100 100"
+      viewBox="0 0 200 230"
       width={size}
-      height={size}
+      height={badgeHeight}
       className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="Microsoft Certified Professional Badge"
+      aria-label="Microsoft Certified: Power BI Data Analyst Associate Badge"
     >
       <defs>
-        <filter id="msBadgeShadow" x="0" y="0" width="100" height="100" filterUnits="userSpaceOnUse">
-          <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#000000" floodOpacity="0.22" />
+        <filter id="msCertBadgeDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3.5" floodColor="#000000" floodOpacity="0.28" />
         </filter>
-        <linearGradient id="msBlueGrad" x1="12" y1="8" x2="94" y2="92" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#0078D4" />
-          <stop offset="0.6" stopColor="#005A9E" />
-          <stop offset="1" stopColor="#004578" />
-        </linearGradient>
+        <filter id="msCertBannerDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#000000" floodOpacity="0.22" />
+        </filter>
       </defs>
 
-      {/* Official Outer Silhouette: Top-Left Tab + Circle */}
-      <g filter="url(#msBadgeShadow)">
+      {/* Base Shield (Official Microsoft Cerulean Blue #0078D4) */}
+      <g filter="url(#msCertBadgeDrop)">
         <path
-          d="M 14 16 C 14 10 18 7 24 7 L 54 7 C 76.6 7 95 25.4 95 48 C 95 70.6 76.6 89 54 89 C 31.4 89 14 70.6 14 48 Z"
-          fill="url(#msBlueGrad)"
+          d="M 100 7
+             L 169 30
+             C 172.5 31.2 174.5 34 174.5 37.5
+             L 174.5 116
+             C 174.5 168 136 211 100 226
+             C 64 211 25.5 168 25.5 116
+             L 25.5 37.5
+             C 25.5 34 27.5 31.2 31 30
+             Z"
+          fill="#0078D4"
         />
       </g>
 
-      {/* Top-Left Document Glyph inside Ribbon Tab */}
-      <rect x="18" y="11" width="13" height="15" rx="2" fill="#FFFFFF" />
-      <rect x="21" y="14" width="4" height="2" fill="#0078D4" />
-      <rect x="21" y="18" width="7" height="1.5" fill="#0078D4" />
-      <rect x="21" y="21" width="5" height="1.5" fill="#0078D4" />
+      {/* Inner Facet / Contour inside Blue Shield Bottom */}
+      <path
+        d="M 100 220
+           C 131 206 163 166 164 122
+           L 145 122
+           C 142 154 121 184 100 196
+           C 79 184 58 154 55 122
+           L 36 122
+           C 37 166 69 206 100 220
+           Z"
+        fill="#005A9E"
+        opacity={0.4}
+      />
 
-      {/* Main Inner White Badge Circle */}
-      <circle cx="54" cy="49" r="36" fill="#FFFFFF" stroke="#0078D4" strokeWidth="2.5" />
-      <circle cx="54" cy="49" r="32" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="4.5" />
+      {/* Top Charcoal Panel (Official Microsoft Credential #444444) */}
+      <path
+        d="M 100 18.5
+           L 161 38.5
+           L 161 108
+           L 39 108
+           L 39 38.5
+           Z"
+        fill="#444444"
+      />
 
-      {/* Official Microsoft 4-Color Logo (Prominent 15x15) */}
-      <g transform="translate(46.5, 20)">
-        <rect x="0" y="0" width="7" height="7" fill="#F25022" />
-        <rect x="8" y="0" width="7" height="7" fill="#7FBA00" />
-        <rect x="0" y="8" width="7" height="7" fill="#00A4EF" />
-        <rect x="8" y="8" width="7" height="7" fill="#FFB900" />
+      {/* Top Text: Microsoft */}
+      <text
+        x="100"
+        y="56"
+        fontFamily="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        fontSize="19"
+        fontWeight="600"
+        fill="#FFFFFF"
+        textAnchor="middle"
+      >
+        Microsoft
+      </text>
+
+      {/* Top Text: CERTIFIED */}
+      <text
+        x="101"
+        y="77.5"
+        fontFamily="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        fontSize="13"
+        fontWeight="700"
+        letterSpacing="4px"
+        fill="#FFFFFF"
+        textAnchor="middle"
+      >
+        CERTIFIED
+      </text>
+
+      {/* Bottom Blue Shield Text: ASSOCIATE */}
+      <text
+        x="100"
+        y="170"
+        fontFamily="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        fontSize="15"
+        fontWeight="800"
+        letterSpacing="2.8px"
+        fill="#FFFFFF"
+        textAnchor="middle"
+      >
+        ASSOCIATE
+      </text>
+
+      {/* Left White 5-Point Star */}
+      <polygon
+        points="85,181.5 88.6,191.5 99,192.5 91.2,199 94,209.5 85,203.5 76,209.5 78.8,199 71,192.5 81.4,191.5"
+        fill="#FFFFFF"
+      />
+
+      {/* Right White 5-Point Star */}
+      <polygon
+        points="115,181.5 118.6,191.5 129,192.5 121.2,199 124,209.5 115,203.5 106,209.5 108.8,199 101,192.5 111.4,191.5"
+        fill="#FFFFFF"
+      />
+
+      {/* Center Arched White Banner Ribbon */}
+      <g filter="url(#msCertBannerDrop)">
+        {/* Arched Ribbon Outline & Fill */}
+        <path
+          d="M 18 99
+             Q 100 84 182 99
+             C 187 100 189.5 103.5 188.5 108.5
+             L 183.5 144
+             C 182.5 149 178.5 152 173 151
+             Q 100 137 27 151
+             C 21.5 152 17.5 149 16.5 144
+             L 11.5 108.5
+             C 10.5 103.5 13 100 18 99
+             Z"
+          fill="#FFFFFF"
+          stroke="#3C3C3C"
+          strokeWidth={5}
+          strokeLinejoin="round"
+        />
+
+        {/* Text inside Banner: POWER BI (Arched Center) */}
+        <text
+          x="100"
+          y="118.5"
+          fontFamily="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          fontSize="19.5"
+          fontWeight="900"
+          letterSpacing="1.2px"
+          fill="#141414"
+          textAnchor="middle"
+        >
+          POWER BI
+        </text>
+
+        {/* Text inside Banner: DATA ANALYST */}
+        <text
+          x="100"
+          y="141"
+          fontFamily="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          fontSize="16.5"
+          fontWeight="900"
+          letterSpacing="0.8px"
+          fill="#141414"
+          textAnchor="middle"
+        >
+          DATA ANALYST
+        </text>
       </g>
-
-      {/* "MICROSOFT CERTIFIED" Header */}
-      <text x="54" y="44" fontFamily="'Segoe UI', Roboto, sans-serif" fontSize="5.6" fontWeight="800" fill="#1E293B" textAnchor="middle" letterSpacing="0.4">
-        MICROSOFT
-      </text>
-      <text x="54" y="52" fontFamily="'Segoe UI', Roboto, sans-serif" fontSize="9" fontWeight="900" fill="#0078D4" textAnchor="middle" letterSpacing="0.6">
-        MCSE
-      </text>
-
-      {/* Official Gold Banner */}
-      <rect x="22" y="58" width="64" height="12" rx="2.5" fill="#FFB900" stroke="#D97706" strokeWidth="0.8" />
-      <text x="54" y="66.5" fontFamily="'Segoe UI', Roboto, sans-serif" fontSize="5.4" fontWeight="900" fill="#000000" textAnchor="middle" letterSpacing="0.4">
-        DATA &amp; ANALYTICS
-      </text>
-
-      {/* Bottom Subtitle */}
-      <text x="54" y="78" fontFamily="'Segoe UI', Roboto, sans-serif" fontSize="4.8" fontWeight="700" fill="#475569" textAnchor="middle">
-        Certified Professional
-      </text>
     </svg>
   );
 }

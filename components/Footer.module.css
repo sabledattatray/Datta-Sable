@@ -164,7 +164,7 @@
 
 .trustIconWrap {
   width: 46px;
-  height: 46px;
+  min-height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,7 +220,7 @@
 
 .brandTrustIcon {
   width: 32px;
-  height: 32px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
