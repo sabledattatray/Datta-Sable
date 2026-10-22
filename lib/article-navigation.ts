@@ -1,4 +1,5 @@
 import { load } from 'cheerio';
+import { marked } from 'marked';
 
 export type ArticleHeading = { id: string; text: string; level: 2 | 3 };
 type ContentBlock = { type: string; content: string; [key: string]: unknown };
@@ -17,10 +18,22 @@ function isContentsTitle(text: string) {
 // are retained; the navigator is derived from the headings actually displayed.
 export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & { headings: ArticleHeading[] } {
   const hasBlocks = Boolean(post.blocks?.length);
+  let rawContent = post.content || '';
+
+  const isMarkdown = !hasBlocks && (
+    /^#{1,6}\s|[^\n]\n#{1,6}\s/m.test(rawContent) ||
+    (!rawContent.includes('<h2') && !rawContent.includes('<p>') && rawContent.includes('##'))
+  );
+
+  if (isMarkdown) {
+    rawContent = marked.parse(rawContent, { gfm: true, breaks: false }) as string;
+    rawContent = rawContent.replace(/<p>\s*(\[\[diagram:[a-zA-Z0-9-_]+\]\])\s*<\/p>/g, '$1');
+  }
+
   const renderedBlocks = new Set(['paragraph', 'heading', 'list', 'quote', 'html', 'callout']);
   const fragments = hasBlocks
     ? post.blocks!.map((block, index) => ({ index, html: renderedBlocks.has(block.type) ? block.content || '' : '' }))
-    : [{ index: -1, html: post.content || '' }];
+    : [{ index: -1, html: rawContent }];
   const documents = fragments.map(fragment => ({ ...fragment, $: load(fragment.html, null, false) }));
 
   for (const { $ } of documents) {

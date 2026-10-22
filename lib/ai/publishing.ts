@@ -1,8 +1,77 @@
 import { revalidatePath } from 'next/cache';
+import { marked } from 'marked';
 import { prisma } from '../prisma';
 import { ensureAiStudioSchema } from './schema';
 import { logAiAudit } from './audit';
 import { AI_SETTING_KEYS, OPERATING_MODES } from './config';
+
+export function injectInternalLinks(
+  content: string,
+  links: Array<{ text: string; targetSlug: string }>
+): string {
+  if (!links || !links.length) return content;
+  let result = content;
+
+  for (const link of links) {
+    if (!link.text || !link.targetSlug) continue;
+    const escaped = link.text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const parts = result.split(/(```[\s\S]*?```|`[^`]+`|<a\b[^>]*>[\s\S]*?<\/a>|\[[^\]]+\]\([^\)]+\))/gi);
+    let replaced = false;
+
+    for (let i = 0; i < parts.length; i++) {
+      if (replaced) break;
+      const part = parts[i];
+      if (
+        part.startsWith('```') ||
+        part.startsWith('`') ||
+        part.startsWith('<a') ||
+        part.startsWith('[')
+      ) {
+        continue;
+      }
+
+      const lines = part.split('\n');
+      for (let l = 0; l < lines.length; l++) {
+        if (lines[l].trim().startsWith('#')) continue;
+        const regex = new RegExp(`\\b(${escaped})\\b`, 'i');
+        if (regex.test(lines[l])) {
+          lines[l] = lines[l].replace(regex, (match) => `[${match}](/blog/${link.targetSlug})`);
+          replaced = true;
+          break;
+        }
+      }
+      if (replaced) {
+        parts[i] = lines.join('\n');
+      }
+    }
+    result = parts.join('');
+  }
+
+  return result;
+}
+
+export function formatArticleContent(
+  rawContent: string,
+  internalLinks?: Array<{ text: string; targetSlug: string }>
+): string {
+  let processed = rawContent || '';
+
+  // 1. Inject internal links into content
+  if (internalLinks && Array.isArray(internalLinks) && internalLinks.length > 0) {
+    processed = injectInternalLinks(processed, internalLinks);
+  }
+
+  // 2. Parse Markdown to HTML if needed
+  const isMarkdown = /^#{1,6}\s|[^\n]\n#{1,6}\s/m.test(processed) ||
+    (!processed.includes('<h2') && !processed.includes('<p>') && processed.includes('##'));
+
+  if (isMarkdown) {
+    processed = marked.parse(processed, { gfm: true, breaks: false }) as string;
+    processed = processed.replace(/<p>\s*(\[\[diagram:[a-zA-Z0-9-_]+\]\])\s*<\/p>/g, '$1');
+  }
+
+  return processed;
+}
 
 export async function approveAndPublishDraft({
   draftId,
@@ -52,6 +121,9 @@ export async function approveAndPublishDraft({
     year: 'numeric',
   });
 
+  // Prepare clean semantic HTML with injected internal links
+  const finalContent = formatArticleContent(draft.content, draft.internalLinks as any);
+
   let post: any;
 
   if (existingPost) {
@@ -61,7 +133,7 @@ export async function approveAndPublishDraft({
       data: {
         title: draft.title,
         excerpt: draft.excerpt,
-        content: draft.content,
+        content: finalContent,
         category: draft.category,
         readTime: Number(draft.readTime) || 5,
         image: draft.featuredImage || existingPost.image,
@@ -75,7 +147,7 @@ export async function approveAndPublishDraft({
         title: draft.title,
         slug: finalSlug,
         excerpt: draft.excerpt,
-        content: draft.content,
+        content: finalContent,
         category: draft.category,
         readTime: Number(draft.readTime) || 5,
         image: draft.featuredImage || null,

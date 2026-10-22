@@ -113,3 +113,45 @@ test('removes Master Table of Contents and id="toc" without leaving residual hor
   assert.equal(result.headings[0].text, '1. The 2026 Enterprise Context');
 });
 
+test('automatically parses raw markdown posts into semantic HTML and generates TOC headings', () => {
+  const markdown = `## Introduction
+
+In enterprise data platforms, deployment automation is essential.
+
+### Key Takeaways
+* Automated testing is non-negotiable
+* Git integration ensures single source of truth
+
+## Architecture & Implementation
+
+Here is the implementation details.
+
+\`\`\`sql
+SELECT * FROM pipelines;
+\`\`\`
+
+## Frequently Asked Questions
+
+### How to configure service principals?
+Use Azure Entra ID app registrations.`;
+
+  const result = prepare({ content: markdown });
+
+  // 1. Verifies TOC headings were automatically discovered and structured
+  assert.equal(result.headings.length, 5);
+  assert.equal(result.headings[0].id, 'introduction');
+  assert.equal(result.headings[0].text, 'Introduction');
+  assert.equal(result.headings[0].level, 2);
+  assert.equal(result.headings[1].id, 'key-takeaways');
+  assert.equal(result.headings[1].level, 3);
+  assert.equal(result.headings[2].id, 'architecture-implementation');
+  assert.equal(result.headings[2].level, 2);
+
+  // 2. Verifies HTML conversion
+  assert.match(result.content, /<h2 id="introduction">Introduction<\/h2>/);
+  assert.match(result.content, /<ul>/);
+  assert.match(result.content, /<li>Automated testing is non-negotiable<\/li>/);
+  assert.match(result.content, /<pre><code class="language-sql">/);
+});
+
+

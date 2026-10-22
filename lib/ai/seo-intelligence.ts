@@ -74,7 +74,7 @@ Requirements:
 1. seoTitle: 50–60 characters. Engaging, clear, with primary keyword early.
 2. seoDescription: 145–160 characters. Accurate summary of benefits, compelling meta description.
 3. targetKeywords: 3–6 relevant search keywords/phrases.
-4. suggestedInternalLinks: 2–4 recommended contextual link anchors from the available articles list, explaining the reason for the link.
+4. suggestedInternalLinks: 2–4 recommended contextual link anchors from the available articles list, explaining the reason for the link. CRITICAL: "text" MUST be an exact verbatim substring present in the provided article content snippet, so that it can be automatically hyperlinked.
 
 Respond ONLY with valid JSON:
 {
