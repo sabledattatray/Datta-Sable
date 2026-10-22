@@ -39,6 +39,67 @@ export default function AiStudioPage() {
   const [editSeoDescription, setEditSeoDescription] = useState('');
   const [editKeywords, setEditKeywords] = useState('');
 
+  // Google Indexing & GSC States
+  const [gscModalData, setGscModalData] = useState<{ title: string; data: any; loading?: boolean; url?: string } | null>(null);
+
+  const handleRequestGoogleIndexing = async (slug: string) => {
+    setActionLoading('indexing-' + slug);
+    try {
+      const res = await fetch('/api/admin/google-indexing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'submit', slug }),
+      });
+      const result = await res.json();
+      setGscModalData({
+        title: 'Google Web Search Indexing',
+        data: result,
+        url: `https://dattasable.com/blog/${slug}`,
+      });
+    } catch (err: any) {
+      setGscModalData({
+        title: 'Google Indexing Error',
+        data: { error: err?.message || 'Network error' },
+        url: `https://dattasable.com/blog/${slug}`,
+      });
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleInspectGoogleUrl = async (slug: string) => {
+    setActionLoading('inspect-' + slug);
+    setGscModalData({
+      title: 'Google Search Console URL Inspection',
+      data: null,
+      loading: true,
+      url: `https://dattasable.com/blog/${slug}`,
+    });
+    try {
+      const res = await fetch('/api/admin/google-indexing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'inspect', slug }),
+      });
+      const result = await res.json();
+      setGscModalData({
+        title: 'Google Search Console URL Inspection',
+        data: result,
+        loading: false,
+        url: `https://dattasable.com/blog/${slug}`,
+      });
+    } catch (err: any) {
+      setGscModalData({
+        title: 'Inspection Error',
+        data: { error: err?.message || 'Failed to inspect' },
+        loading: false,
+        url: `https://dattasable.com/blog/${slug}`,
+      });
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -623,15 +684,49 @@ export default function AiStudioPage() {
                         </button>
                       )}
                       {d.status === 'PUBLISHED' && (
-                        <a
-                          href={`/blog/${d.slug}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={adminStyles.secondary}
-                          style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                        >
-                          <ExternalLink size={13} /> View Live
-                        </a>
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => handleRequestGoogleIndexing(d.slug)}
+                            disabled={actionLoading === 'indexing-' + d.slug}
+                            className={adminStyles.secondary}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#10b981' }}
+                            title="Submit to Google Web Search Indexing API"
+                          >
+                            <Sparkles size={13} className={actionLoading === 'indexing-' + d.slug ? 'animate-spin' : ''} />
+                            {actionLoading === 'indexing-' + d.slug ? 'Submitting...' : 'Request Indexing'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleInspectGoogleUrl(d.slug)}
+                            disabled={actionLoading === 'inspect-' + d.slug}
+                            className={adminStyles.secondary}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#38bdf8' }}
+                            title="Inspect in Google Search Console"
+                          >
+                            <Search size={13} className={actionLoading === 'inspect-' + d.slug ? 'animate-spin' : ''} />
+                            {actionLoading === 'inspect-' + d.slug ? 'Inspecting...' : 'Inspect in GSC'}
+                          </button>
+                          <a
+                            href={`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Adattasable.com&id=${encodeURIComponent(`https://dattasable.com/blog/${d.slug}`)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={adminStyles.secondary}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                            title="Open URL inspection in Google Search Console web portal"
+                          >
+                            <Globe size={13} /> GSC Portal
+                          </a>
+                          <a
+                            href={`/blog/${d.slug}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={adminStyles.secondary}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                          >
+                            <ExternalLink size={13} /> View Live
+                          </a>
+                        </>
                       )}
                     </div>
                   </div>
@@ -1305,6 +1400,166 @@ export default function AiStudioPage() {
                   </button>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Google Indexing / GSC Modal */}
+      {gscModalData && (
+        <div className={adminStyles.modalOverlay} onClick={() => setGscModalData(null)}>
+          <div className={adminStyles.modalContent} style={{ maxWidth: 580 }} onClick={e => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <h3 style={{ fontSize: 16, fontWeight: 700, margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Globe size={18} style={{ color: 'var(--accent)' }} />
+                {gscModalData.title}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setGscModalData(null)}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 18 }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {gscModalData.url && (
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 16, wordBreak: 'break-all' }}>
+                URL: <strong style={{ color: 'var(--text)' }}>{gscModalData.url}</strong>
+              </div>
+            )}
+
+            {gscModalData.loading ? (
+              <div style={{ padding: '36px 0', textAlign: 'center' }}>
+                <Sparkles size={24} className="animate-spin" style={{ color: 'var(--accent)', margin: '0 auto 12px' }} />
+                <p style={{ color: 'var(--text-muted)', fontSize: 13 }}>Querying Google Search Console API...</p>
+              </div>
+            ) : (
+              <div style={{ display: 'grid', gap: 12 }}>
+                {gscModalData.data?.success !== undefined && (
+                  <div style={{
+                    padding: 14,
+                    borderRadius: 10,
+                    background: gscModalData.data.success ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                    border: `1px solid ${gscModalData.data.success ? '#10b981' : '#ef4444'}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10
+                  }}>
+                    {gscModalData.data.success ? (
+                      <>
+                        <CheckCircle2 size={20} color="#10b981" />
+                        <div>
+                          <strong style={{ color: '#10b981', display: 'block' }}>Submission Successful</strong>
+                          <span style={{ fontSize: 12, color: 'var(--text)' }}>
+                            Queued for Googlebot crawling. Notification timestamp: {gscModalData.data.notifiedAt || new Date().toLocaleTimeString()}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <AlertCircle size={20} color="#ef4444" />
+                        <div>
+                          <strong style={{ color: '#ef4444', display: 'block' }}>Submission Issue</strong>
+                          <span style={{ fontSize: 12, color: 'var(--text)' }}>
+                            {gscModalData.data.error || 'Failed to submit URL'}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+
+                {/* Inspection Details */}
+                {gscModalData.data?.inspectionResult && (() => {
+                  const idx = gscModalData.data.inspectionResult.indexStatusResult || {};
+                  const isIndexed = idx.verdict === 'PASS' && idx.coverageState === 'Submitted and indexed';
+                  return (
+                    <div style={{ display: 'grid', gap: 10 }}>
+                      <div style={{
+                        padding: 12,
+                        borderRadius: 8,
+                        background: isIndexed ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)',
+                        border: `1px solid ${isIndexed ? '#10b981' : '#f59e0b'}`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 10
+                      }}>
+                        {isIndexed ? <CheckCircle2 size={18} color="#10b981" /> : <AlertCircle size={18} color="#f59e0b" />}
+                        <div>
+                          <strong style={{ color: isIndexed ? '#10b981' : '#f59e0b' }}>
+                            Verdict: {idx.verdict || 'PENDING'} · {idx.coverageState || 'Processing'}
+                          </strong>
+                          {!isIndexed && (
+                            <p style={{ margin: '4px 0 0', fontSize: 11, color: 'var(--text-muted)' }}>
+                              URL was recently submitted to Googlebot. Google Search Console typically updates its index database within a few hours of publication.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12 }}>
+                        <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Robots.txt</span>
+                          <strong>{idx.robotsTxtState || 'ALLOWED'}</strong>
+                        </div>
+                        <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Page Fetch</span>
+                          <strong>{idx.pageFetchState || 'SUCCESSFUL'}</strong>
+                        </div>
+                        <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Crawled As</span>
+                          <strong>{idx.crawledAs || 'MOBILE'}</strong>
+                        </div>
+                        <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Last Crawled</span>
+                          <strong>{idx.lastCrawlTime ? new Date(idx.lastCrawlTime).toLocaleString() : 'Pending Googlebot visit'}</strong>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {gscModalData.data?.error && !gscModalData.data?.success && (
+                  <div style={{ padding: 12, borderRadius: 8, background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontSize: 12 }}>
+                    {typeof gscModalData.data.error === 'string' ? gscModalData.data.error : JSON.stringify(gscModalData.data.error)}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+              {gscModalData.url && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const slug = gscModalData.url!.split('/blog/')[1];
+                      if (slug) handleRequestGoogleIndexing(slug);
+                    }}
+                    className={adminStyles.primary}
+                    style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+                  >
+                    <Sparkles size={13} /> Request Indexing
+                  </button>
+                  <a
+                    href={`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Adattasable.com&id=${encodeURIComponent(gscModalData.url)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={adminStyles.secondary}
+                    style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+                  >
+                    <ExternalLink size={13} /> Open in GSC Portal
+                  </a>
+                </>
+              )}
+              <button
+                type="button"
+                onClick={() => setGscModalData(null)}
+                className={adminStyles.secondary}
+                style={{ minWidth: 80 }}
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

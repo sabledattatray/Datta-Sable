@@ -8,6 +8,7 @@ import { createResearchBrief } from '@/lib/ai/research-engine';
 import { generateArticleDraft, enrichArticleDraft } from '@/lib/ai/article-writer';
 import { evaluateContentQuality } from '@/lib/ai/quality-gates';
 import { approveAndPublishDraft, scheduleDraftForPublishing } from '@/lib/ai/publishing';
+import { submitUrlToGoogleIndexing, inspectUrlInGoogleSearchConsole } from '@/lib/ai/google-indexing';
 import { AI_SETTING_KEYS, DEFAULT_AI_SETTINGS } from '@/lib/ai/config';
 import { logAiAudit } from '@/lib/ai/audit';
 
@@ -239,6 +240,20 @@ export async function POST(req: Request) {
           actorUserId: (session.user as any)?.id,
         });
         return NextResponse.json({ success: true, schedule });
+      }
+
+      case 'request-google-indexing': {
+        const url = payload.url || (payload.slug ? `https://dattasable.com/blog/${payload.slug}` : null);
+        if (!url) return NextResponse.json({ error: 'url or slug is required' }, { status: 400 });
+        const result = await submitUrlToGoogleIndexing(url);
+        return NextResponse.json({ success: result.success, ...result });
+      }
+
+      case 'inspect-google-url': {
+        const url = payload.url || (payload.slug ? `https://dattasable.com/blog/${payload.slug}` : null);
+        if (!url) return NextResponse.json({ error: 'url or slug is required' }, { status: 400 });
+        const result = await inspectUrlInGoogleSearchConsole(url);
+        return NextResponse.json({ success: true, result });
       }
 
       case 'update-settings': {
