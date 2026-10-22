@@ -10,6 +10,7 @@ import { generateArticleDraft } from '@/lib/ai/article-writer';
 import { detectDuplicateContent } from '@/lib/ai/duplicate-detector';
 import { generateSeoIntelligence } from '@/lib/ai/seo-intelligence';
 import { approveAndPublishDraft, scheduleDraftForPublishing } from '@/lib/ai/publishing';
+import { submitUrlToGoogleIndexing, inspectUrlInGoogleSearchConsole } from '@/lib/ai/google-indexing';
 import { AI_SETTING_KEYS } from '@/lib/ai/config';
 import { logAiAudit } from '@/lib/ai/audit';
 
@@ -139,6 +140,28 @@ const MCP_TOOLS = [
         draftId: { type: 'string', description: 'ID of the approved draft' },
       },
       required: ['draftId'],
+    },
+  },
+  {
+    name: 'request_google_indexing',
+    description: 'Submits a published URL directly to the Google Indexing API to request rapid crawling and indexation.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        url: { type: 'string', description: 'Full URL to submit for indexing' },
+      },
+      required: ['url'],
+    },
+  },
+  {
+    name: 'inspect_google_search_console_url',
+    description: 'Queries the Google Search Console URL Inspection API to check live indexing, crawl status, and mobile coverage verdict.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        url: { type: 'string', description: 'Full URL to inspect in Google Search Console' },
+      },
+      required: ['url'],
     },
   },
   // Operations & Status Tools
@@ -468,6 +491,14 @@ export async function POST(req: Request) {
             draftId: args.draftId,
             publishImmediately: true,
           });
+          break;
+
+        case 'request_google_indexing':
+          responseData = await submitUrlToGoogleIndexing(args.url);
+          break;
+
+        case 'inspect_google_search_console_url':
+          responseData = await inspectUrlInGoogleSearchConsole(args.url);
           break;
 
         case 'get_automation_status': {
