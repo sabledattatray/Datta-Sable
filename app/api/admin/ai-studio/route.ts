@@ -246,7 +246,7 @@ export async function POST(req: Request) {
         const url = payload.url || (payload.slug ? `https://dattasable.com/blog/${payload.slug}` : null);
         if (!url) return NextResponse.json({ error: 'url or slug is required' }, { status: 400 });
         const result = await submitUrlToGoogleIndexing(url);
-        return NextResponse.json({ success: result.success, ...result });
+        return NextResponse.json(result);
       }
 
       case 'inspect-google-url': {

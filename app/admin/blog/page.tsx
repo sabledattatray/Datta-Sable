@@ -1415,6 +1415,9 @@ export default function AdminBlog() {
                 </button>
               </div>
             </div>
+          </div>
+        )}
+
         {/* Google Indexing / Search Console Modal */}
         {gscStatusModal?.open && (
           <div className={adminStyles.modalOverlay} onClick={() => setGscStatusModal(null)}>
