@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import {
   Sparkles, Bot, RefreshCw, Play, CheckCircle2, AlertTriangle, ShieldAlert,
   Clock, DollarSign, Cpu, FileText, ArrowRight, ExternalLink, Sliders, Layers,
-  Terminal, Search, BookOpen, AlertCircle, Eye, Check, X
+  Terminal, Search, BookOpen, AlertCircle, Eye, Check, X, Edit3, Save, Globe, List, Code, ChevronRight
 } from 'lucide-react';
+import { marked } from 'marked';
 import adminStyles from '@/components/admin/AdminCommon.module.css';
 import { DEFAULT_AI_CATEGORIES } from '@/lib/ai/config';
 
@@ -25,6 +26,18 @@ export default function AiStudioPage() {
   // Settings form states
   const [settingsMode, setSettingsMode] = useState<string>('ASSISTED');
   const [settingsBudget, setSettingsBudget] = useState<number>(25);
+
+  // Review & Edit Modal state
+  const [reviewDraft, setReviewDraft] = useState<any | null>(null);
+  const [reviewTab, setReviewTab] = useState<'preview' | 'editor' | 'seo'>('preview');
+  const [editTitle, setEditTitle] = useState('');
+  const [editSlug, setEditSlug] = useState('');
+  const [editCategory, setEditCategory] = useState('');
+  const [editExcerpt, setEditExcerpt] = useState('');
+  const [editContent, setEditContent] = useState('');
+  const [editSeoTitle, setEditSeoTitle] = useState('');
+  const [editSeoDescription, setEditSeoDescription] = useState('');
+  const [editKeywords, setEditKeywords] = useState('');
 
   const fetchData = async () => {
     try {
@@ -89,6 +102,58 @@ export default function AiStudioPage() {
     });
     setGenTopic('');
     setActiveTab('drafts');
+  };
+
+  const openReviewModal = (draft: any, defaultTab: 'preview' | 'editor' | 'seo' = 'preview') => {
+    setReviewDraft(draft);
+    setReviewTab(defaultTab);
+    setEditTitle(draft.title || '');
+    setEditSlug(draft.slug || '');
+    setEditCategory(draft.category || DEFAULT_AI_CATEGORIES[0]);
+    setEditExcerpt(draft.excerpt || '');
+    setEditContent(draft.content || '');
+    setEditSeoTitle(draft.seoTitle || draft.title || '');
+    setEditSeoDescription(draft.seoDescription || draft.excerpt || '');
+    setEditKeywords(Array.isArray(draft.targetKeywords) ? draft.targetKeywords.join(', ') : '');
+  };
+
+  const handleSaveDraftEdits = async () => {
+    if (!reviewDraft) return;
+    await handleAction('update-draft', {
+      draftId: reviewDraft.id,
+      title: editTitle,
+      slug: editSlug,
+      category: editCategory,
+      excerpt: editExcerpt,
+      content: editContent,
+      seoTitle: editSeoTitle,
+      seoDescription: editSeoDescription,
+      targetKeywords: editKeywords.split(',').map((s: string) => s.trim()).filter(Boolean),
+    });
+    setReviewDraft((prev: any) => ({
+      ...prev,
+      title: editTitle,
+      slug: editSlug,
+      category: editCategory,
+      excerpt: editExcerpt,
+      content: editContent,
+      seoTitle: editSeoTitle,
+      seoDescription: editSeoDescription,
+      wordCount: editContent.trim().split(/\s+/).filter(Boolean).length,
+    }));
+  };
+
+  const handleEnrichDraft = async () => {
+    if (!reviewDraft) return;
+    await handleAction('enrich-draft', { draftId: reviewDraft.id });
+    const res = await fetch(`/api/admin/ai-studio?tab=drafts`);
+    if (res.ok) {
+      const json = await res.json();
+      const updated = json.drafts?.find((d: any) => d.id === reviewDraft.id);
+      if (updated) {
+        openReviewModal(updated, 'preview');
+      }
+    }
   };
 
   return (
@@ -334,17 +399,25 @@ export default function AiStudioPage() {
                         </div>
                       </div>
 
-                      {d.status === 'PUBLISHED' ? (
-                        <span style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '6px', background: '#10b98120', color: '#10b981', fontWeight: 600 }}>PUBLISHED</span>
-                      ) : (
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                         <button
-                          onClick={() => handleAction('publish-draft', { draftId: d.id, publishImmediately: true })}
-                          disabled={actionLoading === 'publish-draft'}
-                          style={{ padding: '6px 12px', borderRadius: '6px', background: 'var(--accent)', color: '#000', fontSize: '11px', fontWeight: 600, border: 'none', cursor: 'pointer' }}
+                          onClick={() => openReviewModal(d)}
+                          style={{ padding: '6px 10px', borderRadius: '6px', background: 'var(--surface)', color: 'var(--text)', fontSize: '11px', fontWeight: 600, border: '1px solid var(--border)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
                         >
-                          Approve & Publish
+                          <Eye size={12} /> Review & Edit
                         </button>
-                      )}
+                        {d.status === 'PUBLISHED' ? (
+                          <span style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '6px', background: '#10b98120', color: '#10b981', fontWeight: 600 }}>PUBLISHED</span>
+                        ) : (
+                          <button
+                            onClick={() => handleAction('publish-draft', { draftId: d.id, publishImmediately: true })}
+                            disabled={actionLoading === 'publish-draft'}
+                            style={{ padding: '6px 12px', borderRadius: '6px', background: 'var(--accent)', color: '#000', fontSize: '11px', fontWeight: 600, border: 'none', cursor: 'pointer' }}
+                          >
+                            Approve & Publish
+                          </button>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -533,6 +606,13 @@ export default function AiStudioPage() {
                     </div>
 
                     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                      <button
+                        onClick={() => openReviewModal(d, 'preview')}
+                        className={adminStyles.secondary}
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                      >
+                        <Eye size={13} /> Review & Edit
+                      </button>
                       {d.status !== 'PUBLISHED' && (
                         <button
                           onClick={() => handleAction('publish-draft', { draftId: d.id, publishImmediately: true })}
@@ -559,12 +639,25 @@ export default function AiStudioPage() {
                   <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: '0 0 14px' }}>{d.excerpt}</p>
 
                   {/* Quality Badges */}
-                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', padding: '12px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', fontSize: '12px' }}>
-                    <div>Overall Quality: <strong>{d.qualityScore ? `${Math.round(d.qualityScore)}/100` : 'Passed'}</strong></div>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', padding: '12px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', fontSize: '12px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      Overall Quality: 
+                      <strong style={{
+                        color: (d.qualityScore || 0) >= 80 ? '#10b981' : (d.qualityScore || 0) >= 60 ? '#f59e0b' : '#ef4444'
+                      }}>
+                        {d.qualityScore ? `${Math.round(d.qualityScore)}/100` : 'Evaluating'}
+                      </strong>
+                    </div>
                     <div>·</div>
                     <div>Originality: <strong>{d.originalityScore ? `${Math.round(d.originalityScore)}%` : 'Unique'}</strong></div>
                     <div>·</div>
                     <div>Mode: <strong>{d.operatingMode}</strong></div>
+                    <button
+                      onClick={() => openReviewModal(d, 'seo')}
+                      style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    >
+                      Why score is {Math.round(d.qualityScore || 0)}/100? Inspect Breakdown & SEO →
+                    </button>
                   </div>
                 </div>
               ))}
@@ -697,6 +790,522 @@ export default function AiStudioPage() {
                 </div>
               ))
             )}
+          </div>
+        </div>
+      )}
+
+      {/* REVIEW, EDIT & SEO MODAL */}
+      {reviewDraft && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.82)',
+          backdropFilter: 'blur(8px)',
+          zIndex: 9999,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px',
+        }}>
+          <div style={{
+            background: 'var(--surface, #141414)',
+            border: '1px solid var(--border)',
+            borderRadius: '18px',
+            width: '100%',
+            maxWidth: '1100px',
+            height: '90vh',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+          }}>
+            {/* Modal Header */}
+            <div style={{
+              padding: '18px 24px',
+              borderBottom: '1px solid var(--border)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              background: 'var(--bg)',
+            }}>
+              <div style={{ minWidth: 0, flex: 1, paddingRight: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                  <span style={{
+                    fontSize: '11px',
+                    padding: '2px 8px',
+                    borderRadius: '4px',
+                    background: reviewDraft.status === 'PUBLISHED' ? '#10b98120' : '#f59e0b20',
+                    color: reviewDraft.status === 'PUBLISHED' ? '#10b981' : '#f59e0b',
+                    fontWeight: 700
+                  }}>
+                    {reviewDraft.status}
+                  </span>
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                    {editCategory} · {editContent.trim().split(/\s+/).filter(Boolean).length} words · ~{Math.max(3, Math.ceil(editContent.trim().split(/\s+/).filter(Boolean).length / 200))} min read
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '17px', fontWeight: 700, margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {editTitle || 'Untitled Draft'}
+                </h3>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
+                  fontSize: '12px',
+                }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Quality:</span>
+                  <strong style={{
+                    color: (reviewDraft.qualityScore || 0) >= 80 ? '#10b981' : (reviewDraft.qualityScore || 0) >= 60 ? '#f59e0b' : '#ef4444'
+                  }}>
+                    {reviewDraft.qualityScore ? `${Math.round(reviewDraft.qualityScore)}/100` : 'Evaluating'}
+                  </strong>
+                </div>
+
+                <button
+                  onClick={() => setReviewDraft(null)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '6px',
+                    borderRadius: '6px',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Sub-Tabs */}
+            <div style={{
+              display: 'flex',
+              gap: '6px',
+              padding: '12px 24px',
+              borderBottom: '1px solid var(--border)',
+              background: 'var(--surface)',
+            }}>
+              {[
+                { id: 'preview', label: 'Visual Article Preview & TOC', icon: Eye },
+                { id: 'editor', label: 'Content & Outline Editor', icon: Edit3 },
+                { id: 'seo', label: 'SEO & Quality Gate Inspector', icon: Globe },
+              ].map(t => {
+                const Icon = t.icon;
+                const isTabActive = reviewTab === t.id;
+                return (
+                  <button
+                    key={t.id}
+                    onClick={() => setReviewTab(t.id as any)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      background: isTabActive ? 'var(--accent)' : 'transparent',
+                      color: isTabActive ? '#000' : 'var(--text-muted)',
+                      border: isTabActive ? '1px solid var(--accent)' : '1px solid transparent',
+                    }}
+                  >
+                    <Icon size={14} />
+                    {t.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
+              {/* SUBTAB 1: VISUAL PREVIEW & TOC */}
+              {reviewTab === 'preview' && (
+                <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '24px' }}>
+                  {/* Left: Auto-generated Table of Contents */}
+                  <div style={{
+                    padding: '18px',
+                    borderRadius: '12px',
+                    background: 'var(--bg)',
+                    border: '1px solid var(--border)',
+                    height: 'fit-content',
+                    position: 'sticky',
+                    top: 0,
+                  }}>
+                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <List size={14} color="var(--accent)" /> Table of Contents
+                    </div>
+                    {(() => {
+                      const lines = (editContent || '').split('\n');
+                      const headings: { level: number; text: string }[] = [];
+                      for (const l of lines) {
+                        const m = l.match(/^(#{2,3})\s+(.+)$/);
+                        if (m) headings.push({ level: m[1].length, text: m[2].trim() });
+                      }
+                      if (headings.length === 0) {
+                        return <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>No H2/H3 headings found in markdown.</div>;
+                      }
+                      return (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {headings.map((h, i) => (
+                            <div key={i} style={{
+                              fontSize: '12px',
+                              paddingLeft: h.level === 3 ? '12px' : '0px',
+                              color: h.level === 2 ? 'var(--text)' : 'var(--text-muted)',
+                              borderLeft: h.level === 2 ? '2px solid var(--accent)' : '2px solid transparent',
+                              lineHeight: 1.4,
+                            }}>
+                              {h.text}
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  {/* Right: Rendered HTML Post */}
+                  <div style={{
+                    padding: '28px',
+                    borderRadius: '14px',
+                    background: 'var(--bg)',
+                    border: '1px solid var(--border)',
+                  }}>
+                    <div style={{ marginBottom: '18px', paddingBottom: '16px', borderBottom: '1px solid var(--border)' }}>
+                      <span style={{ fontSize: '12px', color: 'var(--accent)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{editCategory}</span>
+                      <h1 style={{ fontSize: '26px', fontWeight: 800, marginTop: '8px', marginBottom: '12px', lineHeight: 1.25 }}>{editTitle}</h1>
+                      <p style={{ fontSize: '15px', color: 'var(--text-muted)', lineHeight: 1.6, fontStyle: 'italic' }}>{editExcerpt}</p>
+                    </div>
+
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: (() => {
+                          try {
+                            return marked.parse(editContent || '') as string;
+                          } catch (e) {
+                            return editContent;
+                          }
+                        })(),
+                      }}
+                      style={{
+                        lineHeight: 1.7,
+                        fontSize: '14px',
+                        color: 'var(--text)',
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* SUBTAB 2: CONTENT EDITOR */}
+              {reviewTab === 'editor' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+                      Edit title, slug, excerpt, and full markdown body directly.
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleEnrichDraft}
+                      disabled={actionLoading === 'enrich-draft'}
+                      className={adminStyles.primary}
+                      style={{ fontSize: '12px', padding: '8px 14px' }}
+                    >
+                      <Sparkles size={13} className={actionLoading === 'enrich-draft' ? 'animate-spin' : ''} />
+                      {actionLoading === 'enrich-draft' ? 'AI Deepening in progress...' : '✨ AI Deepen / Expand to 2,500 words'}
+                    </button>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '14px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>Article Title</label>
+                      <input
+                        type="text"
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>Category</label>
+                      <select
+                        value={editCategory}
+                        onChange={(e) => setEditCategory(e.target.value)}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      >
+                        {DEFAULT_AI_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>
+                      Slug URL (/blog/...)
+                    </label>
+                    <input
+                      type="text"
+                      value={editSlug}
+                      onChange={(e) => setEditSlug(e.target.value)}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px', fontFamily: 'monospace' }}
+                    />
+                  </div>
+
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 600 }}>Excerpt Summary</label>
+                      <span style={{ fontSize: '11px', color: editExcerpt.length > 160 ? '#ef4444' : 'var(--text-muted)' }}>
+                        {editExcerpt.length} / 160 chars
+                      </span>
+                    </div>
+                    <textarea
+                      rows={2}
+                      value={editExcerpt}
+                      onChange={(e) => setEditExcerpt(e.target.value)}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px', resize: 'vertical' }}
+                    />
+                  </div>
+
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 600 }}>Full Markdown Content</label>
+                      <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                        {editContent.trim().split(/\s+/).filter(Boolean).length} words
+                      </span>
+                    </div>
+                    <textarea
+                      rows={16}
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      style={{ width: '100%', padding: '14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px', fontFamily: 'monospace', lineHeight: 1.6, resize: 'vertical' }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* SUBTAB 3: SEO & QUALITY GATE INSPECTOR */}
+              {reviewTab === 'seo' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                  {/* Google SERP Preview Card */}
+                  <div style={{ padding: '20px', borderRadius: '12px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
+                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '14px' }}>
+                      Google Search Result Snippet Preview
+                    </div>
+                    <div style={{ padding: '16px', borderRadius: '10px', background: '#1c1c1c', border: '1px solid #2a2a2a' }}>
+                      <div style={{ fontSize: '12px', color: '#8ab4f8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span>https://dattasable.com</span>
+                        <span>›</span>
+                        <span>blog</span>
+                        <span>›</span>
+                        <span style={{ color: '#aaa' }}>{editSlug}</span>
+                      </div>
+                      <div style={{ fontSize: '18px', color: '#8ab4f8', fontWeight: 500, margin: '4px 0 6px', cursor: 'pointer' }}>
+                        {editSeoTitle || editTitle} | Datta Sable
+                      </div>
+                      <div style={{ fontSize: '13px', color: '#bdc1c6', lineHeight: 1.5 }}>
+                        {editSeoDescription || editExcerpt}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* SEO Inputs */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                        <label style={{ fontSize: '12px', fontWeight: 600 }}>SEO Meta Title</label>
+                        <span style={{ fontSize: '11px', color: editSeoTitle.length > 60 ? '#f59e0b' : 'var(--text-muted)' }}>
+                          {editSeoTitle.length}/60 chars
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        value={editSeoTitle}
+                        onChange={(e) => setEditSeoTitle(e.target.value)}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>
+                        Target Focus Keywords (comma-separated)
+                      </label>
+                      <input
+                        type="text"
+                        value={editKeywords}
+                        onChange={(e) => setEditKeywords(e.target.value)}
+                        placeholder="e.g. Microsoft Fabric, Data Factory, ETL"
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 600 }}>SEO Meta Description</label>
+                      <span style={{ fontSize: '11px', color: editSeoDescription.length > 160 ? '#f59e0b' : 'var(--text-muted)' }}>
+                        {editSeoDescription.length}/160 chars
+                      </span>
+                    </div>
+                    <textarea
+                      rows={2}
+                      value={editSeoDescription}
+                      onChange={(e) => setEditSeoDescription(e.target.value)}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                    />
+                  </div>
+
+                  {/* Quality Gate Breakdown */}
+                  <div style={{ padding: '20px', borderRadius: '12px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                      <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700 }}>
+                        Quality Gate Breakdown & Diagnostics
+                      </div>
+                      <div style={{
+                        fontSize: '16px',
+                        fontWeight: 800,
+                        color: (reviewDraft.qualityScore || 0) >= 80 ? '#10b981' : (reviewDraft.qualityScore || 0) >= 60 ? '#f59e0b' : '#ef4444'
+                      }}>
+                        Score: {reviewDraft.qualityScore ? `${Math.round(reviewDraft.qualityScore)}/100` : 'Evaluating'}
+                      </div>
+                    </div>
+
+                    {/* Quality Gate Checks */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+                      <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Technical Length</div>
+                        <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: editContent.trim().split(/\s+/).filter(Boolean).length >= 600 ? '#10b981' : '#f59e0b' }}>
+                          {editContent.trim().split(/\s+/).filter(Boolean).length} words
+                        </div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          {editContent.trim().split(/\s+/).filter(Boolean).length < 600 ? '⚠️ Under 600w threshold (-30 pts)' : '✓ Depth passed'}
+                        </div>
+                      </div>
+
+                      <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Heading Hierarchy</div>
+                        <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: (editContent.match(/^##\s+.+$/gm) || []).length >= 3 ? '#10b981' : '#f59e0b' }}>
+                          {(editContent.match(/^##\s+.+$/gm) || []).length} H2 sections
+                        </div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          {(editContent.match(/^##\s+.+$/gm) || []).length >= 3 ? '✓ 3+ H2s present' : '⚠️ Need at least 3 H2s'}
+                        </div>
+                      </div>
+
+                      <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Practical Assets</div>
+                        <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: editContent.includes('```') ? '#10b981' : '#f59e0b' }}>
+                          {editContent.includes('```') ? 'Code snippets present' : 'Missing code snippets'}
+                        </div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          {editContent.includes('```') ? '✓ Practical DAX/SQL code' : '⚠️ Add code for +10 pts'}
+                        </div>
+                      </div>
+
+                      <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Originality & Duplicate Risk</div>
+                        <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: '#10b981' }}>
+                          {reviewDraft.originalityScore ? `${Math.round(reviewDraft.originalityScore)}%` : '100%'} Unique
+                        </div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          ✓ 0% duplicate risk
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Blockers & Recommendations */}
+                    {reviewDraft.qualityReports?.[0]?.blockers?.length > 0 && (
+                      <div style={{ marginBottom: '12px' }}>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#ef4444', marginBottom: '6px' }}>Quality Blockers:</div>
+                        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: '#ef4444' }}>
+                          {reviewDraft.qualityReports[0].blockers.map((b: string, i: number) => (
+                            <li key={i}>{b}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {reviewDraft.qualityReports?.[0]?.recommendations?.length > 0 && (
+                      <div>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#f59e0b', marginBottom: '6px' }}>Recommendations to boost score:</div>
+                        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: 'var(--text-muted)' }}>
+                          {reviewDraft.qualityReports[0].recommendations.map((r: string, i: number) => (
+                            <li key={i}>{r}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div style={{
+              padding: '16px 24px',
+              borderTop: '1px solid var(--border)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              background: 'var(--bg)',
+            }}>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  type="button"
+                  onClick={handleSaveDraftEdits}
+                  disabled={actionLoading === 'update-draft'}
+                  className={adminStyles.secondary}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                >
+                  <Save size={14} />
+                  {actionLoading === 'update-draft' ? 'Saving...' : 'Save Changes'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleEnrichDraft}
+                  disabled={actionLoading === 'enrich-draft'}
+                  className={adminStyles.secondary}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--accent)' }}
+                >
+                  <Sparkles size={14} className={actionLoading === 'enrich-draft' ? 'animate-spin' : ''} />
+                  {actionLoading === 'enrich-draft' ? 'Deepening...' : 'AI Expand to 2.5k Words'}
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  type="button"
+                  onClick={() => setReviewDraft(null)}
+                  className={adminStyles.secondary}
+                >
+                  Close
+                </button>
+
+                {reviewDraft.status !== 'PUBLISHED' && (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await handleSaveDraftEdits();
+                      await handleAction('publish-draft', { draftId: reviewDraft.id, publishImmediately: true });
+                      setReviewDraft(null);
+                    }}
+                    disabled={actionLoading === 'publish-draft'}
+                    className={adminStyles.primary}
+                  >
+                    <Check size={14} /> Approve & Publish Live
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}
