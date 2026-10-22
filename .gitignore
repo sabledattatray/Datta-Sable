@@ -58,3 +58,8 @@ messages.json
 
 # Isolated verification builds
 /.next-*/
+
+# Service account credentials
+*credentials*.json
+*service-account*.json
+gen-lang-*.json
