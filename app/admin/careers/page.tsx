@@ -367,7 +367,7 @@ export default function AdminCareersPage() {
       </div>
 
       {/* Position Chart & Filters layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16, marginBottom: 24, alignItems: 'stretch' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: 16, marginBottom: 24, alignItems: 'stretch' }}>
         {/* Analytics Graph Card */}
         <div className={adminStyles.panel} style={{ marginBottom: 0 }}>
           <div className={adminStyles.panelHeading}>
@@ -699,7 +699,7 @@ export default function AdminCareersPage() {
                 {/* Personal Section */}
                 <div>
                   <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Contact Info</h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 8 }}>
                     <div><span style={{ color: 'var(--muted)' }}>Email:</span> {selectedApplicant.email}</div>
                     <div><span style={{ color: 'var(--muted)' }}>Phone:</span> {selectedApplicant.mobile}</div>
                     <div><span style={{ color: 'var(--muted)' }}>WhatsApp:</span> {selectedApplicant.whatsappNumber || 'N/A'}</div>
@@ -714,7 +714,7 @@ export default function AdminCareersPage() {
                 {/* Professional Info */}
                 <div>
                   <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Professional Experience</h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 8 }}>
                     <div><span style={{ color: 'var(--muted)' }}>Employer:</span> {selectedApplicant.currentCompany || 'N/A'}</div>
                     <div><span style={{ color: 'var(--muted)' }}>Designation:</span> {selectedApplicant.currentDesignation || 'N/A'}</div>
                     <div><span style={{ color: 'var(--muted)' }}>Total Exp:</span> {selectedApplicant.totalExperience}</div>
@@ -778,7 +778,7 @@ export default function AdminCareersPage() {
                 {/* Education */}
                 <div>
                   <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Education</h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 8 }}>
                     <div><span style={{ color: 'var(--muted)' }}>Highest Degree:</span> {selectedApplicant.highestQualification}</div>
                     <div><span style={{ color: 'var(--muted)' }}>University:</span> {selectedApplicant.university}</div>
                     <div><span style={{ color: 'var(--muted)' }}>Graduation:</span> {selectedApplicant.passingYear}</div>

@@ -2,17 +2,12 @@
 import { useEditorStore } from '@/store/editorStore';
 import { Settings, Image as ImageIcon, Box, LayoutPanelLeft } from 'lucide-react';
 import { useState } from 'react';
-import { useTheme } from '@/components/ThemeProvider';
 
 export default function EditorSidebar() {
   const { postMetadata, updatePostMetadata, blocks, activeBlockId, updateBlock } = useEditorStore();
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [tab, setTab] = useState<'post' | 'block'>('post');
 
-  const css = isDark
-    ? { surface: '#000000', surface2: '#121212', border: '#1a1a1a', text: '#f1f5f9', muted: '#64748b', accent: '#6366f1', inputBg: '#121212' }
-    : { surface: '#ffffff', surface2: '#f8faff', border: '#e2e8f0', text: '#0f172a', muted: '#64748b', accent: '#4f46e5', inputBg: '#f8faff' };
+  const css = { surface: 'var(--surface)', surface2: 'var(--surface2)', border: 'var(--border)', text: 'var(--text)', muted: 'var(--muted)', accent: 'var(--accent)', inputBg: 'var(--bg)' };
 
   const activeBlock = blocks.find(b => b.id === activeBlockId);
 

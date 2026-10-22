@@ -599,7 +599,7 @@ export default function AdminMentorship() {
 
       {/* TAB 2: Cohorts Management */}
       {activeAdminTab === 'cohorts' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: 20 }}>
           {/* Create form */}
           <div className={adminStyles.panel}>
             <div className={adminStyles.panelHeading}>
@@ -659,7 +659,7 @@ export default function AdminMentorship() {
 
       {/* TAB 3: Resources Library CMS */}
       {activeAdminTab === 'resources' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: 20 }}>
           {/* Create form */}
           <div className={adminStyles.panel}>
             <div className={adminStyles.panelHeading}>

@@ -130,7 +130,7 @@ export default function FabricMasterPage() {
       </div>
 
       {/* Popular Recommended SKUs & Calculations */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: 20 }}>
         {/* SKU Recommendations Distribution */}
         <div className={adminStyles.panel}>
           <div className={adminStyles.panelHeading}>

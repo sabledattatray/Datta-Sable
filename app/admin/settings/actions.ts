@@ -4,37 +4,33 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { logAudit } from "@/lib/security";
+import { logAudit, rateLimit } from "@/lib/security";
+import { passwordChangeInput } from '@/lib/admin/password-policy';
 
-export async function updateAdminPassword(formData: any) {
+export async function updateAdminPassword(formData: unknown) {
   const session = await getServerSession(authOptions);
 
   if (!session || (session.user as any).role !== 'ADMIN') {
     return { error: 'Unauthorized. Admin access required.' };
   }
 
-  const { currentPassword, newPassword, confirmPassword } = formData;
-
-  if (newPassword !== confirmPassword) {
-    return { error: 'New passwords do not match.' };
-  }
-
-  if (newPassword.length < 8) {
-    return { error: 'Password must be at least 8 characters long.' };
-  }
+  const input = passwordChangeInput.safeParse(formData);
+  if (!input.success) return { error: input.error.issues[0].message };
+  const { currentPassword, newPassword } = input.data;
 
   const userId = (session.user as any).id;
 
   if (!userId) {
     return { error: 'Invalid session: User ID missing. Please log out and log in again.' };
   }
+  if (!rateLimit(`admin-password-change:${userId}`, 5)) return { error: 'Too many attempts. Please wait a minute.' };
 
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId }
     });
 
-    if (!user) {
+    if (!user || user.role !== 'ADMIN') {
       return { error: 'User record not found in database. Please log out and log in again.' };
     }
     
@@ -45,14 +41,18 @@ export async function updateAdminPassword(formData: any) {
         return { error: 'Current password is incorrect.' };
       }
     } else {
-      // User logged in via OAuth and is setting their first password
+      return { error: 'This account uses social sign-in. Use email password recovery to set your first password.' };
     }
 
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const hashedNewPassword = await bcrypt.hash(newPassword, 12);
 
-    await prisma.user.update({
-      where: { id: (session.user as any).id },
-      data: { password: hashedNewPassword }
+    await prisma.$transaction(async tx => {
+      const changed = await tx.user.updateMany({
+        where: { id: user.id, role: 'ADMIN', password: user.password, sessionVersion: user.sessionVersion },
+        data: { password: hashedNewPassword, sessionVersion: { increment: 1 } },
+      });
+      if (changed.count !== 1) throw new Error('Password changed concurrently.');
+      await tx.adminPasswordReset.updateMany({ where: { userId: user.id }, data: { attempts: 5, expiresAt: new Date(0) } });
     });
 
     await logAudit({
@@ -62,9 +62,9 @@ export async function updateAdminPassword(formData: any) {
       details: 'Admin updated their password'
     });
 
-    return { success: 'Password updated successfully!' };
-  } catch (error: any) {
-    console.error('Password update failed:', error);
-    return { error: `Internal App Error: ${error.message || 'Unknown error'}` };
+    return { success: 'Password updated. Please sign in again with your new password.' };
+  } catch {
+    console.error('Admin password update failed. Check database availability and migrations.');
+    return { error: 'Could not update your password. Please try again shortly.' };
   }
 }

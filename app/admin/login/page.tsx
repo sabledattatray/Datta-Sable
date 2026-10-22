@@ -1,172 +1,90 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { signIn } from 'next-auth/react';
-import { 
-  Mail, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  ArrowRight,
-  Loader2,
-  ShieldCheck
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { getProviders, signIn } from 'next-auth/react';
+import { ArrowLeft, ArrowUpRight, Eye, EyeOff, Loader2, LockKeyhole, Mail, ShieldCheck } from 'lucide-react';
+import styles from '@/components/admin/AdminLogin.module.css';
 
+type Mode = 'login' | 'request' | 'reset' | 'complete';
 export default function AdminLoginPage() {
-  const [isLoading, setIsLoading] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
+  const [mode, setMode] = useState<Mode>('login');
+  const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSocialLogin = async (provider: string) => {
-    setIsLoading(provider);
+  const [confirmation, setConfirmation] = useState('');
+  const [code, setCode] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [cooldown, setCooldown] = useState(0);
+  const [providers, setProviders] = useState<{ id: string; name: string }[]>([]);
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('mode') === 'reset') setMode('request');
+    if (query.has('error')) setError('Sign-in could not be completed. Check your credentials or try another sign-in method.');
+    getProviders().then(result => setProviders(Object.values(result || {}).filter(provider => provider.id !== 'credentials'))).catch(() => {});
+  }, []);
+  useEffect(() => {
+    if (!cooldown) return;
+    const timer = setTimeout(() => setCooldown(value => Math.max(0, value - 1)), 1000);
+    return () => clearTimeout(timer);
+  }, [cooldown]);
+  function switchMode(next: Mode) { setMode(next); setError(''); setMessage(''); setPassword(''); setConfirmation(''); setCode(''); setVisible(false); }
+  async function requestCode() {
+    const response = await fetch('/api/auth/admin-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'request', email }) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Could not request a code.');
+    setMessage(result.success); setCooldown(60); setMode('reset');
+  }
+  async function submit(event: React.FormEvent) {
+    event.preventDefault(); setError(''); setMessage(''); setBusy(true);
     try {
-      await signIn(provider, { callbackUrl: '/admin' });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(null);
-    }
-  };
-
-  const handleEmailLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading('email');
-    try {
-      await signIn('credentials', { 
-        email, 
-        password, 
-        callbackUrl: '/admin',
-        redirect: true 
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(null);
-    }
-  };
-
-  return (
-    <div className="min-h-screen w-full bg-[#0A0A0A] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans text-white">
-      {/* Subtle Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-[520px] z-10"
-      >
-        {/* Logo Section */}
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="font-extrabold text-3xl tracking-tighter text-white"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            dattasable<span className="text-blue-500">.</span>
-          </motion.h2>
-        </div>
-
-        {/* glass Card */}
-        <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-[24px] p-8 shadow-2xl overflow-hidden relative group">
-          {/* Subtle line glow */}
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-          <div style={{ marginBottom: '40px', overflow: 'hidden', textAlign: 'center' }}>
-            <h1 className="text-3xl font-bold mb-3 tracking-tight text-white" style={{ fontFamily: 'var(--font-display)', textAlign: 'center' }}>Admin Login</h1>
-            <p className="text-zinc-400 text-sm" style={{ textAlign: 'center' }}>Access your dashboard securely</p>
-          </div>
-
-          <div style={{ maxWidth: '380px', margin: '0 auto', textAlign: 'center' }}>
-            <div className="space-y-6" style={{ textAlign: 'center' }}>
-              {/* Social Logins */}
-              <button
-                onClick={() => handleSocialLogin('google')}
-                disabled={!!isLoading}
-                style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}
-                className="h-12 bg-white hover:bg-zinc-100 text-black font-medium rounded-xl gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed group shadow-sm"
-              >
-                Continue with Google
-              </button>
-
-              <button
-                onClick={() => handleSocialLogin('github')}
-                disabled={!!isLoading}
-                style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                className="h-12 bg-[#18181B] hover:bg-[#27272A] border border-zinc-800 text-white font-medium rounded-xl gap-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Continue with GitHub
-              </button>
-            </div>
-
-            <div className="flex items-center gap-4 my-12" style={{ margin: '48px 0' }}>
-              <div className="h-[1px] flex-1 bg-zinc-800" />
-              <span className="text-zinc-500 text-xs font-medium uppercase tracking-widest leading-none">or</span>
-              <div className="h-[1px] flex-1 bg-zinc-800" />
-            </div>
-
-            {/* Email Form */}
-            <form onSubmit={handleEmailLogin} className="space-y-8" style={{ textAlign: 'center' }}>
-              <div className="space-y-3" style={{ textAlign: 'center' }}>
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block" style={{ textAlign: 'center' }}>Email Address</label>
-                <div className="relative group/input">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@company.com"
-                    style={{ width: '100%', textAlign: 'center', backgroundColor: '#09090B' }}
-                    className="h-12 border border-zinc-800 rounded-xl px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-zinc-600"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3" style={{ textAlign: 'center' }}>
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block" style={{ textAlign: 'center' }}>Password</label>
-                <div className="relative group/input">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    style={{ width: '100%', textAlign: 'center', backgroundColor: '#09090B' }}
-                    className="h-12 border border-zinc-800 rounded-xl px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-zinc-600"
-                  />
-                </div>
-                <div style={{ textAlign: 'center', marginTop: '12px' }}>
-                  <button type="button" className="text-[11px] font-medium text-blue-500 hover:text-blue-400 transition-colors">Forgot password?</button>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={!!isLoading}
-                style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                className="h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl gap-2 transition-all duration-200 active:scale-[0.98] shadow-lg shadow-blue-600/20 disabled:opacity-50 mt-4"
-              >
-                Sign In
-              </button>
-            </form>
-          </div>
-
-          {/* Footer */}
-          <div className="mt-8 flex items-center justify-center gap-2 text-zinc-500">
-            <ShieldCheck className="w-3.5 h-3.5 text-zinc-600" />
-            <span className="text-[11px] font-medium tracking-wide uppercase">Protected by secure authentication</span>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
+      if (mode === 'login') {
+        const result = await signIn('credentials', { email, password, callbackUrl: '/admin', redirect: false });
+        if (!result?.ok || result.error) throw new Error(result?.error === 'CredentialsSignin' ? 'Email or password is incorrect.' : 'Sign-in failed. Verify your email and try again, or use password recovery.');
+        window.location.assign('/admin');
+      } else if (mode === 'request') await requestCode();
+      else if (mode === 'reset') {
+        const response = await fetch('/api/auth/admin-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'reset', email, code, newPassword: password, confirmPassword: confirmation }) });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Could not reset your password.');
+        setPassword(''); setConfirmation(''); setCode(''); setMode('complete'); setMessage(result.success);
+      }
+    } catch (caught) { setError(caught instanceof Error ? caught.message : 'Could not reach the server. Please try again.'); }
+    finally { setBusy(false); }
+  }
+  const recovery = mode !== 'login';
+  const heading = mode === 'login' ? 'Welcome back.' : mode === 'request' ? 'A fresh start.' : mode === 'reset' ? 'Check your inbox.' : 'You’re all set.';
+  return <main className={styles.login}>
+    <section className={styles.story}>
+      <Link href="/" className={styles.brand}>datta sable<span>.</span></Link>
+      <div className={styles.storyCopy}><div className={styles.eyebrow}><span /> YOUR PRIVATE WORKSPACE</div><h1>Great things.<br /><em>Thoughtfully<br />managed.</em></h1><p>One place for your ideas, your audience, and everything you’re building next.</p></div>
+      <div className={styles.storyFooter}><ShieldCheck size={15} /><span>Datta Sable · Administration</span><span>01 / ACCESS</span></div>
+    </section>
+    <section className={styles.formSide}>
+      <div className={styles.card}>
+        <span className={styles.icon}>{recovery ? <Mail size={24} strokeWidth={1.5} /> : <LockKeyhole size={24} strokeWidth={1.5} />}</span>
+        <div className={styles.eyebrow}>{recovery ? 'ACCOUNT RECOVERY' : 'ADMIN SIGN IN'}</div>
+        <h2>{heading}</h2>
+        <p className={styles.intro}>{mode === 'login' ? 'Sign in to your admin workspace.' : mode === 'request' ? 'Enter your administrator email to request a one-time password reset code.' : mode === 'reset' ? `Enter the six-digit code sent to your admin email (${email}). Codes expire after 10 minutes.` : 'Your password has been updated. Continue to sign in.'}</p>
+        {error && <p role="alert" className={styles.error}>{error}</p>}
+        {message && <p role="status" className={styles.message}>{message}</p>}
+        {mode !== 'complete' && <form onSubmit={submit}>
+          <fieldset disabled={busy}>
+            {(mode === 'login' || mode === 'request') && <label htmlFor="admin-email">Email address<input id="admin-email" type="email" autoComplete="email" required maxLength={254} placeholder="you@example.com" value={email} onChange={event => setEmail(event.target.value)} /></label>}
+            {mode === 'reset' && <label htmlFor="admin-code">Email verification code<input id="admin-code" className={styles.code} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required placeholder="000000" value={code} onChange={event => setCode(event.target.value.replace(/\D/g, ''))} /></label>}
+            {(mode === 'login' || mode === 'reset') && <label htmlFor="admin-password">{mode === 'reset' ? 'New password' : 'Password'}<div className={styles.password}><input id="admin-password" type={visible ? 'text' : 'password'} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} minLength={mode === 'reset' ? 12 : undefined} required placeholder={mode === 'reset' ? 'At least 12 characters' : 'Enter your password'} value={password} onChange={event => setPassword(event.target.value)} /><button type="button" onClick={() => setVisible(value => !value)} aria-label={visible ? 'Hide password' : 'Show password'}>{visible ? <EyeOff size={17} /> : <Eye size={17} />}</button></div></label>}
+            {mode === 'reset' && <><label htmlFor="admin-confirm">Confirm new password<input id="admin-confirm" type="password" autoComplete="new-password" required minLength={12} value={confirmation} onChange={event => setConfirmation(event.target.value)} placeholder="Enter the new password again" /></label><p className={styles.hint}>12 characters minimum · 72 UTF-8 bytes maximum. All existing sessions will be signed out.</p></>}
+            {mode === 'login' && <button type="button" className={styles.textButton} onClick={() => switchMode('request')}>Forgot your password?</button>}
+            <button className={styles.primary} type="submit">{busy ? <Loader2 size={16} className={styles.spinning} /> : null}{busy ? 'Please wait…' : mode === 'login' ? 'Sign in to workspace' : mode === 'request' ? 'Send email code' : 'Reset password'}{!busy && <ArrowUpRight size={16} />}</button>
+          </fieldset>
+        </form>}
+        {mode === 'login' && providers.length > 0 && <><div className={styles.divider}>or continue with</div><div className={styles.socials}>{providers.map(provider => <button disabled={busy} key={provider.id} onClick={async () => { setBusy(true); setError(''); try { await signIn(provider.id, { callbackUrl: '/admin' }); } catch { setError('Social sign-in is unavailable. Please try again.'); setBusy(false); } }}>{provider.name}</button>)}</div></>}
+        {mode === 'reset' && <div className={styles.recoveryActions}><button className={styles.textButton} disabled={busy || cooldown > 0} onClick={async () => { setBusy(true); setError(''); try { await requestCode(); } catch (caught) { setError(caught instanceof Error ? caught.message : 'Could not send code.'); } finally { setBusy(false); } }}>{cooldown ? `Resend in ${cooldown}s` : 'Resend code'}</button><button className={styles.textButton} disabled={busy} onClick={() => switchMode('request')}>Change email</button></div>}
+        {recovery && <button disabled={busy} className={mode === 'complete' ? styles.primary : styles.back} onClick={() => switchMode('login')}><ArrowLeft size={14} /> Back to sign in</button>}
+        <div className={styles.security}><ShieldCheck size={13} /> Private access · Administrator accounts only</div>
+      </div>
+    </section>
+  </main>;
 }

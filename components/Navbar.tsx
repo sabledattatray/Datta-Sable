@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
-import dynamic from 'next/dynamic';
 import { ArrowUpRight, ArrowRight, ChevronDown, Menu, Plus, User, X } from 'lucide-react';
 import LogoIcon from './LogoIcon';
 import ThemeToggle from './ThemeToggle';
@@ -12,7 +11,6 @@ import HeaderAccount from './HeaderAccount';
 import { navLinks, megaMenuData } from './navigationData';
 import styles from './Navbar.module.css';
 
-const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
 type Destination = { title: string; desc: string; href: string; icon: React.ReactNode };
 type NavigationGroup = { featured: { title: string; desc: string; href: string }; items: Destination[] };
 const groups = megaMenuData as Record<string, NavigationGroup>;
@@ -42,7 +40,6 @@ export default function Navbar() {
   const [open,setOpen] = useState<string|null>(null);
   const [mobileOpen,setMobileOpen] = useState(false);
   const [mobileSection,setMobileSection] = useState<string|null>(null);
-  const [loginOpen,setLoginOpen] = useState(false);
   const [scrolled,setScrolled] = useState(false);
   const root = useRef<HTMLElement>(null);
   const mobileTrigger = useRef<HTMLButtonElement>(null);
@@ -99,7 +96,7 @@ export default function Navbar() {
         <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<button key={link.label} type="button" className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(current=>event.detail===0&&current===link.label?null:link.label);}} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></button>:<Link key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</Link>)}</nav>
         <div className={styles.actions}>
           <div className={styles.theme} onFocusCapture={()=>setOpen(null)}><ThemeToggle/></div>
-          {session?<HeaderAccount name={session.user?.name} isAdmin={accountRole?.toUpperCase()==='ADMIN'} onSignOut={()=>signOut()}/>:<button type="button" className={styles.signIn} aria-label="Sign in" onClick={()=>{closeAll();setLoginOpen(true);}}><User size={14}/><span>Sign in</span></button>}
+          {session?<HeaderAccount name={session.user?.name} isAdmin={accountRole?.toUpperCase()==='ADMIN'} onSignOut={()=>signOut()}/>:<Link className={styles.signIn} aria-label="Sign in" href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || "/")}`} onClick={closeAll}><User size={14}/><span>Sign in</span></Link>}
           <button ref={mobileTrigger} type="button" className={styles.menuToggle} aria-label={mobileOpen?'Close navigation':'Open navigation'} aria-expanded={mobileOpen} aria-controls="mobile-navigation" onClick={()=>{setOpen(null);setMobileOpen(value=>!value);}}>{mobileOpen?<X size={19}/>:<Menu size={19}/>}</button>
         </div>
       </div>
@@ -114,6 +111,5 @@ export default function Navbar() {
         <div className={styles.mobileFooter}><span>DATA / DESIGN / ENGINEERING</span><Link href="/about" onClick={closeAll}>Meet Datta <ArrowUpRight size={12}/></Link></div>
       </nav></div>}
     </header>
-    <LoginModal isOpen={loginOpen} onClose={()=>setLoginOpen(false)}/>
   </>;
 }

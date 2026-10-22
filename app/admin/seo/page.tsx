@@ -140,7 +140,7 @@ export default function SeoIntelligencePage() {
         <div className={adminStyles.panelHeading}>
           <h2>1-Click SEO Repair & Optimization Triggers</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))', gap: 14 }}>
           {[
             {
               title: 'Rebuild Internal Links',

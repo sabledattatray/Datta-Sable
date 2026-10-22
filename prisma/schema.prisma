@@ -20,9 +20,23 @@ model User {
   role          String    @default("USER") // USER, ADMIN
   createdAt     DateTime  @default(now())
   lastLoginAt   DateTime?
+  sessionVersion Int @default(0)
+  passwordReset AdminPasswordReset?
   commerceOrders CommerceOrder[]
   accounts      Account[]
   sessions      Session[]
+}
+
+model AdminPasswordReset {
+  userId               String   @id
+  codeHash             String
+  nonce                String
+  attempts             Int      @default(0)
+  expiresAt            DateTime
+  requestedAt          DateTime @default(now())
+  requestWindowStartedAt DateTime @default(now())
+  requestCount         Int      @default(1)
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {

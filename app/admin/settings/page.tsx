@@ -1,184 +1,77 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Save, Lock, Shield, CheckCircle2, AlertCircle, Smartphone, ShieldCheck, ToggleLeft, ToggleRight } from 'lucide-react';
+import { useState } from 'react';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { Save, LockKeyhole, ShieldCheck, Mail, ArrowUpRight, Loader2 } from 'lucide-react';
 import { updateAdminPassword } from './actions';
-import adminStyles from '@/components/admin/AdminCommon.module.css';
+import styles from '@/components/admin/AdminCommon.module.css';
+
+type PasswordFields = { currentPassword: string; newPassword: string; confirmPassword: string };
+const fields: { id: keyof PasswordFields; label: string; hint: string }[] = [
+  { id: 'currentPassword', label: 'Current password', hint: 'Enter your current password' },
+  { id: 'newPassword', label: 'New password', hint: 'At least 12 characters' },
+  { id: 'confirmPassword', label: 'Confirm new password', hint: 'Enter your new password again' },
+];
 
 export default function AdminSettingsPage() {
-  const [formData, setFormData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [form, setForm] = useState<PasswordFields>({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // 2FA MFA State
-  const [mfaEnabled, setMfaEnabled] = useState(true);
-  const [mfaMessage, setMfaMessage] = useState<string | null>(null);
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    setLoading(true); setMessage(null);
+    try {
+      const result = await updateAdminPassword(form);
+      if (result.error) setMessage({ type: 'error', text: result.error });
+      else if (result.success) {
+        setMessage({ type: 'success', text: result.success });
+        setForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      }
+    } catch {
+      setMessage({ type: 'error', text: 'Could not reach the server. Please try again.' });
+    } finally { setLoading(false); }
+  }
 
-  const toggleMfa = () => {
-    const nextState = !mfaEnabled;
-    setMfaEnabled(nextState);
-    setMfaMessage(
-      nextState
-        ? 'Two-Factor Authentication (MFA) has been enabled for your admin account.'
-        : 'Two-Factor Authentication (MFA) has been disabled.'
-    );
-    setTimeout(() => setMfaMessage(null), 4000);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage(null);
-    const res = await updateAdminPassword(formData);
-    setLoading(false);
-    if (res?.error) setMessage({ type: 'error', text: res.error });
-    else if (res?.success) {
-      setMessage({ type: 'success', text: res.success });
-      setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    }
-  };
-
-  const Field = ({ label, id, placeholder }: { label: string; id: keyof typeof formData; placeholder: string }) => (
-    <div className={adminStyles.field}>
-      <label className={adminStyles.label}>
-        {label}
-      </label>
-      <input
-        type="password"
-        required
-        value={formData[id]}
-        onChange={e => setFormData(f => ({ ...f, [id]: e.target.value }))}
-        placeholder={placeholder}
-        className={adminStyles.input}
-      />
-    </div>
-  );
-
-  return (
-    <div className={adminStyles.page}>
-      
-      {/* ── PAGE HEADER ── */}
-      <div className={adminStyles.header}>
-        <div className={adminStyles.headerCopy}>
-          <div className={adminStyles.eyebrow}>
-            <span className={adminStyles.eyebrowDot} /> SYSTEM CONFIGURATION
-          </div>
-          <h1 className={adminStyles.title}>
-            Security &amp; <span className={adminStyles.titleAccent}>Authorization</span>
-          </h1>
-          <p className={adminStyles.subtitle}>
-            Configure security tokens, MFA settings, active sessions, and admin access credentials.
-          </p>
-        </div>
+  return <div className={styles.page}>
+    <header className={styles.header}>
+      <div className={styles.headerCopy}>
+        <div className={styles.eyebrow}><span className={styles.eyebrowDot} /> SYSTEM CONFIGURATION</div>
+        <h1 className={styles.title}>Your workspace.<br /><span className={styles.titleAccent}>Your peace of mind.</span></h1>
+        <p className={styles.subtitle}>Manage your admin password and keep a reliable way back into your account.</p>
       </div>
-
-      <div style={{ maxWidth: 680, display: 'flex', flexDirection: 'column', gap: 20 }}>
-        
-        {/* ── 2FA MFA SECURITY CARD ── */}
-        <div className={adminStyles.panel} style={{ padding: 0, overflow: 'hidden', margin: 0 }}>
-          <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ width: 40, height: 40, borderRadius: 10, background: 'color-mix(in srgb, var(--accent) 12%, var(--surface))', border: '1px solid color-mix(in srgb, var(--accent) 30%, var(--border))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', flexShrink: 0 }}>
-              <ShieldCheck size={20} />
-            </div>
-            <div style={{ flex: 1 }}>
-              <h2 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', margin: 0 }}>Two-Factor Authentication (MFA)</h2>
-              <p style={{ fontSize: 11, color: 'var(--muted)', margin: '3px 0 0' }}>Add an extra layer of protection by requiring an authenticator code</p>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span className={mfaEnabled ? adminStyles.badge : adminStyles.badgeNeutral}>
-                {mfaEnabled ? 'Enabled' : 'Disabled'}
-              </span>
-              <button
-                onClick={toggleMfa}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-                aria-label={mfaEnabled ? 'Disable Two-Factor Authentication' : 'Enable Two-Factor Authentication'}
-              >
-                {mfaEnabled ? (
-                  <ToggleRight size={34} style={{ color: 'var(--accent)' }} />
-                ) : (
-                  <ToggleLeft size={34} style={{ color: 'var(--muted)' }} />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {mfaMessage && (
-            <div className={adminStyles.notice} style={{ margin: 0, borderRadius: 0, borderLeft: 0, borderRight: 0 }}>
-              <CheckCircle2 size={16} />
-              <span>{mfaMessage}</span>
-            </div>
-          )}
-
-          <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12, background: 'var(--surface2)' }}>
-            <Smartphone size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-            <p style={{ fontSize: 11, color: 'var(--muted)', margin: 0, lineHeight: 1.6 }}>
-              MFA is currently <strong style={{ color: mfaEnabled ? 'var(--accent)' : 'var(--text)' }}>{mfaEnabled ? 'ACTIVE' : 'INACTIVE'}</strong>. Authenticator apps (Google Authenticator, Microsoft Authenticator) generate code prompts upon login.
-            </p>
-          </div>
-        </div>
-
-        {/* ── PASSWORD CHANGE CARD ── */}
-        <div className={adminStyles.panel} style={{ padding: 0, overflow: 'hidden', margin: 0 }}>
-          <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ width: 40, height: 40, borderRadius: 10, background: 'color-mix(in srgb, var(--accent) 12%, var(--surface))', border: '1px solid color-mix(in srgb, var(--accent) 30%, var(--border))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', flexShrink: 0 }}>
-              <Lock size={19} />
-            </div>
-            <div>
-              <h2 style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', margin: 0 }}>Change Admin Password</h2>
-              <p style={{ fontSize: 11, color: 'var(--muted)', margin: '3px 0 0' }}>Update your admin login security credentials</p>
-            </div>
-          </div>
-
-          <div style={{ padding: '24px' }}>
-            {message && (
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 10,
-                padding: '12px 16px', borderRadius: 8, marginBottom: 20,
-                background: message.type === 'success' ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)',
-                border: `1px solid ${message.type === 'success' ? 'rgba(16,185,129,0.25)' : 'rgba(239,68,68,0.25)'}`,
-                color: message.type === 'success' ? '#34d399' : '#f87171',
-                fontSize: 12, fontWeight: 500
-              }}>
-                {message.type === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-                <span>{message.text}</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-              <Field label="Current Password" id="currentPassword" placeholder="Enter your current password" />
-              <Field label="New Password" id="newPassword" placeholder="Min 8 characters" />
-              <Field label="Confirm New Password" id="confirmPassword" placeholder="Re-enter new password" />
-
-              <div style={{ paddingTop: 6 }}>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={adminStyles.primary}
-                >
-                  <Save size={14} />
-                  {loading ? 'Saving...' : 'Save Password'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* ── SECURITY INFO FOOTER ── */}
-        <div className={adminStyles.panel} style={{ padding: '16px 20px', margin: 0, display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Shield size={16} style={{ color: 'var(--muted)', flexShrink: 0 }} />
-          <p style={{ fontSize: 11, color: 'var(--muted)', margin: 0, lineHeight: 1.6 }}>
-            Your admin session is encrypted over TLS 1.3. Use a mix of letters, numbers, and symbols for stronger password protection.
-          </p>
-        </div>
-
-      </div>
+      <span className={styles.badge}><ShieldCheck size={13} /> Administrator settings</span>
+    </header>
+    <div className={styles.detailGrid}>
+      <section className={styles.panel}>
+        <div className={styles.panelHeading}><div className={styles.sectionTitle}><span className={styles.sectionIcon}><LockKeyhole size={19} /></span><div><h2>Change password</h2><p>Protect your administrator account.</p></div></div></div>
+        {message && <div role={message.type === 'error' ? 'alert' : 'status'} className={styles.notice}>{message.text}</div>}
+        {message?.type === 'success' ? <button className={styles.primary} onClick={() => signOut({ callbackUrl: '/admin/login' })}>Sign in with your new password <ArrowUpRight size={15} /></button> : <form onSubmit={submit}>
+          <fieldset disabled={loading} className={styles.fieldset}>
+            {fields.map(field => <div className={styles.field} key={field.id}>
+              <label htmlFor={field.id} className={styles.label}>{field.label}</label>
+              <input id={field.id} type="password" required autoComplete={field.id === 'currentPassword' ? 'current-password' : 'new-password'} minLength={field.id === 'currentPassword' ? undefined : 12} value={form[field.id]} onChange={event => setForm(current => ({ ...current, [field.id]: event.target.value }))} placeholder={field.hint} className={styles.input} />
+            </div>)}
+            <p className={styles.helperText}>Use at least 12 characters and at most 72 UTF-8 bytes. Changing your password signs out existing sessions.</p>
+            <button type="submit" className={styles.primary}>{loading ? <Loader2 size={15} className={styles.spinning} /> : <Save size={15} />}{loading ? 'Updating password…' : 'Update password'}</button>
+          </fieldset>
+        </form>}
+      </section>
+      <aside>
+        <section className={styles.panel}>
+          <span className={styles.sectionIcon}><Mail size={20} /></span>
+          <div className={styles.eyebrow} style={{ marginTop: 24 }}>A WAY BACK IN</div>
+          <h2>Forgot your password?</h2>
+          <p className={styles.helperText}>Request a one-time code at your administrator email address. Verify the code to reset your password, including accounts that previously used social sign-in.</p>
+          <Link className={styles.secondary} href="/admin/login?mode=reset">Reset with email OTP <ArrowUpRight size={14} /></Link>
+        </section>
+        <section className={styles.panel}>
+          <div className={styles.panelHeading}><h2>Sign-in protection</h2><ShieldCheck size={17} /></div>
+          <p className={styles.helperText}>Email recovery codes expire after 10 minutes and work once. Password recovery does not enable two-factor authentication.</p>
+          <span className={styles.badgeNeutral}>Authenticator MFA is not configured</span>
+        </section>
+      </aside>
     </div>
-  );
+  </div>;
 }

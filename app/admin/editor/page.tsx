@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
 import { useEditorStore } from '@/store/editorStore';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 
 function EditorContent() {
   const { postMetadata, updatePostMetadata } = useEditorStore();
@@ -107,7 +108,7 @@ function EditorContent() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: previewMode ? css.surface : css.bg, color: css.text, transition: 'background 0.3s' }}>
+    <div className={adminStyles.editorpage} data-standalone="true" style={{ display: 'flex', flexDirection: 'column', background: previewMode ? css.surface : css.bg, color: css.text, transition: 'background 0.3s' }}>
 
       {/* Top bar */}
       {!previewMode && (
@@ -157,7 +158,7 @@ function EditorContent() {
       )}
 
       {/* Main workspace */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+      <div className={adminStyles.editorBody} style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         <main style={{ flex: 1, overflowY: 'auto', background: css.bg, padding: previewMode ? '60px 40px' : '24px 32px' }}>
           <div style={{ maxWidth: previewMode ? 860 : 1200, margin: '0 auto' }}>
             {/* Title Input */}

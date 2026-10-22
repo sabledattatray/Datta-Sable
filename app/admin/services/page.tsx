@@ -223,7 +223,7 @@ export default function AdminServices() {
 
       {/* Service Cards Grid */}
       {!loading && services.length > 0 && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))', gap: 16 }}>
           {services.map((s) => (
             <div
               key={s.id}

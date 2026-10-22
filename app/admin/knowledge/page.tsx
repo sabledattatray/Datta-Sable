@@ -104,7 +104,7 @@ export default function KnowledgeGraphPage() {
         <div className={adminStyles.panelHeading}>
           <h2>Topic Cluster Completion Breakdown</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 14 }}>
           {(metrics?.clusters || [
             { name: 'Microsoft Fabric', completionPercentage: 100, status: 'Complete' },
             { name: 'Architecture & BI', completionPercentage: 100, status: 'Complete' },

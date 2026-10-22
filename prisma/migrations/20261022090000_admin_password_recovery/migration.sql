@@ -1,0 +1,14 @@
+ALTER TABLE "User" ADD COLUMN "sessionVersion" INTEGER NOT NULL DEFAULT 0;
+
+CREATE TABLE "AdminPasswordReset" (
+  "userId" TEXT NOT NULL,
+  "codeHash" TEXT NOT NULL,
+  "nonce" TEXT NOT NULL,
+  "attempts" INTEGER NOT NULL DEFAULT 0,
+  "expiresAt" TIMESTAMP(3) NOT NULL,
+  "requestedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "requestWindowStartedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "requestCount" INTEGER NOT NULL DEFAULT 1,
+  CONSTRAINT "AdminPasswordReset_pkey" PRIMARY KEY ("userId"),
+  CONSTRAINT "AdminPasswordReset_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE
+);

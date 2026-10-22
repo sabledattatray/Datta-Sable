@@ -1,4 +1,5 @@
 'use client';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
@@ -201,7 +202,7 @@ export default function AdminCatchAllPage() {
       case 'users':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Management</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>User Management</h1>
@@ -270,13 +271,13 @@ export default function AdminCatchAllPage() {
       case 'users/roles':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Management</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Roles & Permissions</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure permissions and granular access policies for team roles.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 20 }}>
               {[
                 { name: 'Super Admin', desc: 'Full root access to database, settings, keys, and payments.', users: 1, permissions: ['All Access'] },
                 { name: 'Editor', desc: 'Create, modify, and publish blog stories and custom layout pages.', users: 2, permissions: ['Write CMS', 'Edit CMS', 'Delete CMS', 'Upload Media'] },
@@ -304,7 +305,7 @@ export default function AdminCatchAllPage() {
       case 'org/profile':
         return (
           <div style={{ maxWidth: 600 }}>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Organization</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Company Profile</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure global metadata and profile settings for the brand.</p>
@@ -342,13 +343,13 @@ export default function AdminCatchAllPage() {
       case 'org/branches':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Organization</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Branches & Locations</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure global office locations, contact agents, and branches.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: 20 }}>
               {[
                 { city: 'Pune (HQ)', country: 'India', addr: 'Senapati Bapat Road', status: 'Main Office' },
                 { city: 'Mumbai', country: 'India', addr: 'Bandra Kurla Complex', status: 'Regional Hub' },
@@ -371,13 +372,13 @@ export default function AdminCatchAllPage() {
       case 'billing/subs':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Subscriptions</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Monitor client subscription plans, billing frequencies, and status logs.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 20 }}>
               {[
                 { tier: 'Starter Tier', clientsCount: 5, price: '₹4,999/mo', desc: 'Basic BI dashboard reporting and monthly data re-syncs.' },
                 { tier: 'Professional Tier', clientsCount: 12, price: '₹14,999/mo', desc: 'Real-time database syncs, multi-user access control, Custom Reports.', featured: true },
@@ -398,7 +399,7 @@ export default function AdminCatchAllPage() {
       case 'billing/methods':
         return (
           <div style={{ maxWidth: 540 }}>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Payment Methods</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Manage subscription billing payout cards and settings.</p>
@@ -431,7 +432,7 @@ export default function AdminCatchAllPage() {
       case 'orders':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Sales</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Orders List</h1>
@@ -478,7 +479,7 @@ export default function AdminCatchAllPage() {
       case 'orders/transactions':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Sales</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Transactions Ledger</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review payment collection records and billing logs.</p>
@@ -524,7 +525,7 @@ export default function AdminCatchAllPage() {
       case 'analytics/reports':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Analytics</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>
                 {path === 'analytics/traffic' ? 'Traffic & Behavior' : path === 'analytics/reports' ? 'Analytics Reports' : 'Analytics Overview'}
@@ -583,7 +584,7 @@ export default function AdminCatchAllPage() {
       case 'marketing/coupons':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Marketing</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Coupons & Deals</h1>
@@ -642,7 +643,7 @@ export default function AdminCatchAllPage() {
               accept="image/jpeg,image/png,image/webp,image/gif,application/pdf"
             />
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>CMS</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Media Library</h1>
@@ -712,7 +713,7 @@ export default function AdminCatchAllPage() {
       case 'settings/security':
         return (
           <div style={{ maxWidth: 540 }}>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Security & Authorization</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure security tokens, MFA settings, and active sessions.</p>
@@ -739,13 +740,13 @@ export default function AdminCatchAllPage() {
       case 'settings/integrations':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Integrations Hub</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review external API integrations, mail servers, and database connectors.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 20 }}>
               {[
                 { name: 'Prisma Client', desc: 'Active Database integration connecting PostgreSQL schema.', status: 'Connected', badgeColor: '#10b981' },
                 { name: 'Next-Auth / AuthJS', desc: 'Handles administrator OAuth and secure login sessions.', status: 'Connected', badgeColor: '#10b981' },
@@ -766,7 +767,7 @@ export default function AdminCatchAllPage() {
       case 'notifications/alerts':
         return (
           <div>
-            <div style={{ marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Notifications</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>System Alerts</h1>
               <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review system security updates, login alerts, and API logging events.</p>
@@ -799,7 +800,7 @@ export default function AdminCatchAllPage() {
       case 'developer/keys':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>API Access Tokens</h1>
@@ -833,7 +834,7 @@ export default function AdminCatchAllPage() {
       case 'developer/webhooks':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Webhook Subscriptions</h1>
@@ -857,7 +858,7 @@ export default function AdminCatchAllPage() {
       case 'developer/logs':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Live System Logs</h1>
@@ -883,7 +884,7 @@ export default function AdminCatchAllPage() {
       case 'support/tickets':
         return (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+            <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
                 <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Support Desk</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Inbound Tickets</h1>
@@ -943,7 +944,7 @@ export default function AdminCatchAllPage() {
   };
 
   return (
-    <div style={{ padding: '8px 4px', minHeight: '100%' }}>
+    <div className={adminStyles.legacyPage}>
       {renderContent()}
     </div>
   );

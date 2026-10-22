@@ -5,20 +5,17 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession, signOut } from 'next-auth/react';
 import { ChevronDown, ArrowUpRight, User } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import ThemeToggle from './ThemeToggle';
 import HeaderAccount from './HeaderAccount';
 import accountStyles from './HeaderAccount.module.css';
 import { navLinks, megaMenuData } from './navigationData';
 
-const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
 
 export default function DesktopNav() {
   const { data: session } = useSession();
   const pathname = usePathname();
   const [hovered, setHovered] = useState<string | null>(null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const handleMouseEnter = (menu: string) => {
     if (timeoutId) clearTimeout(timeoutId);
@@ -144,16 +141,15 @@ export default function DesktopNav() {
         {session ? (
           <HeaderAccount name={session.user?.name} isAdmin={String((session.user as any)?.role).toUpperCase() === 'ADMIN'} onSignOut={() => signOut()} />
         ) : (
-          <button 
-            type="button"
-            onClick={() => setIsLoginOpen(true)}
+          <Link
+            href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || "/")}`}
             className={accountStyles.signIn}
           >
             <span className={accountStyles.signInIcon}><User size={14} aria-hidden="true" /></span><span>Sign in</span>
-          </button>
+          </Link>
         )}
       </div>
-      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+
     </nav>
   );
 }

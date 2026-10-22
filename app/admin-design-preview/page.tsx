@@ -2,11 +2,16 @@ import { notFound } from 'next/navigation';
 import AdminDashboardWrapper from '@/app/admin/AdminDashboardWrapper';
 import AdminOverview from '@/components/admin/AdminOverview';
 import type { AdminOverviewData } from '@/lib/admin/overview';
+import AdminManagementPreview from '@/components/admin/AdminManagementPreview';
+import AdminSettingsPage from '@/app/admin/settings/page';
 
 export const metadata = { title: 'Admin workspace design preview', robots: { index: false, follow: false } };
 
-export default function AdminDesignPreview() {
+export default async function AdminDesignPreview({ searchParams }: { searchParams: Promise<{ view?: string }> }) {
   if (process.env.NODE_ENV !== 'development' || process.env.ADMIN_DESIGN_PREVIEW !== '1') notFound();
+  const { view } = await searchParams;
+  if (view === 'management') return <AdminDashboardWrapper previewOnly previewPath="/admin/blog"><AdminManagementPreview /></AdminDashboardWrapper>;
+  if (view === 'settings') return <AdminDashboardWrapper previewOnly previewPath="/admin/settings"><AdminSettingsPage /></AdminDashboardWrapper>;
   const now = new Date();
   const traffic = [5,8,4,2,3,6,11,15,10,8,18,22,16,12,19,24,29,21,17,23,16,12,8,6];
   const sample: AdminOverviewData = {

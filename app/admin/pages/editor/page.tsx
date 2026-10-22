@@ -1,4 +1,5 @@
 'use client';
+import adminStyles from '@/components/admin/AdminCommon.module.css';
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { ArrowLeft, Save, Eye, EyeOff, AlertCircle, CheckCircle2, ChevronRight, Layers, X, Globe, FileText, Columns, Sparkles, XCircle, ChevronLeft } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
@@ -435,7 +436,7 @@ function EditorContent() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: css.bg }}>
+    <div className={adminStyles.editorpage} style={{ display: 'flex', flexDirection: 'column', background: css.bg }}>
       {/* Editor Top Navigation Row */}
       <header
         style={{
@@ -515,7 +516,7 @@ function EditorContent() {
       </header>
 
       {/* Editor Content Area */}
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+      <div className={adminStyles.editorBody} style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         
         {editorMode === 'preview' && (
           <div style={{ flex: 1, overflowY: 'auto', background: css.bg, display: 'flex', justifyContent: 'center', padding: '60px 20px' }}>

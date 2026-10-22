@@ -83,7 +83,7 @@ export default function CustomReportsPage() {
       </div>
 
       {/* ── REPORT TEMPLATES GRID ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 16 }}>
         {[
           {
             name: 'Monthly SEO & Search Performance Report',

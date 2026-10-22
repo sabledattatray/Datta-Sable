@@ -5,7 +5,7 @@
 .checkout { min-width:0; font-size:13px; }.checkout > label { display:block; line-height:1.8; margin:18px 0; color:var(--muted); }.checkout > label input { width:18px; height:18px; vertical-align:middle; margin-right:8px; }.checkout a { color:var(--text); text-decoration:underline; }.checkout .primary { display:flex; justify-content:center; align-items:center; width:100%; min-height:48px; padding:14px 18px; margin:16px 0; border:0; border-radius:8px; font:inherit; font-weight:600; cursor:pointer; }.checkout .primary:disabled { opacity:.6; cursor:not-allowed; }.checkout :is(button,input,a):focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
 
 /* Commerce management shares the admin workspace's quieter card system. */
-.adminStudio { margin:0; padding:6px 0 24px; min-height:70vh; font-family:var(--font-syne); }
+.adminStudio { margin:0 auto; padding:34px 32px 28px; max-width:1700px; min-height:70vh; font-family:var(--font-syne); box-sizing:border-box; }
 .adminStudio h1 { font-size:clamp(29px,3vw,42px); font-weight:600; margin:12px 0 24px; }
 .adminStudio .kicker { font-size:9px; letter-spacing:.14em; }
 .adminStudio .panel { border-radius:14px; padding:25px; background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 2%,var(--surface)),var(--surface) 70%); box-shadow:0 4px 20px #00000005; }
@@ -18,4 +18,5 @@
 .adminStudio .table th { background:var(--surface2); font-size:9px; padding:15px; }
 .adminStudio .table td { padding:15px; }
 .adminStudio .table tr:last-child td { border-bottom:0; }
-@media(max-width:650px){.adminStudio{margin:0;padding:0 0 20px;}.adminStudio .panel{padding:20px 17px;}.adminStudio nav button{flex:1;min-width:75px;}}
+.adminStudio header h1 { font-size:clamp(26px,2.8vw,38px); margin:0 0 12px; line-height:1.15; }.adminStudio header p { font-size:13px; margin:0; }.adminStudio header a { color:var(--text); }.adminStudio p { font-size:12px; }.adminStudio nav { padding:5px; width:fit-content; max-width:100%; gap:4px; }.adminStudio nav button { min-height:40px; background:transparent; }.adminStudio nav button[aria-pressed=true] { background:color-mix(in srgb,var(--accent) 12%,var(--surface))!important; color:var(--accent)!important; }.adminStudio summary { font-size:12px; font-weight:500; line-height:1.8; }.adminStudio .panel { padding:24px; }.adminStudio .panel h2 { font-size:19px; }.adminStudio :is(input,select,textarea) { box-sizing:border-box; min-height:44px; }.adminStudio .actions>a { display:inline-flex; align-items:center; gap:8px; min-height:42px; padding:10px 16px; border:1px solid var(--border); border-radius:9px; text-decoration:none; font-size:12px; background:var(--surface); }.adminStudio :is(button,.actions>a):hover { border-color:color-mix(in srgb,var(--accent) 40%,var(--border)); }.adminStudio label { line-height:1.8; }.adminStudio code { font-size:10px; }
+@media(max-width:650px){.adminStudio{padding:20px 16px;}.adminStudio .panel{padding:20px 17px;}.adminStudio nav{width:100%;box-sizing:border-box;}.adminStudio nav button{flex:1;min-width:75px;}.adminStudio :is(input,select,textarea){font-size:16px;}}

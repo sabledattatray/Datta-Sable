@@ -155,6 +155,7 @@ export const authOptions: NextAuthOptions = {
 
           token.id = dbUser.id;
           token.role = dbUser.role;
+          token.sessionVersion = dbUser.sessionVersion;
           token.lastRoleCheck = now;
         } catch (error) {
           console.error("Error updating user activity:", error);
@@ -164,15 +165,14 @@ export const authOptions: NextAuthOptions = {
 
         }
       } else if (token.id) {
-        // Stale privilege propagation check: Query the database at most once every 30 seconds
-        const lastCheck = (token.lastRoleCheck as number) || 0;
-        if (now - lastCheck > 30) {
+        // Check revocation on every session read so password changes invalidate old JWTs.
+        {
           try {
             const dbUser = await prisma.user.findUnique({
               where: { id: token.id as string },
-              select: { role: true }
+              select: { role: true, sessionVersion: true }
             });
-            if (dbUser) {
+            if (dbUser && (token.sessionVersion ?? 0) === dbUser.sessionVersion) {
               token.role = dbUser.role;
               token.lastRoleCheck = now;
             } else {
@@ -180,7 +180,7 @@ export const authOptions: NextAuthOptions = {
               token.role = 'USER';
               delete token.id;
             }
-          } catch (error) {
+          } catch {
             console.error("Role refresh could not access the database.");
             token.role = "USER";
             token.lastRoleCheck = now;
@@ -190,6 +190,8 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      // NextAuth clears the session cookie when this callback rejects a revoked JWT.
+      if (!token.id) throw new Error('Session expired. Please sign in again.');
       if (session.user) {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;

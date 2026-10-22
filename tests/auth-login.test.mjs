@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
-function auth({ auditFails = false, userFails = false } = {}) {
+function auth({ auditFails = false, userFails = false, sessionVersion = 0 } = {}) {
   const mod = { exports: {} };
   const provider = { default: () => ({}) };
   const deps = {
@@ -14,10 +14,10 @@ function auth({ auditFails = false, userFails = false } = {}) {
     'next-auth/providers/credentials': provider,
     '@/lib/prisma': { prisma: {
       user: {
-        findUnique: async () => ({ id: 'admin-1', role: 'ADMIN' }),
+        findUnique: async () => ({ id: 'admin-1', role: 'ADMIN', sessionVersion }),
         upsert: async () => {
           if (userFails) throw Error('User database unavailable');
-          return { id: 'admin-1', role: 'ADMIN' };
+          return { id: 'admin-1', role: 'ADMIN', sessionVersion };
         },
       },
       auditLog: { create: async () => { if (auditFails) throw Error('Audit unavailable'); } },
@@ -50,4 +50,18 @@ test('user persistence failure still fails closed without admin privileges', asy
   const token = await auth({ userFails: true }).callbacks.jwt({ token: {}, user: { email: 'admin@example.test' } });
   assert.equal(token.id, undefined);
   assert.equal(token.role, 'USER');
+});
+
+test('password changes revoke existing sessions on the next session read', async () => {
+  const options = auth({ sessionVersion: 1 });
+  const token = await options.callbacks.jwt({ token: { id: 'admin-1', role: 'ADMIN', sessionVersion: 0, lastRoleCheck: Date.now() / 1000 } });
+  assert.equal(token.role, 'USER');
+  assert.equal(token.id, undefined);
+  await assert.rejects(() => options.callbacks.session({ session: { user: {} }, token }), /Session expired/);
+});
+
+test('sessions issued before versioning continue until the password is changed', async () => {
+  const token = await auth().callbacks.jwt({ token: { id: 'admin-1', role: 'ADMIN' } });
+  assert.equal(token.role, 'ADMIN');
+  assert.equal(token.id, 'admin-1');
 });

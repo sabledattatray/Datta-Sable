@@ -89,7 +89,7 @@ export default function TrafficBehaviorPage() {
             Geographic Traffic Distribution
           </h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 14 }}>
           {[
             { country: 'India', share: '58%', flag: '🇮🇳', visitors: '916' },
             { country: 'United States', share: '22%', flag: '🇺🇸', visitors: '347' },
