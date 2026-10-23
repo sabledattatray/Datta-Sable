@@ -14,6 +14,8 @@ export const FONT_FAMILIES = [
   { name: 'Lora', fallback: 'serif', weights: [400, 500, 600, 700] },
   { name: 'Playfair Display', fallback: 'serif', weights: [400, 500, 600, 700, 800] },
   { name: 'Raleway', fallback: 'sans-serif', weights: [300, 400, 500, 600, 700, 800] },
+  { name: 'Poppins', fallback: 'sans-serif', weights: [300, 400, 500, 600, 700, 800] },
+  { name: 'Kanit', fallback: 'sans-serif', weights: [300, 400, 500, 600, 700, 800] },
   { name: 'Segoe UI', fallback: 'system-ui,sans-serif', weights: [300, 400, 600, 700] },
 ] as const;
 

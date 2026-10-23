@@ -61,7 +61,7 @@ test('malformed settings, CSS injection, unsupported weights and out-of-range va
 });
 
 test('every advertised font is bundled, licensed, and loads only when selected', () => {
-  assert.equal(typography.FONT_FAMILIES.length, 11);
+  assert.equal(typography.FONT_FAMILIES.length, 13);
   const settings = typography.defaultTypography();
   assert.equal(typography.typographyFontCss(settings), '');
   for (const font of typography.FONT_FAMILIES.slice(3).filter(font => font.name !== 'Segoe UI')) {
