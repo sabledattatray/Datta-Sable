@@ -1,0 +1,966 @@
+.dashboardContainer {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-family: var(--font-syne), -apple-system, sans-serif;
+  user-select: none;
+}
+
+.dashboardContainer:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.35), 0 0 20px -4px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+/* ── Top Window Bar (Chrome) ── */
+.windowBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface2) 80%, var(--bg));
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.windowControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dotRed, .dotYellow, .dotGreen {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.dotRed { background: #ef4444; }
+.dotYellow { background: #f59e0b; }
+.dotGreen { background: #10b981; }
+
+.windowBar:hover .dotRed,
+.windowBar:hover .dotYellow,
+.windowBar:hover .dotGreen {
+  filter: brightness(1.15);
+}
+
+.windowTitle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.windowTitle strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.windowBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.pulseDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseDot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.windowActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tourButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tourButton:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tourButton.activeTour {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Filter / Navigation Strip ── */
+.controlStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.scenarioTabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface2);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.scenarioTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.scenarioTab:hover {
+  color: var(--text);
+}
+
+.scenarioTab.activeTab {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.secondaryFilters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.periodPills {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface2);
+  padding: 2px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.periodPill {
+  padding: 3px 8px;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.periodPill:hover {
+  color: var(--text);
+}
+
+.periodPill.activePeriod {
+  background: var(--accent);
+  color: var(--btn-primary-text);
+}
+
+.segmentSelector {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 9.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.segmentSelector:hover {
+  border-color: var(--accent);
+}
+
+/* ── KPI Metrics Bar ── */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--surface2) 40%, var(--surface));
+  border-bottom: 1px solid var(--border);
+}
+
+.kpiCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Power BI Signature Left Accent Bar */
+.kpiCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--kpi-accent, var(--accent));
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
+  transition: width 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.kpiCard:hover {
+  border-color: color-mix(in srgb, var(--kpi-accent, var(--accent)) 35%, var(--border));
+  transform: translateY(-1px);
+}
+
+.kpiCard:hover::before {
+  width: 5px;
+  box-shadow: 0 0 12px var(--kpi-accent, var(--accent));
+  filter: brightness(1.2);
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.kpiLabel {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.kpiDelta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.kpiValueRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kpiValue {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.kpiMiniSparkline {
+  width: 44px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.kpiFootnote {
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Main Dual-Visual Workspace ── */
+.workspaceLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface);
+}
+
+.chartCard, .breakdownCard {
+  background: color-mix(in srgb, var(--surface2) 60%, var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardTitle i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.cardLegend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 8.5px;
+  color: var(--muted);
+}
+
+.legendActual {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendActual i {
+  width: 12px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 1.5px;
+}
+
+.legendTarget {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendTarget i {
+  width: 12px;
+  height: 2px;
+  border-top: 2px dashed var(--muted);
+}
+
+/* ── Interactive SVG Chart ── */
+.chartSvgWrapper {
+  position: relative;
+  width: 100%;
+  height: 172px;
+}
+
+.interactiveSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  cursor: crosshair;
+}
+
+.chartGridLine {
+  stroke: var(--border);
+  stroke-dasharray: 3 3;
+  stroke-width: 0.8;
+  opacity: 0.65;
+}
+
+.chartAxisText {
+  fill: var(--muted);
+  font-size: 8px;
+  font-family: var(--font-syne), sans-serif;
+}
+
+.chartTrendLine {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--accent) 35%, transparent));
+}
+
+.chartTargetLine {
+  fill: none;
+  stroke: var(--muted);
+  stroke-dasharray: 4 4;
+  stroke-width: 1.4;
+  opacity: 0.7;
+}
+
+.chartCrosshair {
+  stroke: color-mix(in srgb, var(--accent) 55%, var(--border));
+  stroke-width: 1.2;
+  stroke-dasharray: 2 2;
+}
+
+.activePointRing {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px var(--accent));
+  transition: all 0.15s ease;
+}
+
+/* ── Hover Tooltip ── */
+.chartTooltip {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  font-size: 9px;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 10;
+}
+
+.tooltipTitle {
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tooltipBadge {
+  font-size: 7.5px;
+  padding: 1px 4px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.tooltipNumbers {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.tooltipVariance {
+  font-size: 8px;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* ── Right Sidecar: Radial Ring Breakdown ── */
+.breakdownBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 172px;
+  padding: 4px 0;
+}
+
+.radialWrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+}
+
+.radialSvg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.radialTrack {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 11;
+  opacity: 0.6;
+}
+
+.radialSegment {
+  fill: none;
+  stroke-linecap: round;
+  cursor: pointer;
+  transition: stroke-width 0.2s ease, opacity 0.2s ease;
+}
+
+.radialSegment:hover {
+  stroke-width: 14;
+}
+
+.radialCenterText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.radialCenterText strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.radialCenterText small {
+  font-size: 7.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.segmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.segmentRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 8.5px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.segmentRow:hover, .segmentRow.activeSegment {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.segmentKey {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.segmentDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.segmentShare {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Bottom Insight & Case Study Bar ── */
+.bottomInsightBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface2) 80%, var(--bg));
+  border-top: 1px solid var(--border);
+  gap: 12px;
+}
+
+.insightText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9.5px;
+  color: var(--muted);
+  line-height: 1.4;
+  min-width: 0;
+}
+
+.insightIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.insightText strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.insightLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.insightLink:hover {
+  opacity: 0.85;
+  transform: translateX(2px);
+}
+
+/* ── Visual 1: Speedometer Radial Gauge (FinTech) ── */
+.gaugeWrapper {
+  position: relative;
+  width: 154px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gaugeSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.gaugeTrack {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 11;
+  stroke-linecap: round;
+}
+
+.gaugeFill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 11;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--accent) 40%, transparent));
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gaugeCenter {
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.gaugeValue {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.gaugeLabel {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+}
+
+.gaugeTargetTick {
+  stroke: #10b981;
+  stroke-width: 2.5;
+}
+
+.gaugeFootnote {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px 6px;
+  background: var(--surface2);
+  border-radius: 6px;
+  font-size: 8px;
+  color: var(--muted);
+}
+
+.gaugeFootnote strong {
+  color: #10b981;
+}
+
+/* ── Visual 2: Clustered Column Bars & Capacity Line (ETL Pipeline) ── */
+.barColumnActual {
+  cursor: pointer;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.barColumnActual:hover {
+  filter: brightness(1.25);
+}
+
+.barColumnBuffer {
+  fill: var(--border);
+  opacity: 0.45;
+  cursor: pointer;
+}
+
+.capacityLine {
+  stroke: #ef4444;
+  stroke-dasharray: 4 3;
+  stroke-width: 1.2;
+  opacity: 0.85;
+}
+
+.capacityBadge {
+  fill: #ef4444;
+  font-size: 7.5px;
+  font-weight: 700;
+  font-family: var(--font-syne), sans-serif;
+}
+
+/* ── Visual 2 Right: Node Cluster Telemetry Grid ── */
+.nodeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  align-content: space-between;
+}
+
+.nodeCard {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.15s ease;
+}
+
+.nodeCard:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.nodeCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.nodeDotLive {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.nodeStats {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 7.5px;
+  color: var(--muted);
+}
+
+.nodeCpuVal {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.nodeBarTrack {
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+
+.nodeBarFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1.5px;
+  transition: width 0.3s ease;
+}
+
+/* ── Visual 3: Stepped Conversion Funnel Waterfall (Deal Intelligence) ── */
+.funnelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 172px;
+  padding: 2px 0;
+  gap: 4px;
+}
+
+.funnelStage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.funnelStage:hover, .funnelStage.activeStage {
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface2));
+}
+
+.funnelMeta {
+  width: 78px;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.funnelMeta small {
+  font-size: 7px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.funnelBarTrack {
+  flex: 1;
+  height: 16px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.funnelBarFill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 85%, transparent), var(--accent));
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+}
+
+.funnelBarText {
+  font-size: 8px;
+  font-weight: 800;
+  color: var(--btn-primary-text);
+  white-space: nowrap;
+}
+
+.funnelConvBadge {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  width: 44px;
+  text-align: right;
+}
+
+/* ── Responsive Behavior ── */
+@media (max-width: 680px) {
+  .workspaceLayout {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .kpiGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .breakdownBody {
+    height: auto;
+    flex-direction: row;
+    gap: 16px;
+    padding: 8px 4px;
+  }
+
+  .segmentList {
+    flex: 1;
+  }
+}
+

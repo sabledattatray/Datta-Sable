@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Crosshair from '@/components/Crosshair';
 import MarketplaceExplorer, { SerializedProduct } from '@/components/commerce/MarketplaceExplorer';
 import { categoryCounts as countCategories } from '@/lib/commerce/discovery';
 import { productDetailsMap } from '@/lib/commerce/product-settings';
@@ -82,8 +83,11 @@ export default async function ProductsPage() {
     <>
       <Navbar />
 
-      <main className={styles.pageWrapper}>
-        <div className={styles.ambientGlow} />
+      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
+        <Crosshair position="tl" />
+
+        <main className={styles.pageWrapper}>
+          <div className={styles.ambientGlow} />
 
         <div className={styles.container}>
           {/* Breadcrumbs & User Shortcut */}
@@ -256,7 +260,10 @@ export default async function ProductsPage() {
             </a>
           </section>
         </div>
-      </main>
+        </main>
+
+        <Crosshair position="br" />
+      </div>
 
       <Footer />
 

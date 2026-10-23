@@ -1,0 +1,945 @@
+/* Power BI Interactive Hero Dashboard Styles - Landscape Desktop & Responsive Mobile */
+
+.pbiContainer {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+  box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.25), 0 0 24px -6px color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  overflow: hidden;
+  user-select: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ── Ribbon Header ── */
+.pbiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: color-mix(in srgb, var(--surface2) 85%, var(--bg));
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pbiBrandGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pbiLogoBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--pbi-primary, var(--accent));
+  color: var(--btn-primary-text, #ffffff);
+  font-weight: 800;
+  font-size: 11px;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 35%, transparent);
+  flex-shrink: 0;
+}
+
+.pbiTitleGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.pbiReportTitle {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pbiSubBadge {
+  font-size: 9.5px;
+  font-family: var(--font-mono, monospace);
+  color: var(--pbi-primary, var(--accent));
+  font-weight: 500;
+}
+
+/* Shade & Action Controls */
+.pbiControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shadeLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.shadeGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  padding: 3px 5px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.shadeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.shadeBtn:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface2) 80%, transparent);
+}
+
+.shadeBtnActive {
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.shadeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pbiActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface2) 80%, transparent);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pbiActionBtn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+/* ── Slicer Bar ── */
+.pbiSlicerBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 16px;
+  background: color-mix(in srgb, var(--surface2) 40%, var(--bg));
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.slicerGroup {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.slicerLabel {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-right: 3px;
+}
+
+.slicerPill {
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.slicerPill:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.slicerPillActive {
+  background: var(--pbi-primary, var(--accent));
+  color: var(--btn-primary-text, #ffffff);
+  border-color: var(--pbi-primary, var(--accent));
+  font-weight: 700;
+}
+
+/* ── Main Canvas (Landscape Flow) ── */
+.pbiCanvas {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 95%, transparent) 0%, var(--bg) 100%);
+}
+
+/* KPI Strip (4 Columns in Landscape) */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.kpiCard {
+  position: relative;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface2) 65%, var(--surface));
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 84px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.kpiCard:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.kpiAccentBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: var(--pbi-primary, var(--accent));
+}
+
+.kpiTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.kpiTitle {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+}
+
+.kpiDaxTag {
+  font-size: 8px;
+  font-family: var(--font-mono, monospace);
+  padding: 1.5px 4px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--pbi-primary, var(--accent));
+  font-weight: 600;
+}
+
+.kpiValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.kpiValue {
+  font-size: 19px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.kpiDelta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1.5px 5px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--pbi-primary, var(--accent));
+}
+
+.kpiFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+.kpiSpark {
+  width: 52px;
+  height: 16px;
+}
+
+/* ── Landscape Visuals Grid (3 Columns across desktop!) ── */
+/* ── Landscape Visuals Grid (2 Wide Landscape Cards on Desktop!) ── */
+.landscapeVisualsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* Common Visual Card - Identical Fixed Height Across All 3 Tabs */
+.visualCard {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface2) 65%, var(--surface));
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.visualCard:hover {
+  border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.chartHeaderLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardSubtitle {
+  font-size: 9px;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.chartLegend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.legendDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  margin-right: 4px;
+}
+
+.legendLine {
+  display: inline-block;
+  width: 12px;
+  height: 2px;
+  border-radius: 1px;
+  margin-right: 4px;
+}
+
+/* Tab 1: Combo Chart */
+.comboChartSvg {
+  width: 100%;
+  height: 175px;
+  overflow: visible;
+  margin-top: auto;
+}
+
+/* Tab 1: Right Card (Donut + Regional Metrics) */
+.donutWithRegionalLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+  margin-top: auto;
+}
+
+.donutRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.donutSvgWrapper {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+}
+
+.donutSvg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donutCenterText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.donutCenterVal {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.donutCenterSub {
+  font-size: 7.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.donutLegendList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.donutLegendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.donutLegendLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+}
+
+.donutLegendVal {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.regionalMiniGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.regionalMiniPill {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.regionalMiniName {
+  font-size: 8px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.regionalMiniVal {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--pbi-primary, var(--accent));
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tab 2: Smooth Spline Area Chart */
+.areaChartSvg {
+  width: 100%;
+  height: 175px;
+  overflow: visible;
+  margin-top: auto;
+}
+
+/* Tab 2: Horizontal Cost Center Variance List (Replaces snapshot card!) */
+.costCenterList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.costCenterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+}
+
+.costCenterTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.costCenterName {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.costCenterStats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.costCenterVal {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  font-size: 10px;
+}
+
+.costCenterVar {
+  font-size: 8.5px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--pbi-primary, var(--accent));
+}
+
+.costCenterTrack {
+  width: 100%;
+  height: 5px;
+  border-radius: 2.5px;
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+  overflow: hidden;
+}
+
+.costCenterBar {
+  height: 100%;
+  border-radius: 2.5px;
+  transition: width 0.3s ease;
+}
+
+/* ── Tab 2: Sales by Region (Map) Visual ── */
+.mapWrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface2) 30%, transparent);
+  margin-top: auto;
+}
+
+.mapSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mapCountryPath {
+  transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+  cursor: pointer;
+}
+
+.mapCountryPath:hover {
+  filter: brightness(1.25);
+  stroke-width: 1px !important;
+}
+
+.mapCalloutCard {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 5px 9px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  z-index: 4;
+  backdrop-filter: blur(8px);
+}
+
+.mapCalloutCard:hover,
+.mapCalloutCardActive {
+  transform: translateY(-2px);
+  border-color: var(--pbi-primary, var(--accent));
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
+}
+
+.mapCalloutTitle {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1;
+  margin-bottom: 2.5px;
+}
+
+.mapCalloutValue {
+  font-size: 13.5px;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 2.5px;
+}
+
+.mapCalloutDelta {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mapCalloutDeltaIcon {
+  font-size: 7.5px;
+}
+
+/* Bottom-left Sales Legend */
+.mapLegend {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.mapLegendTitle {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+.mapLegendScale {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+}
+
+.mapLegendBar {
+  width: 9px;
+  height: 40px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+}
+
+.mapLegendLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 8px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1;
+}
+
+/* Tab 3: Hub Throughput Dual-Bar Chart */
+.hubChartSvg {
+  width: 100%;
+  height: 175px;
+  overflow: visible;
+  margin-top: auto;
+}
+
+/* Tab 3: Radial Speedometer Gauge & Inventory Stratification */
+.gaugeCockpitLayout {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 16px;
+  height: 180px;
+  margin-top: auto;
+}
+
+.gaugeWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gaugeSvg {
+  width: 120px;
+  height: 75px;
+  overflow: visible;
+}
+
+.gaugeValueGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -14px;
+}
+
+.gaugeBigNum {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.gaugeTargetLabel {
+  font-size: 8px;
+  font-family: var(--font-mono, monospace);
+  color: var(--pbi-secondary, var(--accent2));
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.stockStratList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stockStratItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 7px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.stockStratLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9.5px;
+  color: var(--muted);
+}
+
+.stockStratDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stockStratValues {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9.5px;
+}
+
+.stockStratShare {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.stockStratAmount {
+  font-size: 8.5px;
+  color: var(--muted);
+  font-family: var(--font-mono, monospace);
+}
+
+/* ── Bottom Page Tabs ── */
+.pbiFooterTabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 16px;
+  background: color-mix(in srgb, var(--surface2) 85%, var(--bg));
+  border-top: 1px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pbiPageTabGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pbiTabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pbiTabBtn:hover {
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  color: var(--text);
+}
+
+.pbiTabBtnActive {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-bottom: 2px solid var(--pbi-primary, var(--accent));
+}
+
+.pbiStatusInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted);
+}
+
+.statusIndicator {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pbi-primary, var(--accent));
+  box-shadow: 0 0 6px var(--pbi-primary, var(--accent));
+}
+
+/* ── Auto-Responsive Portrait for Mobile (<880px) ── */
+@media (max-width: 880px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kpiCard {
+    height: auto;
+    min-height: 80px;
+  }
+  .landscapeVisualsGrid {
+    grid-template-columns: 1fr;
+  }
+  .visualCard {
+    height: auto;
+    min-height: 220px;
+  }
+  .mapWrapper {
+    height: 200px;
+  }
+  .donutWithRegionalLayout {
+    height: auto;
+    gap: 12px;
+  }
+  .gaugeCockpitLayout {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 12px;
+  }
+  .regionalMiniGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+  .pbiHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pbiControls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .pbiFooterTabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pbiPageTabGroup {
+    flex-wrap: wrap;
+  }
+  .mapCalloutCard {
+    padding: 3px 6px;
+  }
+  .mapCalloutTitle {
+    font-size: 8px;
+  }
+  .mapCalloutValue {
+    font-size: 11px;
+  }
+  .mapCalloutDelta {
+    font-size: 8px;
+  }
+}
+

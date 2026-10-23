@@ -25,6 +25,7 @@ import {
   CheckCircle2,
   Certificate as CertificateIcon
 } from "lucide-react";
+import Crosshair from "@/components/Crosshair";
 import styles from "./Certification.module.css";
 
 interface CertificateItem {
@@ -200,8 +201,11 @@ export default function CertificationPage() {
     <div style={{ background: "var(--bg)", color: "var(--text)" }} className="min-h-screen flex flex-col">
       <Navbar />
 
-      <section className={styles.section} aria-labelledby="certifications-title">
-        <div className="container" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      <div className="boxed-wrapper" style={{ position: "relative", marginBottom: "40px" }}>
+        <Crosshair position="tl" />
+
+        <section className={styles.section} aria-labelledby="certifications-title">
+          <div className="container" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
           
           {/* Top Heading matching StartHere */}
           <div className={styles.heading}>
@@ -336,7 +340,10 @@ export default function CertificationPage() {
         </div>
       </section>
 
-      {/* Interactive Protected Fullscreen PDF Viewer Modal (NO DOWNLOAD) */}
+      <Crosshair position="br" />
+    </div>
+
+    {/* Interactive Protected Fullscreen PDF Viewer Modal (NO DOWNLOAD) */}
       {activePdfModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/85 backdrop-blur-md"

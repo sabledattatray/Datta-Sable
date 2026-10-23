@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Crosshair from '@/components/Crosshair';
 import { servicesData, ServiceItem } from '@/data/servicesData';
 import {
   BarChart3,
@@ -18,11 +19,9 @@ import {
   ArrowRight,
   ArrowUpRight,
   ShieldCheck,
-  Clock,
   Clock3,
   ChevronDown,
   Lock,
-  Award,
   Zap,
   CheckCircle2,
   FileSpreadsheet,
@@ -41,6 +40,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
   'database-optimization': <Zap size={24} />,
   'web-solutions': <Globe size={24} />,
   'seo-optimization': <Sparkles size={24} />,
+  'technical-seo-audit': <Search size={24} />,
   'web-design': <Palette size={24} />,
   'graphic-design': <PenTool size={24} />,
 };
@@ -56,6 +56,7 @@ const serviceCategories: Record<string, string> = {
   'web-design': 'web',
   'graphic-design': 'web',
   'seo-optimization': 'growth',
+  'technical-seo-audit': 'growth',
 };
 
 // Editorial category kickers matching Blog style
@@ -68,48 +69,16 @@ const serviceKickers: Record<string, string> = {
   'web-solutions': 'FULL-STACK WEB & APIS',
   'web-design': 'UI/UX & DESIGN SYSTEMS',
   'graphic-design': 'DATA VISUALIZATION & DESIGN',
-  'seo-optimization': 'TECHNICAL SEO & SPEED',
+  'seo-optimization': 'ON-PAGE SEO & CONTENT',
+  'technical-seo-audit': 'TECHNICAL SEO & AUDITS',
 };
 
 const filterTabs = [
-  { id: 'all', label: 'All Services', count: 9 },
+  { id: 'all', label: 'All Services', count: 10 },
   { id: 'bi', label: 'BI & Dashboards', count: 3 },
   { id: 'engineering', label: 'Pipelines & SQL', count: 2 },
   { id: 'web', label: 'Web & UI/UX', count: 3 },
-  { id: 'growth', label: 'Technical SEO', count: 1 },
-];
-
-const trustCredentials = [
-  {
-    icon: <Award size={18} />,
-    title: 'Microsoft Fabric & Power BI Certified',
-    desc: 'Expert DAX, dimensional modeling & enterprise capacity tuning',
-  },
-  {
-    icon: <BarChart3 size={18} />,
-    title: 'Tableau Desktop Specialist',
-    desc: 'Advanced LOD calculations, dashboard actions & performance logic',
-  },
-  {
-    icon: <Database size={18} />,
-    title: 'PostgreSQL & Python Architecture',
-    desc: 'Automated ETL pipelines, FastAPI endpoints & clean schemas',
-  },
-  {
-    icon: <Lock size={18} />,
-    title: '100% Mutual NDA Protected',
-    desc: 'Confidentiality agreements executed upfront before data access',
-  },
-  {
-    icon: <Zap size={18} />,
-    title: 'Direct Senior Engineer Access',
-    desc: 'Zero account managers or junior delegation — direct communication',
-  },
-  {
-    icon: <ShieldCheck size={18} />,
-    title: '100% Math Reconciliation',
-    desc: 'Zero discrepancy guarantee against audited financial source sheets',
-  },
+  { id: 'growth', label: 'Technical SEO', count: 2 },
 ];
 
 const roadmapSteps = [
@@ -237,12 +206,14 @@ export default function ServicesContent() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
 
-      <main id="main-content" className={styles.container}>
+      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
+        <Crosshair position="tl" />
+
+        <main id="main-content" className={styles.container}>
         {/* ==========================================================================
             Hero Section
             ========================================================================== */}
         <section className={styles.hero} aria-labelledby="services-heading">
-          <div className={styles.heroGlow} aria-hidden="true" />
           <div className={styles.heroContent}>
             <div className={styles.statusBadge}>
               <span className={styles.pulseOrb} aria-hidden="true" />
@@ -307,28 +278,9 @@ export default function ServicesContent() {
         </section>
 
         {/* ==========================================================================
-            Trust & Credentials Strip
-            ========================================================================== */}
-        <section className={styles.trustStrip} aria-label="Credentials and trust assurances">
-          <div className={styles.trustBadgesGrid}>
-            {trustCredentials.map((cred, idx) => (
-              <div key={idx} className={styles.trustBadgeCard}>
-                <div className={styles.trustBadgeIcon} aria-hidden="true">
-                  {cred.icon}
-                </div>
-                <div className={styles.trustBadgeText}>
-                  <strong>{cred.title}</strong>
-                  <span>{cred.desc}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ==========================================================================
             Service Offerings & Interactive Filter
             ========================================================================== */}
-        <section aria-labelledby="offerings-title">
+        <section aria-labelledby="offerings-title" className={styles.offeringsSection}>
           <div className={styles.sectionHeader}>
             <div className={styles.kicker}>
               <span className={styles.kickerDot} aria-hidden="true" />
@@ -625,7 +577,10 @@ export default function ServicesContent() {
             </a>
           </div>
         </section>
-      </main>
+        </main>
+
+        <Crosshair position="br" />
+      </div>
 
       <Footer />
     </div>

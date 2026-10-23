@@ -300,6 +300,64 @@ export const servicesData: ServiceItem[] = [
     ]
   },
   {
+    id: 'technical-seo-audit',
+    slug: 'technical-seo-audit',
+    aliases: ['technical-seo', 'seo-audit'],
+    icon: '⚡',
+    image: '/images/blog/seo_tools_unique.webp',
+    title: 'Technical SEO & Crawl Audits',
+    tagline: 'Crawl architecture, indexing health, structured data schemas, and Core Web Vitals optimization.',
+    desc: 'Comprehensive technical search audits to eliminate index bloat, fix canonical conflicts, configure rich Schema.org structured data, and tune Core Web Vitals for maximum crawl efficiency and organic search authority.',
+    metaTitle: 'Technical SEO Audits & Site Architecture | Datta Sable',
+    metaDesc: 'Enterprise technical SEO consulting and audits. Fix indexing issues, optimize crawl budget, implement JSON-LD Schema markup, and achieve green Core Web Vitals scores.',
+    price: 'Starting at ₹15,000',
+    deliveryTime: '3 - 5 Business Days',
+    cta: 'Request Technical Audit',
+    color: 'var(--accent)',
+    popular: false,
+    features: [
+      'Full crawl audit (Screaming Frog, Search Console)',
+      'Crawl budget optimization & index bloat removal',
+      'Canonical tags, hreflang & redirect chain resolution',
+      'JSON-LD Schema markup for rich Google snippets',
+      'Core Web Vitals diagnostics (LCP, INP, CLS)',
+      'Robots.txt, XML sitemaps & rendering audit'
+    ],
+    capabilities: [
+      {
+        title: 'Crawl Budget & Indexation Control',
+        desc: 'Audit and eliminate non-indexable, thin, or duplicate URLs that waste search engine crawl allocation and dilute ranking signals.'
+      },
+      {
+        title: 'Schema.org Structured Data Engineering',
+        desc: 'Author and validate semantic JSON-LD models for Articles, Products, Organizations, and Breadcrumbs to capture Google rich results.'
+      },
+      {
+        title: 'Core Web Vitals & Rendering Performance',
+        desc: 'Debug client-side vs. server-side rendering bottlenecks to achieve sub-second LCP and excellent Interaction to Next Paint (INP).'
+      },
+      {
+        title: 'JavaScript SEO & Framework Architecture',
+        desc: 'Ensure dynamic React/Next.js routes, server components, and hydration cycles are effortlessly discoverable and parseable by Googlebot.'
+      }
+    ],
+    technologies: ['Screaming Frog', 'Google Search Console', 'Ahrefs', 'Next.js 15', 'Lighthouse', 'Schema.org', 'Cloudflare'],
+    faqs: [
+      {
+        q: 'What does a technical SEO audit deliver?',
+        a: 'You receive an executive summary, prioritized issue backlog categorized by impact vs. effort, and direct code-level fixes or PRs ready for deployment.'
+      },
+      {
+        q: 'Can you implement the technical fixes directly into our codebase?',
+        a: 'Yes. As a full-stack engineer, I can directly implement the schema, meta tags, sitemaps, and speed optimizations into your Git repository.'
+      },
+      {
+        q: 'How does technical SEO differ from content marketing?',
+        a: 'Technical SEO ensures that search engines can discover, crawl, render, and index your pages without barriers. Without strong technical foundations, even exceptional content cannot rank.'
+      }
+    ]
+  },
+  {
     id: 'automation',
     slug: 'automation',
     aliases: ['automation-solutions'],

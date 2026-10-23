@@ -1,7 +1,7 @@
 /* Storefront shares the homepage's type, palette and editorial proportions. */
-.pageWrapper{position:relative;background:var(--bg);color:var(--text);padding:100px 0 60px;overflow:clip}
+.pageWrapper{position:relative;background:var(--bg);color:var(--text);padding:24px 0 60px;overflow:clip}
 .container{max-width:1280px;margin:auto;padding:0 32px;position:relative;z-index:1;min-width:0}
-.ambientGlow{position:absolute;inset:100px 0 auto;height:650px;pointer-events:none;background:radial-gradient(ellipse at 75% 30%,color-mix(in srgb,var(--accent) 5%,transparent),transparent 60%)}
+.ambientGlow{position:absolute;inset:0 0 auto;height:650px;pointer-events:none;background:radial-gradient(ellipse at 75% 30%,color-mix(in srgb,var(--accent) 5%,transparent),transparent 60%)}
 .topNav{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding:18px 0;font:10px var(--font-mono);color:var(--muted)}
 .breadcrumbs,.userLinks{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.breadcrumbs{gap:10px}.current{color:var(--text)}.topNav a{color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:7px;min-height:30px}.topNav a:hover{color:var(--accent)}
 .hero{padding:66px 0 58px}.heroLayout{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:70px;align-items:center}.heroCopy{min-width:0}.eyebrow{display:inline-flex;align-items:center;gap:10px;font:9px var(--font-mono);letter-spacing:.14em;color:var(--muted);margin-bottom:26px}.eyebrowPulse{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 16px color-mix(in srgb,var(--accent) 35%,transparent)}
