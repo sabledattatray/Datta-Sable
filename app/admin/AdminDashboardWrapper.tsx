@@ -96,10 +96,10 @@ export default function AdminDashboardWrapper({ children, previewOnly = false, p
   return <div className={styles.workspace} data-sidebar-collapsed={collapsed}>
     <a className={styles.skipLink} href="#admin-content">Skip to workspace content</a>
     {mobileOpen && <div className={styles.backdrop} onClick={() => setMobileOpen(false)} aria-hidden="true" />}
-    <aside className={styles.desktopSidebar} aria-label="Administration sidebar">
+    <aside className={styles.desktopSidebar} aria-label="Administration sidebar" inert={searchOpen || undefined}>
       <Sidebar collapsed={collapsed} pathname={pathname} companyName={companyName} userName={userName} userEmail={userEmail} onCollapse={toggleCollapsed} onExpand={() => { setCollapsed(false); writeLocalStorage('admin_sidebar_collapsed', 'false'); }} />
     </aside>
-    <aside ref={mobilePanel} id="admin-mobile-sidebar" className={styles.mobileSidebar} data-open={mobileOpen} role="dialog" aria-label="Administration navigation" aria-modal={mobileOpen || undefined} aria-hidden={!mobileOpen} inert={!mobileOpen}>
+    <aside ref={mobilePanel} id="admin-mobile-sidebar" className={styles.mobileSidebar} data-open={mobileOpen} role="dialog" aria-label="Administration navigation" aria-modal={mobileOpen || undefined} aria-hidden={!mobileOpen || searchOpen} inert={!mobileOpen || searchOpen}>
       <Sidebar collapsed={false} pathname={pathname} companyName={companyName} userName={userName} userEmail={userEmail} onClose={() => setMobileOpen(false)} />
     </aside>
     <div className={styles.mainColumn} inert={mobileOpen || searchOpen || undefined}>

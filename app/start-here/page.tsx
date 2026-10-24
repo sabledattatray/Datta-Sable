@@ -15,14 +15,12 @@ import {
   ArrowUpRight,
   Compass,
   CheckCircle2,
-  ShieldCheck,
   BookOpen,
   Target,
   Zap,
   Clock,
   Terminal,
   HelpCircle,
-  TrendingUp,
   Award,
 } from 'lucide-react';
 import styles from './StartHerePage.module.css';
@@ -55,7 +53,7 @@ const tracks = [
     number: '01',
     level: 'FOUNDATION TO CLOUD ARCHITECT',
     title: 'Microsoft Fabric & Modern Lakehouse Architecture',
-    desc: 'The single most transformative shift in enterprise data since cloud databases. Master OneLake, eliminate the "Data Copy Tax", and learn how Direct Lake queries Delta Parquet files at RAM speed without VertiPaq refresh limits.',
+    desc: 'Build a practical understanding of OneLake, lakehouses, medallion layers, and semantic models. Follow the path from platform architecture to certification planning.',
     cert: 'DP-600 & DP-700 FOCUS',
     icon: Layers,
     modules: [
@@ -72,7 +70,7 @@ const tracks = [
     number: '02',
     level: 'ANALYST TO PRINCIPAL BI ARCHITECT',
     title: 'Advanced Power BI & Executive Cockpit Design',
-    desc: 'Move past cluttered tabular grids. Transform complex enterprise metrics into high-stakes executive cockpits designed for 3-second comprehension, bulletproof DAX calculations, and sub-second report interactivity.',
+    desc: 'Connect data modeling, DAX, and dashboard UX to create clearer reporting experiences. Explore the principles behind measures, navigation, and executive decision support.',
     cert: 'PL-300 & ENTERPRISE BI',
     icon: BarChart3,
     modules: [
@@ -89,7 +87,7 @@ const tracks = [
     number: '03',
     level: 'DATABASE & PLATFORM OPTIMIZATION',
     title: 'SQL Performance & High-Throughput Engineering',
-    desc: 'Database I/O is the primary bottleneck of large-scale analytics. Learn how columnstore storage eliminates buffer pool waste, diagnose tricky execution plans, and build zero-trust automated data quality pipelines.',
+    desc: 'Explore query execution, data validation, and reporting architecture. Work through patterns for diagnosing bottlenecks and building trustworthy analytics pipelines.',
     cert: 'DATABASE ARCHITECTURE',
     icon: Database,
     modules: [
@@ -105,7 +103,7 @@ const tracks = [
     number: '04',
     level: 'AUTOMATION & AGENTIC SYSTEMS',
     title: 'Autonomous AI Workflows & Production Orchestration',
-    desc: 'Single-prompt AI is obsolete. Architect multi-agent frameworks with deterministic state machines, supervisor topologies, token compression, and resilient n8n pipelines that run in production without human intervention.',
+    desc: 'Design workflows with clear triggers, tool boundaries, validation, and observability. Explore modular automation and agent orchestration through practical guides.',
     cert: 'AGENTIC AI SYSTEMS',
     icon: Workflow,
     modules: [
@@ -231,6 +229,18 @@ const faqs = [
     a: 'You can reach out directly via the Contact page or book a private strategy session. I work with business leaders, data engineering teams, and enterprise clients to audit analytics infrastructure, optimize capacity licensing, and design executive decision cockpits.',
   },
 ];
+
+const learningMaps: Record<string, string[]> = {
+  'track-fabric': ['OneLake', 'Lakehouse', 'Analytics'],
+  'track-bi': ['Model', 'DAX', 'Dashboard'],
+  'track-sql': ['Profile', 'Optimize', 'Validate'],
+  'track-ai': ['Trigger', 'Orchestrate', 'Observe'],
+};
+
+function LearningMap({ id, title }: { id: string; title: string }) {
+  const nodes = learningMaps[id];
+  return <div className={styles.learningMap}><div className={styles.mapCaption}><span>YOUR CONCEPT MAP</span><span>LEARN → CONNECT → APPLY</span></div><svg viewBox="0 0 380 70" role="img" aria-label={`${title}: ${nodes.join(' → ')}`}><defs><marker id={`${id}-arrow`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L7 4L1 7" fill="none" stroke="var(--accent)" strokeWidth="1.3" /></marker></defs>{[0, 1].map(index => <path key={index} d={`M${110 + index * 133} 35H${132 + index * 133}`} fill="none" stroke="var(--accent)" strokeOpacity=".6" markerEnd={`url(#${id}-arrow)`} />)}{nodes.map((node, index) => <g key={node} transform={`translate(${2 + index * 133},14)`}><rect width="108" height="42" rx="8" fill="var(--surface)" stroke="var(--border)" /><rect x="0" y="11" width="2" height="20" rx="1" fill="var(--accent)" opacity={.35 + index * .3} /><text x="12" y="26" fill="var(--text)" fontFamily="var(--font-syne)" fontSize="14" fontWeight="500">{node}</text></g>)}</svg></div>;
+}
 
 export default function StartHerePage() {
   return (
@@ -367,51 +377,26 @@ export default function StartHerePage() {
                   </h2>
                 </div>
                 <p className={styles.sectionSubtitle}>
-                  Every track is built around real architectural challenges, actionable code patterns, and official Microsoft credential syllabi.
+                  Each pathway connects architectural concepts with practical guides, code patterns, and a clear reading sequence. Pick your focus, then build one skill at a time.
                 </p>
               </div>
 
               <div className={styles.tracksGrid}>
-                {tracks.map((track) => {
+                {tracks.map(track => {
                   const Icon = track.icon;
-                  return (
-                    <div key={track.id} className={styles.trackCard}>
-                      <div>
-                        <div className={styles.trackCardHeader}>
-                          <div className={styles.trackIconWrap}>
-                            <Icon size={26} strokeWidth={1.5} />
-                          </div>
-                          <span className={styles.trackNumber}>{track.number} // PATH</span>
-                        </div>
-
-                        <span className={styles.trackLevel}>{track.level}</span>
-                        <h3 className={styles.trackTitle}>{track.title}</h3>
-                        <p className={styles.trackDesc}>{track.desc}</p>
-
-                        <div className={styles.trackModules}>
-                          <div className="text-[length:var(--text-small)] uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-2 font-semibold">
-                            <BookOpen size={12} style={{ color: 'var(--accent)' }} /> RECOMMENDED READING SEQUENCE:
-                          </div>
-                          {track.modules.map((m) => (
-                            <Link key={m.href} href={m.href} className={styles.moduleItem}>
-                              <div className={styles.moduleLeft}>
-                                <span className={styles.moduleDot} />
-                                <span className={styles.moduleName}>{m.name}</span>
-                              </div>
-                              <ArrowUpRight size={14} className={styles.moduleArrow} />
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className={styles.trackPills}>
-                        {track.skills.map((skill) => (
-                          <span key={skill} className={styles.trackPill}>{skill}</span>
-                        ))}
-                        <span className={styles.certBadge}>{track.cert}</span>
-                      </div>
+                  return <article id={track.id} key={track.id} className={styles.trackCard} aria-labelledby={`${track.id}-title`}>
+                    <div className={styles.trackIntro}>
+                      <div className={styles.trackCardHeader}><span className={styles.trackIconWrap}><Icon size={19} strokeWidth={1.5} /></span><span className={styles.trackNumber}>PATH {track.number}<small>{track.level}</small></span><span className={styles.certBadge}>{track.cert}</span></div>
+                      <h3 id={`${track.id}-title`} className={styles.trackTitle}>{track.title}</h3>
+                      <p className={styles.trackDesc}>{track.desc}</p>
+                      <LearningMap id={track.id} title={track.title} />
                     </div>
-                  );
+                    <div className={styles.trackResources}>
+                      <details className={styles.readingDetails}><summary className={styles.readingHeader}><span><BookOpen size={13} /> Explore reading path</span><small>{track.modules.length} GUIDES <ArrowRight size={12} /></small></summary><p className={styles.readingDescription}>{track.desc}</p>
+                      <ol className={styles.trackModules}>{track.modules.map((module, index) => <li key={module.href}><Link href={module.href} className={styles.moduleItem}><span className={styles.moduleIndex}>{String(index + 1).padStart(2, '0')}</span><span className={styles.moduleName}>{module.name.replace(/^\d+\.\s*/, '')}</span><ArrowUpRight size={13} className={styles.moduleArrow} /></Link></li>)}</ol></details>
+                      <div className={styles.trackPills} aria-label="Skills in this pathway">{track.skills.map(skill => <span key={skill} className={styles.trackPill}>{skill}</span>)}<span className={styles.moreSkills}>+{track.skills.length - 3} skills</span></div>
+                    </div>
+                  </article>;
                 })}
               </div>
             </section>
@@ -503,7 +488,7 @@ export default function StartHerePage() {
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '20px' }}>
                 {foundationalGuides.map((guide) => (
                   <Link
                     key={guide.href}
@@ -566,33 +551,33 @@ export default function StartHerePage() {
                 </p>
               </div>
 
-              <div style={{ overflowX: 'auto' }}>
-                <table className={styles.matrixTable}>
+              <div className={styles.matrixViewport}>
+                <table className={styles.matrixTable} role="table" aria-label="Certification and career comparison">
                   <thead>
                     <tr>
-                      <th>Target Role</th>
-                      <th>Primary Exam</th>
-                      <th>Experience Level</th>
-                      <th>Core Technology Stack</th>
-                      <th>Market Compensation Range</th>
-                      <th>Recommended Next Step</th>
+                      <th scope="col">Target Role</th>
+                      <th scope="col">Primary Exam</th>
+                      <th scope="col">Experience Level</th>
+                      <th scope="col">Core Technology Stack</th>
+                      <th scope="col">Market Compensation Range</th>
+                      <th scope="col">Recommended Next Step</th>
                     </tr>
                   </thead>
                   <tbody>
                     {comparisonMatrix.map((row) => (
                       <tr key={row.cert}>
-                        <td>
+                        <td data-label="Target role">
                           <div className={styles.certName}>{row.role}</div>
                         </td>
-                        <td>
+                        <td data-label="Primary exam">
                           <span className="text-[length:var(--text-small)] font-bold px-2 py-1 bg-[var(--surface2)] border border-[var(--border)] rounded text-[var(--text)]">
                             {row.cert}
                           </span>
                         </td>
-                        <td>{row.experience}</td>
-                        <td style={{ maxWidth: '240px' }}>{row.focus}</td>
-                        <td className="text-[length:var(--text-small)] font-semibold text-[var(--accent)]">{row.salary}</td>
-                        <td style={{ maxWidth: '260px', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{row.nextStep}</td>
+                        <td data-label="Experience level">{row.experience}</td>
+                        <td data-label="Core technology stack" style={{ maxWidth: '240px' }}>{row.focus}</td>
+                        <td data-label="Market compensation range" className="text-[length:var(--text-small)] font-semibold text-[var(--accent)]">{row.salary}</td>
+                        <td data-label="Recommended next step" style={{ maxWidth: '260px', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{row.nextStep}</td>
                       </tr>
                     ))}
                   </tbody>

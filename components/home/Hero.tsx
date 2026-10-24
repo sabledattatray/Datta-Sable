@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight, ArrowDown, Database, Code2, Workflow } from 'lucide-react';
+import { ArrowUpRight, Database, Code2, Workflow } from 'lucide-react';
 import HeroDashboard from './HeroDashboard';
 import styles from './Hero.module.css';
 
@@ -24,7 +24,7 @@ export default function Hero() {
         </div>
         <div className={styles.visual}>
           <HeroDashboard />
-          <div className={styles.visualCaption}><span>01 / THE INTERACTIVE WORKSPACE</span><Link href="#learning-paths-title" className={styles.exploreCue}>Keep exploring <ArrowDown size={15}/></Link></div>
+          <div className={styles.visualCaption}><span>01 / THE INTERACTIVE WORKSPACE</span></div>
         </div>
       </div>
     </section>

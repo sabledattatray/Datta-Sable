@@ -23,11 +23,6 @@
 @media(max-width:900px){.hero{padding:42px 0 45px}.layout{grid-template-columns:1fr;gap:42px}.copy{max-width:640px}.copy h1{font-size:clamp(44px,8vw,65px)}.description{max-width:540px}.visual{width:100%;max-width:680px;margin:auto}.eyebrow{margin-bottom:25px}.expertise{margin-top:27px}.visualCaption{font-size:var(--text-small)}}
 @media(max-width:480px){.hero{padding-top:28px}.layout{gap:32px}.eyebrow{font-size:var(--text-small)}.copy h1{font-size:44px}.description{font-size:14px}.actions{gap:22px}.expertise{gap:12px 16px}.expertise span{font-size:var(--text-small)}.visualCaption{line-height:1.6}.visual:before{inset:-20px}}
 
-.exploreCue{display:inline-flex;align-items:center;gap:9px;color:var(--text);text-decoration:none;font-size:14px;line-height:1.5;border-bottom:1px solid var(--border);padding-bottom:5px}
-.exploreCue svg{color:var(--accent);transition:transform .2s}
-.exploreCue:hover svg{transform:translateY(3px)}
-.exploreCue:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-@media(prefers-reduced-motion:reduce){.exploreCue svg{transition:none}}
 
 /* Fit the desktop introduction below the fixed header, without scaling text. */
 @media(min-width:901px){

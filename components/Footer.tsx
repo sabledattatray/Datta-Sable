@@ -1,9 +1,9 @@
 import CookiePreferencesButton from './CookiePreferencesButton';
 import AdvertisingPreferencesButton from './AdvertisingPreferencesButton';
 import Link from 'next/link';
-import LogoIcon from './LogoIcon';
+import BrandLockup from './BrandLockup';
 import styles from './Footer.module.css';
-import { ArrowUpRight, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers, ShieldCheck } from 'lucide-react';
 import {
   MicrosoftCertifiedBadge,
   SslSecurityBadge,
@@ -129,6 +129,13 @@ const NAV_LINKS: NavSection[] = [
   },
 ];
 
+function FooterNavLink({ link }: { link: NavLink }) {
+  const Icon = link.icon;
+  return <li><Link href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
+    <span className={styles.navLinkIcon}><Icon size={12} aria-hidden="true" /></span><span className={styles.navLinkLabel}>{link.label}</span><ArrowUpRight size={11} className={link.external ? styles.externalArrow : styles.linkArrow} aria-hidden="true" />
+  </Link></li>;
+}
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -166,18 +173,19 @@ export default function Footer() {
           </div>
 
           <div className={styles.trustGrid}>
-            {TRUST_PILLARS.map((item, index) => {
+            {TRUST_PILLARS.map(item => {
               const BadgeComponent = item.badgeComponent;
               return (
                 <article key={item.title} className={styles.trustCard}>
                   <div className={styles.trustCardTop}>
                     <div className={styles.trustIconWrap}>
-                      <BadgeComponent size={72} />
+                      <BadgeComponent size={36} />
                     </div>
-                    <span className={styles.trustIndex} aria-hidden="true">0{index + 1}<span> / 04</span></span>
+                    <div className={styles.trustCardHeading}>
+                      <span className={styles.trustTag}>{item.badge}</span>
+                      <h3 className={styles.trustTitle}>{item.title}</h3>
+                    </div>
                   </div>
-                  <span className={styles.trustTag}>{item.badge}</span>
-                  <h3 className={styles.trustTitle}>{item.title}</h3>
                   <p className={styles.trustDesc}>{item.desc}</p>
                 </article>
               );
@@ -188,8 +196,7 @@ export default function Footer() {
         <div className={styles.main}>
           <div className={styles.brand}>
             <Link href="/" className={styles.logo} aria-label="Datta Sable — Home">
-              <span className={styles.logoMark}><LogoIcon className={styles.logoIcon} color="var(--accent)" /></span>
-              <span>Datta Sable<span className={styles.brandCaption}>Business intelligence &amp; data strategy</span></span>
+              <BrandLockup />
             </Link>
             <p className={styles.description}>Turning complex data into clear, practical solutions. Independent BI consulting, automated reporting, and data engineering from India.</p>
 
@@ -216,20 +223,20 @@ export default function Footer() {
             </div>
           </div>
 
-          <nav className={styles.navigation} aria-label="Footer navigation">
-            {NAV_LINKS.map(section => (
+          <div className={styles.directory}><div className={styles.directoryHeading}><span>EXPLORE THE ECOSYSTEM</span><span>Work. Learn. Connect.</span></div><nav className={styles.navigation} aria-label="Footer navigation">
+            {NAV_LINKS.map(section => {
+              const SectionIcon = section.links[0].icon;
+              return (
               <div key={section.heading} className={styles.column}>
-                <h3>{section.heading}</h3>
-                <ul>{section.links.map(link => (
-                  <li key={link.label}>
-                    <Link href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
-                      <span>{link.label}</span>{link.external && <ArrowUpRight size={12} aria-hidden="true" />}
-                    </Link>
-                  </li>
-                ))}</ul>
+                <div className={styles.columnHeading}><span className={styles.columnIcon}><SectionIcon size={15} aria-hidden="true" /></span><h3>{section.heading}</h3><span className={styles.linkCount} aria-hidden="true">{String(section.links.length).padStart(2, '0')}</span></div>
+                <ul>{section.links.map(link => <FooterNavLink key={link.label} link={link} />)}</ul>
               </div>
-            ))}
-          </nav>
+            ); })}
+            {NAV_LINKS.map(section => {
+              const SectionIcon = section.links[0].icon;
+              return <details key={`mobile-${section.heading}`} className={`${styles.column} ${styles.mobileColumn}`}><summary><span className={styles.columnIcon}><SectionIcon size={15} aria-hidden="true" /></span><strong>{section.heading}</strong><ChevronDown size={14} aria-hidden="true" /></summary><ul>{section.links.map(link => <FooterNavLink key={link.label} link={link} />)}</ul></details>;
+            })}
+          </nav></div>
         </div>
 
         <p className={styles.notice}><strong>Independent by design.</strong> Datta Sable is an independent BI consultant and is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed “Datta Able” admin dashboard template.</p>

@@ -18,7 +18,7 @@ function load(file, stubs = {}) {
 const typography = load('lib/site-typography.ts');
 const templates = load('lib/site-typography-templates.ts', { './site-typography': typography });
 
-test('older published typography cannot reintroduce tiny body text on desktop or mobile', () => {
+test('published typography uses the portfolio body and control floors on desktop and mobile', () => {
   const settings = typography.defaultTypography();
   for (const id of ['body', 'paragraph', 'small', 'button', 'link', 'code']) {
     settings.elements[id].fontSize = 10;
@@ -26,9 +26,9 @@ test('older published typography cannot reintroduce tiny body text on desktop or
   }
   settings.elements.h1.fontSize = 64;
   const css = typography.buildTypographyCss(settings);
-  assert.doesNotMatch(css, /font-size:0\.(625|6875)rem/);
-  assert.match(css, /font-size:1rem!important/);
-  assert.match(css, /font-size:0\.875rem!important/);
+  assert.doesNotMatch(css, /font-size:0\.625rem/);
+  assert.match(css, /font-size:0\.8125rem!important/);
+  assert.match(css, /font-size:0\.6875rem!important/);
   assert.match(css, /font-size:4rem!important/);
   assert.doesNotMatch(css, /text-fill-color|background-image:none/);
 });

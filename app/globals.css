@@ -159,10 +159,10 @@
 
 :root {
   /* Shared readable scale. Keep display headings on their existing scale. */
-  --text-body: 1rem;
-  --text-small: 0.875rem;
-  --text-chart: 0.75rem;
-  --line-body: 1.65;
+  --text-body: 0.8125rem;
+  --text-small: 0.6875rem;
+  --text-chart: 0.625rem;
+  --line-body: 1.8;
   --line-label: 1.5;
   --label-opacity: 1;
   --font-syne: 'SegoeUINum', 'Syne', sans-serif;
@@ -173,9 +173,9 @@
 }
 
 @theme {
-  --text-xs: 0.875rem;
+  --text-xs: 0.6875rem;
   --text-xs--line-height: 1.5;
-  --text-sm: 0.875rem;
+  --text-sm: 0.6875rem;
   --text-sm--line-height: 1.5;
   --breakpoint-xs: 400px;
   --font-sans: 'SegoeUINum', 'Syne', sans-serif;
@@ -364,7 +364,7 @@ body {
 /* Keep mobile form text readable without triggering focus zoom on phones. */
 @media (max-width: 767px) {
   :is(input, textarea, select):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]) {
-    font-size: var(--text-body) !important;
+    font-size: 1rem !important;
     min-height: 44px;
   }
 }
@@ -1462,3 +1462,73 @@ body:has(.admin-layout-root) {
 @media(max-width:360px){:root{--page-gutter:20px}}
 
 @media(max-width:1099px){.boxed-wrapper>.crosshair{transform:scale(.5)}}
+
+:root { --site-frame-top:100px; --site-content-padding:40px; }
+@media(max-width:1099px) { :root { --site-frame-top:94px; --site-content-padding:28px; } }
+
+/* One outer frame for every public page that uses the shared navigation.
+   Existing boxed pages inherit the frame rather than applying a second gutter. */
+#main-content:has([data-site-header]) {
+  width:calc(100% - var(--page-gutter));
+  max-width:var(--content-width);
+  margin-inline:auto;
+  margin-block-start:var(--site-frame-top);
+  min-width:0;
+  border:1px solid var(--border);
+}
+#main-content:has([data-site-header]) .boxed-wrapper {
+  width:100%;
+  max-width:none;
+  margin-top:0;
+  border:0;
+}
+
+/* Content owns its breathing room; the shared frame owns fixed-header clearance. */
+#main-content:has([data-site-header]) > main,
+#main-content:has([data-site-header]) > :has(> [data-site-header]) > main:not(.boxed-wrapper) {
+  padding-top:var(--site-content-padding);
+}
+
+/* Portfolio-derived type roles. The reference page and brand/navigation retain
+   their deliberately authored small variants; colors and font families are untouched. */
+:root {
+ --type-display:clamp(31px,3.6vw,49px);
+ --type-section:27px;
+ --type-card:16px;
+ --type-body:13px;
+ --type-support:11px;
+ --type-label:10px;
+ --weight-heading:600;
+ --weight-section:500;
+ --weight-body:400;
+}
+#main-content:has([data-site-header]) h1:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-display)!important;font-weight:var(--weight-heading)!important;line-height:1.14!important;letter-spacing:-.045em}
+#main-content:has([data-site-header]) h2:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-section)!important;font-weight:var(--weight-section)!important;line-height:1.25!important;letter-spacing:-.035em}
+#main-content:has([data-site-header]) h3:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-card)!important;font-weight:var(--weight-heading)!important;line-height:1.4!important;letter-spacing:-.025em}
+#main-content:has([data-site-header]) h4:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:14px!important;font-weight:500!important;line-height:1.5!important}
+#main-content:has([data-site-header]) h5:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:12px!important;font-weight:500!important;line-height:1.5!important}
+#main-content:has([data-site-header]) h6:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:11px!important;font-weight:600!important;line-height:1.5!important}
+#main-content:has([data-site-header]) p:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-body)!important;font-weight:var(--weight-body)!important;line-height:1.8!important}
+#main-content:has([data-site-header]) li:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-body)!important;line-height:1.8!important}
+#main-content:has([data-site-header]) label:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-support)!important;font-weight:500!important;line-height:1.6!important}
+#main-content:has([data-site-header]) small:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-label)!important;line-height:1.7!important}
+#main-content:has([data-site-header]) button:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-support)!important;font-weight:500!important;line-height:1.5!important}
+#main-content:has([data-site-header]) input:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-support)!important;font-weight:400!important;line-height:1.6!important}
+#main-content:has([data-site-header]) select:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-support)!important;font-weight:400!important;line-height:1.6!important}
+#main-content:has([data-site-header]) textarea:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-support)!important;font-weight:400!important;line-height:1.6!important}
+#main-content:has([data-site-header]) :is([class*="card"],[class*="Card"]) p:not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-support)!important;line-height:1.8!important}
+#main-content:has([data-site-header]) :is([class*="eyebrow"],[class*="Eyebrow"],[class*="kicker"],.label-tech):not(:where([data-site-header] *,footer *,[data-typography-reference] *,[contenteditable="true"] *,[data-typography="dashboard"] *,[role="dialog"] *)){font-size:var(--type-label)!important;font-weight:500!important;line-height:1.6!important}
+@media(max-width:750px) { :root { --type-section:24px; --type-card:14px; --type-body:12px; --type-label:9px; } }
+/* This beats published body-size overrides so phone inputs never trigger zoom. */
+@media(max-width:767px) {
+ #main-content :is(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]) { font-size:16px!important; min-height:44px; }
+}
+/* The home headline is a display role, above the regular page-title scale. */
+#main-content #home-hero-title {
+ font-size:clamp(48px,5.4vw,76px)!important;
+ font-weight:600!important;
+ line-height:1.06!important;
+ letter-spacing:-.055em;
+}
+@media(max-width:900px) { #main-content #home-hero-title { font-size:clamp(42px,8vw,64px)!important; } }
+@media(max-width:600px) { #main-content #home-hero-title { font-size:clamp(32px,10.5vw,46px)!important; line-height:1.1!important; } }

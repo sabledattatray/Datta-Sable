@@ -5,6 +5,14 @@ import vm from 'node:vm';
 import ts from 'typescript';
 import { createRequire } from 'node:module';
 const native = createRequire(import.meta.url);
+
+test('publishing progress distinguishes unavailable queries from a genuinely empty library', () => {
+  const { publishingProgress } = load('lib/admin/overview-display.ts', {});
+  assert.equal(publishingProgress(12, null), null);
+  assert.equal(publishingProgress(undefined, 4), null);
+  assert.equal(publishingProgress(0, 0), 0);
+  assert.equal(publishingProgress(12, 4), 75);
+});
 function load(file, overrides) {
   const exports = {};
   const code = ts.transpileModule(fs.readFileSync(file,'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;

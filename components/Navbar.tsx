@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { ArrowUpRight, ArrowRight, ChevronDown, Menu, Plus, User, X } from 'lucide-react';
-import LogoIcon from './LogoIcon';
+import BrandLockup from './BrandLockup';
 import ThemeToggle from './ThemeToggle';
 import HeaderAccount from './HeaderAccount';
 import { navLinks, megaMenuData } from './navigationData';
@@ -97,9 +97,9 @@ export default function Navbar() {
   const accountRole=(session?.user as {role?:string}|undefined)?.role;
 
   return <>
-    <header ref={root} className={`${styles.header} ${scrolled?styles.scrolled:''} ${open?styles.expanded:''}`} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={event=>{if(!mobileOpen&&!event.currentTarget.contains(event.relatedTarget as Node|null))setOpen(null);}}>
+    <header data-site-header ref={root} className={`${styles.header} ${scrolled?styles.scrolled:''} ${open?styles.expanded:''}`} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={event=>{if(!mobileOpen&&!event.currentTarget.contains(event.relatedTarget as Node|null))setOpen(null);}}>
       <div className={styles.bar}>
-        <Link href="/" className={styles.logo} aria-label="Datta Sable — Home" onClick={closeAll}><span className={styles.logoMark}><LogoIcon color="var(--accent)"/></span><span className={styles.wordmark}><strong>Datta Sable</strong><span>DATA / DESIGN / ENGINEERING</span></span></Link>
+        <Link href="/" className={styles.logo} aria-label="Datta Sable — Home" onClick={closeAll}><BrandLockup /></Link>
         <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<Link key={link.label} href={link.href} className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={closeAll} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></Link>:<Link key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</Link>)}</nav>
         <div className={styles.actions}>
           <div className={styles.theme} onFocusCapture={()=>setOpen(null)}><ThemeToggle/></div>
@@ -121,8 +121,7 @@ export default function Navbar() {
         <div id="mobile-navigation" className={styles.mobilePanel} role="dialog" aria-modal="true" aria-labelledby="mobile-navigation-title">
           <div className={styles.mobileIntro}>
             <Link href="/" className={styles.mobileLogo} onClick={closeAll} aria-label="Datta Sable — Home">
-              <span className={styles.logoMark}><LogoIcon color="var(--accent)"/></span>
-              <span className={styles.wordmark}><strong>Datta Sable</strong></span>
+              <BrandLockup />
             </Link>
             <button ref={closeMobile} type="button" className={styles.closeMobile} aria-label="Close navigation panel" onClick={closeAll}>
               <X size={17}/>

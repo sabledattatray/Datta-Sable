@@ -60,7 +60,7 @@ export default function HeroDashboard() {
   const chooseView = (index: number) => { setViewIndex(index); setChannel(null); setPoint(7); setPlaying(false); };
   return (
     <div className={styles.scene} data-tone={tone} onPointerEnter={() => setEngaged(true)} onPointerLeave={() => setEngaged(false)} onFocusCapture={() => setEngaged(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setEngaged(false); }}>
-      <div className={styles.panel}>
+      <div className={styles.panel} data-typography="dashboard">
         <div className={styles.topbar}>
           <div className={styles.brand}><span className={styles.brandIcon}><BarChart3 size={19} /></span><strong>Clarity<span>Analytics, thoughtfully designed.</span></strong></div>
           <span className={styles.demo}><i /> Interactive demo</span>

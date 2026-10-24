@@ -1,7 +1,7 @@
 /* AdminCommon.module.css - Unified design system tokens and components for all admin pages */
 
 .page {
-  --admin-shadow: 0 8px 30px #00000008;
+  --admin-shadow: 0 2px 4px #00000003, 0 10px 30px #00000006;
   box-sizing: border-box;
   padding: 34px 32px 28px;
   max-width: 1700px;
@@ -16,9 +16,9 @@
   align-items: center;
   gap: 28px;
   margin-bottom: 30px;
-  padding: 32px;
+  padding: 28px;
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 20px;
   background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 65%), var(--surface);
   box-shadow: var(--admin-shadow);
   position: relative;
@@ -32,8 +32,8 @@
 }
 
 .eyebrow {
-  font-size: var(--text-small);
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 600;
   color: var(--accent);
   letter-spacing: .13em;
   display: inline-flex;
@@ -145,18 +145,19 @@
   min-width: 0;
   padding: 22px 22px 18px;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 16px;
   background: linear-gradient(125deg, color-mix(in srgb, var(--accent) 2%, var(--surface)), var(--surface) 70%);
   text-decoration: none;
   color: var(--text);
   transition: transform .2s, border-color .2s, box-shadow .2s;
   box-sizing: border-box;
+  box-shadow: var(--admin-shadow);
 }
 
 .metricCard:hover {
   transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px #0000000d;
 }
 
 .metricTop {
@@ -171,18 +172,22 @@
 
 .metricTop svg {
   color: var(--accent);
-  opacity: .85;
+  box-sizing: content-box;
+  padding: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
   flex-shrink: 0;
 }
 
 .metricValue {
-  font-size: clamp(30px, 2.8vw, 42px);
+  font-size: clamp(28px, 2.6vw, 36px);
   letter-spacing: -.055em;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   display: block;
-  margin: 24px 0 20px;
+  margin: 20px 0 16px;
   color: var(--text);
 }
 
@@ -233,7 +238,7 @@
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 5px;
-  background: var(--surface);
+  background: var(--bg);
   width: fit-content;
   margin-bottom: 20px;
   flex-wrap: wrap;
@@ -309,8 +314,8 @@
 }
 
 .th {
-  background: var(--surface2);
-  font-size: var(--text-small);
+  background: color-mix(in srgb, var(--bg) 70%, var(--surface));
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -527,13 +532,13 @@
 .legacyPage :is(input,textarea,select) { font-family: inherit; max-width: 100%; accent-color: var(--accent); }
 .legacyPage table { font-variant-numeric: tabular-nums; }.legacyPage tbody tr:hover { background: color-mix(in srgb, var(--accent) 3%, var(--surface)); }
 .legacyPage button { transition: border-color .2s, background .2s; }.legacyPage button:hover { filter: brightness(1.08); }
-.legacyHeader { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding: 30px!important; margin-bottom: 28px!important; border: 1px solid var(--border); border-radius: 18px; background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 65%), var(--surface); }
+.legacyHeader { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding: 30px!important; margin-bottom: 28px!important; border: 1px solid var(--border); border-radius: 20px; background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 65%), var(--surface); }
 .legacyHeader:not(:has(>div)) { display: block; }
 .legacyHeader>p:first-child,.legacyHeader>div>p:first-child { color: var(--accent)!important; font-size: var(--text-small)!important; font-weight: 500!important; letter-spacing: .13em!important; margin-bottom: 14px!important; }
 .legacyHeader h1 { font-size: clamp(26px, 2.8vw, 38px)!important; line-height: 1.2; }.legacyHeader p { font-size: var(--text-small)!important; line-height: 1.8; max-width: 680px; }
 @media(max-width:900px) { .detailGrid { grid-template-columns: minmax(0, 1fr); } }
 @media(max-width:800px) { .editorpage { height: auto; min-height: calc(100dvh - 66px); }.editorpage[data-standalone=true] { height: auto; min-height: 100dvh; }.editorBody { flex-direction: column; overflow: visible!important; }.editorBody>main { overflow: visible!important; padding: 24px 16px!important; }.editorBody>aside { width: 100%!important; border-left: 0!important; border-top: 1px solid var(--border); overflow: visible!important; }.editorBody>div { min-width: 0; }.editorpage>header { padding-inline: 16px!important; }.editorpage>header>div:last-child { width: 100%; }.editorpage>header button { flex: 1; }.editorpage :is(input,select,textarea) { max-width: 100%; } }
-@media(max-width:640px) { .page,.legacyPage { padding: 20px 16px; }.header,.legacyHeader { padding: 22px!important; gap: 20px; border-radius: 14px; }.metricCard { padding: 20px 18px; }.tabs { max-width: 100%; width: 100%; }.tabButton { flex: 1; }.input,.textarea,.select,.searchBar input { font-size: 16px; }.headerCopy { min-width: 0; }.headerActions { width: 100%; }.modalOverlay { padding: 12px; }.modalContent { padding: 20px; }.modalHeader { gap: 12px; }.notice { align-items: flex-start; }.legacyHeader { align-items: flex-start; }.legacyHeader>div { min-width: 0; } }
+@media(max-width:640px) { .page,.legacyPage { padding: 20px 16px; }.header,.legacyHeader { padding: 22px!important; gap: 20px; border-radius: 16px; }.metricCard { padding: 20px 18px; }.tabs { max-width: 100%; width: 100%; }.tabButton { flex: 1; }.input,.textarea,.select,.searchBar input { font-size: 16px; }.headerCopy { min-width: 0; }.headerActions { width: 100%; }.modalOverlay { padding: 12px; }.modalContent { padding: 20px; }.modalHeader { gap: 12px; }.notice { align-items: flex-start; }.legacyHeader { align-items: flex-start; }.legacyHeader>div { min-width: 0; } }
 @media(prefers-reduced-motion:reduce) { .page *,.legacyPage * { animation: none!important; transition: none!important; } }
 
 .mobileOnly {
@@ -553,3 +558,7 @@
   }
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+  .page *, .modalOverlay * { animation: none !important; transition: none !important; }
+}

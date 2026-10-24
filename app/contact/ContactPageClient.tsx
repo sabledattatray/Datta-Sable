@@ -1,215 +1,112 @@
 'use client';
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { ArrowDownRight, ArrowUpRight, Check, CheckCircle2, Clock3, Loader2, Mail, MapPin, Phone, Send, ShieldCheck } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import Crosshair from '@/components/Crosshair';
-import { signIn, useSession } from 'next-auth/react';
+import styles from './Contact.module.css';
+
+function SocialIcon({ network }: { network: 'github' | 'linkedin' }) {
+  return <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={network === 'linkedin' ? 'M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.97V9.2h2.96v9.55ZM6.45 7.9a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.3 10.85h-2.96v-4.64c0-1.1-.02-2.52-1.54-2.52-1.55 0-1.79 1.2-1.79 2.44v4.72H9.5V9.2h2.84v1.3h.04c.4-.76 1.37-1.55 2.81-1.55 3 0 3.56 1.98 3.56 4.55v5.25Z' : 'M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.4.7-4.1-1.4-4.1-1.4-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z'} /></svg>;
+}
+
+const emptyForm = { name: '', email: '', subject: '', message: '', honeypot: '' };
 
 export default function ContactPageClient() {
-  const { data: session } = useSession();
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', honeypot: '' });
+  const { data: session, status: sessionStatus } = useSession();
+  const [form, setForm] = useState(emptyForm);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const submitting = useRef(false);
+  const feedback = useRef<HTMLDivElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const accountName = session?.user?.name;
+  const accountEmail = session?.user?.email;
+  useEffect(() => {
+    if (!accountName && !accountEmail) return;
+    setForm(current => ({ ...current, name: current.name || accountName || '', email: current.email || accountEmail || '' }));
+  }, [accountName, accountEmail]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (form.honeypot) return;
-    if (!form.name || !form.email || !form.message) return;
+  useEffect(() => {
+    if (status === 'success' || status === 'error') feedback.current?.focus();
+  }, [status]);
+
+  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setForm(current => ({ ...current, [event.target.name]: event.target.value }));
+  }
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    if (submitting.current || form.honeypot) return;
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setErrorMessage('Please add your name, email address, and a short message.');
+      setStatus('error');
+      return;
+    }
+    submitting.current = true;
     setStatus('loading');
+    setErrorMessage('');
     try {
       const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.message }),
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), subject: form.subject, message: form.message.trim() }),
       });
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || 'Failed to send message');
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.message || 'Your message could not be sent. Please try again or email me directly.');
       }
       setStatus('success');
-      setErrorMessage(null);
-      setForm({ name: '', email: '', subject: '', message: '', honeypot: '' });
-      setTimeout(() => setStatus('idle'), 5000);
-    } catch (error: any) {
+      setForm(current => ({ ...emptyForm, name: current.name, email: current.email }));
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Could not connect. Please try again or email me directly.');
       setStatus('error');
-      setErrorMessage(error.message);
-      setTimeout(() => setStatus('idle'), 5000);
+    } finally {
+      submitting.current = false;
     }
-  };
+  }
 
-  const contactInfo = [
-    { label: 'Email', value: 'info@dattasable.com', href: 'mailto:info@dattasable.com', color: 'var(--accent)', icon: <Mail size={18} /> },
-    { label: 'Phone', value: '+91 80108 03756', href: 'tel:+918010803756', color: 'var(--accent2)', icon: <Phone size={18} /> },
-    { label: 'Location', value: 'Mumbai, Maharashtra, India', href: '#', color: 'var(--accent3)', icon: <MapPin size={18} /> },
-  ];
+  return <div className={styles.page}>
+    <Navbar />
+    <main className={styles.main}>
+      <header className={styles.hero}>
+        <div><div className={styles.eyebrow}><span /> LET’S CONNECT</div><h1>Good work starts with<br /><span>a conversation.</span></h1><p>A dashboard that tells the right story. A report that runs itself. A clearer view of your business. Tell me what you have in mind.</p><a href="#contact-form" className={styles.heroLink}>Start a conversation <ArrowDownRight size={17} /></a></div>
+        <div className={styles.availability}><div className={styles.availabilityTop}><span className={styles.statusDot} /> OPEN TO CONVERSATIONS</div><h2>Your next idea.<br />A practical way forward.</h2><p>Business intelligence, reporting automation, and data solutions built around your goals.</p><div className={styles.availabilityFooter}><Clock3 size={14} /><span>Typically replies within 24 hours</span></div></div>
+      </header>
 
-  const socials = [
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>, label: 'LinkedIn', href: 'https://www.linkedin.com/in/dattasable/', color: '#0077b5' },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>, label: 'GitHub', href: 'https://github.com/sabledattatray', color: 'var(--text)' },
-    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.933zm-1.292 19.494h2.039L6.486 3.24H4.298l13.311 17.407z"/></svg>, label: 'X (Twitter)', href: 'https://x.com/sabledattatray', color: 'var(--text)' },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1 .22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.12.1.16.23.18.33.02.11.02.31.01.45z"/></svg>, label: 'Telegram', href: 'https://t.me/sabledatta', color: '#0088cc' },
-  ];
+      <div className={styles.layout}>
+        <aside className={styles.details} aria-label="Contact details">
+          <div className={styles.sectionLabel}>01 / REACH OUT DIRECTLY</div>
+          <h2>A direct line.<br />A real conversation.</h2><p className={styles.detailsIntro}>Have a brief ready, or simply exploring an idea? Either is a good place to start.</p>
+          <a className={styles.emailCard} href="mailto:info@dattasable.com"><span className={styles.iconTile}><Mail size={20} /></span><span><small>DROP ME A NOTE</small><strong>info@dattasable.com</strong></span><ArrowUpRight size={18} /></a>
+          <div className={styles.contactRows}><a href="tel:+918010803756"><Phone size={17} /><span><small>Prefer a call?</small><strong>+91 80108 03756</strong></span><ArrowUpRight size={15} /></a><div><MapPin size={17} /><span><small>Based in</small><strong>Mumbai, Maharashtra, India</strong></span></div></div>
+          <div className={styles.socialSection}><div className={styles.sectionLabel}>CONNECT & EXPLORE</div><div className={styles.socialLinks}><a href="https://www.linkedin.com/in/dattasable/" target="_blank" rel="noopener noreferrer"><SocialIcon network="linkedin" /><span>LinkedIn</span><ArrowUpRight size={13} /></a><a href="https://github.com/sabledattatray" target="_blank" rel="noopener noreferrer"><SocialIcon network="github" /><span>GitHub</span><ArrowUpRight size={13} /></a></div><div className={styles.otherSocials}><a href="https://x.com/sabledattatray" target="_blank" rel="noopener noreferrer">Twitter / X <ArrowUpRight size={12} /></a><a href="https://t.me/sabledatta" target="_blank" rel="noopener noreferrer">Telegram <ArrowUpRight size={12} /></a></div></div>
+          <div className={styles.approach}><span className={styles.iconTile}><ShieldCheck size={18} /></span><div><strong>Thoughtful from the first message.</strong><p>Your enquiry stays private. No mailing lists, no automated sales follow-ups.</p></div></div>
+        </aside>
 
-  return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      <Navbar />
-      <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>
-        <Crosshair position="tl" />
-        <section className="section" style={{ paddingTop: 'clamp(8rem, 12vw, 10rem)' }}>
-          <div className="container">
-            <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-              <div className="label-tech mb-4" style={{ letterSpacing: '0.3em', justifyContent: 'center' }}>ESTABLISH-CONTACT</div>
-              <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 48px)', fontWeight: 600, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                Let&apos;s <span className="hero-title">Connect</span>
-              </h1>
-              <p style={{ color: 'var(--muted)', maxWidth: 520, margin: '0 auto', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                Have a project in mind, need expert BI consulting, or just want to discuss data strategy? I&apos;m available for freelance projects and consulting engagements. Reach out via the form below or directly by email.
-              </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '3rem', alignItems: 'start' }}>
-              {/* Left column */}
-              <div>
-                <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div style={{ width: 10, height: 10, background: 'var(--accent3)', borderRadius: '50%', boxShadow: '0 0 8px var(--accent3)' }} />
-                    <span style={{ color: 'var(--accent3)', fontWeight: 600, fontSize: '0.9rem' }}>Available for Work</span>
-                  </div>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.875rem', lineHeight: 1.7 }}>
-                    Currently accepting freelance projects and consulting engagements. Typical response time: <span style={{ color: 'var(--text)' }}>under 24 hours</span>.
-                  </p>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
-                  {contactInfo.map(item => (
-                    <a key={item.label} href={item.href} className="card flex items-center gap-3" style={{ padding: '1.25rem', textDecoration: 'none' }}>
-                      <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${item.color}22`, color: item.color }}>
-                        {item.icon}
-                      </div>
-                      <div>
-                        <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.2rem' }}>{item.label}</div>
-                        <div style={{ color: 'var(--text)', fontSize: '0.9rem', fontWeight: 500 }}>{item.value}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-
-                <div style={{ marginBottom: '2rem' }}>
-                  <div className="mono" style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '1rem', letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.8 }}>Network-Nodes</div>
-                  <div className="flex flex-wrap gap-4">
-                    {socials.map(s => (
-                      <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}
-                        className="group relative flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300"
-                        style={{ background: 'var(--surface2)', border: '1px solid var(--border)', color: 'var(--muted)', textDecoration: 'none' }}
-                        onMouseEnter={e => {
-                          (e.currentTarget as HTMLElement).style.borderColor = s.color;
-                          (e.currentTarget as HTMLElement).style.color = 'var(--text)';
-                          (e.currentTarget as HTMLElement).style.background = `${s.color}15`;
-                          (e.currentTarget as HTMLElement).style.boxShadow = `0 0 20px ${s.color}33`;
-                          (e.currentTarget as HTMLElement).style.transform = `translateY(-3px)`;
-                        }}
-                        onMouseLeave={e => {
-                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-                          (e.currentTarget as HTMLElement).style.color = 'var(--muted)';
-                          (e.currentTarget as HTMLElement).style.background = 'var(--surface2)';
-                          (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                          (e.currentTarget as HTMLElement).style.transform = `translateY(0)`;
-                        }}
-                      >
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" style={{ background: `radial-gradient(circle at center, ${s.color}22 0%, transparent 70%)` }} />
-                        <div style={{ position: 'relative', zIndex: 1 }}>{s.icon}</div>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="card" style={{ padding: '1.5rem', background: 'var(--surface2)' }}>
-                  <div className="mono" style={{ color: 'var(--accent)', fontSize: 'var(--text-small)', marginBottom: '1.25rem', letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center' }}>
-                    {session ? `Connected as ${session.user?.name}` : 'One-Tap Connect'}
-                  </div>
-                  <div className="grid grid-cols-3 gap-3">
-                    <button title="Login with Google" onClick={() => signIn('google')} className="flex items-center justify-center h-10 rounded-none border border-[var(--border)] hover:bg-[var(--tag-bg)] transition-all">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                    </button>
-                    <button title="Login with LinkedIn" onClick={() => signIn('linkedin')} className="flex items-center justify-center h-10 rounded-none border border-[var(--border)] hover:bg-[#0077b5]/5 transition-all">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </button>
-                    <button title="Login with GitHub" onClick={() => signIn('github')} className="flex items-center justify-center h-10 rounded-none border border-[var(--border)] hover:bg-[var(--tag-bg)] transition-all">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ color: 'var(--text)' }}><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right column / Contact form */}
-              <div>
-                <div className="card" style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
-                  <h2 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>Send a Message</h2>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.875rem', marginBottom: '2rem' }}>Fill out the form and I&apos;ll get back to you within 24 hours.</p>
-
-                  {status === 'success' && (
-                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl" style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', color: 'var(--accent3)' }}>
-                      <CheckCircle size={18} />
-                      <span style={{ fontSize: '0.9rem' }}>Message sent! I&apos;ll reply within 24 hours.</span>
-                    </motion.div>
-                  )}
-
-                  {status === 'error' && (
-                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl" style={{ background: 'rgba(201, 243, 29, 0.05)', border: '1px solid rgba(201, 243, 29, 0.2)', color: 'var(--accent)' }}>
-                      <AlertCircle size={18} />
-                      <span style={{ fontSize: '0.9rem' }}>{errorMessage || 'Failed to send message. Please try again.'}</span>
-                    </motion.div>
-                  )}
-
-                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                    <input type="text" name="honeypot" value={form.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} />
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '1rem' }}>
-                      {[{ name: 'name', label: 'Your Name', type: 'text' }, { name: 'email', label: 'Email Address', type: 'email' }].map(field => (
-                        <div key={field.name}>
-                          <label htmlFor={`contact-${field.name}`} style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{field.label}</label>
-                          <input
-                            id={`contact-${field.name}`}
-                            type={field.type} name={field.name} value={form[field.name as keyof typeof form]} onChange={handleChange} required
-                            style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif' }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      <label htmlFor="contact-subject" style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
-                      <select id="contact-subject" name="subject" value={form.subject} onChange={handleChange}
-                        style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: form.subject ? 'var(--text)' : 'var(--muted)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif' }}>
-                        <option value="">Select a topic...</option>
-                        <option value="Dashboard Development">Dashboard Development</option>
-                        <option value="Data Analytics Consulting">Data Analytics Consulting</option>
-                        <option value="Automation Solutions">Automation Solutions</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="contact-message" style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
-                      <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} required rows={5}
-                        style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif', resize: 'vertical' }}
-                      />
-                    </div>
-                    <button type="submit" disabled={status === 'loading'} className="btn-primary flex items-center justify-center gap-2" style={{ opacity: status === 'loading' ? 0.7 : 1, cursor: status === 'loading' ? 'not-allowed' : 'pointer' }}>
-                      {status === 'loading' ? 'Sending...' : <><Send size={16} /> Send Message</>}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
+        <section id="contact-form" className={styles.formCard} aria-labelledby="contact-heading">
+          <div className={styles.formHeader}><div><div className={styles.sectionLabel}>02 / TELL ME ABOUT IT</div><h2 id="contact-heading">What can we build together?</h2><p>A few details are all we need to get started.</p></div><span className={styles.formStamp} aria-hidden="true"><Send size={24} strokeWidth={1.3} /></span></div>
+          <div className={styles.accountNote}>
+            {sessionStatus === 'loading' ? <><Loader2 size={14} className={styles.spinner} /><span>Checking your account…</span></> : session?.user ? <><CheckCircle2 size={16} /><span>Signed in as <strong>{session.user.name || session.user.email}</strong>. Your details are filled in below.</span></> : <><ShieldCheck size={16} /><span>No account needed. <Link href="/sign-in?callbackUrl=%2Fcontact">Sign in to fill your details <ArrowUpRight size={11} /></Link></span></>}
           </div>
+          {status === 'success' ? <div ref={feedback} tabIndex={-1} className={styles.success} role="status"><span className={styles.successIcon}><Check size={25} /></span><h3>Your message is in.</h3><p>Thanks for reaching out. I’ll review your note and get back to you at <strong>{form.email}</strong>.</p><span className={styles.responseNote}><Clock3 size={14} /> Typically within 24 hours</span><button type="button" className={styles.secondaryButton} onClick={() => setStatus('idle')}>Send another message <ArrowUpRight size={14} /></button></div> : <>
+            {status === 'error' && <div ref={feedback} tabIndex={-1} className={styles.error} role="alert"><strong>Let’s try that again.</strong><p>{errorMessage}</p><a href="mailto:info@dattasable.com">Email me instead <ArrowUpRight size={12} /></a></div>}
+            <form onSubmit={handleSubmit} className={styles.form} aria-busy={status === 'loading'}>
+              <div hidden aria-hidden="true"><label htmlFor="contact-website">Leave this field empty</label><input id="contact-website" name="honeypot" value={form.honeypot} onChange={handleChange} tabIndex={-1} autoComplete="off" /></div>
+              <fieldset disabled={status === 'loading'}>
+                <div className={styles.fieldRow}><div className={styles.field}><label htmlFor="contact-name">Your name <span>*</span></label><input id="contact-name" name="name" autoComplete="name" value={form.name} onChange={handleChange} placeholder="How should I address you?" required maxLength={120} /></div><div className={styles.field}><label htmlFor="contact-email">Email address <span>*</span></label><input id="contact-email" type="email" name="email" autoComplete="email" value={form.email} onChange={handleChange} placeholder="you@company.com" required maxLength={254} /></div></div>
+                <div className={styles.field}><label htmlFor="contact-subject">What’s on your mind? <span className={styles.optional}>Optional</span></label><select id="contact-subject" name="subject" value={form.subject} onChange={handleChange}><option value="">Choose a topic</option><option>Dashboard Development</option><option>Data Analytics Consulting</option><option>Automation Solutions</option><option>Career Opportunities</option><option>Other</option></select></div>
+                <div className={styles.field}><label htmlFor="contact-message">Tell me a little more <span>*</span></label><textarea id="contact-message" name="message" value={form.message} onChange={handleChange} placeholder="What are you working on, and where could I help? A goal, a challenge, or an idea is a great start." rows={5} required maxLength={10000} aria-describedby="contact-message-help" /><small id="contact-message-help">If you have a timeline or project scope, feel free to include it.</small></div>
+                <button className={styles.submitButton} type="submit" disabled={status === 'loading'}>{status === 'loading' ? <><Loader2 size={16} className={styles.spinner} /> Sending your message…</> : <>Send message <ArrowUpRight size={17} /></>}</button>
+              </fieldset>
+              <p className={styles.privacy}><ShieldCheck size={13} /><span>Only used to respond to your enquiry. <Link href="/privacy">Privacy policy</Link></span></p>
+            </form>
+          </>}
         </section>
-        <Crosshair position="br" />
       </div>
-      <Footer />
-    </div>
-  );
+      <section className={styles.nextSteps} aria-label="What happens next"><div><div className={styles.sectionLabel}>A SIMPLE WAY FORWARD</div><h2>From first hello<br />to a clear next step.</h2></div><div><span>01</span><h3>Share your idea</h3><p>A short brief, a challenge, or a question. Start wherever you are.</p></div><div><span>02</span><h3>Let’s find the fit</h3><p>We’ll talk through your goals, what’s involved, and how I can help.</p></div><div><span>03</span><h3>Make a plan</h3><p>A practical scope and a clear way forward, before any work begins.</p></div></section>
+    </main>
+    <Footer />
+  </div>;
 }

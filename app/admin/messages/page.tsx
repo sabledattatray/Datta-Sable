@@ -1,19 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Search, Trash2, Mail, Clock, X, Reply, Check } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Search, Trash2, Mail, Clock, X, Reply, AlertCircle, RefreshCw } from 'lucide-react';
 import adminStyles from '@/components/admin/AdminCommon.module.css';
 
+type Message = {
+  id: string; name: string; email: string; subject: string; message: string;
+  date: string; read: boolean; createdAt: string;
+};
+
 export default function MessagesInbox() {
-  const [messages, setMessages] = useState<any[]>([]);
-  const [selected, setSelected] = useState<any | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [selected, setSelected] = useState<Message | null>(null);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [deleting, setDeleting] = useState<string | null>(null);
+  const deletingId = useRef<string | null>(null);
+  const markingRead = useRef(new Set<string>());
 
   const fetchMessages = async () => {
     try {
       setLoading(true);
+      setError('');
       const res = await fetch('/api/admin/messages');
+      if (!res.ok) throw new Error('Unable to load messages. Please try again.');
       if (res.ok) {
         const data = await res.json();
         const mapped = data.map((m: any) => {
@@ -42,8 +53,8 @@ export default function MessagesInbox() {
         });
         setMessages(mapped);
       }
-    } catch (e) {
-      console.error('Failed to fetch messages', e);
+    } catch {
+      setError('Unable to load messages. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -55,34 +66,48 @@ export default function MessagesInbox() {
 
   const filtered = messages.filter(m =>
     m.name.toLowerCase().includes(search.toLowerCase()) ||
+    m.email.toLowerCase().includes(search.toLowerCase()) ||
     m.subject.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleSelect = async (m: any) => {
+  const handleSelect = async (m: Message) => {
     setSelected(m);
-    if (!m.read) {
-      setMessages(ms => ms.map(msg => msg.id === m.id ? { ...msg, read: true } : msg));
+    if (!m.read && !markingRead.current.has(m.id)) {
+      markingRead.current.add(m.id);
       try {
-        await fetch(`/api/admin/messages/${m.id}`, {
+        const response = await fetch(`/api/admin/messages/${m.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: 'READ' }),
         });
-      } catch (e) {
-        console.error('Failed to mark message as read', e);
+        if (!response.ok) throw new Error('Unable to mark message as read.');
+        setMessages(ms => ms.map(msg => msg.id === m.id ? { ...msg, read: true } : msg));
+        setSelected(current => current?.id === m.id ? { ...current, read: true } : current);
+      } catch {
+        setError('This message could not be marked as read. Open it again to retry.');
+      } finally {
+        markingRead.current.delete(m.id);
       }
     }
   };
 
-  const handleDelete = async (id: string | number) => {
-    setMessages(ms => ms.filter(m => m.id !== id));
-    if (selected?.id === id) setSelected(null);
+  const handleDelete = async (id: string) => {
+    if (deletingId.current) return;
+    deletingId.current = id;
+    setDeleting(id);
+    setError('');
     try {
-      await fetch(`/api/admin/messages/${id}`, {
+      const response = await fetch(`/api/admin/messages/${id}`, {
         method: 'DELETE',
       });
-    } catch (e) {
-      console.error('Failed to delete message', e);
+      if (!response.ok) throw new Error('Unable to delete message.');
+      setMessages(ms => ms.filter(m => m.id !== id));
+      setSelected(current => current?.id === id ? null : current);
+    } catch {
+      setError('The message was not deleted. Please try again.');
+    } finally {
+      deletingId.current = null;
+      setDeleting(null);
     }
   };
 
@@ -111,22 +136,26 @@ export default function MessagesInbox() {
         </div>
       </div>
 
+      {error && <div className={adminStyles.notice} role="alert"><AlertCircle size={16} /><span>{error}</span></div>}
+
       {/* Main layout */}
       <div style={{ display: 'grid', gridTemplateColumns: selected ? '360px 1fr' : '1fr', gap: 20, alignItems: 'flex-start' }} className="msg-grid">
         
         {/* Message list */}
         <div className={`msg-list-pane ${selected ? 'msg-list-pane-hidden' : ''}`} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden' }}>
           {/* Search */}
-          <div style={{ padding: '14px 14px 0' }}>
+          <div style={{ padding: '14px 14px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
             <div className={adminStyles.searchBar}>
               <Search size={14} />
               <input
                 type="text"
-                placeholder="Search messages by name or subject..."
+                aria-label="Search messages"
+                placeholder="Search name, email or subject…"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
             </div>
+            <button className={adminStyles.secondary} disabled={loading} onClick={fetchMessages} aria-label="Refresh messages" style={{ padding: 10 }}><RefreshCw size={15} /></button>
           </div>
 
           {/* List items */}
@@ -134,15 +163,19 @@ export default function MessagesInbox() {
             {loading ? (
               <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>Loading messages...</div>
             ) : filtered.length === 0 ? (
-              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>No messages found</div>
+              <div className={adminStyles.emptyState} style={{ margin: 16 }}><Mail size={28} /><h2>{error ? 'Messages unavailable' : search ? 'No matching messages' : 'You’re all caught up'}</h2><p>{error ? 'Refresh to try loading your inbox again.' : search ? 'Try another name, email address or subject.' : 'New enquiries will appear here when someone gets in touch.'}</p></div>
             ) : (
               filtered.map((m, i) => {
                 const isActive = selected?.id === m.id;
                 return (
-                  <div
+                  <button
+                    type="button"
                     key={m.id}
                     onClick={() => handleSelect(m)}
+                    aria-pressed={isActive}
+                    aria-label={`${m.read ? '' : 'Unread: '}${m.subject} from ${m.name}`}
                     style={{
+                      width: '100%', textAlign: 'left', border: 0, font: 'inherit',
                       display: 'flex', gap: 12, padding: '14px 16px', cursor: 'pointer',
                       background: isActive ? 'color-mix(in srgb, var(--accent) 8%, var(--surface))' : 'transparent',
                       borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
@@ -151,24 +184,24 @@ export default function MessagesInbox() {
                       alignItems: 'flex-start',
                     }}
                   >
-                    <div style={{
+                    <span style={{
                       width: 34, height: 34, borderRadius: 8,
                       background: 'var(--surface2)', border: '1px solid var(--border)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       color: 'var(--accent)', fontWeight: 600, fontSize: 'var(--text-small)', flexShrink: 0
                     }}>
                       {m.name.charAt(0).toUpperCase()}
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
+                    </span>
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
                         <span style={{ fontSize: 'var(--text-small)', fontWeight: m.read ? 500 : 600, color: 'var(--text)' }}>{m.name}</span>
                         <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', flexShrink: 0, marginLeft: 8 }}>{m.date}</span>
-                      </div>
-                      <div style={{ fontSize: 'var(--text-small)', fontWeight: m.read ? 400 : 500, color: m.read ? 'var(--muted)' : 'var(--text)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.subject}</div>
-                      <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.message}</div>
-                    </div>
+                      </span>
+                      <span style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: m.read ? 400 : 500, color: m.read ? 'var(--muted)' : 'var(--text)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.subject}</span>
+                      <span style={{ display: 'block', fontSize: 'var(--text-small)', color: 'var(--muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.message}</span>
+                    </span>
                     {!m.read && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, marginTop: 5 }} />}
-                  </div>
+                  </button>
                 );
               })
             )}
@@ -184,14 +217,14 @@ export default function MessagesInbox() {
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: 'color-mix(in srgb, var(--accent) 12%, var(--surface))', border: '1px solid color-mix(in srgb, var(--accent) 30%, var(--border))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontWeight: 600, fontSize: 15 }}>
                   {selected.name.charAt(0).toUpperCase()}
                 </div>
-                <div>
+                <div style={{ minWidth: 0, overflowWrap: 'anywhere' }}>
                   <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{selected.name}</div>
                   <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>{selected.email}</div>
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                 <a
-                  href={`mailto:${selected.email}?subject=Re: ${selected.subject}`}
+                  href={`mailto:${selected.email}?subject=${encodeURIComponent(`Re: ${selected.subject}`)}`}
                   className={adminStyles.primary}
                   style={{ minHeight: 36, padding: '7px 14px' }}
                 >
@@ -199,10 +232,11 @@ export default function MessagesInbox() {
                 </a>
                 <button
                   onClick={() => handleDelete(selected.id)}
+                  disabled={deleting !== null}
                   className={adminStyles.danger}
                   style={{ minHeight: 36, padding: '7px 12px' }}
                 >
-                  <Trash2 size={13} /> Delete
+                  <Trash2 size={13} /> {deleting === selected.id ? 'Deleting…' : 'Delete'}
                 </button>
                 <button
                   onClick={() => setSelected(null)}
@@ -224,7 +258,7 @@ export default function MessagesInbox() {
                 <span>{selected.date} ({new Date(selected.createdAt).toLocaleString()})</span>
               </div>
               <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: '18px 20px' }}>
-                <p style={{ fontSize: 'var(--text-small)', color: 'var(--text)', lineHeight: 1.8, margin: 0, whiteSpace: 'pre-wrap' }}>{selected.message}</p>
+                <p style={{ fontSize: 'var(--text-small)', color: 'var(--text)', lineHeight: 1.8, margin: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{selected.message}</p>
               </div>
             </div>
           </div>
@@ -232,7 +266,8 @@ export default function MessagesInbox() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        .msg-grid > * { min-width: 0; }
+        @media (max-width: 1100px) {
           .msg-grid { grid-template-columns: 1fr !important; }
           .msg-list-pane-hidden { display: none !important; }
         }

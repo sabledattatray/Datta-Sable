@@ -97,9 +97,9 @@ export function buildTypographyCss(input: TypographySettings, scope = '#main-con
   const rules: string[] = [];
   for (const id of ELEMENT_IDS) {
     const rule = settings.elements[id];
-    // Published settings and mobile previews share the same readability floor.
+    // Published settings and previews share the compact portfolio text floors.
     // Display headings retain their authored scale and gradient treatment.
-    const readableSize = (value: number) => id.startsWith('h') ? value : Math.max(value, id === 'body' || id === 'paragraph' ? 16 : 14);
+    const readableSize = (value: number) => id.startsWith('h') ? value : Math.max(value, id === 'body' || id === 'paragraph' ? 13 : 11);
     const family = FONT_FAMILIES.find(font => font.name === rule.fontFamily);
     const baseSelectors = TAGS[id].map(tag => `${scope} ${tag}`);
     // Paragraph settings must not flatten link accents, button colors, or code.
