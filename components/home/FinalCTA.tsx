@@ -26,6 +26,6 @@ export default function FinalCTA() {
       </form>}
       <p id="newsletter-privacy" className={styles.privacy}>Unsubscribe anytime. Read our <Link href="/privacy">privacy policy</Link>.</p>
     </div>
-    <div className={styles.mailArt} aria-hidden="true"><div className={styles.mailOrbit}/><div className={styles.letter}><div className={styles.letterTop}><span>DATTA SABLE</span><Mail size={15}/></div><span className={styles.letterLabel}>NOTES FOR THE CURIOUS</span><strong>Good ideas.<br/>Clear thinking.</strong><div className={styles.letterLines}><i/><i/><i/></div><div className={styles.letterBottom}><span>LEARN / BUILD / REPEAT</span><ArrowRight size={14}/></div></div><div className={styles.envelope}/><span className={styles.mailCaption}>A thoughtful addition to your inbox.</span></div>
+    <div className={styles.mailArt} aria-hidden="true"><div className={styles.mailArtwork}><div className={styles.mailOrbit}/><div className={styles.letter}><div className={styles.letterTop}><span>DATTA SABLE</span><Mail size={15}/></div><span className={styles.letterLabel}>NOTES FOR THE CURIOUS</span><strong>Good ideas.<br/>Clear thinking.</strong><div className={styles.letterLines}><i/><i/><i/></div><div className={styles.letterBottom}><span>LEARN / BUILD / REPEAT</span><ArrowRight size={14}/></div></div><div className={styles.envelope}/></div><span className={styles.mailCaption}>A thoughtful addition to your inbox.</span></div>
   </div></div></section>;
 }
