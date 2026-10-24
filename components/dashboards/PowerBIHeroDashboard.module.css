@@ -1,13 +1,12 @@
-/* Power BI Interactive Hero Dashboard Styles - Landscape Desktop & Responsive Mobile */
+/* Power BI Interactive Hero Dashboard Styles - Clarity Executive Landscape */
 
 .pbiContainer {
   position: relative;
   width: 100%;
-  border-radius: 16px;
+  border-radius: 20px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-top: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
-  box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.25), 0 0 24px -6px color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, var(--muted));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), 0 0 0 6px color-mix(in srgb, var(--surface2) 45%, transparent), inset 0 1px 0 color-mix(in srgb, var(--text) 7%, transparent);
   color: var(--text);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   overflow: hidden;
@@ -15,15 +14,15 @@
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* ── Ribbon Header ── */
+/* ── Ribbon Header (Clarity Style) ── */
 .pbiHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  background: color-mix(in srgb, var(--surface2) 85%, var(--bg));
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
   border-bottom: 1px solid var(--border);
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -34,17 +33,15 @@
 }
 
 .pbiLogoBadge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  background: var(--pbi-primary, var(--accent));
-  color: var(--btn-primary-text, #ffffff);
-  font-weight: 800;
-  font-size: var(--text-small);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 35%, transparent);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  color: var(--accent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent);
   flex-shrink: 0;
 }
 
@@ -54,77 +51,101 @@
 }
 
 .pbiReportTitle {
-  font-size: var(--text-small);
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .pbiSubBadge {
-  font-size: var(--text-small);
+  font-size: 11px;
   font-family: var(--font-mono, monospace);
-  color: var(--pbi-primary, var(--accent));
-  font-weight: 500;
-}
-
-/* Shade & Action Controls */
-.pbiControls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.shadeLabel {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: var(--text-small);
   color: var(--muted);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-weight: 500;
+  margin-top: 1px;
 }
 
-.shadeGroup {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: color-mix(in srgb, var(--surface) 60%, transparent);
-  padding: 3px 5px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-
-.shadeBtn {
+.demoBadge {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 8px;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  background: transparent;
   color: var(--muted);
-  font-size: var(--text-small);
-  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.demoBadge i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Tone Controls (Matching snap: Signature, Ocean, Iris, Emerald, Amber, Rose) */
+.pbiControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.toneGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  padding: 0;
+  border: none;
+  flex-wrap: wrap;
+}
+
+.toneBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3.5px 8px;
+  border-radius: 7px;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: color-mix(in srgb, var(--surface2) 40%, transparent);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
-.shadeBtn:hover {
+.toneBtn:hover {
   color: var(--text);
-  background: color-mix(in srgb, var(--surface2) 80%, transparent);
+  background: var(--surface2);
+  border-color: color-mix(in srgb, var(--text) 25%, var(--border));
 }
 
-.shadeBtnActive {
-  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
-  color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+.toneBtnActive {
+  background: color-mix(in srgb, var(--surface2) 80%, var(--surface));
+  color: var(--text);
+  font-weight: 600;
 }
 
-.shadeDot {
+:global(.light) .toneBtn {
+  background: color-mix(in srgb, var(--surface2) 50%, transparent);
+  border-color: var(--border);
+}
+
+:global(.light) .toneBtnActive {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.toneDot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -135,34 +156,44 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  height: 24px;
-  padding: 0 9px;
+  gap: 4px;
+  height: 25px;
+  padding: 0 8px;
   border-radius: 6px;
   background: color-mix(in srgb, var(--surface2) 80%, transparent);
   border: 1px solid var(--border);
   color: var(--muted);
-  font-size: var(--text-small);
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .pbiActionBtn:hover {
   background: var(--surface2);
-  color: var(--text);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
-/* ── Slicer Bar ── */
+/* ── Slicer Bar (Clarity Segment Capsule) ── */
 .pbiSlicerBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 7px 16px;
-  background: color-mix(in srgb, var(--surface2) 40%, var(--bg));
+  justify-content: flex-start;
+  padding: 6px 16px;
+  background: color-mix(in srgb, var(--surface2) 35%, var(--bg));
   border-bottom: 1px solid var(--border);
-  gap: 12px;
-  overflow-x: auto;
+  gap: 10px 18px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pbiSlicerBar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .slicerGroup {
@@ -172,168 +203,214 @@
 }
 
 .slicerLabel {
-  font-size: var(--text-small);
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--muted);
   letter-spacing: 0.08em;
-  margin-right: 3px;
+  margin-right: 2px;
+}
+
+.slicerSegment {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 2px;
 }
 
 .slicerPill {
-  height: 22px;
-  padding: 0 9px;
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--surface) 80%, transparent);
-  border: 1px solid var(--border);
+  height: 23px;
+  padding: 0 8px;
+  border-radius: 5px;
+  background: transparent;
+  border: 1px solid transparent;
   color: var(--muted);
-  font-size: var(--text-small);
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
 
 .slicerPill:hover {
-  background: var(--surface2);
   color: var(--text);
 }
 
 .slicerPillActive {
-  background: var(--pbi-primary, var(--accent));
-  color: var(--btn-primary-text, #ffffff);
-  border-color: var(--pbi-primary, var(--accent));
-  font-weight: 700;
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--border);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.slicerResetBtn {
+  margin-left: auto;
+  font-size: var(--text-small);
+  height: 25px;
 }
 
 /* ── Main Canvas (Landscape Flow) ── */
 .pbiCanvas {
-  padding: 12px 16px;
+  padding: 10px 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 95%, transparent) 0%, var(--bg) 100%);
 }
 
-/* KPI Strip (4 Columns in Landscape) */
+/* KPI Strip (Unified Clarity Strip Layout) */
 .kpiGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 12px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 4.5%, var(--surface)), var(--surface) 65%);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
 }
 
 .kpiCard {
   position: relative;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--surface2) 65%, var(--surface));
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 4px 16px;
+  border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  height: 84px;
+  justify-content: space-between;
+  min-height: 68px;
   box-sizing: border-box;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  min-width: 0;
+  transition: background 0.2s ease;
 }
 
-.kpiCard:hover {
-  transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+.kpiCard:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+
+.kpiCard:last-child {
+  padding-right: 0;
 }
 
 .kpiAccentBar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2.5px;
-  background: var(--pbi-primary, var(--accent));
+  display: none;
 }
 
 .kpiTopRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
-}
-
-.kpiTitle {
-  font-size: var(--text-small);
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: -0.01em;
-}
-
-.kpiDaxTag {
-  font-size: var(--text-small);
-  font-family: var(--font-mono, monospace);
-  padding: 1.5px 4px;
-  border-radius: 3px;
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-  color: var(--pbi-primary, var(--accent));
-  font-weight: 600;
-}
-
-.kpiValueRow {
-  display: flex;
-  align-items: baseline;
   gap: 6px;
   margin-bottom: 4px;
 }
 
+.kpiTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpiDaxTag {
+  font-size: 9.5px;
+  font-family: var(--font-mono, monospace);
+  padding: 1.5px 5px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.kpiValueRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
 .kpiValue {
-  font-size: 19px;
-  font-weight: 800;
+  font-size: 22px;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-family: var(--font-syne, inherit);
 }
 
 .kpiDelta {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-size: var(--text-small);
-  font-weight: 700;
-  padding: 1.5px 5px;
-  border-radius: 3px;
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  color: var(--pbi-primary, var(--accent));
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+:global(.light) .kpiDelta {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
 }
 
 .kpiFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--text-small);
+  font-size: 11px;
   color: var(--muted);
-  margin-top: auto;
+  margin-top: 0;
+  gap: 6px;
+}
+
+.kpiFooterText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  color: var(--muted);
 }
 
 .kpiSpark {
-  width: 52px;
-  height: 16px;
+  width: 50px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
-/* ── Landscape Visuals Grid (3 Columns across desktop!) ── */
 /* ── Landscape Visuals Grid (2 Wide Landscape Cards on Desktop!) ── */
 .landscapeVisualsGrid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 12px;
+  gap: 10px;
   align-items: stretch;
 }
 
 /* Common Visual Card - Identical Fixed Height Across All 3 Tabs */
 .visualCard {
-  padding: 12px 14px;
+  padding: 10px 14px 8px 14px;
   border-radius: 8px;
   background: color-mix(in srgb, var(--surface2) 65%, var(--surface));
   border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  height: 250px;
+  height: 215px;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
@@ -341,15 +418,15 @@
 }
 
 .visualCard:hover {
-  border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+  border-color: color-mix(in srgb, var(--text) 22%, var(--border));
 }
 
 .cardHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
-  gap: 8px;
+  margin-bottom: 6px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
@@ -359,17 +436,17 @@
 }
 
 .cardTitle {
-  font-size: var(--text-small);
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .cardSubtitle {
-  font-size: var(--text-small);
+  font-size: 10.5px;
   font-family: var(--font-mono, monospace);
   color: var(--muted);
   margin-top: 1px;
@@ -378,32 +455,32 @@
 .chartLegend {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: var(--text-small);
+  gap: 8px;
+  font-size: 10.5px;
   font-weight: 600;
   color: var(--muted);
 }
 
 .legendDot {
   display: inline-block;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 2px;
-  margin-right: 4px;
+  margin-right: 3px;
 }
 
 .legendLine {
   display: inline-block;
-  width: 12px;
+  width: 10px;
   height: 2px;
   border-radius: 1px;
-  margin-right: 4px;
+  margin-right: 3px;
 }
 
 /* Tab 1: Combo Chart */
 .comboChartSvg {
   width: 100%;
-  height: 175px;
+  height: 155px;
   overflow: visible;
   margin-top: auto;
 }
@@ -413,20 +490,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 180px;
+  height: 155px;
   margin-top: auto;
 }
 
 .donutRow {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .donutSvgWrapper {
   position: relative;
-  width: 82px;
-  height: 82px;
+  width: 74px;
+  height: 74px;
   flex-shrink: 0;
 }
 
@@ -447,13 +524,13 @@
 }
 
 .donutCenterVal {
-  font-size: var(--text-small);
+  font-size: 13px;
   font-weight: 800;
   color: var(--text);
 }
 
 .donutCenterSub {
-  font-size: var(--text-small);
+  font-size: 9.5px;
   color: var(--muted);
   text-transform: uppercase;
 }
@@ -461,7 +538,7 @@
 .donutLegendList {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   flex: 1;
 }
 
@@ -469,7 +546,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--text-small);
+  font-size: 11px;
 }
 
 .donutLegendLabel {
@@ -488,22 +565,22 @@
 .regionalMiniGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-  padding-top: 8px;
+  gap: 5px;
+  padding-top: 6px;
   border-top: 1px solid var(--border);
 }
 
 .regionalMiniPill {
   display: flex;
   flex-direction: column;
-  padding: 4px 6px;
+  padding: 3px 5px;
   border-radius: 4px;
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 
 .regionalMiniName {
-  font-size: var(--text-small);
+  font-size: 10px;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -511,25 +588,25 @@
 }
 
 .regionalMiniVal {
-  font-size: var(--text-small);
+  font-size: 11px;
   font-weight: 700;
-  color: var(--pbi-primary, var(--accent));
+  color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 
 /* Tab 2: Smooth Spline Area Chart */
 .areaChartSvg {
   width: 100%;
-  height: 175px;
+  height: 155px;
   overflow: visible;
   margin-top: auto;
 }
 
-/* Tab 2: Horizontal Cost Center Variance List (Replaces snapshot card!) */
+/* Tab 2: Horizontal Cost Center Variance List */
 .costCenterList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -537,14 +614,14 @@
 .costCenterItem {
   display: flex;
   flex-direction: column;
-  gap: 3.5px;
+  gap: 3px;
 }
 
 .costCenterTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--text-small);
+  font-size: 11px;
 }
 
 .costCenterName {
@@ -555,23 +632,28 @@
 .costCenterStats {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .costCenterVal {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--text);
-  font-size: var(--text-small);
+  font-size: 11px;
 }
 
 .costCenterVar {
-  font-size: var(--text-small);
+  font-size: 10px;
   font-weight: 700;
-  padding: 1px 4px;
+  padding: 1px 5px;
   border-radius: 3px;
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  color: var(--pbi-primary, var(--accent));
+  background: color-mix(in srgb, #10b981 12%, transparent);
+  color: #10b981;
+}
+
+:global(.light) .costCenterVar {
+  background: #ecfdf5;
+  color: #047857;
 }
 
 .costCenterTrack {
@@ -592,8 +674,8 @@
 .mapWrapper {
   position: relative;
   width: 100%;
-  height: 180px;
-  min-height: 180px;
+  height: 155px;
+  min-height: 155px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -623,8 +705,8 @@
   position: absolute;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 7px;
-  padding: 5px 9px;
+  border-radius: 6px;
+  padding: 4px 7px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
@@ -635,54 +717,54 @@
 .mapCalloutCard:hover,
 .mapCalloutCardActive {
   transform: translateY(-2px);
-  border-color: var(--pbi-primary, var(--accent));
+  border-color: var(--text);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
 }
 
 .mapCalloutTitle {
-  font-size: var(--text-small);
+  font-size: 9.5px;
   font-weight: 600;
   color: var(--muted);
   line-height: 1;
-  margin-bottom: 2.5px;
+  margin-bottom: 2px;
 }
 
 .mapCalloutValue {
-  font-size: var(--text-small);
+  font-size: 11px;
   font-weight: 800;
   font-family: var(--font-mono, monospace);
   color: var(--text);
   line-height: 1.1;
-  margin-bottom: 2.5px;
+  margin-bottom: 2px;
 }
 
 .mapCalloutDelta {
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: var(--text-small);
+  gap: 2px;
+  font-size: 9.5px;
   font-weight: 700;
   line-height: 1;
 }
 
 .mapCalloutDeltaIcon {
-  font-size: var(--text-small);
+  font-size: 9.5px;
 }
 
 /* Bottom-left Sales Legend */
 .mapLegend {
   position: absolute;
-  bottom: 8px;
-  left: 10px;
+  bottom: 6px;
+  left: 8px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   z-index: 5;
   pointer-events: none;
 }
 
 .mapLegendTitle {
-  font-size: var(--text-small);
+  font-size: 9.5px;
   font-weight: 700;
   color: var(--muted);
   letter-spacing: 0.3px;
@@ -691,12 +773,12 @@
 .mapLegendScale {
   display: flex;
   align-items: stretch;
-  gap: 5px;
+  gap: 4px;
 }
 
 .mapLegendBar {
-  width: 9px;
-  height: 40px;
+  width: 8px;
+  height: 32px;
   border-radius: 2px;
   border: 1px solid var(--border);
 }
@@ -705,7 +787,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: var(--text-small);
+  font-size: 9px;
   font-family: var(--font-mono, monospace);
   font-weight: 600;
   color: var(--muted);
@@ -715,7 +797,7 @@
 /* Tab 3: Hub Throughput Dual-Bar Chart */
 .hubChartSvg {
   width: 100%;
-  height: 175px;
+  height: 155px;
   overflow: visible;
   margin-top: auto;
 }
@@ -723,10 +805,10 @@
 /* Tab 3: Radial Speedometer Gauge & Inventory Stratification */
 .gaugeCockpitLayout {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 110px 1fr;
   align-items: center;
-  gap: 16px;
-  height: 180px;
+  gap: 12px;
+  height: 155px;
   margin-top: auto;
 }
 
@@ -738,8 +820,8 @@
 }
 
 .gaugeSvg {
-  width: 120px;
-  height: 75px;
+  width: 110px;
+  height: 68px;
   overflow: visible;
 }
 
@@ -747,36 +829,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -14px;
+  margin-top: -12px;
 }
 
 .gaugeBigNum {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--text);
   line-height: 1;
 }
 
 .gaugeTargetLabel {
-  font-size: var(--text-small);
+  font-size: 10px;
   font-family: var(--font-mono, monospace);
-  color: var(--pbi-secondary, var(--accent2));
+  color: var(--muted);
   font-weight: 600;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .stockStratList {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .stockStratItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 7px;
-  border-radius: 5px;
+  padding: 3.5px 7px;
+  border-radius: 4px;
   background: color-mix(in srgb, var(--surface) 60%, transparent);
   border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
@@ -784,14 +866,14 @@
 .stockStratLabel {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: var(--text-small);
+  gap: 5px;
+  font-size: 11px;
   color: var(--muted);
 }
 
 .stockStratDot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -799,8 +881,8 @@
 .stockStratValues {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: var(--text-small);
+  gap: 5px;
+  font-size: 11px;
 }
 
 .stockStratShare {
@@ -809,7 +891,7 @@
 }
 
 .stockStratAmount {
-  font-size: var(--text-small);
+  font-size: 10px;
   color: var(--muted);
   font-family: var(--font-mono, monospace);
 }
@@ -819,29 +901,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 16px;
+  padding: 5px 14px;
   background: color-mix(in srgb, var(--surface2) 85%, var(--bg));
   border-top: 1px solid var(--border);
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .pbiPageTabGroup {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 
 .pbiTabBtn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
+  gap: 4px;
+  padding: 3px 8px;
   border-radius: 4px;
   background: transparent;
   border: 1px solid transparent;
   color: var(--muted);
-  font-size: var(--text-small);
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -853,41 +935,60 @@
 }
 
 .pbiTabBtnActive {
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  background: color-mix(in srgb, var(--text) 8%, var(--surface));
   color: var(--text);
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-  border-bottom: 2px solid var(--pbi-primary, var(--accent));
+  border-color: color-mix(in srgb, var(--text) 22%, var(--border));
+  border-bottom: 2px solid var(--text);
+  font-weight: 700;
 }
 
 .pbiStatusInfo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: var(--text-small);
+  gap: 8px;
+  font-size: 10px;
   font-family: var(--font-mono, monospace);
   color: var(--muted);
 }
 
 .statusIndicator {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: var(--pbi-primary, var(--accent));
-  box-shadow: 0 0 6px var(--pbi-primary, var(--accent));
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
 }
 
 /* ── Auto-Responsive Portrait for Mobile (<880px) ── */
 @media (max-width: 880px) {
+  .pbiCanvas {
+    padding: 10px 12px;
+    gap: 10px;
+    overflow: hidden;
+  }
   .kpiGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px;
   }
   .kpiCard {
     height: auto;
-    min-height: 80px;
+    min-height: 72px;
+    border-left: none;
+    border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: color-mix(in srgb, var(--surface2) 25%, transparent);
+  }
+  .kpiCard:first-child,
+  .kpiCard:last-child {
+    padding-left: 12px;
+    padding-right: 12px;
   }
   .landscapeVisualsGrid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
   .visualCard {
     height: auto;
@@ -910,24 +1011,120 @@
   }
 }
 
-@media (max-width: 540px) {
-  .kpiGrid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 680px) {
   .pbiHeader {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .pbiBrandGroup {
+    width: 100%;
   }
   .pbiControls {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
+    gap: 8px;
+  }
+  .demoBadge {
+    order: 1;
+  }
+  .pbiActionBtn {
+    order: 2;
+    margin-left: auto;
+  }
+  .toneGroup {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .toneBtn {
+    flex: 1 1 calc(33.333% - 4px);
+    justify-content: center;
+    min-width: 0;
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+  .pbiSlicerBar {
+    padding: 8px 12px;
+    gap: 8px;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .slicerGroup {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 1;
+  }
+  .slicerSegment {
+    flex: 1;
+    display: flex;
+    min-width: 0;
+  }
+  .slicerPill {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    padding: 0 4px;
+    font-size: 11px;
+    height: 24px;
+  }
+  .pbiSlicerBar .pbiActionBtn {
+    margin-left: 0 !important;
+    width: 100%;
+    justify-content: center;
+    height: 26px;
   }
   .pbiFooterTabs {
     flex-direction: column;
     align-items: stretch;
+    padding: 8px 12px;
+    gap: 8px;
   }
   .pbiPageTabGroup {
+    display: flex;
     flex-wrap: wrap;
+    gap: 4px;
+    width: 100%;
+  }
+  .pbiTabBtn {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  .pbiStatusInfo {
+    justify-content: center;
+    padding-top: 4px;
+    border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  }
+}
+
+@media (max-width: 540px) {
+  .kpiGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 8px;
+  }
+  .kpiCard {
+    min-height: 70px;
+    height: auto;
+  }
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .chartLegend {
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .mapCalloutCard {
     padding: 3px 6px;

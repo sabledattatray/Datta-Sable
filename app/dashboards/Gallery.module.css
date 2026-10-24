@@ -1,13 +1,15 @@
 /* Landscape Hero Layout */
-.hero { display: flex !important; flex-direction: column !important; align-items: stretch !important; padding-top: clamp(32px, 3.5vw, 48px) !important; padding-bottom: 36px !important; gap: 32px !important; width: 100% !important; }
-.heroTopBanner { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr); gap: clamp(24px, 3.5vw, 48px); align-items: end; justify-content: space-between; width: 100%; }
+.hero { display: flex !important; flex-direction: column !important; align-items: stretch !important; padding-top: clamp(14px, 1.6vw, 22px) !important; padding-bottom: 14px !important; gap: 16px !important; width: 100% !important; }
+.heroTopBanner { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr); gap: clamp(18px, 2.2vw, 36px); align-items: end; justify-content: space-between; width: 100%; }
 .heroCopyBlock { display: flex; flex-direction: column; }
-.heroTitle { font-family: var(--font-syne); font-size: clamp(38px, 4vw, 58px) !important; font-weight: 600; line-height: 1.06; letter-spacing: -.05em; margin: 18px 0 16px !important; text-wrap: balance; }
+.heroTitle { font-family: var(--font-syne); font-size: clamp(28px, 2.6vw, 38px) !important; font-weight: 600; line-height: 1.08; letter-spacing: -.04em; margin: 6px 0 8px !important; text-wrap: balance; }
 .heroTitle > span { color: var(--accent); }
-.heroLead { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 0; max-width: 520px; }
-.heroActionsBlock { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; padding-bottom: 4px; }
-.heroProof { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: var(--text-small); font-family: var(--font-mono, monospace); }
-.heroProof>span { display: flex; align-items: center; gap: 7px; }
+.heroLead { color: var(--muted); font-size: 13.5px; line-height: 1.6; margin: 0; max-width: 540px; }
+.heroActionsBlock { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-bottom: 2px; }
+.heroActionsBlock > div:first-child { margin-top: 0 !important; gap: 10px !important; }
+.heroActionsBlock :is(a, button) { min-height: 38px !important; padding: 7px 18px !important; font-size: 13px !important; }
+.heroProof { display: flex; flex-wrap: wrap; gap: 16px; color: var(--muted); font-size: 11.5px; font-family: var(--font-mono, monospace); margin-top: 3px; }
+.heroProof>span { display: flex; align-items: center; gap: 6px; }
 .heroProof svg { color: var(--accent); }
 .landscapeDashboardContainer { width: 100%; max-width: 100%; position: relative; }
 

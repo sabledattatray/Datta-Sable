@@ -3,6 +3,7 @@
 import { useState, useEffect, useId, useMemo } from 'react';
 import {
   Activity,
+  ArrowUpRight,
   BarChart3,
   Calendar,
   CheckCircle2,
@@ -17,10 +18,10 @@ import {
 } from 'lucide-react';
 import styles from './PowerBIHeroDashboard.module.css';
 import { WORLD_MAP_VIEWBOX, WORLD_MAP_PATHS } from './WorldMapData';
+import { useTheme } from '@/components/ThemeProvider';
 
-
-// ── 1. Accent Color Shades (No external colors, only theme accent shades) ──
-export interface AccentShadeOption {
+// ── 1. Color Tone Options (Matching Clarity: Signature, Ocean, Iris, Emerald, Amber, Rose) ──
+export interface AccentToneOption {
   id: string;
   name: string;
   dotColor: string;
@@ -28,35 +29,76 @@ export interface AccentShadeOption {
   secondary: string;
   accent3: string;
   accent4: string;
+  lightPrimary?: string;
+  lightSecondary?: string;
 }
 
-export const ACCENT_SHADES: AccentShadeOption[] = [
+export const COLOR_TONES: AccentToneOption[] = [
   {
-    id: 'balanced',
-    name: 'Dual Accent',
-    dotColor: 'var(--accent)',
-    primary: 'var(--accent)',
-    secondary: 'var(--accent2)',
-    accent3: 'color-mix(in srgb, var(--accent) 70%, var(--surface))',
-    accent4: 'color-mix(in srgb, var(--accent2) 50%, var(--surface))',
+    id: 'signature',
+    name: 'Signature',
+    dotColor: '#CCF51E',
+    primary: '#CCF51E',
+    secondary: '#38bdf8',
+    accent3: '#c084fc',
+    accent4: '#34d399',
+    lightPrimary: '#005bbb',
+    lightSecondary: '#0284c7',
   },
   {
-    id: 'light-shade',
-    name: 'Light Shade',
-    dotColor: 'color-mix(in srgb, var(--accent) 70%, white)',
-    primary: 'color-mix(in srgb, var(--accent) 75%, white)',
-    secondary: 'color-mix(in srgb, var(--accent2) 70%, white)',
-    accent3: 'color-mix(in srgb, var(--accent) 50%, white)',
-    accent4: 'color-mix(in srgb, var(--accent2) 35%, white)',
+    id: 'ocean',
+    name: 'Ocean',
+    dotColor: '#38bdf8',
+    primary: '#38bdf8',
+    secondary: '#0ea5e9',
+    accent3: '#0284c7',
+    accent4: '#0369a1',
+    lightPrimary: '#0284c7',
+    lightSecondary: '#0369a1',
   },
   {
-    id: 'dark-shade',
-    name: 'Dark Shade',
-    dotColor: 'color-mix(in srgb, var(--accent) 70%, black)',
-    primary: 'color-mix(in srgb, var(--accent) 75%, black)',
-    secondary: 'color-mix(in srgb, var(--accent2) 70%, black)',
-    accent3: 'color-mix(in srgb, var(--accent) 50%, black)',
-    accent4: 'color-mix(in srgb, var(--accent2) 35%, black)',
+    id: 'iris',
+    name: 'Iris',
+    dotColor: '#c4b5fd',
+    primary: '#c4b5fd',
+    secondary: '#a78bfa',
+    accent3: '#8b5cf6',
+    accent4: '#7c3aed',
+    lightPrimary: '#7c3aed',
+    lightSecondary: '#6d28d9',
+  },
+  {
+    id: 'emerald',
+    name: 'Emerald',
+    dotColor: '#34d399',
+    primary: '#34d399',
+    secondary: '#10b981',
+    accent3: '#059669',
+    accent4: '#047857',
+    lightPrimary: '#047857',
+    lightSecondary: '#059669',
+  },
+  {
+    id: 'amber',
+    name: 'Amber',
+    dotColor: '#fbbf24',
+    primary: '#fbbf24',
+    secondary: '#f59e0b',
+    accent3: '#d97706',
+    accent4: '#b45309',
+    lightPrimary: '#b45309',
+    lightSecondary: '#d97706',
+  },
+  {
+    id: 'rose',
+    name: 'Rose',
+    dotColor: '#fb7185',
+    primary: '#fb7185',
+    secondary: '#f43f5e',
+    accent3: '#e11d48',
+    accent4: '#be123c',
+    lightPrimary: '#be123c',
+    lightSecondary: '#e11d48',
   },
 ];
 
@@ -296,7 +338,9 @@ const REPORT_PAGES: ReportPage[] = [
 ];
 
 export default function PowerBIHeroDashboard() {
-  const [activeShadeId, setActiveShadeId] = useState<string>('balanced');
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+  const [activeToneId, setActiveToneId] = useState<string>('signature');
   const [activePageIndex, setActivePageIndex] = useState<number>(0);
   const [timeHorizon, setTimeHorizon] = useState<'YTD' | 'QTD' | 'MTD'>('YTD');
   const [selectedRegion, setSelectedRegion] = useState<string>('Global');
@@ -307,10 +351,20 @@ export default function PowerBIHeroDashboard() {
 
   const gradientId = useId().replace(/:/g, '');
 
-  const activeShade = useMemo(
-    () => ACCENT_SHADES.find((s) => s.id === activeShadeId) || ACCENT_SHADES[0],
-    [activeShadeId]
-  );
+  const activeTone = useMemo(() => {
+    const t = COLOR_TONES.find((s) => s.id === activeToneId) || COLOR_TONES[0];
+    if (isLight) {
+      return {
+        ...t,
+        primary: t.lightPrimary || t.primary,
+        secondary: t.lightSecondary || t.secondary,
+        dotColor: t.id === 'signature' ? '#005bbb' : t.dotColor,
+      };
+    }
+    return t;
+  }, [activeToneId, isLight]);
+
+  const activeShade = activeTone;
 
   const currentPage = REPORT_PAGES[activePageIndex];
 
@@ -359,6 +413,7 @@ export default function PowerBIHeroDashboard() {
   return (
     <div
       className={styles.pbiContainer}
+      data-tone={activeToneId}
       style={
         {
           '--pbi-primary': activeShade.primary,
@@ -373,7 +428,7 @@ export default function PowerBIHeroDashboard() {
       <header className={styles.pbiHeader}>
         <div className={styles.pbiBrandGroup}>
           <div className={styles.pbiLogoBadge} title="Power BI Pro Architecture">
-            BI
+            <BarChart3 size={18} />
           </div>
           <div className={styles.pbiTitleGroup}>
             <span className={styles.pbiReportTitle}>
@@ -386,32 +441,47 @@ export default function PowerBIHeroDashboard() {
           </div>
         </div>
 
-        {/* Accent Shade Controls & Tour toggle */}
+        {/* Color Tone Swatches (Matching snap: Signature, Ocean, Iris, Emerald, Amber, Rose) */}
         <div className={styles.pbiControls}>
-          <div className={styles.shadeLabel}>
-            <span>Shade:</span>
+          <div className={styles.demoBadge}>
+            <i />
+            <span>Interactive Live</span>
           </div>
 
-          <div className={styles.shadeGroup} role="group" aria-label="Accent color shade">
-            {ACCENT_SHADES.map((shade) => (
-              <button
-                key={shade.id}
-                type="button"
-                className={`${styles.shadeBtn} ${activeShadeId === shade.id ? styles.shadeBtnActive : ''}`}
-                onClick={() => {
-                  setActiveShadeId(shade.id);
-                  setUserInteracted(true);
-                }}
-                aria-label={`Select ${shade.name}`}
-                aria-pressed={activeShadeId === shade.id}
-              >
-                <span
-                  className={styles.shadeDot}
-                  style={{ backgroundColor: shade.dotColor }}
-                />
-                <span>{shade.name}</span>
-              </button>
-            ))}
+          <div className={styles.toneGroup} role="group" aria-label="Palette tone">
+            {COLOR_TONES.map((tone) => {
+              const isSelected = activeToneId === tone.id;
+              const displayDot = isLight && tone.id === 'signature' ? '#005bbb' : tone.dotColor;
+              const activeBorderColor = isLight ? (tone.lightPrimary || tone.primary) : tone.primary;
+
+              return (
+                <button
+                  key={tone.id}
+                  type="button"
+                  className={`${styles.toneBtn} ${isSelected ? styles.toneBtnActive : ''}`}
+                  style={
+                    isSelected
+                      ? {
+                          borderColor: activeBorderColor,
+                          boxShadow: `0 0 0 1px ${activeBorderColor}40`,
+                        }
+                      : undefined
+                  }
+                  onClick={() => {
+                    setActiveToneId(tone.id);
+                    setUserInteracted(true);
+                  }}
+                  aria-label={`Select ${tone.name} tone`}
+                  aria-pressed={isSelected}
+                >
+                  <span
+                    className={styles.toneDot}
+                    style={{ backgroundColor: displayDot }}
+                  />
+                  <span>{tone.name}</span>
+                </button>
+              );
+            })}
           </div>
 
           <button
@@ -421,7 +491,7 @@ export default function PowerBIHeroDashboard() {
             title={isPlaying ? 'Pause Auto-Tour' : 'Start Auto-Tour'}
             aria-label={isPlaying ? 'Pause Tour' : 'Play Tour'}
           >
-            {isPlaying ? <Pause size={11} /> : <Play size={11} />}
+            {isPlaying ? <Pause size={12} /> : <Play size={12} />}
             <span>{isPlaying ? 'Live' : 'Paused'}</span>
           </button>
         </div>
@@ -430,49 +500,52 @@ export default function PowerBIHeroDashboard() {
       {/* ── 2. Interactive Slicer Bar ── */}
       <nav className={styles.pbiSlicerBar} aria-label="Dashboard filters and slicers">
         <div className={styles.slicerGroup}>
-          <Calendar size={11} style={{ color: activeShade.primary }} />
+          <Calendar size={12} style={{ color: activeShade.primary }} />
           <span className={styles.slicerLabel}>Horizon:</span>
-          {(['YTD', 'QTD', 'MTD'] as const).map((h) => (
-            <button
-              key={h}
-              type="button"
-              className={`${styles.slicerPill} ${timeHorizon === h ? styles.slicerPillActive : ''}`}
-              onClick={() => {
-                setTimeHorizon(h);
-                setUserInteracted(true);
-              }}
-            >
-              {h}
-            </button>
-          ))}
+          <div className={styles.slicerSegment}>
+            {(['YTD', 'QTD', 'MTD'] as const).map((h) => (
+              <button
+                key={h}
+                type="button"
+                className={`${styles.slicerPill} ${timeHorizon === h ? styles.slicerPillActive : ''}`}
+                onClick={() => {
+                  setTimeHorizon(h);
+                  setUserInteracted(true);
+                }}
+              >
+                {h}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className={styles.slicerGroup}>
-          <Globe2 size={11} style={{ color: activeShade.secondary }} />
+          <Globe2 size={12} style={{ color: activeShade.secondary }} />
           <span className={styles.slicerLabel}>Segment:</span>
-          {(['Global', 'Americas', 'EMEA', 'APAC'] as const).map((r) => (
-            <button
-              key={r}
-              type="button"
-              className={`${styles.slicerPill} ${selectedRegion === r ? styles.slicerPillActive : ''}`}
-              onClick={() => {
-                setSelectedRegion(r);
-                setUserInteracted(true);
-              }}
-            >
-              {r}
-            </button>
-          ))}
+          <div className={styles.slicerSegment}>
+            {(['Global', 'Americas', 'EMEA', 'APAC'] as const).map((r) => (
+              <button
+                key={r}
+                type="button"
+                className={`${styles.slicerPill} ${selectedRegion === r ? styles.slicerPillActive : ''}`}
+                onClick={() => {
+                  setSelectedRegion(r);
+                  setUserInteracted(true);
+                }}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
         </div>
 
         {(timeHorizon !== 'YTD' || selectedRegion !== 'Global') && (
           <button
             type="button"
-            className={styles.pbiActionBtn}
+            className={`${styles.pbiActionBtn} ${styles.slicerResetBtn}`}
             onClick={resetSlicers}
-            style={{ marginLeft: 'auto', fontSize: 'var(--text-small)', height: '20px' }}
           >
-            <RotateCcw size={10} />
+            <RotateCcw size={11} />
             <span>Reset Slicers</span>
           </button>
         )}
@@ -500,15 +573,7 @@ export default function PowerBIHeroDashboard() {
 
             return (
               <div key={idx} className={styles.kpiCard}>
-                <div
-                  className={styles.kpiAccentBar}
-                  style={{
-                    background:
-                      idx % 2 === 0
-                        ? activeShade.primary
-                        : activeShade.secondary,
-                  }}
-                />
+                <div className={styles.kpiAccentBar} />
                 <div className={styles.kpiTopRow}>
                   <span className={styles.kpiTitle}>{kpi.title}</span>
                   <span className={styles.kpiDaxTag} title={kpi.dax}>
@@ -517,17 +582,20 @@ export default function PowerBIHeroDashboard() {
                 </div>
 
                 <div className={styles.kpiValueRow}>
-                  <span className={styles.kpiValue}>{kpi.format(calculatedVal)}</span>
-                  <span className={styles.kpiDelta}>{kpi.delta}</span>
+                  <strong className={styles.kpiValue}>{kpi.format(calculatedVal)}</strong>
+                  <span className={styles.kpiDelta}>
+                    <ArrowUpRight size={12} />
+                    {kpi.delta}
+                  </span>
                 </div>
 
                 <div className={styles.kpiFooter}>
-                  <span>{kpi.target}</span>
+                  <span className={styles.kpiFooterText}>{kpi.target}</span>
                   <svg className={styles.kpiSpark} viewBox="0 0 52 16" aria-hidden="true">
                     <polyline
                       fill="none"
                       stroke={idx % 2 === 0 ? activeShade.primary : activeShade.secondary}
-                      strokeWidth="1.6"
+                      strokeWidth="1.8"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       points={sparkPoints}
@@ -708,7 +776,7 @@ export default function PowerBIHeroDashboard() {
                         cy={y}
                         r={isHovered ? 4 : 2.5}
                         fill={isHovered ? 'var(--text)' : activeShade.secondary}
-                        stroke={activeShade.primary}
+                        stroke="var(--surface)"
                         strokeWidth="1.2"
                       />
                     );
@@ -739,7 +807,7 @@ export default function PowerBIHeroDashboard() {
                               height="38"
                               rx="4"
                               fill="var(--surface)"
-                              stroke={activeShade.primary}
+                              stroke="color-mix(in srgb, var(--text) 25%, var(--border))"
                               strokeWidth="1"
                             />
                             <text x="6" y="12" fill="var(--text)" fontSize="8.5" fontWeight="700">
@@ -748,7 +816,7 @@ export default function PowerBIHeroDashboard() {
                             <text x="6" y="23" fill="var(--muted)" fontSize="7.5">
                               Plan: ${bgtVal}M
                             </text>
-                            <text x="6" y="33" fill={activeShade.primary} fontSize="7.5" fontWeight="600">
+                            <text x="6" y="33" fill="var(--text)" fontSize="7.5" fontWeight="600">
                               Var: +{varPct}% (Favorable)
                             </text>
                           </g>
@@ -1179,7 +1247,7 @@ export default function PowerBIHeroDashboard() {
                         <div className={styles.mapCalloutValue}>${val}M</div>
                         <div
                           className={styles.mapCalloutDelta}
-                          style={{ color: activeShade.primary }}
+                          style={{ color: '#10b981' }}
                         >
                           <span className={styles.mapCalloutDeltaIcon}>▲</span> {card.growth}
                         </div>
