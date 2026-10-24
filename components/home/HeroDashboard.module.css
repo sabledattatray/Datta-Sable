@@ -276,3 +276,58 @@
  .appearance .swatches{width:100%}
  .swatches button{flex:1;justify-content:center}
 }
+
+/* Reduce chrome and whitespace while retaining readable labels and equal views. */
+@media(min-width:901px){
+ .topbar{padding:10px 18px}
+ .workspace{padding:14px 18px 12px}
+ .heading{margin-bottom:10px}
+ .toolbar{margin-bottom:10px}
+ .metrics{padding:10px 12px;margin-bottom:10px}
+ .chartSurface{padding:10px 12px 8px}
+ .chartHeader{margin-bottom:6px}
+ .plotStage,.plotStage>.chart,.plotStage>.pipelineVisual{height:144px}
+ .ringVisual{width:136px;height:136px}
+ .ringCenter>strong{font-size:26px}
+ .chartNote{height:24px;min-height:24px;margin-top:4px}
+ .chartNote>span:only-child{visibility:hidden}
+ .status{padding:8px 18px}
+}
+@media(min-width:901px) and (max-height:850px){
+ .plotStage,.plotStage>.chart,.plotStage>.pipelineVisual{height:132px}
+ .ringVisual{width:128px;height:128px}
+ .workspace{padding:12px 16px 10px}
+}
+
+/* A landscape dashboard with a smaller, consistent typographic scale. */
+@media(min-width:901px){
+ .panel{font-size:12px;border-radius:20px}
+ .topbar{padding:8px 16px;min-height:44px}
+ .brand{font-size:15px;gap:9px}.brandIcon{width:28px;height:28px;border-radius:9px}
+ .demo{font-size:12px;padding:4px 7px}
+ .workspace{padding:12px 16px 10px}
+ .kicker{display:none}
+ .heading{margin-bottom:8px;min-height:32px}.heading h2{font-size:20px;line-height:1.2;margin:0}
+ .play{width:32px;height:32px;border-radius:9px}
+ .toolbar{margin-bottom:9px;gap:8px}
+ .tabs{padding:3px}.tabs button{font-size:12px;min-height:30px;padding:4px 9px}
+ .periods button{font-size:12px;min-height:30px;min-width:30px}
+ .metrics{padding:9px 11px;gap:10px;margin-bottom:9px}
+ .metrics>div>span{font-size:12px;min-height:18px;margin-bottom:4px}
+ .metrics small{font-size:12px;line-height:1.4}
+ .metrics strong{font-size:18px}.primaryMetric strong{font-size:26px}
+ .primaryMetric>div{min-height:30px;gap:6px}.primaryMetric em{font-size:12px;padding:3px 5px}
+ .miniMetric{padding-left:10px}.miniMetric svg{display:none}
+ .chartSurface{padding:8px 10px 6px}.chartHeader{min-height:24px;margin-bottom:3px;font-size:12px}
+ .chartHeader>span,.chartHeader strong{font-size:12px}.chartHeader strong{padding:3px 5px}
+ .plotStage,.plotStage>.chart,.plotStage>.pipelineVisual{height:112px}
+ .axis,.barValue{font-size:14px}
+ .ringVisual{width:108px;height:108px}.ringCenter>span,.ringCenter>small{font-size:11px}.ringCenter>strong{font-size:23px}
+ .stageList{gap:2px}.stageList button{font-size:12px;min-height:25px;padding:3px 7px}.stageList strong,.stageList small{font-size:12px}
+ .chartNote{font-size:12px;height:20px;min-height:20px;line-height:20px;margin-top:2px}
+ .exploreDetails>summary{font-size:12px;min-height:40px;padding:8px 16px}
+ .status{font-size:12px;padding:7px 16px;line-height:1.4}
+ .appearance>span,.swatches button,.channelHeader,.channels button>span{font-size:12px}
+ .channels strong{font-size:18px}.channels small{font-size:12px}
+}
+@media(max-width:900px){.heading h2{font-size:21px}.primaryMetric strong{font-size:30px}.metrics strong{font-size:20px}.primaryMetric strong{font-size:30px}}

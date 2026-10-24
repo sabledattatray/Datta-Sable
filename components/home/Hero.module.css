@@ -38,3 +38,8 @@
   .hero{padding:12px 0 16px}.layout{gap:36px}.copy h1{font-size:clamp(40px,4.2vw,60px);line-height:1.08;margin-bottom:18px}.eyebrow{margin-bottom:18px;letter-spacing:.06em}.introduction{margin-bottom:12px}.description{line-height:1.7;margin-bottom:22px}.expertise{margin-top:22px;padding-top:16px}.visualCaption{margin-top:10px}
 }
 @media(max-width:600px){.hero{padding-top:24px;padding-bottom:32px}.layout{gap:30px}.visualCaption{margin-top:14px}.visualCaption span{letter-spacing:.04em}}
+
+/* Give the desktop preview a quieter footprint alongside the hero copy. */
+@media(min-width:901px){.visual{width:100%;max-width:640px;justify-self:end}}
+
+@media(min-width:901px){.visual{max-width:720px}}
