@@ -106,3 +106,4 @@
 @media(prefers-reduced-motion:reduce){.mobilePanel{animation:none}}
 
 @media(max-width:1099px){.menuToggle{width:44px;min-width:44px;height:44px;padding:0;gap:0}}
+@media(max-width:1099px){.menuToggle svg{color:var(--accent)}.menuToggle{background:var(--surface);border-color:var(--border)}}
