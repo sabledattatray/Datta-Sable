@@ -7,7 +7,7 @@ import { getCompanyProfile, saveCompanyProfile } from '../org-actions';
 import { 
   Terminal, Plus, 
   Trash2, Key, Globe, Copy, Check, Upload, File,
-  Shield, AlertTriangle, ShieldCheck, Lock, Smartphone, CheckCircle2, QrCode, RefreshCw, Laptop, ShieldAlert, X
+  Shield, AlertTriangle, ShieldCheck, Lock, Smartphone, CheckCircle2, QrCode, RefreshCw, Loader2, Laptop, ShieldAlert, X
 } from 'lucide-react';
 
 export default function AdminCatchAllPage() {
@@ -161,6 +161,11 @@ export default function AdminCatchAllPage() {
   const [showIpModal, setShowIpModal] = useState(false);
   const [mfaSuccessMsg, setMfaSuccessMsg] = useState<string | null>(null);
   const [totpCodeInput, setTotpCodeInput] = useState('');
+  const [mfaSecret, setMfaSecret] = useState('');
+  const [mfaQrCode, setMfaQrCode] = useState('');
+  const [mfaLoading, setMfaLoading] = useState(false);
+  const [mfaVerifyError, setMfaVerifyError] = useState<string | null>(null);
+  const [isVerifyingMfa, setIsVerifyingMfa] = useState(false);
   const [newIpAddress, setNewIpAddress] = useState('');
   const [newIpLabel, setNewIpLabel] = useState('');
 
@@ -195,6 +200,38 @@ export default function AdminCatchAllPage() {
     }
   }, []);
 
+  const loadMfaSetup = async () => {
+    try {
+      setMfaLoading(true);
+      setMfaVerifyError(null);
+      let savedSecret = '';
+      if (typeof window !== 'undefined') {
+        savedSecret = localStorage.getItem('admin_mfa_secret') || '';
+      }
+      const url = savedSecret ? `/api/admin/mfa?secret=${encodeURIComponent(savedSecret)}` : '/api/admin/mfa';
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        setMfaSecret(data.secret);
+        setMfaQrCode(data.qrCode);
+        if (typeof window !== 'undefined' && data.secret) {
+          localStorage.setItem('admin_mfa_secret', data.secret);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load MFA QR setup:', err);
+    } finally {
+      setMfaLoading(false);
+    }
+  };
+
+  const openMfaSetup = () => {
+    setTotpCodeInput('');
+    setMfaVerifyError(null);
+    setShowMfaSetupModal(true);
+    loadMfaSetup();
+  };
+
   const handleToggleMfa = () => {
     if (mfaEnabled) {
       if (confirm('Are you sure you want to disable Two-Factor Authentication? Disabling MFA significantly reduces your admin account protection.')) {
@@ -204,17 +241,39 @@ export default function AdminCatchAllPage() {
         setTimeout(() => setMfaSuccessMsg(null), 3500);
       }
     } else {
-      setShowMfaSetupModal(true);
+      openMfaSetup();
     }
   };
 
-  const handleConfirmMfaSetup = () => {
-    setMfaEnabled(true);
-    if (typeof window !== 'undefined') localStorage.setItem('admin_mfa_enabled', 'true');
-    setShowMfaSetupModal(false);
-    setTotpCodeInput('');
-    setMfaSuccessMsg('Two-Factor Authentication (MFA) successfully verified and enforced!');
-    setTimeout(() => setMfaSuccessMsg(null), 3500);
+  const handleConfirmMfaSetup = async () => {
+    if (totpCodeInput.length < 6 || !mfaSecret) return;
+    try {
+      setIsVerifyingMfa(true);
+      setMfaVerifyError(null);
+      const res = await fetch('/api/admin/mfa', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: totpCodeInput, secret: mfaSecret }),
+      });
+      const data = await res.json();
+      if (res.ok && data.valid) {
+        setMfaEnabled(true);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('admin_mfa_enabled', 'true');
+          localStorage.setItem('admin_mfa_secret', mfaSecret);
+        }
+        setShowMfaSetupModal(false);
+        setTotpCodeInput('');
+        setMfaSuccessMsg('Google Authenticator successfully paired and 2FA verified!');
+        setTimeout(() => setMfaSuccessMsg(null), 4000);
+      } else {
+        setMfaVerifyError(data.error || 'Invalid 6-digit code. Please verify the code in Google Authenticator.');
+      }
+    } catch (err) {
+      setMfaVerifyError('Network error connecting to verification service. Please try again.');
+    } finally {
+      setIsVerifyingMfa(false);
+    }
   };
 
   const handleAddIp = () => {
@@ -990,7 +1049,7 @@ export default function AdminCatchAllPage() {
                       </button>
 
                       <button
-                        onClick={() => setShowMfaSetupModal(true)}
+                        onClick={openMfaSetup}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
@@ -1231,11 +1290,13 @@ export default function AdminCatchAllPage() {
             {/* ═══ MODAL: RECONFIGURE MFA / QR SETUP ═══ */}
             {showMfaSetupModal && (
               <div className={adminStyles.modalOverlay} onClick={() => setShowMfaSetupModal(false)}>
-                <div className={adminStyles.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: 480 }}>
+                <div className={adminStyles.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: 460 }}>
                   <div className={adminStyles.modalHeader}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <Smartphone size={17} style={{ color: 'var(--accent)' }} />
-                      <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)', color: css.text }}>Authenticator App Setup (TOTP)</h3>
+                      <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600, fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)', color: css.text }}>
+                        Authenticator App Setup (TOTP)
+                      </h3>
                     </div>
                     <button className={adminStyles.modalClose} onClick={() => setShowMfaSetupModal(false)}>
                       <X size={16} />
@@ -1244,9 +1305,10 @@ export default function AdminCatchAllPage() {
 
                   <div style={{ textAlign: 'center', marginBottom: 16 }}>
                     <p style={{ fontSize: 12.5, color: css.muted, margin: '0 0 14px', lineHeight: 1.5 }}>
-                      Scan this QR code with Google Authenticator, 1Password, or Authy.
+                      Scan this QR code with Google Authenticator, 1Password, Microsoft Authenticator, or Authy.
                     </p>
 
+                    {/* Real Scannable QR Code */}
                     <div style={{
                       display: 'inline-grid',
                       placeItems: 'center',
@@ -1254,100 +1316,136 @@ export default function AdminCatchAllPage() {
                       borderRadius: 12,
                       background: '#ffffff',
                       border: `1px solid ${css.border}`,
+                      minWidth: 170,
+                      minHeight: 170,
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
                     }}>
-                      <svg width="130" height="130" viewBox="0 0 140 140" fill="none">
-                        <rect width="140" height="140" fill="#ffffff" />
-                        <rect x="10" y="10" width="40" height="40" fill="#000000" />
-                        <rect x="16" y="16" width="28" height="28" fill="#ffffff" />
-                        <rect x="22" y="22" width="16" height="16" fill="#000000" />
-                        
-                        <rect x="90" y="10" width="40" height="40" fill="#000000" />
-                        <rect x="96" y="16" width="28" height="28" fill="#ffffff" />
-                        <rect x="102" y="22" width="16" height="16" fill="#000000" />
-                        
-                        <rect x="10" y="90" width="40" height="40" fill="#000000" />
-                        <rect x="16" y="96" width="28" height="28" fill="#ffffff" />
-                        <rect x="22" y="102" width="16" height="16" fill="#000000" />
-                        
-                        <rect x="60" y="20" width="8" height="20" fill="#000000" />
-                        <rect x="75" y="15" width="8" height="10" fill="#000000" />
-                        <rect x="60" y="60" width="20" height="20" fill="#000000" />
-                        <rect x="65" y="65" width="10" height="10" fill="#ffffff" />
-                        <rect x="20" y="60" width="30" height="8" fill="#000000" />
-                        <rect x="90" y="60" width="15" height="15" fill="#000000" />
-                        <rect x="110" y="70" width="20" height="8" fill="#000000" />
-                        <rect x="60" y="95" width="20" height="8" fill="#000000" />
-                        <rect x="85" y="90" width="15" height="25" fill="#000000" />
-                        <rect x="105" y="105" width="25" height="25" fill="#000000" />
-                      </svg>
+                      {mfaLoading ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: '#333', padding: 20 }}>
+                          <Loader2 size={24} className={adminStyles.spinning} />
+                          <span style={{ fontSize: 11, fontWeight: 600 }}>Generating QR…</span>
+                        </div>
+                      ) : mfaQrCode ? (
+                        <img
+                          src={mfaQrCode}
+                          alt="Google Authenticator QR Code"
+                          style={{ width: 170, height: 170, display: 'block', borderRadius: 4 }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: 11, color: '#999' }}>Failed to load QR</span>
+                      )}
                     </div>
 
-                    <div style={{ marginTop: 12 }}>
-                      <span style={{ fontSize: 11, color: css.muted }}>Secret Key:</span>
+                    {/* Manual Setup Key for Google Authenticator */}
+                    <div style={{ marginTop: 14 }}>
+                      <div style={{ fontSize: 11, color: css.muted, marginBottom: 4 }}>
+                        Can't scan? Enter setup key manually:
+                      </div>
                       <div style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: 8,
-                        marginTop: 4,
-                        marginLeft: 6,
-                        padding: '3px 8px',
+                        padding: '5px 10px',
                         borderRadius: 6,
                         background: css.surface2,
                         border: `1px solid ${css.border}`,
                         fontFamily: 'var(--font-mono, monospace)',
-                        fontSize: 11.5,
-                        fontWeight: 600,
+                        fontSize: 12,
+                        fontWeight: 700,
                         color: css.text,
+                        letterSpacing: '0.06em',
                       }}>
-                        <span>DS-MFA-9842-K7X1-AUTH</span>
-                        <button
-                          onClick={() => handleCopy('DS-MFA-9842-K7X1-AUTH')}
-                          style={{ background: 'none', border: 'none', color: css.muted, cursor: 'pointer', padding: 2, display: 'inline-flex' }}
-                        >
-                          {copiedText === 'DS-MFA-9842-K7X1-AUTH' ? <Check size={11} /> : <Copy size={11} />}
-                        </button>
+                        <span style={{ userSelect: 'all' }}>
+                          {mfaSecret ? (mfaSecret.match(/.{1,4}/g)?.join(' ') || mfaSecret) : 'LOADING...'}
+                        </span>
+                        {mfaSecret && (
+                          <button
+                            onClick={() => handleCopy(mfaSecret)}
+                            title="Copy setup key to clipboard"
+                            style={{ background: 'none', border: 'none', color: css.muted, cursor: 'pointer', padding: 2, display: 'inline-flex' }}
+                          >
+                            {copiedText === mfaSecret ? <Check size={12} color="#10b981" /> : <Copy size={12} />}
+                          </button>
+                        )}
                       </div>
+                      <p style={{ fontSize: 11, color: css.muted, margin: '6px 0 0', lineHeight: 1.4 }}>
+                        In Google Authenticator: tap <strong>+</strong> &rarr; <strong>Enter a setup key</strong>, Account: <em>Datta Sable</em>
+                      </p>
                     </div>
                   </div>
 
+                  {/* Verification Input */}
                   <div style={{ marginBottom: 16 }}>
-                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: css.text, marginBottom: 5 }}>
-                      Enter 6-digit Code:
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: css.text, marginBottom: 5 }}>
+                      Enter 6-digit Code from Authenticator:
                     </label>
                     <input
                       type="text"
                       maxLength={6}
                       value={totpCodeInput}
-                      onChange={(e) => setTotpCodeInput(e.target.value.replace(/\D/g, ''))}
+                      onChange={(e) => {
+                        setMfaVerifyError(null);
+                        setTotpCodeInput(e.target.value.replace(/\D/g, ''));
+                      }}
                       placeholder="000000"
+                      autoFocus
                       style={{
                         width: '100%',
-                        padding: '9px 12px',
+                        padding: '10px 12px',
                         borderRadius: 8,
-                        border: `1px solid ${css.border}`,
+                        border: `1px solid ${mfaVerifyError ? (isDark ? '#f87171' : '#dc2626') : css.border}`,
                         background: css.surface,
                         color: css.text,
-                        fontSize: 16,
-                        letterSpacing: '0.25em',
+                        fontSize: 18,
+                        letterSpacing: '0.28em',
                         textAlign: 'center',
                         fontWeight: 700,
                         fontFamily: 'var(--font-mono, monospace)',
+                        outline: 'none',
                       }}
                     />
+
+                    {mfaVerifyError && (
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        marginTop: 7,
+                        color: isDark ? '#f87171' : '#b91c1c',
+                        fontSize: 11.5,
+                        fontWeight: 500,
+                      }}>
+                        <AlertTriangle size={13} style={{ flexShrink: 0 }} />
+                        <span>{mfaVerifyError}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
-                    <button className={adminStyles.secondary} onClick={() => setShowMfaSetupModal(false)} style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}>
+                    <button
+                      className={adminStyles.secondary}
+                      onClick={() => setShowMfaSetupModal(false)}
+                      style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}
+                    >
                       Cancel
                     </button>
                     <button
                       className={adminStyles.primary}
                       onClick={handleConfirmMfaSetup}
-                      disabled={totpCodeInput.length < 6}
-                      style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}
+                      disabled={totpCodeInput.length < 6 || isVerifyingMfa || mfaLoading}
+                      style={{ fontSize: 12, padding: '7px 14px', minHeight: 36, opacity: totpCodeInput.length < 6 ? 0.6 : 1 }}
                     >
-                      <Check size={13} />
-                      <span>Verify &amp; Enable</span>
+                      {isVerifyingMfa ? (
+                        <>
+                          <Loader2 size={13} className={adminStyles.spinning} />
+                          <span>Verifying…</span>
+                        </>
+                      ) : (
+                        <>
+                          <Check size={13} />
+                          <span>Verify &amp; Enable</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
