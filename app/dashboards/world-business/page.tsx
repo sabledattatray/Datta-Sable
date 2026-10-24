@@ -20,7 +20,7 @@ export default function WorldBusinessDashboardPage() {
                 <div className="font-['Rajdhani'] text-3xl md:text-4xl font-bold tracking-[2px] text-[var(--text)] uppercase">
                   World Business <span className="text-[#00F0FF]">Intelligence</span>
                 </div>
-                <div className="text-[12px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">
                   3,000,000 Audited Transactions &bull; $18.72B GMV &bull; 50 Sovereign Markets
                 </div>
               </div>

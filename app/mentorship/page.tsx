@@ -356,7 +356,7 @@ export default function MentorshipPage() {
             color: message.type === 'success' ? '#10b981' : '#ef4444',
           }}>
             {message.type === 'success' ? <CheckCircle size={16} /> : <HelpCircle size={16} />}
-            <span style={{ fontSize: 13.5, fontWeight: 600 }}>{message.text}</span>
+            <span style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>{message.text}</span>
           </div>
         )}
 
@@ -365,7 +365,7 @@ export default function MentorshipPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 60 }}>
             {/* Hero Section */}
             <section style={{ textAlign: 'center', padding: '40px 0' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: `${css.accent}15`, borderRadius: 20, color: css.accent, fontSize: 11.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 20 }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: `${css.accent}15`, borderRadius: 20, color: css.accent, fontSize: 'var(--text-small)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 20 }}>
                 <Sparkles size={13} /> Genuinely Free Career Mentorship
               </div>
               <h1 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.5rem)', fontWeight: 750, lineHeight: 1.35, maxWidth: 900, margin: '0 auto 20px', letterSpacing: '-0.01em' }}>
@@ -410,8 +410,8 @@ export default function MentorshipPage() {
               ].map((stat, idx) => (
                 <div key={idx} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 20 }}>
                   <h3 style={{ fontSize: 28, fontWeight: 900, color: css.accent, margin: '0 0 4px' }}>{stat.count}</h3>
-                  <strong style={{ fontSize: 13, display: 'block', marginBottom: 2 }}>{stat.label}</strong>
-                  <span style={{ fontSize: 11, color: css.muted }}>{stat.desc}</span>
+                  <strong style={{ fontSize: 'var(--text-small)', display: 'block', marginBottom: 2 }}>{stat.label}</strong>
+                  <span style={{ fontSize: 'var(--text-small)', color: css.muted }}>{stat.desc}</span>
                 </div>
               ))}
             </section>
@@ -425,7 +425,7 @@ export default function MentorshipPage() {
                   "I won't promise you a job. What I can promise is honest guidance, practical learning, real-world projects, resume reviews, interview preparation, and continuous support. If you commit to learning consistently, I'll commit to helping you grow."
                 </p>
                 <div style={{ height: 1, background: css.border, margin: '10px 0' }} />
-                <p style={{ fontSize: 12, color: css.muted, margin: 0, fontWeight: 600, letterSpacing: '0.04em' }}>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: 0, fontWeight: 600, letterSpacing: '0.04em' }}>
                   — DATTA SABLE, DATA PLATFORM & BI ARCHITECT
                 </p>
               </div>
@@ -439,11 +439,11 @@ export default function MentorshipPage() {
                 </div>
                 <div>
                   <h3 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 4px' }}>Datta Sable</h3>
-                  <span style={{ fontSize: 13, color: css.accent, fontWeight: 700 }}>Data Platform & BI Architect</span>
+                  <span style={{ fontSize: 'var(--text-small)', color: css.accent, fontWeight: 700 }}>Data Platform & BI Architect</span>
                 </div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
                   {['Microsoft Certified', 'Fabric Specialist', 'Azure Solutions Architect'].map(tag => (
-                    <span key={tag} style={{ fontSize: 10.5, padding: '3px 8px', background: `${css.accent}12`, color: css.accent, borderRadius: 6, fontWeight: 700 }}>{tag}</span>
+                    <span key={tag} style={{ fontSize: 'var(--text-small)', padding: '3px 8px', background: `${css.accent}12`, color: css.accent, borderRadius: 6, fontWeight: 700 }}>{tag}</span>
                   ))}
                 </div>
               </div>
@@ -452,7 +452,7 @@ export default function MentorshipPage() {
                 <p style={{ fontSize: 14.5, color: css.muted, lineHeight: 1.6, margin: 0 }}>
                   Hi, I'm Datta Sable. I've spent years helping organizations design modern data platforms using Azure and Microsoft Fabric. Through this initiative, I want to help professionals build practical skills, confidence, and strong portfolios — completely free.
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14, fontSize: 13 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14, fontSize: 'var(--text-small)' }}>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                     <Award size={16} color={css.accent} style={{ flexShrink: 0 }} />
                     <span>Microsoft Certified Trainer</span>
@@ -490,10 +490,10 @@ export default function MentorshipPage() {
                     <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20, display: 'flex', flexDirection: 'column', gap: 10, height: '100%', transition: 'border-color 0.2s' }}
                          onMouseEnter={e => e.currentTarget.style.borderColor = css.accent}
                          onMouseLeave={e => e.currentTarget.style.borderColor = css.border}>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: css.accent }}>GUIDE {i+1}</span>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent }}>GUIDE {i+1}</span>
                       <h4 style={{ fontSize: 14.5, fontWeight: 800, margin: 0, lineHeight: 1.4 }}>{art.title}</h4>
-                      <p style={{ fontSize: 12.5, color: css.muted, lineHeight: 1.4, margin: 0, flex: 1 }}>{art.desc}</p>
-                      <span style={{ fontSize: 11.5, fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.4, margin: 0, flex: 1 }}>{art.desc}</p>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
                         Read Guide <ArrowRight size={12} />
                       </span>
                     </div>
@@ -512,8 +512,8 @@ export default function MentorshipPage() {
                       <Code size={20} style={{ margin: 'auto' }} />
                     </div>
                     <h3 style={{ fontSize: 16, fontWeight: 800, margin: 0 }}>{track.name} Track</h3>
-                    <p style={{ fontSize: 13, color: css.muted, lineHeight: 1.5, margin: 0, flex: 1 }}>{track.description}</p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11.5, fontWeight: 700, color: css.accent }}>
+                    <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5, margin: 0, flex: 1 }}>{track.description}</p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent }}>
                       Active Enrollment <ChevronRight size={13} />
                     </div>
                   </div>
@@ -541,9 +541,9 @@ export default function MentorshipPage() {
                 ].map((item, idx) => (
                   <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 16, padding: 14, width: 100, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <span style={{ fontSize: 10, fontWeight: 800, color: css.accent }}>WEEK {item.w}</span>
-                      <strong style={{ fontSize: 13.5, display: 'block' }}>{item.label}</strong>
-                      <span style={{ fontSize: 9.5, color: css.muted, whiteSpace: 'nowrap' }}>{item.desc}</span>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.accent }}>WEEK {item.w}</span>
+                      <strong style={{ fontSize: 'var(--text-small)', display: 'block' }}>{item.label}</strong>
+                      <span style={{ fontSize: 'var(--text-small)', color: css.muted, whiteSpace: 'nowrap' }}>{item.desc}</span>
                     </div>
                     {idx < 8 && <ChevronRight size={16} color={css.border} />}
                   </div>
@@ -566,11 +566,11 @@ export default function MentorshipPage() {
                   { name: 'Enterprise Power BI Dashboard', tech: 'DAX, Star Schema, Gateway scheduling' }
                 ].map((proj, idx) => (
                   <div key={idx} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <div style={{ background: `${css.accent}08`, width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: css.accent, fontWeight: 800, fontSize: 13 }}>
+                    <div style={{ background: `${css.accent}08`, width: 32, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: css.accent, fontWeight: 800, fontSize: 'var(--text-small)' }}>
                       0{idx+1}
                     </div>
-                    <h4 style={{ fontSize: 13.5, fontWeight: 800, margin: 0 }}>{proj.name}</h4>
-                    <span style={{ fontSize: 11, color: css.muted }}>{proj.tech}</span>
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 800, margin: 0 }}>{proj.name}</h4>
+                    <span style={{ fontSize: 'var(--text-small)', color: css.muted }}>{proj.tech}</span>
                   </div>
                 ))}
               </div>
@@ -579,7 +579,7 @@ export default function MentorshipPage() {
             {/* Career Comeback Program */}
             <section style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 40, alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', padding: '4px 12px', background: 'rgba(245,158,11,0.1)', borderRadius: 12, color: '#f59e0b', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', padding: '4px 12px', background: 'rgba(245,158,11,0.1)', borderRadius: 12, color: '#f59e0b', fontSize: 'var(--text-small)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Signature Program
                 </div>
                 <h2 style={{ fontSize: 24, fontWeight: 900, margin: 0 }}>Career Comeback Initiative</h2>
@@ -593,7 +593,7 @@ export default function MentorshipPage() {
                     'Personalized milestones with flexible weekly hours.',
                     'Genuinely free — no subscriptions or paid up-sells.'
                   ].map((item, idx) => (
-                    <div key={idx} style={{ display: 'flex', gap: 8, fontSize: 13.5 }}>
+                    <div key={idx} style={{ display: 'flex', gap: 8, fontSize: 'var(--text-small)' }}>
                       <CheckCircle size={15} style={{ color: '#10b981', flexShrink: 0, marginTop: 2 }} />
                       <span>{item}</span>
                     </div>
@@ -610,15 +610,15 @@ export default function MentorshipPage() {
                     </div>
                     <div>
                       <h4 style={{ fontSize: 14, fontWeight: 700, margin: 0 }}>Sandhyarani</h4>
-                      <span style={{ fontSize: 11, color: css.muted }}>Career Comeback Journey</span>
+                      <span style={{ fontSize: 'var(--text-small)', color: css.muted }}>Career Comeback Journey</span>
                     </div>
                   </div>
-                  <p style={{ fontSize: 13.5, color: css.muted, fontStyle: 'italic', lineHeight: 1.5, margin: 0 }}>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, fontStyle: 'italic', lineHeight: 1.5, margin: 0 }}>
                     "Currently preparing to return to Azure Data Engineering after a career break through the mentorship program."
                   </p>
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {['Maternity Returnee', 'Fabric Lakehouse', 'Active Learner'].map(t => (
-                      <span key={t} style={{ fontSize: 10, padding: '3px 8px', background: css.inputBg, borderRadius: 6, fontWeight: 600 }}>{t}</span>
+                      <span key={t} style={{ fontSize: 'var(--text-small)', padding: '3px 8px', background: css.inputBg, borderRadius: 6, fontWeight: 600 }}>{t}</span>
                     ))}
                   </div>
                 </div>
@@ -639,7 +639,7 @@ export default function MentorshipPage() {
                     { date: 'Jun 24', desc: 'Uploaded DP-600 & DP-700 mock question pools' },
                     { date: 'Jun 20', desc: 'Integrated ATS Resume Optimization template file' }
                   ].map((log, idx) => (
-                    <div key={idx} style={{ display: 'flex', gap: 10, fontSize: 12.5 }}>
+                    <div key={idx} style={{ display: 'flex', gap: 10, fontSize: 'var(--text-small)' }}>
                       <span style={{ fontWeight: 700, color: css.accent, whiteSpace: 'nowrap' }}>{log.date}</span>
                       <span style={{ color: css.muted }}>{log.desc}</span>
                     </div>
@@ -659,7 +659,7 @@ export default function MentorshipPage() {
                     { week: 'Week 3', title: 'Configure ADF trigger pipeline copying files safely to ADLS Gen2.' },
                     { week: 'Week 4', title: 'Create PySpark DataFrame join processing partition logs on local Spark.' }
                   ].map((ch, idx) => (
-                    <div key={idx} style={{ display: 'flex', gap: 8, padding: '10px 14px', background: css.inputBg, borderRadius: 10, fontSize: 12.5 }}>
+                    <div key={idx} style={{ display: 'flex', gap: 8, padding: '10px 14px', background: css.inputBg, borderRadius: 10, fontSize: 'var(--text-small)' }}>
                       <strong style={{ color: css.accent, whiteSpace: 'nowrap' }}>{ch.week}:</strong>
                       <span style={{ color: css.muted }}>{ch.title}</span>
                     </div>
@@ -674,7 +674,7 @@ export default function MentorshipPage() {
                 <h3 style={{ fontSize: 16, fontWeight: 800, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8, color: '#10b981' }}>
                   <CheckCircle size={18} /> Who This Is For
                 </h3>
-                <ul style={{ fontSize: 13.5, color: css.muted, paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, lineHeight: 1.5 }}>
+                <ul style={{ fontSize: 'var(--text-small)', color: css.muted, paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, lineHeight: 1.5 }}>
                   <li><strong>Fresh graduates & Career Switchers</strong> who want structured path validation.</li>
                   <li><strong>Professionals returning to Tech</strong> after health, maternity, or personal breaks.</li>
                   <li>Candidates willing to spend <strong>10+ hours a week</strong> on labs and project building.</li>
@@ -686,7 +686,7 @@ export default function MentorshipPage() {
                 <h3 style={{ fontSize: 16, fontWeight: 800, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8, color: '#ef4444' }}>
                   <AlertTriangle size={18} /> Who This Is NOT For
                 </h3>
-                <ul style={{ fontSize: 13.5, color: css.muted, paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, lineHeight: 1.5 }}>
+                <ul style={{ fontSize: 'var(--text-small)', color: css.muted, paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, lineHeight: 1.5 }}>
                   <li>Candidates looking for <strong>quick shortcuts or direct answers</strong> without doing the labs.</li>
                   <li>Individuals expecting <strong>guaranteed jobs or paid referrals</strong> (all referrals are earned by merit).</li>
                   <li>Learners who want someone else to write their code or build their projects.</li>
@@ -700,26 +700,26 @@ export default function MentorshipPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 24 }}>
                 <div>
                   <h2 style={{ fontSize: 20, fontWeight: 850, margin: 0 }}>Resource Library</h2>
-                  <p style={{ fontSize: 13, color: css.muted, margin: '2px 0 0' }}>Download free study roadmaps, checklists, and resume templates</p>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '2px 0 0' }}>Download free study roadmaps, checklists, and resume templates</p>
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
                 {resources.map(res => (
                   <div key={res.id} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 16, padding: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: 10, fontWeight: 700, background: css.inputBg, padding: '3px 8px', borderRadius: 6, textTransform: 'uppercase' }}>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: css.inputBg, padding: '3px 8px', borderRadius: 6, textTransform: 'uppercase' }}>
                         {res.category}
                       </span>
-                      {res.featured && <span style={{ fontSize: 9.5, color: '#f59e0b', fontWeight: 800 }}>★ FEATURED</span>}
+                      {res.featured && <span style={{ fontSize: 'var(--text-small)', color: '#f59e0b', fontWeight: 800 }}>★ FEATURED</span>}
                     </div>
                     <h3 style={{ fontSize: 14.5, fontWeight: 800, margin: 0 }}>{res.title}</h3>
-                    <p style={{ fontSize: 12.5, color: css.muted, lineHeight: 1.4, margin: 0, flex: 1 }}>{res.description}</p>
+                    <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.4, margin: 0, flex: 1 }}>{res.description}</p>
                     <a
                       href={res.downloadUrl}
                       download
                       style={{
                         display: 'flex', alignItems: 'center', gap: 6, padding: '8px 14px', background: css.inputBg,
-                        borderRadius: 8, color: css.text, textDecoration: 'none', fontSize: 12, fontWeight: 700,
+                        borderRadius: 8, color: css.text, textDecoration: 'none', fontSize: 'var(--text-small)', fontWeight: 700,
                         transition: 'background 0.2s', justifyContent: 'center'
                       }}
                       onMouseEnter={e => e.currentTarget.style.background = css.border}
@@ -757,7 +757,7 @@ export default function MentorshipPage() {
                         <ChevronDown size={16} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', marginLeft: 'auto' }} />
                       </button>
                       {isOpen && (
-                        <div style={{ padding: '0 20px 16px', fontSize: 13.5, color: css.muted, lineHeight: 1.5 }}>
+                        <div style={{ padding: '0 20px 16px', fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5 }}>
                           {item.a}
                         </div>
                       )}
@@ -770,11 +770,11 @@ export default function MentorshipPage() {
             {/* Newsletter Signup Form */}
             <section style={{ background: `linear-gradient(135deg, ${css.surface}, ${css.inputBg})`, border: `1px solid ${css.border}`, borderRadius: 24, padding: '36px 20px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 650, margin: '0 auto', width: '100%' }}>
               <h3 style={{ fontSize: 18, fontWeight: 850, margin: 0 }}>Join the Mentorship Newsletter</h3>
-              <p style={{ fontSize: 13.5, color: css.muted, margin: 0, lineHeight: 1.5 }}>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: 0, lineHeight: 1.5 }}>
                 Get weekly Fabric/Azure updates, mock interview questions, ATS resume templates, and challenges directly in your inbox.
               </p>
               {newsletterSubscribed ? (
-                <div style={{ padding: '16px', background: 'rgba(16,185,129,0.08)', border: '1px solid #10b981', borderRadius: 12, color: '#10b981', display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', margin: '10px auto 0', maxWidth: 450, width: '100%', fontSize: 13.5, fontWeight: 700 }}>
+                <div style={{ padding: '16px', background: 'rgba(16,185,129,0.08)', border: '1px solid #10b981', borderRadius: 12, color: '#10b981', display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', margin: '10px auto 0', maxWidth: 450, width: '100%', fontSize: 'var(--text-small)', fontWeight: 700 }}>
                   <CheckCircle size={16} /> Subscription successful! Welcome to the community.
                 </div>
               ) : (
@@ -783,9 +783,9 @@ export default function MentorshipPage() {
                     type="email" required placeholder="Enter your professional email"
                     value={newsletterEmail}
                     onChange={e => setNewsletterEmail(e.target.value)}
-                    style={{ flex: 1, padding: '10px 14px', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }}
+                    style={{ flex: 1, padding: '10px 14px', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 'var(--text-small)', outline: 'none' }}
                   />
-                  <button type="submit" disabled={newsletterLoading} style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, cursor: 'pointer', opacity: newsletterLoading ? 0.7 : 1 }}>
+                  <button type="submit" disabled={newsletterLoading} style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer', opacity: newsletterLoading ? 0.7 : 1 }}>
                     {newsletterLoading ? 'Joining...' : 'Subscribe'}
                   </button>
                 </form>
@@ -797,7 +797,7 @@ export default function MentorshipPage() {
               <p style={{ fontSize: 14.5, fontStyle: 'italic', color: css.muted, maxWidth: 650, margin: '0 auto', lineHeight: 1.6 }}>
                 "Everyone deserves an opportunity to grow. Sometimes, all it takes is the right guidance, consistent effort, and someone who believes in your potential."
               </p>
-              <span style={{ fontSize: 11, color: css.muted, lineHeight: 1.4 }}>
+              <span style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.4 }}>
                 © {new Date().getFullYear()} Datta Sable. This initiative is a personal community effort by Datta Sable. It is not affiliated with Microsoft or any employer. All guidance is provided based on my experience and availability.
               </span>
             </div>
@@ -809,7 +809,7 @@ export default function MentorshipPage() {
         {activeTab === 'apply' && (
           <div style={{ maxWidth: 650, margin: '0 auto', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 30 }}>
             <h2 style={{ fontSize: 20, fontWeight: 900, marginBottom: 6 }}>Start Your Career Journey</h2>
-            <p style={{ fontSize: 13, color: css.muted, marginBottom: 24 }}>
+            <p style={{ fontSize: 'var(--text-small)', color: css.muted, marginBottom: 24 }}>
               Fill in your details to apply for the next active Batch Cohort.
             </p>
 
@@ -817,35 +817,35 @@ export default function MentorshipPage() {
               
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>FULL NAME</label>
+                  <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>FULL NAME</label>
                   <input
                     type="text" required placeholder="John Doe" value={fullName} onChange={e => setFullName(e.target.value)}
-                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13 }}
+                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>EMAIL ADDRESS</label>
+                  <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>EMAIL ADDRESS</label>
                   <input
                     type="email" required placeholder="john@example.com" value={email} onChange={e => setEmail(e.target.value)}
-                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13 }}
+                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                   />
                 </div>
               </div>
 
               <div>
-                <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>LINKEDIN PROFILE URL</label>
+                <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>LINKEDIN PROFILE URL</label>
                 <input
                   type="url" required placeholder="https://linkedin.com/in/username" value={linkedin} onChange={e => setLinkedin(e.target.value)}
-                  style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13 }}
+                  style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                 />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>YEARS OF EXPERIENCE</label>
+                  <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>YEARS OF EXPERIENCE</label>
                   <select
                     value={experience} onChange={e => setExperience(e.target.value)}
-                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13 }}
+                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                   >
                     <option value="Fresher">Fresher (0 years)</option>
                     <option value="1-2 years">1-2 years</option>
@@ -854,10 +854,10 @@ export default function MentorshipPage() {
                   </select>
                 </div>
                 <div>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>TARGET CAREER TRACK</label>
+                  <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>TARGET CAREER TRACK</label>
                   <select
                     value={trackId} onChange={e => setTrackId(e.target.value)}
-                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13 }}
+                    style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                   >
                     {tracks.map(t => (
                       <option key={t.id} value={t.id}>{t.name}</option>
@@ -867,32 +867,32 @@ export default function MentorshipPage() {
               </div>
 
               <div>
-                <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>TARGET SPECIFIC ROLE</label>
+                <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>TARGET SPECIFIC ROLE</label>
                 <input
                   type="text" required placeholder="e.g. Associate Data Engineer" value={targetRole} onChange={e => setTargetRole(e.target.value)}
-                  style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13 }}
+                  style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>WHAT IS YOUR BIGGEST CAREER CHALLENGE?</label>
+                <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>WHAT IS YOUR BIGGEST CAREER CHALLENGE?</label>
                 <textarea
                   required placeholder="Explain your current bottlenecks, career gaps, or difficulty switching profiles..."
                   value={challenge} onChange={e => setChallenge(e.target.value)} rows={4}
-                  style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13, resize: 'none', lineHeight: 1.5 }}
+                  style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)', resize: 'none', lineHeight: 1.5 }}
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: 11, fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>RESUME PDF UPLOAD (MAX 5MB)</label>
+                <label style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, display: 'block', marginBottom: 6 }}>RESUME PDF UPLOAD (MAX 5MB)</label>
                 <input
                   type="file" required accept=".pdf" onChange={e => setResume(e.target.files?.[0] || null)}
-                  style={{ width: '100%', padding: '8px 12px', background: css.inputBg, border: `1px dashed ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 12 }}
+                  style={{ width: '100%', padding: '8px 12px', background: css.inputBg, border: `1px dashed ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)' }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, margin: '10px 0' }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, cursor: 'pointer' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 'var(--text-small)', cursor: 'pointer' }}>
                   <input
                     type="checkbox" checked={isComebackProgram} onChange={e => setIsComebackProgram(e.target.checked)}
                     style={{ width: 16, height: 16, cursor: 'pointer' }}
@@ -900,7 +900,7 @@ export default function MentorshipPage() {
                   <span>I am returning after a career break or maternity gap (opt-in <strong>Comeback Program</strong>).</span>
                 </label>
 
-                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 12.5, cursor: 'pointer' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 'var(--text-small)', cursor: 'pointer' }}>
                   <input
                     type="checkbox" required checked={agreedGuidelines} onChange={e => setAgreedGuidelines(e.target.checked)}
                     style={{ width: 16, height: 16, cursor: 'pointer', marginTop: 3 }}
@@ -908,7 +908,7 @@ export default function MentorshipPage() {
                   <span>I have read the program guidelines and understand this requires consistent learning effort.</span>
                 </label>
 
-                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 12.5, cursor: 'pointer' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 'var(--text-small)', cursor: 'pointer' }}>
                   <input
                     type="checkbox" required checked={agreedFreePolicy} onChange={e => setAgreedFreePolicy(e.target.checked)}
                     style={{ width: 16, height: 16, cursor: 'pointer', marginTop: 3 }}
@@ -939,7 +939,7 @@ export default function MentorshipPage() {
               <div style={{ maxWidth: 450, margin: '40px auto', background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 30, textAlign: 'center' }}>
                 <Lock size={28} color={css.accent} style={{ marginBottom: 14 }} />
                 <h2 style={{ fontSize: 18, fontWeight: 900, marginBottom: 6 }}>Learner Verification Access</h2>
-                <p style={{ fontSize: 13, color: css.muted, marginBottom: 24 }}>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, marginBottom: 24 }}>
                   Enter your registered email to request a secure one-time verification OTP.
                 </p>
 
@@ -947,11 +947,11 @@ export default function MentorshipPage() {
                   <form onSubmit={handleRequestMagicLink} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                     <input
                       type="email" required placeholder="your.email@example.com" value={loginEmail} onChange={e => setLoginEmail(e.target.value)}
-                      style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 13, textAlign: 'center' }}
+                      style={{ width: '100%', padding: '10px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, outline: 'none', fontSize: 'var(--text-small)', textAlign: 'center' }}
                     />
                     <button
                       type="submit" disabled={loading}
-                      style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontSize: 13.5, fontWeight: 700, cursor: 'pointer' }}
+                      style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer' }}
                     >
                       {loading ? 'Generating Code...' : 'Request Code'}
                     </button>
@@ -964,13 +964,13 @@ export default function MentorshipPage() {
                     />
                     <button
                       type="submit" disabled={loading}
-                      style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontSize: 13.5, fontWeight: 700, cursor: 'pointer' }}
+                      style={{ padding: '10px 20px', background: css.accent, color: '#fff', border: 'none', borderRadius: 10, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer' }}
                     >
                       {loading ? 'Verifying...' : 'Access Dashboard'}
                     </button>
                     <button
                       type="button" onClick={() => setOtpSent(false)}
-                      style={{ background: 'none', border: 'none', color: css.accent, fontSize: 11, fontWeight: 700, cursor: 'pointer', marginTop: 6 }}
+                      style={{ background: 'none', border: 'none', color: css.accent, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer', marginTop: 6 }}
                     >
                       ← Request New Code
                     </button>
@@ -980,12 +980,12 @@ export default function MentorshipPage() {
                 {/* Dev Helper Block for Local testing */}
                 {devHelper && (
                   <div style={{ marginTop: 24, padding: 16, background: 'rgba(245,158,11,0.06)', border: '1px dashed #f59e0b', borderRadius: 10, textAlign: 'left' }}>
-                    <span style={{ fontSize: 10, fontWeight: 800, color: '#f59e0b', display: 'block', marginBottom: 4 }}>DEV LOCAL VERIFICATION HELPER</span>
-                    <span style={{ fontSize: 11, display: 'block', color: css.muted, marginBottom: 8 }}>OTP Code is logged below since you are running locally:</span>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: '#f59e0b', display: 'block', marginBottom: 4 }}>DEV LOCAL VERIFICATION HELPER</span>
+                    <span style={{ fontSize: 'var(--text-small)', display: 'block', color: css.muted, marginBottom: 8 }}>OTP Code is logged below since you are running locally:</span>
                     <code style={{ fontSize: 14, fontWeight: 800, display: 'block', background: css.inputBg, padding: 6, borderRadius: 6, textAlign: 'center', margin: '4px 0' }}>{devHelper.otp}</code>
                     <button
                       onClick={() => setLoginOtp(devHelper.otp)}
-                      style={{ width: '100%', padding: '6px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', marginTop: 4 }}
+                      style={{ width: '100%', padding: '6px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 6, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer', marginTop: 4 }}
                     >
                       Autofill Code ⚡
                     </button>
@@ -998,16 +998,16 @@ export default function MentorshipPage() {
                 {/* Header Profile Summary */}
                 <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 20, padding: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
                   <div>
-                    <span style={{ fontSize: 10, fontWeight: 800, background: css.inputBg, padding: '4px 10px', borderRadius: 8, color: css.accent }}>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, background: css.inputBg, padding: '4px 10px', borderRadius: 8, color: css.accent }}>
                       COHORT: {session.cohort?.name || 'Awaiting Cohort Assignment'}
                     </span>
                     <h2 style={{ fontSize: 22, fontWeight: 900, margin: '8px 0 2px' }}>Welcome back, {session.fullName}!</h2>
-                    <span style={{ fontSize: 13, color: css.muted }}>Registered Track: <strong>{session.track?.name || 'Generic'}</strong></span>
+                    <span style={{ fontSize: 'var(--text-small)', color: css.muted }}>Registered Track: <strong>{session.track?.name || 'Generic'}</strong></span>
                   </div>
                   <div style={{ display: 'flex', gap: 10 }}>
                     <button
                       onClick={() => setSession(null)}
-                      style={{ padding: '8px 16px', background: css.inputBg, border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
+                      style={{ padding: '8px 16px', background: css.inputBg, border: 'none', borderRadius: 8, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer' }}
                     >
                       Sign Out
                     </button>
@@ -1029,11 +1029,11 @@ export default function MentorshipPage() {
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                             <div style={{
                               width: 22, height: 22, borderRadius: 11, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              background: active ? '#10b981' : css.border, color: '#fff', fontSize: 11, fontWeight: 800
+                              background: active ? '#10b981' : css.border, color: '#fff', fontSize: 'var(--text-small)', fontWeight: 800
                             }}>
                               {idx + 1}
                             </div>
-                            <span style={{ fontSize: 12.5, fontWeight: active ? 700 : 500, color: active ? css.text : css.muted }}>{step}</span>
+                            <span style={{ fontSize: 'var(--text-small)', fontWeight: active ? 700 : 500, color: active ? css.text : css.muted }}>{step}</span>
                           </div>
                           {idx < 7 && <ChevronRight size={14} color={css.border} />}
                         </div>
@@ -1050,7 +1050,7 @@ export default function MentorshipPage() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${css.border}`, paddingBottom: 14 }}>
                       <div>
                         <h3 style={{ fontSize: 16, fontWeight: 800, margin: 0 }}>Learning Modules</h3>
-                        <span style={{ fontSize: 12, color: css.muted }}>Track your weekly milestones</span>
+                        <span style={{ fontSize: 'var(--text-small)', color: css.muted }}>Track your weekly milestones</span>
                       </div>
                       <div style={{ fontSize: 14, fontWeight: 800, color: css.accent }}>
                         {getProgressPercentage()}% Complete
@@ -1065,11 +1065,11 @@ export default function MentorshipPage() {
                               type="checkbox" checked={p.completed} readOnly
                               style={{ width: 18, height: 18, cursor: 'not-allowed' }}
                             />
-                            <span style={{ fontSize: 13.5, fontWeight: 600, color: p.completed ? css.text : css.muted }}>
+                            <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: p.completed ? css.text : css.muted }}>
                               Week {p.week}: {p.moduleName}
                             </span>
                           </div>
-                          <span style={{ fontSize: 11, fontWeight: 700, color: p.completed ? '#10b981' : css.muted }}>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: p.completed ? '#10b981' : css.muted }}>
                             {p.completed ? 'COMPLETED' : 'PENDING REVIEW'}
                           </span>
                         </div>
@@ -1078,15 +1078,15 @@ export default function MentorshipPage() {
 
                     {/* Weekly Challenge Submitter */}
                     <div style={{ borderTop: `1px solid ${css.border}`, paddingTop: 18, marginTop: 10 }}>
-                      <h4 style={{ fontSize: 13.5, fontWeight: 700, marginBottom: 4 }}>Submit Weekly Challenge Project</h4>
-                      <p style={{ fontSize: 12, color: css.muted, marginBottom: 12 }}>Paste your GitHub repository link below to submit your week's project for review.</p>
+                      <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 700, marginBottom: 4 }}>Submit Weekly Challenge Project</h4>
+                      <p style={{ fontSize: 'var(--text-small)', color: css.muted, marginBottom: 12 }}>Paste your GitHub repository link below to submit your week's project for review.</p>
                       <form onSubmit={handleSubmitChallenge} style={{ display: 'flex', gap: 10 }}>
                         <input
                           type="url" required placeholder="https://github.com/username/project-repo"
                           value={weeklyChallengeLink} onChange={e => setWeeklyChallengeLink(e.target.value)}
-                          style={{ flex: 1, padding: '8px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 8, color: css.text, fontSize: 12.5 }}
+                          style={{ flex: 1, padding: '8px 12px', background: css.inputBg, border: `1px solid ${css.border}`, borderRadius: 8, color: css.text, fontSize: 'var(--text-small)' }}
                         />
-                        <button type="submit" style={{ padding: '8px 16px', background: css.accent, color: '#fff', border: 'none', borderRadius: 8, fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}>
+                        <button type="submit" style={{ padding: '8px 16px', background: css.accent, color: '#fff', border: 'none', borderRadius: 8, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer' }}>
                           Submit
                         </button>
                       </form>
@@ -1102,11 +1102,11 @@ export default function MentorshipPage() {
                         Private Mentor Notes
                       </h3>
                       {session.mentorNotes ? (
-                        <p style={{ fontSize: 13.5, color: css.muted, lineHeight: 1.5, margin: 0, whiteSpace: 'pre-wrap' }}>
+                        <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5, margin: 0, whiteSpace: 'pre-wrap' }}>
                           {session.mentorNotes}
                         </p>
                       ) : (
-                        <p style={{ fontSize: 12.5, color: css.muted, fontStyle: 'italic', margin: 0 }}>
+                        <p style={{ fontSize: 'var(--text-small)', color: css.muted, fontStyle: 'italic', margin: 0 }}>
                           Datta has not left any notes yet. Complete some modules or submit your resume to trigger reviews!
                         </p>
                       )}
@@ -1121,17 +1121,17 @@ export default function MentorshipPage() {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                           {session.feedbackTimeline.map(log => (
                             <div key={log.id} style={{ borderLeft: `2px solid ${css.accent}`, paddingLeft: 12 }}>
-                              <span style={{ fontSize: 10.5, color: css.muted, fontWeight: 700 }}>
+                              <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700 }}>
                                 {new Date(log.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                               </span>
-                              <p style={{ fontSize: 13, margin: '2px 0 0', lineHeight: 1.4 }}>
+                              <p style={{ fontSize: 'var(--text-small)', margin: '2px 0 0', lineHeight: 1.4 }}>
                                 {log.content}
                               </p>
                             </div>
                           ))}
                         </div>
                       ) : (
-                        <p style={{ fontSize: 12.5, color: css.muted, fontStyle: 'italic', margin: 0 }}>
+                        <p style={{ fontSize: 'var(--text-small)', color: css.muted, fontStyle: 'italic', margin: 0 }}>
                           No feedback timeline events recorded yet.
                         </p>
                       )}

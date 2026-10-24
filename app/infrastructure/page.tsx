@@ -93,7 +93,7 @@ export default async function InfrastructureHub() {
                 </div>
                 <h3 className="text-xl font-bold mb-4">{section.title}</h3>
                 <p className="text-[var(--muted)] mb-8 text-sm leading-relaxed">{section.description}</p>
-                <Link href={section.link} className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] hover:underline flex items-center gap-2">
+                <Link href={section.link} className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--accent)] hover:underline flex items-center gap-2">
                   View Specifications <Share2 size={12} />
                 </Link>
               </div>
@@ -129,9 +129,9 @@ export default async function InfrastructureHub() {
                 <div className="w-3 h-3 rounded-full bg-red-500" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
                 <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="mono text-[10px] ml-4 opacity-50">workflow.json</span>
+                <span className="mono text-[length:var(--text-small)] ml-4 opacity-50">workflow.json</span>
               </div>
-              <pre className="text-[12px] mono text-cyan-500 overflow-x-auto p-4 leading-6">
+              <pre className="text-[length:var(--text-small)] mono text-cyan-500 overflow-x-auto p-4 leading-6">
 {`{
   "name": "Surgical Workflow",
   "version": "1.0",

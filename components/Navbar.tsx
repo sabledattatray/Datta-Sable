@@ -49,7 +49,7 @@ export default function Navbar() {
   const closeTimer = useRef<ReturnType<typeof setTimeout>|null>(null);
   const active = open ? groups[open] : null;
   const intro = open ? introductions[open] : null;
-  const closeAll = () => { setOpen(null);setMobileOpen(false);setMobileSection(null); };
+  const closeAll = () => { setOpen(null);setMobileOpen(false);setMobileSection(null);if(mobileOpen)mobileTrigger.current?.focus(); };
   const cancelClose = () => { if(closeTimer.current) clearTimeout(closeTimer.current); };
   const scheduleClose = () => { cancelClose();if(root.current?.querySelector('[id^="navigation-panel-"]')?.contains(document.activeElement))return;closeTimer.current=setTimeout(()=>setOpen(null),180); };
 
@@ -103,7 +103,7 @@ export default function Navbar() {
         <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<Link key={link.label} href={link.href} className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={closeAll} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></Link>:<Link key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</Link>)}</nav>
         <div className={styles.actions}>
           <div className={styles.theme} onFocusCapture={()=>setOpen(null)}><ThemeToggle/></div>
-          {session?<HeaderAccount name={session.user?.name} isAdmin={accountRole?.toUpperCase()==='ADMIN'} onSignOut={()=>signOut()}/>:<Link className={styles.signIn} aria-label="Sign in" href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || "/")}`} onClick={closeAll}><User size={14}/><span>Sign in</span></Link>}
+          {session?<div className={styles.headerAccount}><HeaderAccount name={session.user?.name} isAdmin={accountRole?.toUpperCase()==='ADMIN'} onSignOut={()=>signOut()}/></div>:<Link className={styles.signIn} aria-label="Sign in" href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || "/")}`} onClick={closeAll}><User size={14}/><span>Sign in</span></Link>}
           <button ref={mobileTrigger} type="button" className={styles.menuToggle} aria-label={mobileOpen?'Close navigation':'Open navigation'} aria-expanded={mobileOpen} aria-controls="mobile-navigation" onClick={()=>{setOpen(null);setMobileOpen(value=>!value);}}>{mobileOpen?<X size={19}/>:<Menu size={19}/>}</button>
         </div>
       </div>
@@ -122,15 +122,19 @@ export default function Navbar() {
           <div className={styles.mobileIntro}>
             <Link href="/" className={styles.mobileLogo} onClick={closeAll} aria-label="Datta Sable — Home">
               <span className={styles.logoMark}><LogoIcon color="var(--accent)"/></span>
-              <span className={styles.wordmark}><strong>Datta Sable</strong><span>DATA / DESIGN / ENGINEERING</span></span>
+              <span className={styles.wordmark}><strong>Datta Sable</strong></span>
             </Link>
             <button ref={closeMobile} type="button" className={styles.closeMobile} aria-label="Close navigation panel" onClick={closeAll}>
               <X size={17}/>
             </button>
           </div>
           <nav className={styles.mobileScroll} aria-label="Mobile navigation">
+            <div className={styles.mobileHeading}>
+              <span>DATA. DESIGN. ENGINEERING.</span>
+              <h2 id="mobile-navigation-title">Find your next step<span>.</span></h2>
+            </div>
             {navLinks.map((link, i) => (
-              <div className={styles.mobileSection} key={link.label}>
+              <div className={styles.mobileSection} key={link.label} data-expanded={mobileSection === link.label}>
                 <div className={styles.mobileRow}>
                   <Link
                     href={link.href}
@@ -138,7 +142,7 @@ export default function Navbar() {
                     aria-current={pathname === link.href ? 'page' : undefined}
                     onClick={closeAll}
                   >
-                    <span className={styles.mobileIndex}>0{i + 1}</span>
+                    <span className={styles.mobileIndex} aria-hidden="true">0{i + 1}</span>
                     <span className={styles.mobileLabel}>{link.label}</span>
                   </Link>
                   {link.mega ? (
@@ -181,11 +185,14 @@ export default function Navbar() {
                 )}
               </div>
             ))}
-            <div className={styles.mobileFooter}>
-              <span>DATA / DESIGN / ENGINEERING</span>
-              <Link href="/about" onClick={closeAll}>Meet Datta <ArrowUpRight size={12} /></Link>
-            </div>
           </nav>
+          <div className={styles.mobileFooter}>
+            <Link className={styles.mobileContact} href="/contact" onClick={closeAll}>Let’s build something <ArrowUpRight size={18}/></Link>
+            <div className={styles.mobileAccountRow}>
+              {session ? <Link href={accountRole?.toUpperCase()==='ADMIN'?'/admin':'/account/purchases'} onClick={closeAll}><User size={16}/><span>{session.user?.name || 'Your account'}</span><ArrowRight size={15}/></Link> : <Link href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || '/')}`} onClick={closeAll}><User size={16}/>Sign in to your account<ArrowRight size={15}/></Link>}
+              <span>Independent by design.</span>
+            </div>
+          </div>
         </div>
       </div>
     )}

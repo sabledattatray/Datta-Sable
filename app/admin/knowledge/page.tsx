@@ -117,15 +117,15 @@ export default function KnowledgeGraphPage() {
           ]).map((c, i) => (
             <div key={i} style={{ background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10, padding: 16 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{c.name}</span>
-                <span style={{ fontSize: 12, fontWeight: 600, color: c.completionPercentage >= 90 ? '#34d399' : c.completionPercentage >= 50 ? '#fbbf24' : '#f87171', fontVariantNumeric: 'tabular-nums' }}>
+                <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)' }}>{c.name}</span>
+                <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: c.completionPercentage >= 90 ? '#34d399' : c.completionPercentage >= 50 ? '#fbbf24' : '#f87171', fontVariantNumeric: 'tabular-nums' }}>
                   {c.completionPercentage}%
                 </span>
               </div>
               <div style={{ width: '100%', height: 6, background: 'var(--surface)', borderRadius: 999, overflow: 'hidden', marginBottom: 8, border: '1px solid var(--border)' }}>
                 <div style={{ width: `${c.completionPercentage}%`, height: '100%', background: 'var(--accent)', borderRadius: 999 }} />
               </div>
-              <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 500 }}>Status: {c.status}</div>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', fontWeight: 500 }}>Status: {c.status}</div>
             </div>
           ))}
         </div>
@@ -159,8 +159,8 @@ export default function KnowledgeGraphPage() {
           ]).map((s, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 18px' }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 3 }}>{s.title}</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)' }}>
+                <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)', marginBottom: 3 }}>{s.title}</div>
+                <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
                   Target Cluster: <strong style={{ color: 'var(--text)' }}>{s.topicCluster}</strong> &bull; Estimated Impact: <strong style={{ color: 'var(--accent)' }}>{s.trafficImpact}</strong>
                 </div>
               </div>

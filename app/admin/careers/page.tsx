@@ -374,18 +374,18 @@ export default function AdminCareersPage() {
             <h2>Applications by Position</h2>
           </div>
           {Object.keys(positionDistribution).length === 0 ? (
-            <div style={{ textAlign: 'center', color: 'var(--muted)', padding: '32px 0', fontSize: 12 }}>No role data to visualize yet.</div>
+            <div style={{ textAlign: 'center', color: 'var(--muted)', padding: '32px 0', fontSize: 'var(--text-small)' }}>No role data to visualize yet.</div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {Object.entries(positionDistribution).map(([position, count]) => {
                 const percentage = Math.round((count / maxPositionCount) * 100);
                 return (
                   <div key={position} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ width: 140, fontSize: 11, color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={position}>{position}</span>
+                    <span style={{ width: 140, fontSize: 'var(--text-small)', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={position}>{position}</span>
                     <div style={{ flex: 1, height: 6, background: 'var(--surface2)', borderRadius: 999, overflow: 'hidden' }}>
                       <div style={{ width: `${percentage}%`, height: '100%', background: 'var(--accent)', borderRadius: 999 }} />
                     </div>
-                    <span style={{ width: 28, fontSize: 11, fontWeight: 600, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{count}</span>
+                    <span style={{ width: 28, fontSize: 'var(--text-small)', fontWeight: 600, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{count}</span>
                   </div>
                 );
               })}
@@ -493,14 +493,14 @@ export default function AdminCareersPage() {
                     </td>
                     <td className={adminStyles.td}>
                       <div style={{ fontWeight: 600, color: 'var(--text)' }}>{app.fullName}</div>
-                      <div style={{ color: 'var(--muted)', fontSize: 10 }}>{app.email}</div>
+                      <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{app.email}</div>
                     </td>
                     <td className={adminStyles.td} style={{ color: 'var(--muted)' }}>{app.job?.title || 'Unknown'}</td>
                     <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>{app.totalExperience}</td>
                     <td className={adminStyles.td} style={{ textAlign: 'center' }}>
                       <span 
                         style={{ 
-                          padding: '2px 8px', borderRadius: 999, fontSize: 10, fontWeight: 600,
+                          padding: '2px 8px', borderRadius: 999, fontSize: 'var(--text-small)', fontWeight: 600,
                           background: app.matchScore >= 80 ? 'rgba(16,185,129,0.1)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
                           color: app.matchScore >= 80 ? '#34d399' : app.matchScore >= 50 ? '#fbbf24' : '#f87171',
                           border: `1px solid ${app.matchScore >= 80 ? 'rgba(16,185,129,0.25)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`
@@ -520,7 +520,7 @@ export default function AdminCareersPage() {
                         </span>
                       )}
                     </td>
-                    <td className={adminStyles.td} style={{ whiteSpace: 'nowrap', color: 'var(--muted)', fontSize: 11 }}>
+                    <td className={adminStyles.td} style={{ whiteSpace: 'nowrap', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>
                       {new Date(app.createdAt).toLocaleDateString()}
                     </td>
                     <td className={adminStyles.td} style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
@@ -552,12 +552,12 @@ export default function AdminCareersPage() {
             <div key={app.id} className={adminStyles.panel} style={{ padding: 16, marginBottom: 0 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8, marginBottom: 8 }}>
                 <div>
-                  <span style={{ fontSize: 10, color: 'var(--accent)', fontWeight: 600 }}>{app.applicationId}</span>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--accent)', fontWeight: 600 }}>{app.applicationId}</span>
                   <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginTop: 2 }}>{app.fullName}</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>{app.email}</div>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>{app.email}</div>
                 </div>
                 <span style={{ 
-                  padding: '2px 8px', borderRadius: 999, fontSize: 10, fontWeight: 600,
+                  padding: '2px 8px', borderRadius: 999, fontSize: 'var(--text-small)', fontWeight: 600,
                   background: app.matchScore >= 80 ? 'rgba(16,185,129,0.1)' : app.matchScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
                   color: app.matchScore >= 80 ? '#34d399' : app.matchScore >= 50 ? '#fbbf24' : '#f87171',
                   flexShrink: 0
@@ -566,13 +566,13 @@ export default function AdminCareersPage() {
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '8px 0', margin: '8px 0', fontSize: 11 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '8px 0', margin: '8px 0', fontSize: 'var(--text-small)' }}>
                 <div>
-                  <span style={{ fontSize: 9, color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Position</span>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Position</span>
                   <strong>{app.job?.title || 'Unknown'}</strong>
                 </div>
                 <div>
-                  <span style={{ fontSize: 9, color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Experience</span>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', display: 'block', textTransform: 'uppercase' }}>Experience</span>
                   <strong>{app.totalExperience}</strong>
                 </div>
               </div>
@@ -609,7 +609,7 @@ export default function AdminCareersPage() {
               {/* Sidebar Header */}
               <div className={adminStyles.modalHeader}>
                 <div>
-                  <span style={{ fontSize: 10, color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.08em' }}>{selectedApplicant.applicationId}</span>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.08em' }}>{selectedApplicant.applicationId}</span>
                   <h3 style={{ marginTop: 2 }}>{selectedApplicant.fullName}</h3>
                 </div>
                 <button onClick={() => setSelectedApplicant(null)} className={adminStyles.modalClose}>
@@ -683,22 +683,22 @@ export default function AdminCareersPage() {
                     className={adminStyles.textarea}
                     rows={2}
                   />
-                  <div style={{ fontSize: 9, color: 'var(--muted)', textAlign: 'right', marginTop: 3 }}>Autosaves on blur</div>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', textAlign: 'right', marginTop: 3 }}>Autosaves on blur</div>
                 </div>
               </div>
 
               {/* Technical Profile Details */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 18, fontSize: 12, lineHeight: 1.6 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 18, fontSize: 'var(--text-small)', lineHeight: 1.6 }}>
                 
                 {/* Score */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: 'color-mix(in srgb, var(--accent) 5%, var(--surface2))', border: '1px solid color-mix(in srgb, var(--accent) 25%, var(--border))', borderRadius: 10 }}>
-                  <span style={{ fontSize: 11, fontWeight: 600 }}>Candidate Match Rating Score</span>
+                  <span style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>Candidate Match Rating Score</span>
                   <span style={{ fontSize: 16, fontWeight: 600, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{selectedApplicant.matchScore}%</span>
                 </div>
 
                 {/* Personal Section */}
                 <div>
-                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Contact Info</h4>
+                  <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Contact Info</h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 8 }}>
                     <div><span style={{ color: 'var(--muted)' }}>Email:</span> {selectedApplicant.email}</div>
                     <div><span style={{ color: 'var(--muted)' }}>Phone:</span> {selectedApplicant.mobile}</div>
@@ -713,7 +713,7 @@ export default function AdminCareersPage() {
 
                 {/* Professional Info */}
                 <div>
-                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Professional Experience</h4>
+                  <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Professional Experience</h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 8 }}>
                     <div><span style={{ color: 'var(--muted)' }}>Employer:</span> {selectedApplicant.currentCompany || 'N/A'}</div>
                     <div><span style={{ color: 'var(--muted)' }}>Designation:</span> {selectedApplicant.currentDesignation || 'N/A'}</div>
@@ -728,18 +728,18 @@ export default function AdminCareersPage() {
 
                 {/* Secure Documents Links */}
                 <div>
-                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Candidate Documents</h4>
+                  <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Candidate Documents</h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     <a 
                       href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.resumeUrl)}`} target="_blank" rel="noopener noreferrer"
-                      className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                      className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 'var(--text-small)' }}
                     >
                       <FileText size={13} style={{ color: 'var(--accent)' }} /> Open Candidate Resume <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
                     </a>
                     {selectedApplicant.aadhaarUrl && (
                       <a 
                         href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.aadhaarUrl)}`} target="_blank" rel="noopener noreferrer"
-                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 'var(--text-small)' }}
                       >
                         <FileText size={13} style={{ color: 'var(--accent)' }} /> Open Aadhaar Card <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
                       </a>
@@ -747,7 +747,7 @@ export default function AdminCareersPage() {
                     {selectedApplicant.photoUrl && (
                       <a 
                         href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.photoUrl)}`} target="_blank" rel="noopener noreferrer"
-                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 'var(--text-small)' }}
                       >
                         <FileText size={13} style={{ color: 'var(--accent)' }} /> Open Candidate Photo <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
                       </a>
@@ -755,7 +755,7 @@ export default function AdminCareersPage() {
                     {selectedApplicant.portfolioFileUrl && (
                       <a 
                         href={`/api/admin/documents?file=${encodeURIComponent(selectedApplicant.portfolioFileUrl)}`} target="_blank" rel="noopener noreferrer"
-                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 11 }}
+                        className={adminStyles.secondary} style={{ justifyContent: 'flex-start', minHeight: 34, fontSize: 'var(--text-small)' }}
                       >
                         <FileSpreadsheet size={13} style={{ color: 'var(--accent)' }} /> Open Portfolio Archive <ArrowUpRight size={11} style={{ marginLeft: 'auto' }} />
                       </a>
@@ -765,7 +765,7 @@ export default function AdminCareersPage() {
 
                 {/* Skills tags */}
                 <div>
-                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Expertise Skills</h4>
+                  <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Expertise Skills</h4>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {selectedApplicant.skills.split(',').map(s => (
                       <span key={s} className={adminStyles.badgeNeutral}>
@@ -777,7 +777,7 @@ export default function AdminCareersPage() {
 
                 {/* Education */}
                 <div>
-                  <h4 style={{ fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Education</h4>
+                  <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', borderBottom: '1px solid var(--border)', paddingBottom: 6, marginBottom: 10 }}>Education</h4>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 8 }}>
                     <div><span style={{ color: 'var(--muted)' }}>Highest Degree:</span> {selectedApplicant.highestQualification}</div>
                     <div><span style={{ color: 'var(--muted)' }}>University:</span> {selectedApplicant.university}</div>

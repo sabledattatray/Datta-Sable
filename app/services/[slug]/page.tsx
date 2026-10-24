@@ -133,7 +133,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         {/* ── Breadcrumb & Navigation Bar ── */}
         <div style={{ paddingTop: 'clamp(5rem, 8vw, 6.5rem)', paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
           <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
               <Link href="/services" style={{ color: 'var(--muted)', textDecoration: 'none' }} className="hover:text-white transition-colors">
                 Services
               </Link>
@@ -157,7 +157,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div style={{ maxWidth: '850px' }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', padding: '0.4rem 1rem', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '4px', marginBottom: '1.5rem' }}>
                 <span style={{ fontSize: '1.25rem' }}>{service.icon}</span>
-                <span className="mono" style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: service.color, fontWeight: 700 }}>
+                <span className="mono" style={{ fontSize: 'var(--text-small)', letterSpacing: '0.15em', textTransform: 'uppercase', color: service.color, fontWeight: 700 }}>
                   SPECIALIZED SERVICE PACKAGE
                 </span>
               </div>
@@ -197,14 +197,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted)', marginBottom: '0.25rem' }}>INVESTMENT</div>
+                  <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted)', marginBottom: '0.25rem' }}>INVESTMENT</div>
                   <div className="mono" style={{ fontSize: '1.35rem', fontWeight: 700, color: service.color }}>{service.price}</div>
                 </div>
 
                 <div style={{ width: '1px', height: '40px', background: 'var(--border)' }} className="hidden sm:block" />
 
                 <div>
-                  <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted)', marginBottom: '0.25rem' }}>TYPICAL TIMELINE</div>
+                  <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted)', marginBottom: '0.25rem' }}>TYPICAL TIMELINE</div>
                   <div style={{ fontSize: '1.05rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <Clock size={16} style={{ color: 'var(--muted)' }} /> {service.deliveryTime}
                   </div>
@@ -213,7 +213,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div style={{ width: '1px', height: '40px', background: 'var(--border)' }} className="hidden sm:block" />
 
                 <div>
-                  <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted)', marginBottom: '0.25rem' }}>GOVERNANCE</div>
+                  <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted)', marginBottom: '0.25rem' }}>GOVERNANCE</div>
                   <div style={{ fontSize: '1.05rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <Shield size={16} style={{ color: 'var(--accent)' }} /> NDA Protected & Audited
                   </div>
@@ -454,8 +454,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     </p>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
-                    <span className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: other.color }}>{other.price}</span>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                    <span className="mono" style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: other.color }}>{other.price}</span>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                       Details <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>

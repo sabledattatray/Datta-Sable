@@ -10,7 +10,7 @@ export default function Breadcrumbs() {
   if (pathname === '/') return null;
 
   return (
-    <nav className="flex items-center gap-2 mono text-[10px] text-[var(--muted)] opacity-70 uppercase tracking-widest mb-8">
+    <nav className="flex items-center gap-2 mono text-[length:var(--text-small)] text-[var(--muted)] opacity-70 uppercase tracking-widest mb-8">
       <Link href="/" className="hover:text-[var(--accent)] flex items-center gap-1 transition-colors">
         <Home size={10} /> HOME
       </Link>

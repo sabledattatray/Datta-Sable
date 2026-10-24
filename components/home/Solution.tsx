@@ -56,7 +56,7 @@ export default function Solution() {
               
               <div className="mt-8 flex items-center gap-2 text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 <CheckCircle2 size={16} />
-                <span className="mono text-[10px] uppercase tracking-widest">System Ready</span>
+                <span className="mono text-[length:var(--text-small)] uppercase tracking-widest">System Ready</span>
               </div>
             </motion.div>
           ))}

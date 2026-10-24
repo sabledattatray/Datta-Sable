@@ -223,8 +223,8 @@ export default function TypographyEditor({ initialSettings, defaultSettings: ini
                 <p style={{ fontSize: 16, lineHeight: 1.75 }}>Good typography makes every article easier to explore. <a href="#typography-preview" onClick={event => event.preventDefault()} style={{ color: previewTheme === 'dark' ? '#c9f31d' : '#0059b3', textDecoration: 'underline' }}>Explore a practical guide</a> and discover what you can create.</p>
                 <div className={styles.sampleDivider} />
                 <h4 style={{ fontSize: 22, fontWeight: 600 }}>H4 · The details matter</h4><h5 style={{ fontSize: 18, fontWeight: 600 }}>H5 · Designed for reading</h5><h6 style={{ fontSize: 16, fontWeight: 600 }}>H6 · One step further</h6>
-                <small style={{ fontSize: 12 }}>A small caption · Updated weekly · 8 minute read</small>
-                <pre><code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 13 }}>SELECT insight FROM ideas;</code></pre>
+                <small style={{ fontSize: 'var(--text-small)' }}>A small caption · Updated weekly · 8 minute read</small>
+                <pre><code style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 'var(--text-small)' }}>SELECT insight FROM ideas;</code></pre>
                 <button type="button" style={{ background: previewTheme === 'dark' ? '#c9f31d' : '#0059b3', color: previewTheme === 'dark' ? '#000' : '#fff', fontSize: 14, fontWeight: 600, border: 0, padding: '12px 20px', borderRadius: 10 }}>Start learning ↗</button>
               </div>
             </div>

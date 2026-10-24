@@ -50,7 +50,7 @@ export default function Newsletter() {
           gap: '0.5rem',
           marginBottom: '2rem',
           color: 'var(--muted)',
-          fontSize: '0.85rem',
+          fontSize: 'var(--text-small)',
           textAlign: 'left'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -87,7 +87,7 @@ export default function Newsletter() {
                 border: 'none', 
                 padding: '0.75rem 1rem', 
                 color: 'var(--text)', 
-                fontSize: '12px',
+                fontSize: 'var(--text-small)',
                 fontFamily: 'var(--mono)',
                 outline: 'none'
               }}
@@ -98,7 +98,7 @@ export default function Newsletter() {
               className="btn-primary" 
               style={{ 
                 padding: '0 1.5rem', 
-                fontSize: '11px', 
+                fontSize: 'var(--text-small)',
                 fontWeight: 700, 
                 letterSpacing: '0.1em',
                 borderRadius: 0,
@@ -113,7 +113,7 @@ export default function Newsletter() {
             </button>
           </form>
         )}
-        <div className="mono" style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '1.5rem', lineHeight: 1.6, letterSpacing: '0.02em' }}>
+        <div className="mono" style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: '1.5rem', lineHeight: 1.6, letterSpacing: '0.02em' }}>
           SECURE_ENCRYPTION: AES-256 // ZERO_SPAM_POLICY: TRUE
         </div>
       </div>

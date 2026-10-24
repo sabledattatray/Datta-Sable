@@ -65,7 +65,7 @@ export default function Tooltip({
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', gap: '1rem' }}>
         <span style={{ 
           fontFamily: 'monospace', 
-          fontSize: '0.7rem', 
+          fontSize: 'var(--text-small)',
           color: 'var(--accent)', 
           textTransform: 'uppercase', 
           letterSpacing: '0.1em' 
@@ -73,7 +73,7 @@ export default function Tooltip({
           {node.category}
         </span>
         <span style={{ 
-          fontSize: '0.65rem', 
+          fontSize: 'var(--text-small)',
           fontWeight: 700, 
           textTransform: 'uppercase',
           padding: '2px 8px',
@@ -96,7 +96,7 @@ export default function Tooltip({
       </h4>
 
       <p style={{ 
-        fontSize: '0.8rem', 
+        fontSize: 'var(--text-small)',
         color: 'var(--muted)', 
         lineHeight: 1.5, 
         marginBottom: '1.25rem' 
@@ -112,7 +112,7 @@ export default function Tooltip({
         borderTop: '1px solid var(--border)', 
         paddingTop: '0.75rem',
         marginBottom: '1.25rem',
-        fontSize: '0.75rem'
+        fontSize: 'var(--text-small)'
       }}>
         {node.prerequisites.length > 0 && (
           <div>
@@ -153,7 +153,7 @@ export default function Tooltip({
           padding: '0.5rem 1rem',
           fontWeight: 700,
           textDecoration: 'none',
-          fontSize: '0.75rem',
+          fontSize: 'var(--text-small)',
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
           borderRadius: '2px',

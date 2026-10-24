@@ -66,7 +66,7 @@ export default function TrafficBehaviorPage() {
                 <tr key={i} className={adminStyles.tr}>
                   <td className={adminStyles.td}>
                     <div style={{ fontWeight: 600, color: 'var(--text)' }}>{row.title}</div>
-                    <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{row.path}</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>{row.path}</div>
                   </td>
                   <td className={adminStyles.td} style={{ fontWeight: 600, color: 'var(--accent)' }}>{row.views}</td>
                   <td className={adminStyles.td}>{row.visitors}</td>

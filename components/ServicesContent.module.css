@@ -30,7 +30,7 @@
   border-radius: 999px;
   background: var(--surface);
   border: 1px solid var(--border);
-  font: 600 10.5px/1 var(--font-mono);
+  font: 600 var(--text-small)/1 var(--font-mono);
   letter-spacing: .12em;
   color: var(--text);
   margin-bottom: 22px;
@@ -87,7 +87,7 @@
   border-radius: 9px;
   background: var(--accent);
   color: var(--btn-primary-text);
-  font: 700 13px/1 var(--font-syne);
+  font: 700 var(--text-small)/1 var(--font-syne);
   letter-spacing: .02em;
   text-decoration: none;
   cursor: pointer;
@@ -109,7 +109,7 @@
   border-radius: 9px;
   background: var(--surface);
   color: var(--text);
-  font: 600 13px/1 var(--font-syne);
+  font: 600 var(--text-small)/1 var(--font-syne);
   text-decoration: none;
   border: 1px solid var(--border);
   transition: transform .2s, border-color .2s, background .2s;
@@ -130,7 +130,7 @@
   border-radius: 9px;
   background: var(--surface);
   color: var(--text);
-  font: 600 13px/1 var(--font-syne);
+  font: 600 var(--text-small)/1 var(--font-syne);
   text-decoration: none;
   border: 1px solid var(--border);
   transition: transform .2s, background .2s, border-color .2s, color .2s;
@@ -183,12 +183,12 @@
 }
 
 .proofLabel {
-  font: 600 11.5px/1.4 var(--font-syne);
+  font: 600 var(--text-small)/1.4 var(--font-syne);
   color: var(--text);
 }
 
 .proofSub {
-  font-size: 10px;
+  font-size: var(--text-small);
   line-height: 1.4;
   color: var(--muted);
 }
@@ -215,7 +215,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 700 10px/1 var(--font-mono);
+  font: 700 var(--text-small)/1 var(--font-mono);
   letter-spacing: .15em;
   color: var(--accent);
   text-transform: uppercase;
@@ -259,7 +259,7 @@
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--muted);
-  font: 600 12px/1 var(--font-syne);
+  font: 600 var(--text-small)/1 var(--font-syne);
   cursor: pointer;
   transition: all .2s;
   display: inline-flex;
@@ -282,7 +282,7 @@
   display: inline-block;
   padding: 2px 6px;
   border-radius: 10px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-family: var(--font-mono);
   background: color-mix(in srgb, var(--text) 10%, transparent);
 }
@@ -380,7 +380,7 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-family: var(--font-mono);
   color: var(--muted);
   white-space: nowrap;
@@ -433,7 +433,7 @@
 }
 
 .category {
-  font-size: 8.5px;
+  font-size: var(--text-small);
   font-family: var(--font-mono);
   font-weight: 600;
   letter-spacing: .08em;
@@ -446,7 +446,7 @@
 }
 
 .popularBadge {
-  font-size: 8px;
+  font-size: var(--text-small);
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: .06em;
@@ -480,7 +480,7 @@
 }
 
 .cardBody > p {
-  font-size: 11px;
+  font-size: var(--text-small);
   line-height: 1.6;
   color: var(--muted);
   margin: 0 0 10px;
@@ -500,7 +500,7 @@
 }
 
 .techPill {
-  font-size: 8.5px;
+  font-size: var(--text-small);
   font-family: var(--font-mono);
   font-weight: 500;
   padding: 2px 6px;
@@ -527,7 +527,7 @@
 }
 
 .priceTag {
-  font-size: 12.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   font-family: var(--font-syne);
   color: var(--accent);
@@ -537,7 +537,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: var(--accent);
   white-space: nowrap;
@@ -587,7 +587,7 @@
 }
 
 .protocolStep {
-  font: 700 12px/1 var(--font-mono);
+  font: 700 var(--text-small)/1 var(--font-mono);
   color: var(--accent);
   letter-spacing: .08em;
 }
@@ -599,7 +599,7 @@
 }
 
 .protocolCard p {
-  font-size: 11.5px;
+  font-size: var(--text-small);
   line-height: 1.65;
   color: var(--muted);
   margin: 0;
@@ -624,7 +624,7 @@
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 12.5px;
+  font-size: var(--text-small);
 }
 
 .comparisonTable th,
@@ -635,7 +635,7 @@
 
 .comparisonTable th {
   background: var(--surface2);
-  font: 700 12.5px/1 var(--font-syne);
+  font: 700 var(--text-small)/1 var(--font-syne);
   color: var(--text);
   letter-spacing: .02em;
 }
@@ -695,7 +695,7 @@
   border-radius: 8px;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: var(--accent);
-  font: 700 12px/1 var(--font-mono);
+  font: 700 var(--text-small)/1 var(--font-mono);
   flex-shrink: 0;
 }
 
@@ -706,7 +706,7 @@
 }
 
 .scopingCardContent p {
-  font-size: 11.5px;
+  font-size: var(--text-small);
   line-height: 1.6;
   color: var(--muted);
   margin: 0;
@@ -721,7 +721,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.6;
   color: var(--text);
 }
@@ -781,7 +781,7 @@
 
 .faqAnswer {
   padding: 0 20px 18px;
-  font-size: 12.5px;
+  font-size: var(--text-small);
   line-height: 1.7;
   color: var(--muted);
 }
@@ -899,7 +899,7 @@
     margin-bottom: 4px;
   }
   .cardBody > p {
-    font-size: 10.5px;
+    font-size: var(--text-small);
     -webkit-line-clamp: 2;
     line-clamp: 2;
     margin-bottom: 6px;
@@ -908,10 +908,10 @@
     display: none;
   }
   .priceTag {
-    font-size: 11.5px;
+    font-size: var(--text-small);
   }
   .readLabel {
-    font-size: 9.5px;
+    font-size: var(--text-small);
   }
   .card .imageArrow {
     width: 24px;

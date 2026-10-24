@@ -25,9 +25,9 @@ export default function PreviewTerminal({
       <div className="flex items-center justify-between px-8 py-5 border-b border-white/5 bg-white/[0.02]">
         <div className="flex items-center gap-3">
           <Terminal className="w-4 h-4 text-red-500" />
-          <span className="text-[10px] font-black text-gray-500 tracking-[0.2em] uppercase font-mono">Intelligence Stream</span>
+          <span className="text-[length:var(--text-small)] font-black text-gray-500 tracking-[0.2em] uppercase font-mono">Intelligence Stream</span>
         </div>
-        <div className="flex items-center gap-4 text-[10px] font-mono text-gray-600">
+        <div className="flex items-center gap-4 text-[length:var(--text-small)] font-mono text-gray-600">
           <span className="text-red-500/50 uppercase tracking-widest">{selectedIndustry.id} ACTIVE</span>
           <div className="flex gap-1.5">
             <div className="w-2 h-2 rounded-full bg-red-500/20" />
@@ -37,7 +37,7 @@ export default function PreviewTerminal({
         </div>
       </div>
 
-      <div className="flex-1 p-8 font-mono text-[11px] overflow-x-auto no-scrollbar">
+      <div className="flex-1 p-8 font-mono text-[length:var(--text-small)] overflow-x-auto no-scrollbar">
         <table className="w-full text-left">
           <thead className="text-gray-600 border-b border-white/5">
             <tr>
@@ -77,14 +77,14 @@ export default function PreviewTerminal({
       </div>
 
       {/* Summary Bar */}
-      <div className="px-8 py-5 bg-black/40 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-gray-600 uppercase">
+      <div className="px-8 py-5 bg-black/40 border-t border-white/5 flex justify-between items-center text-[length:var(--text-small)] font-mono text-gray-600 uppercase">
         <div className="flex gap-10">
           <div className="space-y-1">
-            <span className="text-[9px] opacity-50 block tracking-widest">Tier</span>
+            <span className="text-[length:var(--text-small)] opacity-50 block tracking-widest">Tier</span>
             <span className={session ? 'text-red-500 font-bold' : 'text-gray-400 font-bold'}>{session ? 'PRO' : 'OPEN'}</span>
           </div>
           <div className="space-y-1">
-            <span className="text-[9px] opacity-50 block tracking-widest">Estimated Size</span>
+            <span className="text-[length:var(--text-small)] opacity-50 block tracking-widest">Estimated Size</span>
             <span className="text-red-500 font-bold tabular-nums">~{(dataCount * selectedFields.length * 0.015).toFixed(1)} KB</span>
           </div>
         </div>

@@ -39,6 +39,19 @@ export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & {
   const documents = fragments.map(fragment => ({ ...fragment, $: load(fragment.html, null, false) }));
 
   for (const { $ } of documents) {
+    // Older CMS articles can contain inline caption sizes below the shared
+    // minimum. Adjust rendered text only; leave display headings and code alone.
+    $('[style]').each((_, element) => {
+      const text = $(element);
+      if (text.is('h1,h2,h3,h4,h5,h6,pre,code,script,style') || text.parents('h1,h2,h3,h4,h5,h6,pre,code,script,style').length) return;
+      const style = text.attr('style') || '';
+      text.attr('style', style.replace(/(^|;)\s*font-size\s*:\s*(\d*\.?\d+)(px|rem|em)\s*(!important)?(?=;|$)/gi, (declaration, separator, number, unit, important) => {
+        const value = Number(number);
+        if (!value || (unit.toLowerCase() !== 'em' && value * (unit.toLowerCase() === 'rem' ? 16 : 1) >= 14)) return declaration;
+        const size = unit.toLowerCase() === 'em' ? `max(0.875rem, ${number}em)` : 'var(--text-small)';
+        return `${separator}font-size:${size}${important ? ' !important' : ''}`;
+      }));
+    });
     $('.blog-toc, .table-of-contents, nav[aria-label="Table of contents"], nav[aria-label="Table of Contents"]').each((_, element) => {
       const wrapper = $(element);
       // Avoid removing a similarly named container that contains article prose.

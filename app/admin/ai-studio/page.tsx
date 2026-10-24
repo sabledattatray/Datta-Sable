@@ -309,7 +309,7 @@ export default function AiStudioPage() {
                 gap: '8px',
                 padding: '10px 18px',
                 borderRadius: '10px',
-                fontSize: '13px',
+                fontSize: 'var(--text-small)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
@@ -331,35 +331,35 @@ export default function AiStudioPage() {
           {/* Top KPI Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '28px' }}>
             <div style={{ padding: '20px', borderRadius: '14px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Search size={14} color="var(--accent)" /> Content Opportunities
               </div>
               <div style={{ fontSize: '28px', fontWeight: 700 }}>{data?.stats?.topicsCount ?? '—'}</div>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Identified technical topics</div>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '4px' }}>Identified technical topics</div>
             </div>
 
             <div style={{ padding: '20px', borderRadius: '14px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Clock size={14} color="#f59e0b" /> Pending Approvals
               </div>
               <div style={{ fontSize: '28px', fontWeight: 700, color: '#f59e0b' }}>{data?.stats?.draftsCount ?? '—'}</div>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Awaiting editorial review</div>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '4px' }}>Awaiting editorial review</div>
             </div>
 
             <div style={{ padding: '20px', borderRadius: '14px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <CheckCircle2 size={14} color="#10b981" /> Published via AI
               </div>
               <div style={{ fontSize: '28px', fontWeight: 700, color: '#10b981' }}>{data?.stats?.publishedCount ?? '—'}</div>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Promoted to public catalog</div>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '4px' }}>Promoted to public catalog</div>
             </div>
 
             <div style={{ padding: '20px', borderRadius: '14px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.08em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <DollarSign size={14} color="var(--accent)" /> Monthly Spend
               </div>
               <div style={{ fontSize: '28px', fontWeight: 700 }}>${(data?.stats?.currentMonthSpend ?? 0).toFixed(3)}</div>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Cap: ${(data?.stats?.monthlyBudget ?? 25).toFixed(2)} / month</div>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '4px' }}>Cap: ${(data?.stats?.monthlyBudget ?? 25).toFixed(2)} / month</div>
             </div>
           </div>
 
@@ -369,41 +369,41 @@ export default function AiStudioPage() {
               <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Sparkles size={18} color="var(--accent)" /> Quick Article Creator
               </h3>
-              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '18px' }}>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginBottom: '18px' }}>
                 Launch a research-backed generation job immediately.
               </p>
 
               <form onSubmit={handleQuickDraft}>
                 <div style={{ marginBottom: '14px' }}>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '6px' }}>Topic Title</label>
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '6px' }}>Topic Title</label>
                   <input
                     type="text"
                     value={genTopic}
                     onChange={(e) => setGenTopic(e.target.value)}
                     placeholder="e.g. Real-Time Data Streaming with Microsoft Fabric Eventhouse"
                     required
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                   />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '6px' }}>Category</label>
+                    <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '6px' }}>Category</label>
                     <select
                       value={genCategory}
                       onChange={(e) => setGenCategory(e.target.value)}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                     >
                       {DEFAULT_AI_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '6px' }}>Tier</label>
+                    <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 500, color: 'var(--text-muted)', marginBottom: '6px' }}>Tier</label>
                     <select
                       value={genTier}
                       onChange={(e) => setGenTier(e.target.value as any)}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                     >
                       <option value="STANDARD">Standard (1.2k words)</option>
                       <option value="COMPREHENSIVE">Comprehensive (2.4k words)</option>
@@ -440,13 +440,13 @@ export default function AiStudioPage() {
             <div style={{ padding: '24px', borderRadius: '16px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <h3 style={{ fontSize: '16px', fontWeight: 600 }}>Recent Drafts & Approvals</h3>
-                <button onClick={() => setActiveTab('drafts')} style={{ fontSize: '12px', color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <button onClick={() => setActiveTab('drafts')} style={{ fontSize: 'var(--text-small)', color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   View All <ArrowRight size={12} />
                 </button>
               </div>
 
               {(!data?.recentDrafts || data.recentDrafts.length === 0) ? (
-                <div style={{ padding: '30px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '13px' }}>
+                <div style={{ padding: '30px', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--text-small)' }}>
                   No drafts created yet. Launch your first generation above!
                 </div>
               ) : (
@@ -454,8 +454,8 @@ export default function AiStudioPage() {
                   {data.recentDrafts.map((d: any) => (
                     <div key={d.id} style={{ padding: '14px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ minWidth: 0, flex: 1, paddingRight: '12px' }}>
-                        <div style={{ fontSize: '13px', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{d.title}</div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
+                        <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{d.title}</div>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '4px' }}>
                           {d.category} · {d.wordCount} words · Score: {d.qualityScore ? `${Math.round(d.qualityScore)}/100` : 'Evaluating'}
                         </div>
                       </div>
@@ -463,17 +463,17 @@ export default function AiStudioPage() {
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                         <button
                           onClick={() => openReviewModal(d)}
-                          style={{ padding: '6px 10px', borderRadius: '6px', background: 'var(--surface)', color: 'var(--text)', fontSize: '11px', fontWeight: 600, border: '1px solid var(--border)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                          style={{ padding: '6px 10px', borderRadius: '6px', background: 'var(--surface)', color: 'var(--text)', fontSize: 'var(--text-small)', fontWeight: 600, border: '1px solid var(--border)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
                         >
                           <Eye size={12} /> Review & Edit
                         </button>
                         {d.status === 'PUBLISHED' ? (
-                          <span style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '6px', background: '#10b98120', color: '#10b981', fontWeight: 600 }}>PUBLISHED</span>
+                          <span style={{ fontSize: 'var(--text-small)', padding: '4px 8px', borderRadius: '6px', background: '#10b98120', color: '#10b981', fontWeight: 600 }}>PUBLISHED</span>
                         ) : (
                           <button
                             onClick={() => handleAction('publish-draft', { draftId: d.id, publishImmediately: true })}
                             disabled={actionLoading === 'publish-draft'}
-                            style={{ padding: '6px 12px', borderRadius: '6px', background: 'var(--accent)', color: '#000', fontSize: '11px', fontWeight: 600, border: 'none', cursor: 'pointer' }}
+                            style={{ padding: '6px 12px', borderRadius: '6px', background: 'var(--accent)', color: '#000', fontSize: 'var(--text-small)', fontWeight: 600, border: 'none', cursor: 'pointer' }}
                           >
                             Approve & Publish
                           </button>
@@ -494,7 +494,7 @@ export default function AiStudioPage() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: 600, margin: '0 0 4px' }}>Content Opportunities & Gaps</h2>
-              <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Identified through competitive gap analysis and search intent evaluation.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Identified through competitive gap analysis and search intent evaluation.</p>
             </div>
 
             <button
@@ -520,17 +520,17 @@ export default function AiStudioPage() {
                 <div key={t.id} style={{ padding: '18px', borderRadius: '12px', background: 'var(--surface)', border: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
                   <div style={{ flex: 1, minWidth: '260px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '4px', background: 'color-mix(in srgb, var(--accent) 15%, transparent)', color: 'var(--accent)', fontWeight: 600 }}>{t.category}</span>
-                      <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Intent: {t.searchIntent}</span>
+                      <span style={{ fontSize: 'var(--text-small)', padding: '2px 8px', borderRadius: '4px', background: 'color-mix(in srgb, var(--accent) 15%, transparent)', color: 'var(--accent)', fontWeight: 600 }}>{t.category}</span>
+                      <span style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Intent: {t.searchIntent}</span>
                     </div>
                     <div style={{ fontSize: '15px', fontWeight: 600, marginBottom: '4px' }}>{t.topic}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{t.contentGapRationale}</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>{t.contentGapRationale}</div>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <div style={{ textAlign: 'right' }}>
                       <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--accent)' }}>{t.opportunityScore}</div>
-                      <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>OPPORTUNITY</div>
+                      <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>OPPORTUNITY</div>
                     </div>
 
                     <button
@@ -555,13 +555,13 @@ export default function AiStudioPage() {
       {activeTab === 'generator' && (
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '32px', borderRadius: '16px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
           <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '6px' }}>Autonomous Technical Article Generator</h2>
-          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '24px' }}>
+          <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginBottom: '24px' }}>
             Generates deep, practical documentation citing official Microsoft Learn / tech sources with verified outline and SEO metadata.
           </p>
 
           <form onSubmit={handleQuickDraft}>
             <div style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '8px' }}>Topic / Subject</label>
+              <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Topic / Subject</label>
               <input
                 type="text"
                 value={genTopic}
@@ -574,22 +574,22 @@ export default function AiStudioPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '8px' }}>Category</label>
+                <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Category</label>
                 <select
                   value={genCategory}
                   onChange={(e) => setGenCategory(e.target.value)}
-                  style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                  style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                 >
                   {DEFAULT_AI_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '8px' }}>Target Word Count Tier</label>
+                <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Target Word Count Tier</label>
                 <select
                   value={genTier}
                   onChange={(e) => setGenTier(e.target.value as any)}
-                  style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                  style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                 >
                   <option value="STANDARD">Standard (1,000–1,800 words)</option>
                   <option value="COMPREHENSIVE">Comprehensive (1,800–3,000 words)</option>
@@ -599,7 +599,7 @@ export default function AiStudioPage() {
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '8px' }}>Operating Mode for this Draft</label>
+              <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Operating Mode for this Draft</label>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
                 {[
                   { id: 'MANUAL', label: 'Mode A: Manual', desc: 'Manual generation only' },
@@ -617,8 +617,8 @@ export default function AiStudioPage() {
                       cursor: 'pointer',
                     }}
                   >
-                    <div style={{ fontSize: '12px', fontWeight: 600 }}>{m.label}</div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{m.desc}</div>
+                    <div style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>{m.label}</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '2px' }}>{m.desc}</div>
                   </div>
                 ))}
               </div>
@@ -643,7 +643,7 @@ export default function AiStudioPage() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div>
               <h2 style={{ fontSize: '18px', fontWeight: 600, margin: '0 0 4px' }}>Editorial Drafts & Approvals</h2>
-              <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Review AI drafts, examine factual scores, and approve for publication.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Review AI drafts, examine factual scores, and approve for publication.</p>
             </div>
           </div>
 
@@ -659,11 +659,11 @@ export default function AiStudioPage() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                        <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '4px', background: d.status === 'PUBLISHED' ? '#10b98120' : '#f59e0b20', color: d.status === 'PUBLISHED' ? '#10b981' : '#f59e0b', fontWeight: 600 }}>{d.status}</span>
-                        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{d.category} · {d.wordCount} words · {d.readTime} min read</span>
+                        <span style={{ fontSize: 'var(--text-small)', padding: '2px 8px', borderRadius: '4px', background: d.status === 'PUBLISHED' ? '#10b98120' : '#f59e0b20', color: d.status === 'PUBLISHED' ? '#10b981' : '#f59e0b', fontWeight: 600 }}>{d.status}</span>
+                        <span style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>{d.category} · {d.wordCount} words · {d.readTime} min read</span>
                       </div>
                       <h3 style={{ fontSize: '16px', fontWeight: 600, margin: 0 }}>{d.title}</h3>
-                      <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Slug: /blog/{d.slug}</div>
+                      <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '4px' }}>Slug: /blog/{d.slug}</div>
                     </div>
 
                     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -731,10 +731,10 @@ export default function AiStudioPage() {
                     </div>
                   </div>
 
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: '0 0 14px' }}>{d.excerpt}</p>
+                  <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', margin: '0 0 14px' }}>{d.excerpt}</p>
 
                   {/* Quality Badges */}
-                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', padding: '12px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', fontSize: '12px', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', padding: '12px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', fontSize: 'var(--text-small)', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       Overall Quality: 
                       <strong style={{
@@ -749,7 +749,7 @@ export default function AiStudioPage() {
                     <div>Mode: <strong>{d.operatingMode}</strong></div>
                     <button
                       onClick={() => openReviewModal(d, 'seo')}
-                      style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                      style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: 'var(--text-small)', display: 'flex', alignItems: 'center', gap: '4px' }}
                     >
                       Why score is {Math.round(d.qualityScore || 0)}/100? Inspect Breakdown & SEO →
                     </button>
@@ -768,11 +768,11 @@ export default function AiStudioPage() {
             <h2 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Terminal size={18} color="var(--accent)" /> Model Context Protocol (MCP) Server
             </h2>
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '18px' }}>
+            <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginBottom: '18px' }}>
               Connect external AI agents (like Claude Desktop, Antigravity IDE, Cursor, or CLI) directly to your Content Studio services.
             </p>
 
-            <div style={{ padding: '14px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', marginBottom: '18px', fontFamily: 'monospace', fontSize: '13px' }}>
+            <div style={{ padding: '14px', borderRadius: '10px', background: 'var(--bg)', border: '1px solid var(--border)', marginBottom: '18px', fontFamily: 'monospace', fontSize: 'var(--text-small)' }}>
               <div><strong>Endpoint:</strong> <code>https://dattasable.com/api/mcp</code></div>
               <div style={{ marginTop: '6px' }}><strong>Protocol:</strong> JSON-RPC 2.0 (MCP 2024-11-05)</div>
               <div style={{ marginTop: '6px' }}><strong>Authentication:</strong> <code>Authorization: Bearer &lt;MCP_API_KEY&gt;</code></div>
@@ -792,8 +792,8 @@ export default function AiStudioPage() {
                 { name: 'pause_automation', desc: 'Emergency pause killswitch' },
               ].map(tool => (
                 <div key={tool.name} style={{ padding: '10px 12px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
-                  <div style={{ fontSize: '12px', fontWeight: 600, fontFamily: 'monospace', color: 'var(--accent)' }}>{tool.name}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{tool.desc}</div>
+                  <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, fontFamily: 'monospace', color: 'var(--accent)' }}>{tool.name}</div>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '2px' }}>{tool.desc}</div>
                 </div>
               ))}
             </div>
@@ -805,7 +805,7 @@ export default function AiStudioPage() {
       {activeTab === 'settings' && (
         <div style={{ maxWidth: '750px', margin: '0 auto', padding: '28px', borderRadius: '16px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '6px' }}>Automation Settings & Spending Limits</h2>
-          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '24px' }}>
+          <p style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginBottom: '24px' }}>
             Configure default operating modes, monthly budget guardrails, and safety parameters.
           </p>
 
@@ -817,7 +817,7 @@ export default function AiStudioPage() {
             });
           }}>
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, marginBottom: '8px' }}>Default Operating Mode</label>
+              <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Default Operating Mode</label>
               <div style={{ display: 'grid', gap: '10px' }}>
                 {[
                   { id: 'MANUAL', label: 'Mode A: Manual Approval', desc: 'Admin starts every workflow and reviews every piece of content.' },
@@ -835,15 +835,15 @@ export default function AiStudioPage() {
                       cursor: 'pointer',
                     }}
                   >
-                    <div style={{ fontSize: '13px', fontWeight: 600 }}>{m.label}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '3px' }}>{m.desc}</div>
+                    <div style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>{m.label}</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '3px' }}>{m.desc}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, marginBottom: '8px' }}>Monthly AI Hard Budget (USD)</label>
+              <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Monthly AI Hard Budget (USD)</label>
               <input
                 type="number"
                 min="5"
@@ -853,7 +853,7 @@ export default function AiStudioPage() {
                 onChange={(e) => setSettingsBudget(Number(e.target.value))}
                 style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '14px' }}
               />
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '6px' }}>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '6px' }}>
                 If monthly spending reaches this threshold, all automated generations will be paused.
               </div>
             </div>
@@ -874,7 +874,7 @@ export default function AiStudioPage() {
               <div style={{ padding: '30px', textAlign: 'center', color: 'var(--text-muted)' }}>No logs recorded yet.</div>
             ) : (
               data.usage.map((u: any) => (
-                <div key={u.id} style={{ padding: '12px 16px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px' }}>
+                <div key={u.id} style={{ padding: '12px 16px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'var(--text-small)' }}>
                   <div>
                     <strong>[{u.task}]</strong> via {u.provider} ({u.model})
                     <span style={{ color: 'var(--text-muted)', marginLeft: '10px' }}>{new Date(u.createdAt).toLocaleTimeString()}</span>
@@ -926,7 +926,7 @@ export default function AiStudioPage() {
               <div style={{ minWidth: 0, flex: 1, paddingRight: '20px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                   <span style={{
-                    fontSize: '11px',
+                    fontSize: 'var(--text-small)',
                     padding: '2px 8px',
                     borderRadius: '4px',
                     background: reviewDraft.status === 'PUBLISHED' ? '#10b98120' : '#f59e0b20',
@@ -935,7 +935,7 @@ export default function AiStudioPage() {
                   }}>
                     {reviewDraft.status}
                   </span>
-                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>
                     {editCategory} · {editContent.trim().split(/\s+/).filter(Boolean).length} words · ~{Math.max(3, Math.ceil(editContent.trim().split(/\s+/).filter(Boolean).length / 200))} min read
                   </span>
                 </div>
@@ -953,7 +953,7 @@ export default function AiStudioPage() {
                   borderRadius: '8px',
                   background: 'var(--surface)',
                   border: '1px solid var(--border)',
-                  fontSize: '12px',
+                  fontSize: 'var(--text-small)',
                 }}>
                   <span style={{ color: 'var(--text-muted)' }}>Quality:</span>
                   <strong style={{
@@ -1006,7 +1006,7 @@ export default function AiStudioPage() {
                       gap: '8px',
                       padding: '8px 14px',
                       borderRadius: '8px',
-                      fontSize: '12px',
+                      fontSize: 'var(--text-small)',
                       fontWeight: 600,
                       cursor: 'pointer',
                       background: isTabActive ? 'var(--accent)' : 'transparent',
@@ -1036,7 +1036,7 @@ export default function AiStudioPage() {
                     position: 'sticky',
                     top: 0,
                   }}>
-                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <List size={14} color="var(--accent)" /> Table of Contents
                     </div>
                     {(() => {
@@ -1047,13 +1047,13 @@ export default function AiStudioPage() {
                         if (m) headings.push({ level: m[1].length, text: m[2].trim() });
                       }
                       if (headings.length === 0) {
-                        return <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>No H2/H3 headings found in markdown.</div>;
+                        return <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>No H2/H3 headings found in markdown.</div>;
                       }
                       return (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                           {headings.map((h, i) => (
                             <div key={i} style={{
-                              fontSize: '12px',
+                              fontSize: 'var(--text-small)',
                               paddingLeft: h.level === 3 ? '12px' : '0px',
                               color: h.level === 2 ? 'var(--text)' : 'var(--text-muted)',
                               borderLeft: h.level === 2 ? '2px solid var(--accent)' : '2px solid transparent',
@@ -1075,7 +1075,7 @@ export default function AiStudioPage() {
                     border: '1px solid var(--border)',
                   }}>
                     <div style={{ marginBottom: '18px', paddingBottom: '16px', borderBottom: '1px solid var(--border)' }}>
-                      <span style={{ fontSize: '12px', color: 'var(--accent)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{editCategory}</span>
+                      <span style={{ fontSize: 'var(--text-small)', color: 'var(--accent)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{editCategory}</span>
                       <h1 style={{ fontSize: '26px', fontWeight: 800, marginTop: '8px', marginBottom: '12px', lineHeight: 1.25 }}>{editTitle}</h1>
                       <p style={{ fontSize: '15px', color: 'var(--text-muted)', lineHeight: 1.6, fontStyle: 'italic' }}>{editExcerpt}</p>
                     </div>
@@ -1104,7 +1104,7 @@ export default function AiStudioPage() {
               {reviewTab === 'editor' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>
                       Edit title, slug, excerpt, and full markdown body directly.
                     </div>
 
@@ -1113,7 +1113,7 @@ export default function AiStudioPage() {
                       onClick={handleEnrichDraft}
                       disabled={actionLoading === 'enrich-draft'}
                       className={adminStyles.primary}
-                      style={{ fontSize: '12px', padding: '8px 14px' }}
+                      style={{ fontSize: 'var(--text-small)', padding: '8px 14px' }}
                     >
                       <Sparkles size={13} className={actionLoading === 'enrich-draft' ? 'animate-spin' : ''} />
                       {actionLoading === 'enrich-draft' ? 'AI Deepening in progress...' : '✨ AI Deepen / Expand to 2,500 words'}
@@ -1122,21 +1122,21 @@ export default function AiStudioPage() {
 
                   <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '14px' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>Article Title</label>
+                      <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '6px' }}>Article Title</label>
                       <input
                         type="text"
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
-                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>Category</label>
+                      <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '6px' }}>Category</label>
                       <select
                         value={editCategory}
                         onChange={(e) => setEditCategory(e.target.value)}
-                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                       >
                         {DEFAULT_AI_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                       </select>
@@ -1144,21 +1144,21 @@ export default function AiStudioPage() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>
+                    <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '6px' }}>
                       Slug URL (/blog/...)
                     </label>
                     <input
                       type="text"
                       value={editSlug}
                       onChange={(e) => setEditSlug(e.target.value)}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px', fontFamily: 'monospace' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)', fontFamily: 'monospace' }}
                     />
                   </div>
 
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                      <label style={{ fontSize: '12px', fontWeight: 600 }}>Excerpt Summary</label>
-                      <span style={{ fontSize: '11px', color: editExcerpt.length > 160 ? '#ef4444' : 'var(--text-muted)' }}>
+                      <label style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>Excerpt Summary</label>
+                      <span style={{ fontSize: 'var(--text-small)', color: editExcerpt.length > 160 ? '#ef4444' : 'var(--text-muted)' }}>
                         {editExcerpt.length} / 160 chars
                       </span>
                     </div>
@@ -1166,14 +1166,14 @@ export default function AiStudioPage() {
                       rows={2}
                       value={editExcerpt}
                       onChange={(e) => setEditExcerpt(e.target.value)}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px', resize: 'vertical' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)', resize: 'vertical' }}
                     />
                   </div>
 
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                      <label style={{ fontSize: '12px', fontWeight: 600 }}>Full Markdown Content</label>
-                      <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                      <label style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>Full Markdown Content</label>
+                      <span style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>
                         {editContent.trim().split(/\s+/).filter(Boolean).length} words
                       </span>
                     </div>
@@ -1181,7 +1181,7 @@ export default function AiStudioPage() {
                       rows={16}
                       value={editContent}
                       onChange={(e) => setEditContent(e.target.value)}
-                      style={{ width: '100%', padding: '14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px', fontFamily: 'monospace', lineHeight: 1.6, resize: 'vertical' }}
+                      style={{ width: '100%', padding: '14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)', fontFamily: 'monospace', lineHeight: 1.6, resize: 'vertical' }}
                     />
                   </div>
                 </div>
@@ -1192,11 +1192,11 @@ export default function AiStudioPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
                   {/* Google SERP Preview Card */}
                   <div style={{ padding: '20px', borderRadius: '12px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
-                    <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '14px' }}>
+                    <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '14px' }}>
                       Google Search Result Snippet Preview
                     </div>
                     <div style={{ padding: '16px', borderRadius: '10px', background: '#1c1c1c', border: '1px solid #2a2a2a' }}>
-                      <div style={{ fontSize: '12px', color: '#8ab4f8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div style={{ fontSize: 'var(--text-small)', color: '#8ab4f8', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <span>https://dattasable.com</span>
                         <span>›</span>
                         <span>blog</span>
@@ -1206,7 +1206,7 @@ export default function AiStudioPage() {
                       <div style={{ fontSize: '18px', color: '#8ab4f8', fontWeight: 500, margin: '4px 0 6px', cursor: 'pointer' }}>
                         {editSeoTitle || editTitle} | Datta Sable
                       </div>
-                      <div style={{ fontSize: '13px', color: '#bdc1c6', lineHeight: 1.5 }}>
+                      <div style={{ fontSize: 'var(--text-small)', color: '#bdc1c6', lineHeight: 1.5 }}>
                         {editSeoDescription || editExcerpt}
                       </div>
                     </div>
@@ -1216,8 +1216,8 @@ export default function AiStudioPage() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                        <label style={{ fontSize: '12px', fontWeight: 600 }}>SEO Meta Title</label>
-                        <span style={{ fontSize: '11px', color: editSeoTitle.length > 60 ? '#f59e0b' : 'var(--text-muted)' }}>
+                        <label style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>SEO Meta Title</label>
+                        <span style={{ fontSize: 'var(--text-small)', color: editSeoTitle.length > 60 ? '#f59e0b' : 'var(--text-muted)' }}>
                           {editSeoTitle.length}/60 chars
                         </span>
                       </div>
@@ -1225,12 +1225,12 @@ export default function AiStudioPage() {
                         type="text"
                         value={editSeoTitle}
                         onChange={(e) => setEditSeoTitle(e.target.value)}
-                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>
+                      <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '6px' }}>
                         Target Focus Keywords (comma-separated)
                       </label>
                       <input
@@ -1238,15 +1238,15 @@ export default function AiStudioPage() {
                         value={editKeywords}
                         onChange={(e) => setEditKeywords(e.target.value)}
                         placeholder="e.g. Microsoft Fabric, Data Factory, ETL"
-                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                       />
                     </div>
                   </div>
 
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                      <label style={{ fontSize: '12px', fontWeight: 600 }}>SEO Meta Description</label>
-                      <span style={{ fontSize: '11px', color: editSeoDescription.length > 160 ? '#f59e0b' : 'var(--text-muted)' }}>
+                      <label style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>SEO Meta Description</label>
+                      <span style={{ fontSize: 'var(--text-small)', color: editSeoDescription.length > 160 ? '#f59e0b' : 'var(--text-muted)' }}>
                         {editSeoDescription.length}/160 chars
                       </span>
                     </div>
@@ -1254,14 +1254,14 @@ export default function AiStudioPage() {
                       rows={2}
                       value={editSeoDescription}
                       onChange={(e) => setEditSeoDescription(e.target.value)}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: '13px' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', fontSize: 'var(--text-small)' }}
                     />
                   </div>
 
                   {/* Quality Gate Breakdown */}
                   <div style={{ padding: '20px', borderRadius: '12px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                      <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700 }}>
+                      <div style={{ fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', fontWeight: 700 }}>
                         Quality Gate Breakdown & Diagnostics
                       </div>
                       <div style={{
@@ -1276,41 +1276,41 @@ export default function AiStudioPage() {
                     {/* Quality Gate Checks */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '16px' }}>
                       <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Technical Length</div>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Technical Length</div>
                         <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: editContent.trim().split(/\s+/).filter(Boolean).length >= 600 ? '#10b981' : '#f59e0b' }}>
                           {editContent.trim().split(/\s+/).filter(Boolean).length} words
                         </div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '2px' }}>
                           {editContent.trim().split(/\s+/).filter(Boolean).length < 600 ? '⚠️ Under 600w threshold (-30 pts)' : '✓ Depth passed'}
                         </div>
                       </div>
 
                       <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Heading Hierarchy</div>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Heading Hierarchy</div>
                         <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: (editContent.match(/^##\s+.+$/gm) || []).length >= 3 ? '#10b981' : '#f59e0b' }}>
                           {(editContent.match(/^##\s+.+$/gm) || []).length} H2 sections
                         </div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '2px' }}>
                           {(editContent.match(/^##\s+.+$/gm) || []).length >= 3 ? '✓ 3+ H2s present' : '⚠️ Need at least 3 H2s'}
                         </div>
                       </div>
 
                       <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Practical Assets</div>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Practical Assets</div>
                         <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: editContent.includes('```') ? '#10b981' : '#f59e0b' }}>
                           {editContent.includes('```') ? 'Code snippets present' : 'Missing code snippets'}
                         </div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '2px' }}>
                           {editContent.includes('```') ? '✓ Practical DAX/SQL code' : '⚠️ Add code for +10 pts'}
                         </div>
                       </div>
 
                       <div style={{ padding: '12px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Originality & Duplicate Risk</div>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>Originality & Duplicate Risk</div>
                         <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px', color: '#10b981' }}>
                           {reviewDraft.originalityScore ? `${Math.round(reviewDraft.originalityScore)}%` : '100%'} Unique
                         </div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginTop: '2px' }}>
                           ✓ 0% duplicate risk
                         </div>
                       </div>
@@ -1319,8 +1319,8 @@ export default function AiStudioPage() {
                     {/* Blockers & Recommendations */}
                     {reviewDraft.qualityReports?.[0]?.blockers?.length > 0 && (
                       <div style={{ marginBottom: '12px' }}>
-                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#ef4444', marginBottom: '6px' }}>Quality Blockers:</div>
-                        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: '#ef4444' }}>
+                        <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: '#ef4444', marginBottom: '6px' }}>Quality Blockers:</div>
+                        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--text-small)', color: '#ef4444' }}>
                           {reviewDraft.qualityReports[0].blockers.map((b: string, i: number) => (
                             <li key={i}>{b}</li>
                           ))}
@@ -1330,8 +1330,8 @@ export default function AiStudioPage() {
 
                     {reviewDraft.qualityReports?.[0]?.recommendations?.length > 0 && (
                       <div>
-                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#f59e0b', marginBottom: '6px' }}>Recommendations to boost score:</div>
-                        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: 'var(--text-muted)' }}>
+                        <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: '#f59e0b', marginBottom: '6px' }}>Recommendations to boost score:</div>
+                        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>
                           {reviewDraft.qualityReports[0].recommendations.map((r: string, i: number) => (
                             <li key={i}>{r}</li>
                           ))}
@@ -1423,7 +1423,7 @@ export default function AiStudioPage() {
             </div>
 
             {gscModalData.url && (
-              <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 16, wordBreak: 'break-all' }}>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--text-muted)', marginBottom: 16, wordBreak: 'break-all' }}>
                 URL: <strong style={{ color: 'var(--text)' }}>{gscModalData.url}</strong>
               </div>
             )}
@@ -1431,7 +1431,7 @@ export default function AiStudioPage() {
             {gscModalData.loading ? (
               <div style={{ padding: '36px 0', textAlign: 'center' }}>
                 <Sparkles size={24} className="animate-spin" style={{ color: 'var(--accent)', margin: '0 auto 12px' }} />
-                <p style={{ color: 'var(--text-muted)', fontSize: 13 }}>Querying Google Search Console API...</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: 'var(--text-small)' }}>Querying Google Search Console API...</p>
               </div>
             ) : (
               <div style={{ display: 'grid', gap: 12 }}>
@@ -1450,7 +1450,7 @@ export default function AiStudioPage() {
                         <CheckCircle2 size={20} color="#10b981" />
                         <div>
                           <strong style={{ color: '#10b981', display: 'block' }}>Submission Successful</strong>
-                          <span style={{ fontSize: 12, color: 'var(--text)' }}>
+                          <span style={{ fontSize: 'var(--text-small)', color: 'var(--text)' }}>
                             Queued for Googlebot crawling. Notification timestamp: {gscModalData.data.notifiedAt || new Date().toLocaleTimeString()}
                           </span>
                         </div>
@@ -1460,7 +1460,7 @@ export default function AiStudioPage() {
                         <AlertCircle size={20} color="#ef4444" />
                         <div>
                           <strong style={{ color: '#ef4444', display: 'block' }}>Submission Issue</strong>
-                          <span style={{ fontSize: 12, color: 'var(--text)' }}>
+                          <span style={{ fontSize: 'var(--text-small)', color: 'var(--text)' }}>
                             {gscModalData.data.error || 'Failed to submit URL'}
                           </span>
                         </div>
@@ -1490,28 +1490,28 @@ export default function AiStudioPage() {
                             Verdict: {idx.verdict || 'PENDING'} · {idx.coverageState || 'Processing'}
                           </strong>
                           {!isIndexed && (
-                            <p style={{ margin: '4px 0 0', fontSize: 11, color: 'var(--text-muted)' }}>
+                            <p style={{ margin: '4px 0 0', fontSize: 'var(--text-small)', color: 'var(--text-muted)' }}>
                               URL was recently submitted to Googlebot. Google Search Console typically updates its index database within a few hours of publication.
                             </p>
                           )}
                         </div>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12 }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 'var(--text-small)' }}>
                         <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Robots.txt</span>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 'var(--text-small)' }}>Robots.txt</span>
                           <strong>{idx.robotsTxtState || 'ALLOWED'}</strong>
                         </div>
                         <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Page Fetch</span>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 'var(--text-small)' }}>Page Fetch</span>
                           <strong>{idx.pageFetchState || 'SUCCESSFUL'}</strong>
                         </div>
                         <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Crawled As</span>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 'var(--text-small)' }}>Crawled As</span>
                           <strong>{idx.crawledAs || 'MOBILE'}</strong>
                         </div>
                         <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 10 }}>Last Crawled</span>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 'var(--text-small)' }}>Last Crawled</span>
                           <strong>{idx.lastCrawlTime ? new Date(idx.lastCrawlTime).toLocaleString() : 'Pending Googlebot visit'}</strong>
                         </div>
                       </div>
@@ -1520,7 +1520,7 @@ export default function AiStudioPage() {
                 })()}
 
                 {gscModalData.data?.error && !gscModalData.data?.success && (
-                  <div style={{ padding: 12, borderRadius: 8, background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontSize: 12 }}>
+                  <div style={{ padding: 12, borderRadius: 8, background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontSize: 'var(--text-small)' }}>
                     {typeof gscModalData.data.error === 'string' ? gscModalData.data.error : JSON.stringify(gscModalData.data.error)}
                   </div>
                 )}

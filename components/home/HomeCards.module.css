@@ -7,7 +7,7 @@
   margin: 8px 0 12px;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 500;
   line-height: 1.65;
   letter-spacing: .03em;

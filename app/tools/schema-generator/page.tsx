@@ -199,7 +199,7 @@ export default function SchemaForge() {
           {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
           
           <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
@@ -218,19 +218,19 @@ export default function SchemaForge() {
           <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Standard Compliant</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Standard Compliant</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Generates schema objects that match schema.org and Google's official developer specifications.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Pre-formatted Blocks</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Pre-formatted Blocks</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Outputs complete `&lt;script type="application/ld+json"&gt;` blocks ready for copy-pasting.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Responsive Setup</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Responsive Setup</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Updates schemas instantly as you type data, minimizing errors and syntax typos.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Dynamic Schema Support</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Dynamic Schema Support</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Enables creation of Article, Product, and VideoObject schemas from a single UI.</div>
             </div>
           </div>

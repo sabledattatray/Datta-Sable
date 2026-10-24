@@ -93,7 +93,7 @@ export default function ContactPageClient() {
                         {item.icon}
                       </div>
                       <div>
-                        <div style={{ color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '0.2rem' }}>{item.label}</div>
+                        <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.2rem' }}>{item.label}</div>
                         <div style={{ color: 'var(--text)', fontSize: '0.9rem', fontWeight: 500 }}>{item.value}</div>
                       </div>
                     </a>
@@ -101,7 +101,7 @@ export default function ContactPageClient() {
                 </div>
 
                 <div style={{ marginBottom: '2rem' }}>
-                  <div className="mono" style={{ color: 'var(--muted)', fontSize: '0.75rem', marginBottom: '1rem', letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.8 }}>Network-Nodes</div>
+                  <div className="mono" style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '1rem', letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.8 }}>Network-Nodes</div>
                   <div className="flex flex-wrap gap-4">
                     {socials.map(s => (
                       <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}
@@ -130,7 +130,7 @@ export default function ContactPageClient() {
                 </div>
 
                 <div className="card" style={{ padding: '1.5rem', background: 'var(--surface2)' }}>
-                  <div className="mono" style={{ color: 'var(--accent)', fontSize: '0.75rem', marginBottom: '1.25rem', letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center' }}>
+                  <div className="mono" style={{ color: 'var(--accent)', fontSize: 'var(--text-small)', marginBottom: '1.25rem', letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center' }}>
                     {session ? `Connected as ${session.user?.name}` : 'One-Tap Connect'}
                   </div>
                   <div className="grid grid-cols-3 gap-3">
@@ -172,7 +172,7 @@ export default function ContactPageClient() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '1rem' }}>
                       {[{ name: 'name', label: 'Your Name', type: 'text' }, { name: 'email', label: 'Email Address', type: 'email' }].map(field => (
                         <div key={field.name}>
-                          <label htmlFor={`contact-${field.name}`} style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{field.label}</label>
+                          <label htmlFor={`contact-${field.name}`} style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{field.label}</label>
                           <input
                             id={`contact-${field.name}`}
                             type={field.type} name={field.name} value={form[field.name as keyof typeof form]} onChange={handleChange} required
@@ -182,7 +182,7 @@ export default function ContactPageClient() {
                       ))}
                     </div>
                     <div>
-                      <label htmlFor="contact-subject" style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
+                      <label htmlFor="contact-subject" style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Subject</label>
                       <select id="contact-subject" name="subject" value={form.subject} onChange={handleChange}
                         style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: form.subject ? 'var(--text)' : 'var(--muted)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif' }}>
                         <option value="">Select a topic...</option>
@@ -193,7 +193,7 @@ export default function ContactPageClient() {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="contact-message" style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
+                      <label htmlFor="contact-message" style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
                       <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} required rows={5}
                         style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', fontSize: '0.9rem', outline: 'none', fontFamily: 'Space Grotesk, sans-serif', resize: 'vertical' }}
                       />

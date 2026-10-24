@@ -49,7 +49,7 @@ export default function AdSense({ slot, format = 'auto', responsive = 'true', st
       />
       
       {/* Debug label for development */}
-      <div className="mono" style={{ position: 'absolute', fontSize: '8px', color: 'var(--muted)', opacity: 0.5 }}>
+      <div className="mono" style={{ position: 'absolute', fontSize: 'var(--text-small)', color: 'var(--muted)', opacity: 0.5 }}>
         AD_SLOT: {slot}
       </div>
     </div>

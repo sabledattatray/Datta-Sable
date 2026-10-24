@@ -34,7 +34,7 @@ export default function DiagramRenderer({ name }: { name: string }) {
           padding: '1.5rem',
           borderRadius: '4px',
           color: '#ef4444',
-          fontSize: '0.85rem',
+          fontSize: 'var(--text-small)',
           fontFamily: 'monospace'
         }}>
           Error: Diagram token ID "{name}" is not registered in the rendering engine pipeline.

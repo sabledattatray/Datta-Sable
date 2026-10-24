@@ -62,28 +62,43 @@ export async function validateAuthoritativeSource(urlStr: string): Promise<{
       (d) => domain === d || domain.endsWith('.' + d)
     );
 
-    let httpStatus = 0;
-    try {
-      const headRes = await fetch(urlStr, {
-        method: 'HEAD',
-        headers: {
-          'User-Agent': 'DattaSableResearchBot/2.0 (+https://dattasable.com)',
-        },
-        signal: AbortSignal.timeout(3500),
-        redirect: 'follow',
-      });
-      httpStatus = headRes.status;
-      if (httpStatus === 405) {
-        const getRes = await fetch(urlStr, {
-          method: 'GET',
+    // Validate before making any network request, including redirect targets.
+    if (!isAuthoritativeDomain || parsed.protocol !== 'https:' || parsed.username || parsed.password || (parsed.port && parsed.port !== '443')) {
+      return { verified: false, domain, isAuthoritativeDomain, error: 'Source must use HTTPS on an authoritative whitelist domain without credentials or a custom port' };
+    }
+
+    const requestSource = async (method: 'HEAD' | 'GET') => {
+      let target = parsed;
+      const signal = AbortSignal.timeout(3500);
+      for (let redirects = 0; redirects <= 5; redirects++) {
+        const allowed = AUTHORITATIVE_DOMAINS.some(d => target.hostname === d || target.hostname.endsWith('.' + d));
+        if (!allowed || target.protocol !== 'https:' || target.username || target.password || (target.port && target.port !== '443')) {
+          throw new Error('Unsafe source redirect');
+        }
+        const response = await fetch(target.href, {
+          method,
           headers: {
             'User-Agent': 'DattaSableResearchBot/2.0 (+https://dattasable.com)',
-            Range: 'bytes=0-1024',
+            ...(method === 'GET' ? { Range: 'bytes=0-1024' } : {}),
           },
-          signal: AbortSignal.timeout(3500),
-          redirect: 'follow',
+          signal,
+          redirect: 'manual',
         });
-        httpStatus = getRes.status;
+        // Only successful final responses verify a citation. Release GET bodies.
+        await response.body?.cancel();
+        if (![301, 302, 303, 307, 308].includes(response.status)) return response.status;
+        const location = response.headers.get('location');
+        if (!location) throw new Error('Source redirect has no destination');
+        target = new URL(location, target);
+      }
+      throw new Error('Too many source redirects');
+    };
+
+    let httpStatus = 0;
+    try {
+      httpStatus = await requestSource('HEAD');
+      if (httpStatus === 405) {
+        httpStatus = await requestSource('GET');
       }
     } catch (netErr: any) {
       return {
@@ -94,7 +109,7 @@ export async function validateAuthoritativeSource(urlStr: string): Promise<{
       };
     }
 
-    const verified = httpStatus >= 200 && httpStatus < 400 && isAuthoritativeDomain;
+    const verified = httpStatus >= 200 && httpStatus < 300 && isAuthoritativeDomain;
 
     return {
       verified,

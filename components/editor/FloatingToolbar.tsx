@@ -35,7 +35,7 @@ export default function FloatingToolbar({ editor }: FloatingToolbarProps) {
             <button 
               key={`bg-${c}`} 
               onClick={(e) => { e.preventDefault(); editor.chain().focus().setHighlight({ color: c }).run(); setShowColors(false); }}
-              className="w-5 h-5 rounded border border-slate-200 dark:border-slate-700 hover:scale-110 transition-transform flex items-center justify-center text-[10px] text-white" 
+              className="w-5 h-5 rounded border border-slate-200 dark:border-slate-700 hover:scale-110 transition-transform flex items-center justify-center text-[length:var(--text-small)] text-white"
               style={{ backgroundColor: c }}
             >
               H

@@ -342,14 +342,20 @@ export async function POST(req: Request) {
     );
   }
 
-  await ensureAiStudioSchema();
-
   let body: any;
   try {
     body = await req.json();
   } catch {
     return NextResponse.json(
       { jsonrpc: '2.0', error: { code: -32700, message: 'Parse error: invalid JSON' } },
+      { status: 400 }
+    );
+  }
+
+  if (!body || typeof body !== 'object' || Array.isArray(body) || typeof body.method !== 'string' ||
+      (body.params !== undefined && (!body.params || typeof body.params !== 'object' || Array.isArray(body.params)))) {
+    return NextResponse.json(
+      { jsonrpc: '2.0', id: null, error: { code: -32600, message: 'Invalid JSON-RPC request' } },
       { status: 400 }
     );
   }
@@ -413,6 +419,8 @@ export async function POST(req: Request) {
       }
 
       let responseData: any;
+
+      await ensureAiStudioSchema();
 
       switch (toolName) {
         case 'discover_topics':
@@ -621,7 +629,7 @@ export async function POST(req: Request) {
       id,
       error: {
         code: -32000,
-        message: error?.message || 'Internal MCP execution error',
+        message: 'MCP operation temporarily unavailable. Please retry later.',
       },
     });
   }

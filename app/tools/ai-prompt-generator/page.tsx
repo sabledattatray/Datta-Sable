@@ -214,7 +214,7 @@ function PromptGeneratorContent() {
                 >
                   <div>
                     <h5 className="text-xs font-mono font-bold text-[var(--accent)]">OPERATOR_TEMPLATES</h5>
-                    <p className="text-[11px] text-[var(--muted)] font-mono">Load deep research & agent blueprints</p>
+                    <p className="text-[length:var(--text-small)] text-[var(--muted)] font-mono">Load deep research & agent blueprints</p>
                   </div>
                   <ArrowUpRight size={14} className="text-[var(--accent)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Link>
@@ -340,7 +340,7 @@ export default function AIPromptGenerator() {
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>DEEP_DIVE_GUIDE</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>DEEP_DIVE_GUIDE</span>
           </div>
 
           <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '2rem', color: 'var(--text)', lineHeight: 1.2, fontFamily: "'Syne', sans-serif" }}>
@@ -387,19 +387,19 @@ export default function AIPromptGenerator() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '1.5rem', marginBottom: '2.5rem' }}>
               <div style={{ padding: '1.5rem', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Google Gemini</h4>
+                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: 'var(--text-small)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Google Gemini</h4>
                 <p style={{ fontSize: '0.9rem', margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
                   Gemini excels at reasoning when prompts are explicitly divided into structural sections using markdown headings. Appending explicit logical instructions (like "Verify each step before displaying the output") helps direct its massive context processing capability.
                 </p>
               </div>
               <div style={{ padding: '1.5rem', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Anthropic Claude</h4>
+                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: 'var(--text-small)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Anthropic Claude</h4>
                 <p style={{ fontSize: '0.9rem', margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
                   Claude is trained to respond extremely well to XML tags (e.g., <code>&lt;rules&gt;...&lt;/rules&gt;</code>) to isolate system instructions, inputs, and output schemas, preventing instructions from bleeding into the target content.
                 </p>
               </div>
               <div style={{ padding: '1.5rem', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '6px' }}>
-                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>OpenAI GPT-4</h4>
+                <h4 style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: 'var(--text-small)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>OpenAI GPT-4</h4>
                 <p style={{ fontSize: '0.9rem', margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
                   GPT-4 requires clear task hierarchy. Putting rules in the system prompt and using delimiters like triple backticks (```) to separate data sections ensures it respects the absolute priority of system guidelines.
                 </p>

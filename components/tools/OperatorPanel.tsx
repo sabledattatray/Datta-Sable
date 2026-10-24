@@ -104,9 +104,9 @@ export default function OperatorPanel() {
         <div>
           <div className="flex items-center gap-2 mb-2">
             <h5 className="mono text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Founder_Insight</h5>
-            <span className="text-[11px] mono text-[var(--muted)] px-1.5 py-0.5 border border-[var(--border)] rounded">VERIFIED_OPERATOR</span>
+            <span className="text-[length:var(--text-small)] mono text-[var(--muted)] px-1.5 py-0.5 border border-[var(--border)] rounded">VERIFIED_OPERATOR</span>
           </div>
-          <p className="text-xs leading-relaxed text-[var(--muted)] italic" style={{ fontSize: '0.84rem', lineHeight: 1.65 }}>
+          <p className="text-xs leading-relaxed text-[var(--muted)] italic" style={{ fontSize: 'var(--text-small)', lineHeight: 1.65 }}>
             "Precision is the only scalable advantage. Don't just generate—orchestrate. I built these settings to ensure your technical identity remains consistent across every node."
           </p>
         </div>

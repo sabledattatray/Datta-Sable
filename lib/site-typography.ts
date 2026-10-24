@@ -97,6 +97,9 @@ export function buildTypographyCss(input: TypographySettings, scope = '#main-con
   const rules: string[] = [];
   for (const id of ELEMENT_IDS) {
     const rule = settings.elements[id];
+    // Published settings and mobile previews share the same readability floor.
+    // Display headings retain their authored scale and gradient treatment.
+    const readableSize = (value: number) => id.startsWith('h') ? value : Math.max(value, id === 'body' || id === 'paragraph' ? 16 : 14);
     const family = FONT_FAMILIES.find(font => font.name === rule.fontFamily);
     const baseSelectors = TAGS[id].map(tag => `${scope} ${tag}`);
     // Paragraph settings must not flatten link accents, button colors, or code.
@@ -108,7 +111,7 @@ export function buildTypographyCss(input: TypographySettings, scope = '#main-con
     const selector = selectors.join(',');
     const declarations: string[] = [];
     if (family) declarations.push(`font-family:'${family.name}',${family.fallback}!important`);
-    if (rule.fontSize !== null) declarations.push(`font-size:${rule.fontSize / 16}rem!important`);
+    if (rule.fontSize !== null) declarations.push(`font-size:${readableSize(rule.fontSize) / 16}rem!important`);
     // Let <strong>/<b> retain semantic emphasis instead of forcing body weight.
     if (rule.fontWeight !== null) {
       const weightSelectors = id === 'body' ? [scope, ...baseSelectors] : baseSelectors;
@@ -118,7 +121,7 @@ export function buildTypographyCss(input: TypographySettings, scope = '#main-con
     if (rule.letterSpacing !== null) declarations.push(`letter-spacing:${rule.letterSpacing}em!important`);
     if (declarations.length) rules.push(`${selector}{${declarations.join(';')}}`);
     if (rule.mobileFontSize !== null && previewViewport !== 'desktop') {
-      const mobileRule = `${selector}{font-size:${rule.mobileFontSize / 16}rem!important}`;
+      const mobileRule = `${selector}{font-size:${readableSize(rule.mobileFontSize) / 16}rem!important}`;
       rules.push(previewViewport === 'mobile' ? mobileRule : `@media(max-width:767px){${mobileRule}}`);
     }
     for (const theme of ['light', 'dark'] as const) {

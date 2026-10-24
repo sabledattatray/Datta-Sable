@@ -58,7 +58,7 @@ export default function UseCases() {
                 </div>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 700 }}>{uc.role}</h3>
-                  <div className="text-[10px] mono text-[var(--accent)] tracking-widest uppercase mt-1">
+                  <div className="text-[length:var(--text-small)] mono text-[var(--accent)] tracking-widest uppercase mt-1">
                     {uc.benefit}
                   </div>
                 </div>

@@ -47,7 +47,7 @@ export default function StandardsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="label-tech text-emerald-500">Internal design notes</div>
-              <div className="flex items-center gap-2 mono text-[10px] opacity-40">
+              <div className="flex items-center gap-2 mono text-[length:var(--text-small)] opacity-40">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> DEPLOYED_STABLE
               </div>
             </div>
@@ -61,12 +61,12 @@ export default function StandardsPage() {
 
             {/* Semantic Links */}
             <div className="flex flex-wrap gap-4 mb-10 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
-              <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Technical References:</span>
-              <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[11px] mono hover:text-emerald-500 transition-colors">
+              <span className="mono text-[length:var(--text-small)] uppercase opacity-40 w-full mb-2">Technical References:</span>
+              <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-emerald-500 transition-colors">
                 <LinkIcon size={12} /> EXECUTION_TAXONOMY_V2
               </Link>
               <div className="w-px h-3 bg-[var(--border)]" />
-              <Link href="/knowledge/protocols" className="flex items-center gap-2 text-[11px] mono hover:text-emerald-500 transition-colors">
+              <Link href="/knowledge/protocols" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-emerald-500 transition-colors">
                 <LinkIcon size={12} /> INTENT_PROTOCOLS_V1
               </Link>
             </div>
@@ -81,14 +81,14 @@ export default function StandardsPage() {
                   className="p-8 border border-[var(--border)] bg-[var(--surface1)] rounded-sm"
                 >
                   <div className="flex items-center justify-between mb-6">
-                    <span className="mono text-[10px] text-emerald-500 px-2 py-1 bg-emerald-500/10 border border-emerald-500/20">{s.code}</span>
+                    <span className="mono text-[length:var(--text-small)] text-emerald-500 px-2 py-1 bg-emerald-500/10 border border-emerald-500/20">{s.code}</span>
                     <ShieldCheck size={18} className="text-emerald-500" />
                   </div>
                   <h3 className="text-xl font-bold mb-4">{s.title}</h3>
                   <p className="text-[var(--muted)] text-sm mb-6 leading-relaxed">{s.desc}</p>
                   <div className="p-4 bg-[var(--surface2)] border-l-2 border-emerald-500">
-                    <p className="text-[11px] mono uppercase tracking-wider opacity-60 mb-1">Measured Impact</p>
-                    <p className="text-[12px] font-bold">{s.impact}</p>
+                    <p className="text-[length:var(--text-small)] mono uppercase tracking-wider opacity-60 mb-1">Measured Impact</p>
+                    <p className="text-[length:var(--text-small)] font-bold">{s.impact}</p>
                   </div>
                 </motion.div>
               ))}
@@ -103,10 +103,10 @@ export default function StandardsPage() {
                     <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
                     <div className="w-3 h-3 rounded-full bg-green-500/50" />
                   </div>
-                  <span className="mono text-[10px] opacity-40">SURGICAL_HARDENING_PROTOCOL.yaml</span>
+                  <span className="mono text-[length:var(--text-small)] opacity-40">SURGICAL_HARDENING_PROTOCOL.yaml</span>
                 </div>
                 <div className="p-8 overflow-x-auto">
-                  <pre className="text-[13px] mono text-emerald-500/90 leading-relaxed">
+                  <pre className="text-[length:var(--text-small)] mono text-emerald-500/90 leading-relaxed">
 {`protocol:
   version: 2.1.4
   id: PH-S01-ENFORCER
@@ -138,12 +138,12 @@ export default function StandardsPage() {
                 <div className="flex items-center gap-6">
                   <div className="flex flex-col">
                     <span className="text-2xl font-bold text-emerald-500">Measure</span>
-                    <span className="mono text-[10px] uppercase opacity-40">Failure rate</span>
+                    <span className="mono text-[length:var(--text-small)] uppercase opacity-40">Failure rate</span>
                   </div>
                   <div className="w-px h-10 bg-[var(--border)]" />
                   <div className="flex flex-col">
                     <span className="text-2xl font-bold text-emerald-500">Validate</span>
-                    <span className="mono text-[10px] uppercase opacity-40">Schema conformance</span>
+                    <span className="mono text-[length:var(--text-small)] uppercase opacity-40">Schema conformance</span>
                   </div>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function StandardsPage() {
                   "Sable, D. (2026). Prompt Hardening™: A Structural Framework for Deterministic AI. 
                   Surgical AI Workspace Standards v2.1."
                 </p>
-                <button onClick={() => navigator.clipboard.writeText("Sable, D. (2026). Prompt hardening: internal design notes. https://dattasable.com/knowledge/standards")} className="w-full btn-outline py-3 text-[12px] mono uppercase tracking-widest">
+                <button onClick={() => navigator.clipboard.writeText("Sable, D. (2026). Prompt hardening: internal design notes. https://dattasable.com/knowledge/standards")} className="w-full btn-outline py-3 text-[length:var(--text-small)] mono uppercase tracking-widest">
                   Copy Citation (APA)
                 </button>
               </div>

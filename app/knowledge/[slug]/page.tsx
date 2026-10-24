@@ -69,7 +69,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                   <div className="mb-12">
                     <div className="flex items-center gap-4 mb-6">
                       <span className="label-tech">{article.category.toUpperCase()}</span>
-                      <span className="flex items-center gap-1 text-[10px] mono text-[var(--muted)]">
+                      <span className="flex items-center gap-1 text-[length:var(--text-small)] mono text-[var(--muted)]">
                         <Clock size={12} /> {article.readingTime} READ
                       </span>
                     </div>
@@ -90,8 +90,8 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                           <span className="text-xs mono font-bold text-[var(--accent)]">DS</span>
                         </div>
                         <div>
-                          <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Author Note</h5>
-                          <p className="text-[9px] mono text-[var(--muted)]">Expert Commentary by Datta Sable</p>
+                          <h5 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--accent)] font-bold">Author Note</h5>
+                          <p className="text-[length:var(--text-small)] mono text-[var(--muted)]">Expert Commentary by Datta Sable</p>
                         </div>
                       </div>
                       <p className="text-sm leading-relaxed text-[var(--text)] italic opacity-90">
@@ -106,7 +106,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                   <div className="mt-16 p-8 card" style={{ background: 'var(--surface2)', border: '1px solid var(--accent)' }}>
                     <div className="flex items-center gap-2 mb-4 text-[var(--accent)]">
                       <Target size={20} />
-                      <span className="mono text-[10px] font-bold tracking-widest uppercase">Related Template</span>
+                      <span className="mono text-[length:var(--text-small)] font-bold tracking-widest uppercase">Related Template</span>
                     </div>
                     <h3 className="text-xl font-bold mb-4">Get the {blueprint.title}</h3>
                     <p className="text-sm text-[var(--muted)] mb-8">
@@ -126,7 +126,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
               <div className="lg:col-span-1">
                 <div className="sticky top-32 flex flex-col gap-8">
                   <div className="card p-8" style={{ background: 'var(--surface2)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Related Tools</h4>
+                    <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--muted)] mb-8">Related Tools</h4>
                     <Link 
                       href={article.associatedTool}
                       className="group flex flex-col gap-4 no-underline p-4 border border-[var(--border)] hover:border-[var(--accent)] transition-all"
@@ -136,19 +136,19 @@ export default async function KnowledgeArticlePage({ params }: { params: Promise
                         <ArrowUpRight size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)]" />
                       </div>
                       <div className="font-bold text-sm">View Tools</div>
-                      <div className="text-[10px] mono text-[var(--muted)]">Recommended for this guide</div>
+                      <div className="text-[length:var(--text-small)] mono text-[var(--muted)]">Recommended for this guide</div>
                     </Link>
                   </div>
 
                   <div className="card p-8 border-dashed" style={{ background: 'var(--bg)' }}>
                      <div className="flex items-center gap-2 mb-6">
                         <Sparkles size={16} className="text-[var(--accent)]" />
-                        <h4 className="mono text-[10px] uppercase tracking-widest">Related Articles</h4>
+                        <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest">Related Articles</h4>
                      </div>
-                     <p className="text-[10px] mono text-[var(--muted)] leading-relaxed mb-6">
+                     <p className="text-[length:var(--text-small)] mono text-[var(--muted)] leading-relaxed mb-6">
                         This guide is part of a broader topic. Check out our other articles to learn more.
                      </p>
-                     <Link href="/knowledge" className="text-[10px] mono font-bold text-[var(--accent)] no-underline flex items-center gap-1">
+                     <Link href="/knowledge" className="text-[length:var(--text-small)] mono font-bold text-[var(--accent)] no-underline flex items-center gap-1">
                         VIEW MORE ARTICLES <ChevronRight size={12} />
                      </Link>
                   </div>

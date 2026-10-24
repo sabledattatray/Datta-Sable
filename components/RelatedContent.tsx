@@ -67,7 +67,7 @@ export default function RelatedContent() {
     <div className="mt-20 border-t border-[var(--border)] pt-16">
       <div className="flex items-center gap-3 mb-8">
         <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-        <h3 className="mono text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--text)]">Related_Assets</h3>
+        <h3 className="mono text-[length:var(--text-small)] font-bold uppercase tracking-[0.2em] text-[var(--text)]">Related_Assets</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -81,10 +81,10 @@ export default function RelatedContent() {
                 {link.icon}
               </div>
               <div className="flex flex-col gap-2">
-                <span className="mono text-[9px] text-[var(--accent)] font-bold tracking-widest">{link.type}</span>
+                <span className="mono text-[length:var(--text-small)] text-[var(--accent)] font-bold tracking-widest">{link.type}</span>
                 <h4 className="text-sm font-black uppercase text-[var(--text)]">{link.title}</h4>
-                <p className="text-[12px] text-[var(--muted)] leading-relaxed">{link.desc}</p>
-                <div className="flex items-center gap-2 mt-4 text-[10px] font-bold uppercase tracking-widest text-[var(--text)] opacity-0 group-hover:opacity-100 transition-opacity">
+                <p className="text-[length:var(--text-small)] text-[var(--muted)] leading-relaxed">{link.desc}</p>
+                <div className="flex items-center gap-2 mt-4 text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--text)] opacity-0 group-hover:opacity-100 transition-opacity">
                   Access Now <ArrowRight size={12} />
                 </div>
               </div>

@@ -50,7 +50,7 @@ export default function GlossaryIndex() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-4 mb-8">
-              <Link href="/knowledge" className="mono text-[10px] text-[var(--accent)] hover:underline flex items-center gap-2">
+              <Link href="/knowledge" className="mono text-[length:var(--text-small)] text-[var(--accent)] hover:underline flex items-center gap-2">
                 ← BACK_TO_KNOWLEDGE_HUB
               </Link>
             </div>
@@ -73,7 +73,7 @@ export default function GlossaryIndex() {
                     href={item.href}
                     className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent)] transition-colors"
                   >
-                    <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
+                    <span className="mono text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
                     <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
                       <span className="text-sm font-bold group-hover:text-[var(--accent)] transition-colors">{item.title}</span>
                       <ChevronRight size={13} className="text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
@@ -108,12 +108,12 @@ export default function GlossaryIndex() {
                       <div className="flex items-center gap-3">
                         <Hash size={14} className="text-[var(--accent)]" />
                         <h3 className="text-xl font-bold group-hover:text-[var(--accent)] transition-colors">{t.term}</h3>
-                        <span className="mono text-[9px] px-2 py-0.5 bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 rounded-full">{t.category}</span>
+                        <span className="mono text-[length:var(--text-small)] px-2 py-0.5 bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 rounded-full">{t.category}</span>
                       </div>
-                      <span className="mono text-[10px] opacity-40">ID: {t.id}</span>
+                      <span className="mono text-[length:var(--text-small)] opacity-40">ID: {t.id}</span>
                     </div>
                     <p className="text-sm text-[var(--muted)] leading-relaxed mb-6">{t.definition}</p>
-                    <div className="flex items-center gap-2 text-[var(--accent)] text-[10px] mono font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
+                    <div className="flex items-center gap-2 text-[var(--accent)] text-[length:var(--text-small)] mono font-bold tracking-widest group-hover:gap-4 transition-all uppercase">
                       VIEW_DETAILED_LEXICON <ChevronRight size={12} />
                     </div>
                   </Link>

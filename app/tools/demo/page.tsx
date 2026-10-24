@@ -58,8 +58,8 @@ export default function SystemDemoPage() {
                       {activeStep === i ? <Activity size={20} /> : <CheckCircle2 size={20} />}
                     </div>
                     <div>
-                      <div className="mono text-[12px] uppercase font-bold">{step.name}</div>
-                      <div className="text-[10px] opacity-60 mt-1">{step.detail}</div>
+                      <div className="mono text-[length:var(--text-small)] uppercase font-bold">{step.name}</div>
+                      <div className="text-[length:var(--text-small)] opacity-60 mt-1">{step.detail}</div>
                     </div>
                   </div>
                 ))}
@@ -75,7 +75,7 @@ export default function SystemDemoPage() {
                     <div className="w-2 h-2 rounded-full bg-[#333]" />
                     <div className="w-2 h-2 rounded-full bg-[#333]" />
                   </div>
-                  <div className="mono text-[10px] uppercase tracking-widest opacity-40">Node: execution-chain-alpha</div>
+                  <div className="mono text-[length:var(--text-small)] uppercase tracking-widest opacity-40">Node: execution-chain-alpha</div>
                 </div>
                 
                 <div className="p-8 h-[400px] overflow-hidden">
@@ -85,7 +85,7 @@ export default function SystemDemoPage() {
                         key={i}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="mono text-[11px] text-[var(--accent)]"
+                        className="mono text-[length:var(--text-small)] text-[var(--accent)]"
                       >
                         <span className="opacity-40">{log.split(']')[0]}]</span> {log.split(']')[1]}
                       </motion.div>

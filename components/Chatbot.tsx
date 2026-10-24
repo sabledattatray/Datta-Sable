@@ -167,7 +167,7 @@ export default function Chatbot() {
                 <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text)' }}>Datta&apos;s AI Assistant</div>
                 <div className="flex items-center gap-1.5">
                   <div style={{ width: 6, height: 6, borderRadius: 0, background: 'var(--accent3)' }} />
-                  <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>Online · Flat UI Mode</span>
+                  <span style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>Online · Flat UI Mode</span>
                 </div>
               </div>
               <button 
@@ -202,7 +202,7 @@ export default function Chatbot() {
                     border: '1px solid var(--border)',
                     borderRadius: 0,
                     padding: '0.65rem 0.9rem',
-                    fontSize: '0.82rem',
+                    fontSize: 'var(--text-small)',
                     lineHeight: 1.65,
                     color: msg.role === 'user' ? '#000' : 'var(--text)',
                   }}>
@@ -233,7 +233,7 @@ export default function Chatbot() {
                 <button
                   key={q}
                   onClick={() => { setInput(q); }}
-                  style={{ background: 'transparent', border: '1px solid var(--border)', borderRadius: 0, padding: '0.3rem 0.75rem', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--muted)', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }}
+                  style={{ background: 'transparent', border: '1px solid var(--border)', borderRadius: 0, padding: '0.3rem 0.75rem', fontSize: 'var(--text-small)', fontWeight: 700, textTransform: 'uppercase', color: 'var(--muted)', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--text)'; (e.currentTarget as HTMLElement).style.color = 'var(--text)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; }}
                 >
@@ -251,7 +251,7 @@ export default function Chatbot() {
                 placeholder="Ask me anything..."
                 style={{
                   flex: 1, background: 'transparent', border: '1px solid var(--border)',
-                  borderRadius: 0, padding: '0.6rem 0.9rem', fontSize: '0.82rem',
+                  borderRadius: 0, padding: '0.6rem 0.9rem', fontSize: 'var(--text-small)',
                   color: 'var(--text)', outline: 'none', fontFamily: 'Space Grotesk, sans-serif',
                 }}
                 onFocus={e => (e.target as HTMLElement).style.borderColor = 'var(--text)'}

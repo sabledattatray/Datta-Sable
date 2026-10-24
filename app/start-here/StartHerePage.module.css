@@ -34,7 +34,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font: 11px/1 var(--font-syne);
+  font: var(--text-small)/1 var(--font-syne);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -109,7 +109,7 @@
 }
 
 .statLabel {
-  font: 10px/1.3 var(--font-syne);
+  font: var(--text-small)/1.3 var(--font-syne);
   font-weight: 600;
   color: var(--muted);
   letter-spacing: 0.08em;
@@ -149,7 +149,7 @@
 }
 
 .radarTitle {
-  font: 11px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--text);
@@ -163,7 +163,7 @@
 }
 
 .radarBadge {
-  font: 10px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 100px;
@@ -235,7 +235,7 @@
 }
 
 .layerTag {
-  font: 10px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 700;
   padding: 3px 6px;
   background: var(--surface);
@@ -245,12 +245,12 @@
 }
 
 .layerName {
-  font: 600 12px var(--font-syne);
+  font: 600 var(--text-small) var(--font-syne);
   color: var(--text);
 }
 
 .layerStatus {
-  font: 10px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 500;
   color: var(--muted);
   display: flex;
@@ -283,7 +283,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font: 11px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--muted);
@@ -363,14 +363,14 @@
 }
 
 .trackNumber {
-  font: 12px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--muted);
 }
 
 .trackLevel {
-  font: 10px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--accent);
@@ -390,7 +390,7 @@
 }
 
 .trackDesc {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.75;
   color: var(--muted);
   margin: 0 0 24px;
@@ -442,7 +442,7 @@
 }
 
 .moduleName {
-  font-size: 13px;
+  font-size: var(--text-small);
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
@@ -470,7 +470,7 @@
 }
 
 .trackPill {
-  font: 10px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 500;
   color: var(--muted);
   padding: 4px 8px;
@@ -481,7 +481,7 @@
 
 .certBadge {
   margin-left: auto;
-  font: 10px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--accent);
@@ -526,7 +526,7 @@
 }
 
 .tierNumber {
-  font: 11px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -544,7 +544,7 @@
 }
 
 .tierDesc {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.7;
   color: var(--muted);
   margin: 0 0 20px;
@@ -558,7 +558,7 @@
 }
 
 .tierListItem {
-  font: 12px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 500;
   color: var(--text);
   display: flex;
@@ -590,7 +590,7 @@
   background: var(--surface2);
   padding: 16px 20px;
   text-align: left;
-  font: 11px var(--font-syne);
+  font: var(--text-small) var(--font-syne);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -602,7 +602,7 @@
   padding: 18px 20px;
   border-bottom: 1px solid var(--border);
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.6;
 }
 
@@ -689,7 +689,7 @@
 }
 
 .faqAnswer {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.8;
   color: var(--muted);
   margin: 0;
@@ -796,6 +796,6 @@
   }
   .matrixTable th, .matrixTable td {
     padding: 12px 14px;
-    font-size: 11px;
+    font-size: var(--text-small);
   }
 }

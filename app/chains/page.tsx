@@ -65,7 +65,7 @@ export default function ChainHub() {
                       <div className="p-3 bg-[var(--bg)] border border-[var(--border)] rounded text-[var(--accent)]">
                         <Zap size={20} />
                       </div>
-                      <div className="px-2.5 py-1 text-[10px] mono font-bold border border-[var(--accent)] text-[var(--accent)] rounded animate-pulse">
+                      <div className="px-2.5 py-1 text-[length:var(--text-small)] mono font-bold border border-[var(--accent)] text-[var(--accent)] rounded animate-pulse">
                         LIVE_PIPELINE
                       </div>
                     </div>
@@ -80,14 +80,14 @@ export default function ChainHub() {
 
                     <div className="flex flex-wrap gap-2 mb-8 pt-4 border-t border-[var(--border)] border-opacity-40">
                       {chain.nodes.map(node => (
-                        <div key={node} className="px-2.5 py-1 text-[10px] mono bg-[var(--surface)] border border-[var(--border)] text-[var(--muted)] font-bold">
+                        <div key={node} className="px-2.5 py-1 text-[length:var(--text-small)] mono bg-[var(--surface)] border border-[var(--border)] text-[var(--muted)] font-bold">
                           {node.toUpperCase()}
                         </div>
                       ))}
                     </div>
 
                     <div className="flex items-center justify-between mt-auto pt-6 border-t border-[var(--border)] border-opacity-60">
-                      <div className="flex items-center gap-2 text-[var(--accent)] text-[11px] mono font-bold tracking-widest group-hover:gap-4 transition-all">
+                      <div className="flex items-center gap-2 text-[var(--accent)] text-[length:var(--text-small)] mono font-bold tracking-widest group-hover:gap-4 transition-all">
                         INITIATE_CHAIN <ArrowRight size={14} />
                       </div>
                       <Layers size={14} className="text-[var(--muted)] opacity-30" />
@@ -106,10 +106,10 @@ export default function ChainHub() {
                   Surgical Execution Chains aren't just automations. They are context-aware cognitive pipelines that adapt based on your persona and distribution intent.
                 </p>
                 <div className="flex flex-wrap gap-6 pt-6 border-t border-[var(--border)] border-opacity-60">
-                  <div className="flex items-center gap-2 text-[11px] mono text-[var(--muted)] font-bold tracking-wider">
+                  <div className="flex items-center gap-2 text-[length:var(--text-small)] mono text-[var(--muted)] font-bold tracking-wider">
                     <ShieldCheck size={16} className="text-[var(--accent)]" /> OPERATOR_AWARE
                   </div>
-                  <div className="flex items-center gap-2 text-[11px] mono text-[var(--muted)] font-bold tracking-wider">
+                  <div className="flex items-center gap-2 text-[length:var(--text-small)] mono text-[var(--muted)] font-bold tracking-wider">
                     <ShieldCheck size={16} className="text-[var(--accent)]" /> PERSISTENT_MEMORY
                   </div>
                 </div>
@@ -148,7 +148,7 @@ export default function ChainHub() {
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>SYSTEM_ARCHITECTURAL_BLUEPRINT</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>SYSTEM_ARCHITECTURAL_BLUEPRINT</span>
           </div>
 
           <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '2rem', color: 'var(--text)', lineHeight: 1.2, fontFamily: "'Syne', sans-serif" }}>

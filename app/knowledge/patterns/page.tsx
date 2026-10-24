@@ -66,7 +66,7 @@ export default function PatternsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="label-tech text-cyan-500">Reference Architecture v2.0</div>
-              <div className="flex items-center gap-2 mono text-[10px] opacity-40">
+              <div className="flex items-center gap-2 mono text-[length:var(--text-small)] opacity-40">
                 <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" /> LIVE_REFERENCE
               </div>
             </div>
@@ -81,16 +81,16 @@ export default function PatternsPage() {
 
             {/* Semantic Interlinking */}
             <div className="flex flex-wrap gap-4 mb-10 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
-              <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Technical Dependencies:</span>
-              <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[11px] mono hover:text-cyan-500 transition-colors">
+              <span className="mono text-[length:var(--text-small)] uppercase opacity-40 w-full mb-2">Technical Dependencies:</span>
+              <Link href="/knowledge/taxonomy" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-cyan-500 transition-colors">
                 <LinkIcon size={12} /> EC_TAXONOMY_V2
               </Link>
               <div className="w-px h-3 bg-[var(--border)]" />
-              <Link href="/knowledge/standards" className="flex items-center gap-2 text-[11px] mono hover:text-cyan-500 transition-colors">
+              <Link href="/knowledge/standards" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-cyan-500 transition-colors">
                 <LinkIcon size={12} /> PH_STANDARDS_V1
               </Link>
               <div className="w-px h-3 bg-[var(--border)]" />
-              <Link href="/knowledge/protocols" className="flex items-center gap-2 text-[11px] mono hover:text-cyan-500 transition-colors">
+              <Link href="/knowledge/protocols" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-cyan-500 transition-colors">
                 <LinkIcon size={12} /> OIM_PROTOCOLS_V1
               </Link>
             </div>
@@ -105,7 +105,7 @@ export default function PatternsPage() {
                   className="p-8 border border-[var(--border)] bg-[var(--surface1)] rounded-sm hover:border-cyan-500/30 transition-colors"
                 >
                   <div className="flex items-center justify-between mb-8">
-                    <span className="mono text-[10px] text-cyan-500 px-2 py-1 bg-cyan-500/10 border border-cyan-500/20">{p.code}</span>
+                    <span className="mono text-[length:var(--text-small)] text-cyan-500 px-2 py-1 bg-cyan-500/10 border border-cyan-500/20">{p.code}</span>
                     <Cpu size={18} className="text-cyan-500 opacity-50" />
                   </div>
                   <h3 className="text-xl font-bold mb-4">{p.title}</h3>
@@ -113,10 +113,10 @@ export default function PatternsPage() {
                   
                   <div className="space-y-4 pt-8 border-t border-[var(--border)]">
                     <div>
-                      <span className="mono text-[9px] uppercase opacity-40 block mb-2">Strategic Benefit</span>
+                      <span className="mono text-[length:var(--text-small)] uppercase opacity-40 block mb-2">Strategic Benefit</span>
                       <ul className="space-y-1">
                         {p.benefits.map((b, idx) => (
-                          <li key={idx} className="flex items-center gap-2 text-[11px] mono">
+                          <li key={idx} className="flex items-center gap-2 text-[length:var(--text-small)] mono">
                             <Zap size={10} className="text-cyan-500" /> {b}
                           </li>
                         ))}

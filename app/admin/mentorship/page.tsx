@@ -385,7 +385,7 @@ export default function AdminMentorship() {
                 ))}
               </select>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600, color: 'var(--muted)' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 'var(--text-small)', cursor: 'pointer', fontWeight: 600, color: 'var(--muted)' }}>
                 <input
                   type="checkbox"
                   checked={comebackOnlyFilter}
@@ -431,16 +431,16 @@ export default function AdminMentorship() {
                         >
                           <td className={adminStyles.td}>
                             <div style={{ fontWeight: 600, color: 'var(--text)' }}>{req.fullName}</div>
-                            <div style={{ color: 'var(--muted)', fontSize: 10 }}>{req.email}</div>
+                            <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{req.email}</div>
                             {req.isComebackProgram && (
-                              <span style={{ fontSize: 9, padding: '1px 6px', background: 'rgba(245,158,11,0.12)', color: '#fbbf24', borderRadius: 4, fontWeight: 600, marginTop: 4, display: 'inline-block' }}>
+                              <span style={{ fontSize: 'var(--text-small)', padding: '1px 6px', background: 'rgba(245,158,11,0.12)', color: '#fbbf24', borderRadius: 4, fontWeight: 600, marginTop: 4, display: 'inline-block' }}>
                                 COMEBACK PROGRAM
                               </span>
                             )}
                           </td>
                           <td className={adminStyles.td}>
                             <div style={{ fontWeight: 600 }}>{req.track?.name || 'Unassigned'}</div>
-                            <div style={{ color: 'var(--muted)', fontSize: 10 }}>{req.cohort?.name || 'Pending Batch'}</div>
+                            <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{req.cohort?.name || 'Pending Batch'}</div>
                           </td>
                           <td className={adminStyles.td}>
                             {req.status === 'Placed' ? (
@@ -452,7 +452,7 @@ export default function AdminMentorship() {
                                 {req.status}
                               </span>
                             )}
-                            <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>{progressVal}% completed</div>
+                            <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 4 }}>{progressVal}% completed</div>
                           </td>
                           <td className={adminStyles.td} style={{ textAlign: 'right' }} onClick={e => e.stopPropagation()}>
                             <button
@@ -489,7 +489,7 @@ export default function AdminMentorship() {
                   target="_blank"
                   rel="noreferrer"
                   className={adminStyles.secondary}
-                  style={{ minHeight: 30, padding: '4px 10px', fontSize: 11 }}
+                  style={{ minHeight: 30, padding: '4px 10px', fontSize: 'var(--text-small)' }}
                 >
                   LinkedIn <ExternalLink size={10} />
                 </a>
@@ -498,7 +498,7 @@ export default function AdminMentorship() {
                     href={selectedRequest.resumeUrl}
                     download
                     className={adminStyles.secondary}
-                    style={{ minHeight: 30, padding: '4px 10px', fontSize: 11 }}
+                    style={{ minHeight: 30, padding: '4px 10px', fontSize: 'var(--text-small)' }}
                   >
                     <FileText size={12} /> Resume PDF <Download size={10} />
                   </a>
@@ -548,7 +548,7 @@ export default function AdminMentorship() {
                 <label className={adminStyles.label}>Learning Modules Checklist</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 140, overflowY: 'auto', background: 'var(--surface2)', padding: 10, borderRadius: 8, border: '1px solid var(--border)' }}>
                   {selectedRequest.progress.map(p => (
-                    <label key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, cursor: 'pointer', color: 'var(--text)' }}>
+                    <label key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 'var(--text-small)', cursor: 'pointer', color: 'var(--text)' }}>
                       <input
                         type="checkbox"
                         checked={editProgressWeeks.includes(p.week)}
@@ -644,8 +644,8 @@ export default function AdminMentorship() {
               {cohorts.map(c => (
                 <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', background: 'var(--surface2)', borderRadius: 8, border: '1px solid var(--border)' }}>
                   <div>
-                    <strong style={{ fontSize: 13, color: 'var(--text)' }}>{c.name}</strong>
-                    <span style={{ fontSize: 9.5, padding: '2px 6px', background: 'var(--surface)', borderRadius: 4, marginLeft: 8, border: '1px solid var(--border)', color: 'var(--accent)', fontWeight: 600 }}>{c.status}</span>
+                    <strong style={{ fontSize: 'var(--text-small)', color: 'var(--text)' }}>{c.name}</strong>
+                    <span style={{ fontSize: 'var(--text-small)', padding: '2px 6px', background: 'var(--surface)', borderRadius: 4, marginLeft: 8, border: '1px solid var(--border)', color: 'var(--accent)', fontWeight: 600 }}>{c.status}</span>
                   </div>
                   <button onClick={() => handleDeleteCohort(c.id)} className={adminStyles.danger} style={{ minHeight: 28, padding: '4px 8px' }}>
                     <Trash2 size={13} />
@@ -693,7 +693,7 @@ export default function AdminMentorship() {
                   </select>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginTop: 22 }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600, color: 'var(--text)' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 'var(--text-small)', cursor: 'pointer', fontWeight: 600, color: 'var(--text)' }}>
                     <input
                       type="checkbox"
                       checked={newResourceFeatured}
@@ -743,10 +743,10 @@ export default function AdminMentorship() {
                 <div key={r.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', background: 'var(--surface2)', borderRadius: 8, border: '1px solid var(--border)' }}>
                   <div style={{ flex: 1, marginRight: 10 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <strong style={{ fontSize: 13, color: 'var(--text)' }}>{r.title}</strong>
+                      <strong style={{ fontSize: 'var(--text-small)', color: 'var(--text)' }}>{r.title}</strong>
                       <span className={adminStyles.badgeNeutral}>{r.category}</span>
                     </div>
-                    <span style={{ fontSize: 11, color: 'var(--muted)', wordBreak: 'break-all' }}>{r.downloadUrl}</span>
+                    <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', wordBreak: 'break-all' }}>{r.downloadUrl}</span>
                   </div>
                   <button onClick={() => handleDeleteResource(r.id)} className={adminStyles.danger} style={{ minHeight: 28, padding: '4px 8px' }}>
                     <Trash2 size={13} />

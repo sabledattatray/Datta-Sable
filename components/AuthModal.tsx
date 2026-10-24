@@ -57,7 +57,7 @@ export default function AuthModal() {
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
               </div>
-              <span style={{ fontSize: '10px', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Secure Connection
               </span>
               <button
@@ -76,8 +76,8 @@ export default function AuthModal() {
             </div>
 
             <div style={{ marginBottom: '1.25rem' }}>
-              <h2 style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text)', marginBottom: '4px' }}>Sign in to this Trusted Portal</h2>
-              <p style={{ color: 'var(--muted)', fontSize: '11px', lineHeight: 1.4 }}>Select a verified provider to establish a secure connection.</p>
+              <h2 style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)', marginBottom: '4px' }}>Sign in to this Trusted Portal</h2>
+              <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.4 }}>Select a verified provider to establish a secure connection.</p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -95,7 +95,7 @@ export default function AuthModal() {
                   padding: '0 1rem',
                   gap: '10px',
                   fontWeight: 600,
-                  fontSize: '12px',
+                  fontSize: 'var(--text-small)',
                   cursor: 'pointer',
                   width: '100%',
                 }}
@@ -124,7 +124,7 @@ export default function AuthModal() {
                     justifyContent: 'center',
                     gap: '8px',
                     fontWeight: 500,
-                    fontSize: '11px',
+                    fontSize: 'var(--text-small)',
                     cursor: 'pointer',
                   }}
                 >
@@ -148,7 +148,7 @@ export default function AuthModal() {
                     justifyContent: 'center',
                     gap: '8px',
                     fontWeight: 500,
-                    fontSize: '11px',
+                    fontSize: 'var(--text-small)',
                     cursor: 'pointer',
                   }}
                 >
@@ -161,7 +161,7 @@ export default function AuthModal() {
             </div>
 
             <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-              <span style={{ fontSize: '9px', color: '#4ade80', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
+              <span style={{ fontSize: 'var(--text-small)', color: '#4ade80', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
                 NextAuth Secure Protocol v4.0
               </span>
             </div>

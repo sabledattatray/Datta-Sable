@@ -39,7 +39,7 @@ export default function HeroInteraction() {
 
       <div className="flex items-center gap-3" style={{ marginTop: '3.5rem', color: 'var(--muted)' }}>
         <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse flex-shrink-0" />
-        <p className="text-[10px] mono uppercase tracking-widest">
+        <p className="text-[length:var(--text-small)] mono uppercase tracking-widest">
           AI Tutorials · Next.js · SEO · Digital Marketing · Power BI · Web Dev
         </p>
       </div>

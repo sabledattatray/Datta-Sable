@@ -16,6 +16,17 @@ function load(file) {
 const { prepareArticleNavigation: prepare } = load('lib/article-navigation.ts');
 const { articleHeadingLabel, groupArticleHeadings, filterArticleHeadings } = load('lib/article-toc.ts');
 
+test('legacy CMS captions receive a readability floor without changing headings or literal examples', () => {
+  const original = { content: '<h2 style="font-size:40px;color:transparent;background-image:linear-gradient(red,blue)">Architecture</h2><div style="font-size:0.78rem;color:var(--muted)">Implementation guide</div><p style="font-size:.7em">Relative text</p><p style="font-size:18px">Body text</p><pre><code style="font-size:10px">font-size:10px</code></pre>' };
+  const result = prepare(original);
+  assert.match(result.content, /font-size:var\(--text-small\);color:var\(--muted\)/);
+  assert.match(result.content, /font-size:max\(0\.875rem, .7em\)/);
+  assert.match(result.content, /font-size:40px;color:transparent;background-image:linear-gradient\(red,blue\)/);
+  assert.match(result.content, /font-size:18px/);
+  assert.match(result.content, /<code style="font-size:10px">font-size:10px<\/code>/);
+  assert.match(original.content, /font-size:0\.78rem/);
+});
+
 test('replaces legacy TOCs without deleting article sections, diagrams, examples or existing anchors', () => {
   const content = '<p>Introduction remains.</p><div class="blog-toc"><h4>Table of Contents</h4><ol><li><a href="#architecture">Architecture</a></li></ol></div><h2 id="architecture">Architecture &amp; design</h2><p>Useful original explanation.</p>[[diagram:architecture]]<h3 id="example">Worked example</h3><pre><code>&lt;h2&gt;Literal code&lt;/h2&gt;</code></pre><h2>Next steps</h2>';
   const original = { content };

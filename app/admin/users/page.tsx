@@ -437,7 +437,7 @@ export default function UsersSubscribersAdmin() {
                           </div>
                           <div>
                             <div style={{ fontWeight: 600, color: 'var(--text)' }}>{user.name}</div>
-                            <div style={{ fontSize: '11px', color: 'var(--muted)', marginTop: 2 }}>{user.email}</div>
+                            <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>{user.email}</div>
                           </div>
                         </div>
                       </td>
@@ -454,17 +454,17 @@ export default function UsersSubscribersAdmin() {
                       </td>
                       <td className={adminStyles.td}>
                         {user.role === 'ADMIN' ? (
-                          <span style={{ color: '#ef4444', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '11px' }}>
+                          <span style={{ color: '#ef4444', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: 'var(--text-small)' }}>
                             <ShieldAlert size={13} /> ADMIN
                           </span>
                         ) : (
-                          <span style={{ color: 'var(--muted)', fontSize: '11px' }}>USER</span>
+                          <span style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>USER</span>
                         )}
                       </td>
-                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>
                         {new Date(user.createdAt).toLocaleDateString()}
                       </td>
-                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>
                         {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'N/A'}
                       </td>
                       <td className={adminStyles.td} style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
@@ -475,7 +475,7 @@ export default function UsersSubscribersAdmin() {
                             style={{
                               minHeight: '32px',
                               padding: '5px 11px',
-                              fontSize: '11px',
+                              fontSize: 'var(--text-small)',
                               borderRadius: '6px',
                               display: 'inline-flex',
                               alignItems: 'center',
@@ -492,7 +492,7 @@ export default function UsersSubscribersAdmin() {
                             style={{
                               minHeight: '32px',
                               padding: '5px 11px',
-                              fontSize: '11px',
+                              fontSize: 'var(--text-small)',
                               borderRadius: '6px',
                               display: 'inline-flex',
                               alignItems: 'center',
@@ -542,7 +542,7 @@ export default function UsersSubscribersAdmin() {
                           <CheckCircle2 size={11} /> Active
                         </span>
                       </td>
-                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: '11px' }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>
                         {new Date(sub.createdAt).toLocaleString()}
                       </td>
                       <td className={adminStyles.td} style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
@@ -552,7 +552,7 @@ export default function UsersSubscribersAdmin() {
                           style={{
                             minHeight: '32px',
                             padding: '5px 11px',
-                            fontSize: '11px',
+                            fontSize: 'var(--text-small)',
                             borderRadius: '6px',
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -605,7 +605,7 @@ export default function UsersSubscribersAdmin() {
                 </div>
                 <div>
                   <h3 style={{ margin: 0, fontSize: 16 }}>Edit User Account</h3>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>
                     ID: <span style={{ fontFamily: 'monospace' }}>{editingUser.id}</span>
                   </div>
                 </div>
@@ -650,10 +650,10 @@ export default function UsersSubscribersAdmin() {
                   )}
                 </div>
                 <div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
+                  <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)' }}>
                     {editingUser.name || 'Anonymous User'}
                   </div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
                     Joined {new Date(editingUser.createdAt).toLocaleDateString()}
                   </div>
                 </div>
@@ -680,7 +680,7 @@ export default function UsersSubscribersAdmin() {
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 borderRadius: 8,
                 color: '#ef4444',
-                fontSize: 12,
+                fontSize: 'var(--text-small)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
@@ -728,7 +728,7 @@ export default function UsersSubscribersAdmin() {
                   <option value="USER">USER — Standard Access (Browsing &amp; Purchases)</option>
                   <option value="ADMIN">ADMIN — Full Administrator Privileges</option>
                 </select>
-                <span style={{ fontSize: 11, color: 'var(--muted)', marginTop: 4 }}>
+                <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 4 }}>
                   {editRole === 'ADMIN' 
                     ? '⚠️ Grants full access to CMS, Orders, Settings, and User Management.' 
                     : 'Standard user access without administrative privileges.'}
@@ -802,7 +802,7 @@ export default function UsersSubscribersAdmin() {
                 {deletingTarget.type === 'user' ? 'Delete User Account?' : 'Unsubscribe Contact?'}
               </h3>
 
-              <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0, lineHeight: 1.6 }}>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', margin: 0, lineHeight: 1.6 }}>
                 {deletingTarget.type === 'user' ? (
                   <>
                     Are you sure you want to permanently delete{' '}
@@ -830,7 +830,7 @@ export default function UsersSubscribersAdmin() {
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 borderRadius: 8,
                 color: '#ef4444',
-                fontSize: 12,
+                fontSize: 'var(--text-small)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,

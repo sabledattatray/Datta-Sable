@@ -51,7 +51,7 @@ export default function TaxonomyPage() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="label-tech text-[var(--accent)]">Technical Reference v2.1.0</div>
-              <div className="flex items-center gap-2 mono text-[10px] opacity-40">
+              <div className="flex items-center gap-2 mono text-[length:var(--text-small)] opacity-40">
                 <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" /> LIVE_STANDARD
               </div>
             </div>
@@ -65,12 +65,12 @@ export default function TaxonomyPage() {
 
             {/* Semantic Links */}
             <div className="flex flex-wrap gap-4 mb-10 p-6 bg-[var(--surface2)] border border-[var(--border)] rounded-sm">
-              <span className="mono text-[10px] uppercase opacity-40 w-full mb-2">Linked Frameworks:</span>
-              <Link href="/knowledge/standards" className="flex items-center gap-2 text-[11px] mono hover:text-[var(--accent)] transition-colors">
+              <span className="mono text-[length:var(--text-small)] uppercase opacity-40 w-full mb-2">Linked Frameworks:</span>
+              <Link href="/knowledge/standards" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-[var(--accent)] transition-colors">
                 <LinkIcon size={12} /> PROMPT_HARDENING_V1
               </Link>
               <div className="w-px h-3 bg-[var(--border)]" />
-              <Link href="/knowledge/patterns" className="flex items-center gap-2 text-[11px] mono hover:text-[var(--accent)] transition-colors">
+              <Link href="/knowledge/patterns" className="flex items-center gap-2 text-[length:var(--text-small)] mono hover:text-[var(--accent)] transition-colors">
                 <LinkIcon size={12} /> WORKFLOW_PATTERNS_V2
               </Link>
             </div>
@@ -85,7 +85,7 @@ export default function TaxonomyPage() {
                   className="p-8 border border-[var(--border)] bg-[var(--surface1)] rounded-sm flex flex-col md:flex-row gap-8 items-start"
                 >
                   <div className="flex-shrink-0">
-                    <span className="mono text-[10px] px-3 py-1 border border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5">
+                    <span className="mono text-[length:var(--text-small)] px-3 py-1 border border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5">
                       {node.code}
                     </span>
                   </div>
@@ -94,12 +94,12 @@ export default function TaxonomyPage() {
                     <p className="text-[var(--muted)] mb-6 text-sm leading-relaxed">{node.desc}</p>
                     <div className="grid grid-cols-2 gap-4 pt-6 border-t border-[var(--border)]">
                       <div>
-                        <span className="mono text-[9px] uppercase opacity-40 block mb-2">Primary Use Case</span>
-                        <span className="text-[11px] mono">{node.useCase}</span>
+                        <span className="mono text-[length:var(--text-small)] uppercase opacity-40 block mb-2">Primary Use Case</span>
+                        <span className="text-[length:var(--text-small)] mono">{node.useCase}</span>
                       </div>
                       <div>
-                        <span className="mono text-[9px] uppercase opacity-40 block mb-2">Target Latency</span>
-                        <span className="text-[11px] mono text-cyan-500">{node.latency}</span>
+                        <span className="mono text-[length:var(--text-small)] uppercase opacity-40 block mb-2">Target Latency</span>
+                        <span className="text-[length:var(--text-small)] mono text-cyan-500">{node.latency}</span>
                       </div>
                     </div>
                   </div>
@@ -120,12 +120,12 @@ export default function TaxonomyPage() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
                   <div className="p-6 bg-[var(--bg)] border border-[var(--border)]">
-                    <h4 className="mono text-[10px] text-[var(--accent)] uppercase mb-4">Structural Moats</h4>
-                    <p className="text-[12px] opacity-70">Taxonomy-driven design ensures that your AI infrastructure remains portable and modular across model upgrades.</p>
+                    <h4 className="mono text-[length:var(--text-small)] text-[var(--accent)] uppercase mb-4">Structural Moats</h4>
+                    <p className="text-[length:var(--text-small)] opacity-70">Taxonomy-driven design ensures that your AI infrastructure remains portable and modular across model upgrades.</p>
                   </div>
                   <div className="p-6 bg-[var(--bg)] border border-[var(--border)]">
-                    <h4 className="mono text-[10px] text-[var(--accent)] uppercase mb-4">Citation Standards</h4>
-                    <p className="text-[12px] opacity-70">These are local conventions. No external certification or standards compatibility has been established.</p>
+                    <h4 className="mono text-[length:var(--text-small)] text-[var(--accent)] uppercase mb-4">Citation Standards</h4>
+                    <p className="text-[length:var(--text-small)] opacity-70">These are local conventions. No external certification or standards compatibility has been established.</p>
                   </div>
                 </div>
               </div>

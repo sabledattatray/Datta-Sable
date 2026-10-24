@@ -54,7 +54,7 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
           {/* Status Strip Badge */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] text-xs mb-6">
             <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-            <span className="font-mono font-semibold tracking-wider text-[var(--accent)] text-[11px] uppercase">
+            <span className="font-mono font-semibold tracking-wider text-[var(--accent)] text-[length:var(--text-small)] uppercase">
               {project.badge}
             </span>
             <span className="text-[var(--muted)] opacity-40">|</span>
@@ -95,7 +95,7 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
             >
               <Download size={16} className="stroke-[2.5]" />
               <span>Download Master Excel File (.xlsx)</span>
-              <span className="px-2 py-0.5 bg-black/15 text-black text-[10px] font-mono font-bold">
+              <span className="px-2 py-0.5 bg-black/15 text-black text-[length:var(--text-small)] font-mono font-bold">
                 {project.fileSize}
               </span>
             </a>
@@ -117,13 +117,13 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-3xl mx-auto mt-10 text-left">
             {project.keyKPIs.map((kpi, idx) => (
               <div key={idx} className="p-4 border border-[var(--border)] bg-[var(--card)]">
-                <span className="text-[11px] uppercase font-mono tracking-wider text-[var(--muted)] block mb-1">
+                <span className="text-[length:var(--text-small)] uppercase font-mono tracking-wider text-[var(--muted)] block mb-1">
                   {kpi.label}
                 </span>
                 <div className="text-xl sm:text-2xl font-bold font-mono text-[var(--text)]">
                   {kpi.value}
                 </div>
-                <span className="text-[11px] text-[var(--accent)] font-mono block mt-1">
+                <span className="text-[length:var(--text-small)] text-[var(--accent)] font-mono block mt-1">
                   {kpi.subtext}
                 </span>
               </div>
@@ -192,7 +192,7 @@ export default function ExcelProjectShowcase({ project }: ExcelProjectShowcasePr
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="text-[11px] font-mono px-2.5 py-0.5 border border-[var(--border)] bg-[var(--card)] text-[var(--accent)] font-semibold">
+                <span className="text-[length:var(--text-small)] font-mono px-2.5 py-0.5 border border-[var(--border)] bg-[var(--card)] text-[var(--accent)] font-semibold">
                   {activeTab.badge}
                 </span>
                 <button

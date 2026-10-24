@@ -29,7 +29,7 @@ export default function SurgicalAIDashboardPage() {
               <div className="w-12 h-12 bg-[var(--surface2)] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(110,231,255,0.2)]">⚡</div>
               <div>
                 <h1 className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Surgical <span className="text-[var(--accent)]">AI</span></h1>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Interactive Prototype: Enterprise Workflow Intelligence</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Interactive Prototype: Enterprise Workflow Intelligence</div>
               </div>
             </div>
             <div className="flex items-center gap-3">

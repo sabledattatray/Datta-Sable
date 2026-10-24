@@ -1,19 +1,19 @@
 .root { position: relative; flex-shrink: 0; }
 .headerActions { display: flex; align-items: center; flex-shrink: 0; gap: 10px; margin-left: 10px; padding-left: 12px; border-left: 1px solid var(--border); }
-.signIn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 40px; padding: 4px 14px 4px 5px; border: 1px solid var(--border); border-radius: 24px; background: var(--surface); color: var(--text); font-family: var(--font-inter); font-size: 12px; font-weight: 500; line-height: 1.4; white-space: nowrap; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.signIn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 40px; padding: 4px 14px 4px 5px; border: 1px solid var(--border); border-radius: 24px; background: var(--surface); color: var(--text); font-family: var(--font-inter); font-size: var(--text-small); font-weight: 500; line-height: 1.4; white-space: nowrap; cursor: pointer; transition: border-color .2s, background-color .2s; }
 .signInIcon { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent); }
 .signIn:hover { border-color: var(--accent); background: var(--surface2); }
 .signIn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .trigger { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 4px 8px 4px 4px; border: 1px solid var(--border); border-radius: 24px; color: var(--muted); background: var(--surface); cursor: pointer; }
 .trigger:hover, .trigger[aria-expanded='true'] { border-color: var(--accent); color: var(--accent); }
-.avatar { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); font-size: 12px; font-weight: 600; line-height: 1; }
+.avatar { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); font-size: var(--text-small); font-weight: 600; line-height: 1; }
 .rotated { transform: rotate(180deg); }
 .panel { position: absolute; right: 0; top: calc(100% + 12px); width: 240px; max-width: calc(100vw - 32px); background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 16px 48px #00000026; overflow: hidden; z-index: 310; }
 .identity { display: grid; gap: 5px; padding: 18px; border-bottom: 1px solid var(--border); }
-.identity > span { font-size: 10px; color: var(--muted); line-height: 1.5; }
+.identity > span { font-size: var(--text-small); color: var(--muted); line-height: 1.5; }
 .identity strong { font-size: 14px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
 .actions { display: grid; gap: 3px; padding: 8px; }
-.actions a, .actions button { display: flex; align-items: center; gap: 11px; width: 100%; padding: 12px 10px; min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); text-align: left; text-decoration: none; font-family: inherit; font-size: 12px; line-height: 1.5; cursor: pointer; }
+.actions a, .actions button { display: flex; align-items: center; gap: 11px; width: 100%; padding: 12px 10px; min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); text-align: left; text-decoration: none; font-family: inherit; font-size: var(--text-small); line-height: 1.5; cursor: pointer; }
 .actions a:hover, .actions button:hover { color: var(--text); background: var(--surface2); }
 .actions svg { color: var(--accent); flex-shrink: 0; }
 .root :is(button,a):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

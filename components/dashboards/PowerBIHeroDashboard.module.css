@@ -43,7 +43,7 @@
   background: var(--pbi-primary, var(--accent));
   color: var(--btn-primary-text, #ffffff);
   font-weight: 800;
-  font-size: 11px;
+  font-size: var(--text-small);
   box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 35%, transparent);
   flex-shrink: 0;
 }
@@ -54,7 +54,7 @@
 }
 
 .pbiReportTitle {
-  font-size: 12.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
@@ -64,7 +64,7 @@
 }
 
 .pbiSubBadge {
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-family: var(--font-mono, monospace);
   color: var(--pbi-primary, var(--accent));
   font-weight: 500;
@@ -81,7 +81,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 10px;
+  font-size: var(--text-small);
   color: var(--muted);
   font-weight: 600;
   text-transform: uppercase;
@@ -107,7 +107,7 @@
   border: 1px solid transparent;
   background: transparent;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -142,7 +142,7 @@
   background: color-mix(in srgb, var(--surface2) 80%, transparent);
   border: 1px solid var(--border);
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
@@ -172,7 +172,7 @@
 }
 
 .slicerLabel {
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--muted);
@@ -187,7 +187,7 @@
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   border: 1px solid var(--border);
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -259,14 +259,14 @@
 }
 
 .kpiTitle {
-  font-size: 10.5px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: var(--muted);
   letter-spacing: -0.01em;
 }
 
 .kpiDaxTag {
-  font-size: 8px;
+  font-size: var(--text-small);
   font-family: var(--font-mono, monospace);
   padding: 1.5px 4px;
   border-radius: 3px;
@@ -294,7 +294,7 @@
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   padding: 1.5px 5px;
   border-radius: 3px;
@@ -306,7 +306,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: var(--text-small);
   color: var(--muted);
   margin-top: auto;
 }
@@ -359,7 +359,7 @@
 }
 
 .cardTitle {
-  font-size: 11.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
@@ -369,7 +369,7 @@
 }
 
 .cardSubtitle {
-  font-size: 9px;
+  font-size: var(--text-small);
   font-family: var(--font-mono, monospace);
   color: var(--muted);
   margin-top: 1px;
@@ -379,7 +379,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 9px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: var(--muted);
 }
@@ -447,13 +447,13 @@
 }
 
 .donutCenterVal {
-  font-size: 13px;
+  font-size: var(--text-small);
   font-weight: 800;
   color: var(--text);
 }
 
 .donutCenterSub {
-  font-size: 7.5px;
+  font-size: var(--text-small);
   color: var(--muted);
   text-transform: uppercase;
 }
@@ -469,7 +469,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 
 .donutLegendLabel {
@@ -503,7 +503,7 @@
 }
 
 .regionalMiniName {
-  font-size: 8px;
+  font-size: var(--text-small);
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -511,7 +511,7 @@
 }
 
 .regionalMiniVal {
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--pbi-primary, var(--accent));
   font-variant-numeric: tabular-nums;
@@ -544,7 +544,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 
 .costCenterName {
@@ -562,11 +562,11 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--text);
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 
 .costCenterVar {
-  font-size: 8.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   padding: 1px 4px;
   border-radius: 3px;
@@ -640,7 +640,7 @@
 }
 
 .mapCalloutTitle {
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: var(--muted);
   line-height: 1;
@@ -648,7 +648,7 @@
 }
 
 .mapCalloutValue {
-  font-size: 13.5px;
+  font-size: var(--text-small);
   font-weight: 800;
   font-family: var(--font-mono, monospace);
   color: var(--text);
@@ -660,13 +660,13 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 9px;
+  font-size: var(--text-small);
   font-weight: 700;
   line-height: 1;
 }
 
 .mapCalloutDeltaIcon {
-  font-size: 7.5px;
+  font-size: var(--text-small);
 }
 
 /* Bottom-left Sales Legend */
@@ -682,7 +682,7 @@
 }
 
 .mapLegendTitle {
-  font-size: 8.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--muted);
   letter-spacing: 0.3px;
@@ -705,7 +705,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 8px;
+  font-size: var(--text-small);
   font-family: var(--font-mono, monospace);
   font-weight: 600;
   color: var(--muted);
@@ -758,7 +758,7 @@
 }
 
 .gaugeTargetLabel {
-  font-size: 8px;
+  font-size: var(--text-small);
   font-family: var(--font-mono, monospace);
   color: var(--pbi-secondary, var(--accent2));
   font-weight: 600;
@@ -785,7 +785,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 
@@ -800,7 +800,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
 }
 
 .stockStratShare {
@@ -809,7 +809,7 @@
 }
 
 .stockStratAmount {
-  font-size: 8.5px;
+  font-size: var(--text-small);
   color: var(--muted);
   font-family: var(--font-mono, monospace);
 }
@@ -841,7 +841,7 @@
   background: transparent;
   border: 1px solid transparent;
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -863,7 +863,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 9px;
+  font-size: var(--text-small);
   font-family: var(--font-mono, monospace);
   color: var(--muted);
 }
@@ -933,13 +933,13 @@
     padding: 3px 6px;
   }
   .mapCalloutTitle {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .mapCalloutValue {
-    font-size: 11px;
+    font-size: var(--text-small);
   }
   .mapCalloutDelta {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
 }
 

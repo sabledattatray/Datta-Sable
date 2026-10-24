@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactECharts from 'echarts-for-react';
+import { useTheme } from '@/components/ThemeProvider';
 import { 
   TrendingUp, 
   Users, 
@@ -62,12 +63,12 @@ const StatCard = ({ label, value, trend, icon: Icon, color }: any) => (
       <div className="p-2 bg-[var(--tag-bg)] border border-[var(--border)] text-[var(--accent)] group-hover:scale-110 transition-transform">
         <Icon size={20} />
       </div>
-      <div className={`flex items-center gap-1 text-[10px] mono font-bold ${trend > 0 ? 'text-green-400' : 'text-red-400'}`}>
+      <div className={`flex items-center gap-1 text-[length:var(--text-small)] mono font-bold ${trend > 0 ? 'text-green-400' : 'text-red-400'}`}>
         {trend > 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
         {Math.abs(trend)}%
       </div>
     </div>
-    <p className="text-[11px] uppercase tracking-widest text-[var(--muted)] font-bold mb-1">{label}</p>
+    <p className="text-[length:var(--text-small)] uppercase tracking-widest text-[var(--muted)] font-bold mb-1">{label}</p>
     <h3 className="text-3xl font-black tracking-tighter">{value}</h3>
     <div className="mt-4 w-full h-1 bg-[var(--border)] rounded-full overflow-hidden">
       <motion.div 
@@ -81,6 +82,8 @@ const StatCard = ({ label, value, trend, icon: Icon, color }: any) => (
 );
 
 export default function InteractiveDashboard() {
+  const { theme } = useTheme();
+  const chartText = theme === 'light' ? '#475569' : '#b3bdcc';
   const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState('');
   const [syncTime, setSyncTime] = useState('');
@@ -114,12 +117,12 @@ export default function InteractiveDashboard() {
       boundaryGap: false,
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       axisLine: { lineStyle: { color: '#333' } },
-      axisLabel: { color: '#666', fontSize: 10 }
+      axisLabel: { color: chartText, fontSize: 14 }
     },
     yAxis: {
       type: 'value',
       splitLine: { lineStyle: { color: '#1a1a1a' } },
-      axisLabel: { color: '#666', fontSize: 10 }
+      axisLabel: { color: chartText, fontSize: 14 }
     },
     series: [{
       name: 'Revenue',
@@ -144,7 +147,7 @@ export default function InteractiveDashboard() {
   const donutChartOption = {
     backgroundColor: 'transparent',
     tooltip: { trigger: 'item' },
-    legend: { bottom: '0', left: 'center', textStyle: { color: '#888', fontSize: 10 }, icon: 'circle' },
+    legend: { bottom: '0', left: 'center', textStyle: { color: chartText, fontSize: 14 }, icon: 'circle' },
     series: [{
       name: 'Regional Sales',
       type: 'pie',
@@ -201,9 +204,9 @@ export default function InteractiveDashboard() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-xl font-black uppercase tracking-tight">Revenue Intelligence</h1>
-                <span className="text-[9px] mono px-1.5 py-0.5 bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">v2.4.0</span>
+                <span className="text-[length:var(--text-small)] mono px-1.5 py-0.5 bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">v2.4.0</span>
               </div>
-              <div className="flex items-center gap-4 text-[11px] mono text-[var(--muted)] uppercase tracking-widest">
+              <div className="flex items-center gap-4 text-[length:var(--text-small)] mono text-[var(--muted)] uppercase tracking-widest">
                 <span className="flex items-center gap-1.5"><RefreshCw size={10} className="animate-spin-slow" /> System Live</span>
                 <span className="text-[var(--border)]">|</span>
                 <span>Last Sync: <span className="text-white">{syncTime}</span></span>
@@ -213,14 +216,14 @@ export default function InteractiveDashboard() {
 
           <div className="flex items-center gap-3">
             <div className="flex flex-col items-end mr-4">
-              <span className="text-[10px] mono text-[var(--muted)] uppercase">Network Load</span>
+              <span className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase">Network Load</span>
               <div className="flex gap-1 mt-1">
                 {[1, 2, 3, 4, 5].map(i => (
                   <div key={i} className={`w-1 h-3 ${i < 4 ? 'bg-[var(--accent)]' : 'bg-[var(--border)]'}`} />
                 ))}
               </div>
             </div>
-            <button className="px-5 py-2.5 bg-[var(--accent)] text-black text-[11px] font-black uppercase tracking-widest hover:bg-white transition-colors">
+            <button className="px-5 py-2.5 bg-[var(--accent)] text-black text-[length:var(--text-small)] font-black uppercase tracking-widest hover:bg-white transition-colors">
               Export Data
             </button>
           </div>
@@ -241,11 +244,11 @@ export default function InteractiveDashboard() {
               <div className="flex justify-between items-center mb-8">
                 <div>
                   <h3 className="text-lg font-bold">Performance Analytics</h3>
-                  <p className="text-[12px] text-[var(--muted)]">Real-time revenue velocity tracking</p>
+                  <p className="text-[length:var(--text-small)] text-[var(--muted)]">Real-time revenue velocity tracking</p>
                 </div>
                 <div className="flex gap-2">
                   {['1D', '1W', '1M', '1Y'].map(t => (
-                    <button key={t} className={`px-2 py-1 text-[10px] mono border border-[var(--border)] ${t === '1W' ? 'bg-[var(--accent)] text-black' : 'text-[var(--muted)]'}`}>{t}</button>
+                    <button key={t} className={`px-2 py-1 text-[length:var(--text-small)] mono border border-[var(--border)] ${t === '1W' ? 'bg-[var(--accent)] text-black' : 'text-[var(--muted)]'}`}>{t}</button>
                   ))}
                 </div>
               </div>
@@ -256,7 +259,7 @@ export default function InteractiveDashboard() {
 
             <div className="bg-[var(--surface2)] border border-[var(--border)] p-6">
               <h3 className="text-lg font-bold mb-2">Regional Market</h3>
-              <p className="text-[12px] text-[var(--muted)] mb-8">Global distribution share</p>
+              <p className="text-[length:var(--text-small)] text-[var(--muted)] mb-8">Global distribution share</p>
               <div className="h-[300px]">
                 <ReactECharts option={donutChartOption} style={{ height: '100%' }} />
               </div>
@@ -268,7 +271,7 @@ export default function InteractiveDashboard() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
               <div>
                 <h3 className="text-xl font-black uppercase tracking-tight">Recent Transactions</h3>
-                <p className="text-[12px] text-[var(--muted)]">Latest verified ledger activities</p>
+                <p className="text-[length:var(--text-small)] text-[var(--muted)]">Latest verified ledger activities</p>
               </div>
               <div className="relative w-full md:w-80">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={16} />
@@ -277,7 +280,7 @@ export default function InteractiveDashboard() {
                   placeholder="Search ledger..." 
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full bg-black border border-[var(--border)] pl-12 pr-4 py-3 text-[13px] outline-none focus:border-[var(--accent)] transition-colors"
+                  className="w-full bg-black border border-[var(--border)] pl-12 pr-4 py-3 text-[length:var(--text-small)] outline-none focus:border-[var(--accent)] transition-colors"
                 />
               </div>
             </div>
@@ -285,7 +288,7 @@ export default function InteractiveDashboard() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[var(--border)] text-[var(--muted)] uppercase text-[10px] mono tracking-widest">
+                  <tr className="border-b border-[var(--border)] text-[var(--muted)] uppercase text-[length:var(--text-small)] mono tracking-widest">
                     <th className="pb-4 font-bold">Transaction ID</th>
                     <th className="pb-4 font-bold">Customer</th>
                     <th className="pb-4 font-bold">Region</th>
@@ -293,7 +296,7 @@ export default function InteractiveDashboard() {
                     <th className="pb-4 font-bold text-center">Status</th>
                   </tr>
                 </thead>
-                <tbody className="text-[13px]">
+                <tbody className="text-[length:var(--text-small)]">
                   <AnimatePresence mode="popLayout">
                     {filteredTransactions.map((tx, idx) => (
                       <motion.tr 
@@ -306,7 +309,7 @@ export default function InteractiveDashboard() {
                         <td className="py-5 font-bold mono text-[var(--accent)]">{tx.id}</td>
                         <td className="py-5">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[10px] font-bold">
+                            <div className="w-8 h-8 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[length:var(--text-small)] font-bold">
                               {tx.customer.split(' ').map(n => n[0]).join('')}
                             </div>
                             {tx.customer}
@@ -316,7 +319,7 @@ export default function InteractiveDashboard() {
                         <td className="py-5 text-right font-bold">${tx.amount.toLocaleString()}</td>
                         <td className="py-5">
                           <div className="flex justify-center">
-                            <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest ${
+                            <span className={`px-2.5 py-1 text-[length:var(--text-small)] font-bold uppercase tracking-widest ${
                               tx.status === 'Completed' ? 'bg-green-500/10 text-green-400' :
                               tx.status === 'Pending' ? 'bg-yellow-500/10 text-yellow-400' :
                               'bg-red-500/10 text-red-400'
@@ -331,7 +334,7 @@ export default function InteractiveDashboard() {
                 </tbody>
               </table>
               {filteredTransactions.length === 0 && (
-                <div className="py-20 text-center text-[var(--muted)] mono text-[12px]">
+                <div className="py-20 text-center text-[var(--muted)] mono text-[length:var(--text-small)]">
                   No records found matching your query.
                 </div>
               )}

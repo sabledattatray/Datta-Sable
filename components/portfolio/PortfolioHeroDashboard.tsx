@@ -507,7 +507,7 @@ export default function PortfolioHeroDashboard() {
                 </>
               )}
               {scenarioIdx === 2 && (
-                <span style={{ color: 'var(--accent)', fontSize: '8.5px', fontWeight: 700 }}>
+                <span style={{ color: 'var(--accent)', fontSize: 'var(--text-small)', fontWeight: 700 }}>
                   5-Stage Sales Velocity
                 </span>
               )}
@@ -806,7 +806,7 @@ export default function PortfolioHeroDashboard() {
                   : 'Source Mix'}
               </span>
             </div>
-            <span style={{ fontSize: '8px', color: 'var(--muted)' }}>
+            <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
               {scenarioIdx === 0 ? 'Target Dial' : scenarioIdx === 1 ? '4 Nodes' : 'Attribution'}
             </span>
           </div>

@@ -25,5 +25,5 @@ export default function AdvertisingPreferencesButton() {
   return <button type="button" onClick={() => {
     const privacy = (window as Window & { googlefc?: GooglePrivacy }).googlefc;
     privacy?.showRevocationMessage?.();
-  }} style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Advertising privacy choices</button>;
+  }} style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>Advertising privacy choices</button>;
 }

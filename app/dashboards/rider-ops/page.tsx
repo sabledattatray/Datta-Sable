@@ -600,7 +600,7 @@ export default function RiderOpsDashboardPage() {
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] px-2.5 py-0.5 rounded font-semibold uppercase tracking-wider bg-emerald-500/15 text-[#107C41] dark:text-emerald-400 border border-emerald-500/30">
+                  <span className="text-[length:var(--text-small)] px-2.5 py-0.5 rounded font-semibold uppercase tracking-wider bg-emerald-500/15 text-[#107C41] dark:text-emerald-400 border border-emerald-500/30">
                     Microsoft Excel MIS Dashboard
                   </span>
                   <span className="text-xs font-medium text-[var(--muted)] dark:text-zinc-300" style={{ color: 'var(--muted)' }}>
@@ -672,7 +672,7 @@ export default function RiderOpsDashboardPage() {
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-emerald-100 text-[11px] hidden md:inline">
+                  <span className="text-emerald-100 text-[length:var(--text-small)] hidden md:inline">
                     Interactive Grid: Click any KPI or cell to inspect active formula
                   </span>
                   <a
@@ -717,7 +717,7 @@ export default function RiderOpsDashboardPage() {
                 <div className="flex-1 px-3 py-1 bg-white border border-[#CBD5E1] rounded text-slate-900 font-mono text-xs overflow-x-auto whitespace-nowrap shadow-xs flex items-center justify-between">
                   <span>{activeCell.formula}</span>
                   {activeCell.value && (
-                    <span className="text-slate-400 font-sans text-[11px] ml-4 font-normal">
+                    <span className="text-slate-400 font-sans text-[length:var(--text-small)] ml-4 font-normal">
                       Result: <strong className="text-slate-800">{activeCell.value}</strong>
                     </span>
                   )}
@@ -801,12 +801,12 @@ export default function RiderOpsDashboardPage() {
               <div className="bg-white overflow-x-auto min-h-[550px]">
                 
                 {/* Excel Column Headers Row */}
-                <div className="flex border-b border-[#CBD5E1] bg-[#F2F4F8] text-[11px] font-semibold text-slate-600 select-none min-w-[950px]">
+                <div className="flex border-b border-[#CBD5E1] bg-[#F2F4F8] text-[length:var(--text-small)] font-semibold text-slate-600 select-none min-w-[950px]">
                   <div className="w-10 border-r border-[#CBD5E1] py-1 text-center bg-[#E5E9F0] text-slate-500 flex items-center justify-center">
-                    <span className="text-[10px]">◢</span>
+                    <span className="text-[length:var(--text-small)]">◢</span>
                   </div>
                   {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'].map((col) => (
-                    <div key={col} className="flex-1 py-1 text-center border-r border-[#CBD5E1] font-mono text-[11px]">
+                    <div key={col} className="flex-1 py-1 text-center border-r border-[#CBD5E1] font-mono text-[length:var(--text-small)]">
                       {col}
                     </div>
                   ))}
@@ -824,10 +824,10 @@ export default function RiderOpsDashboardPage() {
                       className="bg-[#1F4E78] text-white p-6 sm:p-7 rounded-none border border-[#163857] shadow-sm cursor-pointer hover:brightness-105 transition-all select-none relative"
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <div className="text-[11px] uppercase tracking-wider text-blue-200 font-semibold font-mono">
+                        <div className="text-[length:var(--text-small)] uppercase tracking-wider text-blue-200 font-semibold font-mono">
                           MANAGEMENT INFORMATION SYSTEM (MIS) COCKPIT — MUMBAI REGION
                         </div>
-                        <span className="font-mono text-[10px] text-blue-200 bg-white/15 px-2 py-0.5 rounded border border-white/20 hidden sm:inline-block">
+                        <span className="font-mono text-[length:var(--text-small)] text-blue-200 bg-white/15 px-2 py-0.5 rounded border border-white/20 hidden sm:inline-block">
                           Cells B2:P3
                         </span>
                       </div>
@@ -846,11 +846,11 @@ export default function RiderOpsDashboardPage() {
                     {/* ── 5 EXECUTIVE EXCEL KPI CARDS (PREMIUM FINANCIAL STYLING) ── */}
                     <div className="space-y-3.5">
                       <div className="flex items-center justify-between text-xs text-slate-500 font-medium px-1">
-                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[11px] text-slate-700">
+                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[length:var(--text-small)] text-slate-700">
                           <Activity size={14} className="text-[#1F4E78]" />
                           Executive Financial &amp; Operational Metrics
                         </span>
-                        <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                        <span className="font-mono text-[length:var(--text-small)] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                           Cells B6:P7 • Auto-Aggregated
                         </span>
                       </div>
@@ -919,10 +919,10 @@ export default function RiderOpsDashboardPage() {
                             >
                               {/* Card Header with subtle cell coordinate */}
                               <div className="bg-[#F8FAFD] border-b border-[#E2E8F0] px-3.5 py-2 flex items-center justify-between">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#1F4E78] truncate">
+                                <span className="text-[length:var(--text-small)] font-bold uppercase tracking-wider text-[#1F4E78] truncate">
                                   {card.label}
                                 </span>
-                                <span className="font-mono text-[9px] text-slate-500 font-bold bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-2xs">
+                                <span className="font-mono text-[length:var(--text-small)] text-slate-500 font-bold bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-2xs">
                                   {card.coord}
                                 </span>
                               </div>
@@ -932,10 +932,10 @@ export default function RiderOpsDashboardPage() {
                                 <div className="text-2xl sm:text-[1.8rem] font-extrabold text-[#0F2C59] font-sans tracking-tight leading-none mb-2.5">
                                   {card.value}
                                 </div>
-                                <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs mb-2 ${card.badgeClass}`}>
+                                <span className={`inline-flex items-center gap-1 text-[length:var(--text-small)] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs mb-2 ${card.badgeClass}`}>
                                   {card.badge}
                                 </span>
-                                <div className="text-[11px] text-slate-500 font-medium leading-tight">
+                                <div className="text-[length:var(--text-small)] text-slate-500 font-medium leading-tight">
                                   {card.sub}
                                 </div>
                               </div>
@@ -953,11 +953,11 @@ export default function RiderOpsDashboardPage() {
                     {/* ── SECTION 1: SIDE-BY-SIDE CLASSIC EXCEL PIVOT TABLES ── */}
                     <div className="space-y-3.5">
                       <div className="flex items-center justify-between text-xs text-slate-500 font-medium px-1">
-                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[11px] text-slate-700">
+                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[length:var(--text-small)] text-slate-700">
                           <BarChart3 size={14} className="text-[#1F4E78]" />
                           Pivot Analysis: Weekly Performance &amp; Hub Zone Allocations
                         </span>
-                        <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                        <span className="font-mono text-[length:var(--text-small)] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                           Cells B9:P15 • Formula Slicers Linked
                         </span>
                       </div>
@@ -968,11 +968,11 @@ export default function RiderOpsDashboardPage() {
                         <div className="border border-[#CBD5E1] rounded-none overflow-hidden shadow-xs bg-white">
                           <div className="bg-[#1F4E78] text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
                             <span className="tracking-wide">Weekly Performance Pivot Table</span>
-                            <span className="font-mono text-[10px] bg-white/20 px-2 py-0.5 rounded font-normal">SUMIF / PIVOT</span>
+                            <span className="font-mono text-[length:var(--text-small)] bg-white/20 px-2 py-0.5 rounded font-normal">SUMIF / PIVOT</span>
                           </div>
                           <table className="w-full text-xs text-left border-collapse">
                             <thead>
-                              <tr className="bg-[#F2F5F9] border-b border-[#CBD5E1] font-bold text-slate-700 text-[11px]">
+                              <tr className="bg-[#F2F5F9] border-b border-[#CBD5E1] font-bold text-slate-700 text-[length:var(--text-small)]">
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Week</th>
                                 <th className="py-3 px-4 text-right border-r border-[#CBD5E1]">Trips Completed</th>
                                 <th className="py-3 px-4 text-right border-r border-[#CBD5E1]">Gross Earnings</th>
@@ -1013,11 +1013,11 @@ export default function RiderOpsDashboardPage() {
                         <div className="border border-[#CBD5E1] rounded-none overflow-hidden shadow-xs bg-white">
                           <div className="bg-[#1F4E78] text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
                             <span className="tracking-wide">Hub Zone Allocation Pivot Table</span>
-                            <span className="font-mono text-[10px] bg-white/20 px-2 py-0.5 rounded font-normal">SUMPRODUCT</span>
+                            <span className="font-mono text-[length:var(--text-small)] bg-white/20 px-2 py-0.5 rounded font-normal">SUMPRODUCT</span>
                           </div>
                           <table className="w-full text-xs text-left border-collapse">
                             <thead>
-                              <tr className="bg-[#F2F5F9] border-b border-[#CBD5E1] font-bold text-slate-700 text-[11px]">
+                              <tr className="bg-[#F2F5F9] border-b border-[#CBD5E1] font-bold text-slate-700 text-[length:var(--text-small)]">
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Hub Zone</th>
                                 <th className="py-3 px-4 text-center border-r border-[#CBD5E1]">Riders</th>
                                 <th className="py-3 px-4 text-right border-r border-[#CBD5E1]">Completed Trips</th>
@@ -1063,11 +1063,11 @@ export default function RiderOpsDashboardPage() {
                     {/* ── SECTION 2: SHIFT DYNAMICS & TOP PERFORMERS SCORECARD ── */}
                     <div className="space-y-3.5">
                       <div className="flex items-center justify-between text-xs text-slate-500 font-medium px-1">
-                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[11px] text-slate-700">
+                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[length:var(--text-small)] text-slate-700">
                           <Trophy size={14} className="text-[#1F4E78]" />
                           Operational Shift Dynamics &amp; Top Earners Leaderboard
                         </span>
-                        <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                        <span className="font-mono text-[length:var(--text-small)] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                           Cells B17:P23 • 24-Hour MIS
                         </span>
                       </div>
@@ -1078,11 +1078,11 @@ export default function RiderOpsDashboardPage() {
                         <div className="border border-[#CBD5E1] rounded-none overflow-hidden shadow-xs bg-white">
                           <div className="bg-[#1F4E78] text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
                             <span className="tracking-wide">Operational Shifts &amp; Surge Multiplier</span>
-                            <span className="font-mono text-[10px] bg-white/20 px-2 py-0.5 rounded font-normal">24-HOUR MIS</span>
+                            <span className="font-mono text-[length:var(--text-small)] bg-white/20 px-2 py-0.5 rounded font-normal">24-HOUR MIS</span>
                           </div>
                           <table className="w-full text-xs text-left border-collapse">
                             <thead>
-                              <tr className="bg-[#F8F9FA] border-b border-[#CBD5E1] font-bold text-slate-700 text-[11px]">
+                              <tr className="bg-[#F8F9FA] border-b border-[#CBD5E1] font-bold text-slate-700 text-[length:var(--text-small)]">
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Operating Shift</th>
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Active Hours</th>
                                 <th className="py-3 px-4 text-right border-r border-[#CBD5E1]">Total Orders</th>
@@ -1100,11 +1100,11 @@ export default function RiderOpsDashboardPage() {
                                   }`}
                                 >
                                   <td className="py-3 px-4 font-semibold text-slate-800 border-r border-[#CBD5E1]">{s.name}</td>
-                                  <td className="py-3 px-4 text-slate-600 border-r border-[#CBD5E1] font-mono text-[11px]">{s.time}</td>
+                                  <td className="py-3 px-4 text-slate-600 border-r border-[#CBD5E1] font-mono text-[length:var(--text-small)]">{s.time}</td>
                                   <td className="py-3 px-4 text-right text-slate-800 border-r border-[#CBD5E1] font-medium">{formatIndianNum(s.trips)}</td>
                                   <td className="py-3 px-4 text-center text-slate-700 border-r border-[#CBD5E1]">{s.avgDuration}</td>
                                   <td className="py-3 px-4 text-center">
-                                    <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
+                                    <span className={`px-2 py-0.5 rounded text-[length:var(--text-small)] font-semibold ${
                                       s.surge.includes('1.4x') || s.surge.includes('1.5x')
                                         ? 'bg-amber-100 text-amber-800 border border-amber-300'
                                         : 'bg-slate-100 text-slate-700 border border-slate-300'
@@ -1122,11 +1122,11 @@ export default function RiderOpsDashboardPage() {
                         <div className="border border-[#CBD5E1] rounded-none overflow-hidden shadow-xs bg-white">
                           <div className="bg-[#1F4E78] text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
                             <span className="tracking-wide">Top 3 Fleet Operations Earners</span>
-                            <span className="font-mono text-[10px] bg-white/20 px-2 py-0.5 rounded font-normal">AUDIT SCORECARD</span>
+                            <span className="font-mono text-[length:var(--text-small)] bg-white/20 px-2 py-0.5 rounded font-normal">AUDIT SCORECARD</span>
                           </div>
                           <table className="w-full text-xs text-left border-collapse">
                             <thead>
-                              <tr className="bg-[#F2F5F9] border-b border-[#CBD5E1] font-bold text-slate-700 text-[11px]">
+                              <tr className="bg-[#F2F5F9] border-b border-[#CBD5E1] font-bold text-slate-700 text-[length:var(--text-small)]">
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Rank</th>
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Rider Name</th>
                                 <th className="py-3 px-4 border-r border-[#CBD5E1]">Hub Zone</th>
@@ -1148,12 +1148,12 @@ export default function RiderOpsDashboardPage() {
                                     }`}
                                   >
                                     <td className="py-3 px-4 border-r border-[#CBD5E1]">
-                                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${rankBg}`}>
+                                      <span className={`px-2 py-0.5 rounded text-[length:var(--text-small)] font-bold border ${rankBg}`}>
                                         {rankLabel}
                                       </span>
                                     </td>
                                     <td className="py-3 px-4 font-bold text-slate-800 border-r border-[#CBD5E1]">
-                                      {r.name} <span className="font-mono text-[10px] text-slate-500 font-normal">({r.id})</span>
+                                      {r.name} <span className="font-mono text-[length:var(--text-small)] text-slate-500 font-normal">({r.id})</span>
                                     </td>
                                     <td className="py-3 px-4 text-slate-700 border-r border-[#CBD5E1]">{r.zone}</td>
                                     <td className="py-3 px-4 text-right text-slate-800 font-medium border-r border-[#CBD5E1]">{r.trips}</td>
@@ -1167,7 +1167,7 @@ export default function RiderOpsDashboardPage() {
                                           e.stopPropagation();
                                           setSelectedRiderModal(r);
                                         }}
-                                        className="px-2.5 py-1 text-[11px] font-semibold text-[#1F4E78] bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded cursor-pointer transition-colors"
+                                        className="px-2.5 py-1 text-[length:var(--text-small)] font-semibold text-[#1F4E78] bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded cursor-pointer transition-colors"
                                       >
                                         Inspect
                                       </button>
@@ -1185,11 +1185,11 @@ export default function RiderOpsDashboardPage() {
                     {/* ── SECTION 3: FLEET OPERATIONS MASTER LEDGER TABLE ── */}
                     <div className="space-y-3.5">
                       <div className="flex items-center justify-between text-xs text-slate-500 font-medium px-1">
-                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[11px] text-slate-700">
+                        <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[length:var(--text-small)] text-slate-700">
                           <ShieldCheck size={14} className="text-[#1F4E78]" />
                           Fleet Operations Master Ledger (Table_Rider_MIS)
                         </span>
-                        <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                        <span className="font-mono text-[length:var(--text-small)] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                           Cells A25:M38 • Full Bank Reconciliation
                         </span>
                       </div>
@@ -1198,11 +1198,11 @@ export default function RiderOpsDashboardPage() {
                         <div className="bg-[#1F4E78] text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="tracking-wide">Master Rider Ledger &amp; Payout Audit</span>
-                            <span className="font-normal text-blue-200 text-[11px] hidden sm:inline">
+                            <span className="font-normal text-blue-200 text-[length:var(--text-small)] hidden sm:inline">
                               • Click column header to sort • All calculations formula-driven
                             </span>
                           </div>
-                          <span className="font-mono text-[10px] bg-white/20 px-2.5 py-0.5 rounded font-normal">
+                          <span className="font-mono text-[length:var(--text-small)] bg-white/20 px-2.5 py-0.5 rounded font-normal">
                             Showing {filteredRiders.length} of {RIDER_DATASET.length} Riders
                           </span>
                         </div>
@@ -1210,7 +1210,7 @@ export default function RiderOpsDashboardPage() {
                         <div className="overflow-x-auto">
                           <table className="w-full text-xs text-left border-collapse">
                             <thead>
-                              <tr className="bg-[#F2F5F9] border-b-2 border-[#1F4E78] font-bold text-slate-800 text-[11px]">
+                              <tr className="bg-[#F2F5F9] border-b-2 border-[#1F4E78] font-bold text-slate-800 text-[length:var(--text-small)]">
                                 <th className="py-3 px-3.5 cursor-pointer border-r border-[#CBD5E1]" onClick={() => handleSort('id')}>
                                   <div className="flex items-center gap-1">Rider_ID <ArrowUpDown size={11} className="text-slate-400" /></div>
                                 </th>
@@ -1266,7 +1266,7 @@ export default function RiderOpsDashboardPage() {
                                       {r.deductions > 0 ? `-₹${r.deductions.toFixed(0)}` : '₹0'}
                                     </td>
                                     <td className="py-3 px-3.5 text-right border-r border-[#CBD5E1]">
-                                      <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
+                                      <span className={`px-2 py-0.5 rounded text-[length:var(--text-small)] font-semibold ${
                                         Number(attRate) >= 90 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
                                       }`}>
                                         {attRate}% ({r.attendanceDays}/{r.totalDays}d)
@@ -1282,7 +1282,7 @@ export default function RiderOpsDashboardPage() {
                                           e.stopPropagation();
                                           setSelectedRiderModal(r);
                                         }}
-                                        className="px-2.5 py-1 text-[11px] font-semibold text-[#1F4E78] bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded cursor-pointer transition-colors"
+                                        className="px-2.5 py-1 text-[length:var(--text-small)] font-semibold text-[#1F4E78] bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded cursor-pointer transition-colors"
                                       >
                                         Inspect
                                       </button>
@@ -1330,7 +1330,7 @@ export default function RiderOpsDashboardPage() {
                   <div className="space-y-4 max-w-[1200px] mx-auto">
                     <div className="bg-[#1F4E78] text-white p-3 rounded text-xs">
                       <div className="font-bold text-sm">Sheet: 2. MIS_Summary (Calculation Engine)</div>
-                      <div className="text-blue-100 text-[11px] mt-0.5">
+                      <div className="text-blue-100 text-[length:var(--text-small)] mt-0.5">
                         Dynamic row-by-rider calculation table with XLOOKUP, SUMPRODUCT, SUMIF, COUNTIFS, and IFERROR without hardcoded numbers.
                       </div>
                     </div>
@@ -1338,7 +1338,7 @@ export default function RiderOpsDashboardPage() {
                     <div className="border border-[#CBD5E1] rounded overflow-x-auto shadow-sm">
                       <table className="w-full text-xs text-left border-collapse">
                         <thead>
-                          <tr className="bg-[#F2F5F9] border-b-2 border-[#1F4E78] font-bold text-slate-800 text-[11px]">
+                          <tr className="bg-[#F2F5F9] border-b-2 border-[#1F4E78] font-bold text-slate-800 text-[length:var(--text-small)]">
                             <th className="p-2 border-r border-[#CBD5E1]">Col A: ID</th>
                             <th className="p-2 border-r border-[#CBD5E1]">Col B: Rider [XLOOKUP]</th>
                             <th className="p-2 border-r border-[#CBD5E1]">Col C: Zone [XLOOKUP]</th>
@@ -1404,7 +1404,7 @@ export default function RiderOpsDashboardPage() {
                   <div className="space-y-4 max-w-[1200px] mx-auto">
                     <div className="bg-[#107C41] text-white p-3 rounded text-xs">
                       <div className="font-bold text-sm">Sheet: 1. Raw_Data (Transactional Ingestion Layer)</div>
-                      <div className="text-emerald-100 text-[11px] mt-0.5">
+                      <div className="text-emerald-100 text-[length:var(--text-small)] mt-0.5">
                         Granular transactional records. Showing first 25 sample daily logs across riders, delivery mileage, order pay rates, and attendance checks.
                       </div>
                     </div>
@@ -1412,7 +1412,7 @@ export default function RiderOpsDashboardPage() {
                     <div className="border border-[#CBD5E1] rounded overflow-x-auto shadow-sm">
                       <table className="w-full text-xs text-left border-collapse">
                         <thead>
-                          <tr className="bg-[#F2F5F9] border-b-2 border-[#107C41] font-bold text-slate-800 text-[11px]">
+                          <tr className="bg-[#F2F5F9] border-b-2 border-[#107C41] font-bold text-slate-800 text-[length:var(--text-small)]">
                             <th className="p-2 border-r border-[#CBD5E1]">Date</th>
                             <th className="p-2 border-r border-[#CBD5E1]">Rider_ID</th>
                             <th className="p-2 border-r border-[#CBD5E1]">Rider_Name</th>
@@ -1442,7 +1442,7 @@ export default function RiderOpsDashboardPage() {
                               <td className="p-2 text-right text-slate-600 border-r border-[#CBD5E1]">{row.km}</td>
                               <td className="p-2 text-right text-slate-700 border-r border-[#CBD5E1]">₹{row.rate}</td>
                               <td className="p-2 text-center border-r border-[#CBD5E1]">
-                                <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                <span className={`px-2 py-0.5 rounded text-[length:var(--text-small)] font-bold ${
                                   row.bonus === 'Y' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'
                                 }`}>
                                   {row.bonus}
@@ -1450,14 +1450,14 @@ export default function RiderOpsDashboardPage() {
                               </td>
                               <td className="p-2 text-right text-slate-600 border-r border-[#CBD5E1]">₹{row.ded}</td>
                               <td className="p-2 text-center border-r border-[#CBD5E1]">
-                                <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                                <span className={`px-2 py-0.5 rounded text-[length:var(--text-small)] font-semibold ${
                                   row.att === 'Present' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
                                 }`}>
                                   {row.att}
                                 </span>
                               </td>
                               <td className="p-2 text-slate-700 border-r border-[#CBD5E1]">{row.zone}</td>
-                              <td className="p-2 text-slate-600 font-mono text-[11px]">{row.week}</td>
+                              <td className="p-2 text-slate-600 font-mono text-[length:var(--text-small)]">{row.week}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -1471,7 +1471,7 @@ export default function RiderOpsDashboardPage() {
                   <div className="space-y-4 max-w-[1200px] mx-auto">
                     <div className="bg-[#1F4E78] text-white p-3 rounded text-xs">
                       <div className="font-bold text-sm">Sheet: 4. AI_Insights_&amp;_Formulas (Calculation Reference)</div>
-                      <div className="text-blue-100 text-[11px] mt-0.5">
+                      <div className="text-blue-100 text-[length:var(--text-small)] mt-0.5">
                         Technical formula syntax and aggregation logic implemented across the Excel workbook.
                       </div>
                     </div>
@@ -1481,7 +1481,7 @@ export default function RiderOpsDashboardPage() {
                         <div key={idx} className="p-4 rounded border border-[#CBD5E1] bg-white shadow-sm">
                           <div className="flex items-center justify-between mb-2">
                             <span className="font-bold text-xs text-slate-900">{doc.name}</span>
-                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                            <span className="text-[length:var(--text-small)] font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
                               {doc.type}
                             </span>
                           </div>
@@ -1543,7 +1543,7 @@ export default function RiderOpsDashboardPage() {
                   })}
                 </div>
 
-                <div className="hidden sm:flex items-center gap-3 text-slate-500 text-[11px]">
+                <div className="hidden sm:flex items-center gap-3 text-slate-500 text-[length:var(--text-small)]">
                   <span>Ready</span>
                   <span>•</span>
                   <span>Count: {filteredRiders.length}</span>
@@ -1602,26 +1602,26 @@ export default function RiderOpsDashboardPage() {
               {/* 4 Clean Stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
                 <div className="p-3 rounded bg-slate-50 border border-slate-200 text-center">
-                  <div className="text-[10px] font-bold uppercase text-slate-500">Completed Trips</div>
+                  <div className="text-[length:var(--text-small)] font-bold uppercase text-slate-500">Completed Trips</div>
                   <div className="text-lg font-bold text-slate-800 mt-0.5">{selectedRiderModal.trips}</div>
-                  <div className="text-[10px] text-slate-500">{(selectedRiderModal.trips / selectedRiderModal.attendanceDays).toFixed(1)} / day</div>
+                  <div className="text-[length:var(--text-small)] text-slate-500">{(selectedRiderModal.trips / selectedRiderModal.attendanceDays).toFixed(1)} / day</div>
                 </div>
                 <div className="p-3 rounded bg-slate-50 border border-slate-200 text-center">
-                  <div className="text-[10px] font-bold uppercase text-slate-500">Distance</div>
+                  <div className="text-[length:var(--text-small)] font-bold uppercase text-slate-500">Distance</div>
                   <div className="text-lg font-bold text-[#2E75B6] mt-0.5">{selectedRiderModal.distanceKm.toFixed(0)} km</div>
-                  <div className="text-[10px] text-slate-500">{(selectedRiderModal.distanceKm / selectedRiderModal.trips).toFixed(1)} km/trip</div>
+                  <div className="text-[length:var(--text-small)] text-slate-500">{(selectedRiderModal.distanceKm / selectedRiderModal.trips).toFixed(1)} km/trip</div>
                 </div>
                 <div className="p-3 rounded bg-slate-50 border border-slate-200 text-center">
-                  <div className="text-[10px] font-bold uppercase text-slate-500">Bonus Shifts</div>
+                  <div className="text-[length:var(--text-small)] font-bold uppercase text-slate-500">Bonus Shifts</div>
                   <div className="text-lg font-bold text-[#833C0C] mt-0.5">{selectedRiderModal.bonusDays} Shifts</div>
-                  <div className="text-[10px] text-slate-500">₹{selectedRiderModal.bonusAmount} earned</div>
+                  <div className="text-[length:var(--text-small)] text-slate-500">₹{selectedRiderModal.bonusAmount} earned</div>
                 </div>
                 <div className="p-3 rounded bg-emerald-50 border border-emerald-200 text-center">
-                  <div className="text-[10px] font-bold uppercase text-emerald-800">Net Payout</div>
+                  <div className="text-[length:var(--text-small)] font-bold uppercase text-emerald-800">Net Payout</div>
                   <div className="text-lg font-bold text-[#107C41] mt-0.5">
                     {formatIndianCurrency(selectedRiderModal.netPayout)}
                   </div>
-                  <div className="text-[10px] text-emerald-700">100% reconciled</div>
+                  <div className="text-[length:var(--text-small)] text-emerald-700">100% reconciled</div>
                 </div>
               </div>
 
@@ -1640,7 +1640,7 @@ export default function RiderOpsDashboardPage() {
                     return (
                       <div
                         key={i}
-                        className={`h-7 rounded flex items-center justify-center text-[10px] font-bold font-mono ${
+                        className={`h-7 rounded flex items-center justify-center text-[length:var(--text-small)] font-bold font-mono ${
                           isBonusDay
                             ? 'bg-amber-100 text-amber-900 border border-amber-300'
                             : isPresent
@@ -1654,7 +1654,7 @@ export default function RiderOpsDashboardPage() {
                     );
                   })}
                 </div>
-                <div className="flex items-center gap-4 mt-2.5 text-[11px] text-slate-600">
+                <div className="flex items-center gap-4 mt-2.5 text-[length:var(--text-small)] text-slate-600">
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-amber-400" /> Bonus Shift (11+ orders)</span>
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-emerald-500" /> Standard Shift</span>
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-slate-300" /> Rest Day</span>

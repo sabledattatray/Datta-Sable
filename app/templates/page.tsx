@@ -97,7 +97,7 @@ export default function TemplatesPage() {
                 href={item.href}
                 className="no-underline group border border-[var(--border)] bg-[var(--bg)] p-4 hover:border-[var(--accent3)] transition-colors"
               >
-                <span className="mono text-[9px] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
+                <span className="mono text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-widest">{item.label}</span>
                 <div className="mt-2 flex items-center justify-between gap-3 text-[var(--text)]">
                   <span className="text-sm font-bold group-hover:text-[var(--accent3)] transition-colors">{item.title}</span>
                   <ArrowRight size={13} className="text-[var(--accent3)] group-hover:translate-x-1 transition-transform" />
@@ -122,7 +122,7 @@ export default function TemplatesPage() {
                 <div className="p-4 bg-[var(--bg)] rounded-sm border border-[var(--border)] shadow-inner">
                   {template.icon}
                 </div>
-                <div className="tag mono text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">{template.type}</div>
+                <div className="tag mono text-[length:var(--text-small)] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">{template.type}</div>
               </div>
 
               <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }} className="group-hover:text-[var(--accent)] transition-colors">
@@ -134,16 +134,16 @@ export default function TemplatesPage() {
 
               <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
                 <div className="flex flex-col">
-                   <span className="mono text-[10px] text-[var(--muted)] opacity-60 uppercase mb-1 font-bold">Filesize</span>
-                   <span className="mono text-[12px] font-bold text-[var(--accent)]">{template.size}</span>
+                   <span className="mono text-[length:var(--text-small)] text-[var(--muted)] opacity-60 uppercase mb-1 font-bold">Filesize</span>
+                   <span className="mono text-[length:var(--text-small)] font-bold text-[var(--accent)]">{template.size}</span>
                 </div>
                 <a 
                   href={template.downloadUrl} 
                   download 
-                  className="btn-outline px-6 py-3 flex items-center gap-2.5 group/dl no-underline font-bold text-[12px]"
+                  className="btn-outline px-6 py-3 flex items-center gap-2.5 group/dl no-underline font-bold text-[length:var(--text-small)]"
                 >
                    <Download size={15} className="group-hover/dl:translate-y-0.5 transition-transform text-[var(--accent)]" />
-                   <span className="mono text-[11px] font-bold tracking-wider">DOWNLOAD</span>
+                   <span className="mono text-[length:var(--text-small)] font-bold tracking-wider">DOWNLOAD</span>
                 </a>
               </div>
             </motion.div>
@@ -173,10 +173,10 @@ export default function TemplatesPage() {
                 style={{ padding: '2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}
               >
                 <div className="flex items-center justify-between mb-8">
-                  <div className="tag mono text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
+                  <div className="tag mono text-[length:var(--text-small)] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
                     {item.category.toUpperCase()}
                   </div>
-                  <div className="tag mono text-[10px] tracking-[0.1em] px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm opacity-60">
+                  <div className="tag mono text-[length:var(--text-small)] tracking-[0.1em] px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm opacity-60">
                     {item.targetModule.split('/').pop()}
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export default function TemplatesPage() {
                 </p>
 
                 <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
-                  <Link href={`/templates/${item.slug}`} className="mono text-[11px] font-bold text-[var(--accent2)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
+                  <Link href={`/templates/${item.slug}`} className="mono text-[length:var(--text-small)] font-bold text-[var(--accent2)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
                     VIEW BLUEPRINT <ArrowRight size={12} />
                   </Link>
                 </div>
@@ -221,10 +221,10 @@ export default function TemplatesPage() {
                 style={{ padding: '2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}
               >
                 <div className="flex items-center justify-between mb-8">
-                  <div className="tag mono text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
+                  <div className="tag mono text-[length:var(--text-small)] tracking-[0.2em] font-bold px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm">
                     {item.persona.toUpperCase()}
                   </div>
-                  <div className="tag mono text-[10px] tracking-[0.1em] px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm opacity-60">
+                  <div className="tag mono text-[length:var(--text-small)] tracking-[0.1em] px-2.5 py-1 bg-[var(--bg)] border border-[var(--border)] rounded-sm opacity-60">
                     {item.intent.toUpperCase()}
                   </div>
                 </div>
@@ -237,7 +237,7 @@ export default function TemplatesPage() {
                 </p>
 
                 <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
-                  <Link href={`/lp/${item.slug}`} className="mono text-[11px] font-bold text-[var(--accent3)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
+                  <Link href={`/lp/${item.slug}`} className="mono text-[length:var(--text-small)] font-bold text-[var(--accent3)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
                     READ PLAYBOOK <ArrowRight size={12} />
                   </Link>
                 </div>
@@ -250,7 +250,7 @@ export default function TemplatesPage() {
         <div className="border-2 border-dashed border-[var(--border)] rounded-sm text-center shadow-xl bg-[var(--surface1)]" style={{ marginTop: '8rem', padding: '4.5rem 2rem' }}>
            <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', fontFamily: "'Syne', sans-serif" }}>Need a custom architecture?</h3>
            <p style={{ color: 'var(--muted)', marginBottom: '3rem', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>We build bespoke automation systems tailored to your specific business logic.</p>
-           <a href="/contact" className="btn-primary inline-flex py-4 px-12 font-bold tracking-wider text-[13px]">REQUEST ARCHITECTURE BUILD</a>
+           <a href="/contact" className="btn-primary inline-flex py-4 px-12 font-bold tracking-wider text-[length:var(--text-small)]">REQUEST ARCHITECTURE BUILD</a>
         </div>
       </main>
 

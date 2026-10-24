@@ -154,7 +154,7 @@ function injectTableOfContents(content: string): string {
 
   let tocHtml = `<div class="blog-toc" style="padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 2rem; background: var(--surface2);">
   <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text);">Table of Contents</h4>
-  <ul style="list-style-type: none; padding-left: 0; margin: 0; font-size: 0.85rem; line-height: 1.6; display: flex; flex-direction: column; gap: 6px;">`;
+  <ul style="list-style-type: none; padding-left: 0; margin: 0; font-size:var(--text-small); line-height: 1.6; display: flex; flex-direction: column; gap: 6px;">`;
 
   headings.forEach(h => {
     const isH3 = h.tag.toLowerCase() === 'h3';
@@ -621,7 +621,7 @@ export default function AdminBlog() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
           <span
             style={{
-              fontSize: 10,
+              fontSize: 'var(--text-small)',
               fontWeight: 700,
               color: css.accent,
               borderColor: `color-mix(in srgb, ${css.accent} 27%, transparent)`,
@@ -635,10 +635,10 @@ export default function AdminBlog() {
           >
             {formData.category}
           </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: css.muted, fontSize: '0.8rem' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: css.muted, fontSize: 'var(--text-small)' }}>
             ⏱️ {formData.readTime || '5'} min read
           </span>
-          <span style={{ color: css.muted, fontSize: '0.8rem' }}>
+          <span style={{ color: css.muted, fontSize: 'var(--text-small)' }}>
             {formData.date}
           </span>
         </div>
@@ -712,7 +712,7 @@ export default function AdminBlog() {
             <div style={{ fontWeight: 600, fontSize: '0.9rem', color: css.text }}>
               Datta Sable
             </div>
-            <div style={{ color: css.muted, fontSize: '0.8rem' }}>
+            <div style={{ color: css.muted, fontSize: 'var(--text-small)' }}>
               BI & Analytics Expert
             </div>
           </div>
@@ -770,7 +770,7 @@ export default function AdminBlog() {
             <div style={{ flex: 1, minWidth: 260 }}>
               <div
                 style={{
-                  fontSize: 9,
+                  fontSize: 'var(--text-small)',
                   fontWeight: 800,
                   color: css.accent,
                   letterSpacing: '0.1em',
@@ -1430,7 +1430,7 @@ export default function AdminBlog() {
               <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>
                 Delete this article?
               </h3>
-              <p style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.6, margin: '0 0 24px' }}>
+              <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, margin: '0 0 24px' }}>
                 This action is permanent and cannot be undone. The story will be removed from your public blog.
               </p>
               <div style={{ display: 'flex', gap: 10 }}>
@@ -1474,7 +1474,7 @@ export default function AdminBlog() {
               </div>
 
               {gscStatusModal.url && (
-                <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 16, wordBreak: 'break-all' }}>
+                <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginBottom: 16, wordBreak: 'break-all' }}>
                   URL: <strong style={{ color: 'var(--text)' }}>{gscStatusModal.url}</strong>
                 </div>
               )}
@@ -1482,7 +1482,7 @@ export default function AdminBlog() {
               {gscStatusModal.loading ? (
                 <div style={{ padding: '36px 0', textAlign: 'center' }}>
                   <Sparkles size={24} className="animate-spin" style={{ color: 'var(--accent)', margin: '0 auto 12px' }} />
-                  <p style={{ color: 'var(--muted)', fontSize: 13 }}>Querying Google Search Console API...</p>
+                  <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>Querying Google Search Console API...</p>
                 </div>
               ) : (
                 <div style={{ display: 'grid', gap: 12 }}>
@@ -1501,7 +1501,7 @@ export default function AdminBlog() {
                           <CheckCircle2 size={20} color="#10b981" />
                           <div>
                             <strong style={{ color: '#10b981', display: 'block' }}>Submission Successful</strong>
-                            <span style={{ fontSize: 12, color: 'var(--text)' }}>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--text)' }}>
                               Queued for Googlebot crawling. Notification timestamp: {gscStatusModal.content.notifiedAt || new Date().toLocaleTimeString()}
                             </span>
                           </div>
@@ -1511,7 +1511,7 @@ export default function AdminBlog() {
                           <AlertCircle size={20} color="#ef4444" />
                           <div>
                             <strong style={{ color: '#ef4444', display: 'block' }}>Submission Issue</strong>
-                            <span style={{ fontSize: 12, color: 'var(--text)' }}>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--text)' }}>
                               {gscStatusModal.content.error || 'Failed to submit URL'}
                             </span>
                           </div>
@@ -1541,28 +1541,28 @@ export default function AdminBlog() {
                               Verdict: {idx.verdict || 'PENDING'} · {idx.coverageState || 'Processing'}
                             </strong>
                             {!isIndexed && (
-                              <p style={{ margin: '4px 0 0', fontSize: 11, color: 'var(--muted)' }}>
+                              <p style={{ margin: '4px 0 0', fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
                                 URL was recently submitted to Googlebot. Google Search Console typically updates its snapshot within a few hours of publication.
                               </p>
                             )}
                           </div>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12 }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 'var(--text-small)' }}>
                           <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 10 }}>Robots.txt State</span>
+                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 'var(--text-small)' }}>Robots.txt State</span>
                             <strong>{idx.robotsTxtState || 'ALLOWED'}</strong>
                           </div>
                           <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 10 }}>Page Fetch</span>
+                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 'var(--text-small)' }}>Page Fetch</span>
                             <strong>{idx.pageFetchState || 'SUCCESSFUL'}</strong>
                           </div>
                           <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 10 }}>Crawled As</span>
+                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 'var(--text-small)' }}>Crawled As</span>
                             <strong>{idx.crawledAs || 'MOBILE'}</strong>
                           </div>
                           <div style={{ padding: 10, borderRadius: 6, background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 10 }}>Last Crawled</span>
+                            <span style={{ color: 'var(--muted)', display: 'block', fontSize: 'var(--text-small)' }}>Last Crawled</span>
                             <strong>{idx.lastCrawlTime ? new Date(idx.lastCrawlTime).toLocaleString() : 'Pending Googlebot visit'}</strong>
                           </div>
                         </div>
@@ -1571,7 +1571,7 @@ export default function AdminBlog() {
                   })()}
 
                   {gscStatusModal.content?.error && !gscStatusModal.content?.success && (
-                    <div style={{ padding: 12, borderRadius: 8, background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontSize: 12 }}>
+                    <div style={{ padding: 12, borderRadius: 8, background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontSize: 'var(--text-small)' }}>
                       {typeof gscStatusModal.content.error === 'string' ? gscStatusModal.content.error : JSON.stringify(gscStatusModal.content.error)}
                     </div>
                   )}
@@ -1711,7 +1711,7 @@ export default function AdminBlog() {
                 onClick={() => setSearch('')}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  color: 'var(--muted)', fontSize: 11, fontWeight: 600,
+                  color: 'var(--muted)', fontSize: 'var(--text-small)', fontWeight: 600,
                 }}
               >
                 Clear
@@ -1721,13 +1721,13 @@ export default function AdminBlog() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '0 10px', minHeight: 38 }}>
-              <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>SORT:</span>
+              <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>SORT:</span>
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value as any)}
                 style={{
                   background: 'transparent', border: 'none', outline: 'none',
-                  fontSize: 11, color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit',
+                  fontSize: 'var(--text-small)', color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit',
                 }}
               >
                 <option value="date">Date Created</option>
@@ -1740,7 +1740,7 @@ export default function AdminBlog() {
             <button
               onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
               className={adminStyles.secondary}
-              style={{ minHeight: 38, padding: '0 12px', fontSize: 11 }}
+              style={{ minHeight: 38, padding: '0 12px', fontSize: 'var(--text-small)' }}
             >
               {sortOrder === 'desc' ? '▼ DESC' : '▲ ASC'}
             </button>
@@ -1809,7 +1809,7 @@ export default function AdminBlog() {
                         >
                           {post.title}
                         </div>
-                        <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 500 }}>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', fontWeight: 500 }}>
                           {post.date} &bull; /blog/{post.slug}
                         </div>
                       </td>
@@ -1817,7 +1817,7 @@ export default function AdminBlog() {
                       {/* Word Count */}
                       <td className={adminStyles.td} style={{ whiteSpace: 'nowrap' }}>
                         <span style={{ fontWeight: 600 }}>{(post.wordCount || 0).toLocaleString()}</span>
-                        <span style={{ color: 'var(--muted)', fontSize: 11 }}> words</span>
+                        <span style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}> words</span>
                       </td>
 
                       {/* SEO Score */}
@@ -1828,7 +1828,7 @@ export default function AdminBlog() {
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: 4,
-                              fontSize: 10,
+                              fontSize: 'var(--text-small)',
                               fontWeight: 600,
                               color: post.seoScore >= 80 ? '#34d399' : post.seoScore >= 50 ? '#fbbf24' : '#f87171',
                               background: post.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : post.seoScore >= 50 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
@@ -1840,7 +1840,7 @@ export default function AdminBlog() {
                             <Sparkles size={10} /> {post.seoScore || 0}/100
                           </span>
                         ) : (
-                          <span style={{ color: 'var(--muted)', fontSize: 11 }}>--</span>
+                          <span style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>--</span>
                         )}
                       </td>
 
@@ -2012,12 +2012,12 @@ export default function AdminBlog() {
                   ) : (
                     <span className={adminStyles.badgeNeutral}>Draft</span>
                   )}
-                  <span style={{ fontSize: 10, color: 'var(--muted)' }}>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
                     📝 {(post.wordCount || 0).toLocaleString()} words
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: 10, fontSize: 11, color: 'var(--muted)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: 10, fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
                   <span>{post.date}</span>
                   <span style={{ fontWeight: 600, color: 'var(--text)' }}>👁️ {parseInt(post.views || '0', 10).toLocaleString()} views</span>
                 </div>
@@ -2080,7 +2080,7 @@ export default function AdminBlog() {
             <h3 style={{ fontSize: 20, fontWeight: 700, color: css.text, margin: '0 0 10px' }}>
               You have unsaved changes
             </h3>
-            <p style={{ color: css.muted, fontSize: 13, lineHeight: 1.6, margin: '0 0 28px' }}>
+            <p style={{ color: css.muted, fontSize: 'var(--text-small)', lineHeight: 1.6, margin: '0 0 28px' }}>
               Would you like to save this article as a draft before leaving, or discard your modifications?
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -2092,7 +2092,7 @@ export default function AdminBlog() {
                 style={{
                   width: '100%', padding: '12px', borderRadius: 12,
                   background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none',
-                  color: 'var(--btn-primary-text)', fontWeight: 700, cursor: 'pointer', fontSize: 13,
+                  color: 'var(--btn-primary-text)', fontWeight: 700, cursor: 'pointer', fontSize: 'var(--text-small)',
                   boxShadow: `0 4px 12px color-mix(in srgb, ${css.accent} 19%, transparent)`,
                 }}
               >
@@ -2110,7 +2110,7 @@ export default function AdminBlog() {
                 style={{
                   width: '100%', padding: '12px', borderRadius: 12,
                   background: css.surface2, border: `1px solid ${css.border}`,
-                  color: '#ef4444', fontWeight: 700, cursor: 'pointer', fontSize: 13,
+                  color: '#ef4444', fontWeight: 700, cursor: 'pointer', fontSize: 'var(--text-small)',
                   transition: 'background 0.15s',
                 }}
               >
@@ -2121,7 +2121,7 @@ export default function AdminBlog() {
                 style={{
                   width: '100%', padding: '12px', borderRadius: 12,
                   background: 'none', border: `1px solid ${css.border}`,
-                  color: css.text, fontWeight: 600, cursor: 'pointer', fontSize: 13,
+                  color: css.text, fontWeight: 600, cursor: 'pointer', fontSize: 'var(--text-small)',
                 }}
               >
                 Keep Editing
@@ -2178,7 +2178,7 @@ export default function AdminBlog() {
                 style={{
                   flex: 1, background: css.inputBg,
                   border: `1px solid ${css.border}`, color: css.text,
-                  padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 13,
+                  padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)',
                 }}
                 onKeyDown={e => { if (e.key === 'Enter') handleAddNewCategory(newCat); }}
               />
@@ -2187,7 +2187,7 @@ export default function AdminBlog() {
                 style={{
                   background: css.accent, border: 'none',
                   borderRadius: 10, padding: '10px 16px',
-                  fontSize: 12, fontWeight: 700, cursor: 'pointer', color: 'var(--btn-primary-text)',
+                  fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer', color: 'var(--btn-primary-text)',
                 }}
               >
                 Add
@@ -2214,7 +2214,7 @@ export default function AdminBlog() {
                         style={{
                           flex: 1, background: css.inputBg,
                           border: `1px solid ${css.border}`, color: css.text,
-                          padding: '6px 10px', borderRadius: 8, outline: 'none', fontSize: 12,
+                          padding: '6px 10px', borderRadius: 8, outline: 'none', fontSize: 'var(--text-small)',
                         }}
                         autoFocus
                         onKeyDown={e => {
@@ -2224,26 +2224,26 @@ export default function AdminBlog() {
                       />
                       <button
                         onClick={() => handleRenameCategory(cat, renameValue)}
-                        style={{ background: '#10b981', color: '#fff', border: 'none', borderRadius: 8, padding: '6px 12px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                        style={{ background: '#10b981', color: '#fff', border: 'none', borderRadius: 8, padding: '6px 12px', fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer' }}
                       >
                         Save
                       </button>
                       <button
                         onClick={() => setEditingCategory(null)}
-                        style={{ background: 'none', border: `1px solid ${css.border}`, color: css.text, borderRadius: 8, padding: '6px 10px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}
+                        style={{ background: 'none', border: `1px solid ${css.border}`, color: css.text, borderRadius: 8, padding: '6px 10px', fontSize: 'var(--text-small)', fontWeight: 600, cursor: 'pointer' }}
                       >
                         Cancel
                       </button>
                     </div>
                   ) : (
                     <>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: css.text }}>{cat}</span>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: css.text }}>{cat}</span>
                       <div style={{ display: 'flex', gap: 6 }}>
                         <button
                           onClick={() => { setEditingCategory(cat); setRenameValue(cat); }}
                           style={{
                             background: 'none', border: `1px solid ${css.border}`,
-                            borderRadius: 8, padding: '5px 8px', fontSize: 11, fontWeight: 600,
+                            borderRadius: 8, padding: '5px 8px', fontSize: 'var(--text-small)', fontWeight: 600,
                             color: css.muted, cursor: 'pointer', transition: 'all 0.15s',
                           }}
                           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.accent; (e.currentTarget as HTMLElement).style.borderColor = css.accent; }}
@@ -2255,7 +2255,7 @@ export default function AdminBlog() {
                           onClick={() => handleDeleteCategory(cat)}
                           style={{
                             background: 'none', border: `1px solid ${css.border}`,
-                            borderRadius: 8, padding: '5px 8px', fontSize: 11, fontWeight: 600,
+                            borderRadius: 8, padding: '5px 8px', fontSize: 'var(--text-small)', fontWeight: 600,
                             color: '#ef4444', cursor: 'pointer', transition: 'all 0.15s',
                           }}
                           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.06)'; }}
@@ -2298,7 +2298,7 @@ export default function AdminBlog() {
               borderRadius: 9, padding: '7px 12px',
               cursor: 'pointer', color: css.muted,
               display: 'flex', alignItems: 'center', gap: 6,
-              fontSize: 13, fontWeight: 600,
+              fontSize: 'var(--text-small)', fontWeight: 600,
               transition: 'all 0.15s',
             }}
             onMouseEnter={e => {
@@ -2314,7 +2314,7 @@ export default function AdminBlog() {
           </button>
           <span
             style={{
-              fontSize: 13, fontWeight: 700,
+              fontSize: 'var(--text-small)', fontWeight: 700,
               color: css.muted, padding: '3px 10px',
               background: css.surface2, borderRadius: 8,
             }}
@@ -2327,7 +2327,7 @@ export default function AdminBlog() {
             <span
               className="editor-header-draft-label"
               style={{
-                fontSize: 12,
+                fontSize: 'var(--text-small)',
                 color: saveStatus === 'dirty' ? '#f59e0b' : saveStatus === 'saving' ? css.accent : '#10b981',
                 fontWeight: 600,
                 fontStyle: 'italic',
@@ -2367,7 +2367,7 @@ export default function AdminBlog() {
                     gap: 6,
                     padding: '6px 12px',
                     borderRadius: 8,
-                    fontSize: 12,
+                    fontSize: 'var(--text-small)',
                     fontWeight: active ? 700 : 500,
                     background: active ? css.surface : 'transparent',
                     border: 'none',
@@ -2446,8 +2446,8 @@ export default function AdminBlog() {
                     gap: 12,
                   }}>
                     <div>
-                      <span style={{ fontSize: 13, fontWeight: 700, color: css.text }}>Unsaved local backup found</span>
-                      <p style={{ fontSize: 11, color: css.muted, margin: '2px 0 0' }}>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>Unsaved local backup found</span>
+                      <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '2px 0 0' }}>
                         An auto-saved draft from {new Date(hasAutosaveToRestore.timestamp).toLocaleString()} was found.
                       </p>
                     </div>
@@ -2464,7 +2464,7 @@ export default function AdminBlog() {
                           color: 'var(--btn-primary-text)',
                           padding: '6px 14px',
                           borderRadius: 8,
-                          fontSize: 12,
+                          fontSize: 'var(--text-small)',
                           fontWeight: 700,
                           cursor: 'pointer',
                         }}
@@ -2484,7 +2484,7 @@ export default function AdminBlog() {
                           color: css.text,
                           padding: '6px 14px',
                           borderRadius: 8,
-                          fontSize: 12,
+                          fontSize: 'var(--text-small)',
                           fontWeight: 600,
                           cursor: 'pointer',
                         }}
@@ -2553,7 +2553,7 @@ export default function AdminBlog() {
             <button
               onClick={() => setSidebarTab('settings')}
               style={{
-                flex: 1, padding: '14px 10px', fontSize: 11, fontWeight: 700,
+                flex: 1, padding: '14px 10px', fontSize: 'var(--text-small)', fontWeight: 700,
                 background: sidebarTab === 'settings' ? css.surface2 : 'transparent',
                 color: sidebarTab === 'settings' ? css.accent : css.muted,
                 border: 'none', borderBottom: sidebarTab === 'settings' ? `2px solid ${css.accent}` : 'none',
@@ -2566,7 +2566,7 @@ export default function AdminBlog() {
             <button
               onClick={() => setSidebarTab('seo')}
               style={{
-                flex: 1, padding: '14px 10px', fontSize: 11, fontWeight: 700,
+                flex: 1, padding: '14px 10px', fontSize: 'var(--text-small)', fontWeight: 700,
                 background: sidebarTab === 'seo' ? css.surface2 : 'transparent',
                 color: sidebarTab === 'seo' ? css.accent : css.muted,
                 border: 'none', borderBottom: sidebarTab === 'seo' ? `2px solid ${css.accent}` : 'none',
@@ -2580,14 +2580,14 @@ export default function AdminBlog() {
 
           {sidebarTab === 'settings' ? (
             <div style={{ padding: '20px 20px' }}>
-              <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
                 Post Settings
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 {/* Category */}
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                     Category
                   </label>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -2598,7 +2598,7 @@ export default function AdminBlog() {
                         flex: 1, background: css.inputBg,
                         border: `1px solid ${css.border}`, color: css.text,
                         padding: '10px 12px', borderRadius: 10, outline: 'none',
-                        cursor: 'pointer', fontSize: 13, fontWeight: 600,
+                        cursor: 'pointer', fontSize: 'var(--text-small)', fontWeight: 600,
                       }}
                     >
                       {categories.map(cat => (
@@ -2625,7 +2625,7 @@ export default function AdminBlog() {
 
                 {/* Slug */}
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                     URL Slug
                   </label>
                   <input
@@ -2637,11 +2637,11 @@ export default function AdminBlog() {
                     style={{
                       width: '100%', background: css.inputBg,
                       border: `1px solid ${slugError ? '#ef4444' : css.border}`, color: css.text,
-                      padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
+                      padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)',
                     }}
                   />
                   {slugError && (
-                    <p style={{ fontSize: 11, color: '#ef4444', fontWeight: 600, margin: '6px 0 0' }}>
+                    <p style={{ fontSize: 'var(--text-small)', color: '#ef4444', fontWeight: 600, margin: '6px 0 0' }}>
                       ⚠️ {slugError}
                     </p>
                   )}
@@ -2652,7 +2652,7 @@ export default function AdminBlog() {
                         setFormData(f => ({ ...f, slug: generateSlug(f.title) }));
                       }}
                       style={{
-                        background: 'none', border: 'none', color: css.accent, fontSize: 10, fontWeight: 700,
+                        background: 'none', border: 'none', color: css.accent, fontSize: 'var(--text-small)', fontWeight: 700,
                         cursor: 'pointer', padding: 0, marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.05em'
                       }}
                     >
@@ -2664,7 +2664,7 @@ export default function AdminBlog() {
                 {/* Read Time */}
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', margin: 0 }}>
+                    <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', margin: 0 }}>
                       Read Time (minutes)
                     </label>
                     {isReadTimeManual && (
@@ -2674,7 +2674,7 @@ export default function AdminBlog() {
                           setFormData(f => ({ ...f, readTime: calculateReadTime(f.content) }));
                         }}
                         style={{
-                          background: 'none', border: 'none', color: css.accent, fontSize: 10, fontWeight: 700,
+                          background: 'none', border: 'none', color: css.accent, fontSize: 'var(--text-small)', fontWeight: 700,
                           cursor: 'pointer', padding: 0, textTransform: 'uppercase', letterSpacing: '0.05em'
                         }}
                       >
@@ -2693,7 +2693,7 @@ export default function AdminBlog() {
                     style={{
                       width: '100%', background: css.inputBg,
                       border: `1px solid ${css.border}`, color: css.text,
-                      padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
+                      padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)',
                       fontWeight: 600,
                     }}
                   />
@@ -2701,7 +2701,7 @@ export default function AdminBlog() {
 
                 {/* Featured image */}
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                     Featured Image
                   </label>
                   <div
@@ -2721,7 +2721,7 @@ export default function AdminBlog() {
                     ) : (
                       <>
                         <ImageIcon size={22} color={css.muted} style={{ pointerEvents: 'none' }} />
-                        <span style={{ fontSize: 12, color: css.muted, marginTop: 6, fontWeight: 500, pointerEvents: 'none' }}>
+                        <span style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 6, fontWeight: 500, pointerEvents: 'none' }}>
                           Set featured image
                         </span>
                       </>
@@ -2731,7 +2731,7 @@ export default function AdminBlog() {
                   {formData.image && (
                     <button
                       onClick={() => setFormData(f => ({ ...f, image: '' }))}
-                      style={{ marginTop: 6, background: 'none', border: 'none', color: '#ef4444', fontSize: 12, fontWeight: 600, cursor: 'pointer', padding: 0 }}
+                      style={{ marginTop: 6, background: 'none', border: 'none', color: '#ef4444', fontSize: 'var(--text-small)', fontWeight: 600, cursor: 'pointer', padding: 0 }}
                     >
                       Remove image
                     </button>
@@ -2740,7 +2740,7 @@ export default function AdminBlog() {
 
                 {/* Excerpt */}
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                     Excerpt
                   </label>
                   <textarea
@@ -2751,7 +2751,7 @@ export default function AdminBlog() {
                       width: '100%', background: css.inputBg,
                       border: `1px solid ${css.border}`, color: css.text,
                       padding: '10px 12px', borderRadius: 10, outline: 'none',
-                      fontSize: 12, resize: 'none', lineHeight: 1.6,
+                      fontSize: 'var(--text-small)', resize: 'none', lineHeight: 1.6,
                       fontFamily: "'Inter', sans-serif",
                     }}
                   />
@@ -2761,17 +2761,17 @@ export default function AdminBlog() {
           ) : (
             <div style={{ padding: '20px 20px', display: 'flex', flexDirection: 'column', gap: 20 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
                   SEO Analyzer
                 </p>
-                <span style={{ fontSize: 10, fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
+                <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
                   <Globe size={11} /> PRO Enabled
                 </span>
               </div>
 
               {/* Focus Keyword Input */}
               <div>
-                <label style={{ display: 'block', fontSize: 11, color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                   Focus Keyword(s)
                 </label>
                 <input
@@ -2782,11 +2782,11 @@ export default function AdminBlog() {
                   style={{
                     width: '100%', background: css.inputBg,
                     border: `1px solid ${css.border}`, color: css.text,
-                    padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12,
+                    padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)',
                     fontWeight: 600,
                   }}
                 />
-                <span style={{ fontSize: 9.5, color: css.muted, marginTop: 4, display: 'block', fontWeight: 500 }}>
+                <span style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 4, display: 'block', fontWeight: 500 }}>
                   First keyword acts as the primary focus keyword.
                 </span>
               </div>
@@ -2800,7 +2800,7 @@ export default function AdminBlog() {
                   return (
                     <div style={{
                       padding: '30px 20px', textAlign: 'center', border: `1px dashed ${css.border}`,
-                      borderRadius: 16, color: css.muted, fontSize: 12, lineHeight: 1.6
+                      borderRadius: 16, color: css.muted, fontSize: 'var(--text-small)', lineHeight: 1.6
                     }}>
                       Enter a focus keyword to see your SEO score and analyze content in real-time.
                     </div>
@@ -2846,7 +2846,7 @@ export default function AdminBlog() {
                   <>
                     {/* Keyword Tags Switcher */}
                     <div>
-                      <label style={{ display: 'block', fontSize: 10, color: css.muted, fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                      <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                         Selected Keywords & Scores
                       </label>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -2870,7 +2870,7 @@ export default function AdminBlog() {
                                 background: tagBg,
                                 border: tagBorder,
                                 color: isActive ? css.text : css.muted,
-                                fontSize: 11,
+                                fontSize: 'var(--text-small)',
                                 fontWeight: 700,
                                 cursor: 'pointer',
                                 transition: 'all 0.15s',
@@ -2883,7 +2883,7 @@ export default function AdminBlog() {
                                 color: '#fff',
                                 borderRadius: 99,
                                 padding: '1px 5px',
-                                fontSize: 9,
+                                fontSize: 'var(--text-small)',
                                 fontWeight: 800,
                               }}>{score}</span>
                             </button>
@@ -2895,7 +2895,7 @@ export default function AdminBlog() {
                     {/* Google Snippet Editor Accordion */}
                     <div style={{ borderTop: `1px solid ${css.border}`, paddingTop: 16 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                        <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                           Google Snippet Preview
                         </span>
                         <div style={{ display: 'flex', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 8, padding: 2, gap: 2 }}>
@@ -2904,7 +2904,7 @@ export default function AdminBlog() {
                             onClick={() => setSnippetDevice('desktop')}
                             style={{
                               display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6,
-                              fontSize: 10, fontWeight: 600, border: 'none', cursor: 'pointer',
+                              fontSize: 'var(--text-small)', fontWeight: 600, border: 'none', cursor: 'pointer',
                               background: snippetDevice === 'desktop' ? css.surface : 'transparent',
                               color: snippetDevice === 'desktop' ? css.accent : css.muted,
                             }}
@@ -2916,7 +2916,7 @@ export default function AdminBlog() {
                             onClick={() => setSnippetDevice('mobile')}
                             style={{
                               display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6,
-                              fontSize: 10, fontWeight: 600, border: 'none', cursor: 'pointer',
+                              fontSize: 'var(--text-small)', fontWeight: 600, border: 'none', cursor: 'pointer',
                               background: snippetDevice === 'mobile' ? css.surface : 'transparent',
                               color: snippetDevice === 'mobile' ? css.accent : css.muted,
                             }}
@@ -2953,15 +2953,15 @@ export default function AdminBlog() {
                               <div style={{
                                 width: 14, height: 14, borderRadius: '50%', background: css.accent,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                color: 'var(--btn-primary-text)', fontSize: 8, fontWeight: 800,
+                                color: 'var(--btn-primary-text)', fontSize: 'var(--text-small)', fontWeight: 800,
                               }}>
                                 D
                               </div>
                               <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                                <span style={{ fontSize: 11, color: isDark ? '#bdc1c6' : '#202124', fontWeight: 500, lineHeight: 1 }}>
+                                <span style={{ fontSize: 'var(--text-small)', color: isDark ? '#bdc1c6' : '#202124', fontWeight: 500, lineHeight: 1 }}>
                                   dattasable.com
                                 </span>
-                                <span style={{ fontSize: 9, color: isDark ? '#9aa0a6' : '#4d5156', lineHeight: 1 }}>
+                                <span style={{ fontSize: 'var(--text-small)', color: isDark ? '#9aa0a6' : '#4d5156', lineHeight: 1 }}>
                                   blog › {displaySlug}
                                 </span>
                               </div>
@@ -2989,7 +2989,7 @@ export default function AdminBlog() {
 
                             {/* Excerpt */}
                             <p style={{
-                              fontSize: 12.5,
+                              fontSize: 'var(--text-small)',
                               color: googleSnippetColor,
                               margin: '4px 0 0',
                               lineHeight: 1.4,
@@ -3009,8 +3009,8 @@ export default function AdminBlog() {
                         {/* SEO Title Input */}
                         <div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                            <label style={{ fontSize: 10.5, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>SEO Title</label>
-                            <span style={{ fontSize: 10, fontWeight: 700, color: getLengthColor(formData.title.length, 40, 70) }}>
+                            <label style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>SEO Title</label>
+                            <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: getLengthColor(formData.title.length, 40, 70) }}>
                               {formData.title.length} / 70
                             </span>
                           </div>
@@ -3029,7 +3029,7 @@ export default function AdminBlog() {
                             }}
                             style={{
                               width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
-                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12, fontWeight: 600,
+                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 'var(--text-small)', fontWeight: 600,
                             }}
                           />
                         </div>
@@ -3037,8 +3037,8 @@ export default function AdminBlog() {
                         {/* URL Slug Input */}
                         <div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                            <label style={{ fontSize: 10.5, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>URL Slug</label>
-                            <span style={{ fontSize: 10, fontWeight: 700, color: getLengthColor(formData.slug.length, 1, 75) }}>
+                            <label style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>URL Slug</label>
+                            <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: getLengthColor(formData.slug.length, 1, 75) }}>
                               {formData.slug.length} / 75
                             </span>
                           </div>
@@ -3051,7 +3051,7 @@ export default function AdminBlog() {
                             }}
                             style={{
                               width: '100%', background: css.inputBg, border: `1px solid ${slugError ? '#ef4444' : css.border}`, color: css.text,
-                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12, fontWeight: 600,
+                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 'var(--text-small)', fontWeight: 600,
                             }}
                           />
                         </div>
@@ -3059,8 +3059,8 @@ export default function AdminBlog() {
                         {/* Meta Description Input */}
                         <div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                            <label style={{ fontSize: 10.5, color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Meta Description</label>
-                            <span style={{ fontSize: 10, fontWeight: 700, color: getLengthColor(formData.excerpt.length, 120, 160) }}>
+                            <label style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Meta Description</label>
+                            <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: getLengthColor(formData.excerpt.length, 120, 160) }}>
                               {formData.excerpt.length} / 160
                             </span>
                           </div>
@@ -3070,7 +3070,7 @@ export default function AdminBlog() {
                             rows={3}
                             style={{
                               width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
-                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 12, fontWeight: 600,
+                              padding: '8px 10px', borderRadius: 8, outline: 'none', fontSize: 'var(--text-small)', fontWeight: 600,
                               resize: 'none', lineHeight: 1.5, fontFamily: 'inherit',
                             }}
                           />
@@ -3097,7 +3097,7 @@ export default function AdminBlog() {
                             style={{ transition: 'stroke-dashoffset 0.35s' }}
                           />
                         </svg>
-                        <span style={{ fontSize: 12.5, fontWeight: 900, color: scoreColor }}>
+                        <span style={{ fontSize: 'var(--text-small)', fontWeight: 900, color: scoreColor }}>
                           {activeAnalysis.analysis.score}
                         </span>
                       </div>
@@ -3105,7 +3105,7 @@ export default function AdminBlog() {
                         <span style={{ fontSize: 14, fontWeight: 800, color: scoreColor }}>
                           {activeAnalysis.analysis.score >= 80 ? 'Great SEO' : activeAnalysis.analysis.score >= 50 ? 'Needs Work' : 'Poor SEO'}
                         </span>
-                        <span style={{ fontSize: 9.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: css.muted }}>
+                        <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: css.muted }}>
                           Keyword: "{activeAnalysis.keyword}"
                         </span>
                       </div>
@@ -3113,7 +3113,7 @@ export default function AdminBlog() {
 
                     {/* Categorized Diagnostic Tabs */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                      <span style={{ fontSize: 10.5, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                      <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                         Analysis Diagnostics
                       </span>
 
@@ -3142,7 +3142,7 @@ export default function AdminBlog() {
                                 flex: 1,
                                 padding: '6px 2px',
                                 borderRadius: 8,
-                                fontSize: 10.5,
+                                fontSize: 'var(--text-small)',
                                 fontWeight: active ? 700 : 500,
                                 background: active ? css.surface : 'transparent',
                                 border: 'none',
@@ -3165,7 +3165,7 @@ export default function AdminBlog() {
                             key={check.id}
                             style={{
                               display: 'flex', alignItems: 'flex-start', gap: 10,
-                              fontSize: 12, fontWeight: 500, color: check.passed ? css.text : css.muted
+                              fontSize: 'var(--text-small)', fontWeight: 500, color: check.passed ? css.text : css.muted
                             }}
                           >
                             <span style={{
@@ -3181,7 +3181,7 @@ export default function AdminBlog() {
                             </span>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                               <span style={{ lineHeight: 1.25 }}>{check.label}</span>
-                              <span style={{ fontSize: 9.5, color: css.muted, fontWeight: 600 }}>
+                              <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 600 }}>
                                 {check.passed ? `Passed (+${check.pts} pts)` : `Missing (-${check.pts} pts)`}
                               </span>
                             </div>

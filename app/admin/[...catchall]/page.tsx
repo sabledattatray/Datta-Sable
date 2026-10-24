@@ -204,9 +204,9 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Management</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Management</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>User Management</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Manage administrator accounts, permissions, and roles.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Manage administrator accounts, permissions, and roles.</p>
               </div>
               <button 
                 onClick={() => setUsers([...users, { id: Date.now(), name: 'New Team Member', email: 'new@dattasable.com', role: 'Viewer', status: 'Active', logs: 'Account created just now' }])}
@@ -222,7 +222,7 @@ export default function AdminCatchAllPage() {
                   <thead>
                     <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
                       {['User', 'Role', 'Status', 'Last Activity', 'Actions'].map(h => (
-                        <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
+                        <th key={h} style={{ padding: '14px 20px', fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -231,26 +231,26 @@ export default function AdminCatchAllPage() {
                       <tr key={u.id} style={{ borderBottom: i < users.length - 1 ? `1px solid ${css.border}` : 'none' }}>
                         <td style={{ padding: '16px 20px' }}>
                           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                            <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--btn-primary-text)', fontWeight: 800, fontSize: 13 }}>
+                            <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--btn-primary-text)', fontWeight: 800, fontSize: 'var(--text-small)' }}>
                               {u.name.charAt(0)}
                             </div>
                             <div>
-                              <div style={{ fontSize: 13.5, fontWeight: 700, color: css.text }}>{u.name}</div>
-                              <div style={{ fontSize: 11, color: css.muted, marginTop: 2 }}>{u.email}</div>
+                              <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{u.name}</div>
+                              <div style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 2 }}>{u.email}</div>
                             </div>
                           </div>
                         </td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)', color: css.accent, border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: isDark ? 'rgba(99,102,241,0.12)' : 'rgba(79,70,229,0.07)', color: css.accent, border: `1px solid color-mix(in srgb, ${css.accent} 19%, transparent)`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
                             {u.role}
                           </span>
                         </td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, background: u.status === 'Active' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: u.status === 'Active' ? '#10b981' : '#ef4444', border: `1px solid ${u.status === 'Active' ? '#10b98130' : '#ef444430'}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 'var(--text-small)', fontWeight: 700, background: u.status === 'Active' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: u.status === 'Active' ? '#10b981' : '#ef4444', border: `1px solid ${u.status === 'Active' ? '#10b98130' : '#ef444430'}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
                             {u.status}
                           </span>
                         </td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted }}>{u.logs}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.muted }}>{u.logs}</td>
                         <td style={{ padding: '16px 20px' }}>
                           <button onClick={() => setUsers(users.filter(x => x.id !== u.id))} style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 9, padding: 7, cursor: 'pointer', color: css.muted }}
                             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#ef4444'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(239,68,68,0.3)'; }}
@@ -272,9 +272,9 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Management</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Management</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Roles & Permissions</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure permissions and granular access policies for team roles.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure permissions and granular access policies for team roles.</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 20 }}>
@@ -287,12 +287,12 @@ export default function AdminCatchAllPage() {
                 <div key={idx} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                     <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: 0 }}>{role.name}</h3>
-                    <span style={{ fontSize: 11, color: css.muted, fontWeight: 600 }}>{role.users} user{role.users !== 1 ? 's' : ''}</span>
+                    <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 600 }}>{role.users} user{role.users !== 1 ? 's' : ''}</span>
                   </div>
-                  <p style={{ fontSize: 12.5, color: css.muted, lineHeight: 1.6, margin: '0 0 20px' }}>{role.desc}</p>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.6, margin: '0 0 20px' }}>{role.desc}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {role.permissions.map((p, i) => (
-                      <span key={i} style={{ fontSize: 9.5, fontWeight: 700, background: css.surface2, border: `1px solid ${css.border}`, color: css.text, padding: '3px 8px', borderRadius: 6 }}>{p}</span>
+                      <span key={i} style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: css.surface2, border: `1px solid ${css.border}`, color: css.text, padding: '3px 8px', borderRadius: 6 }}>{p}</span>
                     ))}
                   </div>
                 </div>
@@ -306,35 +306,35 @@ export default function AdminCatchAllPage() {
         return (
           <div style={{ maxWidth: 600 }}>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Organization</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Organization</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Company Profile</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure global metadata and profile settings for the brand.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure global metadata and profile settings for the brand.</p>
             </div>
 
             <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 28, boxShadow: css.shadow }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Company Name</label>
-                  <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Company Name</label>
+                  <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 'var(--text-small)', outline: 'none' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Support Email</label>
-                  <input type="email" value={supportEmail} onChange={e => setSupportEmail(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Support Email</label>
+                  <input type="email" value={supportEmail} onChange={e => setSupportEmail(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 'var(--text-small)', outline: 'none' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Tax ID / GSTIN</label>
-                  <input type="text" value={taxId} onChange={e => setTaxId(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none' }} />
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Tax ID / GSTIN</label>
+                  <input type="text" value={taxId} onChange={e => setTaxId(e.target.value)} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 'var(--text-small)', outline: 'none' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Office Address</label>
-                  <textarea value={officeAddress} onChange={e => setOfficeAddress(e.target.value)} rows={3} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 13, outline: 'none', resize: 'none' }} />
+                  <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Office Address</label>
+                  <textarea value={officeAddress} onChange={e => setOfficeAddress(e.target.value)} rows={3} style={{ width: '100%', padding: '10px 14px', background: css.surface2, border: `1.5px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 'var(--text-small)', outline: 'none', resize: 'none' }} />
                 </div>
                 {saveStatus === 'success' && (
-                  <div style={{ padding: '10px 14px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 10, color: '#10b981', fontSize: 12.5, fontWeight: 600 }}>
+                  <div style={{ padding: '10px 14px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 10, color: '#10b981', fontSize: 'var(--text-small)', fontWeight: 600 }}>
                     ✓ Profile settings saved successfully!
                   </div>
                 )}
-                <button onClick={handleSaveCompanyProfile} style={{ padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 10, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', width: 'fit-content' }}>Save Company Profile</button>
+                <button onClick={handleSaveCompanyProfile} style={{ padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 10, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', width: 'fit-content' }}>Save Company Profile</button>
               </div>
             </div>
           </div>
@@ -344,9 +344,9 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Organization</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Organization</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Branches & Locations</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure global office locations, contact agents, and branches.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure global office locations, contact agents, and branches.</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: 20 }}>
@@ -356,10 +356,10 @@ export default function AdminCatchAllPage() {
                 { city: 'London', country: 'United Kingdom', addr: 'Canary Wharf', status: 'Support Branch' },
               ].map((b, i) => (
                 <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: 18, right: 18, fontSize: 9, fontWeight: 700, background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '2px 8px', borderRadius: 999 }}>{b.status}</div>
+                  <div style={{ position: 'absolute', top: 18, right: 18, fontSize: 'var(--text-small)', fontWeight: 700, background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '2px 8px', borderRadius: 999 }}>{b.status}</div>
                   <h3 style={{ fontSize: 17, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{b.city}</h3>
-                  <p style={{ fontSize: 12, color: css.muted, margin: '0 0 14px' }}>{b.country}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: css.text, borderTop: `1px solid ${css.border}`, paddingTop: 14 }}>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '0 0 14px' }}>{b.country}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 'var(--text-small)', color: css.text, borderTop: `1px solid ${css.border}`, paddingTop: 14 }}>
                     <Globe size={13} color={css.muted} /> {b.addr}
                   </div>
                 </div>
@@ -373,9 +373,9 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Subscriptions</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Monitor client subscription plans, billing frequencies, and status logs.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Monitor client subscription plans, billing frequencies, and status logs.</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 20 }}>
@@ -385,11 +385,11 @@ export default function AdminCatchAllPage() {
                 { tier: 'Enterprise Tier', clientsCount: 3, price: '₹49,999/mo', desc: 'Dedicated cluster, SLA uptime guarantee, custom n8n workflow bridges.' },
               ].map((tier, idx) => (
                 <div key={idx} style={{ background: css.surface, border: tier.featured ? `2px solid ${css.accent}` : `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, position: 'relative' }}>
-                  {tier.featured && <div style={{ position: 'absolute', top: -11, left: 24, fontSize: 9, fontWeight: 800, background: css.accent, color: 'var(--btn-primary-text)', padding: '2px 10px', borderRadius: 999 }}>POPULAR</div>}
+                  {tier.featured && <div style={{ position: 'absolute', top: -11, left: 24, fontSize: 'var(--text-small)', fontWeight: 800, background: css.accent, color: 'var(--btn-primary-text)', padding: '2px 10px', borderRadius: 999 }}>POPULAR</div>}
                   <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{tier.tier}</h3>
                   <div style={{ fontSize: 22, fontWeight: 900, color: css.text, margin: '8px 0' }}>{tier.price}</div>
-                  <p style={{ fontSize: 12, color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{tier.desc}</p>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: css.accent }}>{tier.clientsCount} Active Clients</div>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{tier.desc}</p>
+                  <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent }}>{tier.clientsCount} Active Clients</div>
                 </div>
               ))}
             </div>
@@ -400,9 +400,9 @@ export default function AdminCatchAllPage() {
         return (
           <div style={{ maxWidth: 540 }}>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Billing</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Payment Methods</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Manage subscription billing payout cards and settings.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Manage subscription billing payout cards and settings.</p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -412,16 +412,16 @@ export default function AdminCatchAllPage() {
               ].map((card, i) => (
                 <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-                    <div style={{ width: 48, height: 32, borderRadius: 6, background: css.surface2, border: `1px solid ${css.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: css.text }}>{card.type}</div>
+                    <div style={{ width: 48, height: 32, borderRadius: 6, background: css.surface2, border: `1px solid ${css.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--text-small)', fontWeight: 800, color: css.text }}>{card.type}</div>
                     <div>
-                      <div style={{ fontSize: 13.5, fontWeight: 700, color: css.text }}>{card.number}</div>
-                      <div style={{ fontSize: 11, color: css.muted, marginTop: 2 }}>Expires {card.exp}</div>
+                      <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{card.number}</div>
+                      <div style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 2 }}>Expires {card.exp}</div>
                     </div>
                   </div>
-                  <span style={{ fontSize: 9.5, fontWeight: 700, color: css.accent, background: css.accentGlow, padding: '3px 10px', borderRadius: 999 }}>{card.status}</span>
+                  <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent, background: css.accentGlow, padding: '3px 10px', borderRadius: 999 }}>{card.status}</span>
                 </div>
               ))}
-              <button style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px', background: css.surface2, border: `1px dashed ${css.border}`, borderRadius: 12, color: css.text, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+              <button style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px', background: css.surface2, border: `1px dashed ${css.border}`, borderRadius: 12, color: css.text, fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer' }}>
                 <Plus size={15} /> Add New Payout Card
               </button>
             </div>
@@ -434,12 +434,12 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Sales</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Sales</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Orders List</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Track and manage active consulting services orders.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Track and manage active consulting services orders.</p>
               </div>
               <button onClick={() => setOrders([{ id: 'ORD-' + Math.floor(Math.random() * 9000 + 1000), client: 'Priya Verma', service: 'n8n Workflow Automation', price: '₹18,000', status: 'Pending', date: 'Just now' }, ...orders])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Create Order
               </button>
             </div>
@@ -450,23 +450,23 @@ export default function AdminCatchAllPage() {
                   <thead>
                     <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
                       {['Order ID', 'Client', 'Service', 'Price', 'Status', 'Ordered On'].map(h => (
-                        <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
+                        <th key={h} style={{ padding: '14px 20px', fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {orders.map((o, i) => (
                       <tr key={i} style={{ borderBottom: i < orders.length - 1 ? `1px solid ${css.border}` : 'none' }}>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{o.id}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.text }}>{o.client}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.text }}>{o.service}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{o.price}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{o.id}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.text }}>{o.client}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 600, color: css.text }}>{o.service}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{o.price}</td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700, background: o.status === 'Completed' ? 'rgba(16,185,129,0.1)' : o.status === 'Processing' ? 'rgba(99,102,241,0.1)' : 'rgba(245,158,11,0.1)', color: o.status === 'Completed' ? '#10b981' : o.status === 'Processing' ? '#6366f1' : '#f59e0b', border: `1px solid ${o.status === 'Completed' ? '#10b98130' : o.status === 'Processing' ? '#6366f130' : '#f59e0b30'}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 'var(--text-small)', fontWeight: 700, background: o.status === 'Completed' ? 'rgba(16,185,129,0.1)' : o.status === 'Processing' ? 'rgba(99,102,241,0.1)' : 'rgba(245,158,11,0.1)', color: o.status === 'Completed' ? '#10b981' : o.status === 'Processing' ? '#6366f1' : '#f59e0b', border: `1px solid ${o.status === 'Completed' ? '#10b98130' : o.status === 'Processing' ? '#6366f130' : '#f59e0b30'}`, padding: '3px 10px', borderRadius: 999, textTransform: 'uppercase' }}>
                             <span style={{ width: 5, height: 5, borderRadius: '50%', background: o.status === 'Completed' ? '#10b981' : o.status === 'Processing' ? '#6366f1' : '#f59e0b' }} /> {o.status}
                           </span>
                         </td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted }}>{o.date}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.muted }}>{o.date}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -480,9 +480,9 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Sales</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Sales</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Transactions Ledger</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review payment collection records and billing logs.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Review payment collection records and billing logs.</p>
             </div>
 
             <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, overflow: 'hidden', boxShadow: css.shadow }}>
@@ -491,7 +491,7 @@ export default function AdminCatchAllPage() {
                   <thead>
                     <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
                       {['TXN Reference', 'Channel', 'Volume', 'Date', 'Type'].map(h => (
-                        <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
+                        <th key={h} style={{ padding: '14px 20px', fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -503,12 +503,12 @@ export default function AdminCatchAllPage() {
                       { ref: 'tx_0d4a9b5f9022', ch: 'Refund Gateway', vol: '- ₹4,999', date: 'May 01, 15:10 IST', type: 'Debit' },
                     ].map((t, i) => (
                       <tr key={i} style={{ borderBottom: i < 3 ? `1px solid ${css.border}` : 'none' }}>
-                        <td style={{ padding: '16px 20px', fontSize: 12.5, fontFamily: 'monospace', fontWeight: 700, color: css.text }}>{t.ref}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.text }}>{t.ch}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: t.type === 'Credit' ? '#10b981' : '#ef4444' }}>{t.vol}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted }}>{t.date}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontFamily: 'monospace', fontWeight: 700, color: css.text }}>{t.ref}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.text }}>{t.ch}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 700, color: t.type === 'Credit' ? '#10b981' : '#ef4444' }}>{t.vol}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.muted }}>{t.date}</td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 9.5, fontWeight: 700, color: t.type === 'Credit' ? '#10b981' : '#ef4444', background: t.type === 'Credit' ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)', padding: '2px 8px', borderRadius: 6 }}>{t.type}</span>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: t.type === 'Credit' ? '#10b981' : '#ef4444', background: t.type === 'Credit' ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)', padding: '2px 8px', borderRadius: 6 }}>{t.type}</span>
                         </td>
                       </tr>
                     ))}
@@ -526,11 +526,11 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Analytics</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Analytics</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>
                 {path === 'analytics/traffic' ? 'Traffic & Behavior' : path === 'analytics/reports' ? 'Analytics Reports' : 'Analytics Overview'}
               </h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review real-time website visitors, traffic sources, page bounce rates, and browser details.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Review real-time website visitors, traffic sources, page bounce rates, and browser details.</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 28 }}>
@@ -541,9 +541,9 @@ export default function AdminCatchAllPage() {
                 { label: 'Traffic Goal', value: '94%', color: '#f59e0b', sub: 'Target 10k reads monthly' },
               ].map((stat, i) => (
                 <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 18, padding: 20, boxShadow: css.shadow }}>
-                  <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', margin: '0 0 4px' }}>{stat.label}</p>
+                  <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.06em', margin: '0 0 4px' }}>{stat.label}</p>
                   <p style={{ fontSize: 26, fontWeight: 900, color: stat.color, margin: '0 0 4px' }}>{stat.value}</p>
-                  <p style={{ fontSize: 11, color: css.muted, margin: 0 }}>{stat.sub}</p>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: 0 }}>{stat.sub}</p>
                 </div>
               ))}
             </div>
@@ -551,7 +551,7 @@ export default function AdminCatchAllPage() {
             <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, minHeight: 280 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: 0 }}>Realtime Traffic Chart (Last 24 Hours)</h3>
-                <span style={{ fontSize: 10, fontWeight: 800, color: '#10b981', display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} /> Live data syncing</span>
+                <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: '#10b981', display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} /> Live data syncing</span>
               </div>
               
               {/* Simulated traffic graph using svg polyline */}
@@ -567,7 +567,7 @@ export default function AdminCatchAllPage() {
                   <path d="M0,130 Q120,60 240,110 T480,40 T720,90 T960,20 L1200,80" fill="none" stroke={css.accent} strokeWidth="3" strokeLinecap="round" />
                 </svg>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, fontSize: 11, color: css.muted, fontWeight: 600 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, fontSize: 'var(--text-small)', color: css.muted, fontWeight: 600 }}>
                 <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span>
               </div>
             </div>
@@ -586,12 +586,12 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Marketing</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Marketing</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Coupons & Deals</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Manage promo codes, discount percentages, and referral campaigns.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Manage promo codes, discount percentages, and referral campaigns.</p>
               </div>
               <button onClick={() => alert('Simulating Coupon Code Generator')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Create Coupon
               </button>
             </div>
@@ -602,7 +602,7 @@ export default function AdminCatchAllPage() {
                   <thead>
                     <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
                       {['Coupon Code', 'Discount', 'Status', 'Usage Limit', 'Expiry Date'].map(h => (
-                        <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
+                        <th key={h} style={{ padding: '14px 20px', fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -614,13 +614,13 @@ export default function AdminCatchAllPage() {
                       { code: 'EXPIRED50', discount: '50% Off Starter Plan', status: 'Expired', usage: '100 / 100 uses', exp: 'May 01, 2026' },
                     ].map((c, i) => (
                       <tr key={i} style={{ borderBottom: i < 3 ? `1px solid ${css.border}` : 'none' }}>
-                        <td style={{ padding: '16px 20px' }}><code style={{ fontSize: 12, background: css.surface2, padding: '3px 8px', borderRadius: 6, color: css.accent, fontWeight: 800 }}>{c.code}</code></td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{c.discount}</td>
+                        <td style={{ padding: '16px 20px' }}><code style={{ fontSize: 'var(--text-small)', background: css.surface2, padding: '3px 8px', borderRadius: 6, color: css.accent, fontWeight: 800 }}>{c.code}</code></td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{c.discount}</td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 9.5, fontWeight: 700, background: c.status === 'Active' ? 'rgba(16,185,129,0.1)' : 'rgba(100,116,139,0.1)', color: c.status === 'Active' ? '#10b981' : css.muted, border: `1px solid ${c.status === 'Active' ? '#10b98125' : '#1e293b25'}`, padding: '3px 10px', borderRadius: 999 }}>{c.status}</span>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: c.status === 'Active' ? 'rgba(16,185,129,0.1)' : 'rgba(100,116,139,0.1)', color: c.status === 'Active' ? '#10b981' : css.muted, border: `1px solid ${c.status === 'Active' ? '#10b98125' : '#1e293b25'}`, padding: '3px 10px', borderRadius: 999 }}>{c.status}</span>
                         </td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.text }}>{c.usage}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted }}>{c.exp}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.text }}>{c.usage}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.muted }}>{c.exp}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -645,12 +645,12 @@ export default function AdminCatchAllPage() {
 
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>CMS</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>CMS</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Media Library</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Upload and organize assets, images, and files for layouts and posts.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Upload and organize assets, images, and files for layouts and posts.</p>
               </div>
               <button onClick={handleMediaUploadClick}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Upload size={15} /> Upload File
               </button>
             </div>
@@ -663,7 +663,7 @@ export default function AdminCatchAllPage() {
             >
               <Upload size={32} color={css.muted} style={{ marginBottom: 10 }} />
               <p style={{ fontSize: 14, fontWeight: 700, color: css.text, margin: '0 0 4px' }}>Drag and drop media files here, or click to upload</p>
-              <p style={{ fontSize: 11.5, color: css.muted, margin: 0 }}>Supports JPG, PNG, WEBP, SVG, and PDF (Max 10MB)</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: 0 }}>Supports JPG, PNG, WEBP, SVG, and PDF (Max 10MB)</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 20 }}>
@@ -680,9 +680,9 @@ export default function AdminCatchAllPage() {
                     )}
                   </div>
                   <div style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <div style={{ fontSize: 12.5, fontWeight: 700, color: css.text, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }} title={m.name}>{m.name}</div>
+                    <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.text, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }} title={m.name}>{m.name}</div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6 }}>
-                      <span style={{ fontSize: 10.5, color: css.muted, fontWeight: 600 }}>{m.size} &bull; {m.date}</span>
+                      <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 600 }}>{m.size} &bull; {m.date}</span>
                       <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                         {m.url !== '#' && (
                           <button onClick={(e) => { e.stopPropagation(); handleCopy(m.url); }}
@@ -714,9 +714,9 @@ export default function AdminCatchAllPage() {
         return (
           <div style={{ maxWidth: 540 }}>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Security & Authorization</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure security tokens, MFA settings, and active sessions.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure security tokens, MFA settings, and active sessions.</p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -726,10 +726,10 @@ export default function AdminCatchAllPage() {
               ].map((s, i) => (
                 <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
                   <h3 style={{ fontSize: 14.5, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{s.title}</h3>
-                  <p style={{ fontSize: 12, color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{s.desc}</p>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{s.desc}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, background: 'rgba(239,68,68,0.1)', color: '#ef4444', padding: '2px 8px', borderRadius: 6 }}>{s.status}</span>
-                    <button style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 11, fontWeight: 700, color: css.text }}>Enable</button>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: 'rgba(239,68,68,0.1)', color: '#ef4444', padding: '2px 8px', borderRadius: 6 }}>{s.status}</span>
+                    <button style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>Enable</button>
                   </div>
                 </div>
               ))}
@@ -741,9 +741,9 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Integrations Hub</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review external API integrations, mail servers, and database connectors.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Review external API integrations, mail servers, and database connectors.</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 20 }}>
@@ -755,8 +755,8 @@ export default function AdminCatchAllPage() {
               ].map((c, i) => (
                 <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
                   <h3 style={{ fontSize: 14.5, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{c.name}</h3>
-                  <p style={{ fontSize: 12, color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{c.desc}</p>
-                  <span style={{ fontSize: 9.5, fontWeight: 700, color: c.badgeColor, background: `${c.badgeColor}0f`, border: `1px solid ${c.badgeColor}25`, padding: '2px 8px', borderRadius: 6, textTransform: 'uppercase' }}>{c.status}</span>
+                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{c.desc}</p>
+                  <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: c.badgeColor, background: `${c.badgeColor}0f`, border: `1px solid ${c.badgeColor}25`, padding: '2px 8px', borderRadius: 6, textTransform: 'uppercase' }}>{c.status}</span>
                 </div>
               ))}
             </div>
@@ -768,9 +768,9 @@ export default function AdminCatchAllPage() {
         return (
           <div>
             <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Notifications</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Notifications</p>
               <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>System Alerts</h1>
-              <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review system security updates, login alerts, and API logging events.</p>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Review system security updates, login alerts, and API logging events.</p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -786,8 +786,8 @@ export default function AdminCatchAllPage() {
                       <Icon size={16} color={a.color} />
                     </div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: css.text }}>{a.text}</div>
-                      <div style={{ fontSize: 11, color: css.muted, marginTop: 3 }}>{a.date}</div>
+                      <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{a.text}</div>
+                      <div style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 3 }}>{a.date}</div>
                     </div>
                   </div>
                 );
@@ -802,12 +802,12 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>API Access Tokens</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure secure authorization headers for external scripts.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure secure authorization headers for external scripts.</p>
               </div>
               <button onClick={() => setKeys([{ name: 'Sandbox Test Key', key: 'ds_test_' + Math.random().toString(36).substring(2, 15), created: new Date().toISOString().split('T')[0] }, ...keys])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Generate Key
               </button>
             </div>
@@ -817,10 +817,10 @@ export default function AdminCatchAllPage() {
                 <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                     <h3 style={{ fontSize: 14, fontWeight: 800, color: css.text, margin: 0 }}>{k.name}</h3>
-                    <span style={{ fontSize: 11, color: css.muted, fontWeight: 500 }}>Generated on {k.created}</span>
+                    <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 500 }}>Generated on {k.created}</span>
                   </div>
                   <div style={{ display: 'flex', gap: 10, background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 10, padding: '10px 14px', alignItems: 'center' }}>
-                    <code style={{ fontSize: 12, color: css.accent, fontFamily: 'monospace', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{k.key}</code>
+                    <code style={{ fontSize: 'var(--text-small)', color: css.accent, fontFamily: 'monospace', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{k.key}</code>
                     <button onClick={() => handleCopy(k.key)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: css.muted, display: 'flex' }}>
                       {copiedText === k.key ? <Check size={14} color="#10b981" /> : <Copy size={14} />}
                     </button>
@@ -836,12 +836,12 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Webhook Subscriptions</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Configure URL endpoints to receive payload notifications on events.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure URL endpoints to receive payload notifications on events.</p>
               </div>
               <button onClick={() => alert('Simulating webhook URL creation')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Add Endpoint
               </button>
             </div>
@@ -849,8 +849,8 @@ export default function AdminCatchAllPage() {
             <div style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 24, boxShadow: css.shadow, textAlign: 'center' }}>
               <Terminal size={32} color={css.muted} style={{ marginBottom: 12, opacity: 0.5 }} />
               <h3 style={{ fontSize: 16, fontWeight: 800, color: css.text, margin: '0 0 6px' }}>No active webhook endpoints</h3>
-              <p style={{ fontSize: 13, color: css.muted, margin: '0 0 20px' }}>Register an endpoint to receive live event payloads for new leads or reviews.</p>
-              <button onClick={() => alert('Simulating webhook URL creation')} style={{ padding: '8px 16px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>Register Endpoint</button>
+              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '0 0 20px' }}>Register an endpoint to receive live event payloads for new leads or reviews.</p>
+              <button onClick={() => alert('Simulating webhook URL creation')} style={{ padding: '8px 16px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 10, color: css.text, fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer' }}>Register Endpoint</button>
             </div>
           </div>
         );
@@ -860,16 +860,16 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Developer</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Live System Logs</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Review system logs, error traces, and runtime database metrics.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Review system logs, error traces, and runtime database metrics.</p>
               </div>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                <span style={{ fontSize: 10, fontWeight: 800, color: '#10b981', display: 'flex', alignItems: 'center', gap: 5 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} /> Live Console Stream</span>
+                <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: '#10b981', display: 'flex', alignItems: 'center', gap: 5 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} /> Live Console Stream</span>
               </div>
             </div>
 
-            <div style={{ background: isDark ? '#050505' : '#1e293b', border: `1px solid ${css.border}`, borderRadius: 14, padding: 20, fontFamily: 'monospace', fontSize: 12.5, color: '#38bdf8', minHeight: 380, maxHeight: '60vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6, boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.5)' }}>
+            <div style={{ background: isDark ? '#050505' : '#1e293b', border: `1px solid ${css.border}`, borderRadius: 14, padding: 20, fontFamily: 'monospace', fontSize: 'var(--text-small)', color: '#38bdf8', minHeight: 380, maxHeight: '60vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6, boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.5)' }}>
               <div><span style={{ color: '#8b5cf6' }}>[2026-06-11 14:45:00]</span> INFO: Next.js dev server hot-reload triggered successfully.</div>
               <div><span style={{ color: '#8b5cf6' }}>[2026-06-11 14:45:05]</span> PRISMA: Query executed: <span style={{ color: '#10b981' }}>SELECT &quot;public&quot;.&quot;User&quot;.&quot;id&quot;, ... FROM &quot;public&quot;.&quot;User&quot;</span> in 12ms.</div>
               <div><span style={{ color: '#8b5cf6' }}>[2026-06-11 14:45:12]</span> INFO: GET /api/admin/stats 200 - served in 115ms.</div>
@@ -886,12 +886,12 @@ export default function AdminCatchAllPage() {
           <div>
             <div className={adminStyles.legacyHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Support Desk</p>
+                <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>Support Desk</p>
                 <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Inbound Tickets</h1>
-                <p style={{ fontSize: 13, color: css.muted, margin: '4px 0 0' }}>Moderate customer requests, server bugs, and contact tickets.</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Moderate customer requests, server bugs, and contact tickets.</p>
               </div>
               <button onClick={() => setTickets([{ id: 'TCK-' + Math.floor(Math.random() * 800 + 100), subject: 'Automated server alert: High CPU utilization', client: 'System Monitor', status: 'Open', priority: 'High', date: 'Just now' }, ...tickets])}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', background: `linear-gradient(135deg, ${css.accent}, var(--accent2))`, border: 'none', borderRadius: 12, color: 'var(--btn-primary-text)', fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer', boxShadow: `0 4px 14px color-mix(in srgb, ${css.accent} 25%, transparent)` }}>
                 <Plus size={15} /> Create Ticket
               </button>
             </div>
@@ -902,25 +902,25 @@ export default function AdminCatchAllPage() {
                   <thead>
                     <tr style={{ background: css.surface2, borderBottom: `1px solid ${css.border}` }}>
                       {['Ticket ID', 'Client', 'Subject', 'Priority', 'Status', 'Date Created', 'Action'].map(h => (
-                        <th key={h} style={{ padding: '14px 20px', fontSize: 10, fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
+                        <th key={h} style={{ padding: '14px 20px', fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {tickets.map((t, i) => (
                       <tr key={i} style={{ borderBottom: i < tickets.length - 1 ? `1px solid ${css.border}` : 'none' }}>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 700, color: css.text }}>{t.id}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.text }}>{t.client}</td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, fontWeight: 600, color: css.text }}>{t.subject}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>{t.id}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.text }}>{t.client}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', fontWeight: 600, color: css.text }}>{t.subject}</td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 9.5, fontWeight: 700, color: t.priority === 'High' ? '#ef4444' : t.priority === 'Medium' ? '#f59e0b' : '#3b82f6', background: t.priority === 'High' ? 'rgba(239,68,68,0.08)' : t.priority === 'Medium' ? 'rgba(245,158,11,0.08)' : 'rgba(59,130,246,0.08)', padding: '2px 8px', borderRadius: 6 }}>{t.priority}</span>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: t.priority === 'High' ? '#ef4444' : t.priority === 'Medium' ? '#f59e0b' : '#3b82f6', background: t.priority === 'High' ? 'rgba(239,68,68,0.08)' : t.priority === 'Medium' ? 'rgba(245,158,11,0.08)' : 'rgba(59,130,246,0.08)', padding: '2px 8px', borderRadius: 6 }}>{t.priority}</span>
                         </td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, background: t.status === 'Open' ? 'rgba(239,68,68,0.1)' : t.status === 'Resolved' ? 'rgba(16,185,129,0.1)' : 'rgba(99,102,241,0.1)', color: t.status === 'Open' ? '#ef4444' : t.status === 'Resolved' ? '#10b981' : '#6366f1', padding: '3px 10px', borderRadius: 999 }}>{t.status}</span>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: t.status === 'Open' ? 'rgba(239,68,68,0.1)' : t.status === 'Resolved' ? 'rgba(16,185,129,0.1)' : 'rgba(99,102,241,0.1)', color: t.status === 'Open' ? '#ef4444' : t.status === 'Resolved' ? '#10b981' : '#6366f1', padding: '3px 10px', borderRadius: 999 }}>{t.status}</span>
                         </td>
-                        <td style={{ padding: '16px 20px', fontSize: 13, color: css.muted }}>{t.date}</td>
+                        <td style={{ padding: '16px 20px', fontSize: 'var(--text-small)', color: css.muted }}>{t.date}</td>
                         <td style={{ padding: '16px 20px' }}>
-                          <button onClick={() => alert('Simulating Ticket Chat Thread')} style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 11, fontWeight: 700, color: css.text }}>Reply</button>
+                          <button onClick={() => alert('Simulating Ticket Chat Thread')} style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>Reply</button>
                         </td>
                       </tr>
                     ))}
@@ -937,7 +937,7 @@ export default function AdminCatchAllPage() {
           <div style={{ textAlign: 'center', padding: '64px 0' }}>
             <h2 style={{ fontSize: 22, fontWeight: 900, color: css.text, margin: '0 0 10px' }}>Admin Module Placeholder</h2>
             <p style={{ fontSize: 14, color: css.muted, margin: '0 0 24px' }}>Path: <code>/admin/{path}</code></p>
-            <button onClick={() => router.push('/admin')} style={{ padding: '10px 20px', background: css.accent, color: 'var(--btn-primary-text)', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>Back to Dashboard</button>
+            <button onClick={() => router.push('/admin')} style={{ padding: '10px 20px', background: css.accent, color: 'var(--btn-primary-text)', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: 'var(--text-small)', cursor: 'pointer' }}>Back to Dashboard</button>
           </div>
         );
     }

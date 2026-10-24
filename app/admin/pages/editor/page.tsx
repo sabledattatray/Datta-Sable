@@ -422,7 +422,7 @@ function EditorContent() {
   };
 
   const labelStyle: React.CSSProperties = {
-    fontSize: 10, fontWeight: 700, color: css.muted,
+    fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted,
     textTransform: 'uppercase', letterSpacing: '0.08em',
     display: 'block', marginBottom: 7,
   };
@@ -457,7 +457,7 @@ function EditorContent() {
               borderRadius: 9, padding: '7px 12px',
               cursor: 'pointer', color: css.muted,
               display: 'flex', alignItems: 'center', gap: 6,
-              fontSize: 13, fontWeight: 600,
+              fontSize: 'var(--text-small)', fontWeight: 600,
               textDecoration: 'none', transition: 'all 0.15s'
             }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = css.text; (e.currentTarget as HTMLElement).style.background = css.surface2; }}
@@ -465,7 +465,7 @@ function EditorContent() {
           >
             <ChevronLeft size={16} /> Back
           </Link>
-          <span style={{ fontSize: 13, fontWeight: 700, color: css.muted, padding: '3px 10px', background: css.surface2, borderRadius: 8 }}>
+          <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, padding: '3px 10px', background: css.surface2, borderRadius: 8 }}>
             {editId ? 'Editing Page' : 'New Page'}
           </span>
         </div>
@@ -487,7 +487,7 @@ function EditorContent() {
                   onClick={() => setEditorMode(tab.id as any)}
                   className={tab.desktopOnly ? 'desktop-only-btn' : ''}
                   style={{
-                    display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, fontSize: 12,
+                    display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, fontSize: 'var(--text-small)',
                     fontWeight: active ? 700 : 500, background: active ? css.surface : 'transparent', border: 'none',
                     color: active ? css.accent : css.muted, cursor: 'pointer', transition: 'all 0.15s'
                   }}
@@ -558,7 +558,7 @@ function EditorContent() {
                     color: message.type === 'success' ? '#10b981' : '#ef4444',
                   }}>
                     {message.type === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{message.text}</span>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>{message.text}</span>
                     <button onClick={() => setMessage(null)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', padding: 2 }}><X size={14} /></button>
                   </div>
                 )}
@@ -595,7 +595,7 @@ function EditorContent() {
                 <button
                   onClick={() => setSidebarTab('settings')}
                   style={{
-                    flex: 1, padding: '14px 10px', fontSize: 11, fontWeight: 700,
+                    flex: 1, padding: '14px 10px', fontSize: 'var(--text-small)', fontWeight: 700,
                     background: sidebarTab === 'settings' ? css.surface2 : 'transparent',
                     color: sidebarTab === 'settings' ? css.accent : css.muted,
                     border: 'none', borderBottom: sidebarTab === 'settings' ? `2px solid ${css.accent}` : 'none',
@@ -607,7 +607,7 @@ function EditorContent() {
                 <button
                   onClick={() => setSidebarTab('seo')}
                   style={{
-                    flex: 1, padding: '14px 10px', fontSize: 11, fontWeight: 700,
+                    flex: 1, padding: '14px 10px', fontSize: 'var(--text-small)', fontWeight: 700,
                     background: sidebarTab === 'seo' ? css.surface2 : 'transparent',
                     color: sidebarTab === 'seo' ? css.accent : css.muted,
                     border: 'none', borderBottom: sidebarTab === 'seo' ? `2px solid ${css.accent}` : 'none',
@@ -620,7 +620,7 @@ function EditorContent() {
 
               {sidebarTab === 'settings' ? (
                 <div style={{ padding: '20px' }}>
-                  <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
+                  <p style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 18px' }}>
                     Page Settings
                   </p>
 
@@ -633,7 +633,7 @@ function EditorContent() {
                         onChange={e => setPublished(e.target.value === 'true')}
                         style={{
                           width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
-                          padding: '10px 12px', borderRadius: 10, outline: 'none', cursor: 'pointer', fontSize: 13, fontWeight: 600,
+                          padding: '10px 12px', borderRadius: 10, outline: 'none', cursor: 'pointer', fontSize: 'var(--text-small)', fontWeight: 600,
                         }}
                       >
                         <option value="true">Published</option>
@@ -655,11 +655,11 @@ function EditorContent() {
                         }}
                         style={{
                           width: '100%', background: css.inputBg, border: `1px solid ${slugError ? '#ef4444' : css.border}`, color: css.text,
-                          padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12, fontFamily: 'monospace'
+                          padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)', fontFamily: 'monospace'
                         }}
                       />
                       {slugError && (
-                        <p style={{ fontSize: 11, color: '#ef4444', fontWeight: 600, margin: '6px 0 0' }}>
+                        <p style={{ fontSize: 'var(--text-small)', color: '#ef4444', fontWeight: 600, margin: '6px 0 0' }}>
                           ⚠️ {slugError}
                         </p>
                       )}
@@ -670,14 +670,14 @@ function EditorContent() {
                             setSlug(title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
                           }}
                           style={{
-                            background: 'none', border: 'none', color: css.accent, fontSize: 10, fontWeight: 700,
+                            background: 'none', border: 'none', color: css.accent, fontSize: 'var(--text-small)', fontWeight: 700,
                             cursor: 'pointer', padding: 0, marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.05em'
                           }}
                         >
                           Auto-generate from title 🔄
                         </button>
                       )}
-                      <span style={{ fontSize: 10, color: css.muted, marginTop: 6, display: 'block', fontWeight: 600 }}>
+                      <span style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 6, display: 'block', fontWeight: 600 }}>
                         Route: <code>{['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(slug) ? '' : '/p'}/{slug || '...'}</code>
                       </span>
                     </div>
@@ -692,7 +692,7 @@ function EditorContent() {
                         rows={5}
                         style={{
                           width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
-                          padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12, resize: 'none',
+                          padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)', resize: 'none',
                           lineHeight: 1.5, fontFamily: "'Inter', sans-serif"
                         }}
                       />
@@ -702,10 +702,10 @@ function EditorContent() {
               ) : (
                 <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: 20 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <p style={{ fontSize: 11, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
+                    <p style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
                       SEO Analyzer
                     </p>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.accent, display: 'flex', alignItems: 'center', gap: 4 }}>
                       <Globe size={11} /> PRO Enabled
                     </span>
                   </div>
@@ -720,10 +720,10 @@ function EditorContent() {
                       onChange={e => setFocusedKeyword(e.target.value)}
                       style={{
                         width: '100%', background: css.inputBg, border: `1px solid ${css.border}`, color: css.text,
-                        padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 12, fontWeight: 600,
+                        padding: '10px 12px', borderRadius: 10, outline: 'none', fontSize: 'var(--text-small)', fontWeight: 600,
                       }}
                     />
-                    <span style={{ fontSize: 9.5, color: css.muted, marginTop: 4, display: 'block', fontWeight: 500 }}>
+                    <span style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 4, display: 'block', fontWeight: 500 }}>
                       First keyword acts as the primary focus keyword.
                     </span>
                   </div>
@@ -737,7 +737,7 @@ function EditorContent() {
                       return (
                         <div style={{
                           padding: '30px 20px', textAlign: 'center', border: `1px dashed ${css.border}`,
-                          borderRadius: 16, color: css.muted, fontSize: 12, lineHeight: 1.6
+                          borderRadius: 16, color: css.muted, fontSize: 'var(--text-small)', lineHeight: 1.6
                         }}>
                           Enter a focus keyword to see your SEO score and analyze content in real-time.
                         </div>
@@ -765,7 +765,7 @@ function EditorContent() {
                       <>
                         {/* Keyword tags switcher */}
                         <div>
-                          <label style={{ display: 'block', fontSize: 10, color: css.muted, fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                          <label style={{ display: 'block', fontSize: 'var(--text-small)', color: css.muted, fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                             Selected Keywords & Scores
                           </label>
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -784,11 +784,11 @@ function EditorContent() {
                                     display: 'flex', alignItems: 'center', gap: 6, padding: '5px 10px',
                                     borderRadius: 8, background: tagBg, border: tagBorder,
                                     color: isActive ? tagScoreColor : css.muted, cursor: 'pointer',
-                                    fontSize: 11, fontWeight: isActive ? 700 : 500, transition: 'all 0.15s'
+                                    fontSize: 'var(--text-small)', fontWeight: isActive ? 700 : 500, transition: 'all 0.15s'
                                   }}
                                 >
                                   <span>{item.keyword}</span>
-                                  <span style={{ fontSize: 9, opacity: 0.85, fontWeight: 800 }}>({score})</span>
+                                  <span style={{ fontSize: 'var(--text-small)', opacity: 0.85, fontWeight: 800 }}>({score})</span>
                                 </button>
                               );
                             })}
@@ -807,16 +807,16 @@ function EditorContent() {
                             </svg>
                             <div style={{
                               position: 'absolute', inset: 0, display: 'flex', alignItems: 'center',
-                              justifyContent: 'center', fontSize: 13, fontWeight: 900, color: css.text
+                              justifyContent: 'center', fontSize: 'var(--text-small)', fontWeight: 900, color: css.text
                             }}>
                               {activeAnalysis.analysis.score}
                             </div>
                           </div>
                           <div>
-                            <span style={{ fontSize: 10, fontWeight: 800, color: scoreColor, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                            <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: scoreColor, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                               {activeAnalysis.analysis.score >= 80 ? 'Good SEO' : activeAnalysis.analysis.score >= 50 ? 'Needs Improvement' : 'Poor SEO'}
                             </span>
-                            <p style={{ fontSize: 11, color: css.muted, margin: '2px 0 0', lineHeight: 1.35 }}>
+                            <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '2px 0 0', lineHeight: 1.35 }}>
                               Your page matches {activeAnalysis.analysis.score}% of basic optimization checkmarks.
                             </p>
                           </div>
@@ -839,7 +839,7 @@ function EditorContent() {
                                   type="button"
                                   onClick={() => setSeoTab(t.id as any)}
                                   style={{
-                                    flex: 1, padding: '6px 2px', borderRadius: 8, fontSize: 10.5,
+                                    flex: 1, padding: '6px 2px', borderRadius: 8, fontSize: 'var(--text-small)',
                                     fontWeight: active ? 700 : 500, background: active ? css.surface : 'transparent',
                                     border: 'none', color: active ? css.accent : css.muted, cursor: 'pointer',
                                     textAlign: 'center', transition: 'all 0.15s'
@@ -854,7 +854,7 @@ function EditorContent() {
                           {/* Checks Checklist */}
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
                             {((activeAnalysis.analysis.categories as any)[seoTab] || []).map((check: any) => (
-                              <div key={check.id} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 12, fontWeight: 500, color: check.passed ? css.text : css.muted }}>
+                              <div key={check.id} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 'var(--text-small)', fontWeight: 500, color: check.passed ? css.text : css.muted }}>
                                 <span style={{ marginTop: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                                   {check.passed ? (
                                     <CheckCircle2 size={14.5} style={{ color: '#10b981' }} />
@@ -864,7 +864,7 @@ function EditorContent() {
                                 </span>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                   <span style={{ lineHeight: 1.25 }}>{check.label}</span>
-                                  <span style={{ fontSize: 9.5, color: css.muted, fontWeight: 600 }}>
+                                  <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontWeight: 600 }}>
                                     {check.passed ? `Passed (+${check.pts} pts)` : `Missing (-${check.pts} pts)`}
                                   </span>
                                 </div>

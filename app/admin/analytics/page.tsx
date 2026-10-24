@@ -92,7 +92,7 @@ export default function AnalyticsOverviewPage() {
               { channel: 'LinkedIn & Social', percentage: 4 },
             ].map((ch, i) => (
               <div key={i}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, fontWeight: 500, marginBottom: 7, color: 'var(--text)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-small)', fontWeight: 500, marginBottom: 7, color: 'var(--text)' }}>
                   <span>{ch.channel}</span>
                   <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{ch.percentage}%</span>
                 </div>
@@ -125,7 +125,7 @@ export default function AnalyticsOverviewPage() {
                     <div style={{ width: 32, height: 32, borderRadius: 8, background: 'var(--surface2)', border: '1px solid var(--border)', display: 'grid', placeItems: 'center', color: 'var(--accent)' }}>
                       <DevIcon size={16} />
                     </div>
-                    <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)' }}>{d.device}</span>
+                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 500, color: 'var(--text)' }}>{d.device}</span>
                   </div>
                   <span className={adminStyles.badge}>{d.percentage}%</span>
                 </div>

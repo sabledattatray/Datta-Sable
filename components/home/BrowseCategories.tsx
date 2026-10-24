@@ -20,12 +20,14 @@ export default function BrowseCategories() {
         <h2 id="technical-topics-title">Go deeper.<br /><span>By design.</span></h2>
         <p>Follow your curiosity through the tools, systems, and ideas that shape better engineering.</p>
         <div className={styles.map} aria-hidden="true">
+          <div className={styles.mapArt}>
           <div className={styles.mapGrid} />
           <div className={styles.ring} />
           <div className={styles.core}><Cpu size={30} strokeWidth={1.25} /></div>
           <span className={`${styles.node} ${styles.nodeTop}`}><Database size={16} /></span>
           <span className={`${styles.node} ${styles.nodeRight}`}><Code2 size={16} /></span>
           <span className={`${styles.node} ${styles.nodeBottom}`}><Workflow size={16} /></span>
+          </div>
           <span className={styles.mapLabel}>CONNECTED KNOWLEDGE</span>
           <span className={styles.coordinates}>07 / DOMAINS</span>
         </div>

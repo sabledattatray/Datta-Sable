@@ -392,7 +392,7 @@ export default function PowerBIHeroDashboard() {
             <span>Shade:</span>
           </div>
 
-          <div className={styles.shadeGroup} role="radiogroup" aria-label="Accent color shade">
+          <div className={styles.shadeGroup} role="group" aria-label="Accent color shade">
             {ACCENT_SHADES.map((shade) => (
               <button
                 key={shade.id}
@@ -403,7 +403,7 @@ export default function PowerBIHeroDashboard() {
                   setUserInteracted(true);
                 }}
                 aria-label={`Select ${shade.name}`}
-                aria-checked={activeShadeId === shade.id}
+                aria-pressed={activeShadeId === shade.id}
               >
                 <span
                   className={styles.shadeDot}
@@ -470,7 +470,7 @@ export default function PowerBIHeroDashboard() {
             type="button"
             className={styles.pbiActionBtn}
             onClick={resetSlicers}
-            style={{ marginLeft: 'auto', fontSize: '9.5px', height: '20px' }}
+            style={{ marginLeft: 'auto', fontSize: 'var(--text-small)', height: '20px' }}
           >
             <RotateCcw size={10} />
             <span>Reset Slicers</span>
@@ -859,7 +859,7 @@ export default function PowerBIHeroDashboard() {
                     ].map((reg, idx) => (
                       <div key={idx} className={styles.regionalMiniPill}>
                         <span className={styles.regionalMiniName}>{reg.name}</span>
-                        <span className={styles.regionalMiniVal}>{reg.val} <small style={{ color: 'var(--muted)', fontSize: '7.5px' }}>{reg.share}</small></span>
+                        <span className={styles.regionalMiniVal}>{reg.val} <small style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{reg.share}</small></span>
                       </div>
                     ))}
                   </div>

@@ -399,11 +399,11 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
         <section className="section" style={{ paddingTop: 'clamp(7rem, 10vw, 9rem)', paddingBottom: '3rem' }}>
           <div className="container">
             <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#ef4444', padding: '0.4rem 1rem', borderRadius: '50px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#ef4444', padding: '0.4rem 1rem', borderRadius: '50px', fontSize: 'var(--text-small)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} /> Urgent Hiring Campaign 2026
               </div>
 
-              <div style={{ background: 'var(--surface2)', display: 'inline-flex', padding: '0.5rem 1.25rem', border: '1px solid var(--border)', borderRadius: '4px', fontSize: '12px', fontWeight: 600, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>
+              <div style={{ background: 'var(--surface2)', display: 'inline-flex', padding: '0.5rem 1.25rem', border: '1px solid var(--border)', borderRadius: '4px', fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>
                 ⚡ Immediate Joiners Preferred
               </div>
 
@@ -417,7 +417,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
               
               <div className="flex flex-wrap gap-4 justify-center">
                 <a href="#quick-apply" className="btn-primary" style={{ textDecoration: 'none', padding: '1rem 2rem' }}>Apply Now Online</a>
-                <a href="#tracking" className="mono" style={{ textDecoration: 'none', border: '1px solid var(--border)', padding: '1rem 2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', background: 'var(--surface2)' }}>
+                <a href="#tracking" className="mono" style={{ textDecoration: 'none', border: '1px solid var(--border)', padding: '1rem 2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--text-small)', letterSpacing: '0.1em', textTransform: 'uppercase', background: 'var(--surface2)' }}>
                   <Search size={14} /> Track Application Status
                 </a>
               </div>
@@ -427,19 +427,19 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
               <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>40+</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>FOS Openings</div>
+                <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>FOS Openings</div>
               </div>
               <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>10</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team Leader Openings</div>
+                <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team Leader Openings</div>
               </div>
               <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>10th Pass</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Minimum Qualification</div>
+                <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Minimum Qualification</div>
               </div>
               <div className="card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>Immediate</div>
-                <div style={{ color: 'var(--muted)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Joining Available</div>
+                <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Joining Available</div>
               </div>
             </div>
           </div>
@@ -457,11 +457,11 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <span className="tag" style={{ color: 'var(--accent)', borderColor: 'rgba(201, 243, 29, 0.2)' }}>Field Operations</span>
-                    <span style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 700 }}>🔥 40 Positions</span>
+                    <span style={{ fontSize: 'var(--text-small)', color: '#ef4444', fontWeight: 700 }}>🔥 40 Positions</span>
                   </div>
                   
                   <h3 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 700, color: 'var(--text)', marginBottom: '0.75rem', letterSpacing: '-0.015em' }}>{collectionsJobOfficer.title}</h3>
-                  <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <div><strong>📍 Location:</strong> {collectionsJobOfficer.location}</div>
                     <div><strong>💼 Compensation:</strong> {collectionsJobOfficer.salary}</div>
                     <div><strong>🎓 Education:</strong> {collectionsJobOfficer.qualification}</div>
@@ -469,13 +469,13 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </div>
 
                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Commission Structure</h4>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{collectionsJobOfficer.commission}</p>
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Commission Structure</h4>
+                    <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6 }}>{collectionsJobOfficer.commission}</p>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
-                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
+                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
                       <li>Field operations (FOS) for debt collection in assigned locations</li>
                       <li>Visit customer locations to collect outstanding dues</li>
                       <li>Maintain clean records and daily collection reports</li>
@@ -483,8 +483,8 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </div>
 
                   <div style={{ marginBottom: '2rem' }}>
-                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Eligibility</h4>
-                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Eligibility</h4>
+                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
                       <li>Minimum 10th Pass</li>
                       <li>Freshers Can Apply</li>
                       <li>Collection Experience Preferred</li>
@@ -514,11 +514,11 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <span className="tag" style={{ color: 'var(--accent)', borderColor: 'rgba(201, 243, 29, 0.2)' }}>Team Management</span>
-                    <span style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 700 }}>🔥 10 Positions</span>
+                    <span style={{ fontSize: 'var(--text-small)', color: '#ef4444', fontWeight: 700 }}>🔥 10 Positions</span>
                   </div>
                   
                   <h3 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 700, color: 'var(--text)', marginBottom: '0.75rem', letterSpacing: '-0.015em' }}>{collectionsJobLeader.title}</h3>
-                  <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <div><strong>📍 Location:</strong> {collectionsJobLeader.location}</div>
                     <div><strong>💼 Salary:</strong> {collectionsJobLeader.salary}</div>
                     <div><strong>🎓 Education:</strong> {collectionsJobLeader.qualification}</div>
@@ -526,13 +526,13 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </div>
 
                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Additional Benefits</h4>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{collectionsJobLeader.bonus}</p>
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Additional Benefits</h4>
+                    <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6 }}>{collectionsJobLeader.bonus}</p>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
-                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Roles & Responsibilities</h4>
+                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
                       <li>Manage a team of 15-20 field collection officers (FOS)</li>
                       <li>Monitor and drive daily collection targets</li>
                       <li>Handle critical escalations and agency reports</li>
@@ -540,8 +540,8 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </div>
 
                   <div style={{ marginBottom: '2rem' }}>
-                    <h4 style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Eligibility</h4>
-                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
+                    <h4 style={{ fontSize: 'var(--text-small)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', color: 'var(--text)' }}>Eligibility</h4>
+                    <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6 }} className="space-y-1">
                       <li>2–5 Years Collections Experience</li>
                       <li>Team Handling Experience</li>
                       <li>Leadership Skills</li>
@@ -594,7 +594,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   </p>
                   
                   <div style={{ padding: '1.25rem 2.5rem', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: '8px', display: 'inline-block' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Application Tracking ID</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Application Tracking ID</div>
                     <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent)', marginTop: '0.25rem' }}>{generatedAppId}</div>
                   </div>
 
@@ -624,14 +624,14 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                       <React.Fragment key={s.step}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
                           <div style={{ 
-                            width: 22, height: 22, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 600,
+                            width: 22, height: 22, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--text-small)', fontWeight: 600,
                             background: formStep === s.step ? 'var(--accent)' : formStep > s.step ? 'rgba(16,185,129,0.1)' : 'var(--tag-bg)',
                             color: formStep === s.step ? '#000' : formStep > s.step ? '#10b981' : 'var(--muted)',
                             border: formStep > s.step ? '1px solid #10b981' : '1px solid var(--border)'
                           }}>
                             {formStep > s.step ? '✓' : s.step}
                           </div>
-                          <span style={{ fontSize: '11px', fontWeight: formStep === s.step ? 600 : 400, color: formStep === s.step ? 'var(--text)' : 'var(--muted)' }}>{s.label}</span>
+                          <span style={{ fontSize: 'var(--text-small)', fontWeight: formStep === s.step ? 600 : 400, color: formStep === s.step ? 'var(--text)' : 'var(--muted)' }}>{s.label}</span>
                         </div>
                         {idx < 4 && <ChevronRight size={14} style={{ color: 'var(--border)', flexShrink: 0 }} />}
                       </React.Fragment>
@@ -641,14 +641,14 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   {submitStatus === 'error' && (
                     <div className="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444' }}>
                       <AlertCircle size={18} />
-                      <span style={{ fontSize: '0.85rem' }}>{submitMessage}</span>
+                      <span style={{ fontSize: 'var(--text-small)' }}>{submitMessage}</span>
                     </div>
                   )}
 
                   {fileError && (
                     <div className="flex items-center gap-3 mb-5 px-4 py-3 rounded-xl" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444' }}>
                       <AlertCircle size={18} />
-                      <span style={{ fontSize: '0.85rem' }}>{fileError}</span>
+                      <span style={{ fontSize: 'var(--text-small)' }}>{fileError}</span>
                     </div>
                   )}
 
@@ -656,7 +656,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   {formStep === 1 && (
                     <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Position Applying For *</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Position Applying For *</label>
                         <select name="jobId" value={form.jobId} onChange={(e) => {
                           const val = e.target.value;
                           const selected = jobs.find(j => j.id === val);
@@ -671,7 +671,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Candidate Recruiting Source *</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Candidate Recruiting Source *</label>
                         <select name="candidateSource" value={form.candidateSource} onChange={handleInputChange} required style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }}>
                           <option value="LinkedIn">LinkedIn</option>
                           <option value="WhatsApp">WhatsApp</option>
@@ -692,35 +692,35 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                   {formStep === 2 && (
                     <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Full Name *</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Full Name *</label>
                         <input type="text" name="fullName" value={form.fullName} onChange={handleInputChange} required className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Mobile Number *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Mobile Number *</label>
                           <input type="tel" name="mobile" value={form.mobile} onChange={handleInputChange} required className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>WhatsApp Number *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>WhatsApp Number *</label>
                           <input type="tel" name="whatsappNumber" value={form.whatsappNumber} onChange={handleInputChange} required className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Email Address *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Email Address *</label>
                           <input type="email" name="email" value={form.email} onChange={handleInputChange} required className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Date of Birth *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Date of Birth *</label>
                           <input type="date" name="dateOfBirth" value={form.dateOfBirth} onChange={handleInputChange} required style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Gender *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Gender *</label>
                           <select name="gender" value={form.gender} onChange={handleInputChange} required style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }}>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -728,13 +728,13 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Location (City) *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Location (City) *</label>
                           <input type="text" name="currentLocation" value={form.currentLocation} onChange={handleInputChange} required placeholder="e.g. Mumbai, Kalyan, Thane" className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Full Address *</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Full Address *</label>
                         <textarea name="currentAddress" value={form.currentAddress} onChange={handleInputChange} required style={{ width: '100%', minHeight: '60px', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none', resize: 'vertical' }} />
                       </div>
 
@@ -750,7 +750,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                     <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Highest Qualification *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Highest Qualification *</label>
                           <select name="highestQualification" value={form.highestQualification} onChange={handleInputChange} required style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }}>
                             <option value="10th Pass">10th Pass</option>
                             <option value="12th Pass">12th Pass</option>
@@ -759,7 +759,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Experience Status *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Experience Status *</label>
                           <select name="totalExperience" value={form.totalExperience} onChange={handleInputChange} required style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }}>
                             <option value="0-2 Years">Fresher</option>
                             <option value="3-5 Years">Experienced (1-3 years)</option>
@@ -770,29 +770,29 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Company (If experienced)</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Company (If experienced)</label>
                           <input type="text" name="currentCompany" value={form.currentCompany} onChange={handleInputChange} className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Designation</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Designation</label>
                           <input type="text" name="currentDesignation" value={form.currentDesignation} onChange={handleInputChange} className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Monthly Salary (If applicable)</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current Monthly Salary (If applicable)</label>
                           <input type="text" name="currentSalary" value={form.currentSalary} onChange={handleInputChange} placeholder="e.g. ₹15,000" className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Expected Salary *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Expected Salary *</label>
                           <input type="text" name="expectedSalary" value={form.expectedSalary} onChange={handleInputChange} required placeholder="e.g. ₹25,000" className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                         </div>
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Notice Period *</label>
+                          <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Notice Period *</label>
                           <select name="noticePeriod" value={form.noticePeriod} onChange={handleInputChange} required style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }}>
                             <option value="Immediate">Immediate Joining</option>
                             <option value="15 Days">15 Days</option>
@@ -823,7 +823,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           <input type="checkbox" name="is10thPass" checked={form.is10thPass} onChange={handleInputChange} style={{ width: 20, height: 20, accentColor: 'var(--accent)' }} />
                           <div>
                             <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>10th Pass Confirmed?</div>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Confirm you have cleared SSC exam</span>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>Confirm you have cleared SSC exam</span>
                           </div>
                         </label>
 
@@ -831,7 +831,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           <input type="checkbox" name="hasCollectionExperience" checked={form.hasCollectionExperience} onChange={handleInputChange} style={{ width: 20, height: 20, accentColor: 'var(--accent)' }} />
                           <div>
                             <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>Collections Experience?</div>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Do you have past collection experience?</span>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>Do you have past collection experience?</span>
                           </div>
                         </label>
 
@@ -839,7 +839,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           <input type="checkbox" name="hasTeamHandlingExperience" checked={form.hasTeamHandlingExperience} onChange={handleInputChange} style={{ width: 20, height: 20, accentColor: 'var(--accent)' }} />
                           <div>
                             <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>Team Handling Exp?</div>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Have you managed collections agents?</span>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>Have you managed collections agents?</span>
                           </div>
                         </label>
 
@@ -847,7 +847,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           <input type="checkbox" name="hasTwoWheeler" checked={form.hasTwoWheeler} onChange={handleInputChange} style={{ width: 20, height: 20, accentColor: 'var(--accent)' }} />
                           <div>
                             <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>Two Wheeler Available?</div>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Do you own a bike/scooter?</span>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>Do you own a bike/scooter?</span>
                           </div>
                         </label>
 
@@ -855,13 +855,13 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                           <input type="checkbox" name="hasDrivingLicense" checked={form.hasDrivingLicense} onChange={handleInputChange} style={{ width: 20, height: 20, accentColor: 'var(--accent)' }} />
                           <div>
                             <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>Driving License Available?</div>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Do you have a valid driving license?</span>
+                            <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>Do you have a valid driving license?</span>
                           </div>
                         </label>
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Which Mumbai Areas are you familiar with? *</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Which Mumbai Areas are you familiar with? *</label>
                         <input type="text" name="areaFamiliarity" value={form.areaFamiliarity} onChange={handleInputChange} required placeholder="e.g. Kalyan, Dombivli, Thane, Badlapur, Kurla" className="form-input" style={{ width: '100%', padding: '0.75rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text)', outline: 'none' }} />
                       </div>
 
@@ -878,33 +878,33 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                       
                       {/* Resume */}
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Upload Resume * (PDF, DOC, DOCX - Max 10MB)</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Upload Resume * (PDF, DOC, DOCX - Max 10MB)</label>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.75rem', background: 'var(--tag-bg)', border: '1px dashed var(--border)', borderRadius: '8px' }}>
-                          <input type="file" required onChange={(e) => handleFileChange(e, 'resume')} accept=".pdf,.doc,.docx" style={{ fontSize: '0.85rem' }} />
-                          {resumeFile && <span style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 600 }}>✓ Attached</span>}
+                          <input type="file" required onChange={(e) => handleFileChange(e, 'resume')} accept=".pdf,.doc,.docx" style={{ fontSize: 'var(--text-small)' }} />
+                          {resumeFile && <span style={{ color: 'var(--accent)', fontSize: 'var(--text-small)', fontWeight: 600 }}>✓ Attached</span>}
                         </div>
                       </div>
 
                       {/* Aadhaar */}
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Upload Aadhaar Card * (PDF, JPG, PNG - Max 10MB)</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Upload Aadhaar Card * (PDF, JPG, PNG - Max 10MB)</label>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.75rem', background: 'var(--tag-bg)', border: '1px dashed var(--border)', borderRadius: '8px' }}>
-                          <input type="file" required onChange={(e) => handleFileChange(e, 'aadhaar')} accept=".pdf,.jpg,.jpeg,.png" style={{ fontSize: '0.85rem' }} />
-                          {aadhaarFile && <span style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 600 }}>✓ Attached</span>}
+                          <input type="file" required onChange={(e) => handleFileChange(e, 'aadhaar')} accept=".pdf,.jpg,.jpeg,.png" style={{ fontSize: 'var(--text-small)' }} />
+                          {aadhaarFile && <span style={{ color: 'var(--accent)', fontSize: 'var(--text-small)', fontWeight: 600 }}>✓ Attached</span>}
                         </div>
                       </div>
 
                       {/* Photo */}
                       <div>
-                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.8rem', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Upload Candidate Photo * (Passport Size - JPG, PNG - Max 5MB)</label>
+                        <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', marginBottom: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Upload Candidate Photo * (Passport Size - JPG, PNG - Max 5MB)</label>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.75rem', background: 'var(--tag-bg)', border: '1px dashed var(--border)', borderRadius: '8px' }}>
-                          <input type="file" required onChange={(e) => handleFileChange(e, 'photo')} accept=".jpg,.jpeg,.png" style={{ fontSize: '0.85rem' }} />
-                          {photoFile && <span style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 600 }}>✓ Attached</span>}
+                          <input type="file" required onChange={(e) => handleFileChange(e, 'photo')} accept=".jpg,.jpeg,.png" style={{ fontSize: 'var(--text-small)' }} />
+                          {photoFile && <span style={{ color: 'var(--accent)', fontSize: 'var(--text-small)', fontWeight: 600 }}>✓ Attached</span>}
                         </div>
                       </div>
 
                       <div style={{ marginTop: '1.5rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-                        <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--muted)' }}>
+                        <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', cursor: 'pointer', fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
                           <input type="checkbox" name="declarationChecked" checked={form.declarationChecked} onChange={handleInputChange} required style={{ width: 16, height: 16, marginTop: '2px', accentColor: 'var(--accent)' }} />
                           <span>I hereby declare that all details provided in this application form are true and accurate to the best of my knowledge. I understand that any false declarations may lead to immediate disqualification.</span>
                         </label>
@@ -941,17 +941,17 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
           <div className="container" style={{ maxWidth: '640px' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
               <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 1.6rem)', fontWeight: 700, letterSpacing: '-0.015em', marginBottom: '0.5rem' }}>Track Application Status</h2>
-              <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>Enter your Application ID and Email to view your hiring workflow status.</p>
+              <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>Enter your Application ID and Email to view your hiring workflow status.</p>
             </div>
 
             <div className="card" style={{ padding: '2rem', background: 'var(--surface2)', border: '1px solid var(--border)' }}>
               <form onSubmit={handleTrackApplication} className="space-y-4">
                 <div>
-                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Application ID *</label>
+                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Application ID *</label>
                   <input type="text" value={trackId} onChange={(e) => setTrackId(e.target.value)} required placeholder="e.g. DS-2026-0001" style={{ width: '100%', padding: '0.65rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Email Address *</label>
+                  <label style={{ display: 'block', color: 'var(--muted)', fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Email Address *</label>
                   <input type="email" value={trackEmail} onChange={(e) => setTrackEmail(e.target.value)} required placeholder="e.g. candidate@domain.com" style={{ width: '100%', padding: '0.65rem 1rem', background: 'var(--tag-bg)', border: '1px solid var(--border)', borderRadius: '4px', color: 'var(--text)', outline: 'none' }} />
                 </div>
 
@@ -975,7 +975,7 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                 <div style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
                   <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text)', marginBottom: '1rem' }}>Application Tracking Details</h4>
                   
-                  <div style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
                     <div><strong>Name:</strong> {trackResult.fullName}</div>
                     <div><strong>Position:</strong> {trackResult.position}</div>
                     <div><strong>Applied On:</strong> {new Date(trackResult.appliedAt).toLocaleDateString()}</div>
@@ -1015,23 +1015,23 @@ export default function CareersContent({ defaultJobTitle }: { defaultJobTitle?: 
                             background: isActive ? 'var(--accent)' : 'var(--tag-bg)',
                             border: isActive ? '1px solid var(--accent)' : '1px solid var(--border)'
                           }} />
-                          <div style={{ fontSize: '0.85rem', fontWeight: isActive ? 700 : 400, color: isActive ? 'var(--text)' : 'var(--muted)' }}>
-                            {step.status} {step.date && <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 600 }}>({step.date})</span>}
+                          <div style={{ fontSize: 'var(--text-small)', fontWeight: isActive ? 700 : 400, color: isActive ? 'var(--text)' : 'var(--muted)' }}>
+                            {step.status} {step.date && <span style={{ fontSize: 'var(--text-small)', color: 'var(--accent)', fontWeight: 600 }}>({step.date})</span>}
                           </div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{step.desc}</div>
+                          <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>{step.desc}</div>
                         </div>
                       );
                     })}
 
                     {trackResult.recruitmentStatus === 'Rejected' && (
                       <div style={{ position: 'relative', background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.2)', padding: '0.75rem', borderRadius: '6px' }}>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ef4444' }}>Application Status: Rejected</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>We regret to inform you that we are not moving forward with your application at this time. Thank you for your interest.</div>
+                        <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: '#ef4444' }}>Application Status: Rejected</div>
+                        <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>We regret to inform you that we are not moving forward with your application at this time. Thank you for your interest.</div>
                       </div>
                     )}
 
                     {trackResult.remarks && (
-                      <div style={{ padding: '0.75rem', background: 'var(--surface)', borderLeft: '3px solid var(--accent)', fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.5rem' }}>
+                      <div style={{ padding: '0.75rem', background: 'var(--surface)', borderLeft: '3px solid var(--accent)', fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: '0.5rem' }}>
                         <strong>Recruiter Note:</strong> {trackResult.remarks}
                       </div>
                     )}

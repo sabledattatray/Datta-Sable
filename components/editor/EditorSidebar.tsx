@@ -14,13 +14,13 @@ export default function EditorSidebar() {
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '10px 12px',
     background: css.inputBg, border: `1.5px solid ${css.border}`,
-    borderRadius: 10, fontSize: 13, color: css.text,
+    borderRadius: 10, fontSize: 'var(--text-small)', color: css.text,
     outline: 'none', fontFamily: "'Inter', sans-serif",
     boxSizing: 'border-box',
   };
 
   const labelStyle: React.CSSProperties = {
-    fontSize: 10, fontWeight: 700, color: css.muted,
+    fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted,
     textTransform: 'uppercase', letterSpacing: '0.08em',
     display: 'block', marginBottom: 7,
   };
@@ -40,7 +40,7 @@ export default function EditorSidebar() {
           <button key={key} onClick={() => setTab(key as any)}
             style={{
               flex: 1, padding: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-              fontSize: 13, fontWeight: 700, cursor: 'pointer', background: 'none', border: 'none',
+              fontSize: 'var(--text-small)', fontWeight: 700, cursor: 'pointer', background: 'none', border: 'none',
               color: tab === key ? css.text : css.muted,
               borderBottom: tab === key ? `2px solid ${css.accent}` : '2px solid transparent',
               transition: 'color 0.15s',
@@ -88,7 +88,7 @@ export default function EditorSidebar() {
                 ) : (
                   <>
                     <ImageIcon size={22} color={css.muted} />
-                    <span style={{ fontSize: 11, color: css.muted, marginTop: 6, fontWeight: 500 }}>Click to upload</span>
+                    <span style={{ fontSize: 'var(--text-small)', color: css.muted, marginTop: 6, fontWeight: 500 }}>Click to upload</span>
                   </>
                 )}
               </div>
@@ -123,7 +123,7 @@ export default function EditorSidebar() {
               <label style={labelStyle}>Categories</label>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {['Technology', 'Business', 'Design', 'Data Analytics'].map(cat => (
-                  <label key={cat} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 13, color: css.text, cursor: 'pointer', fontWeight: 500 }}>
+                  <label key={cat} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 'var(--text-small)', color: css.text, cursor: 'pointer', fontWeight: 500 }}>
                     <input type="checkbox" checked={postMetadata.categories.includes(cat)}
                       onChange={e => updatePostMetadata({ categories: e.target.checked ? [...postMetadata.categories, cat] : postMetadata.categories.filter(c => c !== cat) })}
                       style={{ accentColor: css.accent, width: 15, height: 15 }}
@@ -155,7 +155,7 @@ export default function EditorSidebar() {
 
             {/* SEO section */}
             <div style={{ borderTop: `1px solid ${css.border}`, paddingTop: 18, display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <p style={{ fontSize: 10, fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>SEO Optimization</p>
+              <p style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>SEO Optimization</p>
               <div>
                 <label style={labelStyle}>Meta Title</label>
                 <input type="text" placeholder="Leave blank to use post title" value={postMetadata.metaTitle || ''}
@@ -178,17 +178,17 @@ export default function EditorSidebar() {
             {!activeBlock ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 20px', textAlign: 'center', gap: 12 }}>
                 <LayoutPanelLeft size={32} color={css.muted} />
-                <p style={{ fontSize: 13, color: css.muted, margin: 0, lineHeight: 1.6 }}>Select a block on the canvas to edit its properties</p>
+                <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: 0, lineHeight: 1.6 }}>Select a block on the canvas to edit its properties</p>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <div style={{ padding: '12px 14px', background: css.surface2, border: `1px solid ${css.border}`, borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 11, textTransform: 'uppercase' }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${css.accent}, #8b5cf6)`, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--text-small)', textTransform: 'uppercase' }}>
                     {activeBlock.type.substring(0, 2)}
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: css.text, textTransform: 'capitalize' }}>{activeBlock.type} Block</div>
-                    <div style={{ fontSize: 11, color: css.muted }}>ID: {activeBlock.id.split('-')[1]}</div>
+                    <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.text, textTransform: 'capitalize' }}>{activeBlock.type} Block</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: css.muted }}>ID: {activeBlock.id.split('-')[1]}</div>
                   </div>
                 </div>
                 {[

@@ -270,12 +270,12 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           <Link
             href="/blog"
             className="flex items-center gap-2"
-            style={{ textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}
+            style={{ textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: 'var(--text-small)', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}
           >
             <ChevronLeft size={16} /> BACK TO ARTICLES
           </Link>
           
-          <nav className="flex items-center gap-2 mono text-[12px] text-[var(--muted)] uppercase tracking-wider" style={{ marginBottom: 16 }}>
+          <nav className="flex items-center gap-2 mono text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-wider" style={{ marginBottom: 16 }}>
             <Link href="/" className="hover:text-[var(--accent)]">HOME</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-[var(--accent)]">BLOG</Link>
@@ -325,7 +325,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           </div>
           <div>
             <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text)' }}>Datta Sable</div>
-            <div style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>BI & Analytics Expert</div>
+            <div style={{ color: 'var(--muted)', fontSize: 'var(--text-small)' }}>BI & Analytics Expert</div>
           </div>
           <button 
             onClick={handleShare}
@@ -338,7 +338,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
               padding: '0.4rem 1.2rem', 
               cursor: 'pointer', 
               color: copied ? 'var(--btn-primary-text)' : 'var(--text)',
-              fontSize: '10px',
+              fontSize: 'var(--text-small)',
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.1em'
@@ -381,10 +381,10 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
               borderLeft: '2px solid var(--accent)', 
               borderRadius: '16px'
             }}>
-              <h4 className="mono text-[11px] uppercase tracking-wider text-[var(--accent)] mb-3">Technical References &amp; Standards</h4>
+              <h4 className="mono text-[length:var(--text-small)] uppercase tracking-wider text-[var(--accent)] mb-3">Technical References &amp; Standards</h4>
               <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }} className="flex flex-col gap-2.5">
                 {refs.map(ref => (
-                  <li key={ref.url} className="text-[13px] flex items-center gap-2">
+                  <li key={ref.url} className="text-[length:var(--text-small)] flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
                     <a 
                       href={ref.url} 
@@ -429,8 +429,8 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
                 Senior BI Developer & Data Architect with over 10 years of experience in engineering high-fidelity analytics systems. Specialized in Tableau, Power BI, SQL, and Python-driven automation for enterprise-grade decision clarity.
               </p>
               <div className="flex gap-4">
-                <Link href="/about" className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] hover:underline">View Portfolio</Link>
-                <Link href="/contact" className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] hover:underline">Get in Touch</Link>
+                <Link href="/about" className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--accent)] hover:underline">View Portfolio</Link>
+                <Link href="/contact" className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--accent)] hover:underline">Get in Touch</Link>
               </div>
             </div>
           </div>
@@ -452,9 +452,9 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
                         className="object-cover group-hover:scale-105 transition-transform duration-500" 
                       />
                     </div>
-                    <span className="text-[12px] text-[var(--muted)] mono uppercase tracking-wider block" style={{ marginBottom: 10 }}>{p.category}</span>
+                    <span className="text-[length:var(--text-small)] text-[var(--muted)] mono uppercase tracking-wider block" style={{ marginBottom: 10 }}>{p.category}</span>
                     <h4 style={{ fontSize: '1rem', lineHeight: 1.3, color: 'var(--text)', marginBottom: '0.5rem' }}>{p.title}</h4>
-                    <p style={{ color: 'var(--muted)', fontSize: '0.8rem', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+                    <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
                       {p.excerpt}
                     </p>
                   </div>

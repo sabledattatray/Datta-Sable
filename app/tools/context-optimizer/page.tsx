@@ -154,7 +154,7 @@ export default function ContextOptimizer() {
                     </div>
                     <div className="flex items-center gap-2 text-[var(--muted)]">
                        <Minimize2 size={12} />
-                       <span className="text-[11px] mono uppercase">Lean_Mode</span>
+                       <span className="text-[length:var(--text-small)] mono uppercase">Lean_Mode</span>
                     </div>
                   </div>
                 </div>
@@ -183,7 +183,7 @@ export default function ContextOptimizer() {
           {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
           
           <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
@@ -202,19 +202,19 @@ export default function ContextOptimizer() {
           <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Token Savings Calculator</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Token Savings Calculator</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Estimates monthly database savings by running token pruning algorithms on source payloads.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Boilerplate Removal</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Boilerplate Removal</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Strips recurring web layouts, footers, and code syntax markers that consume context space.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Information Profiler</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Information Profiler</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Scores text structures to identify sections with low semantic values.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>RAG Chunk Optimizer</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>RAG Chunk Optimizer</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Helper guidelines to rank and group document vectors for prompt layouts.</div>
             </div>
           </div>

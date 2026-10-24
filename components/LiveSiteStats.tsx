@@ -64,13 +64,13 @@ export default function LiveSiteStats() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-[var(--accent)]"></span>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mono">
+          <span className="text-[length:var(--text-small)] font-bold uppercase tracking-[0.4em] text-[var(--accent)] mono">
             LIVE_PLATFORM_ANALYTICS_FEED
           </span>
         </div>
         
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 mono text-[9px] text-[var(--muted)] uppercase tracking-widest bg-[var(--surface)] border border-[var(--border)] px-4 py-2">
+          <div className="flex items-center gap-2 mono text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-widest bg-[var(--surface)] border border-[var(--border)] px-4 py-2">
             <Activity size={10} className="text-[var(--accent)] animate-pulse" />
             <span className="text-[var(--accent)] font-bold">LIVE_SYNC:</span> {syncTime}
           </div>
@@ -115,13 +115,13 @@ export default function LiveSiteStats() {
               </AnimatePresence>
             </div>
             
-            <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '6px' }}>{item.label}</div>
-            <div style={{ fontSize: '10px', color: 'var(--muted)', letterSpacing: '0.05em', marginBottom: '2rem', opacity: 0.6 }}>{item.sub}</div>
+            <div style={{ fontSize: 'var(--text-small)', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '6px' }}>{item.label}</div>
+            <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', letterSpacing: '0.05em', marginBottom: '2rem', opacity: 0.6 }}>{item.sub}</div>
             
             {/* Real-time Processing Bars */}
             <div className="space-y-4">
               <div className="space-y-1.5">
-                <div className="flex justify-between text-[9px] mono font-black opacity-40 uppercase tracking-tighter">
+                <div className="flex justify-between text-[length:var(--text-small)] mono font-black opacity-40 uppercase tracking-tighter">
                   <span>Packet Analysis</span>
                   <span>{item.val}%</span>
                 </div>

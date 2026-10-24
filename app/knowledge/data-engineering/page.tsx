@@ -67,12 +67,12 @@ export default function DataEngineeringPillar() {
                 <div className="p-6 bg-[var(--surface2)] border border-[var(--border)] relative overflow-hidden h-full flex flex-col">
                   <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent)] opacity-50" />
                   <h3 className="text-lg font-black uppercase mb-2">{cluster.title}</h3>
-                  <p className="text-[12px] text-[var(--muted)] mb-8 flex-grow">{cluster.desc}</p>
+                  <p className="text-[length:var(--text-small)] text-[var(--muted)] mb-8 flex-grow">{cluster.desc}</p>
                   
                   <div className="space-y-4">
                     {cluster.links.map((link, lIdx) => (
                       <Link key={lIdx} href={link.href} className="group flex items-center justify-between no-underline p-3 bg-black/20 border border-[var(--border)] hover:border-[var(--accent)] transition-all">
-                        <span className="text-[11px] font-bold uppercase tracking-tight group-hover:text-[var(--accent)] transition-colors">{link.name}</span>
+                        <span className="text-[length:var(--text-small)] font-bold uppercase tracking-tight group-hover:text-[var(--accent)] transition-colors">{link.name}</span>
                         <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                       </Link>
                     ))}

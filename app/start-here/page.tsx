@@ -265,7 +265,7 @@ export default function StartHerePage() {
                     <a href="#learning-tracks" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                       EXPLORE 4 LEARNING TRACKS <ArrowRight size={16} />
                     </a>
-                    <a href="#decision-tree" className="secondary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--muted)', fontSize: '13px' }}>
+                    <a href="#decision-tree" className="secondary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>
                       <Compass size={16} /> CAREER DECISION MATRIX
                     </a>
                   </div>
@@ -389,7 +389,7 @@ export default function StartHerePage() {
                         <p className={styles.trackDesc}>{track.desc}</p>
 
                         <div className={styles.trackModules}>
-                          <div className="text-[10px] uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-2 font-semibold">
+                          <div className="text-[length:var(--text-small)] uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-2 font-semibold">
                             <BookOpen size={12} style={{ color: 'var(--accent)' }} /> RECOMMENDED READING SEQUENCE:
                           </div>
                           {track.modules.map((m) => (
@@ -523,24 +523,24 @@ export default function StartHerePage() {
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="text-[9px] text-[var(--accent)] tracking-wider uppercase font-semibold">{guide.category}</span>
-                        <div className="flex items-center gap-1 text-[9px] text-[var(--muted)] font-medium">
+                        <span className="text-[length:var(--text-small)] text-[var(--accent)] tracking-wider uppercase font-semibold">{guide.category}</span>
+                        <div className="flex items-center gap-1 text-[length:var(--text-small)] text-[var(--muted)] font-medium">
                           <Clock size={11} /> {guide.time}
                         </div>
                       </div>
                       <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text)', lineHeight: 1.3, marginBottom: '8px', fontFamily: 'var(--font-syne)' }}>
                         {guide.title}
                       </h3>
-                      <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 16px' }}>
+                      <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 16px' }}>
                         {guide.desc}
                       </p>
                     </div>
 
                     <div className="flex items-center justify-between pt-3 border-t border-[var(--border)]">
-                      <span className="text-[8px] font-semibold tracking-wider uppercase px-2 py-1 bg-[var(--surface2)] border border-[var(--border)] rounded text-[var(--muted)]">
+                      <span className="text-[length:var(--text-small)] font-semibold tracking-wider uppercase px-2 py-1 bg-[var(--surface2)] border border-[var(--border)] rounded text-[var(--muted)]">
                         {guide.difficulty}
                       </span>
-                      <span className="text-[11px] font-semibold text-[var(--accent)] flex items-center gap-1 group-hover:underline tracking-wide">
+                      <span className="text-[length:var(--text-small)] font-semibold text-[var(--accent)] flex items-center gap-1 group-hover:underline tracking-wide">
                         READ ARTICLE <ArrowUpRight size={13} />
                       </span>
                     </div>
@@ -585,14 +585,14 @@ export default function StartHerePage() {
                           <div className={styles.certName}>{row.role}</div>
                         </td>
                         <td>
-                          <span className="text-[11px] font-bold px-2 py-1 bg-[var(--surface2)] border border-[var(--border)] rounded text-[var(--text)]">
+                          <span className="text-[length:var(--text-small)] font-bold px-2 py-1 bg-[var(--surface2)] border border-[var(--border)] rounded text-[var(--text)]">
                             {row.cert}
                           </span>
                         </td>
                         <td>{row.experience}</td>
                         <td style={{ maxWidth: '240px' }}>{row.focus}</td>
-                        <td className="text-[11px] font-semibold text-[var(--accent)]">{row.salary}</td>
-                        <td style={{ maxWidth: '260px', color: 'var(--muted)', fontSize: '12px' }}>{row.nextStep}</td>
+                        <td className="text-[length:var(--text-small)] font-semibold text-[var(--accent)]">{row.salary}</td>
+                        <td style={{ maxWidth: '260px', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>{row.nextStep}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -600,7 +600,7 @@ export default function StartHerePage() {
               </div>
 
               <div className="mt-4 flex justify-end">
-                <Link href="/certification" className="text-[11px] font-semibold text-[var(--accent)] flex items-center gap-1 hover:underline tracking-wide">
+                <Link href="/certification" className="text-[length:var(--text-small)] font-semibold text-[var(--accent)] flex items-center gap-1 hover:underline tracking-wide">
                   VIEW FULL CERTIFICATIONS DIRECTORY <ArrowRight size={14} />
                 </Link>
               </div>
@@ -625,7 +625,7 @@ export default function StartHerePage() {
 
               <div className={styles.workshopCard}>
                 <div>
-                  <span className="text-[10px] text-[var(--accent)] tracking-widest uppercase block mb-3 font-semibold">
+                  <span className="text-[length:var(--text-small)] text-[var(--accent)] tracking-widest uppercase block mb-3 font-semibold">
                     FEATURED WORKSHOP // 35 MINS
                   </span>
                   <h3 style={{ fontSize: '24px', fontFamily: 'var(--font-syne)', fontWeight: 600, color: 'var(--text)', marginBottom: '14px', lineHeight: 1.25 }}>
@@ -638,17 +638,17 @@ export default function StartHerePage() {
                   <div className="flex items-center gap-6 mb-6">
                     <div>
                       <div className="text-[20px] font-bold text-[var(--text)]">9K+</div>
-                      <div className="text-[9px] font-semibold text-[var(--muted)] tracking-wider">VIEWS LOGGED</div>
+                      <div className="text-[length:var(--text-small)] font-semibold text-[var(--muted)] tracking-wider">VIEWS LOGGED</div>
                     </div>
                     <div style={{ width: '1px', height: '28px', background: 'var(--border)' }} />
                     <div>
                       <div className="text-[20px] font-bold text-[var(--text)]">1K+</div>
-                      <div className="text-[9px] font-semibold text-[var(--muted)] tracking-wider">SUBSCRIBERS</div>
+                      <div className="text-[length:var(--text-small)] font-semibold text-[var(--muted)] tracking-wider">SUBSCRIBERS</div>
                     </div>
                     <div style={{ width: '1px', height: '28px', background: 'var(--border)' }} />
                     <div>
                       <div className="text-[20px] font-bold text-[var(--accent)]">100%</div>
-                      <div className="text-[9px] font-semibold text-[var(--muted)] tracking-wider">FREE ON YOUTUBE</div>
+                      <div className="text-[length:var(--text-small)] font-semibold text-[var(--muted)] tracking-wider">FREE ON YOUTUBE</div>
                     </div>
                   </div>
 
@@ -708,7 +708,7 @@ export default function StartHerePage() {
 
             {/* ── SECTION 7: FINAL CTA ── */}
             <section className={styles.ctaBox} aria-labelledby="cta-heading">
-              <span className="text-[10px] text-[var(--accent)] tracking-widest uppercase block mb-3 font-semibold">
+              <span className="text-[length:var(--text-small)] text-[var(--accent)] tracking-widest uppercase block mb-3 font-semibold">
                 TAILORED ROADMAPS &amp; CONSULTATION
               </span>
               <h2 id="cta-heading" className={styles.ctaTitle}>

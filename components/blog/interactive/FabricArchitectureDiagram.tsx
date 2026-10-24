@@ -57,7 +57,7 @@ export default function FabricArchitectureDiagram({
         display: 'flex', 
         alignItems: 'center', 
         gap: '0.4rem',
-        fontSize: '0.7rem',
+        fontSize: 'var(--text-small)',
         fontFamily: 'monospace',
         color: 'var(--muted)',
         textTransform: 'uppercase'
@@ -110,32 +110,32 @@ export default function FabricArchitectureDiagram({
             {/* 1. INGESTION SOURCES NODE */}
             <g transform="translate(40, 70)" onClick={() => handleNodeClick('architecture')} style={{ cursor: 'pointer' }}>
               <rect width="80" height="100" rx="6" fill="var(--surface2)" stroke={activeNodeId === 'fabric-architecture' ? 'var(--accent)' : 'var(--border)'} strokeWidth="1.5" />
-              <text x="40" y="35" textAnchor="middle" fill="var(--text)" style={{ fontSize: '0.65rem', fontWeight: 'bold', fontFamily: 'monospace' }}>SOURCES</text>
-              <text x="40" y="55" textAnchor="middle" fill="var(--muted)" style={{ fontSize: '0.55rem' }}>ADLS / SQL</text>
-              <text x="40" y="70" textAnchor="middle" fill="var(--muted)" style={{ fontSize: '0.55rem' }}>Snowflake</text>
+              <text x="40" y="35" textAnchor="middle" fill="var(--text)" style={{ fontSize: 'var(--text-small)', fontWeight: 'bold', fontFamily: 'monospace' }}>SOURCES</text>
+              <text x="40" y="55" textAnchor="middle" fill="var(--muted)" style={{ fontSize: 'var(--text-small)' }}>ADLS / SQL</text>
+              <text x="40" y="70" textAnchor="middle" fill="var(--muted)" style={{ fontSize: 'var(--text-small)' }}>Snowflake</text>
             </g>
 
             {/* 2. ONELAKE LOGICAL STORAGE NODE */}
             <g transform="translate(210, 70)" onClick={() => handleNodeClick('onelake')} style={{ cursor: 'pointer' }}>
               <rect width="80" height="100" rx="6" fill="var(--surface2)" stroke={activeNodeId === 'onelake' || activeNodeId === 'medallion' ? 'var(--accent)' : 'var(--border)'} strokeWidth="1.5" />
-              <text x="40" y="35" textAnchor="middle" fill="var(--text)" style={{ fontSize: '0.65rem', fontWeight: 'bold', fontFamily: 'monospace' }}>ONELAKE</text>
-              <text x="40" y="55" textAnchor="middle" fill="var(--muted)" style={{ fontSize: '0.55rem' }}>Delta Lake</text>
-              <text x="40" y="70" textAnchor="middle" fill="var(--muted)" style={{ fontSize: '0.55rem' }}>Parquet</text>
+              <text x="40" y="35" textAnchor="middle" fill="var(--text)" style={{ fontSize: 'var(--text-small)', fontWeight: 'bold', fontFamily: 'monospace' }}>ONELAKE</text>
+              <text x="40" y="55" textAnchor="middle" fill="var(--muted)" style={{ fontSize: 'var(--text-small)' }}>Delta Lake</text>
+              <text x="40" y="70" textAnchor="middle" fill="var(--muted)" style={{ fontSize: 'var(--text-small)' }}>Parquet</text>
               <circle cx="40" cy="85" r="4" fill="var(--accent)" />
             </g>
 
             {/* 3. COMPUTE ENGINES (DIRECT LAKE) */}
             <g transform="translate(380, 70)" onClick={() => handleNodeClick('direct-lake')} style={{ cursor: 'pointer' }}>
               <rect width="80" height="100" rx="6" fill="var(--surface2)" stroke={activeNodeId === 'direct-lake' ? 'var(--accent)' : 'var(--border)'} strokeWidth="1.5" />
-              <text x="40" y="35" textAnchor="middle" fill="var(--text)" style={{ fontSize: '0.65rem', fontWeight: 'bold', fontFamily: 'monospace' }}>ENGINES</text>
-              <text x="40" y="55" textAnchor="middle" fill="var(--muted)" style={{ fontSize: '0.55rem' }}>Direct Lake</text>
-              <text x="40" y="70" textAnchor="middle" fill="var(--muted)" style={{ fontSize: '0.55rem' }}>Spark / SQL</text>
+              <text x="40" y="35" textAnchor="middle" fill="var(--text)" style={{ fontSize: 'var(--text-small)', fontWeight: 'bold', fontFamily: 'monospace' }}>ENGINES</text>
+              <text x="40" y="55" textAnchor="middle" fill="var(--muted)" style={{ fontSize: 'var(--text-small)' }}>Direct Lake</text>
+              <text x="40" y="70" textAnchor="middle" fill="var(--muted)" style={{ fontSize: 'var(--text-small)' }}>Spark / SQL</text>
             </g>
 
             {/* 4. POWER BI REPORTS */}
             <g transform="translate(515, 80)" onClick={() => handleNodeClick('direct-lake')} style={{ cursor: 'pointer' }}>
               <circle cx="30" cy="40" r="30" fill="var(--surface2)" stroke={activeNodeId === 'direct-lake' ? 'var(--accent)' : 'var(--border)'} strokeWidth="1.5" />
-              <text x="30" y="44" textAnchor="middle" fill="var(--text)" style={{ fontSize: '0.65rem', fontWeight: 'bold', fontFamily: 'monospace' }}>REPORTS</text>
+              <text x="30" y="44" textAnchor="middle" fill="var(--text)" style={{ fontSize: 'var(--text-small)', fontWeight: 'bold', fontFamily: 'monospace' }}>REPORTS</text>
             </g>
           </svg>
         </div>
@@ -156,7 +156,7 @@ export default function FabricArchitectureDiagram({
             textAlign: 'center',
             borderRadius: '6px',
             color: 'var(--muted)',
-            fontSize: '0.85rem'
+            fontSize: 'var(--text-small)'
           }}>
             Click any component block in the blueprint diagram above to dynamically inspect core specifications, prerequisites, and learning modules.
           </div>

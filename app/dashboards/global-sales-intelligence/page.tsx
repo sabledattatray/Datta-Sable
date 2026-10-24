@@ -314,12 +314,12 @@ export default function GlobalSalesIntelligencePage() {
               <div className="w-12 h-12 bg-gradient-to-br from-[#9b59ff] to-[#00d4ff] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(155,89,255,0.4)]">🌍</div>
               <div>
                 <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">GLOBAL<span className="text-[#00d4ff]">SALES</span></div>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Real-time Revenue Intelligence Engine</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Real-time Revenue Intelligence Engine</div>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="hidden md:flex flex-col items-end mr-4">
-                <div className="text-[10px] text-[var(--muted)] uppercase tracking-widest">Global Status</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-widest">Global Status</div>
                 <div className="text-[#00ff88] text-xs font-bold font-['Rajdhani']">OPERATIONAL_OPTIMAL</div>
               </div>
               <div className="flex gap-2 bg-[var(--surface2)] border border-[var(--border)] rounded-xl p-1.5 shadow-inner">
@@ -327,7 +327,7 @@ export default function GlobalSalesIntelligencePage() {
                   <button 
                     key={t} 
                     onClick={() => setTimeRange(t)}
-                    className={`w-8 h-8 flex items-center justify-center text-[11px] rounded-lg transition-all ${timeRange === t ? 'bg-[#00d4ff] text-black font-bold shadow-[0_0_10px_rgba(0,212,255,0.4)]' : 'text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5'}`}
+                    className={`w-8 h-8 flex items-center justify-center text-[length:var(--text-small)] rounded-lg transition-all ${timeRange === t ? 'bg-[#00d4ff] text-black font-bold shadow-[0_0_10px_rgba(0,212,255,0.4)]' : 'text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5'}`}
                   >
                     {t}
                   </button>
@@ -348,10 +348,10 @@ export default function GlobalSalesIntelligencePage() {
               >
                 <div className="absolute top-0 left-0 w-full h-[3px] opacity-80" style={{ background: k.color }}></div>
                 <div className="relative z-10">
-                  <div className="text-[11px] uppercase tracking-[2px] text-[var(--muted)] mb-3 font-bold opacity-70 group-hover:opacity-100 transition-opacity">{k.label}</div>
+                  <div className="text-[length:var(--text-small)] uppercase tracking-[2px] text-[var(--muted)] mb-3 font-bold opacity-70 group-hover:opacity-100 transition-opacity">{k.label}</div>
                   <div className="font-['Rajdhani'] text-3xl font-bold tracking-[1px]" style={{ color: k.color }}>{k.val}<span className="text-sm ml-1 opacity-70">{k.unit}</span></div>
                 </div>
-                <div className="flex items-center gap-2 text-[12px] relative z-10">
+                <div className="flex items-center gap-2 text-[length:var(--text-small)] relative z-10">
                   <span className={`font-bold ${k.delta.startsWith('+') ? 'text-[#00ff88]' : 'text-[#ff3366]'}`}>
                     {k.delta.startsWith('+') ? '▲' : '▼'} {k.delta}
                   </span>
@@ -368,16 +368,16 @@ export default function GlobalSalesIntelligencePage() {
             <div className="lg:col-span-2 bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 relative overflow-hidden shadow-sm">
               <div className="flex items-center justify-between mb-6">
                 <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Global Connectivity Mesh</div>
-                <div className="flex items-center gap-4 text-[10px] text-[var(--muted)] uppercase">
+                <div className="flex items-center gap-4 text-[length:var(--text-small)] text-[var(--muted)] uppercase">
                   <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]"></div> Active Nodes</div>
                   <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#00ff88]"></div> Optimal</div>
                 </div>
               </div>
               <canvas ref={mapCanvasRef} className="w-full h-[280px] cursor-crosshair"></canvas>
               <div className="absolute bottom-6 right-6 p-4 bg-[var(--surface2)]/80 backdrop-blur-md border border-[var(--border)] rounded-xl shadow-lg">
-                <div className="text-[9px] text-[var(--muted)] uppercase tracking-widest mb-1">Peak Region</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-widest mb-1">Peak Region</div>
                 <div className="text-[#00d4ff] font-['Rajdhani'] font-bold text-lg">EMEA_CENTRAL</div>
-                <div className="text-[10px] text-[var(--muted)] mt-1">Efficiency: 98.4%</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] mt-1">Efficiency: 98.4%</div>
               </div>
             </div>
 
@@ -411,12 +411,12 @@ export default function GlobalSalesIntelligencePage() {
             <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
               <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase mb-6"><span className="text-[#00d4ff] mr-2">◈</span>Sales Conversion</div>
               <canvas ref={conversionCanvasRef} className="w-full h-[180px]"></canvas>
-              <div className="mt-4 text-[10px] text-[var(--muted)] text-center leading-relaxed">Funnel analysis based on last 30 days of global lead ingestion.</div>
+              <div className="mt-4 text-[length:var(--text-small)] text-[var(--muted)] text-center leading-relaxed">Funnel analysis based on last 30 days of global lead ingestion.</div>
             </div>
             <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-6">
                 <div className="font-['Rajdhani'] text-sm font-bold tracking-widest uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Top Categories</div>
-                <div className="text-[10px] text-[#00d4ff] font-bold">LIVE</div>
+                <div className="text-[length:var(--text-small)] text-[#00d4ff] font-bold">LIVE</div>
               </div>
               <div className="space-y-5">
                 {[
@@ -427,7 +427,7 @@ export default function GlobalSalesIntelligencePage() {
                   { name: 'AI Workflows', val: 41, color: C.yellow }
                 ].map((cat, i) => (
                   <div key={i}>
-                    <div className="flex justify-between text-[11px] mb-2">
+                    <div className="flex justify-between text-[length:var(--text-small)] mb-2">
                       <span className="text-[var(--muted)]">{cat.name}</span>
                       <span className="text-[var(--text)] font-['Rajdhani'] font-bold opacity-80">{cat.val}%</span>
                     </div>

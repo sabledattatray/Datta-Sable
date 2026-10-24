@@ -53,7 +53,7 @@ export default function ToolCard({ title, description, icon, category, href, sta
             <div 
               className="tag mono" 
               style={{ 
-                fontSize: '10px', 
+                fontSize: 'var(--text-small)',
                 opacity: 0.6,
                 letterSpacing: '0.1em'
               }}
@@ -72,11 +72,11 @@ export default function ToolCard({ title, description, icon, category, href, sta
 
           <div className="flex items-center justify-between">
             {isComingSoon ? (
-              <div className="flex items-center gap-2 text-[10px] mono text-[var(--muted)] opacity-50">
+              <div className="flex items-center gap-2 text-[length:var(--text-small)] mono text-[var(--muted)] opacity-50">
                 <Lock size={12} /> INITIALIZING_NODE
               </div>
             ) : (
-              <div className="flex items-center gap-2 text-[var(--accent)] font-bold text-[11px] mono tracking-widest group-hover:gap-4 transition-all">
+              <div className="flex items-center gap-2 text-[var(--accent)] font-bold text-[length:var(--text-small)] mono tracking-widest group-hover:gap-4 transition-all">
                 ACCESS_UTILITY <ArrowRight size={14} />
               </div>
             )}

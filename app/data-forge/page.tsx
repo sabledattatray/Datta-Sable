@@ -23,7 +23,7 @@ const PreviewTerminal = dynamic(() => import('@/components/data-forge/PreviewTer
   loading: () => <div className="h-[600px] bg-[#0a0a0a] rounded-[2rem] animate-pulse flex items-center justify-center">
     <div className="flex flex-col items-center gap-4">
       <Cpu className="w-8 h-8 text-red-500/20 animate-spin" />
-      <span className="text-[10px] font-black text-white/10 uppercase tracking-[0.3em]">Initializing Core...</span>
+      <span className="text-[length:var(--text-small)] font-black text-white/10 uppercase tracking-[0.3em]">Initializing Core...</span>
     </div>
   </div>,
   ssr: false // Client-side only for data generation previews
@@ -211,7 +211,7 @@ export default function DataForgePage() {
             <div className="mb-20">
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-[1px] w-12 bg-red-500" />
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500">Data Engineering Lab</span>
+                <span className="text-[length:var(--text-small)] font-black uppercase tracking-[0.4em] text-red-500">Data Engineering Lab</span>
               </div>
               <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tighter uppercase leading-[0.85] text-[var(--text)]">
                 Data <span className="text-red-500">Forge</span> <span className="text-2xl md:text-4xl text-[var(--muted)] font-light">PRO</span>
@@ -235,25 +235,25 @@ export default function DataForgePage() {
                     {session ? (
                       <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full">
                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                        <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">Authenticated</span>
+                        <span className="text-[length:var(--text-small)] font-black text-green-500 uppercase tracking-widest">Authenticated</span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 px-3 py-1 bg-yellow-500/10 border border-yellow-500/20 rounded-full">
                         <Lock size={10} className="text-yellow-500" />
-                        <span className="text-[10px] font-black text-yellow-500 uppercase tracking-widest">Free Tier</span>
+                        <span className="text-[length:var(--text-small)] font-black text-yellow-500 uppercase tracking-widest">Free Tier</span>
                       </div>
                     )}
                   </div>
 
                   {/* Industry Selection */}
                   <div className="mb-10">
-                    <label className="text-[11px] font-black text-[var(--text)] uppercase tracking-[0.2em] mb-4 block opacity-70">Target Industry</label>
+                    <label className="text-[length:var(--text-small)] font-black text-[var(--text)] uppercase tracking-[0.2em] mb-4 block opacity-70">Target Industry</label>
                     <div className="grid grid-cols-2 gap-3">
                       {INDUSTRIES.map(ind => (
                         <button
                           key={ind.id}
                           onClick={() => setSelectedIndustry(ind)}
-                          className={`p-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
+                          className={`p-4 rounded-xl text-[length:var(--text-small)] font-black uppercase tracking-widest transition-all border ${
                             selectedIndustry.id === ind.id 
                               ? 'bg-red-500 border-red-500 text-white shadow-lg shadow-red-500/20' 
                               : 'bg-[var(--surface)] border-[var(--border)] text-[var(--muted)] hover:border-red-500/50'
@@ -268,14 +268,14 @@ export default function DataForgePage() {
                   {/* Schema Builder */}
                   <div className="mb-10">
                     <div className="flex items-center justify-between mb-4">
-                      <label className="text-[11px] font-black text-[var(--text)] uppercase tracking-[0.2em] block opacity-70">Dynamic Schema</label>
-                      <span className="text-[10px] font-mono text-[var(--muted)] font-bold">{selectedFields.length} / 12 Fields</span>
+                      <label className="text-[length:var(--text-small)] font-black text-[var(--text)] uppercase tracking-[0.2em] block opacity-70">Dynamic Schema</label>
+                      <span className="text-[length:var(--text-small)] font-mono text-[var(--muted)] font-bold">{selectedFields.length} / 12 Fields</span>
                     </div>
                     
                     <div className="flex flex-wrap gap-2 p-5 bg-[var(--surface)] border border-[var(--border)] rounded-2xl mb-6 min-h-[120px] content-start">
                       {selectedFields.map((field, idx) => (
                         <div key={idx} className="flex items-center gap-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg group/tag">
-                          <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">{field.label}</span>
+                          <span className="text-[length:var(--text-small)] font-black text-red-500 uppercase tracking-widest">{field.label}</span>
                           <button onClick={() => removeField(idx)} className="hover:text-red-500 transition-colors">
                             <X size={10} className="text-red-500/50 group-hover/tag:text-red-500" />
                           </button>
@@ -284,7 +284,7 @@ export default function DataForgePage() {
                     </div>
 
                     <div className="relative">
-                      <div className="flex items-center gap-2 mb-3 text-[10px] font-black text-[var(--muted)] px-1 tracking-widest">
+                      <div className="flex items-center gap-2 mb-3 text-[length:var(--text-small)] font-black text-[var(--muted)] px-1 tracking-widest">
                         <Plus size={10} className="text-red-500" />
                         <span>ADD NEW INTELLIGENCE FIELD</span>
                       </div>
@@ -319,7 +319,7 @@ export default function DataForgePage() {
 
                   {/* Volume Gating */}
                   <div className="mb-10">
-                    <label className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.2em] mb-4 block text-center">Select Dataset Volume (Tiered)</label>
+                    <label className="text-[length:var(--text-small)] font-black text-[var(--muted)] uppercase tracking-[0.2em] mb-4 block text-center">Select Dataset Volume (Tiered)</label>
                     <div className="grid grid-cols-4 gap-2">
                       {DATA_COUNTS.map(count => {
                         const isKLocked = count > 10000 && !session;
@@ -335,7 +335,7 @@ export default function DataForgePage() {
                                 : 'bg-[var(--surface)] border-[var(--border)] text-[var(--muted)] hover:border-red-500/50'
                             } ${(isKLocked || isPLocked) ? 'opacity-50 cursor-not-allowed' : ''}`}
                           >
-                            <span className="text-[10px] font-bold uppercase">{count >= 1000 ? `${count/1000}k` : count}</span>
+                            <span className="text-[length:var(--text-small)] font-bold uppercase">{count >= 1000 ? `${count/1000}k` : count}</span>
                             {isKLocked && <Lock size={8} className="absolute top-1 right-1" />}
                             {isPLocked && <Crown size={8} className="absolute top-1 right-1 text-yellow-500" />}
                           </button>
@@ -348,7 +348,7 @@ export default function DataForgePage() {
                   <button
                     onClick={handleDownload}
                     disabled={isGenerating || isPremium || isLocked}
-                    className="w-full py-5 bg-red-600 hover:bg-red-500 disabled:bg-[var(--surface)] disabled:text-[var(--muted)] transition-all font-black text-[12px] tracking-[0.3em] uppercase flex items-center justify-center gap-4 group rounded-2xl shadow-2xl shadow-red-500/20"
+                    className="w-full py-5 bg-red-600 hover:bg-red-500 disabled:bg-[var(--surface)] disabled:text-[var(--muted)] transition-all font-black text-[length:var(--text-small)] tracking-[0.3em] uppercase flex items-center justify-center gap-4 group rounded-2xl shadow-2xl shadow-red-500/20"
                   >
                     {isGenerating ? (
                       <>
@@ -376,18 +376,18 @@ export default function DataForgePage() {
 
                 {/* Technical Note */}
                 <div className="p-8 border border-[var(--border)] bg-[var(--surface2)]/50 rounded-[2rem]">
-                  <h4 className="text-[10px] font-black text-[var(--muted)] mb-4 uppercase tracking-[0.2em] flex items-center gap-3">
+                  <h4 className="text-[length:var(--text-small)] font-black text-[var(--muted)] mb-4 uppercase tracking-[0.2em] flex items-center gap-3">
                     <Shield size={14} className="text-red-500" />
                     Quality Assurance
                   </h4>
-                  <p className="text-[11px] text-[var(--muted)] leading-relaxed mb-6 font-medium">
+                  <p className="text-[length:var(--text-small)] text-[var(--muted)] leading-relaxed mb-6 font-medium">
                     Each generated record is subjected to our proprietary <strong className="text-[var(--text)]">Synthetic Integrity Check</strong>. For the healthcare template, Hospital Type is weighted based on regional government-to-private ratios to ensure statistical parity.
                   </p>
                   <div className="flex gap-4">
-                    <div className="px-3 py-1.5 bg-[var(--surface)] border border-[var(--border)] rounded-full text-[9px] font-bold text-[var(--muted)] uppercase tracking-tighter">
+                    <div className="px-3 py-1.5 bg-[var(--surface)] border border-[var(--border)] rounded-full text-[length:var(--text-small)] font-bold text-[var(--muted)] uppercase tracking-tighter">
                       No PII Data
                     </div>
-                    <div className="px-3 py-1.5 bg-[var(--surface)] border border-[var(--border)] rounded-full text-[9px] font-bold text-[var(--muted)] uppercase tracking-tighter">
+                    <div className="px-3 py-1.5 bg-[var(--surface)] border border-[var(--border)] rounded-full text-[length:var(--text-small)] font-bold text-[var(--muted)] uppercase tracking-tighter">
                       GDPR Compliant
                     </div>
                   </div>

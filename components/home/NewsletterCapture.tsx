@@ -27,7 +27,7 @@ export default function NewsletterCapture() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles size={16} className="text-[var(--accent)]" />
-                <span className="mono text-[10px] font-bold tracking-widest text-[var(--accent)] uppercase">Audience_Ownership</span>
+                <span className="mono text-[length:var(--text-small)] font-bold tracking-widest text-[var(--accent)] uppercase">Audience_Ownership</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
                 Join the <span className="hero-title">Operator Dispatch</span>
@@ -43,7 +43,7 @@ export default function NewsletterCapture() {
                    'Workflow Compression Tips',
                    'Zero Spam Policy'
                  ].map((item, i) => (
-                   <div key={i} className="flex items-center gap-3 text-[10px] mono text-[var(--muted)]">
+                   <div key={i} className="flex items-center gap-3 text-[length:var(--text-small)] mono text-[var(--muted)]">
                       <Check size={12} className="text-[var(--accent)]" />
                       {item.toUpperCase()}
                    </div>
@@ -63,7 +63,7 @@ export default function NewsletterCapture() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8 text-center">Identity_Verification</h4>
+                  <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--muted)] mb-8 text-center">Identity_Verification</h4>
                   
                   <div className="relative mb-6">
                     <input 
@@ -89,7 +89,7 @@ export default function NewsletterCapture() {
                     )}
                   </button>
 
-                  <div className="mt-6 flex items-center justify-center gap-2 text-[9px] mono text-[var(--muted)] opacity-60">
+                  <div className="mt-6 flex items-center justify-center gap-2 text-[length:var(--text-small)] mono text-[var(--muted)] opacity-60">
                     <ShieldCheck size={12} />
                     ENCRYPTED_SIGNUP // OPERATOR_INFRASTRUCTURE
                   </div>

@@ -266,7 +266,7 @@ export default function ProjectsManager() {
                         <tr key={p.id} className={adminStyles.tr}>
                           <td className={adminStyles.td}>
                             <div style={{ fontWeight: 600, color: 'var(--text)', marginBottom: 2 }}>{p.title}</div>
-                            <div style={{ fontSize: 10, color: 'var(--muted)', letterSpacing: '0.04em' }}>{p.category}</div>
+                            <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', letterSpacing: '0.04em' }}>{p.category}</div>
                           </td>
                           <td className={adminStyles.td} style={{ color: 'var(--muted)', fontWeight: 500 }}>
                             {p.client || '—'}
@@ -275,7 +275,7 @@ export default function ProjectsManager() {
                             <span
                               style={{
                                 display: 'inline-block',
-                                fontSize: 9.5,
+                                fontSize: 'var(--text-small)',
                                 fontWeight: 600,
                                 background: tool.bg,
                                 color: tool.color,
@@ -338,7 +338,7 @@ export default function ProjectsManager() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                   <div>
                     <div style={{ fontWeight: 600, color: 'var(--text)', fontSize: 14 }}>{p.title}</div>
-                    <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>{p.category} &bull; {p.client}</div>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>{p.category} &bull; {p.client}</div>
                   </div>
                   <div style={{ display: 'flex', gap: 6 }}>
                     <button onClick={() => openEdit(p)} className={adminStyles.secondary} style={{ minHeight: 30, padding: '4px 8px' }}>
@@ -355,7 +355,7 @@ export default function ProjectsManager() {
                   ) : (
                     <span className={adminStyles.badgeNeutral}>Draft</span>
                   )}
-                  <span style={{ fontSize: 11, color: 'var(--muted)' }}>👁️ {p.views || 0} views</span>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>👁️ {p.views || 0} views</span>
                 </div>
               </div>
             ))}

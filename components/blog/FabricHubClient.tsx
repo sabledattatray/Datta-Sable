@@ -89,7 +89,7 @@ export default function FabricHubClient({
       }}>
         <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <div style={{ width: '8px', height: '8px', background: 'var(--accent)', borderRadius: '50%', animation: 'pulse 2s infinite' }} />
-          <span style={{ fontSize: '0.75rem', fontFamily: 'monospace', color: 'var(--muted)', textTransform: 'uppercase' }}>Interactive Curriculum Map</span>
+          <span style={{ fontSize: 'var(--text-small)', fontFamily: 'monospace', color: 'var(--muted)', textTransform: 'uppercase' }}>Interactive Curriculum Map</span>
         </div>
 
         <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '2rem', fontFamily: 'Syne, sans-serif' }}>
@@ -186,7 +186,7 @@ export default function FabricHubClient({
                       textAnchor="middle" 
                       fill={isSelected ? 'var(--text)' : 'var(--muted)'} 
                       style={{ 
-                        fontSize: '0.75rem', 
+                        fontSize: 'var(--text-small)',
                         fontFamily: 'monospace', 
                         fontWeight: isSelected ? '700' : '400',
                         transition: 'fill 0.2s, font-weight 0.2s'
@@ -214,7 +214,7 @@ export default function FabricHubClient({
               <div>
                 <span style={{ 
                   fontFamily: 'monospace', 
-                  fontSize: '0.7rem', 
+                  fontSize: 'var(--text-small)',
                   color: 'var(--accent)', 
                   textTransform: 'uppercase', 
                   letterSpacing: '0.1em',
@@ -234,7 +234,7 @@ export default function FabricHubClient({
                   {selectedNode.title}
                 </h4>
 
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                   {initialPosts.find(p => p.slug === selectedNode.slug)?.excerpt || 'Master this curriculum segment to scale your skills in Microsoft Fabric data solutions.'}
                 </p>
 
@@ -247,7 +247,7 @@ export default function FabricHubClient({
                       padding: '0.5rem 1.25rem', 
                       fontWeight: 700, 
                       textDecoration: 'none', 
-                      fontSize: '0.8rem',
+                      fontSize: 'var(--text-small)',
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
                       borderRadius: '2px'
@@ -267,7 +267,7 @@ export default function FabricHubClient({
                         border: '1px solid var(--border)',
                         color: 'var(--muted)',
                         padding: '0.5rem 1rem',
-                        fontSize: '0.8rem',
+                        fontSize: 'var(--text-small)',
                         fontFamily: 'monospace',
                         cursor: 'pointer',
                         borderRadius: '2px'
@@ -327,7 +327,7 @@ export default function FabricHubClient({
                 border: '1px solid var(--border)',
                 padding: '0.4rem 1rem',
                 borderRadius: '20px',
-                fontSize: '0.8rem',
+                fontSize: 'var(--text-small)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 transition: 'background 0.2s, color 0.2s'
@@ -356,20 +356,20 @@ export default function FabricHubClient({
             onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent)'}
             onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
             >
-              <span style={{ fontSize: '0.75rem', fontFamily: 'monospace', color: 'var(--accent)', marginBottom: '0.5rem', display: 'block', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 'var(--text-small)', fontFamily: 'monospace', color: 'var(--accent)', marginBottom: '0.5rem', display: 'block', textTransform: 'uppercase' }}>
                 {post.category}
               </span>
               <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 0.75rem 0', lineHeight: 1.3, fontFamily: 'Syne, sans-serif' }}>
                 {post.title}
               </h4>
-              <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
+              <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
                 {post.excerpt}
               </p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: 'monospace' }}>
+                <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', fontFamily: 'monospace' }}>
                   {post.readTime} min read
                 </span>
-                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent)' }}>
+                <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--accent)' }}>
                   Read Article →
                 </span>
               </div>

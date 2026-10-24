@@ -59,7 +59,7 @@ export default function CustomReportsPage() {
       {/* ── DATE RANGE & FILTER CONTROLS ── */}
       <div className={adminStyles.panel} style={{ padding: '16px 20px', marginBottom: 20 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 'var(--text-small)', fontWeight: 500, color: 'var(--muted)' }}>
             <Calendar size={15} style={{ color: 'var(--accent)' }} />
             <span>Select Time Period:</span>
           </div>
@@ -109,7 +109,7 @@ export default function CustomReportsPage() {
           <div key={i} className={adminStyles.panel} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: 0 }}>
             <div>
               <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>{report.name}</div>
-              <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 20, lineHeight: 1.7 }}>{report.desc}</div>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginBottom: 20, lineHeight: 1.7 }}>{report.desc}</div>
             </div>
             <div>
               <button

@@ -21,7 +21,7 @@ export function segoeTypography(): TypographySettings {
     Object.assign(settings.elements[id as keyof typeof settings.elements], values, { darkColor: '#FAFAFA', lightColor: '#18181B' });
   }
   Object.assign(settings.elements.button, { fontSize: 14, mobileFontSize: 14, fontWeight: 600, lineHeight: 1.4, letterSpacing: 0 });
-  Object.assign(settings.elements.small, { fontSize: 13, mobileFontSize: 13, fontWeight: 400, lineHeight: 1.6, letterSpacing: 0, darkColor: '#A1A1AA', lightColor: '#52525B' });
+  Object.assign(settings.elements.small, { fontSize: 14, mobileFontSize: 14, fontWeight: 400, lineHeight: 1.6, letterSpacing: 0, darkColor: '#B3BDCC', lightColor: '#475569' });
   settings.elements.code.fontFamily = 'JetBrains Mono';
   // Links inherit surrounding sizes/weights and keep their existing accent.
   // Buttons and code also retain their existing colors.

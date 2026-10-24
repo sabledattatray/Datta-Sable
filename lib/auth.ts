@@ -176,13 +176,10 @@ export const authOptions: NextAuthOptions = {
             .filter(Boolean);
           const isEnvAdmin = Boolean(token.email && envAdminEmails.includes((token.email as string).toLowerCase()));
 
-          if (dbUser && ((token.sessionVersion ?? 0) === dbUser.sessionVersion || isEnvAdmin)) {
+          if (dbUser && (token.sessionVersion ?? 0) === dbUser.sessionVersion) {
             token.id = dbUser.id;
             token.role = (isEnvAdmin || dbUser.role === 'ADMIN') ? 'ADMIN' : dbUser.role;
             token.sessionVersion = dbUser.sessionVersion;
-            token.lastRoleCheck = now;
-          } else if (isEnvAdmin) {
-            token.role = 'ADMIN';
             token.lastRoleCheck = now;
           } else {
             // User was deleted or session version revoked: revoke privileges immediately (AUD-08)
@@ -191,7 +188,10 @@ export const authOptions: NextAuthOptions = {
           }
         } catch {
           console.error("Role refresh could not access the database.");
-          token.lastRoleCheck = now;
+          // Do not authorize a stale session when revocation cannot be checked.
+          token.role = 'USER';
+          delete token.id;
+          delete token.lastRoleCheck;
         }
       }
       return token;

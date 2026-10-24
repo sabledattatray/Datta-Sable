@@ -128,7 +128,7 @@ export default function WordCounter() {
                     <h4 className="mono text-xs uppercase tracking-widest">Read_Speed</h4>
                   </div>
                   <div className="text-3xl font-bold mb-2">~{stats.readingTime} <span className="text-xs mono font-normal text-[var(--muted)]">MIN</span></div>
-                  <p className="text-xs mono text-[var(--muted)]" style={{ fontSize: '0.78rem' }}>Based on average reading speed of 225 words per minute.</p>
+                  <p className="text-xs mono text-[var(--muted)]" style={{ fontSize: 'var(--text-small)' }}>Based on average reading speed of 225 words per minute.</p>
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function WordCounter() {
           {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
           
           <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
@@ -160,19 +160,19 @@ export default function WordCounter() {
           <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>LSI Keyword Balancing</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>LSI Keyword Balancing</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Helps keep track of text length so you can balance core topic coverage with semantic search terms.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Reading Pace Metrics</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Reading Pace Metrics</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Provides estimated reading times to help structure blog posts for optimal reader retention.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Metadata Constraints</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Metadata Constraints</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Perfect for checking title tags and meta descriptions against search engine characters limits.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Zero Server Tracking</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Zero Server Tracking</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Data is processed entirely inside your local browser sandbox, providing absolute security for draft copy.</div>
             </div>
           </div>

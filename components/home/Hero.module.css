@@ -1,24 +1,40 @@
 .hero{position:relative;overflow:hidden;padding:54px 0 54px;background:var(--bg)}
 .layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;gap:64px}
 .copy{min-width:0;position:relative;z-index:1}
-.eyebrow{display:flex;align-items:center;gap:10px;font:10px var(--font-mono);letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:33px}
+.eyebrow{display:flex;align-items:center;gap:10px;font:var(--text-small) var(--font-mono);letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:33px}
 .eyebrow>span{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 16px color-mix(in srgb,var(--accent) 35%,transparent)}
 .introduction{font-size:15px;color:var(--text);margin:0 0 15px}
 .copy h1{font-family:var(--font-syne);font-size:clamp(40px,4.6vw,70px);font-weight:600;letter-spacing:-.055em;line-height:1.08;margin:0 0 25px}
 .copy h1 span{color:var(--accent)}
 .description{max-width:460px;color:var(--muted);font-size:15px;line-height:1.85;margin:0 0 30px}
 .actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
-.actions>a{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-size:12px;white-space:nowrap}
+.actions>a{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-size:var(--text-small);white-space:nowrap}
 .secondary{color:var(--text);padding:14px 0;border-bottom:1px solid var(--border);transition:color .2s,border-color .2s}
 .secondary:hover{color:var(--accent);border-color:var(--accent)}
 .expertise{display:flex;flex-wrap:wrap;gap:12px 20px;margin-top:38px;padding-top:23px;border-top:1px solid var(--border)}
-.expertise span{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px}
+.expertise span{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:var(--text-small)}
 .expertise svg{color:var(--accent)}
 .visual{min-width:0;position:relative}
 .visual:before{content:'';position:absolute;inset:-70px;pointer-events:none;background:radial-gradient(ellipse at 60% 40%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 65%)}
-.visualCaption{position:relative;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:10px;margin:19px 4px 0}
-.visualCaption span{font:8px var(--font-mono);letter-spacing:.12em}
+.visualCaption{position:relative;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:var(--text-small);margin:19px 4px 0}
+.visualCaption span{font:var(--text-small) var(--font-mono);letter-spacing:.12em}
 @media(min-width:1600px){.layout{gap:85px}.hero{padding-top:74px;padding-bottom:70px}}
-@media(max-width:1100px){.layout{gap:32px}.copy h1{font-size:48px}.eyebrow{font-size:9px;letter-spacing:.08em}.actions{gap:18px}.expertise{gap:12px}}
-@media(max-width:900px){.hero{padding:42px 0 45px}.layout{grid-template-columns:1fr;gap:42px}.copy{max-width:640px}.copy h1{font-size:clamp(44px,8vw,65px)}.description{max-width:540px}.visual{width:100%;max-width:680px;margin:auto}.eyebrow{margin-bottom:25px}.expertise{margin-top:27px}.visualCaption{font-size:9px}}
-@media(max-width:480px){.hero{padding-top:28px}.layout{gap:32px}.eyebrow{font-size:8px}.copy h1{font-size:44px}.description{font-size:14px}.actions{gap:22px}.expertise{gap:12px 16px}.expertise span{font-size:9px}.visualCaption{line-height:1.6}.visual:before{inset:-20px}}
+@media(max-width:1100px){.layout{gap:32px}.copy h1{font-size:48px}.eyebrow{font-size:var(--text-small);letter-spacing:.08em}.actions{gap:18px}.expertise{gap:12px}}
+@media(max-width:900px){.hero{padding:42px 0 45px}.layout{grid-template-columns:1fr;gap:42px}.copy{max-width:640px}.copy h1{font-size:clamp(44px,8vw,65px)}.description{max-width:540px}.visual{width:100%;max-width:680px;margin:auto}.eyebrow{margin-bottom:25px}.expertise{margin-top:27px}.visualCaption{font-size:var(--text-small)}}
+@media(max-width:480px){.hero{padding-top:28px}.layout{gap:32px}.eyebrow{font-size:var(--text-small)}.copy h1{font-size:44px}.description{font-size:14px}.actions{gap:22px}.expertise{gap:12px 16px}.expertise span{font-size:var(--text-small)}.visualCaption{line-height:1.6}.visual:before{inset:-20px}}
+
+.exploreCue{display:inline-flex;align-items:center;gap:9px;color:var(--text);text-decoration:none;font-size:14px;line-height:1.5;border-bottom:1px solid var(--border);padding-bottom:5px}
+.exploreCue svg{color:var(--accent);transition:transform .2s}
+.exploreCue:hover svg{transform:translateY(3px)}
+.exploreCue:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.exploreCue svg{transition:none}}
+
+/* Fit the desktop introduction below the fixed header, without scaling text. */
+@media(min-width:901px){
+  .hero{padding:24px 0 26px}.layout{gap:44px;align-items:center}.visualCaption{margin-top:14px;font-size:14px}.visualCaption span{letter-spacing:.06em}
+  .eyebrow{margin-bottom:22px}.copy h1{margin-bottom:21px}.expertise{margin-top:25px;padding-top:18px}
+}
+@media(min-width:901px) and (max-height:850px){
+  .hero{padding:12px 0 16px}.layout{gap:36px}.copy h1{font-size:clamp(40px,4.2vw,60px);line-height:1.08;margin-bottom:18px}.eyebrow{margin-bottom:18px;letter-spacing:.06em}.introduction{margin-bottom:12px}.description{line-height:1.7;margin-bottom:22px}.expertise{margin-top:22px;padding-top:16px}.visualCaption{margin-top:10px}
+}
+@media(max-width:600px){.hero{padding-top:24px;padding-bottom:32px}.layout{gap:30px}.visualCaption{margin-top:14px}.visualCaption span{letter-spacing:.04em}}

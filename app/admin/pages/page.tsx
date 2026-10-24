@@ -248,7 +248,7 @@ export default function PagesManager() {
               <Trash2 size={22} />
             </div>
             <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>Confirm Page Deletion</h3>
-            <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 20px', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', margin: '0 0 20px', lineHeight: 1.6 }}>
               Are you sure you want to permanently delete this page? This action cannot be undone.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
@@ -366,11 +366,11 @@ export default function PagesManager() {
       {/* Sort Controls Bar */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8, marginBottom: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '0 10px', minHeight: 36 }}>
-          <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
+          <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
           <select 
             value={sortBy} 
             onChange={e => setSortBy(e.target.value as any)}
-            style={{ background: 'transparent', border: 'none', outline: 'none', fontSize: 11, color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}
+            style={{ background: 'transparent', border: 'none', outline: 'none', fontSize: 'var(--text-small)', color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}
           >
             <option value="updatedAt">Last Updated</option>
             <option value="title">Page Title</option>
@@ -382,7 +382,7 @@ export default function PagesManager() {
         <button 
           onClick={() => setSortOrder(o => o === 'asc' ? 'desc' : 'asc')}
           className={adminStyles.secondary}
-          style={{ minHeight: 36, padding: '0 10px', fontSize: 11 }}
+          style={{ minHeight: 36, padding: '0 10px', fontSize: 'var(--text-small)' }}
         >
           {sortOrder === 'asc' ? '▲ ASC' : '▼ DESC'}
         </button>
@@ -445,9 +445,9 @@ export default function PagesManager() {
                     <tr key={page.id} className={adminStyles.tr}>
                       <td className={adminStyles.td}>
                         <div style={{ fontWeight: 600, color: 'var(--text)' }}>{page.title}</div>
-                        {page.excerpt && <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 280 }}>{page.excerpt}</div>}
+                        {page.excerpt && <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 280 }}>{page.excerpt}</div>}
                       </td>
-                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontFamily: 'monospace', fontSize: 11 }}>
+                      <td className={adminStyles.td} style={{ color: 'var(--muted)', fontFamily: 'monospace', fontSize: 'var(--text-small)' }}>
                         <span style={{ background: 'var(--surface2)', padding: '2px 6px', borderRadius: 4, color: 'var(--accent)', border: '1px solid var(--border)' }}>
                           {['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? '' : '/p'}/{page.slug}
                         </span>
@@ -457,7 +457,7 @@ export default function PagesManager() {
                       </td>
                       <td className={adminStyles.td}>
                         <span style={{ 
-                          display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 10, fontWeight: 600, 
+                          display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-small)', fontWeight: 600,
                           background: page.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)', 
                           color: page.seoScore >= 80 ? '#34d399' : page.seoScore >= 60 ? '#fbbf24' : '#f87171', 
                           border: `1px solid ${page.seoScore >= 80 ? 'rgba(16,185,129,0.25)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`, 
@@ -487,7 +487,7 @@ export default function PagesManager() {
                           </span>
                         )}
                       </td>
-                      <td className={adminStyles.td} style={{ fontSize: 11, color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
+                      <td className={adminStyles.td} style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
                         {updateDate}
                       </td>
                       <td className={adminStyles.td}>

@@ -29,7 +29,7 @@ export default function BlinkitSalesDashboardPage() {
               <div className="w-12 h-12 bg-[var(--surface2)] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(255,255,255,0.1)]">🛒</div>
               <div>
                 <h1 className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Blinkit <span className="text-[var(--accent2)]">Intelligence</span></h1>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Technical Case Study: Quick Commerce Analytics</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Technical Case Study: Quick Commerce Analytics</div>
               </div>
             </div>
             <div className="flex items-center gap-4">

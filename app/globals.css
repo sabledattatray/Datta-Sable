@@ -158,6 +158,13 @@
 }
 
 :root {
+  /* Shared readable scale. Keep display headings on their existing scale. */
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-chart: 0.75rem;
+  --line-body: 1.65;
+  --line-label: 1.5;
+  --label-opacity: 1;
   --font-syne: 'SegoeUINum', 'Syne', sans-serif;
   --font-inter: 'SegoeUINum', 'Syne', sans-serif;
   --font-mono: 'SegoeUINum', 'Syne', sans-serif;
@@ -166,6 +173,10 @@
 }
 
 @theme {
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
   --breakpoint-xs: 400px;
   --font-sans: 'SegoeUINum', 'Syne', sans-serif;
   --font-display: 'SegoeUINum', 'Syne', sans-serif;
@@ -191,7 +202,7 @@ input:-webkit-autofill:active {
   --accent2: #b5da1a;
   --accent3: #9fb817;
   --text: #ffffff;
-  --muted: #a1a1aa;
+  --muted: #b3bdcc;
   --tag-bg: #161622;
   --navbar-bg: rgba(5, 5, 8, 0.85);
   --hero-overlay-start: #050508;
@@ -199,7 +210,8 @@ input:-webkit-autofill:active {
   --hero-overlay-end: rgba(5, 5, 8, 0.4);
   --grid-color: #12121a;
   --radius: 12px;
-  --content-width: 1280px;
+  --content-width: 1440px;
+  --page-gutter: 48px;
   --grid-size: 100px;
   --crosshair-offset: -20px;
   --hero-title-bg: linear-gradient(135deg, var(--accent) 0%, #fff134 30%, #00f0ff 70%);
@@ -243,8 +255,8 @@ input:-webkit-autofill:active {
   --accent: #0059B3;
   --accent2: #006BD6;
   --accent3: #00478F;
-  --text: #000000;
-  --muted: #303038;
+  --text: #17212f;
+  --muted: #475569;
   --label-opacity: 1;
   --tag-bg: #e5e7eb;
   --navbar-bg: rgba(252, 252, 252, 0.98);
@@ -343,13 +355,23 @@ body {
   color: var(--text);
   font-family: var(--font-syne);
   font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--line-body);
   overflow-x: clip; /* Modern way to prevent horizontal scroll */
   -webkit-font-smoothing: antialiased;
 }
 
+/* Keep mobile form text readable without triggering focus zoom on phones. */
+@media (max-width: 767px) {
+  :is(input, textarea, select):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]) {
+    font-size: var(--text-body) !important;
+    min-height: 44px;
+  }
+}
+
 /* Technical Boxed Wrapper */
 .boxed-wrapper {
-  width: calc(100% - 3rem);
+  width: calc(100% - var(--page-gutter));
   max-width: var(--content-width);
   margin: 90px auto 40px;
   min-height: calc(100vh - 90px);
@@ -363,15 +385,14 @@ body {
   .boxed-wrapper {
     margin-left: auto;
     margin-right: auto;
-    width: calc(100% - 2rem);
-    max-width: none;
+    width: calc(100% - var(--page-gutter));
   }
 }
 
 @media (max-width: 768px) {
   .boxed-wrapper {
     margin-top: 80px;
-    width: calc(100% - 2rem); /* Clearer gap to see the 'box' */
+    width: calc(100% - var(--page-gutter));
     margin-left: auto;
     margin-right: auto;
     border-left: 1px solid var(--border);
@@ -485,7 +506,7 @@ body {
 /* Typography Labels */
 .label-tech {
   font-family: var(--font-syne);
-  font-size: 12px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
@@ -515,7 +536,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--btn-primary-text);
   padding: 0.75rem 2rem;
   font-family: var(--font-syne);
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -539,7 +560,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text);
   padding: 0.75rem 2rem;
   font-family: var(--font-syne);
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -567,7 +588,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--muted);
   padding: 0.75rem 1.5rem;
   font-family: var(--font-syne);
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -818,7 +839,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-small);
   color: var(--muted);
   letter-spacing: 0.2em;
   opacity: 0.5;
@@ -844,7 +865,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1rem;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-small);
   letter-spacing: 0.1em;
 }
 
@@ -1141,7 +1162,7 @@ body:has(.admin-layout-root) {
 
 .blog-content pre code {
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-  font-size: 0.85rem;
+  font-size: var(--text-small);
   line-height: 1.6;
   color: var(--accent) !important;
   background: transparent !important;
@@ -1155,7 +1176,7 @@ body:has(.admin-layout-root) {
 
 .blog-content code {
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.85rem;
+  font-size: var(--text-small);
   color: var(--accent);
   background: var(--surface2);
   padding: 2px 6px;
@@ -1311,7 +1332,7 @@ body:has(.admin-layout-root) {
 
 .blog-toc h4 {
   font-family: var(--font-syne);
-  font-size: 13px !important;
+  font-size: var(--text-small) !important;
   font-weight: 700 !important;
   text-transform: uppercase;
   letter-spacing: 0.15em !important;
@@ -1416,22 +1437,28 @@ body:has(.admin-layout-root) {
 }
 
 
-/* Light-theme readability: secondary text stays legible without flattening
-   image overlays, disabled controls, decorative graphics, or the dark theme. */
+/* Secondary text stays legible without flattening image overlays,
+   disabled controls or decorative graphics. */
 .light :where(small, time, label, figcaption, .mono, .font-mono, .label-tech) {
   font-weight: 500;
 }
-.light :is(.mono, .font-mono, .text-theme-muted, [class~="text-[var(--muted)]"]):is(.opacity-30, .opacity-40, .opacity-50, .opacity-60, .opacity-70):not(:disabled):not([aria-disabled="true"]) {
+:is(.mono, .font-mono, .text-theme-muted, [class~="text-[var(--muted)]"]):is(.opacity-30, .opacity-40, .opacity-50, .opacity-60, .opacity-70):not(:disabled):not([aria-disabled="true"]) {
   opacity: 1;
 }
-.light :is([style*="color: var(--muted)"], [style*="color:var(--muted)"])[style*="opacity"]:not(:disabled):not([aria-disabled="true"]) {
+:is([style*="color: var(--muted)"], [style*="color:var(--muted)"])[style*="opacity"]:not(:disabled):not([aria-disabled="true"]) {
   opacity: 1 !important;
 }
-.light :is(input, textarea)::placeholder {
+:is(input, textarea)::placeholder {
   color: var(--muted);
-  opacity: 1;
+  opacity: 1 !important;
 }
 /* Inline category badges use the same light-only readability treatment. */
 .light .tag.mono[style*="opacity"] {
   opacity: 1 !important;
 }
+
+/* Shared outer edges for navigation and boxed pages. */
+@media(max-width:1099px){:root{--page-gutter:24px}}
+@media(max-width:360px){:root{--page-gutter:20px}}
+
+@media(max-width:1099px){.boxed-wrapper>.crosshair{transform:scale(.5)}}

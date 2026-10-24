@@ -75,7 +75,7 @@ export default function MobileMenuDrawer({
                       <button
                         onClick={() => setExpandedMobile(isExpanded ? null : link.label)}
                         style={{ padding: '1.25rem 1rem' }}
-                        className={`w-full flex items-center justify-between text-[13px] font-bold tracking-widest uppercase transition-colors ${
+                        className={`w-full flex items-center justify-between text-[length:var(--text-small)] font-bold tracking-widest uppercase transition-colors ${
                           isExpanded ? 'text-[var(--accent)]' : 'text-[var(--text)]'
                         }`}
                       >
@@ -90,7 +90,7 @@ export default function MobileMenuDrawer({
                         href={link.href}
                         onClick={onClose}
                         style={{ padding: '1rem', display: 'block' }}
-                        className="text-[12px] font-bold tracking-widest uppercase text-[var(--text)] opacity-70 hover:text-[var(--accent)] transition-colors no-underline"
+                        className="text-[length:var(--text-small)] font-bold tracking-widest uppercase text-[var(--text)] opacity-70 hover:text-[var(--accent)] transition-colors no-underline"
                       >
                         {link.label}
                       </Link>
@@ -131,7 +131,7 @@ export default function MobileMenuDrawer({
                                 </div>
                                 <div className="flex flex-col">
                                   <span className="text-sm font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">{sub.title}</span>
-                                  <span className="text-[12px] text-[var(--muted)]">{sub.desc}</span>
+                                  <span className="text-[length:var(--text-small)] text-[var(--muted)]">{sub.desc}</span>
                                 </div>
                               </Link>
                             );
@@ -150,12 +150,12 @@ export default function MobileMenuDrawer({
             {session ? (
               <div className="py-4 text-center space-y-6">
                 <div>
-                  <p className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-widest mb-1">Authenticated as</p>
+                  <p className="text-[length:var(--text-small)] font-bold text-[var(--accent)] uppercase tracking-widest mb-1">Authenticated as</p>
                   <p className="text-sm font-bold text-[var(--text)]">{session.user?.name}</p>
                 </div>
                 <button 
                   onClick={() => signOut()}
-                  className="w-full flex items-center justify-center gap-2 py-4 text-[11px] font-bold tracking-[0.2em] uppercase border border-[var(--accent)]/30 text-[var(--accent)] hover:bg-[var(--accent)] hover:text-black transition-all"
+                  className="w-full flex items-center justify-center gap-2 py-4 text-[length:var(--text-small)] font-bold tracking-[0.2em] uppercase border border-[var(--accent)]/30 text-[var(--accent)] hover:bg-[var(--accent)] hover:text-black transition-all"
                 >
                   <LogOut size={14} /> SIGN OUT
                 </button>
@@ -166,7 +166,7 @@ export default function MobileMenuDrawer({
                   onClose();
                   setIsLoginOpen(true);
                 }}
-                className="btn-primary w-full block text-center py-5 text-[11px] font-bold tracking-[0.2em] uppercase" 
+                className="btn-primary w-full block text-center py-5 text-[length:var(--text-small)] font-bold tracking-[0.2em] uppercase"
               >
                 SIGN IN
               </button>

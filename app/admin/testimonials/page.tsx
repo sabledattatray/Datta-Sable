@@ -186,7 +186,7 @@ export default function AdminTestimonials() {
           position: 'fixed', top: 24, right: 24, zIndex: 9999,
           background: 'var(--surface)', border: '1px solid var(--accent)',
           borderRadius: 10, padding: '12px 20px', boxShadow: '0 12px 36px rgba(0,0,0,0.3)',
-          fontSize: 12, fontWeight: 600, color: 'var(--accent)',
+          fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--accent)',
         }}>
           {toast}
         </div>
@@ -308,7 +308,7 @@ export default function AdminTestimonials() {
               <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', margin: '0 0 6px' }}>
                 {items.length === 0 ? 'No testimonials recorded' : 'No testimonials match criteria'}
               </h3>
-              <p style={{ fontSize: 12, color: 'var(--muted)', margin: 0 }}>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', margin: 0 }}>
                 {items.length === 0 ? 'Click "+ Add Testimonial" to enter your first client review.' : 'Try adjusting your search query or status filter.'}
               </p>
             </div>
@@ -330,7 +330,7 @@ export default function AdminTestimonials() {
                   </div>
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{t.name}</div>
-                    <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
+                    <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>
                       {t.role}{t.role && t.company ? ' · ' : ''}{t.company}
                     </div>
                   </div>
@@ -387,17 +387,17 @@ export default function AdminTestimonials() {
                     stroke={i < t.rating ? '#fbbf24' : 'var(--border)'}
                   />
                 ))}
-                <span style={{ fontSize: 11, color: 'var(--muted)', marginLeft: 6, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+                <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginLeft: 6, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
                   {t.rating}/5
                 </span>
               </div>
 
               {/* Quote */}
-              <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.6, margin: '0 0 12px', fontStyle: 'italic' }}>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--text)', lineHeight: 1.6, margin: '0 0 12px', fontStyle: 'italic' }}>
                 "{t.content}"
               </p>
 
-              <div style={{ fontSize: 10, color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 5, borderTop: '1px solid var(--border)', paddingTop: 10 }}>
+              <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 5, borderTop: '1px solid var(--border)', paddingTop: 10 }}>
                 <Clock size={11} /> {formatDate(t.createdAt)}
               </div>
             </div>
@@ -426,7 +426,7 @@ export default function AdminTestimonials() {
                   onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   className={adminStyles.input}
                 />
-                {formErrors.name && <div style={{ fontSize: 10, color: '#f87171', marginTop: 4 }}>{formErrors.name}</div>}
+                {formErrors.name && <div style={{ fontSize: 'var(--text-small)', color: '#f87171', marginTop: 4 }}>{formErrors.name}</div>}
               </div>
 
               <div className={adminStyles.modalGrid2}>
@@ -469,7 +469,7 @@ export default function AdminTestimonials() {
                       />
                     </button>
                   ))}
-                  <span style={{ fontSize: 12, color: 'var(--muted)', fontWeight: 600, marginLeft: 6 }}>
+                  <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', fontWeight: 600, marginLeft: 6 }}>
                     {form.rating} / 5
                   </span>
                 </div>
@@ -484,7 +484,7 @@ export default function AdminTestimonials() {
                   rows={4}
                   className={adminStyles.textarea}
                 />
-                {formErrors.content && <div style={{ fontSize: 10, color: '#f87171', marginTop: 4 }}>{formErrors.content}</div>}
+                {formErrors.content && <div style={{ fontSize: 'var(--text-small)', color: '#f87171', marginTop: 4 }}>{formErrors.content}</div>}
               </div>
 
               <div className={adminStyles.field}>
@@ -544,7 +544,7 @@ export default function AdminTestimonials() {
               <Trash2 size={22} />
             </div>
             <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>Delete Testimonial?</h3>
-            <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 20px', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', margin: '0 0 20px', lineHeight: 1.6 }}>
               This review will be permanently deleted from the database. This action cannot be undone.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>

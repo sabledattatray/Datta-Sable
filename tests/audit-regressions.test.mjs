@@ -93,3 +93,33 @@ test('mentorship provider failure returns an error and removes unsent credential
 test('mentorship rejects malformed tokens before looking up applicant data', async () => {
   const e = mentorship(); assert.equal((await e.call({ token: '123456' })).status, 400); assert.equal((await e.call({ email: ['invalid'] })).status, 400); assert.equal(e.emails.length, 0);
 });
+
+test('public jobs reads never create default vacancies in an empty database', async () => {
+  const route = loader({ '@/lib/prisma': { prisma: { job: { findMany: async () => [] } } } })('app/api/jobs/route.ts');
+  const response = await route.GET();
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), []);
+});
+
+test('MCP validates request envelopes and initializes without database writes', async () => {
+  let schemaCalls = 0;
+  const stubs = {
+    'next-auth': { getServerSession: async () => ({ user: { role: 'ADMIN' } }) },
+    '@/lib/auth': { authOptions: {} }, '@/lib/prisma': { prisma: {} },
+    '@/lib/ai/schema': { ensureAiStudioSchema: async () => { schemaCalls++; throw Error('Database unavailable'); } },
+  };
+  for (const dependency of ['topic-discovery', 'research-engine', 'article-writer', 'duplicate-detector', 'seo-intelligence', 'publishing', 'google-indexing', 'config', 'audit']) stubs[`@/lib/ai/${dependency}`] = {};
+  const route = loader(stubs)('app/api/mcp/route.ts');
+  const call = body => route.POST(new Request('https://dattasable.test/api/mcp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }));
+  for (const body of [null, [], 'invalid', {}, { method: 'tools/call', params: null }]) {
+    const response = await call(body);
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error.code, -32600);
+  }
+  assert.equal((await call({ id: 7, method: 'initialize' })).status, 200);
+  assert.equal((await call({ id: 8, method: 'tools/list' })).status, 200);
+  assert.equal(schemaCalls, 0);
+  const unavailable = await call({ id: 9, method: 'tools/call', params: { name: 'list_articles' } });
+  assert.equal((await unavailable.json()).error.code, -32000);
+  assert.equal(schemaCalls, 1);
+});

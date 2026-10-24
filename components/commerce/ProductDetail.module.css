@@ -28,7 +28,7 @@
   padding: 24px 0 16px;
   border-bottom: 1px solid var(--border);
   margin-bottom: 40px;
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 
 .breadcrumbs {
@@ -131,7 +131,7 @@
 
 .coverBadge {
   display: inline-block;
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -167,7 +167,7 @@
   justify-content: center;
   gap: 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -186,7 +186,7 @@
 }
 
 .categoryTag {
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -221,7 +221,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
   color: var(--text);
 }
@@ -257,7 +257,7 @@
 }
 
 .purchasePriceType {
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: var(--muted);
   text-transform: uppercase;
@@ -265,7 +265,7 @@
 }
 
 .currencyNotice {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.5;
   margin: 0 0 20px;
@@ -277,7 +277,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   margin-top: 16px;
 }
@@ -286,7 +286,7 @@
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   margin-top: 16px;
   padding-top: 14px;
@@ -313,7 +313,7 @@
   padding: 12px 16px;
   text-decoration: none;
   color: #25D366;
-  font-size: 13px;
+  font-size: var(--text-small);
   font-weight: 600;
   transition: all 0.2s ease;
 }
@@ -388,7 +388,7 @@
 }
 
 .deliverableCardText {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
   color: var(--text);
   margin: 0;
@@ -398,7 +398,7 @@
 .specsTable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: var(--text-small);
   margin-top: 12px;
 }
 
@@ -450,7 +450,7 @@
 }
 
 .faqAnswer {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.7;
   color: var(--muted);
   margin: 12px 0 0;
@@ -463,7 +463,7 @@
   border: 1px dashed var(--border);
   border-radius: 12px;
   padding: 20px;
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.6;
   color: var(--muted);
 }
@@ -551,7 +551,7 @@
 @media (max-width: 375px) { .container { padding-inline: 14px; } }
 
 .accountLinks { display: flex; gap: 16px; flex-wrap: wrap; }
-.specsList { display: grid; grid-template-columns: minmax(90px,1fr) minmax(0,3fr); gap: 14px 20px; font-size: 13px; line-height: 1.8; }
+.specsList { display: grid; grid-template-columns: minmax(90px,1fr) minmax(0,3fr); gap: 14px 20px; font-size: var(--text-small); line-height: 1.8; }
 .specsList dt { color: var(--muted); }
 .specsList dd { margin: 0; min-width: 0; }
 .heroMedia, .heroContent { min-width: 0; }
@@ -570,4 +570,4 @@
 .pageWrapper { padding-top: 100px; }
 @media(max-width:600px) { .pageWrapper { padding-top: 85px; } }
 
-.disclaimerBox h2 { font-size:17px; font-weight:650; line-height:1.5; margin:0 0 14px; color:var(--text); }.disclaimerBox p { font-size:13px; line-height:1.85; margin:8px 0; }.coverFrame { background:linear-gradient(135deg,var(--surface2),var(--bg)); }
+.disclaimerBox h2 { font-size:17px; font-weight:650; line-height:1.5; margin:0 0 14px; color:var(--text); }.disclaimerBox p { font-size:var(--text-small); line-height:1.85; margin:8px 0; }.coverFrame { background:linear-gradient(135deg,var(--surface2),var(--bg)); }

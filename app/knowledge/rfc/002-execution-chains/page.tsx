@@ -38,16 +38,16 @@ export default function RFC002() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-4 mb-12">
-              <Link href="/knowledge/rfc" className="mono text-[10px] text-[var(--accent)] hover:underline flex items-center gap-2">
+              <Link href="/knowledge/rfc" className="mono text-[length:var(--text-small)] text-[var(--accent)] hover:underline flex items-center gap-2">
                 ← BACK_TO_RFC_HUB
               </Link>
               <div className="w-px h-3 bg-[var(--border)]" />
-              <div className="mono text-[10px] opacity-40">PUBLISHED_MAY_2026</div>
+              <div className="mono text-[length:var(--text-small)] opacity-40">PUBLISHED_MAY_2026</div>
             </div>
 
             <div className="flex items-center justify-between mb-8">
               <div className="label-tech text-blue-500">RFC-002 Specification</div>
-              <div className="flex items-center gap-2 mono text-[10px] px-3 py-1 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-full">
+              <div className="flex items-center gap-2 mono text-[length:var(--text-small)] px-3 py-1 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> STATUS: PROPOSED
               </div>
             </div>
@@ -79,15 +79,15 @@ export default function RFC002() {
                 <div className="space-y-8">
                   <div className="bg-[var(--surface1)] border border-[var(--border)] rounded-sm overflow-hidden">
                     <div className="p-4 border-b border-[var(--border)] bg-[var(--surface2)] flex items-center justify-between">
-                      <span className="mono text-[10px] opacity-40">ECT_SCHEMA.json</span>
+                      <span className="mono text-[length:var(--text-small)] opacity-40">ECT_SCHEMA.json</span>
                       <button 
                         onClick={() => copyToClipboard('{"level": 3, "agents": ["researcher", "editor"], "validator": "supervisor"}')}
-                        className="text-[10px] mono text-blue-500 hover:underline"
+                        className="text-[length:var(--text-small)] mono text-blue-500 hover:underline"
                       >
                         COPY_SCHEMA
                       </button>
                     </div>
-                    <pre className="p-8 mono text-[12px] text-blue-500/80 overflow-x-auto">
+                    <pre className="p-8 mono text-[length:var(--text-small)] text-blue-500/80 overflow-x-auto">
 {`{
   "rfc": "002",
   "pattern": "VALIDATED_MULTI_AGENT",
@@ -110,12 +110,12 @@ export default function RFC002() {
                 <h2 className="text-2xl font-bold">Cite ECT Standard</h2>
                 <button 
                   onClick={() => copyToClipboard(bibtex)}
-                  className="flex items-center gap-2 mono text-[10px] text-blue-500 hover:underline"
+                  className="flex items-center gap-2 mono text-[length:var(--text-small)] text-blue-500 hover:underline"
                 >
                   <Copy size={14} /> COPY_BIBTEX
                 </button>
               </div>
-              <pre className="p-8 bg-[var(--bg)] border border-[var(--border)] mono text-[11px] text-blue-500/80 overflow-x-auto">
+              <pre className="p-8 bg-[var(--bg)] border border-[var(--border)] mono text-[length:var(--text-small)] text-blue-500/80 overflow-x-auto">
                 {bibtex}
               </pre>
             </div>

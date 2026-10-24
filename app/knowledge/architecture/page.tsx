@@ -84,7 +84,7 @@ export default function ArchitecturePage() {
                     <div className="mt-auto pt-6 border-t border-[var(--border)]">
                       <ul className="space-y-3">
                         {layer.features.map(f => (
-                          <li key={f} className="flex items-center gap-2 text-[10px] mono uppercase opacity-60">
+                          <li key={f} className="flex items-center gap-2 text-[length:var(--text-small)] mono uppercase opacity-60">
                             <Zap size={10} className="text-[var(--accent)]" />
                             {f}
                           </li>
@@ -108,10 +108,10 @@ export default function ArchitecturePage() {
                       <div className="flex-1 w-full">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                           <div className="flex items-center gap-3">
-                            <span className="mono text-[10px] uppercase tracking-widest px-3 py-1 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 rounded-sm font-bold">{arch.category}</span>
+                            <span className="mono text-[length:var(--text-small)] uppercase tracking-widest px-3 py-1 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 rounded-sm font-bold">{arch.category}</span>
                             <h3 className="text-2xl font-bold tracking-tight">{arch.title}</h3>
                           </div>
-                          <Link href={`/blog/${arch.caseStudySlug}`} className="flex items-center gap-2 text-[11px] mono text-[var(--accent)] hover:underline font-bold bg-[var(--surface2)] px-3 py-1.5 border border-[var(--border)] rounded-sm w-fit">
+                          <Link href={`/blog/${arch.caseStudySlug}`} className="flex items-center gap-2 text-[length:var(--text-small)] mono text-[var(--accent)] hover:underline font-bold bg-[var(--surface2)] px-3 py-1.5 border border-[var(--border)] rounded-sm w-fit">
                             CASE_STUDY <ArrowUpRight size={14} />
                           </Link>
                         </div>
@@ -119,24 +119,24 @@ export default function ArchitecturePage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 pt-6 border-t border-[var(--border)] border-opacity-60">
                           <div>
-                            <h4 className="mono text-[11px] uppercase tracking-wider text-[var(--accent)] mb-5 font-bold flex items-center gap-2">
+                            <h4 className="mono text-[length:var(--text-small)] uppercase tracking-wider text-[var(--accent)] mb-5 font-bold flex items-center gap-2">
                               <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-pulse" /> Prompt Chain:
                             </h4>
                             <div className="flex flex-col gap-3.5">
                               {arch.promptChain.map((prompt, idx) => (
-                                <div key={idx} className="p-4 bg-[var(--surface2)] border border-[var(--border)] text-[12.5px] mono italic opacity-90 rounded-sm shadow-sm" style={{ lineHeight: 1.65 }}>
+                                <div key={idx} className="p-4 bg-[var(--surface2)] border border-[var(--border)] text-[length:var(--text-small)] mono italic opacity-90 rounded-sm shadow-sm" style={{ lineHeight: 1.65 }}>
                                   "{prompt}"
                                 </div>
                               ))}
                             </div>
                           </div>
                           <div>
-                            <h4 className="mono text-[11px] uppercase tracking-wider text-emerald-500 mb-5 font-bold flex items-center gap-2">
+                            <h4 className="mono text-[length:var(--text-small)] uppercase tracking-wider text-emerald-500 mb-5 font-bold flex items-center gap-2">
                               <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full" /> Validation checklist:
                             </h4>
                             <div className="flex flex-col gap-4">
                               {arch.outcomes.map((outcome, idx) => (
-                                <div key={idx} className="flex items-start gap-3.5 text-[13.5px] opacity-90 p-3 bg-[var(--surface2)] border border-[var(--border)] rounded-sm shadow-sm" style={{ lineHeight: 1.65 }}>
+                                <div key={idx} className="flex items-start gap-3.5 text-[length:var(--text-small)] opacity-90 p-3 bg-[var(--surface2)] border border-[var(--border)] rounded-sm shadow-sm" style={{ lineHeight: 1.65 }}>
                                   <CheckCircle2 size={16} className="text-emerald-500 mt-0.5 flex-shrink-0" />
                                   <span>{outcome}</span>
                                 </div>
@@ -148,7 +148,7 @@ export default function ArchitecturePage() {
                         <div className="flex flex-wrap gap-4 border-t border-[var(--border)] border-opacity-60" style={{ paddingTop: '2.5rem', marginTop: '1rem' }}>
                           <button
                             onClick={() => handleDownload(arch.template, `${arch.id}-design.${arch.template.trim().startsWith('--') ? 'sql' : 'json'}`)}
-                            className="btn-primary flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
+                            className="btn-primary flex items-center gap-2.5 py-3.5 px-7 font-bold text-[length:var(--text-small)]"
                           >
                             <Download size={16} /> Download Design Sketch
                           </button>
@@ -179,7 +179,7 @@ export default function ArchitecturePage() {
                                 window.prompt("Copy this reference link:", embedCode);
                               }
                             }}
-                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px] transition-all duration-300"
+                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[length:var(--text-small)] transition-all duration-300"
                           >
                             <Code size={16} /> Copy Reference Link
                           </button>
@@ -187,7 +187,7 @@ export default function ArchitecturePage() {
                             href={`https://github.com/sabledattatray/dattasable`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
+                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[length:var(--text-small)]"
                           >
                             <GitBranch size={16} /> GitHub
                           </a>
@@ -196,22 +196,22 @@ export default function ArchitecturePage() {
                               const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://dattasable.com/knowledge/architecture?id=${arch.id}`)}`;
                               window.open(url, '_blank');
                             }}
-                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[13px]"
+                            className="btn-outline flex items-center gap-2.5 py-3.5 px-7 font-bold text-[length:var(--text-small)]"
                           >
                             <Share2 size={16} /> LinkedIn
                           </button>
                         </div>
                       </div>
                       <div className="lg:w-1/3 p-8 bg-[var(--bg)] border border-[var(--border)] rounded-sm w-full lg:sticky lg:top-28 shadow-inner">
-                        <h4 className="mono text-[11px] uppercase tracking-widest mb-6 opacity-60 font-bold flex items-center gap-2">
+                        <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest mb-6 opacity-60 font-bold flex items-center gap-2">
                           <Terminal size={14} className="text-cyan-500" /> System Diagram:
                         </h4>
                         <div className="p-5 bg-[var(--surface2)] border border-[var(--border)] rounded-sm shadow-sm">
-                          <pre className="text-[11px] mono text-cyan-400 overflow-x-auto leading-relaxed" style={{ lineHeight: 1.75 }}>
+                          <pre className="text-[length:var(--text-small)] mono text-cyan-400 overflow-x-auto leading-relaxed" style={{ lineHeight: 1.75 }}>
                             {arch.diagram}
                           </pre>
                         </div>
-                        <div className="mt-8 flex items-center justify-between text-[11px] mono uppercase opacity-60 font-bold border-t border-[var(--border)] pt-4">
+                        <div className="mt-8 flex items-center justify-between text-[length:var(--text-small)] mono uppercase opacity-60 font-bold border-t border-[var(--border)] pt-4">
                           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[var(--accent)]" /> Status: Design example</span>
                           <span>Ver: 1.0.4</span>
                         </div>
@@ -230,7 +230,7 @@ export default function ArchitecturePage() {
                   <strong>System-Led Execution</strong> to ensure that every workflow scale is reproducible.
                 </p>
                 <div className="p-6 bg-[var(--surface2)] border-l-2 border-[var(--accent)]">
-                  <p className="mono text-[12px] leading-relaxed">
+                  <p className="mono text-[length:var(--text-small)] leading-relaxed">
                     "We don't build prompts; we build software that happens to use Large Language Models as logic processors."
                   </p>
                 </div>

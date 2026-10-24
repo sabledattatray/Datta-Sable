@@ -85,7 +85,7 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
                       <Cpu size={16} className="text-[var(--accent)]" />
-                      <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Blueprint_Structure</h4>
+                      <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--text)]">Blueprint_Structure</h4>
                     </div>
                   </div>
                   <pre className="p-6 bg-[var(--bg)] rounded border border-[var(--border)] overflow-x-auto text-xs mono text-[var(--muted)] leading-relaxed min-h-[200px]">
@@ -133,10 +133,10 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
 
               <div className="lg:col-span-1">
                 <div className="card p-8 sticky top-32" style={{ background: 'var(--surface2)' }}>
-                  <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Execution_Target</h4>
+                  <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--muted)] mb-8">Execution_Target</h4>
                   
                   <div className="mb-8">
-                    <div className="text-[10px] mono text-[var(--muted)] uppercase mb-2">Target_Module</div>
+                    <div className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase mb-2">Target_Module</div>
                     <div className="text-sm font-bold text-[var(--text)]">{template.targetModule.replace('/tools/', '').replace('-', ' ').toUpperCase()}</div>
                   </div>
 
@@ -147,7 +147,7 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
                     OPEN RELATED TOOL <ChevronRight size={14} />
                   </Link>
                   
-                  <div className="mt-6 p-4 bg-[var(--bg)] border border-[var(--border)] rounded text-[9px] mono text-[var(--muted)] leading-relaxed">
+                  <div className="mt-6 p-4 bg-[var(--bg)] border border-[var(--border)] rounded text-[length:var(--text-small)] mono text-[var(--muted)] leading-relaxed">
                     Open the related tool to adapt this example. Review any populated fields; a template does not validate your claims or publish the result.
                   </div>
                 </div>

@@ -53,7 +53,7 @@ export default async function MicrosoftFabricHub() {
           
           {/* Hero Header */}
           <div style={{ marginBottom: '4rem', borderBottom: '1px solid var(--border)', paddingBottom: '3rem' }}>
-            <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Topical Knowledge Base</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Topical Knowledge Base</span>
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, marginTop: '0.5rem', marginBottom: '1.5rem', fontFamily: 'Syne, sans-serif' }}>
               Microsoft Fabric <span style={{ color: 'var(--accent)' }}>Hub</span>
             </h1>

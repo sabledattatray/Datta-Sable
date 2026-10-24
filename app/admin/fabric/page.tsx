@@ -139,7 +139,7 @@ export default function FabricMasterPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {(telemetry?.popularSkus || []).map((sku, i) => (
               <div key={i}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, fontWeight: 600, marginBottom: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: 6 }}>
                   <span style={{ color: 'var(--text)' }}>{sku.sku}</span>
                   <span style={{ color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>{sku.monthlyCost} ({sku.percentage}%)</span>
                 </div>
@@ -160,14 +160,14 @@ export default function FabricMasterPage() {
             {(telemetry?.recentCalculations || []).map((calc) => (
               <div key={calc.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface2)', padding: '12px 14px', borderRadius: 8, border: '1px solid var(--border)' }}>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{calc.tool}</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>
+                  <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)' }}>{calc.tool}</div>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>
                     Recommended: <strong style={{ color: 'var(--accent)' }}>{calc.skuRecommended}</strong>
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{calc.estMonthlyCost}</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>{calc.timestamp}</div>
+                  <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{calc.estMonthlyCost}</div>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)' }}>{calc.timestamp}</div>
                 </div>
               </div>
             ))}

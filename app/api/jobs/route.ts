@@ -45,23 +45,10 @@ const defaultJobs = [
 
 export async function GET() {
   try {
-    let jobs = await prisma.job.findMany({
+    const jobs = await prisma.job.findMany({
       where: { status: 'OPEN' },
       orderBy: { createdAt: 'desc' }
     });
-
-    // Only seed if the job table is completely empty (do not re-seed when all jobs are closed)
-    const totalJobsCount = await prisma.job.count();
-    if (totalJobsCount === 0) {
-      console.log("No jobs found in table. Seeding default positions...");
-      await prisma.job.createMany({
-        data: defaultJobs
-      });
-      jobs = await prisma.job.findMany({
-        where: { status: 'OPEN' },
-        orderBy: { createdAt: 'desc' }
-      });
-    }
 
     return NextResponse.json(jobs, { status: 200 });
   } catch (error: any) {

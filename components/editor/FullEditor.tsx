@@ -516,7 +516,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '10px 18px', border: `1px solid ${css.border}`,
         borderRadius: '0 0 12px 12px', background: css.surface, color: css.muted,
-        fontSize: 12, fontWeight: 600,
+        fontSize: 'var(--text-small)', fontWeight: 600,
       }}>
         <div style={{ display: 'flex', gap: 16 }}>
           <span><strong>{words}</strong> words</span>
@@ -611,7 +611,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         .toolbar-select {
           height: 34px;
           padding: 0 10px;
-          font-size: 13px;
+          font-size:var(--text-small);
           font-weight: 600;
           background: ${isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(15, 23, 42, 0.02)'};
           border: 1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'};
@@ -641,7 +641,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
         .toolbar-input {
           width: 200px;
           padding: 6px 12px;
-          font-size: 13px;
+          font-size:var(--text-small);
           background: ${css.bg};
           border: 1px solid ${css.border};
           border-radius: 8px;
@@ -657,7 +657,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
         .toolbar-btn-set {
           padding: 6px 14px;
-          font-size: 12px;
+          font-size:var(--text-small);
           background: ${css.accent};
           color: #fff;
           border: none;
@@ -675,7 +675,7 @@ export default function FullEditor({ content, onChange, isDark }: FullEditorProp
 
         .toolbar-btn-cancel {
           padding: 6px 10px;
-          font-size: 12px;
+          font-size:var(--text-small);
           background: transparent;
           color: ${css.muted};
           border: 1px solid ${css.border};

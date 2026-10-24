@@ -216,7 +216,7 @@ export default function AnalyticsLivePage() {
             </div>
             <div>
               <h1 className="text-lg font-black uppercase tracking-tighter">Live Intelligence Dashboard</h1>
-              <div className="flex items-center gap-3 text-[12px] mono uppercase tracking-widest text-[var(--muted)]">
+              <div className="flex items-center gap-3 text-[length:var(--text-small)] mono uppercase tracking-widest text-[var(--muted)]">
                 <span className="flex items-center gap-1.5">
                   <span className={`w-1.5 h-1.5 rounded-full ${error ? 'bg-red-500' : 'bg-green-500 animate-pulse'}`} />
                   Status: <span className="text-white">{error ? 'Error' : 'Live'}</span>
@@ -233,13 +233,13 @@ export default function AnalyticsLivePage() {
             <button
               onClick={fetchAnalytics}
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 border border-[var(--border)] rounded text-[11px] mono uppercase hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all disabled:opacity-40"
+              className="flex items-center gap-2 px-4 py-2 border border-[var(--border)] rounded text-[length:var(--text-small)] mono uppercase hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all disabled:opacity-40"
             >
               <RefreshCw size={12} className={loading ? 'animate-spin' : ''} />
               Refresh
             </button>
             <div className="flex flex-col items-end gap-1">
-              <div className="text-[11px] mono uppercase tracking-widest text-[var(--muted)]">
+              <div className="text-[length:var(--text-small)] mono uppercase tracking-widest text-[var(--muted)]">
                 Auto-refresh: <span className="text-[var(--accent)]">{countdown}s</span>
               </div>
               <div className="w-32 h-1 bg-[var(--border)] rounded-full overflow-hidden">
@@ -280,11 +280,11 @@ export default function AnalyticsLivePage() {
                   <div className="p-2 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
                     {metric.icon}
                   </div>
-                  <div className="text-[10px] mono font-bold text-[var(--muted)]">{metric.id}</div>
+                  <div className="text-[length:var(--text-small)] mono font-bold text-[var(--muted)]">{metric.id}</div>
                 </div>
 
                 <div className="space-y-1">
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)]">
+                  <p className="text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)]">
                     {metric.label}
                   </p>
                   <div className="h-8 flex items-center">
@@ -301,8 +301,8 @@ export default function AnalyticsLivePage() {
                     </AnimatePresence>
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-[11px] text-[var(--muted)]">{metric.sub}</span>
-                    <span className="text-[11px] font-bold" style={{ color: metric.color }}>
+                    <span className="text-[length:var(--text-small)] text-[var(--muted)]">{metric.sub}</span>
+                    <span className="text-[length:var(--text-small)] font-bold" style={{ color: metric.color }}>
                       {metric.trend}
                     </span>
                   </div>
@@ -322,13 +322,13 @@ export default function AnalyticsLivePage() {
             <div className="lg:col-span-2 space-y-3">
               <div className="flex items-center gap-2 px-1">
                 <TerminalIcon size={12} className="text-[var(--accent)]" />
-                <h2 className="text-[12px] font-bold uppercase tracking-widest text-[var(--muted)]">
+                <h2 className="text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)]">
                   Top Pages · Last 7 Days
                 </h2>
               </div>
               <div className="bg-[var(--surface)] border border-[var(--border)] rounded p-5 space-y-3">
                 {(data?.topPages ?? []).length === 0 ? (
-                  <p className="text-[12px] text-[var(--muted)] mono">
+                  <p className="text-[length:var(--text-small)] text-[var(--muted)] mono">
                     {loading ? 'Loading page data…' : 'No data yet — visit more pages!'}
                   </p>
                 ) : (
@@ -337,7 +337,7 @@ export default function AnalyticsLivePage() {
                     const pct = Math.round((page.views / max) * 100);
                     return (
                       <div key={page.path} className="space-y-1">
-                        <div className="flex justify-between text-[11px] mono">
+                        <div className="flex justify-between text-[length:var(--text-small)] mono">
                           <span className="text-[var(--muted)] truncate max-w-[70%]">
                             #{i + 1} {page.path}
                           </span>
@@ -362,7 +362,7 @@ export default function AnalyticsLivePage() {
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Clock size={12} className="text-[var(--accent)]" />
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)]">
+                    <span className="text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)]">
                       Daily Views · Last 7 Days
                     </span>
                   </div>
@@ -382,7 +382,7 @@ export default function AnalyticsLivePage() {
                               style={{ height: barH }}
                               title={`${day}: ${count} views`}
                             />
-                            <span className="text-[9px] mono text-[var(--muted)]">
+                            <span className="text-[length:var(--text-small)] mono text-[var(--muted)]">
                               {day.slice(5)}
                             </span>
                           </div>
@@ -398,12 +398,12 @@ export default function AnalyticsLivePage() {
               <div className="bg-[var(--accent)] text-black rounded p-6">
                 <Activity size={24} className="mb-4" />
                 <h3 className="text-sm font-black uppercase mb-1">Real DB Feed</h3>
-                <p className="text-[12px] opacity-80 mb-6">
+                <p className="text-[length:var(--text-small)] opacity-80 mb-6">
                   Powered by your PostgreSQL PageView table. Auto-refreshes every {REFRESH_INTERVAL_SEC}s.
                 </p>
                 <Link
                   href="/knowledge/architecture"
-                  className="block w-full py-2 bg-black text-white text-center text-[10px] font-black uppercase tracking-widest rounded hover:opacity-80 transition-opacity no-underline"
+                  className="block w-full py-2 bg-black text-white text-center text-[length:var(--text-small)] font-black uppercase tracking-widest rounded hover:opacity-80 transition-opacity no-underline"
                 >
                   View Architecture
                 </Link>
@@ -412,7 +412,7 @@ export default function AnalyticsLivePage() {
               <div className="bg-[var(--surface)] border border-[var(--border)] rounded p-5 space-y-4">
                 <div className="flex items-center gap-2">
                   <Server size={12} className="text-[var(--accent)]" />
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)]">
+                  <span className="text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)]">
                     Data Source
                   </span>
                 </div>
@@ -421,7 +421,7 @@ export default function AnalyticsLivePage() {
                   { label: 'Tracking', val: '/api/track', ok: true },
                   { label: 'Umami', val: 'Pending deploy', ok: false },
                 ].map(item => (
-                  <div key={item.label} className="flex justify-between text-[11px] mono">
+                  <div key={item.label} className="flex justify-between text-[length:var(--text-small)] mono">
                     <span className="text-[var(--muted)]">{item.label}</span>
                     <span className={item.ok ? 'text-green-400' : 'text-yellow-400'}>
                       {item.val}
@@ -432,8 +432,8 @@ export default function AnalyticsLivePage() {
 
               {data && (
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded p-5">
-                  <span className="text-[10px] mono text-[var(--muted)] block mb-1">Last sync</span>
-                  <span className="text-[11px] mono text-[var(--text)]">
+                  <span className="text-[length:var(--text-small)] mono text-[var(--muted)] block mb-1">Last sync</span>
+                  <span className="text-[length:var(--text-small)] mono text-[var(--text)]">
                     {new Date(data.generatedAt).toLocaleString()}
                   </span>
                 </div>

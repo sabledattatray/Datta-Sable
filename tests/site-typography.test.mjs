@@ -18,6 +18,21 @@ function load(file, stubs = {}) {
 const typography = load('lib/site-typography.ts');
 const templates = load('lib/site-typography-templates.ts', { './site-typography': typography });
 
+test('older published typography cannot reintroduce tiny body text on desktop or mobile', () => {
+  const settings = typography.defaultTypography();
+  for (const id of ['body', 'paragraph', 'small', 'button', 'link', 'code']) {
+    settings.elements[id].fontSize = 10;
+    settings.elements[id].mobileFontSize = 11;
+  }
+  settings.elements.h1.fontSize = 64;
+  const css = typography.buildTypographyCss(settings);
+  assert.doesNotMatch(css, /font-size:0\.(625|6875)rem/);
+  assert.match(css, /font-size:1rem!important/);
+  assert.match(css, /font-size:0\.875rem!important/);
+  assert.match(css, /font-size:4rem!important/);
+  assert.doesNotMatch(css, /text-fill-color|background-image:none/);
+});
+
 test('original site remains unchanged until individual properties are customized', () => {
   const settings = typography.defaultTypography();
   assert.ok(typography.parseTypography(settings));
@@ -124,7 +139,7 @@ test('Segoe UI template matches all recommended typography values without replac
     ['h1', 48, 34, 700, 1.2, -0.025], ['h2', 34, 28, 600, 1.3, -0.015],
     ['h3', 26, 23, 600, 1.35, -0.01], ['h4', 22, 20, 600, 1.4, 0],
     ['h5', 19, 18, 600, 1.4, 0], ['h6', 17, 16, 600, 1.5, 0],
-    ['button', 14, 14, 600, 1.4, 0], ['small', 13, 13, 400, 1.6, 0],
+    ['button', 14, 14, 600, 1.4, 0], ['small', 14, 14, 400, 1.6, 0],
   ]) {
     const rule = settings.elements[id];
     assert.equal(rule.fontFamily, 'Segoe UI');
@@ -134,7 +149,7 @@ test('Segoe UI template matches all recommended typography values without replac
     assert.equal(settings.elements[id].darkColor, '#FAFAFA'); assert.equal(settings.elements[id].lightColor, '#18181B');
   }
   assert.equal(settings.elements.paragraph.darkColor, '#D4D4D8'); assert.equal(settings.elements.paragraph.lightColor, '#27272A');
-  assert.equal(settings.elements.small.darkColor, '#A1A1AA'); assert.equal(settings.elements.small.lightColor, '#52525B');
+  assert.equal(settings.elements.small.darkColor, '#B3BDCC'); assert.equal(settings.elements.small.lightColor, '#475569');
   for (const id of ['button', 'link', 'code']) { assert.equal(settings.elements[id].lightColor, ''); assert.equal(settings.elements[id].darkColor, ''); }
   assert.equal(settings.elements.code.fontFamily, 'JetBrains Mono');
   assert.equal(settings.elements.link.fontSize, null); assert.equal(settings.elements.link.fontWeight, null);
@@ -260,7 +275,7 @@ test('database save failure reports failure and does not invalidate or claim pub
   assert.equal(e.invalidated.length, 0); assert.equal(e.audits.length, 0);
 });
 
-test('public reads use validated persisted settings and fall back without caching a database failure', async () => {
+test('public reads use validated persisted settings and fall back on database failure', async () => {
   const settings = typography.defaultTypography(); settings.elements.h1.fontSize = 60;
   let fail = false;
   const store = load('lib/site-typography-store.ts', {
@@ -271,4 +286,18 @@ test('public reads use validated persisted settings and fall back without cachin
   assert.equal((await store.getPublicTypography()).elements.h1.fontSize, 60);
   fail = true; assert.equal(typography.buildTypographyCss(await store.getPublicTypography()), '');
   fail = false; assert.equal((await store.getPublicTypography()).elements.h1.fontSize, 60);
+});
+
+test('public typography falls back safely when its database is unreachable', async () => {
+  let attempts = 0;
+  const store = load('lib/site-typography-store.ts', {
+    'next/cache': { unstable_cache: callback => callback },
+    '@/lib/prisma': { prisma: { systemSetting: { findUnique: async () => {
+      attempts += 1;
+      throw new Error('Database unavailable');
+    } } } },
+    './site-typography': typography,
+  });
+  assert.deepEqual(await store.getPublicTypography(), typography.defaultTypography());
+  assert.equal(attempts, 1);
 });

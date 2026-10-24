@@ -13,8 +13,8 @@ function CoverArt({ variant }: { variant: number }) {
     <defs><pattern id={`series-grid-${variant}`} width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" stroke="currentColor" strokeOpacity=".07" /></pattern></defs>
     <rect width="240" height="100" fill={`url(#series-grid-${variant})`} />
     {variant === 0 ? <>
-      <path d="M45 49H195M83 49V24H157V49M83 49V76H157V49" stroke="currentColor" opacity=".25" />
-      {[45,120,195].map((x,i)=><g key={x}><rect x={x-15} y="34" width="30" height="30" rx="7" fill="var(--surface)" stroke="currentColor" strokeOpacity={i===1?'.8':'.25'} /><path d={`M${x-7} 46l7-4 7 4-7 4-7-4zm0 5l7 4 7-4`} stroke="currentColor" strokeOpacity={i===1?'1':'.45'} /></g>)}
+      <path d="M45 49H195M83 49V24H157V49M83 49V76H157V49" stroke="currentColor" opacity=".45" />
+      {[45,120,195].map((x,i)=><g key={x}><rect x={x-15} y="34" width="30" height="30" rx="7" fill="var(--surface)" stroke="currentColor" strokeOpacity={i===1?'1':'.5'} /><path d={`M${x-7} 46l7-4 7 4-7 4-7-4zm0 5l7 4 7-4`} stroke="currentColor" strokeOpacity={i===1?'1':'.7'} /></g>)}
       <circle cx="83" cy="24" r="3" fill="currentColor" /><circle cx="157" cy="76" r="3" fill="currentColor" />
     </> : variant === 1 ? <>
       <path d="M42 78H199" stroke="currentColor" opacity=".2" />
@@ -32,7 +32,7 @@ export default function FeaturedSeries() {
   return <section className={styles.section} aria-labelledby="learning-series-title"><div className="container">
     <div className={styles.heading}><div><span className={styles.eyebrow}><BookOpen size={14} /> THE DEEPER READ</span><h2 id="learning-series-title">Less searching.<br /><span>More understanding.</span></h2></div><p>Explore a subject from the inside out.<br />Three focused collections for your next deep dive.</p></div>
     <div className={styles.grid}>{series.map(({ title, label, desc, chapters, slug, icon: Icon }, i) => <Link href={`/category/${slug}`} className={styles.card} key={slug}>
-      <div className={styles.cover}><div className={styles.coverTop}><span>COLLECTION / 0{i+1}</span><Icon size={16} strokeWidth={1.5} /></div><CoverArt variant={i} /><span className={styles.coverLabel}>{label}</span></div>
+      <div className={styles.cover}><div className={styles.coverTop}><span>COLLECTION <span className={styles.collectionNumber}>0{i+1}</span></span><span className={styles.coverIcon}><Icon size={19} strokeWidth={1.5} /></span></div><CoverArt variant={i} /><span className={styles.coverLabel}>{label}</span></div>
       <div className={styles.body}><h3>{title}</h3><p>{desc}</p><div className={styles.chapters}>{chapters.map((chapter,j)=><div key={chapter}><span>0{j+1}</span>{chapter}<ArrowRight size={11} /></div>)}</div><div className={styles.footer}><span>Explore collection</span><span className={styles.arrow}><ArrowUpRight size={17} /></span></div></div>
     </Link>)}</div>
   </div></section>;

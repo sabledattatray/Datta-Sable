@@ -166,19 +166,20 @@ export default function Footer() {
           </div>
 
           <div className={styles.trustGrid}>
-            {TRUST_PILLARS.map(item => {
+            {TRUST_PILLARS.map((item, index) => {
               const BadgeComponent = item.badgeComponent;
               return (
-                <div key={item.title} className={styles.trustCard}>
+                <article key={item.title} className={styles.trustCard}>
                   <div className={styles.trustCardTop}>
                     <div className={styles.trustIconWrap}>
-                      <BadgeComponent size={46} />
+                      <BadgeComponent size={72} />
                     </div>
-                    <span className={styles.trustTag}>{item.badge}</span>
+                    <span className={styles.trustIndex} aria-hidden="true">0{index + 1}<span> / 04</span></span>
                   </div>
-                  <h4 className={styles.trustTitle}>{item.title}</h4>
+                  <span className={styles.trustTag}>{item.badge}</span>
+                  <h3 className={styles.trustTitle}>{item.title}</h3>
                   <p className={styles.trustDesc}>{item.desc}</p>
-                </div>
+                </article>
               );
             })}
           </div>
@@ -233,7 +234,8 @@ export default function Footer() {
 
         <p className={styles.notice}><strong>Independent by design.</strong> Datta Sable is an independent BI consultant and is not affiliated with, sponsored by, or related to the CodedThemes/AppSeed “Datta Able” admin dashboard template.</p>
         <div className={styles.bottom}>
-          <p>© {year} Datta Sable. All rights reserved.</p>
+          <div className={styles.legalHeading}><ShieldCheck size={19} aria-hidden="true"/><h3>Policies &amp; privacy</h3></div>
+          <p className={styles.copyright}><span>© {year} Datta Sable.</span> <span>All rights reserved.</span></p>
           <nav className={styles.legal} aria-label="Legal and privacy">
             <Link href="/editorial-policy">Editorial policy</Link>
             <Link href="/disclaimer">Disclaimer</Link>
@@ -242,8 +244,10 @@ export default function Footer() {
             <Link href="/refund-policy">Refund policy</Link>
             <Link href="/delivery-policy">Delivery policy</Link>
             <Link href="/cookies">Cookies</Link>
-            <CookiePreferencesButton />
-            <AdvertisingPreferencesButton />
+            <div className={styles.privacyControls}>
+              <CookiePreferencesButton />
+              <AdvertisingPreferencesButton />
+            </div>
           </nav>
         </div>
       </div>

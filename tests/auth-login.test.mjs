@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
-function auth({ auditFails = false, userFails = false, sessionVersion = 0 } = {}) {
+function auth({ auditFails = false, userFails = false, sessionVersion = 0, missingUser = false, refreshFails = false, env = {} } = {}) {
   const mod = { exports: {} };
   const provider = { default: () => ({}) };
   const deps = {
@@ -14,7 +14,10 @@ function auth({ auditFails = false, userFails = false, sessionVersion = 0 } = {}
     'next-auth/providers/credentials': provider,
     '@/lib/prisma': { prisma: {
       user: {
-        findUnique: async () => ({ id: 'admin-1', role: 'ADMIN', sessionVersion }),
+        findUnique: async () => {
+          if (refreshFails) throw Error('User database unavailable');
+          return missingUser ? null : { id: 'admin-1', role: 'ADMIN', sessionVersion };
+        },
         upsert: async () => {
           if (userFails) throw Error('User database unavailable');
           return { id: 'admin-1', role: 'ADMIN', sessionVersion };
@@ -32,7 +35,7 @@ function auth({ auditFails = false, userFails = false, sessionVersion = 0 } = {}
   vm.runInNewContext(compiled.outputText, {
     module: mod, exports: mod.exports,
     require: id => { assert.ok(id in deps, id); return deps[id]; },
-    process: { env: {} }, console: { error() {} },
+    process: { env }, console: { error() {} },
   });
   return mod.exports.authOptions;
 }
@@ -64,4 +67,22 @@ test('sessions issued before versioning continue until the password is changed',
   const token = await auth().callbacks.jwt({ token: { id: 'admin-1', role: 'ADMIN' } });
   assert.equal(token.role, 'ADMIN');
   assert.equal(token.id, 'admin-1');
+});
+
+test('environment administrators cannot bypass password revocation or account deletion', async () => {
+  for (const state of [{ sessionVersion: 1 }, { missingUser: true }]) {
+    const options = auth({ ...state, env: { ADMIN_EMAILS: 'admin@example.test' } });
+    const token = await options.callbacks.jwt({ token: { id: 'admin-1', email: 'admin@example.test', role: 'ADMIN', sessionVersion: 0 } });
+    assert.equal(token.id, undefined);
+    assert.equal(token.role, 'USER');
+    await assert.rejects(() => options.callbacks.session({ session: { user: {} }, token }), /Session expired/);
+  }
+});
+
+test('a failed revocation lookup cannot retain authenticated access', async () => {
+  const options = auth({ refreshFails: true });
+  const token = await options.callbacks.jwt({ token: { id: 'admin-1', role: 'ADMIN', sessionVersion: 0 } });
+  assert.equal(token.id, undefined);
+  assert.equal(token.role, 'USER');
+  await assert.rejects(() => options.callbacks.session({ session: { user: {} }, token }), /Session expired/);
 });

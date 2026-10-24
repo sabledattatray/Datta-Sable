@@ -58,7 +58,7 @@ export default function PromptAuditorPage() {
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <div className="flex items-center gap-3 mb-6">
               <div style={{ color: 'var(--accent)' }}><ShieldCheck size={24} /></div>
-              <span className="mono text-[12px] uppercase tracking-[0.3em]" style={{ color: 'var(--accent)' }}>Project: Surgical Auditor v1.0</span>
+              <span className="mono text-[length:var(--text-small)] uppercase tracking-[0.3em]" style={{ color: 'var(--accent)' }}>Project: Surgical Auditor v1.0</span>
             </div>
             
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 48px)', marginBottom: '1.5rem', lineHeight: 1.1 }}>
@@ -128,7 +128,7 @@ export default function PromptAuditorPage() {
                 </div>
 
                 <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', padding: '2rem' }}>
-                  <h3 className="text-[12px] mono uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                  <h3 className="text-[length:var(--text-small)] mono uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                     <Zap size={14} style={{ color: 'var(--accent)' }} /> Optimization_Roadmap
                   </h3>
                   <div className="space-y-4">
@@ -141,7 +141,7 @@ export default function PromptAuditorPage() {
                   </div>
                   
                   <div className="mt-12 p-6 border border-dashed border-[#333] text-center">
-                    <p style={{ color: '#888', fontSize: '13px', marginBottom: '1.5rem' }}>
+                    <p style={{ color: '#888', fontSize: 'var(--text-small)', marginBottom: '1.5rem' }}>
                       Ready to implement a high-fidelity automation pipeline?
                     </p>
                     <a href="/contact" className="btn-outline" style={{ display: 'inline-block' }}>
@@ -160,7 +160,7 @@ export default function PromptAuditorPage() {
           {"/* ── About This Tool Header ── */"}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
           
           <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.2 }}>
@@ -179,19 +179,19 @@ export default function PromptAuditorPage() {
           <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text)', marginBottom: '1.25rem', fontFamily: 'monospace' }}>CORE_CAPABILITIES</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Fidelity Evaluation</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Fidelity Evaluation</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Audits the presence of schemas, tags, and formatting rules to ensure high structural reliability.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Bloat Identification</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Bloat Identification</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Flags conversational pleasantries and polite language that waste expensive API tokens.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Entropy Diagnosis</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Entropy Diagnosis</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Evaluates the balance of instructions and variables to prevent model confusion.</div>
             </div>
             <div style={{ padding: '1.5rem', background: 'var(--surface2)', borderRadius: '8px', border: '1px solid var(--border)', minWidth: 0 }}>
-              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Self-Correction Guide</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Self-Correction Guide</div>
               <div style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: 1.65 }} className="font-sans">Provides direct suggestions to convert unstructured prompts into compiled Surgical formats.</div>
             </div>
           </div>

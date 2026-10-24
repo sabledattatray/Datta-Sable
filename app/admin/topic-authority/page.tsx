@@ -68,7 +68,7 @@ export default function TopicAuthorityDashboard() {
       <div className={adminStyles.page}>
         <div className={adminStyles.panel} style={{ textAlign: 'center', padding: '60px 20px' }}>
           <Activity className="animate-spin" size={28} style={{ color: 'var(--accent)', margin: '0 auto 12px' }} />
-          <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '0.82rem', color: 'var(--muted)' }}>
+          <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: 'var(--text-small)', color: 'var(--muted)' }}>
             Calculating Topical Link Equity Graph...
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function TopicAuthorityDashboard() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {data.categoryCoverage.map(cat => (
                 <div key={cat.name}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', marginBottom: '5px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-small)', fontFamily: 'var(--font-mono, monospace)', marginBottom: '5px' }}>
                     <span style={{ color: 'var(--text)', fontWeight: 500 }}>{cat.name}</span>
                     <span style={{ color: 'var(--accent)' }}>{cat.percentage}% ({cat.matched}/{cat.total})</span>
                   </div>
@@ -193,13 +193,13 @@ export default function TopicAuthorityDashboard() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {data.suggestions.map((suggestion, index) => (
-                <div key={index} style={{ display: 'flex', gap: '8px', alignItems: 'start', fontSize: '0.78rem', lineHeight: 1.5 }}>
+                <div key={index} style={{ display: 'flex', gap: '8px', alignItems: 'start', fontSize: 'var(--text-small)', lineHeight: 1.5 }}>
                   <ChevronRight size={13} style={{ color: 'var(--accent)', marginTop: '3px', flexShrink: 0 }} />
                   <span style={{ color: 'var(--muted)' }}>{suggestion}</span>
                 </div>
               ))}
               {data.suggestions.length === 0 && (
-                <div style={{ fontSize: '0.78rem', color: 'var(--muted)', textAlign: 'center', padding: '16px 0' }}>
+                <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', textAlign: 'center', padding: '16px 0' }}>
                   <CheckCircle2 size={16} style={{ color: 'var(--accent)', margin: '0 auto 6px' }} />
                   All topic linking structures are optimal!
                 </div>
@@ -280,7 +280,7 @@ export default function TopicAuthorityDashboard() {
                       textAnchor="middle"
                       fill={isHovered ? 'var(--text)' : 'var(--muted)'}
                       style={{ 
-                        fontSize: '0.65rem', 
+                        fontSize: 'var(--text-small)',
                         fontFamily: 'var(--font-mono, monospace)', 
                         fontWeight: isHovered ? '700' : '400',
                         transition: 'fill 0.2s'
@@ -304,21 +304,21 @@ export default function TopicAuthorityDashboard() {
                 borderRadius: '4px',
                 padding: '12px 14px',
                 width: '210px',
-                fontSize: '0.75rem',
+                fontSize: 'var(--text-small)',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
                 backdropFilter: 'blur(8px)',
                 zIndex: 10
               }}>
-                <div style={{ fontWeight: 600, marginBottom: '2px', color: 'var(--text)', fontSize: '0.8rem' }}>{hoveredNode.title}</div>
-                <div style={{ color: 'var(--muted)', marginBottom: '8px', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', fontSize: '0.62rem' }}>{hoveredNode.category}</div>
+                <div style={{ fontWeight: 600, marginBottom: '2px', color: 'var(--text)', fontSize: 'var(--text-small)' }}>{hoveredNode.title}</div>
+                <div style={{ color: 'var(--muted)', marginBottom: '8px', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', fontSize: 'var(--text-small)' }}>{hoveredNode.category}</div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', borderTop: '1px solid var(--border)', paddingTop: '8px' }}>
                   <div>
-                    <span style={{ color: 'var(--muted)', display: 'block', fontSize: '0.65rem' }}>Inbound</span>
-                    <strong style={{ color: 'var(--accent)', fontSize: '0.85rem' }}>{hoveredNode.incoming}</strong>
+                    <span style={{ color: 'var(--muted)', display: 'block', fontSize: 'var(--text-small)' }}>Inbound</span>
+                    <strong style={{ color: 'var(--accent)', fontSize: 'var(--text-small)' }}>{hoveredNode.incoming}</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--muted)', display: 'block', fontSize: '0.65rem' }}>Outbound</span>
-                    <strong style={{ color: 'var(--text)', fontSize: '0.85rem' }}>{hoveredNode.outgoing}</strong>
+                    <span style={{ color: 'var(--muted)', display: 'block', fontSize: 'var(--text-small)' }}>Outbound</span>
+                    <strong style={{ color: 'var(--text)', fontSize: 'var(--text-small)' }}>{hoveredNode.outgoing}</strong>
                   </div>
                 </div>
               </div>

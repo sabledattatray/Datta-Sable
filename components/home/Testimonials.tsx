@@ -96,7 +96,7 @@ export default function Testimonials() {
         <div className="flex flex-col items-center text-center gap-4 mb-16">
           <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--surface)]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="mono text-[10px] font-bold tracking-[0.25em] text-[var(--accent)] uppercase">
+            <span className="mono text-[length:var(--text-small)] font-bold tracking-[0.25em] text-[var(--accent)] uppercase">
               VERIFIED_CLIENT_LOGS
             </span>
           </div>
@@ -171,10 +171,10 @@ export default function Testimonials() {
                       <Icon size={15} style={{ color: t.color }} />
                     </div>
                     <div>
-                      <div className="mono text-[10px] font-bold text-[var(--text)] tracking-wider leading-none">{t.company}</div>
+                      <div className="mono text-[length:var(--text-small)] font-bold text-[var(--text)] tracking-wider leading-none">{t.company}</div>
                       <div className="flex items-center gap-1 mt-1">
                         <CheckCircle2 size={9} className="text-emerald-400 flex-shrink-0" />
-                        <span className="text-[9px] text-[var(--muted)]">Verified Client</span>
+                        <span className="text-[length:var(--text-small)] text-[var(--muted)]">Verified Client</span>
                       </div>
                     </div>
                   </div>
@@ -189,7 +189,7 @@ export default function Testimonials() {
                 {/* Quote */}
                 <p
                   className="text-[var(--muted)] group-hover:text-[var(--text)] transition-colors duration-300"
-                  style={{ fontSize: '0.85rem', lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: '1rem' }}
+                  style={{ fontSize: 'var(--text-small)', lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: '1rem' }}
                 >
                   &ldquo;{t.quote}&rdquo;
                 </p>
@@ -197,7 +197,7 @@ export default function Testimonials() {
                 {/* Tag pill */}
                 <div className="mb-3.5">
                   <span
-                    className="mono text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                    className="mono text-[length:var(--text-small)] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
                     style={{
                       color: t.color,
                       background: `${t.color}14`,
@@ -211,7 +211,7 @@ export default function Testimonials() {
                 {/* Author */}
                 <div className="flex items-center gap-2.5 pt-3.5 border-t border-[var(--border)]">
                   <div
-                    className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[10px] font-mono flex-shrink-0"
+                    className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[length:var(--text-small)] font-mono flex-shrink-0"
                     style={{
                       background: `linear-gradient(135deg, ${t.color}33, ${t.color}11)`,
                       border: `1px solid ${t.color}44`,
@@ -221,8 +221,8 @@ export default function Testimonials() {
                     {t.initials}
                   </div>
                   <div>
-                    <div className="text-[13px] font-bold text-[var(--text)]">{t.author}</div>
-                    <div className="text-[10px] font-mono tracking-wide" style={{ color: t.color }}>{t.role}</div>
+                    <div className="text-[length:var(--text-small)] font-bold text-[var(--text)]">{t.author}</div>
+                    <div className="text-[length:var(--text-small)] font-mono tracking-wide" style={{ color: t.color }}>{t.role}</div>
                   </div>
                 </div>
               </motion.div>
@@ -242,7 +242,7 @@ export default function Testimonials() {
               <div className="text-[1.5rem] font-bold font-display" style={{ color: 'var(--accent)', letterSpacing: '-0.02em' }}>
                 {stat.value}
               </div>
-              <div className="mono text-[10px] text-[var(--muted)] uppercase tracking-widest mt-0.5">{stat.label}</div>
+              <div className="mono text-[length:var(--text-small)] text-[var(--muted)] uppercase tracking-widest mt-0.5">{stat.label}</div>
             </div>
           ))}
         </div>

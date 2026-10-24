@@ -29,7 +29,7 @@ export default function SalesPipelineDashboardPage() {
               <div className="w-12 h-12 bg-[var(--surface2)] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(201,243,29,0.2)]">📈</div>
               <div>
                 <h1 className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)] uppercase">Pipeline <span className="text-[var(--accent)]">Velocity</span></h1>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Technical Showcase: B2B Revenue Analytics</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Technical Showcase: B2B Revenue Analytics</div>
               </div>
             </div>
             <div className="flex items-center gap-4">

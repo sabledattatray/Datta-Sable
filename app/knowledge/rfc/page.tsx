@@ -46,7 +46,7 @@ export default function RFCHub() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="label-tech text-[var(--accent)]">Standards Ecosystem</div>
-              <div className="flex items-center gap-2 mono text-[10px] opacity-40">
+              <div className="flex items-center gap-2 mono text-[length:var(--text-small)] opacity-40">
                 <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" /> REQUEST_FOR_COMMENTS
               </div>
             </div>
@@ -72,15 +72,15 @@ export default function RFCHub() {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="mono text-[10px] text-blue-500 px-2 py-1 bg-blue-500/10 border border-blue-500/20">{rfc.id}</span>
-                          <span className={`mono text-[10px] px-2 py-1 border ${
+                          <span className="mono text-[length:var(--text-small)] text-blue-500 px-2 py-1 bg-blue-500/10 border border-blue-500/20">{rfc.id}</span>
+                          <span className={`mono text-[length:var(--text-small)] px-2 py-1 border ${
                             rfc.status === 'STABLE' ? 'text-emerald-500 border-emerald-500/20 bg-emerald-500/5' : 
                             rfc.status === 'PROPOSED' ? 'text-blue-500 border-blue-500/20 bg-blue-500/5' :
                             'text-amber-500 border-amber-500/20 bg-amber-500/5'
                           }`}>
                             {rfc.status}
                           </span>
-                          <span className="mono text-[10px] opacity-40">{rfc.ver}</span>
+                          <span className="mono text-[length:var(--text-small)] opacity-40">{rfc.ver}</span>
                         </div>
                         <h3 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">{rfc.title}</h3>
                         <p className="text-sm text-[var(--muted)] leading-relaxed max-w-xl">{rfc.desc}</p>

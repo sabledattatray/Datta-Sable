@@ -66,7 +66,7 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                 <div style={{ marginBottom: '4rem' }}>
                   <div className="flex items-center gap-3 mb-6">
                     <span className="label-tech">{term.category.toUpperCase()}_LEXICON</span>
-                    <span className="text-[10px] mono text-[var(--muted)]">TERM_ID: {term.id.toUpperCase()}</span>
+                    <span className="text-[length:var(--text-small)] mono text-[var(--muted)]">TERM_ID: {term.id.toUpperCase()}</span>
                   </div>
                   <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1.1, marginBottom: '2rem' }}>
                     {term.term}
@@ -94,9 +94,9 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                 <div className="p-8 bg-[var(--accent)]/5 border border-[var(--border)] rounded-sm mb-12">
                    <div className="flex items-center gap-3 mb-4">
                       <div className="w-8 h-8 rounded-full bg-[var(--surface2)] border border-[var(--accent)]/30 flex items-center justify-center">
-                         <span className="text-[10px] mono font-bold text-[var(--accent)]">DS</span>
+                         <span className="text-[length:var(--text-small)] mono font-bold text-[var(--accent)]">DS</span>
                       </div>
-                      <h5 className="mono text-[10px] uppercase tracking-widest text-[var(--accent)] font-bold">Author Note</h5>
+                      <h5 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--accent)] font-bold">Author Note</h5>
                    </div>
                    <p className="text-sm italic text-[var(--text)] leading-relaxed">
                       "{term.founderNote}"
@@ -108,7 +108,7 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
               <div className="lg:col-span-1">
                 <div className="sticky top-32 flex flex-col gap-8">
                   <div className="card p-8" style={{ background: 'var(--surface2)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Related Tools</h4>
+                    <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--muted)] mb-8">Related Tools</h4>
                     <Link 
                       href="/tools"
                       className="group flex flex-col gap-4 no-underline p-4 border border-[var(--border)] hover:border-[var(--accent)] transition-all bg-[var(--bg)]"
@@ -118,22 +118,22 @@ export default async function GlossaryDetail({ params }: { params: Promise<{ slu
                         <ArrowUpRight size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)]" />
                       </div>
                       <div className="font-bold text-sm">View Tools</div>
-                      <div className="text-[10px] mono text-[var(--muted)]">Apply this concept using our free tools</div>
+                      <div className="text-[length:var(--text-small)] mono text-[var(--muted)]">Apply this concept using our free tools</div>
                     </Link>
                   </div>
 
                   <div className="card p-8 border-dashed" style={{ background: 'var(--bg)' }}>
                      <div className="flex items-center gap-2 mb-6">
                         <Sparkles size={16} className="text-[var(--accent)]" />
-                        <h4 className="mono text-[10px] uppercase tracking-widest">Article Info</h4>
+                        <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest">Article Info</h4>
                      </div>
                      <div className="flex justify-between items-center mb-4">
-                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Category:</span>
-                        <span className="text-[10px] mono text-[var(--accent)]">{term.category}</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase">Category:</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--accent)]">{term.category}</span>
                      </div>
                      <div className="flex justify-between items-center">
-                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Status:</span>
-                        <span className="text-[10px] mono text-[var(--text)]">Published</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase">Status:</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--text)]">Published</span>
                      </div>
                   </div>
                 </div>

@@ -54,7 +54,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--muted);
@@ -75,7 +75,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
   border-radius: 999px;
   color: var(--accent);
-  font-size: 8px;
+  font-size: var(--text-small);
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -109,7 +109,7 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -156,7 +156,7 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: var(--muted);
   cursor: pointer;
@@ -195,7 +195,7 @@
   background: transparent;
   border: 0;
   border-radius: 4px;
-  font-size: 9px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--muted);
   cursor: pointer;
@@ -220,7 +220,7 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--text);
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-weight: 600;
   cursor: pointer;
   transition: border-color 0.15s ease;
@@ -287,7 +287,7 @@
 }
 
 .kpiLabel {
-  font-size: 9px;
+  font-size: var(--text-small);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -298,7 +298,7 @@
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-size: 8.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: #10b981;
   background: rgba(16, 185, 129, 0.1);
@@ -328,7 +328,7 @@
 }
 
 .kpiFootnote {
-  font-size: 8px;
+  font-size: var(--text-small);
   color: var(--muted);
   margin-top: 3px;
   display: flex;
@@ -362,7 +362,7 @@
 }
 
 .cardTitle {
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
@@ -382,7 +382,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 8.5px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 
@@ -434,7 +434,7 @@
 
 .chartAxisText {
   fill: var(--muted);
-  font-size: 8px;
+  font-size: var(--text-small);
   font-family: var(--font-syne), sans-serif;
 }
 
@@ -481,7 +481,7 @@
   padding: 6px 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   pointer-events: none;
-  font-size: 9px;
+  font-size: var(--text-small);
   line-height: 1.4;
   display: flex;
   flex-direction: column;
@@ -499,7 +499,7 @@
 }
 
 .tooltipBadge {
-  font-size: 7.5px;
+  font-size: var(--text-small);
   padding: 1px 4px;
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: var(--accent);
@@ -511,13 +511,13 @@
   display: flex;
   align-items: baseline;
   gap: 6px;
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 800;
   color: var(--accent);
 }
 
 .tooltipVariance {
-  font-size: 8px;
+  font-size: var(--text-small);
   color: #10b981;
   font-weight: 600;
 }
@@ -573,14 +573,14 @@
 }
 
 .radialCenterText strong {
-  font-size: 13px;
+  font-size: var(--text-small);
   font-weight: 800;
   color: var(--text);
   line-height: 1;
 }
 
 .radialCenterText small {
-  font-size: 7.5px;
+  font-size: var(--text-small);
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -601,7 +601,7 @@
   justify-content: space-between;
   padding: 3px 6px;
   border-radius: 4px;
-  font-size: 8.5px;
+  font-size: var(--text-small);
   color: var(--muted);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -644,7 +644,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.4;
   min-width: 0;
@@ -664,7 +664,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--accent);
   text-decoration: none;
@@ -726,7 +726,7 @@
 }
 
 .gaugeLabel {
-  font-size: 7.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
@@ -747,7 +747,7 @@
   padding: 4px 6px;
   background: var(--surface2);
   border-radius: 6px;
-  font-size: 8px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 
@@ -780,7 +780,7 @@
 
 .capacityBadge {
   fill: #ef4444;
-  font-size: 7.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   font-family: var(--font-syne), sans-serif;
 }
@@ -814,7 +814,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 8px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--text);
 }
@@ -831,12 +831,12 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  font-size: 7.5px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 
 .nodeCpuVal {
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 800;
   color: var(--accent);
 }
@@ -884,7 +884,7 @@
 
 .funnelMeta {
   width: 78px;
-  font-size: 8.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: var(--text);
   display: flex;
@@ -894,7 +894,7 @@
 }
 
 .funnelMeta small {
-  font-size: 7px;
+  font-size: var(--text-small);
   font-weight: 500;
   color: var(--muted);
 }
@@ -922,14 +922,14 @@
 }
 
 .funnelBarText {
-  font-size: 8px;
+  font-size: var(--text-small);
   font-weight: 800;
   color: var(--btn-primary-text);
   white-space: nowrap;
 }
 
 .funnelConvBadge {
-  font-size: 7.5px;
+  font-size: var(--text-small);
   font-weight: 700;
   color: #10b981;
   background: rgba(16, 185, 129, 0.1);

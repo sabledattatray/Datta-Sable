@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font: 9px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   letter-spacing: .15em;
   color: var(--muted);
   margin-bottom: 19px;
@@ -43,7 +43,7 @@
 }
 
 .intro p {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.8;
   color: var(--muted);
   margin: 0 0 17px;
@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font: 9px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   color: var(--muted);
 }
 
@@ -86,7 +86,7 @@
 
 .chip {
   padding: 6px 14px;
-  font: 11px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   color: var(--muted);
   background: transparent;
   border: 1px solid transparent;
@@ -127,7 +127,7 @@
 .searchInput {
   width: 100%;
   padding: 8px 12px 8px 34px;
-  font: 11px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   color: var(--text);
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -236,7 +236,7 @@
   position: absolute;
   left: 6px;
   bottom: 3px;
-  font: 9px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   letter-spacing: .12em;
   color: var(--muted);
 }
@@ -247,7 +247,7 @@
 }
 
 .level {
-  font: 8px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   letter-spacing: .08em;
   color: var(--accent);
   text-transform: uppercase;
@@ -267,7 +267,7 @@
 }
 
 .body p {
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.7;
   color: var(--muted);
   margin: 0 0 15px;
@@ -280,7 +280,7 @@
 }
 
 .topics span {
-  font: 8px var(--font-mono);
+  font: var(--text-small) var(--font-mono);
   color: var(--muted);
   border: 1px solid var(--border);
   border-radius: 5px;
@@ -308,7 +308,7 @@
   align-items: center;
   gap: 15px;
   margin-top: 32px;
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   padding-top: 24px;
   border-top: 1px solid var(--border);
@@ -345,7 +345,7 @@
     font-size: 19px;
   }
   .body p {
-    font-size: 11px;
+    font-size: var(--text-small);
   }
 }
 
@@ -375,7 +375,7 @@
     font-size: 21px;
   }
   .body p {
-    font-size: 12px;
+    font-size: var(--text-small);
   }
   .section {
     padding: 56px 0 36px;
@@ -417,13 +417,13 @@
     font-size: 18px;
   }
   .body p {
-    font-size: 11px;
+    font-size: var(--text-small);
   }
   .level {
-    font-size: 7px;
+    font-size: var(--text-small);
   }
   .topics span {
-    font-size: 7px;
+    font-size: var(--text-small);
     padding: 4px 5px;
   }
   .arrow {
@@ -435,7 +435,7 @@
     height: 14px;
   }
   .foot {
-    font-size: 9px;
+    font-size: var(--text-small);
     flex-direction: column;
     align-items: flex-start;
   }

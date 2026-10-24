@@ -130,20 +130,20 @@ function EditorContent() {
               {editId ? 'Edit Post' : 'New Post'}
             </span>
             {autoSaveLabel && (
-              <span style={{ fontSize: 12, color: css.muted, fontStyle: 'italic' }}>
+              <span style={{ fontSize: 'var(--text-small)', color: css.muted, fontStyle: 'italic' }}>
                 {autoSaveLabel}
               </span>
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <ThemeToggle />
-            <button onClick={() => setPreviewMode(true)} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4, fontSize: 11, fontWeight: 600, color: 'var(--text)', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <button onClick={() => setPreviewMode(true)} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4, fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               <Eye size={13} /> Preview
             </button>
-            <button onClick={() => handlePublish('Draft')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4, fontSize: 11, fontWeight: 600, color: 'var(--text)', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: loading ? 0.5 : 1 }}>
+            <button onClick={() => handlePublish('Draft')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 12px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4, fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: loading ? 0.5 : 1 }}>
               <Save size={13} /> Save Draft
             </button>
-            <button onClick={() => handlePublish('Published')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 16px', background: 'var(--accent)', border: 'none', borderRadius: 4, fontSize: 11, fontWeight: 700, color: '#000', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: loading ? 0.5 : 1 }}>
+            <button onClick={() => handlePublish('Published')} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 16px', background: 'var(--accent)', border: 'none', borderRadius: 4, fontSize: 'var(--text-small)', fontWeight: 700, color: '#000', cursor: 'pointer', transition: 'all 0.15s', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: loading ? 0.5 : 1 }}>
               <Send size={13} /> {loading ? 'Saving...' : 'Publish'}
             </button>
           </div>
@@ -152,7 +152,7 @@ function EditorContent() {
 
       {/* Exit preview button */}
       {previewMode && (
-        <button onClick={() => setPreviewMode(false)} style={{ position: 'fixed', top: 24, left: '50%', transform: 'translateX(-50%)', padding: '10px 24px', background: isDark ? '#1e293b' : '#0f172a', color: '#fff', fontWeight: 700, borderRadius: 999, boxShadow: '0 8px 24px rgba(0,0,0,0.3)', zIndex: 50, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
+        <button onClick={() => setPreviewMode(false)} style={{ position: 'fixed', top: 24, left: '50%', transform: 'translateX(-50%)', padding: '10px 24px', background: isDark ? '#1e293b' : '#0f172a', color: '#fff', fontWeight: 700, borderRadius: 999, boxShadow: '0 8px 24px rgba(0,0,0,0.3)', zIndex: 50, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: 'var(--text-small)' }}>
           <Eye size={15} /> Exit Preview
         </button>
       )}

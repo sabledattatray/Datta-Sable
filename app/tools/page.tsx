@@ -164,7 +164,7 @@ export default function ToolsHub() {
       
       <main className="boxed-wrapper" style={{ position: 'relative', marginBottom: '80px' }}>
         {/* Precision Decorators */}
-        <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', zIndex: 10 }}>
+        <div className="hidden sm:block" aria-hidden="true" style={{ position: 'absolute', top: '-20px', left: '-20px', width: '40px', height: '40px', zIndex: 10 }}>
           <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '1px', height: '24px', background: 'var(--accent)' }} />
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '24px', height: '1px', background: 'var(--accent)' }} />
@@ -184,7 +184,7 @@ export default function ToolsHub() {
 
             <div className="flex items-center gap-2 mb-8">
               <Zap size={16} className="text-[var(--accent)]" />
-              <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Precision_Modules</h4>
+              <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--text)]">Precision_Modules</h4>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -196,7 +196,7 @@ export default function ToolsHub() {
         </section>
 
         {/* Bottom Decorator */}
-        <div style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', zIndex: 10 }}>
+        <div className="hidden sm:block" aria-hidden="true" style={{ position: 'absolute', bottom: '-20px', right: '-20px', width: '40px', height: '40px', zIndex: 10 }}>
           <div style={{ position: 'absolute', width: '100%', height: '100%', border: '1px solid rgba(201, 243, 29, 0.4)', borderRadius: '50%' }} />
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '1px', height: '24px', background: 'var(--accent)' }} />
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '24px', height: '1px', background: 'var(--accent)' }} />

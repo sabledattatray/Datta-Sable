@@ -85,7 +85,7 @@ export default function OGPreviewPage() {
             background: '#060606', 
             border: '1px solid #C9F31D',
             padding: '4px 12px',
-            fontSize: '10px',
+            fontSize: 'var(--text-small)',
             fontWeight: 700,
             color: '#C9F31D',
             letterSpacing: '0.1em'
@@ -104,17 +104,17 @@ export default function OGPreviewPage() {
         <div style={{ marginTop: 'auto', display: 'flex', gap: '15px' }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '20px', fontWeight: 700, color: '#fff' }}>50+</div>
-            <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}>PROJECTS</div>
+            <div style={{ fontSize: 'var(--text-small)', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}>PROJECTS</div>
           </div>
           <div style={{ width: '1px', height: '30px', background: 'rgba(255,255,255,0.1)' }} />
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '20px', fontWeight: 700, color: '#fff' }}>100K+</div>
-            <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}>ROWS</div>
+            <div style={{ fontSize: 'var(--text-small)', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}>ROWS</div>
           </div>
           <div style={{ width: '1px', height: '30px', background: 'rgba(255,255,255,0.1)' }} />
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '20px', fontWeight: 700, color: '#fff' }}>99%</div>
-            <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}>CLIENTS</div>
+            <div style={{ fontSize: 'var(--text-small)', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em' }}>CLIENTS</div>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function OGPreviewPage() {
       <div style={{ flex: 1, padding: '60px', position: 'relative', zIndex: 2 }}>
         {/* Top: Tech Arsenal */}
         <div style={{ marginBottom: '50px' }}>
-          <div style={{ fontSize: '10px', color: '#C9F31D', letterSpacing: '0.3em', marginBottom: '20px' }}>TECHNICAL_ARSENAL</div>
+          <div style={{ fontSize: 'var(--text-small)', color: '#C9F31D', letterSpacing: '0.3em', marginBottom: '20px' }}>TECHNICAL_ARSENAL</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
             {[
               { icon: <Database size={18} />, label: 'SQL' },
@@ -140,7 +140,7 @@ export default function OGPreviewPage() {
                 gap: '10px'
               }}>
                 <div style={{ color: '#00C9F2' }}>{skill.icon}</div>
-                <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em' }}>{skill.label}</div>
+                <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, letterSpacing: '0.1em' }}>{skill.label}</div>
               </div>
             ))}
           </div>
@@ -148,7 +148,7 @@ export default function OGPreviewPage() {
 
         {/* Bottom: Core Deployments */}
         <div>
-          <div style={{ fontSize: '10px', color: '#00C9F2', letterSpacing: '0.3em', marginBottom: '20px' }}>CORE_DEPLOYMENTS</div>
+          <div style={{ fontSize: 'var(--text-small)', color: '#00C9F2', letterSpacing: '0.3em', marginBottom: '20px' }}>CORE_DEPLOYMENTS</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
             {[
               { title: 'SDR-9 Analytical Lab', desc: 'Enterprise-scale telemetry & fraud detection systems.' },
@@ -162,7 +162,7 @@ export default function OGPreviewPage() {
                 background: 'rgba(0, 201, 242, 0.02)'
               }}>
                 <h4 style={{ fontSize: '14px', marginBottom: '6px', fontWeight: 600 }}>{p.title}</h4>
-                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{p.desc}</p>
+                <p style={{ fontSize: 'var(--text-small)', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{p.desc}</p>
               </div>
             ))}
           </div>
@@ -179,7 +179,7 @@ export default function OGPreviewPage() {
           opacity: 0.5
         }}>
           <Globe size={14} color="#C9F31D" />
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em' }}>DATTASABLE.COM</div>
+          <div style={{ fontSize: 'var(--text-small)', fontWeight: 700, letterSpacing: '0.2em' }}>DATTASABLE.COM</div>
         </div>
       </div>
 

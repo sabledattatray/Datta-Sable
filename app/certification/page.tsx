@@ -369,7 +369,7 @@ export default function CertificationPage() {
                   <h3 id="certificate-modal-title" className="text-xs sm:text-sm font-extrabold text-[var(--text)] truncate font-display">
                     {activePdfModal.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[var(--muted)] font-mono">
+                  <div className="flex items-center gap-2 text-[length:var(--text-small)] sm:text-[length:var(--text-small)] text-[var(--muted)] font-mono">
                     <span>{activePdfModal.issuerBadge}</span>
                     <span>&bull;</span>
                     <span className="truncate">ID: {activePdfModal.credentialId}</span>
@@ -390,7 +390,7 @@ export default function CertificationPage() {
                   >
                     <ZoomOut size={14} />
                   </button>
-                  <span className="w-10 text-center text-[10px]">{zoomLevel}%</span>
+                  <span className="w-10 text-center text-[length:var(--text-small)]">{zoomLevel}%</span>
                   <button
                     type="button"
                     onClick={() => setZoomLevel((prev) => Math.min(150, prev + 15))}
@@ -433,12 +433,12 @@ export default function CertificationPage() {
             </header>
 
             {/* Document Protection Shield Banner (Download Disabled) */}
-            <div className="px-4 py-2 bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] border-b border-[var(--border)] flex items-center justify-between text-[11px] font-mono shrink-0">
+            <div className="px-4 py-2 bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] border-b border-[var(--border)] flex items-center justify-between text-[length:var(--text-small)] font-mono shrink-0">
               <div className="flex items-center gap-2 text-[var(--accent)] font-semibold truncate">
                 <Lock size={14} className="shrink-0" />
                 <span className="truncate">Official Certificate Vault &bull; View-Only Protected Mode (Direct Download Disabled)</span>
               </div>
-              <span className="text-[10px] text-[var(--muted)] hidden md:inline">
+              <span className="text-[length:var(--text-small)] text-[var(--muted)] hidden md:inline">
                 Issued to: {activePdfModal.recipient}
               </span>
             </div>

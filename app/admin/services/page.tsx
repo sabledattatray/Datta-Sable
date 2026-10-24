@@ -132,7 +132,7 @@ export default function AdminServices() {
           color: toast.type === 'success' ? 'var(--accent)' : '#f87171',
           border: `1px solid ${toast.type === 'success' ? 'var(--accent)' : 'rgba(239,68,68,0.3)'}`,
           padding: '12px 20px', borderRadius: 10, boxShadow: '0 12px 36px rgba(0,0,0,0.4)',
-          backdropFilter: 'blur(12px)', fontSize: 12, fontWeight: 600,
+          backdropFilter: 'blur(12px)', fontSize: 'var(--text-small)', fontWeight: 600,
         }}>
           {toast.type === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
           {toast.message}
@@ -214,7 +214,7 @@ export default function AdminServices() {
             <Briefcase size={26} color="var(--accent)" />
           </div>
           <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>No services published</h3>
-          <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 20px' }}>Create your first service offering to start building your catalog.</p>
+          <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', margin: '0 0 20px' }}>Create your first service offering to start building your catalog.</p>
           <button onClick={openAdd} className={adminStyles.primary}>
             <Plus size={15} /> Add Service
           </button>
@@ -280,7 +280,7 @@ export default function AdminServices() {
                 )}
               </div>
 
-              <p style={{ fontSize: 12, color: 'var(--muted)', margin: '0 0 16px', lineHeight: 1.6, flex: 1 }}>
+              <p style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', margin: '0 0 16px', lineHeight: 1.6, flex: 1 }}>
                 {s.desc || 'No description provided.'}
               </p>
 
@@ -298,7 +298,7 @@ export default function AdminServices() {
                     Inactive
                   </span>
                 )}
-                <span style={{ fontSize: 11, color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                   <Clock size={11} /> {s.orders} order{s.orders !== 1 ? 's' : ''}
                 </span>
               </div>

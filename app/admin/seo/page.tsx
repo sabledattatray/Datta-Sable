@@ -163,14 +163,14 @@ export default function SeoIntelligencePage() {
           ].map((item, i) => (
             <div key={i} style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 18, background: 'var(--surface2)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>{item.title}</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)', lineHeight: 1.5, marginBottom: 16 }}>{item.desc}</div>
+                <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>{item.title}</div>
+                <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', lineHeight: 1.5, marginBottom: 16 }}>{item.desc}</div>
               </div>
               <button
                 onClick={() => handleExecuteAction(item.action)}
                 disabled={loadingAction === item.action}
                 className={adminStyles.secondary}
-                style={{ width: '100%', minHeight: 34, fontSize: 11 }}
+                style={{ width: '100%', minHeight: 34, fontSize: 'var(--text-small)' }}
               >
                 {loadingAction === item.action ? 'Executing...' : item.btn}
               </button>
@@ -213,15 +213,15 @@ export default function SeoIntelligencePage() {
           ].map((op, i) => (
             <div key={i} style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 16, background: 'var(--surface2)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 10, marginBottom: 8 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{op.title}</div>
-                <div style={{ display: 'flex', gap: 12, fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>
+                <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--text)' }}>{op.title}</div>
+                <div style={{ display: 'flex', gap: 12, fontSize: 'var(--text-small)', fontWeight: 500, color: 'var(--muted)' }}>
                   <span>Impressions: <strong style={{ color: 'var(--text)', fontVariantNumeric: 'tabular-nums' }}>{op.impressions}</strong></span>
                   <span>Clicks: <strong style={{ color: 'var(--text)', fontVariantNumeric: 'tabular-nums' }}>{op.clicks}</strong></span>
                   <span>CTR: <strong style={{ color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{op.ctr}</strong></span>
                   <span>Position: <strong style={{ color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>{op.position}</strong></span>
                 </div>
               </div>
-              <div className={adminStyles.notice} style={{ marginBottom: 0, padding: '8px 12px', fontSize: 11 }}>
+              <div className={adminStyles.notice} style={{ marginBottom: 0, padding: '8px 12px', fontSize: 'var(--text-small)' }}>
                 <span>💡 <strong>Optimization Tip:</strong> {op.recommendation}</span>
               </div>
             </div>

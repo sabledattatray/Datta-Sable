@@ -175,11 +175,11 @@ export default function ChainExecutionClient({ chain }: { chain: ExecutionChain 
                 <div className="card p-8 sticky top-32" style={{ background: 'var(--surface2)' }}>
                   <div className="flex items-center gap-2 mb-6">
                     <Cpu size={16} className="text-[var(--accent)]" />
-                    <h4 className="mono text-[10px] uppercase tracking-widest">Input_Parameters</h4>
+                    <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest">Input_Parameters</h4>
                   </div>
 
                   <div className="mb-8">
-                    <label className="block mono text-[9px] text-[var(--muted)] mb-3 uppercase tracking-widest">{chain.inputLabel}</label>
+                    <label className="block mono text-[length:var(--text-small)] text-[var(--muted)] mb-3 uppercase tracking-widest">{chain.inputLabel}</label>
                     <textarea 
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
@@ -207,19 +207,19 @@ export default function ChainExecutionClient({ chain }: { chain: ExecutionChain 
                       <div className="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--bg)]/50">
                         <div className="flex items-center gap-2">
                           <Layers size={14} className="text-[var(--accent)]" />
-                          <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--text)]">Node_{node.toUpperCase()}</h4>
+                          <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--text)]">Node_{node.toUpperCase()}</h4>
                         </div>
                         {results[node] && (
                           <button 
                             onClick={() => handleCopy(node, results[node])}
-                            className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[9px]"
+                            className="text-[var(--accent)] hover:opacity-80 transition-all flex items-center gap-2 mono text-[length:var(--text-small)]"
                           >
                             {copied === node ? <Check size={12} /> : <Copy size={12} />} COPY_NODE
                           </button>
                         )}
                       </div>
                       <div 
-                        className="p-6 min-h-[100px] mono text-[10px] leading-relaxed text-[var(--muted)]"
+                        className="p-6 min-h-[100px] mono text-[length:var(--text-small)] leading-relaxed text-[var(--muted)]"
                         style={{ whiteSpace: 'pre-wrap' }}
                       >
                         {isExecuting ? (
@@ -232,7 +232,7 @@ export default function ChainExecutionClient({ chain }: { chain: ExecutionChain 
                   ))}
 
                   {Object.keys(results).length > 0 && (
-                    <button className="btn-outline w-full py-4 flex items-center justify-center gap-2 mono text-[10px] tracking-widest">
+                    <button className="btn-outline w-full py-4 flex items-center justify-center gap-2 mono text-[length:var(--text-small)] tracking-widest">
                       <Download size={14} /> EXPORT_COMPLETE_PACKAGE
                     </button>
                   )}
@@ -250,7 +250,7 @@ export default function ChainExecutionClient({ chain }: { chain: ExecutionChain 
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
               <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-              <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>{editorial.label}</span>
+              <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>{editorial.label}</span>
             </div>
 
             <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', fontWeight: 700, marginBottom: '2rem', color: 'var(--text)', lineHeight: 1.25, fontFamily: "'Syne', sans-serif" }}>

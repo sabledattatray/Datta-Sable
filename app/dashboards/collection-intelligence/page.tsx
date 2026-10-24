@@ -287,7 +287,7 @@ export default function CollectionIntelligencePage() {
               <div className="w-12 h-12 bg-gradient-to-br from-[#00d4ff] to-[#0066ff] rounded-xl flex items-center justify-center text-2xl shadow-[0_0_30px_rgba(0,212,255,0.4)]">💳</div>
               <div>
                 <div className="font-['Rajdhani'] text-3xl font-bold tracking-[2px] text-[var(--text)]">EMI<span className="text-[#00d4ff]">PULSE</span></div>
-                <div className="text-[11px] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Collection Intelligence Infrastructure</div>
+                <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">Collection Intelligence Infrastructure</div>
               </div>
             </div>
             <div className="flex items-center gap-6">
@@ -295,7 +295,7 @@ export default function CollectionIntelligencePage() {
                 {['1W', '1M', '3M', '6M', '1Y'].map(t => (
                   <button 
                     key={t} 
-                    className={`px-4 py-1.5 text-[11px] rounded-lg transition-all whitespace-nowrap min-w-[45px] flex items-center justify-center ${
+                    className={`px-4 py-1.5 text-[length:var(--text-small)] rounded-lg transition-all whitespace-nowrap min-w-[45px] flex items-center justify-center ${
                       t === '3M' ? 'bg-[#00d4ff] text-black font-bold shadow-[0_0_15px_rgba(0,212,255,0.3)]' : 'text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5'
                     }`}
                   >
@@ -328,10 +328,10 @@ export default function CollectionIntelligencePage() {
             >
               <div className="absolute top-0 left-0 w-full h-[2px] opacity-70" style={{ background: kpi.color }}></div>
               <div>
-                <div className="text-[10px] tracking-[1.5px] uppercase text-[var(--muted)] mb-2 font-semibold">{kpi.label}</div>
+                <div className="text-[length:var(--text-small)] tracking-[1.5px] uppercase text-[var(--muted)] mb-2 font-semibold">{kpi.label}</div>
                 <div className="font-['Rajdhani'] text-2xl font-bold leading-none mb-2" style={{ color: kpi.color }}>{kpi.value}<span className="text-sm ml-0.5">{kpi.unit}</span></div>
               </div>
-              <div className="flex items-center gap-2 text-[11px]">
+              <div className="flex items-center gap-2 text-[length:var(--text-small)]">
                 <span className={`font-bold ${kpi.delta.startsWith('+') ? 'text-[#00ff88]' : 'text-[#ff3366]'}`}>
                   {kpi.delta.startsWith('+') ? '▲' : '▼'} {kpi.delta}
                 </span>
@@ -349,7 +349,7 @@ export default function CollectionIntelligencePage() {
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>EMI Collection Trend</div>
               <div className="flex gap-1">
                 {['Bar', 'Line', 'Area'].map(t => (
-                  <button key={t} className={`px-2.5 py-1 text-[10px] border border-white/5 rounded-md ${t === 'Bar' ? 'bg-[#00d4ff]/10 border-[#00d4ff] text-[#00d4ff]' : 'text-white/30 hover:text-white'}`}>{t}</button>
+                  <button key={t} className={`px-2.5 py-1 text-[length:var(--text-small)] border border-white/5 rounded-md ${t === 'Bar' ? 'bg-[#00d4ff]/10 border-[#00d4ff] text-[#00d4ff]' : 'text-white/30 hover:text-white'}`}>{t}</button>
                 ))}
               </div>
             </div>
@@ -359,12 +359,12 @@ export default function CollectionIntelligencePage() {
           <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl flex flex-col items-center shadow-sm">
             <div className="w-full flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Monthly Target</div>
-              <div className="text-[10px] px-2 py-0.5 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-full text-[#00d4ff] font-bold">MAY 2026</div>
+              <div className="text-[length:var(--text-small)] px-2 py-0.5 bg-[#00d4ff]/10 border border-[#00d4ff]/20 rounded-full text-[#00d4ff] font-bold">MAY 2026</div>
             </div>
             <div className="flex flex-col items-center mt-2">
               <canvas ref={gaugeCanvasRef} className="w-[200px] h-[140px]"></canvas>
               <div className="font-['Rajdhani'] text-3xl font-bold -mt-3 text-[#00ff88]">94.7%</div>
-              <div className="text-[11px] text-white/30 tracking-[1px] uppercase mt-1">Efficiency</div>
+              <div className="text-[length:var(--text-small)] text-white/30 tracking-[1px] uppercase mt-1">Efficiency</div>
             </div>
             <div className="grid grid-cols-3 w-full gap-2 mt-6">
               {[
@@ -374,7 +374,7 @@ export default function CollectionIntelligencePage() {
               ].map((s, i) => (
                 <div key={i} className="text-center">
                   <div className="font-['Rajdhani'] text-base font-bold" style={{ color: s.color.startsWith('white') ? 'rgba(255,255,255,0.3)' : s.color }}>{s.val}</div>
-                  <div className="text-[9px] uppercase tracking-[1px] text-white/30">{s.label}</div>
+                  <div className="text-[length:var(--text-small)] uppercase tracking-[1px] text-white/30">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -412,7 +412,7 @@ export default function CollectionIntelligencePage() {
           <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Overdue Aging</div>
-              <div className="text-[10px] px-2 py-0.5 bg-[#ff3366]/10 border border-[#ff3366]/20 rounded-full text-[#ff3366] font-bold">NPA RISK</div>
+              <div className="text-[length:var(--text-small)] px-2 py-0.5 bg-[#ff3366]/10 border border-[#ff3366]/20 rounded-full text-[#ff3366] font-bold">NPA RISK</div>
             </div>
             <canvas ref={agingCanvasRef} className="w-full h-[180px]"></canvas>
           </div>
@@ -452,11 +452,11 @@ export default function CollectionIntelligencePage() {
           <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Daily Heatmap</div>
-              <div className="text-[10px] text-white/30">May 2026</div>
+              <div className="text-[length:var(--text-small)] text-white/30">May 2026</div>
             </div>
             <div className="grid grid-cols-7 gap-1 mb-4">
               {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, idx) => (
-                <div key={`${d}-${idx}`} className="text-center text-[9px] text-white/20 mb-1">{d}</div>
+                <div key={`${d}-${idx}`} className="text-center text-[length:var(--text-small)] text-white/20 mb-1">{d}</div>
               ))}
               {Array.from({ length: 35 }).map((_, i) => {
                 const intensity = mounted ? (intensities[i] || 0) : 0;
@@ -471,7 +471,7 @@ export default function CollectionIntelligencePage() {
               })}
             </div>
             <div className="pt-4 border-t border-white/5">
-              <div className="text-[10px] tracking-[1px] uppercase text-white/30 mb-3">Collection Channel</div>
+              <div className="text-[length:var(--text-small)] tracking-[1px] uppercase text-white/30 mb-3">Collection Channel</div>
               <canvas ref={channelCanvasRef} className="w-full h-[110px]"></canvas>
             </div>
           </div>
@@ -482,17 +482,17 @@ export default function CollectionIntelligencePage() {
           <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl overflow-x-auto shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Recent Transactions</div>
-              <button className="text-[10px] px-3 py-1 bg-[#00d4ff]/5 border border-[#00d4ff]/20 rounded-md text-[#00d4ff] hover:bg-[#00d4ff]/10 transition-all">View All</button>
+              <button className="text-[length:var(--text-small)] px-3 py-1 bg-[#00d4ff]/5 border border-[#00d4ff]/20 rounded-md text-[#00d4ff] hover:bg-[#00d4ff]/10 transition-all">View All</button>
             </div>
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
                 <tr className="border-b border-white/5">
-                  <th className="p-3 text-[9px] uppercase tracking-[1.5px] text-white/30 font-medium">Loan ID</th>
-                  <th className="p-3 text-[9px] uppercase tracking-[1.5px] text-white/30 font-medium">Customer</th>
-                  <th className="p-3 text-[9px] uppercase tracking-[1.5px] text-white/30 font-medium">Type</th>
-                  <th className="p-3 text-[9px] uppercase tracking-[1.5px] text-white/30 font-medium">EMI Amount</th>
-                  <th className="p-3 text-[9px] uppercase tracking-[1.5px] text-white/30 font-medium">Status</th>
-                  <th className="p-3 text-[9px] uppercase tracking-[1.5px] text-white/30 font-medium">DPD</th>
+                  <th className="p-3 text-[length:var(--text-small)] uppercase tracking-[1.5px] text-white/30 font-medium">Loan ID</th>
+                  <th className="p-3 text-[length:var(--text-small)] uppercase tracking-[1.5px] text-white/30 font-medium">Customer</th>
+                  <th className="p-3 text-[length:var(--text-small)] uppercase tracking-[1.5px] text-white/30 font-medium">Type</th>
+                  <th className="p-3 text-[length:var(--text-small)] uppercase tracking-[1.5px] text-white/30 font-medium">EMI Amount</th>
+                  <th className="p-3 text-[length:var(--text-small)] uppercase tracking-[1.5px] text-white/30 font-medium">Status</th>
+                  <th className="p-3 text-[length:var(--text-small)] uppercase tracking-[1.5px] text-white/30 font-medium">DPD</th>
                 </tr>
               </thead>
               <tbody className="text-xs">
@@ -509,7 +509,7 @@ export default function CollectionIntelligencePage() {
                     <td className="p-3 text-white/30">{tx.type}</td>
                     <td className="p-3 font-['Rajdhani'] font-bold">{tx.amt}</td>
                     <td className="p-3">
-                      <span className={`px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider ${
+                      <span className={`px-2 py-0.5 rounded-sm text-[length:var(--text-small)] font-bold uppercase tracking-wider ${
                         tx.status === 'paid' ? 'bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20' : 
                         tx.status === 'pending' ? 'bg-[#ffd700]/10 text-[#ffd700] border border-[#ffd700]/20' : 
                         'bg-[#ff3366]/10 text-[#ff3366] border border-[#ff3366]/20'
@@ -525,10 +525,10 @@ export default function CollectionIntelligencePage() {
           <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl shadow-sm">
             <div className="flex items-center justify-between mb-5">
               <div className="font-['Rajdhani'] text-sm font-semibold tracking-[1.5px] uppercase"><span className="text-[#00d4ff] mr-2">◈</span>Risk vs Amount</div>
-              <div className="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-white/50 font-bold uppercase">Scatter</div>
+              <div className="text-[length:var(--text-small)] px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-white/50 font-bold uppercase">Scatter</div>
             </div>
             <canvas ref={scatterCanvasRef} className="w-full h-[220px]"></canvas>
-            <div className="flex flex-wrap gap-4 mt-4 text-[10px] text-white/30 uppercase tracking-wider">
+            <div className="flex flex-wrap gap-4 mt-4 text-[length:var(--text-small)] text-white/30 uppercase tracking-wider">
               <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#00ff88]"></div> Low Risk</div>
               <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#ffd700]"></div> Medium</div>
               <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#ff3366]"></div> High Risk</div>

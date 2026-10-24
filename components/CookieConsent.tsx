@@ -37,7 +37,7 @@ export default function CookieConsent() {
             </svg>
           </span>
           <p className="cookie-text">
-            <span>We use cookies to maintain essential functionality and optional analytics to improve your experience.</span>
+            <span>Essential cookies keep this site working. Analytics are optional.</span>
             <span className="cookie-links">
               <Link href="/cookies">Cookie policy</Link>
               <span className="cookie-sep" aria-hidden="true">·</span>
@@ -121,7 +121,7 @@ export default function CookieConsent() {
         .cookie-text {
           margin: 0;
           color: var(--muted);
-          font-size: 13px;
+          font-size:var(--text-small);
           line-height: 1.45;
         }
         .cookie-links {
@@ -136,7 +136,7 @@ export default function CookieConsent() {
           text-decoration: underline;
           text-decoration-color: var(--border);
           text-underline-offset: 3px;
-          font-size: 12px;
+          font-size:var(--text-small);
           transition: color 0.15s, text-decoration-color 0.15s;
         }
         .cookie-links :global(a:hover) {
@@ -162,7 +162,7 @@ export default function CookieConsent() {
           padding: 6px 16px;
           border-radius: 9px;
           font-family: inherit;
-          font-size: 12px;
+          font-size:var(--text-small);
           font-weight: 600;
           cursor: pointer;
           transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
@@ -197,9 +197,9 @@ export default function CookieConsent() {
         @media (max-width: 680px) {
           .cookie-banner {
             bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-            width: calc(100% - 24px);
-            padding: 12px 14px;
-            border-radius: 14px;
+            width: min(420px, calc(100% - 24px));
+            padding: 12px;
+            border-radius: 18px;
           }
           .cookie-inner {
             flex-direction: column;
@@ -207,10 +207,30 @@ export default function CookieConsent() {
             gap: 10px;
           }
           .cookie-content {
-            gap: 10px;
+            align-items: flex-start;
+            gap: 9px;
+          }
+          .cookie-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
           }
           .cookie-text {
-            font-size: 12px;
+            font-size:var(--text-small);
+            line-height: 1.5;
+          }
+          .cookie-links {
+            display: flex;
+            margin-left: 0;
+            gap: 3px;
+          }
+          .cookie-links :global(a) {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+          }
+          .cookie-sep {
+            margin: 0 4px;
           }
           .cookie-actions {
             display: grid;
@@ -219,7 +239,11 @@ export default function CookieConsent() {
           }
           .cookie-button {
             width: 100%;
-            min-height: 36px;
+            min-height: 44px;
+            border-radius: 11px;
+          }
+          .cookie-accept {
+            box-shadow: none;
           }
         }
         @media (prefers-reduced-motion: reduce) {

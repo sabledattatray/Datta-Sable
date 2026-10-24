@@ -132,9 +132,9 @@ export default function MessagesInbox() {
           {/* List items */}
           <div style={{ marginTop: 12 }}>
             {loading ? (
-              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--muted)', fontSize: 12 }}>Loading messages...</div>
+              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>Loading messages...</div>
             ) : filtered.length === 0 ? (
-              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--muted)', fontSize: 12 }}>No messages found</div>
+              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--muted)', fontSize: 'var(--text-small)' }}>No messages found</div>
             ) : (
               filtered.map((m, i) => {
                 const isActive = selected?.id === m.id;
@@ -155,17 +155,17 @@ export default function MessagesInbox() {
                       width: 34, height: 34, borderRadius: 8,
                       background: 'var(--surface2)', border: '1px solid var(--border)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: 'var(--accent)', fontWeight: 600, fontSize: 12, flexShrink: 0
+                      color: 'var(--accent)', fontWeight: 600, fontSize: 'var(--text-small)', flexShrink: 0
                     }}>
                       {m.name.charAt(0).toUpperCase()}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
-                        <span style={{ fontSize: 12, fontWeight: m.read ? 500 : 600, color: 'var(--text)' }}>{m.name}</span>
-                        <span style={{ fontSize: 9, color: 'var(--muted)', flexShrink: 0, marginLeft: 8 }}>{m.date}</span>
+                        <span style={{ fontSize: 'var(--text-small)', fontWeight: m.read ? 500 : 600, color: 'var(--text)' }}>{m.name}</span>
+                        <span style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', flexShrink: 0, marginLeft: 8 }}>{m.date}</span>
                       </div>
-                      <div style={{ fontSize: 11, fontWeight: m.read ? 400 : 500, color: m.read ? 'var(--muted)' : 'var(--text)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.subject}</div>
-                      <div style={{ fontSize: 10, color: 'var(--muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.message}</div>
+                      <div style={{ fontSize: 'var(--text-small)', fontWeight: m.read ? 400 : 500, color: m.read ? 'var(--muted)' : 'var(--text)', marginBottom: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.subject}</div>
+                      <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.message}</div>
                     </div>
                     {!m.read && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, marginTop: 5 }} />}
                   </div>
@@ -186,7 +186,7 @@ export default function MessagesInbox() {
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{selected.name}</div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{selected.email}</div>
+                  <div style={{ fontSize: 'var(--text-small)', color: 'var(--muted)', marginTop: 2 }}>{selected.email}</div>
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -217,14 +217,14 @@ export default function MessagesInbox() {
 
             {/* Message body */}
             <div style={{ padding: '24px' }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 6 }}>Subject</div>
+              <div style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 6 }}>Subject</div>
               <h2 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text)', margin: '0 0 16px' }}>{selected.subject}</h2>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 18, color: 'var(--muted)', fontSize: 11 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 18, color: 'var(--muted)', fontSize: 'var(--text-small)' }}>
                 <Clock size={12} />
                 <span>{selected.date} ({new Date(selected.createdAt).toLocaleString()})</span>
               </div>
               <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: '18px 20px' }}>
-                <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.8, margin: 0, whiteSpace: 'pre-wrap' }}>{selected.message}</p>
+                <p style={{ fontSize: 'var(--text-small)', color: 'var(--text)', lineHeight: 1.8, margin: 0, whiteSpace: 'pre-wrap' }}>{selected.message}</p>
               </div>
             </div>
           </div>

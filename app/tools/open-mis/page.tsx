@@ -202,15 +202,15 @@ export default function OpenMisToolPage() {
 
               {/* Technical Capability Badges */}
               <div className="flex flex-wrap items-center gap-2.5 mb-8">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[length:var(--text-small)] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
                   <ShieldCheck size={13} className="text-[var(--accent)]" />
                   Zero Telemetry • 0KB Network Ingestion
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[length:var(--text-small)] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
                   <Cpu size={13} className="text-[var(--accent)]" />
                   Web Worker Parsing Engine
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[length:var(--text-small)] font-mono uppercase tracking-wider bg-[var(--surface2)] text-[var(--text)] border border-[var(--border)] rounded">
                   <FileSpreadsheet size={13} className="text-[var(--accent)]" />
                   Multi-Sheet .xlsx &amp; .csv Support
                 </span>
@@ -327,12 +327,12 @@ export default function OpenMisToolPage() {
                     <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }} />
                     <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#27c93f' }} />
                   </div>
-                  <span className="mono text-[11px] font-bold text-[var(--text)] tracking-wider ml-2">
+                  <span className="mono text-[length:var(--text-small)] font-bold text-[var(--text)] tracking-wider ml-2">
                     NEXDIAL_PARSER_CONSOLE // IN_BROWSER_ISOLATION
                   </span>
                 </div>
 
-                <div className="flex items-center gap-4 text-[10px] font-mono text-[var(--muted)]">
+                <div className="flex items-center gap-4 text-[length:var(--text-small)] font-mono text-[var(--muted)]">
                   <span className="flex items-center gap-1.5">
                     <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent)' }} />
                     THREAD: WEB_WORKER_01
@@ -362,7 +362,7 @@ export default function OpenMisToolPage() {
                       onClick={() => setActiveDataset(ds)}
                       style={{
                         padding: '0.55rem 1.15rem',
-                        fontSize: '11px',
+                        fontSize: 'var(--text-small)',
                         fontFamily: 'var(--font-mono)',
                         fontWeight: 600,
                         textTransform: 'uppercase',
@@ -409,7 +409,7 @@ export default function OpenMisToolPage() {
                     <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
                       {activeDataset.name}
                     </h3>
-                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--muted)]">
+                    <span className="mono text-[length:var(--text-small)] px-2 py-0.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--muted)]">
                       {activeDataset.rowCount}
                     </span>
                   </div>
@@ -422,7 +422,7 @@ export default function OpenMisToolPage() {
                   href="https://excel.dattasable.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline inline-flex items-center gap-2 text-[11px] font-mono no-underline"
+                  className="btn-outline inline-flex items-center gap-2 text-[length:var(--text-small)] font-mono no-underline"
                   style={{ 
                     padding: '0.5rem 1rem', 
                     borderRadius: '4px', 
@@ -455,10 +455,10 @@ export default function OpenMisToolPage() {
                       }}
                     >
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="mono text-[10px] uppercase font-bold text-[var(--muted)] tracking-wider">
+                        <span className="mono text-[length:var(--text-small)] uppercase font-bold text-[var(--muted)] tracking-wider">
                           {kpi.label}
                         </span>
-                        <span className="mono text-[9px] px-1.5 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                        <span className="mono text-[length:var(--text-small)] px-1.5 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
                           {kpi.trend}
                         </span>
                       </div>
@@ -467,7 +467,7 @@ export default function OpenMisToolPage() {
                         {kpi.value}
                       </div>
 
-                      <div className="mono text-[10px] text-[var(--muted)] flex items-center gap-1 truncate">
+                      <div className="mono text-[length:var(--text-small)] text-[var(--muted)] flex items-center gap-1 truncate">
                         <span className="text-[var(--accent)] font-bold">fx:</span> {kpi.sub}
                       </div>
                     </div>
@@ -493,11 +493,11 @@ export default function OpenMisToolPage() {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
                         <PieChart size={15} className="text-[var(--accent)]" />
-                        <span className="mono text-[11px] font-bold text-[var(--text)] uppercase tracking-wider">
+                        <span className="mono text-[length:var(--text-small)] font-bold text-[var(--text)] uppercase tracking-wider">
                           Categorical Distribution Mapping
                         </span>
                       </div>
-                      <span className="mono text-[10px] text-[var(--muted)]">Apache ECharts Engine</span>
+                      <span className="mono text-[length:var(--text-small)] text-[var(--muted)]">Apache ECharts Engine</span>
                     </div>
 
                     <div className="space-y-3.5">
@@ -505,7 +505,7 @@ export default function OpenMisToolPage() {
                         <div key={i} className="space-y-1.5">
                           <div className="flex justify-between items-center text-xs">
                             <span className="font-medium text-[var(--text)]">{item.category}</span>
-                            <div className="flex items-center gap-2 font-mono text-[11px]">
+                            <div className="flex items-center gap-2 font-mono text-[length:var(--text-small)]">
                               <span className="text-[var(--text)] font-semibold">{item.amount}</span>
                               <span className="text-[var(--muted)]">({item.share}%)</span>
                             </div>
@@ -544,11 +544,11 @@ export default function OpenMisToolPage() {
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <Terminal size={15} className="text-[var(--accent)]" />
-                          <span className="mono text-[11px] font-bold text-[var(--text)] uppercase tracking-wider">
+                          <span className="mono text-[length:var(--text-small)] font-bold text-[var(--text)] uppercase tracking-wider">
                             Formula Transparency Audit
                           </span>
                         </div>
-                        <span className="mono text-[9px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] border border-[var(--border)] font-semibold">
+                        <span className="mono text-[length:var(--text-small)] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] border border-[var(--border)] font-semibold">
                           ZERO_BLACK_BOX
                         </span>
                       </div>
@@ -565,18 +565,18 @@ export default function OpenMisToolPage() {
                           borderRadius: '6px', 
                           padding: '0.85rem 1rem',
                           fontFamily: 'var(--font-mono)',
-                          fontSize: '11px',
+                          fontSize: 'var(--text-small)',
                           color: 'var(--text)',
                           lineHeight: 1.6,
                           overflowX: 'auto'
                         }}
                       >
-                        <div className="text-[var(--muted)] text-[10px] mb-1">// Deterministic Excel Logic:</div>
+                        <div className="text-[var(--muted)] text-[length:var(--text-small)] mb-1">// Deterministic Excel Logic:</div>
                         <code className="text-[var(--accent)] font-semibold">{activeDataset.formulaAudit}</code>
                       </div>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-3 text-[10px] font-mono text-[var(--muted)]">
+                    <div className="mt-4 pt-3 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-3 text-[length:var(--text-small)] font-mono text-[var(--muted)]">
                       <span className="flex items-center gap-1.5">
                         <Check size={12} className="text-[var(--accent)]" />
                         IQR Outlier Scrubbing Applied
@@ -616,52 +616,52 @@ export default function OpenMisToolPage() {
               
               {/* Step 1 */}
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
-                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                <div className="mono text-[length:var(--text-small)] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
                   PHASE_01 // INGESTION
                 </div>
                 <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
                   Drag &amp; Drop Spreadsheet
                 </h3>
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, margin: 0 }}>
                   Supports multi-sheet <code className="font-mono text-[var(--accent)]">.xlsx</code> workbooks and <code className="font-mono text-[var(--accent)]">.csv</code> files. Stream-parsed in isolated background Web Workers with 0KB cloud upload.
                 </p>
               </div>
 
               {/* Step 2 */}
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
-                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                <div className="mono text-[length:var(--text-small)] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
                   PHASE_02 // PROFILING
                 </div>
                 <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
                   Automated Type Profiling
                 </h3>
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, margin: 0 }}>
                   Automatically indexes timestamp formats, categorical dimensions, numerical measures, and primary keys. Flags duplicate rows and cleans mathematical outliers via IQR.
                 </p>
               </div>
 
               {/* Step 3 */}
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
-                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                <div className="mono text-[length:var(--text-small)] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
                   PHASE_03 // RENDERING
                 </div>
                 <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
                   Dynamic Visual Assembly
                 </h3>
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, margin: 0 }}>
                   Aggregates executive KPIs, MoM growth deltas, and renders high-performance Apache ECharts (time-series, split doughnuts, stacked bars, scatter correlations).
                 </p>
               </div>
 
               {/* Step 4 */}
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)' }}>
-                <div className="mono text-[11px] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
+                <div className="mono text-[length:var(--text-small)] font-bold text-[var(--accent)] tracking-widest bg-[var(--surface2)] px-2.5 py-1 border border-[var(--border)] inline-block mb-4 rounded">
                   PHASE_04 // EXPORT
                 </div>
                 <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text)' }}>
                   Sanitized Export &amp; PDF
                 </h3>
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, margin: 0 }}>
                   Filter dimensions, customize charts, and export sanitized CSVs (all formula injection vectors like <code className="font-mono text-[var(--accent)]">=, +, @, -</code> neutralized) or print-ready PDF reports.
                 </p>
               </div>
@@ -699,26 +699,26 @@ export default function OpenMisToolPage() {
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '680px' }}>
                   <thead>
                     <tr style={{ background: 'var(--surface2)', borderBottom: '1px solid var(--border)' }}>
-                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
                         Evaluation Vector
                       </th>
                       <th style={{ padding: '1rem 1.25rem', background: 'rgba(201, 243, 29, 0.08)', borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)' }}>
                         <div className="flex items-center gap-1.5">
-                          <span style={{ fontFamily: 'var(--font-syne)', fontSize: '13px', fontWeight: 700, color: 'var(--accent)' }}>
+                          <span style={{ fontFamily: 'var(--font-syne)', fontSize: 'var(--text-small)', fontWeight: 700, color: 'var(--accent)' }}>
                             Nexdial OpenMIS™
                           </span>
-                          <span className="mono text-[9px] px-1.5 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-bold">
+                          <span className="mono text-[length:var(--text-small)] px-1.5 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-bold">
                             RECOMMENDED
                           </span>
                         </div>
                       </th>
-                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
                         Power BI Service
                       </th>
-                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
                         Google Looker Studio
                       </th>
-                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
+                      <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-small)', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>
                         Raw Excel Workbook
                       </th>
                     </tr>
@@ -831,15 +831,15 @@ export default function OpenMisToolPage() {
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                    <span className="mono text-[length:var(--text-small)] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
                       LOGISTICS // QUICK-COMMERCE
                     </span>
-                    <span className="mono text-[10px] text-[var(--muted)]">4,140 rows</span>
+                    <span className="mono text-[length:var(--text-small)] text-[var(--muted)]">4,140 rows</span>
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
                     Hyperlocal Fleet &amp; Rider Ops
                   </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                     Driver velocity, trip SLA attainment, shift compliance, and net payout reconciliation across multi-hub city operations.
                   </p>
                 </div>
@@ -859,15 +859,15 @@ export default function OpenMisToolPage() {
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                    <span className="mono text-[length:var(--text-small)] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
                       COMMERCIAL // REVENUE
                     </span>
-                    <span className="mono text-[10px] text-[var(--muted)]">1,420 rows</span>
+                    <span className="mono text-[length:var(--text-small)] text-[var(--muted)]">1,420 rows</span>
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
                     B2B SaaS Sales Pipeline
                   </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                     Tracks pipeline conversion, sales cycle duration, average deal sizes, and quota fulfillment by sales rep.
                   </p>
                 </div>
@@ -887,15 +887,15 @@ export default function OpenMisToolPage() {
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                    <span className="mono text-[length:var(--text-small)] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
                       HR // PEOPLE OPS
                     </span>
-                    <span className="mono text-[10px] text-[var(--muted)]">320 rows</span>
+                    <span className="mono text-[length:var(--text-small)] text-[var(--muted)]">320 rows</span>
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
                     Executive Headcount &amp; Payroll
                   </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                     Department salary distributions, compensation band compliance, hiring velocity, and voluntary attrition trends.
                   </p>
                 </div>
@@ -915,15 +915,15 @@ export default function OpenMisToolPage() {
               <div className="card" style={{ padding: '1.75rem', borderRadius: 'var(--radius)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="mono text-[10px] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
+                    <span className="mono text-[length:var(--text-small)] px-2 py-0.5 rounded bg-[var(--surface2)] text-[var(--accent)] font-semibold border border-[var(--border)]">
                       SUPPLY CHAIN // WAREHOUSING
                     </span>
-                    <span className="mono text-[10px] text-[var(--muted)]">890 SKUs</span>
+                    <span className="mono text-[length:var(--text-small)] text-[var(--muted)]">890 SKUs</span>
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-syne)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
                     Inventory Aging &amp; Stock Velocity
                   </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                     Categorizes aging buckets (&lt;30d, 60d, 90d+), calculates stock turn ratio, and flags slow-moving capital items.
                   </p>
                 </div>

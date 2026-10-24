@@ -48,7 +48,7 @@ export default function DesktopNav() {
         >
           <Link
             href={link.href}
-            className={`px-1.5 xl:px-2 2xl:px-3 py-2 text-[10px] xl:text-[10.5px] 2xl:text-[11px] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-0.5 xl:gap-1 rounded-lg ${
+            className={`px-1.5 xl:px-2 2xl:px-3 py-2 text-[length:var(--text-small)] xl:text-[length:var(--text-small)] 2xl:text-[length:var(--text-small)] font-bold tracking-widest uppercase transition-all duration-300 no-underline relative z-10 flex items-center gap-0.5 xl:gap-1 rounded-lg ${
               pathname === link.href || (hovered === link.label && link.mega)
                 ? 'text-[var(--accent)]' 
                 : 'text-[var(--text)] opacity-75 hover:opacity-100 hover:bg-white/[0.03]'
@@ -119,7 +119,7 @@ export default function DesktopNav() {
                                 {item.title}
                                 <ArrowUpRight size={14} className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 group-hover/item:-translate-y-1 transition-all" />
                               </h4>
-                              <p className="text-[13px] text-[var(--muted)] leading-relaxed font-medium group-hover/item:text-[var(--text)] opacity-70 transition-colors">
+                              <p className="text-[length:var(--text-small)] text-[var(--muted)] leading-relaxed font-medium group-hover/item:text-[var(--text)] opacity-70 transition-colors">
                                 {item.desc}
                               </p>
                             </div>

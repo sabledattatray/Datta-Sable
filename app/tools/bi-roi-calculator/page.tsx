@@ -84,19 +84,19 @@ export default function BiRoiCalculator() {
             <div className="absolute top-0 right-0 w-2 h-2 bg-[var(--accent)]" />
             <div className="space-y-6">
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Team Size (Analysts)</label>
+                <label className="block text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Team Size (Analysts)</label>
                 <input 
                   type="range" name="teamSize" min="1" max="100" value={inputs.teamSize} onChange={handleInputChange}
                   className="w-full accent-[var(--accent)] bg-[var(--surface2)]"
                 />
-                <div className="flex justify-between mt-2 mono text-[12px]">
+                <div className="flex justify-between mt-2 mono text-[length:var(--text-small)]">
                   <span>1</span>
                   <span className="text-[var(--accent)] font-bold">{inputs.teamSize}</span>
                   <span>100</span>
                 </div>
               </div>
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Average Annual Salary ($)</label>
+                <label className="block text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Average Annual Salary ($)</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]">$</span>
                   <input 
@@ -106,24 +106,24 @@ export default function BiRoiCalculator() {
                 </div>
               </div>
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Manual Reporting Hours / Week (Per Person)</label>
+                <label className="block text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Manual Reporting Hours / Week (Per Person)</label>
                 <input 
                   type="range" name="manualHoursPerWeek" min="1" max="40" value={inputs.manualHoursPerWeek} onChange={handleInputChange}
                   className="w-full accent-[var(--accent)] bg-[var(--surface2)]"
                 />
-                <div className="flex justify-between mt-2 mono text-[12px]">
+                <div className="flex justify-between mt-2 mono text-[length:var(--text-small)]">
                   <span>1h</span>
                   <span className="text-[var(--accent)] font-bold">{inputs.manualHoursPerWeek}h</span>
                   <span>40h</span>
                 </div>
               </div>
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Est. Manual Error Rate (%)</label>
+                <label className="block text-[length:var(--text-small)] font-bold uppercase tracking-widest text-[var(--muted)] mb-3">Est. Manual Error Rate (%)</label>
                 <input 
                   type="range" name="errorRate" min="0" max="20" step="0.5" value={inputs.errorRate} onChange={handleInputChange}
                   className="w-full accent-[var(--accent)] bg-[var(--surface2)]"
                 />
-                <div className="flex justify-between mt-2 mono text-[12px]">
+                <div className="flex justify-between mt-2 mono text-[length:var(--text-small)]">
                   <span>0%</span>
                   <span className="text-[var(--accent)] font-bold">{inputs.errorRate}%</span>
                   <span>20%</span>
@@ -156,7 +156,7 @@ export default function BiRoiCalculator() {
 
             <div className="mt-12 p-4 bg-black/40 border border-[var(--border)] flex items-start gap-4">
               <AlertCircle size={20} className="text-[var(--accent)] shrink-0 mt-1" />
-              <p className="text-xs text-[var(--muted)] leading-relaxed" style={{ fontSize: '0.8rem' }}>
+              <p className="text-xs text-[var(--muted)] leading-relaxed" style={{ fontSize: 'var(--text-small)' }}>
                 This estimation includes labor costs and the "hidden cost" of manual errors (calculated at 1.5x labor impact). Automating these workflows usually pays for itself within <span className="text-white font-bold">3–6 months</span>.
               </p>
             </div>
@@ -190,17 +190,17 @@ export default function BiRoiCalculator() {
               <div className="space-y-4">
                 <div className="w-8 h-8 rounded-full bg-[var(--surface2)] flex items-center justify-center text-[var(--accent)] font-bold">1</div>
                 <h3 className="font-bold uppercase text-sm">Labor Displacement</h3>
-                <p className="text-[13px] text-[var(--muted)] leading-relaxed">Most analysts spend 80% of their time preparing data and only 20% analyzing it. Automation flips this ratio.</p>
+                <p className="text-[length:var(--text-small)] text-[var(--muted)] leading-relaxed">Most analysts spend 80% of their time preparing data and only 20% analyzing it. Automation flips this ratio.</p>
               </div>
               <div className="space-y-4">
                 <div className="w-8 h-8 rounded-full bg-[var(--surface2)] flex items-center justify-center text-[var(--accent)] font-bold">2</div>
                 <h3 className="font-bold uppercase text-sm">Error Mitigation</h3>
-                <p className="text-[13px] text-[var(--muted)] leading-relaxed">Manual spreadsheets have a 90% error rate in complex models. Automated pipelines ensure "One Version of Truth".</p>
+                <p className="text-[length:var(--text-small)] text-[var(--muted)] leading-relaxed">Manual spreadsheets have a 90% error rate in complex models. Automated pipelines ensure "One Version of Truth".</p>
               </div>
               <div className="space-y-4">
                 <div className="w-8 h-8 rounded-full bg-[var(--surface2)] flex items-center justify-center text-[var(--accent)] font-bold">3</div>
                 <h3 className="font-bold uppercase text-sm">Opportunity Cost</h3>
-                <p className="text-[13px] text-[var(--muted)] leading-relaxed">The biggest cost isn't the labor—it's the delayed decision-making caused by slow, manual reporting cycles.</p>
+                <p className="text-[length:var(--text-small)] text-[var(--muted)] leading-relaxed">The biggest cost isn't the labor—it's the delayed decision-making caused by slow, manual reporting cycles.</p>
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default function BiRoiCalculator() {
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
             <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
+            <span style={{ fontFamily: 'monospace', fontSize: 'var(--text-small)', letterSpacing: '0.25em', color: 'var(--accent)', textTransform: 'uppercase' }}>ABOUT_THIS_TOOL</span>
           </div>
           <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--text)', lineHeight: 1.25 }}>
             BI ROI Calculator — Justify Your Business Intelligence Investment
@@ -230,7 +230,7 @@ export default function BiRoiCalculator() {
               { label: 'ROI %', desc: 'Return on investment based on estimated 10% implementation cost' },
             ].map(f => (
               <div key={f.label} style={{ padding: '1.25rem 1.5rem', background: 'var(--bg)', borderRadius: '10px', border: '1px solid var(--border)', minWidth: 0 }}>
-                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: '0.82rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
+                <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)', fontSize: 'var(--text-small)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{f.label}</div>
                 <div style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7 }}>{f.desc}</div>
               </div>
             ))}

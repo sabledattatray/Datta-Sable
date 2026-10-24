@@ -168,6 +168,38 @@ test('Concurrency-safe budget reservations calculate task upper bounds accuratel
   assert.equal(seoCost, 0.02);
 });
 
+test('source validation rejects unsafe destinations before fetching and checks every redirect', async () => {
+  const requests = [];
+  let responses = [];
+  const research = loader({}, { AbortSignal, fetch: async (url, options) => {
+    requests.push({ url, options });
+    return responses.shift() || new Response(null, { status: 200 });
+  } })('lib/ai/research-engine.ts');
+
+  for (const url of ['https://127.0.0.1/private', 'https://learn.microsoft.com.evil.test/', 'http://learn.microsoft.com/', 'https://user:pass@learn.microsoft.com/', 'https://learn.microsoft.com:8443/']) {
+    assert.equal((await research.validateAuthoritativeSource(url)).verified, false);
+  }
+  assert.equal(requests.length, 0);
+
+  responses = [new Response(null, { status: 302, headers: { location: 'http://169.254.169.254/latest/meta-data/' } })];
+  assert.equal((await research.validateAuthoritativeSource('https://learn.microsoft.com/redirect')).verified, false);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].options.redirect, 'manual');
+
+  requests.length = 0;
+  responses = [new Response(null, { status: 301, headers: { location: '/en-us/fabric/' } }), new Response(null, { status: 200 })];
+  assert.equal((await research.validateAuthoritativeSource('https://learn.microsoft.com/old')).verified, true);
+  assert.equal(requests[1].url, 'https://learn.microsoft.com/en-us/fabric/');
+
+  requests.length = 0;
+  responses = [new Response(null, { status: 405 }), new Response('source', { status: 200 })];
+  assert.equal((await research.validateAuthoritativeSource('https://learn.microsoft.com/')).verified, true);
+  assert.deepEqual(requests.map(r => r.options.method), ['HEAD', 'GET']);
+
+  responses = Array.from({ length: 6 }, () => new Response(null, { status: 302, headers: { location: '/loop' } }));
+  assert.equal((await research.validateAuthoritativeSource('https://learn.microsoft.com/loop')).verified, false);
+});
+
 test('Schema DDL reflects all 7 additive models without dropping or altering existing tables', () => {
   const ddl = schema.AI_STUDIO_SCHEMA;
   assert.ok(Array.isArray(ddl));

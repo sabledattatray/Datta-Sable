@@ -25,9 +25,9 @@
 .brandIcon { display: grid; place-items: center; color: var(--accent); width: 32px; }
 .brandIcon svg { width: 30px; height: 30px; }
 .brand strong { display: block; font-size: 18px; letter-spacing: -.03em; font-weight: 600; line-height: 1; }
-.brand small { display: block; color: var(--muted); font-size: 6.5px; letter-spacing: .14em; margin-top: 4px; }
+.brand small { display: block; color: var(--muted); font-size: var(--text-small); letter-spacing: .14em; margin-top: 4px; }
 .topActions { display: flex; align-items: center; gap: 20px; }
-.back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11.5px; text-decoration: none; }
+.back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: var(--text-small); text-decoration: none; }
 .back:hover { color: var(--text); }
 
 .layout {
@@ -59,7 +59,7 @@
   align-items: center;
   gap: 9px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-small);
   letter-spacing: .15em;
   line-height: 1.6;
 }
@@ -71,15 +71,15 @@
   margin: 18px 0 14px;
 }
 .introduction h1>span { color: var(--accent); }
-.lead { max-width: 440px; color: var(--muted); font-size: 13.5px; line-height: 1.85; margin: 0; }
+.lead { max-width: 440px; color: var(--muted); font-size: var(--text-small); line-height: 1.85; margin: 0; }
 .art { max-width: 440px; margin: 22px -10px 18px; color: var(--accent); }
 .art svg { width: 100%; display: block; max-height: 140px; }
-.art>span { display: block; text-align: center; color: var(--muted); font-size: 8px; letter-spacing: .2em; margin-top: 4px; }
+.art>span { display: block; text-align: center; color: var(--muted); font-size: var(--text-small); letter-spacing: .2em; margin-top: 4px; }
 .features { display: flex; flex-direction: column; gap: 16px; margin-top: 18px; }
 .features>div { display: flex; align-items: flex-start; gap: 14px; }
 .features svg { color: var(--accent); flex-shrink: 0; margin-top: 2px; width: 18px; height: 18px; }
-.features strong { display: block; color: var(--text); font-size: 13px; font-weight: 500; }
-.features small { display: block; color: var(--muted); font-size: 11px; line-height: 1.65; margin-top: 2px; }
+.features strong { display: block; color: var(--text); font-size: var(--text-small); font-weight: 500; }
+.features small { display: block; color: var(--muted); font-size: var(--text-small); line-height: 1.65; margin-top: 2px; }
 
 .access {
   display: flex;
@@ -109,7 +109,7 @@
   border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
   flex-shrink: 0;
 }
-.access .eyebrow { font-size: 8.5px; margin-bottom: 2px; }
+.access .eyebrow { font-size: var(--text-small); margin-bottom: 2px; }
 .access h2 {
   font: 600 clamp(23px, 2.2vw, 30px)/1.2 var(--font-syne);
   letter-spacing: -.04em;
@@ -117,7 +117,7 @@
   color: var(--text);
 }
 .description {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.6;
   margin: 6px 0 0;
@@ -140,7 +140,7 @@
   gap: 4px;
 }
 .label {
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 500;
   color: var(--muted);
   letter-spacing: .02em;
@@ -155,7 +155,7 @@
   background: var(--surface);
   color: var(--text);
   padding: 8px 13px;
-  font: 12.5px/1.3 var(--font-syne);
+  font: var(--text-small)/1.3 var(--font-syne);
   outline: none;
   transition: border-color .2s, box-shadow .2s;
 }
@@ -184,7 +184,7 @@
 }
 .togglePassword:hover { color: var(--text); }
 .passwordHint {
-  font-size: 9.5px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.4;
   margin: 1px 0 0;
@@ -202,7 +202,7 @@
   border-radius: 8px;
   background: var(--accent);
   color: var(--btn-primary-text, #000);
-  font: 600 12.5px/1.3 var(--font-syne);
+  font: 600 var(--text-small)/1.3 var(--font-syne);
   cursor: pointer;
   text-decoration: none;
   transition: transform .2s, box-shadow .2s, opacity .2s;
@@ -219,7 +219,7 @@
   gap: 12px;
   margin: 13px 0 11px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--text-small);
   text-transform: uppercase;
   letter-spacing: .08em;
 }
@@ -249,7 +249,7 @@
   border-radius: 7px;
   background: var(--surface);
   color: var(--text);
-  font: 500 11.5px/1.3 var(--font-syne);
+  font: 500 var(--text-small)/1.3 var(--font-syne);
   cursor: pointer;
   box-shadow: none;
   transition: border-color .2s, background .2s;
@@ -271,7 +271,7 @@
   gap: 5px;
   margin: 12px 0 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--text-small);
   line-height: 1.5;
 }
 .accountSwitch a {
@@ -296,11 +296,11 @@
   text-align: center;
 }
 .reassurance svg { flex-shrink: 0; color: var(--accent); width: 13px; height: 13px; }
-.reassurance p { font-size: 9.5px; line-height: 1.5; margin: 0; }
+.reassurance p { font-size: var(--text-small); line-height: 1.5; margin: 0; }
 
 .legal {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--text-small);
   line-height: 1.5;
   margin: 7px 0 0;
   text-align: center;
@@ -313,7 +313,7 @@
   justify-content: center;
   gap: 7px;
   margin-top: 7px;
-  font-size: 9.5px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 .admin a {
@@ -335,7 +335,7 @@
   padding: 0 clamp(24px, 4vw, 72px);
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--text-small);
   flex-shrink: 0;
 }
 .footer>div { display: flex; gap: 18px; }
@@ -349,8 +349,8 @@
   background: color-mix(in srgb, #d98b74 8%, transparent);
   border-radius: 0 6px 6px 0;
 }
-.error p { color: var(--text); font-size: 11px; line-height: 1.5; margin: 0; }
-.error button { color: var(--accent); background: transparent; border: 0; font: 500 10px var(--font-syne); padding: 4px 0 0; cursor: pointer; display: block; }
+.error p { color: var(--text); font-size: var(--text-small); line-height: 1.5; margin: 0; }
+.error button { color: var(--accent); background: transparent; border: 0; font: 500 var(--text-small) var(--font-syne); padding: 4px 0 0; cursor: pointer; display: block; }
 
 .successCard {
   border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
@@ -366,10 +366,10 @@
 }
 .successIcon { color: var(--accent); display: grid; place-items: center; }
 .successCard h3 { font-size: 16px; margin: 0; font-weight: 600; color: var(--text); }
-.successCard p { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0; }
-.textButton { background: transparent; border: none; color: var(--accent); font: 500 11px var(--font-syne); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+.successCard p { font-size: var(--text-small); line-height: 1.6; color: var(--muted); margin: 0; }
+.textButton { background: transparent; border: none; color: var(--accent); font: 500 var(--text-small) var(--font-syne); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
 
-.loading { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-size: 11px; padding: 8px 0; grid-column: span 3; }
+.loading { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-size: var(--text-small); padding: 8px 0; grid-column: span 3; }
 .loading>svg, .spinning { animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 

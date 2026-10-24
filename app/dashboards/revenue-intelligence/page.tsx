@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactECharts from 'echarts-for-react';
+import { useTheme } from '@/components/ThemeProvider';
 import { 
   TrendingUp, 
   Users, 
@@ -73,22 +74,24 @@ const StatCard = ({ label, value, chg, icon: Icon, color }: any) => (
   >
     <div className="absolute top-0 left-0 w-full h-[2px]" style={{ background: color }} />
     <div className="flex justify-between items-start mb-3">
-      <span className="text-[10px] mono uppercase tracking-widest text-[var(--muted)] font-bold">{label}</span>
+      <span className="text-[length:var(--text-small)] mono uppercase tracking-widest text-[var(--muted)] font-bold">{label}</span>
       <div className="text-[var(--muted)] group-hover:text-[var(--text)] transition-colors">
         <Icon size={14} />
       </div>
     </div>
     <div className="flex items-baseline gap-3">
       <h3 className="text-2xl font-black tracking-tighter">{value}</h3>
-      <div className={`text-[10px] mono font-bold flex items-center ${chg[1] === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+      <div className={`text-[length:var(--text-small)] mono font-bold flex items-center ${chg[1] === 'up' ? 'text-green-400' : 'text-red-400'}`}>
         {chg[1] === 'up' ? '↑' : '↓'} {chg[0]}%
       </div>
     </div>
-    <div className="text-[9px] text-[var(--muted)] uppercase mt-1 opacity-60">vs prior period</div>
+    <div className="text-[length:var(--text-small)] text-[var(--muted)] uppercase mt-1 opacity-60">vs prior period</div>
   </motion.div>
 );
 
 export default function RevenueIntelligence() {
+  const { theme } = useTheme();
+  const chartText = theme === 'light' ? '#475569' : '#b3bdcc';
   const [year, setYear] = useState(2024);
   const [seg, setSeg] = useState('all');
   const [mounted, setMounted] = useState(false);
@@ -106,12 +109,12 @@ export default function RevenueIntelligence() {
       type: 'category',
       data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       axisLine: { lineStyle: { color: '#222' } },
-      axisLabel: { color: '#666', fontSize: 10, fontFamily: 'JetBrains Mono' }
+      axisLabel: { color: chartText, fontSize: 14, fontFamily: 'JetBrains Mono' }
     },
     yAxis: {
       type: 'value',
       splitLine: { lineStyle: { color: '#111' } },
-      axisLabel: { color: '#666', fontSize: 10, fontFamily: 'JetBrains Mono', formatter: '${value}k' }
+      axisLabel: { color: chartText, fontSize: 14, fontFamily: 'JetBrains Mono', formatter: '${value}k' }
     },
     series: [
       {
@@ -171,7 +174,7 @@ export default function RevenueIntelligence() {
               <LayoutDashboard size={18} className="text-[var(--accent)]" />
               <h1 className="text-lg font-black uppercase tracking-tight">Revenue Intelligence</h1>
             </div>
-            <p className="text-[11px] mono text-[var(--muted)] uppercase tracking-widest">
+            <p className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase tracking-widest">
               FY {year} · {seg === 'all' ? 'Unified Segments' : `${seg.toUpperCase()} Channels`}
             </p>
           </div>
@@ -181,7 +184,7 @@ export default function RevenueIntelligence() {
               <button 
                 key={y} 
                 onClick={() => setYear(y)}
-                className={`px-4 py-1.5 text-[10px] mono transition-all border ${year === y ? 'bg-[var(--accent)] text-black border-[var(--accent)] font-bold shadow-[0_0_10px_rgba(201,243,29,0.2)]' : 'bg-black text-[var(--muted)] border-[var(--border)] hover:border-[var(--accent)]/50 hover:text-white'}`}
+                className={`px-4 py-1.5 text-[length:var(--text-small)] mono transition-all border ${year === y ? 'bg-[var(--accent)] text-black border-[var(--accent)] font-bold shadow-[0_0_10px_rgba(201,243,29,0.2)]' : 'bg-black text-[var(--muted)] border-[var(--border)] hover:border-[var(--accent)]/50 hover:text-white'}`}
               >
                 {y}
               </button>
@@ -195,7 +198,7 @@ export default function RevenueIntelligence() {
             <button 
               key={s} 
               onClick={() => setSeg(s)}
-              className={`flex-1 py-3 text-[11px] font-bold uppercase tracking-widest transition-all border-r border-[var(--border)] last:border-0 ${seg === s ? 'bg-[var(--accent)]/5 text-[var(--accent)]' : 'text-[var(--muted)] hover:text-white'}`}
+              className={`flex-1 py-3 text-[length:var(--text-small)] font-bold uppercase tracking-widest transition-all border-r border-[var(--border)] last:border-0 ${seg === s ? 'bg-[var(--accent)]/5 text-[var(--accent)]' : 'text-[var(--muted)] hover:text-white'}`}
             >
               {s === 'all' ? 'All Segments' : s}
               {seg === s && <motion.div layoutId="seg-active" className="h-[2px] bg-[var(--accent)] absolute bottom-0 left-0 w-full" />}
@@ -217,7 +220,7 @@ export default function RevenueIntelligence() {
             <div className="lg:col-span-2 bg-[var(--surface2)] border border-[var(--border)] p-6">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xs font-black uppercase tracking-widest text-[var(--muted)]">Monthly Revenue Engine</h3>
-                <div className="flex items-center gap-4 text-[10px] mono">
+                <div className="flex items-center gap-4 text-[length:var(--text-small)] mono">
                   <span className="flex items-center gap-1.5"><div className="w-2 h-2 bg-[var(--accent)]" /> Revenue</span>
                   <span className="flex items-center gap-1.5"><div className="w-2 h-2 bg-[#00d4ff] opacity-50" /> Target</span>
                 </div>
@@ -234,7 +237,7 @@ export default function RevenueIntelligence() {
               </div>
               <div className="space-y-3">
                 {data.channels.map((c: any) => (
-                  <div key={c.n} className="flex justify-between items-center text-[11px] mono">
+                  <div key={c.n} className="flex justify-between items-center text-[length:var(--text-small)] mono">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2" style={{ background: c.c }} />
                       <span className="text-[var(--muted)]">{c.n}</span>
@@ -253,7 +256,7 @@ export default function RevenueIntelligence() {
               <div className="space-y-5">
                 {data.regions.map((r: any) => (
                   <div key={r.n} className="space-y-1.5">
-                    <div className="flex justify-between text-[11px] mono">
+                    <div className="flex justify-between text-[length:var(--text-small)] mono">
                       <span className="text-[var(--muted)]">{r.n}</span>
                       <span className="text-white font-bold">{r.m}</span>
                     </div>
@@ -275,10 +278,10 @@ export default function RevenueIntelligence() {
               <div className="space-y-1">
                 {data.products.map((p: any) => (
                   <div key={p.n} className="flex justify-between items-center py-3 border-b border-[var(--border)] last:border-0">
-                    <span className="text-[12px]">{p.n}</span>
+                    <span className="text-[length:var(--text-small)]">{p.n}</span>
                     <div className="flex items-center gap-3">
-                      <span className="text-[12px] mono font-bold">{p.v}</span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded-sm mono font-bold ${p.up ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
+                      <span className="text-[length:var(--text-small)] mono font-bold">{p.v}</span>
+                      <span className={`text-[length:var(--text-small)] px-1.5 py-0.5 rounded-sm mono font-bold ${p.up ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
                         {p.chg}
                       </span>
                     </div>
@@ -292,7 +295,7 @@ export default function RevenueIntelligence() {
               <div className="space-y-4">
                 {data.funnel.map((f: any, idx: number) => (
                   <div key={f.n} className="relative">
-                    <div className="flex justify-between text-[11px] mono mb-1 relative z-10">
+                    <div className="flex justify-between text-[length:var(--text-small)] mono mb-1 relative z-10">
                       <span className="text-[var(--muted)]">{f.n}</span>
                       <span className="text-white">{f.v.toLocaleString()}</span>
                     </div>
@@ -303,14 +306,14 @@ export default function RevenueIntelligence() {
                         className="h-full opacity-30"
                         style={{ background: '#c9f31d' }}
                       />
-                      <div className="absolute inset-0 flex items-center justify-center text-[9px] mono font-bold opacity-40">
+                      <div className="absolute inset-0 flex items-center justify-center text-[length:var(--text-small)] mono font-bold opacity-40">
                         {f.pct}%
                       </div>
                     </div>
                   </div>
                 ))}
                 <div className="mt-6 pt-4 border-t border-[var(--border)] flex justify-between items-center">
-                  <span className="text-[10px] mono uppercase text-[var(--muted)]">Overall Efficiency</span>
+                  <span className="text-[length:var(--text-small)] mono uppercase text-[var(--muted)]">Overall Efficiency</span>
                   <span className="text-[var(--accent)] text-lg font-black">{data.funnel[data.funnel.length-1].pct}%</span>
                 </div>
               </div>

@@ -55,7 +55,7 @@ export default async function LandingPageDetail({ params }: { params: Promise<{ 
             <div style={{ maxWidth: 800, marginBottom: '4rem' }}>
               <div className="flex items-center gap-3 mb-6">
                 <span className="label-tech">{lp.intent.toUpperCase()}_NODE</span>
-                <span className="text-[10px] mono text-[var(--muted)]">TARGET_PERSONA: {lp.persona.toUpperCase()}</span>
+                <span className="text-[length:var(--text-small)] mono text-[var(--muted)]">TARGET_PERSONA: {lp.persona.toUpperCase()}</span>
               </div>
               <h1 style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
                 {lp.title}
@@ -97,7 +97,7 @@ export default async function LandingPageDetail({ params }: { params: Promise<{ 
                   <div className="mt-12 p-8 card border-dashed" style={{ background: 'var(--bg)', borderColor: 'var(--accent)' }}>
                     <div className="flex items-center gap-2 mb-4 text-[var(--accent)]">
                       <Target size={20} />
-                      <span className="mono text-[10px] font-bold tracking-widest uppercase">DEPLOY_THIS_SYSTEM</span>
+                      <span className="mono text-[length:var(--text-small)] font-bold tracking-widest uppercase">DEPLOY_THIS_SYSTEM</span>
                     </div>
                     <h3 className="text-xl font-bold mb-4">Launch the {template.title}</h3>
                     <p className="text-sm text-[var(--muted)] mb-8">
@@ -117,7 +117,7 @@ export default async function LandingPageDetail({ params }: { params: Promise<{ 
               <div className="lg:col-span-1">
                 <div className="sticky top-32 flex flex-col gap-8">
                   <div className="card p-8" style={{ background: 'var(--surface2)' }}>
-                    <h4 className="mono text-[10px] uppercase tracking-widest text-[var(--muted)] mb-8">Related_Module</h4>
+                    <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest text-[var(--muted)] mb-8">Related_Module</h4>
                     <Link 
                       href={lp.associatedTool}
                       className="group flex flex-col gap-4 no-underline p-4 border border-[var(--border)] hover:border-[var(--accent)] transition-all"
@@ -127,22 +127,22 @@ export default async function LandingPageDetail({ params }: { params: Promise<{ 
                         <ArrowUpRight size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)]" />
                       </div>
                       <div className="font-bold text-sm">OPEN_WORKPLACE_NODE</div>
-                      <div className="text-[10px] mono text-[var(--muted)]">Direct access to tools</div>
+                      <div className="text-[length:var(--text-small)] mono text-[var(--muted)]">Direct access to tools</div>
                     </Link>
                   </div>
 
                   <div className="card p-8" style={{ background: 'var(--bg)' }}>
                      <div className="flex items-center gap-2 mb-6">
                         <Sparkles size={16} className="text-[var(--accent)]" />
-                        <h4 className="mono text-[10px] uppercase tracking-widest">Indexing_Status</h4>
+                        <h4 className="mono text-[length:var(--text-small)] uppercase tracking-widest">Indexing_Status</h4>
                      </div>
                      <div className="flex justify-between items-center mb-4">
-                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Traffic_Node:</span>
-                        <span className="text-[10px] mono text-[var(--accent)]">ACTIVE</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase">Traffic_Node:</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--accent)]">ACTIVE</span>
                      </div>
                      <div className="flex justify-between items-center">
-                        <span className="text-[10px] mono text-[var(--muted)] uppercase">Discovery_Depth:</span>
-                        <span className="text-[10px] mono text-[var(--text)]">HIGH_PRIORITY</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--muted)] uppercase">Discovery_Depth:</span>
+                        <span className="text-[length:var(--text-small)] mono text-[var(--text)]">HIGH_PRIORITY</span>
                      </div>
                   </div>
                 </div>
