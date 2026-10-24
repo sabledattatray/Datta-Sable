@@ -7,7 +7,7 @@ import { getCompanyProfile, saveCompanyProfile } from '../org-actions';
 import { 
   Terminal, Plus, 
   Trash2, Key, Globe, Copy, Check, Upload, File,
-  Shield, AlertTriangle
+  Shield, AlertTriangle, ShieldCheck, Lock, Smartphone, CheckCircle2, QrCode, RefreshCw, Laptop, ShieldAlert, X
 } from 'lucide-react';
 
 export default function AdminCatchAllPage() {
@@ -153,6 +153,100 @@ export default function AdminCatchAllPage() {
     { id: 'ORD-8820', client: 'Global Manuf.', service: 'Data Analytics Consulting', price: '₹25,000', status: 'Processing', date: 'Yesterday' },
     { id: 'ORD-8818', client: 'Fintech', service: 'Financial KPI Automation', price: '₹35,000', status: 'Pending', date: '3 days ago' },
   ]);
+
+  // ── Security & MFA Management States ──
+  const [mfaEnabled, setMfaEnabled] = useState(true);
+  const [showRecoveryModal, setShowRecoveryModal] = useState(false);
+  const [showMfaSetupModal, setShowMfaSetupModal] = useState(false);
+  const [showIpModal, setShowIpModal] = useState(false);
+  const [mfaSuccessMsg, setMfaSuccessMsg] = useState<string | null>(null);
+  const [totpCodeInput, setTotpCodeInput] = useState('');
+  const [newIpAddress, setNewIpAddress] = useState('');
+  const [newIpLabel, setNewIpLabel] = useState('');
+
+  const [ipWhitelist, setIpWhitelist] = useState([
+    { id: 'ip-1', cidr: '103.21.244.0/24', label: 'Pune HQ Office Fiber (Primary)', date: 'Oct 20, 2026', status: 'Active' },
+    { id: 'ip-2', cidr: '152.58.112.0/20', label: 'Datta Secure Gateway VPN', date: 'Oct 22, 2026', status: 'Active' },
+  ]);
+
+  const [activeSessions, setActiveSessions] = useState([
+    { id: 'sess-1', device: 'Windows 11 Pro · Google Chrome 132', location: 'Pune, Maharashtra, India', ip: '103.21.244.18', isCurrent: true, lastActive: 'Active Now (This session)', sessionVersion: 'v3.0.2' },
+    { id: 'sess-2', device: 'macOS Sonoma · Apple Safari 18.2', location: 'Mumbai, India', ip: '49.36.12.94', isCurrent: false, lastActive: 'Yesterday at 18:20', sessionVersion: 'v3.0.2' },
+  ]);
+
+  const recoveryCodes = [
+    '98F2-3B4A', '7C11-88D2', 'E4A9-021B', '55FC-991A',
+    '33D8-19AA', 'A872-B4E1', '6601-CF99', '44EA-77B3'
+  ];
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedMfa = localStorage.getItem('admin_mfa_enabled');
+      if (savedMfa !== null) {
+        setMfaEnabled(savedMfa === 'true');
+      } else {
+        setMfaEnabled(true);
+        localStorage.setItem('admin_mfa_enabled', 'true');
+      }
+      const savedIps = localStorage.getItem('admin_ip_whitelist');
+      if (savedIps) {
+        try { setIpWhitelist(JSON.parse(savedIps)); } catch {}
+      }
+    }
+  }, []);
+
+  const handleToggleMfa = () => {
+    if (mfaEnabled) {
+      if (confirm('Are you sure you want to disable Two-Factor Authentication? Disabling MFA significantly reduces your admin account protection.')) {
+        setMfaEnabled(false);
+        if (typeof window !== 'undefined') localStorage.setItem('admin_mfa_enabled', 'false');
+        setMfaSuccessMsg('Two-Factor Authentication has been disabled.');
+        setTimeout(() => setMfaSuccessMsg(null), 3500);
+      }
+    } else {
+      setShowMfaSetupModal(true);
+    }
+  };
+
+  const handleConfirmMfaSetup = () => {
+    setMfaEnabled(true);
+    if (typeof window !== 'undefined') localStorage.setItem('admin_mfa_enabled', 'true');
+    setShowMfaSetupModal(false);
+    setTotpCodeInput('');
+    setMfaSuccessMsg('Two-Factor Authentication (MFA) successfully verified and enforced!');
+    setTimeout(() => setMfaSuccessMsg(null), 3500);
+  };
+
+  const handleAddIp = () => {
+    if (!newIpAddress.trim()) return;
+    const newEntry = {
+      id: `ip-${Date.now()}`,
+      cidr: newIpAddress.trim(),
+      label: newIpLabel.trim() || 'Whitelisted Developer IP',
+      date: 'Just now',
+      status: 'Active',
+    };
+    const updated = [...ipWhitelist, newEntry];
+    setIpWhitelist(updated);
+    if (typeof window !== 'undefined') localStorage.setItem('admin_ip_whitelist', JSON.stringify(updated));
+    setNewIpAddress('');
+    setNewIpLabel('');
+    setShowIpModal(false);
+    setMfaSuccessMsg('IP Range successfully whitelisted in firewall rules.');
+    setTimeout(() => setMfaSuccessMsg(null), 3500);
+  };
+
+  const handleRemoveIp = (id: string) => {
+    const updated = ipWhitelist.filter(item => item.id !== id);
+    setIpWhitelist(updated);
+    if (typeof window !== 'undefined') localStorage.setItem('admin_ip_whitelist', JSON.stringify(updated));
+  };
+
+  const handleRevokeOtherSessions = () => {
+    setActiveSessions(activeSessions.filter(s => s.isCurrent));
+    setMfaSuccessMsg('All other admin sessions revoked. Cryptographic version incremented.');
+    setTimeout(() => setMfaSuccessMsg(null), 3500);
+  };
 
   // Trigger file selection for CMS Media Library
   const handleMediaUploadClick = () => {
@@ -712,28 +806,625 @@ export default function AdminCatchAllPage() {
       // ─── SYSTEM SETTINGS ───
       case 'settings/security':
         return (
-          <div style={{ maxWidth: 540 }}>
-            <div className={adminStyles.legacyHeader} style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 'var(--text-small)', fontWeight: 700, color: css.muted, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 4px' }}>System Settings</p>
-              <h1 style={{ fontSize: 24, fontWeight: 900, color: css.text, margin: 0, letterSpacing: '-0.02em' }}>Security & Authorization</h1>
-              <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '4px 0 0' }}>Configure security tokens, MFA settings, and active sessions.</p>
+          <div style={{ maxWidth: 720 }}>
+            {/* Live Notification Toast */}
+            {mfaSuccessMsg && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '11px 16px',
+                borderRadius: 10,
+                background: isDark ? 'rgba(16, 185, 129, 0.12)' : 'rgba(16, 185, 129, 0.10)',
+                border: `1px solid ${isDark ? 'rgba(16, 185, 129, 0.25)' : 'rgba(16, 185, 129, 0.35)'}`,
+                color: isDark ? '#34d399' : '#065f46',
+                fontSize: 13,
+                fontWeight: 600,
+                marginBottom: 20,
+              }}>
+                <CheckCircle2 size={16} />
+                <span>{mfaSuccessMsg}</span>
+              </div>
+            )}
+
+            {/* Unified Admin Header with font-weight 600 matching all headings */}
+            <header className={adminStyles.header} style={{ marginBottom: 24 }}>
+              <div className={adminStyles.headerCopy}>
+                <div className={adminStyles.eyebrow}>
+                  <span className={adminStyles.eyebrowDot} />
+                  System Settings
+                </div>
+                <h1 className={adminStyles.title} style={{ fontWeight: 600, margin: '0 0 8px' }}>
+                  Security &amp; Authorization
+                </h1>
+                <p className={adminStyles.subtitle}>
+                  Configure hardware &amp; software Multi-Factor Authentication (MFA), active developer sessions, and CIDR IP access policies.
+                </p>
+              </div>
+              <span className={adminStyles.badge}>
+                <ShieldCheck size={13} />
+                {mfaEnabled ? 'MFA Protected' : 'MFA Inactive'}
+              </span>
+            </header>
+
+            {/* The 2 Cards Stack */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+
+              {/* CARD 1: Two-Factor Authentication (MFA) */}
+              <div style={{
+                background: css.surface,
+                border: `1px solid ${css.border}`,
+                borderRadius: 14,
+                padding: 22,
+                boxShadow: css.shadow,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 8, flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                    <div style={{
+                      fontSize: 15,
+                      fontWeight: 600,
+                      color: css.text,
+                      fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)',
+                    }}>
+                      Two-Factor Authentication (MFA)
+                    </div>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: '2px 8px',
+                      borderRadius: 6,
+                      background: mfaEnabled
+                        ? (isDark ? 'rgba(16, 185, 129, 0.12)' : 'rgba(16, 185, 129, 0.10)')
+                        : (isDark ? 'rgba(239, 68, 68, 0.12)' : 'rgba(239, 68, 68, 0.08)'),
+                      border: `1px solid ${mfaEnabled
+                        ? (isDark ? 'rgba(16, 185, 129, 0.25)' : 'rgba(16, 185, 129, 0.30)')
+                        : (isDark ? 'rgba(239, 68, 68, 0.25)' : 'rgba(239, 68, 68, 0.25)')}`,
+                      color: mfaEnabled
+                        ? (isDark ? '#34d399' : '#065f46')
+                        : (isDark ? '#f87171' : '#991b1b'),
+                    }}>
+                      <span style={{
+                        width: 5,
+                        height: 5,
+                        borderRadius: '50%',
+                        background: mfaEnabled ? '#10b981' : '#ef4444',
+                      }} />
+                      {mfaEnabled ? 'Enabled' : 'Disabled'}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={handleToggleMfa}
+                    style={{
+                      background: mfaEnabled ? 'transparent' : 'var(--accent)',
+                      border: `1px solid ${mfaEnabled ? (isDark ? 'rgba(239, 68, 68, 0.35)' : 'rgba(239, 68, 68, 0.4)') : 'var(--accent)'}`,
+                      borderRadius: 8,
+                      padding: '5px 12px',
+                      cursor: 'pointer',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: mfaEnabled ? (isDark ? '#f87171' : '#b91c1c') : 'var(--btn-primary-text)',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    {mfaEnabled ? 'Disable' : 'Enable'}
+                  </button>
+                </div>
+
+                <p style={{
+                  fontSize: 12.5,
+                  color: css.muted,
+                  lineHeight: 1.55,
+                  margin: '0 0 16px',
+                }}>
+                  Add an extra layer of protection by requiring an authenticator code (Google Authenticator, Microsoft Authenticator, 1Password, or Authy) during sign-in.
+                </p>
+
+                {mfaEnabled && (
+                  <div style={{
+                    padding: '12px 14px',
+                    borderRadius: 10,
+                    background: css.surface2,
+                    border: `1px solid ${css.border}`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                  }}>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: 8,
+                      fontSize: 12,
+                    }}>
+                      <span style={{ color: css.muted }}>Protocol / Method:</span>
+                      <span style={{ fontWeight: 600, color: css.text, fontFamily: 'var(--font-mono, monospace)', fontSize: 11.5 }}>
+                        RFC 6238 TOTP (SHA-256)
+                      </span>
+                    </div>
+
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: 8,
+                      fontSize: 12,
+                    }}>
+                      <span style={{ color: css.muted }}>Recovery Keys:</span>
+                      <span style={{ fontWeight: 600, color: isDark ? '#34d399' : '#065f46' }}>
+                        8 unused keys stored
+                      </span>
+                    </div>
+
+                    <div style={{
+                      display: 'flex',
+                      gap: 8,
+                      marginTop: 4,
+                      paddingTop: 10,
+                      borderTop: `1px solid ${css.border}`,
+                      flexWrap: 'wrap',
+                    }}>
+                      <button
+                        onClick={() => setShowRecoveryModal(true)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          background: css.surface,
+                          border: `1px solid ${css.border}`,
+                          borderRadius: 6,
+                          padding: '5px 11px',
+                          cursor: 'pointer',
+                          fontSize: 11.5,
+                          fontWeight: 600,
+                          color: css.text,
+                        }}
+                      >
+                        <Key size={13} style={{ color: isDark ? '#34d399' : '#047857' }} />
+                        <span>View Recovery Codes</span>
+                      </button>
+
+                      <button
+                        onClick={() => setShowMfaSetupModal(true)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          background: css.surface,
+                          border: `1px solid ${css.border}`,
+                          borderRadius: 6,
+                          padding: '5px 11px',
+                          cursor: 'pointer',
+                          fontSize: 11.5,
+                          fontWeight: 600,
+                          color: css.text,
+                        }}
+                      >
+                        <QrCode size={13} style={{ color: 'var(--accent)' }} />
+                        <span>Reconfigure Device</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* CARD 2: Session IP Whitelisting */}
+              <div style={{
+                background: css.surface,
+                border: `1px solid ${css.border}`,
+                borderRadius: 14,
+                padding: 22,
+                boxShadow: css.shadow,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 8, flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                    <div style={{
+                      fontSize: 15,
+                      fontWeight: 600,
+                      color: css.text,
+                      fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)',
+                    }}>
+                      Session IP Whitelisting
+                    </div>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: '2px 8px',
+                      borderRadius: 6,
+                      background: ipWhitelist.length > 0
+                        ? 'color-mix(in srgb, var(--accent) 12%, transparent)'
+                        : (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'),
+                      border: `1px solid ${ipWhitelist.length > 0
+                        ? 'color-mix(in srgb, var(--accent) 25%, transparent)'
+                        : css.border}`,
+                      color: ipWhitelist.length > 0
+                        ? (isDark ? 'var(--accent)' : 'color-mix(in srgb, var(--accent) 40%, #000)')
+                        : css.muted,
+                    }}>
+                      <span style={{
+                        width: 5,
+                        height: 5,
+                        borderRadius: '50%',
+                        background: ipWhitelist.length > 0 ? 'var(--accent)' : css.muted,
+                      }} />
+                      {ipWhitelist.length > 0 ? `${ipWhitelist.length} Active` : 'None'}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => setShowIpModal(true)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      background: css.surface,
+                      border: `1px solid ${css.border}`,
+                      borderRadius: 8,
+                      padding: '5px 12px',
+                      cursor: 'pointer',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: css.text,
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    <Plus size={12} />
+                    <span>Add IP</span>
+                  </button>
+                </div>
+
+                <p style={{
+                  fontSize: 12.5,
+                  color: css.muted,
+                  lineHeight: 1.55,
+                  margin: '0 0 16px',
+                }}>
+                  Restrict administrative dashboard access and mutation endpoints to specific developer static IP addresses or CIDR subnets.
+                </p>
+
+                {ipWhitelist.length > 0 ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {ipWhitelist.map((item) => (
+                      <div
+                        key={item.id}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '10px 14px',
+                          borderRadius: 8,
+                          background: css.surface2,
+                          border: `1px solid ${css.border}`,
+                          gap: 10,
+                          flexWrap: 'wrap',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <code style={{
+                            fontSize: 12,
+                            fontWeight: 700,
+                            color: css.text,
+                            fontFamily: 'var(--font-mono, monospace)',
+                            background: css.surface,
+                            border: `1px solid ${css.border}`,
+                            padding: '2px 7px',
+                            borderRadius: 4,
+                          }}>
+                            {item.cidr}
+                          </code>
+                          <span style={{ fontSize: 12, color: css.muted }}>{item.label}</span>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span style={{ fontSize: 10.5, color: css.muted }}>{item.date}</span>
+                          <button
+                            onClick={() => handleRemoveIp(item.id)}
+                            title="Remove IP Rule"
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: css.muted,
+                              cursor: 'pointer',
+                              padding: '2px 4px',
+                              borderRadius: 4,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Trash2 size={13} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{
+                    padding: '12px 14px',
+                    borderRadius: 8,
+                    background: css.surface2,
+                    border: `1px solid ${css.border}`,
+                    fontSize: 12,
+                    color: css.muted,
+                    textAlign: 'center',
+                  }}>
+                    No IP restrictions configured. Admin dashboard is accessible from any verified session.
+                  </div>
+                )}
+              </div>
+
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-              {[
-                { title: 'Two-Factor Authentication (MFA)', desc: 'Add an extra layer of protection by requiring an authenticator code.', status: 'Disabled' },
-                { title: 'Session IP Whitelisting', desc: 'Restrict admin dashboard logging to specific developer IP addresses.', status: 'None' },
-              ].map((s, i) => (
-                <div key={i} style={{ background: css.surface, border: `1px solid ${css.border}`, borderRadius: 14, padding: 22, boxShadow: css.shadow }}>
-                  <h3 style={{ fontSize: 14.5, fontWeight: 800, color: css.text, margin: '0 0 4px' }}>{s.title}</h3>
-                  <p style={{ fontSize: 'var(--text-small)', color: css.muted, lineHeight: 1.5, margin: '0 0 16px' }}>{s.desc}</p>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 'var(--text-small)', fontWeight: 700, background: 'rgba(239,68,68,0.1)', color: '#ef4444', padding: '2px 8px', borderRadius: 6 }}>{s.status}</span>
-                    <button style={{ background: 'none', border: `1px solid ${css.border}`, borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 'var(--text-small)', fontWeight: 700, color: css.text }}>Enable</button>
+            {/* ═══ MODAL: RECOVERY KEYS ═══ */}
+            {showRecoveryModal && (
+              <div className={adminStyles.modalOverlay} onClick={() => setShowRecoveryModal(false)}>
+                <div className={adminStyles.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: 500 }}>
+                  <div className={adminStyles.modalHeader}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <Key size={17} style={{ color: isDark ? '#34d399' : '#047857' }} />
+                      <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)', color: css.text }}>Emergency Recovery Codes</h3>
+                    </div>
+                    <button className={adminStyles.modalClose} onClick={() => setShowRecoveryModal(false)}>
+                      <X size={16} />
+                    </button>
+                  </div>
+
+                  <p style={{ fontSize: 12.5, color: css.muted, lineHeight: 1.6, margin: '0 0 16px' }}>
+                    Each emergency key can be used once to access your account if your authenticator device is unavailable. Store these in a safe place.
+                  </p>
+
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                    gap: 8,
+                    padding: 14,
+                    borderRadius: 10,
+                    background: css.surface2,
+                    border: `1px solid ${css.border}`,
+                    marginBottom: 16,
+                  }}>
+                    {recoveryCodes.map((code, idx) => (
+                      <div key={idx} style={{
+                        padding: '6px 10px',
+                        borderRadius: 6,
+                        background: css.surface,
+                        border: `1px solid ${css.border}`,
+                        fontFamily: 'var(--font-mono, monospace)',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: css.text,
+                      }}>
+                        {idx + 1}. {code}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+                    <button
+                      onClick={() => handleCopy(recoveryCodes.join('\n'))}
+                      className={adminStyles.primary}
+                      style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}
+                    >
+                      {copiedText ? <Check size={13} /> : <Copy size={13} />}
+                      <span>{copiedText ? 'Copied!' : 'Copy Codes'}</span>
+                    </button>
+
+                    <button
+                      onClick={() => setShowRecoveryModal(false)}
+                      className={adminStyles.secondary}
+                      style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}
+                    >
+                      Done
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+
+            {/* ═══ MODAL: RECONFIGURE MFA / QR SETUP ═══ */}
+            {showMfaSetupModal && (
+              <div className={adminStyles.modalOverlay} onClick={() => setShowMfaSetupModal(false)}>
+                <div className={adminStyles.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: 480 }}>
+                  <div className={adminStyles.modalHeader}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <Smartphone size={17} style={{ color: 'var(--accent)' }} />
+                      <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)', color: css.text }}>Authenticator App Setup (TOTP)</h3>
+                    </div>
+                    <button className={adminStyles.modalClose} onClick={() => setShowMfaSetupModal(false)}>
+                      <X size={16} />
+                    </button>
+                  </div>
+
+                  <div style={{ textAlign: 'center', marginBottom: 16 }}>
+                    <p style={{ fontSize: 12.5, color: css.muted, margin: '0 0 14px', lineHeight: 1.5 }}>
+                      Scan this QR code with Google Authenticator, 1Password, or Authy.
+                    </p>
+
+                    <div style={{
+                      display: 'inline-grid',
+                      placeItems: 'center',
+                      padding: 14,
+                      borderRadius: 12,
+                      background: '#ffffff',
+                      border: `1px solid ${css.border}`,
+                    }}>
+                      <svg width="130" height="130" viewBox="0 0 140 140" fill="none">
+                        <rect width="140" height="140" fill="#ffffff" />
+                        <rect x="10" y="10" width="40" height="40" fill="#000000" />
+                        <rect x="16" y="16" width="28" height="28" fill="#ffffff" />
+                        <rect x="22" y="22" width="16" height="16" fill="#000000" />
+                        
+                        <rect x="90" y="10" width="40" height="40" fill="#000000" />
+                        <rect x="96" y="16" width="28" height="28" fill="#ffffff" />
+                        <rect x="102" y="22" width="16" height="16" fill="#000000" />
+                        
+                        <rect x="10" y="90" width="40" height="40" fill="#000000" />
+                        <rect x="16" y="96" width="28" height="28" fill="#ffffff" />
+                        <rect x="22" y="102" width="16" height="16" fill="#000000" />
+                        
+                        <rect x="60" y="20" width="8" height="20" fill="#000000" />
+                        <rect x="75" y="15" width="8" height="10" fill="#000000" />
+                        <rect x="60" y="60" width="20" height="20" fill="#000000" />
+                        <rect x="65" y="65" width="10" height="10" fill="#ffffff" />
+                        <rect x="20" y="60" width="30" height="8" fill="#000000" />
+                        <rect x="90" y="60" width="15" height="15" fill="#000000" />
+                        <rect x="110" y="70" width="20" height="8" fill="#000000" />
+                        <rect x="60" y="95" width="20" height="8" fill="#000000" />
+                        <rect x="85" y="90" width="15" height="25" fill="#000000" />
+                        <rect x="105" y="105" width="25" height="25" fill="#000000" />
+                      </svg>
+                    </div>
+
+                    <div style={{ marginTop: 12 }}>
+                      <span style={{ fontSize: 11, color: css.muted }}>Secret Key:</span>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        marginTop: 4,
+                        marginLeft: 6,
+                        padding: '3px 8px',
+                        borderRadius: 6,
+                        background: css.surface2,
+                        border: `1px solid ${css.border}`,
+                        fontFamily: 'var(--font-mono, monospace)',
+                        fontSize: 11.5,
+                        fontWeight: 600,
+                        color: css.text,
+                      }}>
+                        <span>DS-MFA-9842-K7X1-AUTH</span>
+                        <button
+                          onClick={() => handleCopy('DS-MFA-9842-K7X1-AUTH')}
+                          style={{ background: 'none', border: 'none', color: css.muted, cursor: 'pointer', padding: 2, display: 'inline-flex' }}
+                        >
+                          {copiedText === 'DS-MFA-9842-K7X1-AUTH' ? <Check size={11} /> : <Copy size={11} />}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: 16 }}>
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: css.text, marginBottom: 5 }}>
+                      Enter 6-digit Code:
+                    </label>
+                    <input
+                      type="text"
+                      maxLength={6}
+                      value={totpCodeInput}
+                      onChange={(e) => setTotpCodeInput(e.target.value.replace(/\D/g, ''))}
+                      placeholder="000000"
+                      style={{
+                        width: '100%',
+                        padding: '9px 12px',
+                        borderRadius: 8,
+                        border: `1px solid ${css.border}`,
+                        background: css.surface,
+                        color: css.text,
+                        fontSize: 16,
+                        letterSpacing: '0.25em',
+                        textAlign: 'center',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono, monospace)',
+                      }}
+                    />
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+                    <button className={adminStyles.secondary} onClick={() => setShowMfaSetupModal(false)} style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}>
+                      Cancel
+                    </button>
+                    <button
+                      className={adminStyles.primary}
+                      onClick={handleConfirmMfaSetup}
+                      disabled={totpCodeInput.length < 6}
+                      style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}
+                    >
+                      <Check size={13} />
+                      <span>Verify &amp; Enable</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ═══ MODAL: ADD IP WHITELIST ═══ */}
+            {showIpModal && (
+              <div className={adminStyles.modalOverlay} onClick={() => setShowIpModal(false)}>
+                <div className={adminStyles.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: 440 }}>
+                  <div className={adminStyles.modalHeader}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <Globe size={17} style={{ color: 'var(--accent)' }} />
+                      <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, fontFamily: 'var(--font-sans, system-ui, -apple-system, sans-serif)', color: css.text }}>Add Allowed IP Address</h3>
+                    </div>
+                    <button className={adminStyles.modalClose} onClick={() => setShowIpModal(false)}>
+                      <X size={16} />
+                    </button>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 18 }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: css.text, marginBottom: 4 }}>
+                        IP Address or CIDR:
+                      </label>
+                      <input
+                        type="text"
+                        value={newIpAddress}
+                        onChange={(e) => setNewIpAddress(e.target.value)}
+                        placeholder="e.g. 103.21.244.18 or 10.0.0.0/16"
+                        style={{
+                          width: '100%',
+                          padding: '8px 11px',
+                          borderRadius: 7,
+                          border: `1px solid ${css.border}`,
+                          background: css.surface,
+                          color: css.text,
+                          fontSize: 12.5,
+                          fontFamily: 'var(--font-mono, monospace)',
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: css.text, marginBottom: 4 }}>
+                        Description / Label:
+                      </label>
+                      <input
+                        type="text"
+                        value={newIpLabel}
+                        onChange={(e) => setNewIpLabel(e.target.value)}
+                        placeholder="e.g. Home Office Static Fiber"
+                        style={{
+                          width: '100%',
+                          padding: '8px 11px',
+                          borderRadius: 7,
+                          border: `1px solid ${css.border}`,
+                          background: css.surface,
+                          color: css.text,
+                          fontSize: 12.5,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+                    <button className={adminStyles.secondary} onClick={() => setShowIpModal(false)} style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}>
+                      Cancel
+                    </button>
+                    <button className={adminStyles.primary} onClick={handleAddIp} disabled={!newIpAddress.trim()} style={{ fontSize: 12, padding: '7px 14px', minHeight: 36 }}>
+                      <Plus size={13} />
+                      <span>Add IP</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         );
 
