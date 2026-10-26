@@ -218,7 +218,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <PublicTypography settings={typography} nonce={nonce} />
-        <Providers>
+        <Providers ebooksEnabled={process.env.EBOOK_STORE_ENABLED === 'true' && process.env.EBOOK_STORE_NAV_ENABLED === 'true'}>
           <ThemeProvider>
             <main id="main-content">
               {children}

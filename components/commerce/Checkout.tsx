@@ -11,7 +11,7 @@ type CheckoutResponse = { razorpay_order_id: string; razorpay_payment_id: string
 type CheckoutOptions = { key: string; amount: number; currency: string; order_id: string; name: string; description: string; prefill: { name: string; email: string }; handler: (response: CheckoutResponse) => void; modal: { ondismiss: () => void } };
 declare global { interface Window { Razorpay?: new (options: CheckoutOptions) => { open: () => void; on: (name: string, handler: () => void) => void } } }
 let scriptPromise: Promise<void> | undefined;
-function loadCheckout() {
+export function loadCheckout() {
   if (typeof window === 'undefined') return Promise.resolve();
   if (window.Razorpay) return Promise.resolve();
   const existing = document.querySelector<HTMLScriptElement>('script[src*="checkout.razorpay.com"]');

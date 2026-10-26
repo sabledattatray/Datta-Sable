@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { cache } from 'react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { customer } from '@/lib/commerce/access';
 import { assertCheckout } from '@/lib/commerce/config';
@@ -14,8 +14,9 @@ import styles from '@/components/commerce/ProductDetail.module.css';
 export const dynamic = 'force-dynamic';
 type Props = { params: Promise<{ slug: string }> };
 const loadProduct = cache(async (slug: string) => {
-  const product = await prisma.commerceProduct.findUnique({where:{slug},include:{resources:{where:{active:true},select:{id:true,title:true,pathname:true}}}});
+  const product = await prisma.commerceProduct.findUnique({where:{slug},include:{ebook:true,resources:{where:{active:true},select:{id:true,title:true,pathname:true}}}});
   if (!product) return null;
+  if (product.ebook) { if (product.status !== 'PUBLISHED' || process.env.EBOOK_STORE_ENABLED !== 'true') return null; permanentRedirect('/ebooks/' + product.slug); }
   if (product.status !== 'PUBLISHED') { try { await customer(true); } catch { return null; } }
   const details = (await productDetailsMap([product.id])).get(product.id) || defaultProductDetails();
   return {product,details,readiness:productReadiness(product,details)};

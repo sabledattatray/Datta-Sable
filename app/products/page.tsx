@@ -45,7 +45,7 @@ export default async function ProductsPage() {
   let serializedProducts: SerializedProduct[] = [];
   let publishedArticles: Array<{ slug: string; title: string; category: string; excerpt: string; readTime: number }> = [];
   try {
-    const raw = await prisma.commerceProduct.findMany({ where: { status: 'PUBLISHED' }, select: { id:true, slug:true, title:true, excerpt:true, category:true, image:true, priceMinor:true, currency:true, status:true, salesEnabled:true, deliveryReady:true, createdAt:true, resources: { where: { active: true }, select: { title: true } } }, orderBy: { createdAt: 'desc' } });
+    const raw = await prisma.commerceProduct.findMany({ where: { status: 'PUBLISHED', ebook: { is: null } }, select: { id:true, slug:true, title:true, excerpt:true, category:true, image:true, priceMinor:true, currency:true, status:true, salesEnabled:true, deliveryReady:true, createdAt:true, resources: { where: { active: true }, select: { title: true } } }, orderBy: { createdAt: 'desc' } });
     const settings = await productDetailsMap(raw.map(p => p.id));
     serializedProducts = raw.map(p => { const details = settings.get(p.id) || defaultProductDetails(); return {
       id: p.id, slug: p.slug, title: p.title, excerpt: p.excerpt, category: p.category, image: p.image,
@@ -98,7 +98,7 @@ export default async function ProductsPage() {
               <span className={styles.current}>Digital Products</span>
             </div>
 
-            <div className={styles.userLinks}>
+            <div className={styles.userLinks}>{process.env.EBOOK_STORE_ENABLED === 'true' && <Link href="/ebooks">Browse eBooks</Link>}
               <Link href="/account/orders">
                 My Orders
               </Link>

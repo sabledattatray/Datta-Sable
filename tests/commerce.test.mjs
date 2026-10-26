@@ -128,3 +128,17 @@ test('an audited manual refund-email resend preserves the verified refund refere
  const response=await h.load('app/api/commerce/[...path]/route.ts').POST(new Request('https://dattasable.test/api/commerce/admin',{method:'POST',headers:{origin:'https://dattasable.test'},body:JSON.stringify({action:'resend',id:'refund-email',confirmedProviderReview:true})}),{params:Promise.resolve({path:['admin']})});
  assert.equal(response.status,200);assert.equal(h.tables.commerceEmail.length,2);assert.match(h.tables.commerceEmail[1].dedupeKey,/^refund:rfnd_original:resend:/);assert.equal(h.tables.commerceEmail[1].kind,'REFUND');
 });
+
+test('explicit eBook live checkout selects separate live credentials without changing default test checkout',()=>{
+ const h=harness({env:{RAZORPAY_LIVE_KEY_ID:'rzp_live_fixture',RAZORPAY_LIVE_KEY_SECRET:'live-fixture-secret',EBOOK_LIVE_CHECKOUT_APPROVED:'true'}}),c=h.load('lib/commerce/config.ts');
+ assert.equal(c.paymentConfig().key,'rzp_test_fixture');assert.equal(c.paymentConfig('live').key,'rzp_live_fixture');assert.equal(c.paymentConfig('live').secret,'live-fixture-secret');c.assertCheckout('live');
+});
+test('live callbacks verify with the persisted order mode and reject the test secret',async()=>{
+ const h=harness({env:{RAZORPAY_LIVE_KEY_ID:'rzp_live_fixture',RAZORPAY_LIVE_KEY_SECRET:'live-fixture-secret'}});h.tables.commerceOrder[0].mode='live';const p=h.load('lib/commerce/payments.ts');
+ const testSignature=createHmac('sha256','fixture-secret').update('order_remote|pay_verified').digest('hex');await assert.rejects(p.verifyCallback('order1','user1','pay_verified','order_remote',testSignature));
+ const liveSignature=createHmac('sha256','live-fixture-secret').update('order_remote|pay_verified').digest('hex');await p.verifyCallback('order1','user1','pay_verified','order_remote',liveSignature);assert.equal(h.tables.commerceOrder[0].status,'PAID');assert.equal(h.tables.commerceEntitlement.length,1);
+});
+test('webhooks cannot cross payment modes and a live receipt never claims a test payment',async()=>{
+ const h=harness();h.tables.commerceOrder[0].mode='live';await assert.rejects(h.load('lib/commerce/payments.ts').reconcilePayment('pay_verified','order1','test'));
+ const receipt=h.load('lib/commerce/jobs.ts').receiptContent({...h.tables.commerceOrder[0],paidAt:new Date(),payments:[{providerId:'pay_verified',status:'CAPTURED'}]});assert.doesNotMatch(receipt.subject,/TEST/);assert.doesNotMatch(receipt.text,/No real payment/);assert.match(receipt.html,/Payment verified by Razorpay/);
+});

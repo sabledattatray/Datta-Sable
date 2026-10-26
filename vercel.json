@@ -1,5 +1,6 @@
 {
   "crons": [
-    { "path": "/api/commerce/worker", "schedule": "17 3 * * *" }
+    { "path": "/api/commerce/worker", "schedule": "17 3 * * *" },
+    { "path": "/api/ebooks/worker", "schedule": "22 3 * * *" }
   ]
 }

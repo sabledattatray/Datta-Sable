@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { EbookNavigation } from './Providers';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
@@ -8,7 +9,7 @@ import { ArrowUpRight, ArrowRight, ChevronDown, Menu, Plus, User, X } from 'luci
 import BrandLockup from './BrandLockup';
 import ThemeToggle from './ThemeToggle';
 import HeaderAccount from './HeaderAccount';
-import { navLinks, megaMenuData } from './navigationData';
+import { navLinks as baseNavLinks, megaMenuData } from './navigationData';
 import styles from './Navbar.module.css';
 
 type Destination = { title: string; desc: string; href: string; icon: React.ReactNode };
@@ -35,6 +36,8 @@ function DestinationLink({ item, onSelect }: { item: Destination; onSelect: () =
 }
 
 export default function Navbar() {
+  const ebooksEnabled = useContext(EbookNavigation);
+  const navLinks = ebooksEnabled ? [...baseNavLinks.slice(0,4), { label: 'eBooks', href: '/ebooks', mega: false }, ...baseNavLinks.slice(4)] : baseNavLinks;
   const { data: session } = useSession();
   const pathname = usePathname();
   const [open,setOpen] = useState<string|null>(null);

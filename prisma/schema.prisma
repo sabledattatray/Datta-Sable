@@ -444,6 +444,7 @@ model CommerceProduct {
   resources         CommerceResource[]
   items             CommerceOrderItem[]
   entitlements      CommerceEntitlement[]
+  ebook             EbookProfile?
 }
 
 model CommerceResource {
@@ -455,6 +456,7 @@ model CommerceResource {
   active    Boolean            @default(true)
   createdAt DateTime           @default(now()) @db.Timestamptz(6)
   downloads CommerceDownload[]
+  asset     EbookAsset?
 
   @@index([productId, active])
 }
@@ -497,6 +499,7 @@ model CommerceOrderItem {
   unitPriceMinor Int
   currency       String
   quantity       Int             @default(1)
+  resourceIdSnapshot String?
 
   @@unique([orderId, productId])
 }
@@ -557,8 +560,102 @@ model CommerceEntitlement {
   status    String          @default("ACTIVE")
   grantedAt DateTime        @default(now()) @db.Timestamptz(6)
   revokedAt DateTime?       @db.Timestamptz(6)
+  grants    EbookDownloadGrant[]
 
   @@unique([orderId, productId])
+}
+
+// eBooks extend commerce; financial records and customer identities remain shared.
+model EbookProfile {
+  productId    String @id
+  product      CommerceProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+  sku          String @unique
+  author       String @default("Datta Sable")
+  edition      String
+  pageCount    Int
+  language     String @default("English")
+  version      String @default("1.0")
+  featured     Boolean @default(false)
+  approved     Boolean @default(false)
+  contents     String[]
+  outcomes     String[]
+  audience     String[]
+  prerequisites String[]
+  notIncluded  String[]
+  license      String @default("Personal use only. Redistribution is not permitted.")
+  updatePolicy String @default("Access includes the purchased edition. Future editions are not included unless stated.")
+  categories   EbookCategoryLink[]
+}
+
+model EbookCategory {
+  id String @id @default(cuid())
+  slug String @unique
+  name String
+  description String @default("")
+  icon String @default("BookOpen")
+  sortOrder Int @default(0)
+  published Boolean @default(true)
+  seoTitle String?
+  seoDescription String?
+  books EbookCategoryLink[]
+}
+
+model EbookCategoryLink {
+  productId String
+  categoryId String
+  isPrimary Boolean @default(false)
+  ebook EbookProfile @relation(fields: [productId], references: [productId], onDelete: Cascade)
+  category EbookCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  @@id([productId, categoryId])
+  @@index([categoryId])
+}
+
+model EbookAsset {
+  resourceId String @id
+  resource CommerceResource @relation(fields: [resourceId], references: [id], onDelete: Restrict)
+  sha256 String
+  byteSize Int
+  filename String
+  mimeType String @default("application/pdf")
+  version String
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model EbookAccessToken {
+  hash String @id
+  email String
+  kind String
+  expiresAt DateTime @db.Timestamptz(6)
+  consumedAt DateTime? @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  @@index([email, kind])
+  @@index([expiresAt])
+}
+
+model EbookDownloadGrant {
+  hash String @id
+  entitlementId String
+  entitlement CommerceEntitlement @relation(fields: [entitlementId], references: [id], onDelete: Restrict)
+  expiresAt DateTime @db.Timestamptz(6)
+  usedCount Int @default(0)
+  maxUses Int @default(3)
+  revokedAt DateTime? @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  @@index([entitlementId])
+  @@index([expiresAt])
+}
+
+model EbookAccessMail {
+  id String @id
+  email String
+  status String @default("PENDING")
+  attempts Int @default(0)
+  nextAttemptAt DateTime @default(now()) @db.Timestamptz(6)
+  leaseUntil DateTime? @db.Timestamptz(6)
+  lastError String?
+  providerId String?
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  @@index([status, nextAttemptAt])
 }
 
 model CommerceEmail {

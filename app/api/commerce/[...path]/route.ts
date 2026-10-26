@@ -42,8 +42,9 @@ export async function GET(req: Request, context: Context) {
     }
     if (path[0] === 'downloads' && path[1]) {
       const user = await customer();
-      const resource = await prisma.commerceResource.findFirst({ where: { id: path[1], active: true, product: { deliveryReady: true, entitlements: { some: { status: 'ACTIVE', order: { userId: user.id, status: 'PAID' } } } } } });
+      const resource = await prisma.commerceResource.findFirst({ where: { id: path[1], active: true, product: { deliveryReady: true, entitlements: { some: { status: 'ACTIVE', order: { userId: user.id, status: 'PAID' } } } } }, include: { product: { select: { ebook: true } } } });
       if (!resource) throw new CommerceError('Download not available.', 404);
+      if (resource.product?.ebook) return new NextResponse(null, { status: 303, headers: { Location: '/ebooks/library', 'Cache-Control': 'private, no-store' } });
       const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
       if (!token) throw new CommerceError('Private storage is not configured.', 503);
       if (!/^products\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+$/.test(resource.pathname) || resource.pathname.includes('..')) throw new CommerceError('Download not available.', 404);
@@ -90,9 +91,10 @@ export async function GET(req: Request, context: Context) {
 export async function POST(req: Request, context: Context) {
   try {
     const path = (await context.params).path.join('/');
-    if (path === 'webhook') {
-      paymentConfig(); // This release rejects live configuration.
-      const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    if (path === 'webhook' || path === 'webhook/live') {
+      const webhookMode = path === 'webhook/live' ? 'live' : process.env.RAZORPAY_KEY_ID?.startsWith('rzp_live_') ? 'live' : 'test';
+      paymentConfig(webhookMode);
+      const secret = path === 'webhook/live' ? process.env.RAZORPAY_LIVE_WEBHOOK_SECRET : process.env.RAZORPAY_WEBHOOK_SECRET;
       if (!secret) throw new CommerceError('Webhook secret is not configured.', 503);
       const raw = await req.text();
       if (Buffer.byteLength(raw) > 262144) throw new CommerceError('Payload too large.', 413);
@@ -103,15 +105,18 @@ export async function POST(req: Request, context: Context) {
       const paymentId = event.payload.payment?.entity.id || event.payload.refund?.entity.payment_id;
       if (!paymentId) throw new CommerceError('Missing payment reference.');
       // Persist before acknowledging. A duplicate never resets an event's processing state.
-      await prisma.commerceWebhook.upsert({ where: { eventId }, create: { eventId, type: event.event, payload: { paymentId } }, update: {} });
+      await prisma.commerceWebhook.upsert({ where: { eventId }, create: { eventId, type: event.event, payload: { paymentId, mode: webhookMode } }, update: {} });
       kick(); return ok({ received: true });
     }
     sameOrigin(req);
     const user = await customer(path.startsWith('admin'));
     if (path === 'orders') {
       const input = z.object({ productId: z.string().min(1).max(100), requestKey: z.string().uuid() }).parse(await jsonBody(req));
-      const order = await initiate(user, input.productId, input.requestKey);
-      return ok({ id: order.id, number: order.number, razorpayOrderId: order.razorpayOrderId, amount: order.totalMinor, currency: order.currency, key: paymentConfig().key, email: order.customerEmail, name: order.customerName });
+      const ebookProduct = await prisma.commerceProduct.findUnique({ where: { id: input.productId }, select: { ebook: true } });
+      if (ebookProduct?.ebook) await (await import('@/lib/ebooks/service')).assertEbookSale(input.productId);
+      const mode = ebookProduct?.ebook ? (await import('@/lib/ebooks/validation')).ebookPaymentMode() : undefined;
+      const order = await initiate(user, input.productId, input.requestKey, mode);
+      return ok({ id: order.id, number: order.number, razorpayOrderId: order.razorpayOrderId, amount: order.totalMinor, currency: order.currency, key: paymentConfig(order.mode === 'live' ? 'live' : 'test').key, email: order.customerEmail, name: order.customerName });
     }
     if (path === 'verify') {
       const input = z.object({ orderId: z.string().min(1), paymentId: z.string().regex(/^pay_[a-zA-Z0-9]+$/), razorpayOrderId: z.string(), signature: z.string().length(64) }).parse(await jsonBody(req));
@@ -129,7 +134,9 @@ export async function POST(req: Request, context: Context) {
       const productId = z.string().min(1).parse(form.get('productId'));
       const title = z.string().trim().min(1).max(180).parse(form.get('title'));
       if (!(file instanceof File) || file.size < 5 || file.size > 4 * 1024 * 1024) throw new CommerceError('Upload a resource of up to 4 MB.');
-      if (!(await prisma.commerceProduct.findUnique({ where: { id: productId } }))) throw new CommerceError('Product not found.', 404);
+      const uploadProduct = await prisma.commerceProduct.findUnique({ where: { id: productId }, select: { ebook: true } });
+      if (!uploadProduct) throw new CommerceError('Product not found.', 404);
+      if (uploadProduct.ebook) throw new CommerceError('Upload eBook PDFs through the eBook studio for checksums and approval.');
       const bytes = Buffer.from(await file.arrayBuffer());
       const format = resourceFormat(file.name, bytes);
       const blob = await put(`products/${productId}/${randomUUID()}.${format.extension}`, bytes, { access: 'private', token, contentType: format.contentType, addRandomSuffix: false });
@@ -144,7 +151,8 @@ export async function POST(req: Request, context: Context) {
     if (action === 'product') {
       const data = productInput.parse(body.product), id = z.string().optional().parse(body.id);
       if (id) {
-        const existingProduct = await prisma.commerceProduct.findUniqueOrThrow({ where: { id }, select: { slug: true } });
+        const existingProduct = await prisma.commerceProduct.findUniqueOrThrow({ where: { id }, select: { slug: true, ebook: true } });
+        if (existingProduct.ebook) throw new CommerceError('Manage this eBook through the eBook studio.');
         if (existingProduct.slug !== data.slug) throw new CommerceError('Existing product URLs are preserved. Create a new draft instead of changing this slug.');
       }
       const detailsInput = (body.product as Record<string, unknown>).details;
@@ -178,16 +186,19 @@ export async function POST(req: Request, context: Context) {
       await prisma.commerceEmail.create({ data: { orderId: job.orderId, dedupeKey: job.kind === 'REFUND' ? `${job.dedupeKey}:resend:${randomUUID()}` : `resend:${randomUUID()}`, kind: job.kind, recipient: job.recipient } }); kick();
     }
     if (action === 'refund') {
-      paymentConfig();
-      const input = z.object({ paymentId: z.string(), reason: z.string().min(5).max(500), requestKey: z.string().uuid(), confirmation: z.literal('REFUND TEST PAYMENT') }).parse(body);
+      const input = z.object({ paymentId: z.string(), reason: z.string().min(5).max(500), requestKey: z.string().uuid(), confirmation: z.enum(['REFUND TEST PAYMENT', 'REFUND LIVE PAYMENT']) }).parse(body);
       const refund = await transaction(async tx => {
         const payment = await tx.commercePayment.findUniqueOrThrow({ where: { id: input.paymentId }, include: { refunds: true } });
+        const order = await tx.commerceOrder.findUniqueOrThrow({ where: { id: payment.orderId } });
+        if (input.confirmation !== (order.mode === 'live' ? 'REFUND LIVE PAYMENT' : 'REFUND TEST PAYMENT')) throw new CommerceError('Refund confirmation does not match the payment mode.');
+        paymentConfig(order.mode === 'live' ? 'live' : 'test');
         if (payment.status !== 'CAPTURED' || payment.refunds.some(r => r.status !== 'FAILED')) throw new CommerceError('Refund already exists or payment is not captured.', 409);
         return tx.commerceRefund.create({ data: { paymentId: payment.id, amountMinor: payment.amountMinor, requestKey: input.requestKey, actorId: user.id, reason: input.reason } });
       });
       const payment = await prisma.commercePayment.findUniqueOrThrow({ where: { id: refund.paymentId } });
       try {
-        const remote = await providerCall(provider().payments.refund(payment.providerId, { amount: refund.amountMinor, receipt: refund.id }));
+        const refundOrder = await prisma.commerceOrder.findUniqueOrThrow({ where: { id: payment.orderId } });
+        const remote = await providerCall(provider(refundOrder.mode === 'live' ? 'live' : 'test').payments.refund(payment.providerId, { amount: refund.amountMinor, receipt: refund.id }));
         await prisma.commerceRefund.update({ where: { id: refund.id }, data: { providerId: remote.id, status: remote.status.toUpperCase() } });
         await reconcileOrder(payment.orderId);
       } catch { throw new CommerceError('Refund outcome requires reconciliation. Do not issue another refund.', 503); }

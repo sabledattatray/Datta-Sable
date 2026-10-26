@@ -42,6 +42,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...(Number.isFinite(date.getTime()) && date.getTime() <= Date.now() ? { lastModified: date } : {}) };
     }),
   ];
+  if (typeof process !== 'undefined' && process.env.EBOOK_STORE_ENABLED === 'true') {
+    try {
+      const { prisma } = await import('@/lib/prisma');
+      const [books, categories] = await Promise.all([
+        prisma.commerceProduct.findMany({ where: { status: 'PUBLISHED', ebook: { isNot: null } }, select: { slug: true, updatedAt: true } }),
+        prisma.ebookCategory.findMany({ where: { published: true, books: { some: { ebook: { product: { status: 'PUBLISHED' } } } } }, select: { slug: true } }),
+      ]);
+      urls.push({ url: baseUrl + '/ebooks' }, ...books.map(b => ({ url: `${baseUrl}/ebooks/${b.slug}`, lastModified: b.updatedAt })), ...categories.map(c => ({ url: `${baseUrl}/ebooks/category/${c.slug}` })));
+    } catch { console.error('Ebook sitemap source unavailable.'); }
+  }
   // Omit invented baseline dates; lastmod must describe real content changes.
   return [...new Map(urls.map(item => [item.url, item])).values()];
 }

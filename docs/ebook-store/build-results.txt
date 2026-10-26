@@ -1,0 +1,8 @@
+Build validation — 26 October 2026
+Command: $env:NEXT_BUILD_DIR='.next-ebook-build'; npx next build
+Result: completed successfully, including route table and final page optimization.
+Compilation: successful (54 seconds in final recorded run).
+Type validation and lint: completed; existing unrelated lint warnings remain.
+Configured database: unreachable; existing blog/CMS/product pages reported fallback/unavailable warnings during static generation. This was not represented as successful database integration.
+New route table includes /ebooks, /ebooks/[slug], /ebooks/category/[slug], /ebooks/library, /ebooks/access, /ebooks/download/[grantToken], /admin/ebooks and /api/ebooks/[...path].
+No production deployment or live payment was performed.

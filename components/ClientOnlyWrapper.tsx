@@ -11,6 +11,7 @@ const BackToTop = dynamic(() => import("@/components/BackToTop"), { ssr: false }
 
 export default function ClientOnlyWrapper() {
   const pathname = usePathname();
+  if (/^\/ebooks\/(library|access|download|order|checkout)(\/|$)/.test(pathname)) return <CookieConsent />;
   if (pathname === '/sign-in' || pathname === '/sign-up') return <CookieConsent />;
   return (
     <>

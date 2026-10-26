@@ -3,8 +3,11 @@ import { z } from 'zod';
 import { CommerceError } from './shared';
 
 // Supports both verified test credentials and active live production keys.
-export function paymentConfig() {
-  const key = process.env.RAZORPAY_KEY_ID || '', secret = process.env.RAZORPAY_KEY_SECRET || '';
+export function paymentConfig(mode?: 'test' | 'live') {
+  const activeKey = process.env.RAZORPAY_KEY_ID || '';
+  const useActive = !mode || activeKey.startsWith(`rzp_${mode}_`);
+  const key = (useActive ? activeKey : process.env[`RAZORPAY_${mode!.toUpperCase()}_KEY_ID`]) || '';
+  const secret = (useActive ? process.env.RAZORPAY_KEY_SECRET : process.env[`RAZORPAY_${mode!.toUpperCase()}_KEY_SECRET`]) || '';
   const isTest = key.startsWith('rzp_test_');
   const isLive = key.startsWith('rzp_live_');
   if ((!isTest && !isLive) || !secret) {
@@ -12,7 +15,7 @@ export function paymentConfig() {
   }
   return { key, secret };
 }
-export function provider() { const { key, secret } = paymentConfig(); return new Razorpay({ key_id: key, key_secret: secret }); }
+export function provider(mode?: 'test' | 'live') { const { key, secret } = paymentConfig(mode); return new Razorpay({ key_id: key, key_secret: secret }); }
 export async function providerCall<T>(request: Promise<T>): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
@@ -21,10 +24,10 @@ export async function providerCall<T>(request: Promise<T>): Promise<T> {
     })]);
   } finally { if (timer) clearTimeout(timer); }
 }
-export function assertCheckout() {
-  const { key } = paymentConfig();
+export function assertCheckout(mode?: 'test' | 'live') {
+  const { key } = paymentConfig(mode);
   if (key.startsWith('rzp_live_')) {
-    const liveActive = process.env.COMMERCE_LIVE_CHECKOUT_ENABLED === 'true' || process.env.COMMERCE_TEST_CHECKOUT_ENABLED === 'false';
+    const liveActive = process.env.COMMERCE_LIVE_CHECKOUT_ENABLED === 'true' || process.env.COMMERCE_TEST_CHECKOUT_ENABLED === 'false' || (mode === 'live' && process.env.EBOOK_LIVE_CHECKOUT_APPROVED === 'true');
     if (!liveActive) throw new CommerceError('Live checkout is not enabled.', 503);
   } else {
     if (process.env.COMMERCE_TEST_CHECKOUT_ENABLED !== 'true') throw new CommerceError('Checkout is not enabled.', 503);

@@ -2,6 +2,7 @@
 export function analyticsPath(value: string): string | null {
   const path = value.split(/[?#]/, 1)[0];
   if (!path.startsWith('/') || path.startsWith('//') || /@|%40/i.test(path)) return null;
+  if (/^\/ebooks\/(library|access|download|order|checkout)(\/|$)/i.test(path)) return null;
   if (/^\/(admin|api|auth|login|register|dashboard|preview|unsubscribe|profile|settings)(\/|$)/i.test(path)) return null;
   return path;
 }

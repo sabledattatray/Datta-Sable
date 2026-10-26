@@ -15,6 +15,7 @@ export const adminNavigation = [
   { label: 'Commerce', items: [
     { label: 'Payments', href: '/admin/payments', icon: CreditCard },
     { label: 'Digital products', href: '/admin/products', icon: ShoppingBag },
+    { label: 'eBook studio', href: '/admin/ebooks', icon: FileText },
     { label: 'Orders & billing', icon: Layers, children: [
       { label: 'All orders', href: '/admin/orders' }, { label: 'Transactions', href: '/admin/orders/transactions' },
       { label: 'Purchase receipts', href: '/admin/billing/invoices' }, { label: 'Refunds', href: '/admin/refunds' },

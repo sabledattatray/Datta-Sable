@@ -1,0 +1,65 @@
+[
+  {
+    "page": "storefront",
+    "width": 320,
+    "status": 200,
+    "overflow": false,
+    "h1": "Practical eBooks for Data, Analytics & Technology"
+  },
+  {
+    "page": "storefront",
+    "width": 375,
+    "status": 200,
+    "overflow": false,
+    "h1": "Practical eBooks for Data, Analytics & Technology"
+  },
+  {
+    "page": "storefront",
+    "width": 768,
+    "status": 200,
+    "overflow": false,
+    "h1": "Practical eBooks for Data, Analytics & Technology"
+  },
+  {
+    "page": "storefront",
+    "width": 1024,
+    "status": 200,
+    "overflow": false,
+    "h1": "Practical eBooks for Data, Analytics & Technology"
+  },
+  {
+    "page": "storefront",
+    "width": 1440,
+    "status": 200,
+    "overflow": false,
+    "h1": "Practical eBooks for Data, Analytics & Technology"
+  },
+  {
+    "page": "library",
+    "status": 200,
+    "overflow": false
+  },
+  {
+    "page": "guest-access",
+    "status": 200,
+    "overflow": false
+  },
+  {
+    "page": "admin-auth",
+    "status": 200,
+    "overflow": false
+  },
+  {
+    "page": "draft-product",
+    "status": 200,
+    "overflow": false
+  },
+  {
+    "check": "anonymous grant denied",
+    "status": 401
+  },
+  {
+    "check": "cross-origin checkout denied",
+    "status": 403
+  }
+]

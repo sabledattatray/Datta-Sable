@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
 
   const isDev = process.env.NODE_ENV === 'development';
   // Razorpay permissions are confined to checkout-capable pages.
-  const isCommerce = path.startsWith('/products') || path.startsWith('/account/orders') || path.startsWith('/checkout');
+  const isCommerce = path.startsWith('/products') || path.startsWith('/ebooks') || path.startsWith('/account/orders') || path.startsWith('/checkout');
   const paymentScript = isCommerce ? ' https://checkout.razorpay.com' : '';
   const paymentConnect = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com https://lumberjack.razorpay.com https://lumberjack-cx.razorpay.com' : '';
   const paymentFrame = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com' : '';
@@ -80,6 +80,11 @@ export function middleware(request: NextRequest) {
 
   // 4. Referrer Policy
   response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
+  if (/^\/ebooks\/(library|access|download|order|checkout)(\/|$)/.test(path)) {
+    response.headers.set('Referrer-Policy', 'no-referrer');
+    response.headers.set('Cache-Control', 'private, no-store');
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
 
   // 5. Strict Transport Security (HSTS) - Set to 2 Years for preload eligibility
   if (process.env.NODE_ENV === 'production') {

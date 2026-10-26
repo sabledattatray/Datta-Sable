@@ -1,0 +1,167 @@
+[
+  {
+    "product": {
+      "slug": "power-bi-real-world-projects-2026",
+      "title": "Power BI Real-World Projects",
+      "excerpt": "A practical handbook covering five business analytics project walkthroughs.",
+      "description": "A 33-page practical handbook with Sales, HR, Finance P&L, Customer Churn, and Inventory project walkthroughs, plus DAX reference, troubleshooting and practice challenges. PDF handbook only; no downloadable datasets or PBIX files are supplied.",
+      "category": "Power BI & DAX",
+      "image": "https://zguwn4d5nxccyjka.public.blob.vercel-storage.com/power-bi-real-world-projects-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "33-page PDF",
+        "2026 Edition",
+        "Five project walkthroughs"
+      ],
+      "includedResources": [
+        "33-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Power BI Real-World Projects | 2026 Edition",
+      "seoDescription": "33-page Power BI PDF handbook by Datta Sable."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-PBI-RWP-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 33,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Professional Power BI workflow",
+        "Setup and practice datasets",
+        "Sales Performance Dashboard",
+        "HR Analytics Dashboard",
+        "Finance P&L and Budget Variance",
+        "Customer Churn and Marketing",
+        "Inventory and Supply Chain",
+        "Publishing, refresh, security and sharing",
+        "Performance optimization and dashboard design",
+        "DAX reference, troubleshooting and portfolio challenges"
+      ],
+      "outcomes": [
+        "Follow practical business analytics workflows",
+        "Practice data preparation, modeling and DAX",
+        "Review dashboard design and delivery considerations"
+      ],
+      "audience": [
+        "Power BI learners",
+        "Data analysts",
+        "Students and career switchers"
+      ],
+      "prerequisites": [
+        "Power BI Desktop on Windows",
+        "Basic familiarity with data tables and calculations"
+      ],
+      "notIncluded": [
+        "PBIX project files",
+        "Downloadable CSV datasets",
+        "Companion ZIP archive",
+        "Completed dashboard source files"
+      ],
+      "license": "Personal learning use only. Redistribution, resale and public upload are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "power-bi-dax",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "PowerBI_Real-World_Projects_Dark_Edition-3.pdf",
+      "sha256": "6f12e599e49f957d2aca916811b97888b1c67177e0b72e3fa7c3d5d5d6058bdb",
+      "byteSize": 129964,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "power-bi-mastery-2026",
+      "title": "Power BI Mastery",
+      "excerpt": "From raw data to executive dashboards: Power Query, modeling, DAX, design and governance.",
+      "description": "A 16-page independent guide to Power Query, star-schema modeling, DAX, executive dashboards, performance, security and deployment. Includes exercises and interview preparation in the PDF. The supplied PDF refers to a companion ZIP and CSV datasets; those files were not provided and are not included in this listing. Publication is pending review of those references.",
+      "category": "Power BI & DAX",
+      "image": "https://zguwn4d5nxccyjka.public.blob.vercel-storage.com/power-bi-mastery-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "16-page PDF",
+        "2026 Edition",
+        "Power Query, modeling and DAX"
+      ],
+      "includedResources": [
+        "16-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Power BI Mastery | 2026 Edition",
+      "seoDescription": "16-page Power BI PDF handbook by Datta Sable."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-PBI-MASTERY-2026",
+      "author": "Datta Sable",
+      "edition": "First Edition - October 2026",
+      "pageCount": 16,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Analytics workflow and the Power BI ecosystem",
+        "Power Query: connect, profile and clean data",
+        "Star-schema data modeling",
+        "DAX foundations and CALCULATE",
+        "Time intelligence and business KPIs",
+        "Accessible executive dashboards",
+        "Sales Performance report",
+        "Customer, product and regional analysis",
+        "Performance, security, publishing and governance",
+        "Capstone project and interview preparation",
+        "DAX reference, glossary and quality checklist"
+      ],
+      "outcomes": [
+        "Follow practical business analytics workflows",
+        "Practice data preparation, modeling and DAX",
+        "Review dashboard design and delivery considerations"
+      ],
+      "audience": [
+        "Power BI learners",
+        "Data analysts",
+        "Students and career switchers"
+      ],
+      "prerequisites": [
+        "Power BI Desktop on Windows",
+        "Basic familiarity with data tables and calculations"
+      ],
+      "notIncluded": [
+        "PBIX project files",
+        "Downloadable CSV datasets",
+        "Companion ZIP archive",
+        "Completed dashboard source files"
+      ],
+      "license": "Personal learning use only. Redistribution, resale and public upload are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "power-bi-dax",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "Power_BI_Mastery_Datta_Sable_2026.pdf",
+      "sha256": "d9b23025c40dc033de5e1b30c2b316348b3d5dd6752a92a06623ccd7fd85b4d6",
+      "byteSize": 201745,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "The PDF cover and pages 2-3 refer to companion ZIP/CSV datasets that were not supplied. Resolve these references or supply the original companion files before publication."
+    ]
+  }
+]

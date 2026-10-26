@@ -6,6 +6,7 @@ docs/
 tests/
 scripts/
 scratch/
+storage/
 coverage/
 
 # Redundant documentation files
