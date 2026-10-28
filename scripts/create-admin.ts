@@ -7,11 +7,37 @@ import { posts as originalPosts } from '../app/blog/data';
 import { projects as originalProjects } from '../app/portfolio/data';
 
 async function main() {
-  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const envEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const configuredEmails = (process.env.ADMIN_EMAILS || '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter((e) => e.includes('@'));
+
+  // Prefer explicit ADMIN_EMAIL, otherwise check existing admins from ADMIN_EMAILS
+  let email = envEmail;
+  let existingAdmin = email ? await prisma.user.findUnique({ where: { email } }) : null;
+
+  if (!existingAdmin && !envEmail) {
+    for (const candidate of configuredEmails) {
+      const found = await prisma.user.findUnique({ where: { email: candidate } });
+      if (found) {
+        email = candidate;
+        existingAdmin = found;
+        break;
+      }
+    }
+  }
+
+  // Fallback to primary configured email or default admin if no user exists yet
+  if (!email) {
+    email = configuredEmails[0] || 'admin@dattasable.com';
+    existingAdmin = await prisma.user.findUnique({ where: { email } });
+  }
+
   const password = process.env.ADMIN_PASSWORD;
-  if (!email || !email.includes('@')) throw new Error('Set ADMIN_EMAIL explicitly before running the database seed.');
-  const existingAdmin = await prisma.user.findUnique({ where: { email } });
-  if ((!existingAdmin || password) && (!password || password.length < 12 || Buffer.byteLength(password, 'utf8') > 72)) throw new Error('Set ADMIN_PASSWORD to a unique password of at least 12 characters and at most 72 UTF-8 bytes.');
+  if ((!existingAdmin || password) && (!password || password.length < 12 || Buffer.byteLength(password, 'utf8') > 72)) {
+    throw new Error('Set ADMIN_PASSWORD to a unique password of at least 12 characters and at most 72 UTF-8 bytes.');
+  }
   const hashedPassword = password ? await bcrypt.hash(password, 12) : undefined;
 
   console.log('--- SEEDING DATABASE ---');

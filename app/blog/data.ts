@@ -54,7 +54,9 @@ import { microsoftFabricCapacitySizingGuide2026Post } from "./posts/microsoft-fa
 import { microsoftFabricVsDatabricks2026Post } from "./posts/microsoft-fabric-vs-databricks-2026";
 import { pl300VsDp600VsDp700MicrosoftCertificationGuide2026Post } from "./posts/pl-300-vs-dp-600-vs-dp-700-microsoft-certification-guide-2026";
 import { cybersecurityCloudSecurityGuide2026Post } from "./posts/cybersecurity-cloud-security-guide-2026";
+import { sqlWindowFunctionsExplainedGuidePost } from "./posts/sql-window-functions-explained-guide";
 export const posts = [
+  sqlWindowFunctionsExplainedGuidePost,
   microsoftFabricRealTimeIntelligenceGuidePost,
   cybersecurityCloudSecurityGuide2026Post,
   pl300VsDp600VsDp700MicrosoftCertificationGuide2026Post,

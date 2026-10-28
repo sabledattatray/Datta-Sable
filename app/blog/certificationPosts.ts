@@ -9,7 +9,7 @@ export const newCertificationPosts = [
     date: "June 25, 2026",
     color: "var(--accent)",
     icon: "📖",
-    image: "/images/blog/dp-600-fabric-analytics-engineer-study-companion-notebook.webp",
+    image: "/images/blog/dp-600-study-guide-2026.webp",
     tags: ["Microsoft Fabric", "DP-600", "Analytics Engineering", "Direct Lake", "Power BI", "Data Warehouse", "Study Guide"],
     content: `<!-- BREADCRUMB_START -->
 <div class="breadcrumb-container" style="font-family: monospace; font-size: 0.8rem; margin-bottom: 2rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
