@@ -14,9 +14,6 @@ Disallow: /dashboard$
 Disallow: /dashboard/
 Disallow: /preview$
 Disallow: /preview/
-Disallow: /analytics-live$
-Disallow: /analytics-live/
-Disallow: /live-dashboard$
-Disallow: /live-dashboard/
 
+Sitemap: https://dattasable.com/sitemap.xml
 Sitemap: https://dattasable.com/sitemap-index.xml

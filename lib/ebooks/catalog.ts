@@ -8,14 +8,9 @@ export type Book = Prisma.CommerceProductGetPayload<{ include: typeof bookInclud
 export async function catalog(params: { q?: string; category?: string; sort?: string; page?: string }) {
   const q = (params.q || '').trim().slice(0, 120);
   const page = Math.min(10000, Math.max(1, Number.parseInt(params.page || '1') || 1));
-  const local = await localBooks();
-  if (local.length) {
-    const filtered = local.filter(b => (!q || `${b.title} ${b.excerpt}`.toLowerCase().includes(q.toLowerCase())) && (!params.category || b.ebook?.categories.some(c => c.category.slug === params.category)));
-    filtered.sort((a,b) => params.sort === 'price-asc' ? a.priceMinor-b.priceMinor : params.sort === 'price-desc' ? b.priceMinor-a.priceMinor : params.sort === 'title' ? a.title.localeCompare(b.title) : b.createdAt.getTime()-a.createdAt.getTime());
-    const categories = [...new Map(local.flatMap(b => b.ebook!.categories.map(c => [c.categoryId, c.category] as const))).values()].map(c => ({ ...c, _count: { books: local.filter(b => b.ebook?.categories.some(link => link.categoryId === c.id)).length } }));
-    return { books: filtered.slice((page-1)*12,page*12), count: filtered.length, categories, featured: local.filter(b => b.ebook?.featured), page, localPreview: true };
-  }
-  const where: Prisma.CommerceProductWhereInput = { AND: [publicBookWhere, ...(q ? [{ OR: [{ title: { contains: q, mode: 'insensitive' as const } }, { excerpt: { contains: q, mode: 'insensitive' as const } }] }] : [])], ebook: { is: { categories: { some: { category: { published: true, ...(params.category ? { slug: params.category } : {}) } } } } },
+  const where: Prisma.CommerceProductWhereInput = {
+    AND: [publicBookWhere, ...(q ? [{ OR: [{ title: { contains: q, mode: 'insensitive' as const } }, { excerpt: { contains: q, mode: 'insensitive' as const } }] }] : [])],
+    ebook: { is: { categories: { some: { category: { published: true, ...(params.category ? { slug: params.category } : {}) } } } } },
   };
   const orderBy: Prisma.CommerceProductOrderByWithRelationInput = params.sort === 'price-asc' ? { priceMinor: 'asc' } : params.sort === 'price-desc' ? { priceMinor: 'desc' } : params.sort === 'title' ? { title: 'asc' } : { createdAt: 'desc' };
   const [books, count, categories, featured] = await Promise.all([
@@ -24,10 +19,36 @@ export async function catalog(params: { q?: string; category?: string; sort?: st
     prisma.ebookCategory.findMany({ where: { published: true }, orderBy: { sortOrder: 'asc' }, include: { _count: { select: { books: { where: { ebook: { product: publicBookWhere } } } } } } }),
     prisma.commerceProduct.findMany({ where: { AND: [publicBookWhere], ebook: { is: { featured: true, categories: { some: { category: { published: true } } } } } }, include: bookInclude, take: 3, orderBy: { createdAt: 'desc' } }),
   ]);
-  return { books, count, categories: categories.filter(c => c._count.books > 0), featured, page, localPreview: false };
+
+  if (books.length > 0 || count > 0) {
+    return { books, count, categories: categories.filter(c => c._count.books > 0), featured, page, localPreview: false };
+  }
+
+  // Fallback to local catalog preview only when the database has no books in development
+  if (process.env.NODE_ENV === 'development') {
+    const local = await localBooks();
+    if (local.length) {
+      const filtered = local.filter(b => (!q || `${b.title} ${b.excerpt}`.toLowerCase().includes(q.toLowerCase())) && (!params.category || b.ebook?.categories.some(c => c.category.slug === params.category)));
+      filtered.sort((a,b) => params.sort === 'price-asc' ? a.priceMinor-b.priceMinor : params.sort === 'price-desc' ? b.priceMinor-a.priceMinor : params.sort === 'title' ? a.title.localeCompare(b.title) : b.createdAt.getTime()-a.createdAt.getTime());
+      const categories = [...new Map(local.flatMap(b => b.ebook!.categories.map(c => [c.categoryId, c.category] as const))).values()].map(c => ({ ...c, _count: { books: local.filter(b => b.ebook?.categories.some(link => link.categoryId === c.id)).length } }));
+      return { books: filtered.slice((page-1)*12,page*12), count: filtered.length, categories, featured: local.filter(b => b.ebook?.featured), page, localPreview: true };
+    }
+  }
+
+  return { books: [], count: 0, categories: [], featured: [], page, localPreview: false };
 }
 export async function publishedBook(slug: string) {
-  const local = (await localBooks()).find(b => b.slug === slug);
-  if (local) return local;
-  return prisma.commerceProduct.findFirst({ where: { slug, AND: [publicBookWhere], ebook: { is: { categories: { some: { category: { published: true } } } } } }, include: bookInclude });
+  // Query authoritative database record first
+  const dbBook = await prisma.commerceProduct.findFirst({
+    where: { slug, AND: [publicBookWhere], ebook: { is: { categories: { some: { category: { published: true } } } } } },
+    include: bookInclude,
+  });
+  if (dbBook) return dbBook;
+
+  // Fallback to local preview catalog in development if database has no matching book
+  if (process.env.NODE_ENV === 'development') {
+    const local = (await localBooks()).find(b => b.slug === slug);
+    if (local) return local;
+  }
+  return null;
 }

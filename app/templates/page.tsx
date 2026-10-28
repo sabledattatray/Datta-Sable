@@ -35,7 +35,7 @@ const TEMPLATES = [
 const PRIORITY_TEMPLATE_PATHS = [
   {
     title: 'Gemini SEO Pipelines',
-    href: '/lp/gemini-seo-pipelines-for-marketers',
+    href: '/templates/gemini-research-pipeline',
     label: 'SEO PLAYBOOK'
   },
   {
@@ -237,7 +237,7 @@ export default function TemplatesPage() {
                 </p>
 
                 <div className="pt-6 border-t border-[var(--border)] border-opacity-60 flex items-center justify-between">
-                  <Link href={`/lp/${item.slug}`} className="mono text-[length:var(--text-small)] font-bold text-[var(--accent3)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
+                  <Link href={`/templates/${item.associatedTemplate || item.slug}`} className="mono text-[length:var(--text-small)] font-bold text-[var(--accent3)] hover:text-white transition-colors no-underline flex items-center gap-1.5">
                     READ PLAYBOOK <ArrowRight size={12} />
                   </Link>
                 </div>

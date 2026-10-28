@@ -47,6 +47,8 @@ const nextConfig = {
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   async redirects() {
     return [
+      {"source":"/blog/azure-data-factory-vs-microsoft-fabric-data-factory-2026-deep-dive","destination":"/blog/microsoft-fabric-data-factory-vs-azure-data-factory-feature-parity-cost-migration-strategy-in-2026","permanent":true},
+      {"source":"/blog/power-bi-calculation-groups-enterprise-dax-architecture-performance-guide-2026","destination":"/blog/power-bi-calculation-groups-in-2026-enterprise-dax-architecture-dynamic-formatting-model-optimization","permanent":true},
       {"source":"/blog/microsoft-fabric-architecture-explained-complete-2026-guide","destination":"/blog/microsoft-fabric-architecture-explained-2026","permanent":true},
       {"source":"/blog/dp-600-study-guide-2026-fabric-analytics-engineer","destination":"/blog/dp-600-study-guide-2026","permanent":true},
       {"source":"/blog/microsoft-fabric-capacity-sizing-2026","destination":"/blog/microsoft-fabric-capacity-sizing-guide-2026","permanent":true},
