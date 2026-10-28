@@ -85,7 +85,7 @@ async function runStagingCrawl() {
     try {
       // First fetch without manual follow to catch 301/308 redirects
       const resInitial = await fetch(testUrl, { redirect: 'manual' });
-      let status = resInitial.status;
+      const status = resInitial.status;
       let finalUrl = testUrl;
       let html = '';
 
@@ -243,3 +243,4 @@ runStagingCrawl().catch(err => {
   console.error('Staging crawl failed:', err);
   process.exit(1);
 });
+

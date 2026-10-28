@@ -277,3 +277,4 @@ scoreAllArticles().catch(err => {
   console.error('Scoring failed:', err);
   process.exit(1);
 });
+

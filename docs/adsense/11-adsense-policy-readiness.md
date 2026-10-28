@@ -115,3 +115,4 @@ Google quality raters and AdSense reviewers assess **Experience, Expertise, Auth
 
 ### Review Recommendation:
 The site is **technically and architecturally ready** for review. However, before submitting the AdSense re-application, the site owner should execute either **Option A** (expand the top 20 thin articles to 1,200+ words) or **Option C** (temporarily apply `noindex` to articles under 400 words) as outlined in `docs/adsense/10-top-20-content-remediation-plan.md` to eliminate any residual risk of a "Low-Value Content" automated refusal.
+

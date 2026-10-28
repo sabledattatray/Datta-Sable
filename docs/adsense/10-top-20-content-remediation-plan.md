@@ -210,3 +210,4 @@ The site owner may authorize one of three execution pathways for these 20 articl
 - **Option A (Full Technical Enhancement — Recommended):** Elevate all 20 articles with custom code, diagrams, and worked examples according to the blueprints above. This maximizes long-term organic authority and search visibility.
 - **Option B (Selective Enhancement + Selective Noindex):** Enhance the top 10 certification and architectural articles (1–10), and apply `noindex, follow` to the 10 shorter conceptual articles (11–20) until author bandwidth allows full expansion.
 - **Option C (Immediate Noindex of All 36 Thin Articles):** Apply `noindex, follow` to all articles under 400 words immediately, allowing the remaining 90 high-value articles to undergo AdSense review with zero low-word-count risk.
+
