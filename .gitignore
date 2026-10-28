@@ -52,6 +52,7 @@ surgical-forge-lab/public/staging/*.csv
 # User uploads
 /public/uploads/
 /storage/
+/output/pdf/
 
 # Local fallback data files
 messages.json

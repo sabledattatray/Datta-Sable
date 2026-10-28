@@ -1,6 +1,6 @@
 # eBook store implementation report
 
-**Latest status:** [Owner import and live-payment update](08-owner-import-live.md). Both ₹99 drafts are now in the database; live Razorpay credentials were verified. Storage, live webhooks and final content review still block sales. Earlier phase reports describe the initial implementation state.
+**Latest status (28 October 2026):** [Premium guide release](11-premium-guide-release.md). Five original premium dark guides have been created, rendered and imported at ₹99 each, with approved private assets. The supplied Digital Marketing PDF is also imported as a separate upcoming title. See the release report for production verification; earlier phase reports describe historical implementation states.
 
 Built inside the existing repository. **Not production-ready or live-enabled:** the configured database was unreachable, and an approved cover/PDF, private-store test, real test payment and mailbox verification remain required. Partial acceptance gates are explicitly recorded in [QA/release](07-qa-release.md).
 

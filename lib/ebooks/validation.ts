@@ -2,6 +2,12 @@ import { z } from 'zod';
 
 export const ebookEnabled = () => process.env.EBOOK_STORE_ENABLED === 'true';
 export const ebookPaymentMode = (): 'test' | 'live' => process.env.EBOOK_PAYMENT_MODE === 'live' || process.env.RAZORPAY_KEY_ID?.startsWith('rzp_live_') ? 'live' : 'test';
+// Reuse the existing commerce endpoint only when its active credentials are live.
+// An explicit opt-in keeps a test webhook from satisfying live readiness.
+export const ebookLiveWebhookReady = () => Boolean(process.env.RAZORPAY_LIVE_WEBHOOK_SECRET || (
+  process.env.EBOOK_USE_ACTIVE_LIVE_WEBHOOK === 'true' &&
+  process.env.RAZORPAY_KEY_ID?.startsWith('rzp_live_') && process.env.RAZORPAY_WEBHOOK_SECRET
+));
 const lines = z.array(z.string().trim().min(1).max(500)).max(40);
 export const categoryInput = z.object({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(100), name: z.string().trim().min(2).max(100),
@@ -17,7 +23,7 @@ export const profileInput = z.object({
 export const categorySeeds = [
   ['power-bi-dax', 'Power BI & DAX'], ['microsoft-fabric', 'Microsoft Fabric'], ['advanced-excel', 'Advanced Excel'],
   ['sql-databases', 'SQL & Databases'], ['data-analytics-bi', 'Data Analytics & BI'], ['python-automation', 'Python & Automation'],
-  ['career-certifications', 'Career & Certifications'], ['ai-productivity', 'AI & Productivity'],
+  ['career-certifications', 'Career & Certifications'], ['ai-productivity', 'AI & Productivity'], ['digital-marketing', 'Digital Marketing'],
 ];
 export const firstBook = {
   slug: 'power-bi-real-world-projects-2026', title: 'Power BI Real-World Projects',

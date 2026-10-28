@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { CommerceError } from '@/lib/commerce/shared';
 import { transaction } from '@/lib/commerce/payments';
-import { categorySeeds, firstBook, firstProfile, ebookPaymentMode } from './validation';
+import { categorySeeds, firstBook, firstProfile, ebookPaymentMode, ebookLiveWebhookReady } from './validation';
 
 export async function seedEbooks() {
   return transaction(async tx => {
@@ -24,7 +24,7 @@ export async function assertEbookSale(productId: string) {
   if (process.env.EBOOK_STORE_ENABLED !== 'true') throw new CommerceError('The eBook store is not enabled.', 503);
   if (ebookPaymentMode() === 'live') {
     if (process.env.EBOOK_LIVE_CHECKOUT_APPROVED !== 'true') throw new CommerceError('Live eBook checkout has not been approved.', 503);
-    if (!process.env.COMMERCE_BLOB_READ_WRITE_TOKEN || !process.env.RAZORPAY_LIVE_WEBHOOK_SECRET) throw new CommerceError('Live payment delivery and webhook setup is incomplete.', 503);
+    if (!process.env.COMMERCE_BLOB_READ_WRITE_TOKEN || !ebookLiveWebhookReady()) throw new CommerceError('Live payment delivery and webhook setup is incomplete.', 503);
   } else if (!process.env.RAZORPAY_KEY_ID?.startsWith('rzp_test_') && !process.env.RAZORPAY_TEST_KEY_ID?.startsWith('rzp_test_')) throw new CommerceError('Test checkout is not configured.', 503);
   if (!ebook.approved || !ebook.product.image || ebook.product.currency !== 'INR' || !ebook.product.resources.some(r => r.asset && r.asset.version === ebook.version)) throw new CommerceError('This eBook is awaiting its approved cover and final PDF.', 409);
 }

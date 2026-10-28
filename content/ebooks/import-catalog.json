@@ -163,5 +163,496 @@
     "reviewNotes": [
       "The PDF cover and pages 2-3 refer to companion ZIP/CSV datasets that were not supplied. Resolve these references or supply the original companion files before publication."
     ]
+  },
+  {
+    "product": {
+      "slug": "digital-marketing-playbook-2026",
+      "title": "The Complete Digital Marketing Playbook",
+      "excerpt": "A practical digital marketing workbook covering strategy, SEO, social media, advertising, analytics and AI.",
+      "description": "A 152-page dark-edition PDF workbook with 30 chapters covering digital marketing fundamentals, research, audience segmentation, brand strategy, planning, websites, copywriting, SEO, content, social media, paid advertising, email, automation, analytics, conversion optimization, marketing economics and AI. Includes planning exercises, checklists and a 90-day execution roadmap within the PDF. Examples are educational illustrations, not performance guarantees. PDF only; no separate editable templates or software are included.",
+      "category": "Digital Marketing",
+      "image": "/images/ebooks/digital-marketing-playbook-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "152-page PDF",
+        "30 chapters",
+        "2026 Dark Edition"
+      ],
+      "includedResources": [
+        "152-page PDF workbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "The Complete Digital Marketing Playbook | 2026 Dark Edition",
+      "seoDescription": "152-page digital marketing workbook by Datta Sable: strategy, SEO, social media, advertising, analytics and AI."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-DM-PLAYBOOK-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Dark Edition",
+      "pageCount": 152,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Digital marketing fundamentals and market research",
+        "Audience segmentation, brand strategy and marketing planning",
+        "Website foundations and conversion copywriting",
+        "Technical SEO, keyword research and on-page SEO",
+        "Content strategy, blogging and long-form content",
+        "Social media strategy: Instagram, LinkedIn and YouTube",
+        "Search advertising, paid social and retargeting",
+        "Email marketing and marketing automation",
+        "Analytics foundations and Google Analytics 4",
+        "Conversion optimization and marketing economics",
+        "AI for marketing and 15 free marketing tools",
+        "Marketing reporting and a 90-day execution roadmap",
+        "Templates and operating toolkit exercises"
+      ],
+      "outcomes": [
+        "Build a practical campaign brief and marketing plan",
+        "Plan content, SEO and channel activities around business goals",
+        "Define measurement signals and a weekly performance review",
+        "Practice the workbook assignments and 90-day roadmap"
+      ],
+      "audience": [
+        "Digital marketing learners",
+        "Small business owners",
+        "Freelancers and content professionals"
+      ],
+      "prerequisites": [
+        "Basic familiarity with websites and social media",
+        "A real or practice business for the exercises"
+      ],
+      "notIncluded": [
+        "Separate editable template files",
+        "Advertising credits or paid tool subscriptions",
+        "Guaranteed traffic, leads or revenue"
+      ],
+      "license": "Personal learning use only. Redistribution, resale and public upload are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "digital-marketing"
+    ],
+    "asset": {
+      "filename": "Digital_Marketing_Complete_150_Page_Dark_Edition.pdf",
+      "sha256": "f5a627167d091f6cc86fe8b112b6502144984f150d08e62d37f1cdcf147ae1de",
+      "byteSize": 457673,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "Verified 152 actual PDF pages, including cover and reader guide, despite the source filename referring to 150 pages. Final content approval remains pending."
+    ]
+  },
+  {
+    "product": {
+      "slug": "sql-business-analytics-2026",
+      "title": "SQL for Business Analytics",
+      "excerpt": "Turn transaction data into reliable business answers. A PostgreSQL practice guide with a complete miniature dataset.",
+      "description": "An original 15-page professional field guide by Datta Sable in a premium dark edition. Turn transaction data into reliable business answers. A PostgreSQL practice guide with a complete miniature dataset. Includes 11 practical chapters, worked scenarios, exercises, answer notes and official references. All examples and code are contained in the PDF. No separate editable files, software subscriptions or certificates are included.",
+      "category": "SQL & Databases",
+      "image": "/images/ebooks/sql-business-analytics-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "15-page PDF",
+        "11 practical chapters",
+        "Worked examples and answer notes",
+        "2026 Premium Dark Edition"
+      ],
+      "includedResources": [
+        "15-page PDF field guide"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "SQL for Business Analytics | 2026 Premium Dark Edition",
+      "seoDescription": "Turn transaction data into reliable business answers. A PostgreSQL practice guide with a complete miniature dataset."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-SQL-BUSINESS-ANALYTICS",
+      "author": "Datta Sable",
+      "edition": "2026 Premium Dark Edition",
+      "pageCount": 15,
+      "language": "English",
+      "version": "1.0",
+      "featured": false,
+      "approved": false,
+      "contents": [
+        "Define the metric before the query",
+        "Create a complete practice dataset",
+        "Filter dates and handle missing values",
+        "Aggregate at a defensible grain",
+        "Join without multiplying revenue",
+        "Build a daily report and running total",
+        "Rank customers and define ties",
+        "Calculate repeat purchase responsibly",
+        "Quality checks that catch real defects",
+        "Read a plan before adding indexes",
+        "Capstone: a reconciled monthly brief"
+      ],
+      "outcomes": [
+        "Turn transaction data into reliable business answers. A PostgreSQL practice guide with a complete miniature dataset.",
+        "Apply worked examples and complete the practice exercises",
+        "Use the answer notes and official references to review your work"
+      ],
+      "audience": [
+        "Working professionals",
+        "Analysts and self-directed learners"
+      ],
+      "prerequisites": [
+        "A PostgreSQL-compatible SQL environment and permission to create temporary practice tables. Examples use NUMERIC, DATE, CTEs and window functions. Run them in a practice database, not a production schema."
+      ],
+      "notIncluded": [
+        "Separate editable files or datasets",
+        "Software licences, subscriptions or advertising credits",
+        "Certificates or guaranteed business outcomes"
+      ],
+      "license": "Personal learning use only. You may apply the techniques in your own work. Redistribution, resale and public upload of the book are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF edition. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "sql-databases",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "sql-business-analytics-2026.pdf",
+      "sha256": "e3e458bccb769e2df7de87d31743070df7e822d7083d431595dc467bb2c55869",
+      "byteSize": 92278,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "Original guide created at the owner's request. All pages rendered and inspected; worked SQL and Python examples executed. Publication is authorised after final file and delivery checks."
+    ]
+  },
+  {
+    "product": {
+      "slug": "advanced-excel-mis-reporting-2026",
+      "title": "Advanced Excel & MIS Reporting",
+      "excerpt": "Build a monthly reporting workbook that refreshes cleanly, explains its numbers and survives handover.",
+      "description": "An original 14-page professional field guide by Datta Sable in a premium dark edition. Build a monthly reporting workbook that refreshes cleanly, explains its numbers and survives handover. Includes 10 practical chapters, worked scenarios, exercises, answer notes and official references. All examples and code are contained in the PDF. No separate editable files, software subscriptions or certificates are included.",
+      "category": "Advanced Excel",
+      "image": "/images/ebooks/advanced-excel-mis-reporting-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "14-page PDF",
+        "10 practical chapters",
+        "Worked examples and answer notes",
+        "2026 Premium Dark Edition"
+      ],
+      "includedResources": [
+        "14-page PDF field guide"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Advanced Excel & MIS Reporting | 2026 Premium Dark Edition",
+      "seoDescription": "Build a monthly reporting workbook that refreshes cleanly, explains its numbers and survives handover."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-ADVANCED-EXCEL-MIS-REPORTING",
+      "author": "Datta Sable",
+      "edition": "2026 Premium Dark Edition",
+      "pageCount": 14,
+      "language": "English",
+      "version": "1.0",
+      "featured": false,
+      "approved": false,
+      "contents": [
+        "Design the workbook as a reporting system",
+        "Enter and validate the practice table",
+        "Use structured references and explicit periods",
+        "Look up mappings without hiding exceptions",
+        "Build a visible quality-control panel",
+        "Plan a refreshable Power Query pipeline",
+        "Use PivotTables to investigate, not just decorate",
+        "Calculate KPIs with honest denominators",
+        "Design a premium report that remains readable",
+        "Operate, protect and hand over the workbook"
+      ],
+      "outcomes": [
+        "Build a monthly reporting workbook that refreshes cleanly, explains its numbers and survives handover.",
+        "Apply worked examples and complete the practice exercises",
+        "Use the answer notes and official references to review your work"
+      ],
+      "audience": [
+        "Working professionals",
+        "Analysts and self-directed learners"
+      ],
+      "prerequisites": [
+        "Excel for Microsoft 365 on desktop for the full workflow. XLOOKUP, dynamic arrays, Power Query and refresh interfaces vary by version and platform. Formulas use English names and comma argument separators; adapt separators to your regional settings."
+      ],
+      "notIncluded": [
+        "Separate editable files or datasets",
+        "Software licences, subscriptions or advertising credits",
+        "Certificates or guaranteed business outcomes"
+      ],
+      "license": "Personal learning use only. You may apply the techniques in your own work. Redistribution, resale and public upload of the book are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF edition. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "advanced-excel",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "advanced-excel-mis-reporting-2026.pdf",
+      "sha256": "3fd0b45c1c9b7d2c9df02c97d76673da56243db2c74871241202f605d608591b",
+      "byteSize": 90993,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "Original guide created at the owner's request. All pages rendered and inspected; worked SQL and Python examples executed. Publication is authorised after final file and delivery checks."
+    ]
+  },
+  {
+    "product": {
+      "slug": "python-automation-analysts-2026",
+      "title": "Python Automation for Analysts",
+      "excerpt": "Build a dependable CSV reporting pipeline with validation, exact money arithmetic, repeatable outputs and useful logs.",
+      "description": "An original 15-page professional field guide by Datta Sable in a premium dark edition. Build a dependable CSV reporting pipeline with validation, exact money arithmetic, repeatable outputs and useful logs. Includes 10 practical chapters, worked scenarios, exercises, answer notes and official references. All examples and code are contained in the PDF. No separate editable files, software subscriptions or certificates are included.",
+      "category": "Python & Automation",
+      "image": "/images/ebooks/python-automation-analysts-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "15-page PDF",
+        "10 practical chapters",
+        "Worked examples and answer notes",
+        "2026 Premium Dark Edition"
+      ],
+      "includedResources": [
+        "15-page PDF field guide"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Python Automation for Analysts | 2026 Premium Dark Edition",
+      "seoDescription": "Build a dependable CSV reporting pipeline with validation, exact money arithmetic, repeatable outputs and useful logs."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-PYTHON-AUTOMATION-ANALYSTS",
+      "author": "Datta Sable",
+      "edition": "2026 Premium Dark Edition",
+      "pageCount": 15,
+      "language": "English",
+      "version": "1.0",
+      "featured": false,
+      "approved": false,
+      "contents": [
+        "Choose an automation boundary",
+        "Create and inspect the sample input",
+        "Use Decimal for the monetary contract",
+        "Validate every row and preserve exceptions",
+        "Separate transformation from file handling",
+        "Publish atomically and keep the last good report",
+        "Run the complete reporting pipeline",
+        "Test the failure cases, not just the happy path",
+        "Schedule with visibility and a single owner",
+        "Extend the pipeline without losing its contract"
+      ],
+      "outcomes": [
+        "Build a dependable CSV reporting pipeline with validation, exact money arithmetic, repeatable outputs and useful logs.",
+        "Apply worked examples and complete the practice exercises",
+        "Use the answer notes and official references to review your work"
+      ],
+      "audience": [
+        "Working professionals",
+        "Analysts and self-directed learners"
+      ],
+      "prerequisites": [
+        "Python 3.11 or later, a text editor and a local practice folder. The worked pipeline uses only the Python standard library. Commands shown assume Python is available as python; some systems use python3 or an absolute executable path."
+      ],
+      "notIncluded": [
+        "Separate editable files or datasets",
+        "Software licences, subscriptions or advertising credits",
+        "Certificates or guaranteed business outcomes"
+      ],
+      "license": "Personal learning use only. You may apply the techniques in your own work. Redistribution, resale and public upload of the book are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF edition. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "python-automation",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "python-automation-analysts-2026.pdf",
+      "sha256": "b71dcc82d7693c8bb18f082ccf15100acaab9d2a0f9e6fe52fb7e5a753b146ab",
+      "byteSize": 92386,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "Original guide created at the owner's request. All pages rendered and inspected; worked SQL and Python examples executed. Publication is authorised after final file and delivery checks."
+    ]
+  },
+  {
+    "product": {
+      "slug": "microsoft-fabric-foundations-2026",
+      "title": "Microsoft Fabric Foundations",
+      "excerpt": "Design a small analytics platform from ingestion to a trusted semantic model, with practical checkpoints at every boundary.",
+      "description": "An original 14-page professional field guide by Datta Sable in a premium dark edition. Design a small analytics platform from ingestion to a trusted semantic model, with practical checkpoints at every boundary. Includes 10 practical chapters, worked scenarios, exercises, answer notes and official references. All examples and code are contained in the PDF. No separate editable files, software subscriptions or certificates are included.",
+      "category": "Microsoft Fabric",
+      "image": "/images/ebooks/microsoft-fabric-foundations-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "14-page PDF",
+        "10 practical chapters",
+        "Worked examples and answer notes",
+        "2026 Premium Dark Edition"
+      ],
+      "includedResources": [
+        "14-page PDF field guide"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Microsoft Fabric Foundations | 2026 Premium Dark Edition",
+      "seoDescription": "Design a small analytics platform from ingestion to a trusted semantic model, with practical checkpoints at every boundary."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-MICROSOFT-FABRIC-FOUNDATIONS",
+      "author": "Datta Sable",
+      "edition": "2026 Premium Dark Edition",
+      "pageCount": 14,
+      "language": "English",
+      "version": "1.0",
+      "featured": false,
+      "approved": false,
+      "contents": [
+        "Start with the business and service contract",
+        "Map the platform to the workload",
+        "Organise workspaces and environments",
+        "Land raw data with provenance",
+        "Build conformed tables with explicit quality gates",
+        "Model facts and dimensions for reporting",
+        "Create a semantic model with a metric contract",
+        "Design security across every access path",
+        "Operate for freshness, recovery and capacity",
+        "Capstone: the Northstar release review"
+      ],
+      "outcomes": [
+        "Design a small analytics platform from ingestion to a trusted semantic model, with practical checkpoints at every boundary.",
+        "Apply worked examples and complete the practice exercises",
+        "Use the answer notes and official references to review your work"
+      ],
+      "audience": [
+        "Working professionals",
+        "Analysts and self-directed learners"
+      ],
+      "prerequisites": [
+        "Basic SQL and data-model familiarity. A Fabric-enabled practice environment is needed for platform exercises; licensing, capacity, tenant settings and feature availability depend on your organisation. The architecture and paper exercises can be completed without provisioning resources."
+      ],
+      "notIncluded": [
+        "Separate editable files or datasets",
+        "Software licences, subscriptions or advertising credits",
+        "Certificates or guaranteed business outcomes"
+      ],
+      "license": "Personal learning use only. You may apply the techniques in your own work. Redistribution, resale and public upload of the book are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF edition. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "microsoft-fabric",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "microsoft-fabric-foundations-2026.pdf",
+      "sha256": "c635b29abf54d59b0204fefb4e022fc0223329a33d412073b211ffca9981ad29",
+      "byteSize": 91920,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "Original guide created at the owner's request. All pages rendered and inspected; worked SQL and Python examples executed. Publication is authorised after final file and delivery checks."
+    ]
+  },
+  {
+    "product": {
+      "slug": "ai-productivity-professionals-2026",
+      "title": "AI Productivity for Professionals",
+      "excerpt": "Design repeatable AI-assisted workflows for research, analysis, writing and quality review without surrendering judgement.",
+      "description": "An original 14-page professional field guide by Datta Sable in a premium dark edition. Design repeatable AI-assisted workflows for research, analysis, writing and quality review without surrendering judgement. Includes 10 practical chapters, worked scenarios, exercises, answer notes and official references. All examples and code are contained in the PDF. No separate editable files, software subscriptions or certificates are included.",
+      "category": "AI & Productivity",
+      "image": "/images/ebooks/ai-productivity-professionals-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "14-page PDF",
+        "10 practical chapters",
+        "Worked examples and answer notes",
+        "2026 Premium Dark Edition"
+      ],
+      "includedResources": [
+        "14-page PDF field guide"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "AI Productivity for Professionals | 2026 Premium Dark Edition",
+      "seoDescription": "Design repeatable AI-assisted workflows for research, analysis, writing and quality review without surrendering judgement."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-AI-PRODUCTIVITY-PROFESSIONALS",
+      "author": "Datta Sable",
+      "edition": "2026 Premium Dark Edition",
+      "pageCount": 14,
+      "language": "English",
+      "version": "1.0",
+      "featured": false,
+      "approved": false,
+      "contents": [
+        "Choose tasks with a clear acceptance test",
+        "Write a task brief, not a magic phrase",
+        "Ground summaries in traceable evidence",
+        "Analyse a small table without trusting arithmetic",
+        "Turn meeting notes into accountable actions",
+        "Draft writing with a claim ledger",
+        "Treat documents as evidence, not instructions",
+        "Evaluate prompts with a small test set",
+        "Build a repeatable workflow and measure its value",
+        "Capstone: a verified weekly brief"
+      ],
+      "outcomes": [
+        "Design repeatable AI-assisted workflows for research, analysis, writing and quality review without surrendering judgement.",
+        "Apply worked examples and complete the practice exercises",
+        "Use the answer notes and official references to review your work"
+      ],
+      "audience": [
+        "Working professionals",
+        "Analysts and self-directed learners"
+      ],
+      "prerequisites": [
+        "Access to an organisation-approved text AI tool and a text editor. No paid subscription, API key or programming experience is required for the exercises. Use the invented examples in the book; apply your organisation's data-handling rules before using real workplace material."
+      ],
+      "notIncluded": [
+        "Separate editable files or datasets",
+        "Software licences, subscriptions or advertising credits",
+        "Certificates or guaranteed business outcomes"
+      ],
+      "license": "Personal learning use only. You may apply the techniques in your own work. Redistribution, resale and public upload of the book are not permitted.",
+      "updatePolicy": "Access includes the purchased PDF edition. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "ai-productivity",
+      "career-certifications"
+    ],
+    "asset": {
+      "filename": "ai-productivity-professionals-2026.pdf",
+      "sha256": "dcebb348fbea2b476a249e416f41e8e98c4870a0b9e54db272b1280ca766e1f6",
+      "byteSize": 91462,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": [
+      "Original guide created at the owner's request. All pages rendered and inspected; worked SQL and Python examples executed. Publication is authorised after final file and delivery checks."
+    ]
   }
 ]

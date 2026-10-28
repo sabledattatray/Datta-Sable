@@ -12,7 +12,10 @@ const db = new PrismaClient();
 async function main() {
   const apply = process.argv.includes('--apply');
   const catalogOnly = process.argv.includes('--catalog-only');
-  const records = JSON.parse(await readFile('content/ebooks/import-catalog.json', 'utf8'));
+  const selectedSlug = process.argv.find(arg => arg.startsWith('--slug='))?.slice(7);
+  const allRecords = JSON.parse(await readFile('content/ebooks/import-catalog.json', 'utf8'));
+  const records = selectedSlug ? allRecords.filter((record: { product: { slug: string } }) => selectedSlug.split(',').includes(record.product.slug)) : allRecords;
+  if (!records.length) throw new Error('No matching eBook import record.');
   for (const record of records) {
     const product = productInput.parse(record.product), profile = profileInput.parse(record.profile);
     const filename = path.basename(record.asset.filename);

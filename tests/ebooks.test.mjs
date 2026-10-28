@@ -38,8 +38,8 @@ test('guest link consumption is single-use, expires, creates hashed session and 
 test('expired magic link cannot create a session',async()=>{
  const access=load('lib/ebooks/access.ts',{'next/headers':{},'next-auth':{},'@/lib/auth':{},'@/lib/prisma':{prisma:{$transaction:work=>work({ebookAccessToken:{findUnique:async()=>({kind:'LINK',expiresAt:new Date(0)})}})}}});await assert.rejects(access.createSession('a'.repeat(64)));
 });
-test('catalog performs bounded server pagination and published-only category search',async()=>{
- const calls=[];const prisma={commerceProduct:{findMany:async args=>{calls.push(args);return[];},count:async()=>0},ebookCategory:{findMany:async()=>[]}};const {catalog}=load('lib/ebooks/catalog.ts',{'@/lib/prisma':{prisma}});await catalog({q:' BI ',category:'power-bi-dax',sort:'price-asc',page:'2'});assert.equal(calls[0].take,12);assert.equal(calls[0].skip,12);assert.equal(calls[0].where.status,'PUBLISHED');assert.equal(calls[0].where.OR[0].title.contains,'BI');assert.equal(calls[0].where.ebook.is.categories.some.category.slug,'power-bi-dax');assert.equal(calls[0].orderBy[0].priceMinor,'asc');
+test('catalog performs bounded pagination and combines public visibility with search',async()=>{
+ const calls=[];const prisma={commerceProduct:{findMany:async args=>{calls.push(args);return[];},count:async()=>0},ebookCategory:{findMany:async()=>[]}};const {catalog}=load('lib/ebooks/catalog.ts',{'@/lib/prisma':{prisma}});await catalog({q:' BI ',category:'power-bi-dax',sort:'price-asc',page:'2'});assert.equal(calls[0].take,12);assert.equal(calls[0].skip,12);assert.equal(calls[0].where.AND[0].OR[0].status,'PUBLISHED');assert.equal(calls[0].where.AND[1].OR[0].title.contains,'BI');assert.equal(calls[0].where.AND[0].OR[1].status,'DRAFT');assert.deepEqual(Array.from(calls[0].where.AND[0].OR[1].slug.in),['power-bi-real-world-projects-2026','power-bi-mastery-2026','digital-marketing-playbook-2026']);assert.equal(calls[0].where.ebook.is.categories.some.category.slug,'power-bi-dax');assert.equal(calls[0].orderBy[0].priceMinor,'asc');
 });
 test('private eBook paths and bearer tokens never enter visit analytics',()=>{
  const {analyticsPath}=load('lib/analytics-url.ts');for(const route of ['/ebooks/library','/ebooks/access','/ebooks/download/access','/ebooks/download/secret','/ebooks/order/secret'])assert.equal(analyticsPath(route),null);assert.equal(analyticsPath('/ebooks/power-bi-real-world-projects-2026?utm_source=linkedin'),'/ebooks/power-bi-real-world-projects-2026');
@@ -83,14 +83,31 @@ test('download API rejects cross-origin and malformed bearer-token requests',asy
  const h=routeHarness();assert.equal((await h.post('download',{token:'a'.repeat(64)},'https://attacker.test')).status,403);assert.equal((await h.post('download',{token:'../private'})).status,410);assert.equal(h.signed,0);
 });
 test('eBook admin mutations deny anonymous access before touching catalog data',async()=>{const h=routeHarness();assert.equal((await h.post('admin',{action:'seed'})).status,401);});
-test('owner import has two real-cover INR 99 drafts without promising missing companion files',()=>{
- const records=JSON.parse(fs.readFileSync('content/ebooks/import-catalog.json','utf8'));const {profileInput}=load('lib/ebooks/validation.ts');const {productInput}=load('lib/commerce/shared.ts');assert.equal(records.length,2);
- for(const record of records){productInput.parse(record.product);profileInput.parse(record.profile);assert.equal(record.product.priceMinor,9900);assert.equal(record.product.status,'DRAFT');assert.equal(record.product.salesEnabled,false);assert.equal(record.profile.approved,false);assert.ok(new URL(record.product.image).hostname.endsWith('.public.blob.vercel-storage.com'));assert.ok(fs.existsSync('public/images/ebooks/'+record.product.slug+'.png'));assert.match(record.asset.sha256,/^[a-f0-9]{64}$/);assert.equal(record.product.includedResources.length,1);}
+test('owner import has eight real-cover INR 99 records without promising missing companion files',()=>{
+ const records=JSON.parse(fs.readFileSync('content/ebooks/import-catalog.json','utf8'));const {profileInput}=load('lib/ebooks/validation.ts');const {productInput}=load('lib/commerce/shared.ts');assert.equal(records.length,8);
+ for(const record of records){productInput.parse(record.product);profileInput.parse(record.profile);assert.equal(record.product.priceMinor,9900);assert.equal(record.product.status,'DRAFT');assert.equal(record.product.salesEnabled,false);assert.equal(record.profile.approved,false);assert.ok(record.product.image.startsWith('/images/ebooks/') || new URL(record.product.image).hostname.endsWith('.public.blob.vercel-storage.com'));assert.ok(fs.existsSync('public/images/ebooks/'+record.product.slug+'.png'));assert.match(record.asset.sha256,/^[a-f0-9]{64}$/);assert.equal(record.product.includedResources.length,1);}
  const mastery=records.find(r=>r.product.slug==='power-bi-mastery-2026');assert.equal(mastery.profile.pageCount,16);assert.match(mastery.reviewNotes[0],/not supplied/);
 });
 test('development draft catalog cannot load into production',async()=>{const {localBooks}=load('lib/ebooks/local-catalog.ts',{}, {NODE_ENV:'production'});assert.equal((await localBooks()).length,0);});
 test('live eBook approval still refuses missing private delivery or live webhook setup',async()=>{
  const valid={approved:true,version:'1',product:{image:'/cover.png',currency:'INR',resources:[{asset:{version:'1'}}]}};
  const service=load('lib/ebooks/service.ts',{'@/lib/prisma':{prisma:{ebookProfile:{findUnique:async()=>valid}}},'@/lib/commerce/payments':{}},{EBOOK_STORE_ENABLED:'true',EBOOK_PAYMENT_MODE:'live',EBOOK_LIVE_CHECKOUT_APPROVED:'true'});await assert.rejects(service.assertEbookSale('book'));
+});
+
+test('active commerce webhook satisfies live readiness only with explicit opt-in and live keys',()=>{
+ const base={EBOOK_USE_ACTIVE_LIVE_WEBHOOK:'true',RAZORPAY_WEBHOOK_SECRET:'existing-secret'};
+ for(const env of [base,{...base,RAZORPAY_KEY_ID:'rzp_test_example'},{...base,EBOOK_USE_ACTIVE_LIVE_WEBHOOK:'false',RAZORPAY_KEY_ID:'rzp_live_example'}]){
+  assert.equal(load('lib/ebooks/validation.ts',{},env).ebookLiveWebhookReady(),false);
+ }
+ assert.equal(load('lib/ebooks/validation.ts',{}, {...base,RAZORPAY_KEY_ID:'rzp_live_example'}).ebookLiveWebhookReady(),true);
+ assert.equal(load('lib/ebooks/validation.ts',{}, {RAZORPAY_LIVE_WEBHOOK_SECRET:'dedicated-secret'}).ebookLiveWebhookReady(),true);
+});
+
+test('checkout display refuses incomplete provider configuration even for approved editions',()=>{
+ const env={EBOOK_STORE_ENABLED:'true',EBOOK_PAYMENT_MODE:'live',EBOOK_LIVE_CHECKOUT_APPROVED:'true',COMMERCE_BLOB_READ_WRITE_TOKEN:'private-token',RAZORPAY_LIVE_WEBHOOK_SECRET:'webhook-secret'};
+ const failed=load('lib/ebooks/checkout.ts',{'@/lib/commerce/config':{assertCheckout:()=>{throw Error('missing live keys');}}},env);
+ assert.equal(failed.ebookCheckoutReady(),false);
+ const ready=load('lib/ebooks/checkout.ts',{'@/lib/commerce/config':{assertCheckout:mode=>assert.equal(mode,'live')}},env);
+ assert.equal(ready.ebookCheckoutReady(),true);
 });
 
