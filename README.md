@@ -1,14 +1,14 @@
 # DATTA SABLE
-### Enterprise Business Intelligence · Analytics Engineering · Digital Innovation
+### Enterprise Business Intelligence · Analytics Engineering · Modern Web Architecture
 
 <div align="center">
 
 <br/>
 
-<h1>Transforming Complex Data Into Intelligent Decisions.<br/>Engineering Scalable Digital Experiences.</h1>
+<h1>Transforming Complex Data Into Clear Decisions.<br/>Engineering Scalable Digital Experiences.</h1>
 
 <p align="center">
-  <strong>Enterprise Business Intelligence · Modern Analytics Engineering · Full-Stack Web Architecture · Digital Commerce</strong>
+  <strong>Enterprise Business Intelligence · Modern Analytics Engineering · Full-Stack Web Platform · Digital Commerce</strong>
 </p>
 
 <p align="center">
@@ -47,22 +47,12 @@
 
 ## 01 / Platform Overview
 
-**Datta Sable** is an enterprise-grade digital architecture built to demonstrate the convergence of business intelligence, data modeling, full-stack software engineering, and digital knowledge monetization.
+**Datta Sable** is a modern digital platform designed to demonstrate the intersection of enterprise business intelligence, analytical data modeling, full-stack application engineering, and technical knowledge publishing.
 
-Rather than treating data analytics as disconnected desktop dashboards, this platform unifies the complete data product lifecycle:
+To maintain architectural precision, the platform explicitly distinguishes between two core domains:
 
-$$\text{Raw Ingestion} \longrightarrow \text{Medallion Lakehouse} \longrightarrow \text{Validated Semantic Model} \longrightarrow \text{Actionable Decision Intelligence}$$
-
-### Core Operational Pillars
-
-| Pillar | Engineering Scope | Business Value |
-| :--- | :--- | :--- |
-| **Business Intelligence** | Power BI semantic modeling, DAX statistical process control, and live executive telemetry. | Eliminates reporting ambiguity; delivers real-time visibility into revenue, pipeline velocity, and margins. |
-| **Analytics Engineering** | Medallion architecture (Bronze $\to$ Silver $\to$ Gold), OneLake Delta tables, and PySpark transformations. | Ensures verifiable data lineage, schema consistency, and sub-second analytical query performance. |
-| **Interactive Utilities** | Client-side financial calculators, diagram syntax visualizers, and operational KPI trees. | Empowers decision-makers to model ROI, validate architectures, and drill into metrics without server round-trips. |
-| **Digital Commerce** | Razorpay-backed e-commerce, time-expiring cryptographically signed download tokens, and webhook reconciliation. | Seamless fulfillment of professional technical resources, eBooks, and certification packages. |
-| **Technical Publishing** | 126 publication-grade technical articles featuring 37 custom-engineered technical deep dives. | Translates complex cloud platforms (Microsoft Fabric, Azure, SQL) into reproducible implementation blueprints. |
-| **Security & Governance** | Role-based administrative access control, CSRF protection, and autonomous publisher lockout mechanisms. | Defends intellectual property, prevents automated content drift, and enforces zero-trust session boundaries. |
+1. **The Web Application Platform:** Built on Next.js 15, React 19, TypeScript, Prisma ORM, and PostgreSQL. It delivers performant public web experiences, interactive client-side workspace utilities, customer authentication, and protected digital commerce.
+2. **The Analytics Engineering Portfolio:** Enterprise Business Intelligence implementations built using Power BI, Microsoft Fabric, OneLake Delta tables, PySpark, and advanced DAX modeling.
 
 ---
 
@@ -131,15 +121,15 @@ $$\text{Raw Ingestion} \longrightarrow \text{Medallion Lakehouse} \longrightarro
 
 ---
 
-## 03 / Platform Capabilities Matrix
+## 03 / Core Capabilities Matrix
 
-| System Module | Verified Production Capability | Implementation Detail |
+| System Module | Verified Production Capability | Implementation Architecture |
 | :--- | :--- | :--- |
-| **Interactive Workspace Tools** | Client-side analytical calculators and engineering visualization tools. | Built with Zustand, Web Workers, and Mermaid.js (`/tools/open-mis`, `/tools/bi-roi-calculator`, `/tools/mermaid-forge`). |
-| **Enterprise BI Telemetry** | High-performance interactive dashboard views with zero cold-start crashes. | Component-level error boundary isolation with dynamic SSR fallback (`/dashboards/*`). |
+| **Interactive Workspace Tools** | Client-side analytical calculators and engineering visualization utilities. | Built with Zustand, Web Workers, and Mermaid.js (`/tools/open-mis`, `/tools/bi-roi-calculator`, `/tools/mermaid-forge`). |
+| **Enterprise BI Telemetry** | High-performance interactive dashboard views with isolated runtime stability. | Component-level error boundary isolation with dynamic SSR fallback (`/dashboards/*`). |
 | **Digital Commerce Engine** | Server-side Razorpay order generation and cryptographic webhook signature verification. | Idempotent transaction handling, order tracking, and purchase logging (`/products`, `/checkout`). |
 | **Protected Digital Delivery** | Tamper-resistant file delivery with single-use expiring access tokens. | Cryptographically signed URLs prevent link sharing and directory traversal attacks (`/ebooks`). |
-| **Editorial Knowledge Hub** | 126 technical articles backed by structured schema.org metadata. | Custom editorial revision overlay architecture (`lib/editorial-revisions.ts`) ensuring verified code examples. |
+| **Editorial Knowledge Hub** | 126 published technical articles backed by structured schema.org metadata. | Custom editorial revision overlay architecture (`lib/editorial-revisions.ts`) ensuring verified code examples. |
 | **SEO & Crawler Alignment** | Dynamic sitemaps, robots.txt directives, and canonical tags. | 272 audited URLs: 0 HTTP 500 errors, clean 301 redirects, and legacy preview routes isolated to clean 404s. |
 | **Autonomous Lockout** | Hard failure enforcement against autonomous, unverified AI publishing jobs. | Code-level enforcement (`AI_PUBLISHING_DISABLED=true`) preventing unauthorized database writes or publishing drift. |
 | **Design System** | Fluid dark-mode interface with accessible contrast and custom typography. | Styled with Tailwind CSS v4, `Syne` headline typography, and `JetBrains Mono` code blocks. |
@@ -150,9 +140,11 @@ $$\text{Raw Ingestion} \longrightarrow \text{Medallion Lakehouse} \longrightarro
 
 The flagship analytics portfolio showcases a full-scale, **9-page enterprise Power BI analytics solution** engineered to model complex business performance across multi-dimensional datasets:
 
+$$\text{Raw Ingestion} \longrightarrow \text{Medallion Architecture (Bronze $\to$ Silver $\to$ Gold)} \longrightarrow \text{Direct Lake / Import Semantic Models} \longrightarrow \text{Executive Decision Intelligence}$$
+
 ```mermaid
 graph LR
-    subgraph Enterprise["Enterprise BI Reporting Suite"]
+    subgraph Enterprise["Enterprise BI Reporting Suite (Power BI Portfolio)"]
         P1["01 Executive Overview<br>High-level KPIs, EBITDA, Growth"]
         P2["02 Sales Performance<br>Revenue, Targets, MoM Delta"]
         P3["03 Product Analysis<br>Margin Matrix, SKU Velocity"]
@@ -178,52 +170,51 @@ graph LR
 
 ---
 
-## 05 / System Architecture & Data Flow
+## 05 / Website Application Architecture & Data Flow
 
-The platform utilizes a modern serverless architecture combining Next.js App Router, Edge Middleware, Prisma ORM, and PostgreSQL:
+The website platform utilizes a provider-neutral Next.js server runtime, PostgreSQL persistence, Prisma ORM, and secure server-side integration APIs:
 
 ```mermaid
 flowchart TD
-    Client["Client Browser<br>(Desktop & Mobile)"]
+    Client["Client Browser<br>(Desktop & Mobile Viewports)"]
     
-    subgraph EdgeLayer["Edge & Ingestion Layer (Vercel Anycast CDN)"]
-        DNS["DNS Zone<br>(Hostinger Nameservers)"]
-        Middleware["Edge Middleware<br>(Security Headers, CSRF, Route Normalization)"]
+    subgraph IngestionLayer["Ingestion & Network Boundary"]
+        Proxy["Reverse Proxy & Edge Router<br>(Security Headers, CSRF, Route Normalization)"]
     end
 
     subgraph AppLayer["Application Runtime (Next.js 15.5 App Router)"]
-        StaticPages["SSG Static Cache<br>(126 Blog Articles, Portfolio, Tools)"]
-        DynamicRoutes["Server Components & Actions<br>(Product Checkout, Auth Sessions)"]
+        StaticPages["Pre-rendered Static Pages (SSG)<br>(Published Blog Articles, Portfolio, Tools)"]
+        DynamicRoutes["Server-Rendered Routes & Actions (SSR)<br>(Checkout Sessions, Account Management)"]
         APIs["Protected Route Handlers<br>(/api/commerce, /api/auth, /api/admin)"]
     end
 
-    subgraph IntegrationLayer["External Enterprise Services"]
-        Razorpay["Razorpay Gateway<br>(Order API & Webhook Verification)"]
+    subgraph IntegrationLayer["External Service Providers"]
+        Razorpay["Razorpay Payment Gateway<br>(Order API & Webhook Verification)"]
         Nodemailer["SMTP Transactional Email<br>(Order Receipts & Magic Links)"]
-        AdSense["Google AdSense Bot<br>(Verified ads.txt & Clean Sitemaps)"]
+        AdSense["Search & Policy Scanners<br>(Authorized ads.txt & Dynamic Sitemaps)"]
     end
 
     subgraph DataLayer["Persistence & Storage Layer"]
         Prisma["Prisma ORM 5.22<br>(Strict Schema Validation & Connection Pooling)"]
-        Postgres[("PostgreSQL 16 DB<br>(Users, Orders, Revisions, Analytics)")]
-        BlobStorage["Protected Asset Storage<br>(Signed PDF & Digital Resource Delivery)"]
+        Postgres[("PostgreSQL 16 Database<br>(Users, Orders, Revisions, Analytics)")]
+        SecureAssets["Protected Asset Storage<br>(Signed PDF & Digital Product Delivery)"]
     end
 
-    Client --> DNS --> Middleware
-    Middleware --> StaticPages & DynamicRoutes
+    Client --> Proxy
+    Proxy --> StaticPages & DynamicRoutes
     DynamicRoutes --> APIs
     APIs --> Prisma --> Postgres
     APIs --> Razorpay
     APIs --> Nodemailer
-    APIs --> BlobStorage
+    APIs --> SecureAssets
     Client -.-> AdSense
 ```
 
 ---
 
-## 06 / Technology Stack
+## 06 / Verified Technology Stack
 
-All dependencies and runtime packages are verified directly against `package.json` and production build logs:
+All dependencies and runtime packages are verified directly against `package.json` and production build outputs:
 
 | Domain | Technology | Version | Purpose in Platform |
 | :--- | :--- | :---: | :--- |
@@ -248,23 +239,24 @@ All dependencies and runtime packages are verified directly against `package.jso
 
 ## 07 / Security, Reliability & Quality Assurance
 
-The platform enforces strict engineering practices to safeguard data integrity and operational uptime:
+The platform enforces factual, code-supported engineering practices to ensure security, data integrity, and compliance:
 
-- **Autonomous Publishing Safeguard:** To prevent hallucinated or repetitive content drift, all automated publishing workers are hard-locked (`AI_PUBLISHING_DISABLED=true`). Publication requires technical validation and human approval.
-- **Cryptographic Entitlement Verification:** Digital product downloads (`/ebooks`) use single-use, time-expiring signed tokens. Unauthenticated traversal requests fail closed without leaking storage paths.
-- **Administrative Path Cloaking:** Protected admin routes enforce session verification; unauthorized crawler requests receive a clean Next.js `notFound` (404) response rather than exposing authentication challenges.
-- **Automated Regression Suite:** 100% test pass rate across **210 automated unit, integration, and readiness tests** (`npm test`), including end-to-end commerce webhooks, sitemap XML integrity, and campaign throttling.
-- **Google AdSense Policy Compliance:** Verified implementation of `ads.txt` (`pub-4242010382827250`), dynamic sitemaps, semantic H1 heading hierarchies, and dedicated legal trust pages (`/privacy`, `/terms`, `/disclaimer`).
+- **Autonomous Publishing Safeguard:** All automated publishing workers are hard-locked (`AI_PUBLISHING_DISABLED=true`) to eliminate unreviewed content generation. Publishing requires explicit editorial validation.
+- **Protected Product Delivery:** Digital product downloads (`/ebooks`) use single-use, time-expiring cryptographically signed tokens. Unauthorized path traversal requests fail closed without leaking storage destinations.
+- **Administrative Path Cloaking:** Protected admin routes require active administrator sessions; unauthenticated requests receive a clean Next.js `notFound` (404) response rather than exposing authentication challenges or administrative route existence.
+- **Automated Regression Suite:** **210 test cases passing** across unit, integration, and readiness test suites (`npm test`), validating commerce webhooks, sitemap XML integrity, session recovery, and campaign throttling.
+- **Google AdSense Policy Compliance:** Fully aligned with AdSense policy requirements, including verified `ads.txt` (`pub-4242010382827250`), dynamic sitemaps, semantic H1 heading hierarchies, and dedicated legal trust pages (`/privacy`, `/terms`, `/disclaimer`).
+- **Verified SEO Audit (October 2026):** Complete crawl of all 272 inventory routes confirmed **zero HTTP 500 errors**, 259 HTTP 200 responses, 5 permanent 301/308 redirects, and 8 legacy draft/preview routes cleanly isolated to HTTP 404.
 
 ---
 
 ## 08 / Local Developer Setup Guide
 
-Follow these verified instructions to run the platform locally:
+Follow these verified instructions to set up the development environment:
 
 ### 1. Prerequisites
-- **Node.js:** `v20.x` or higher (Tested on Node v24 LTS)
-- **Database:** Local or hosted PostgreSQL instance
+- **Node.js:** `v20.x` or higher (Tested and verified on Node v24 LTS)
+- **Database:** Local or hosted PostgreSQL instance (PostgreSQL 14+)
 - **Package Manager:** `npm` (v10+)
 
 ### 2. Clone the Repository
@@ -281,30 +273,35 @@ npm install
 ### 4. Configure Environment Variables
 Create a `.env` file in the project root:
 ```ini
-# Core Configuration
+# Core Application Configuration
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your-development-secret-here"
 
-# Database Connection
+# Database Connection (PostgreSQL)
 DATABASE_URL="postgresql://user:password@localhost:5432/dattasable?schema=public"
 
-# Razorpay Integration (Test Mode)
+# Razorpay Integration (Test Credentials)
 RAZORPAY_KEY_ID="rzp_test_..."
 RAZORPAY_KEY_SECRET="your-test-secret"
 RAZORPAY_WEBHOOK_SECRET="your-webhook-secret"
 
-# Safety Lockouts
+# Publishing Safety Lockout
 AI_PUBLISHING_DISABLED="true"
 ```
 
-### 5. Generate Prisma Client & Migrate Schema
+### 5. Database Migration Setup
+The repository maintains a full migration history in `prisma/migrations/`. Apply committed migrations to your local database:
 ```bash
+# Generate the Prisma Client
 npx prisma generate
-npx prisma db push
-```
 
-### 6. Run the Test Suite
+# Apply committed migrations to development database
+npx prisma migrate dev
+```
+*(For automated staging/CI environments, use `npx prisma migrate deploy`).*
+
+### 6. Run the Test Suite & Quality Checks
 ```bash
 # Execute all 210 regression test assertions
 npm test
@@ -319,7 +316,7 @@ npm run lint
 ### 7. Launch Development Server
 ```bash
 npm run dev
-# The application will be available at http://localhost:3000
+# The application will be accessible at http://localhost:3000
 ```
 
 ### 8. Production Build Verification
@@ -353,7 +350,9 @@ Datta-Sable/
 │   ├── adsense/              # AdSense policy remediation reports (Phases 0–5)
 │   └── assets/readme/        # Ultra-premium verified README screenshots (WebP)
 ├── lib/                      # Core backend utilities, Prisma client, auth & commerce
-├── prisma/                   # Database schema definitions & seeding scripts
+├── prisma/                   # Database schema definitions & committed migrations
+│   ├── migrations/           # Committed Prisma migration history
+│   └── schema.prisma         # Relational schema specification
 ├── public/                   # Static assets, fonts (Syne, JetBrains Mono), ads.txt
 ├── scripts/                  # Operational audits, staging crawlers & test harnesses
 └── tests/                    # Automated regression test suites (210 passing tests)
