@@ -123,7 +123,7 @@ export async function GET(req: Request, context: Context) {
             }
           }
         }
-        return new Response(bytes, {
+        return new NextResponse(new Uint8Array(bytes), {
           status: 200,
           headers: {
             'Content-Type': 'application/pdf',
