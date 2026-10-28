@@ -8,3 +8,4 @@ const fivers = lines.filter(l => l.includes(',"500",')).map(l => {
 
 console.log('Total 500s:', fivers.length);
 console.log(JSON.stringify(fivers, null, 2));
+

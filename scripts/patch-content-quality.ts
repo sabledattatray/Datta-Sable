@@ -168,3 +168,4 @@ patchTemplateBranding();
 patchGlossaryDoorwayLinks();
 patchTemplatesDoorwayLinks();
 console.log('All patches completed successfully.');
+

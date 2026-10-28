@@ -16,7 +16,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services/automation', '/services/web-design', '/contact', '/start-here',
     '/dashboards', '/dashboards/world-business', '/dashboards/aura-capital-sales',
     '/dashboards/rider-ops', '/privacy', '/terms', '/disclaimer', '/cookies',
-    '/editorial-policy', '/refund-policy', '/delivery-policy', '/knowledge', '/products'];
+    '/editorial-policy', '/refund-policy', '/delivery-policy', '/knowledge', '/products',
+    '/tools/open-mis', '/tools/bi-roi-calculator', '/tools/mermaid-forge'];
   const [posts, products] = await Promise.all([
     getPublishedBlogPosts(),
     import('@/lib/prisma').then(m => m.prisma.commerceProduct.findMany({

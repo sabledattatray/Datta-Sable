@@ -151,7 +151,7 @@ export async function POST(req: Request) {
           category: payload.category,
           briefId: payload.briefId,
           tier: payload.tier || 'COMPREHENSIVE',
-          operatingMode: payload.operatingMode || 'ASSISTED',
+          operatingMode: payload.operatingMode === 'AUTONOMOUS' ? 'ASSISTED' : (payload.operatingMode || 'ASSISTED'),
         });
         return NextResponse.json({ success: true, ...result });
       }
@@ -258,6 +258,12 @@ export async function POST(req: Request) {
 
       case 'update-settings': {
         if (payload.operatingMode) {
+          if (payload.operatingMode === 'AUTONOMOUS') {
+            return NextResponse.json(
+              { error: 'Autonomous publishing is permanently deactivated per AdSense editorial quality policy. Only MANUAL and ASSISTED modes are permitted.' },
+              { status: 400 }
+            );
+          }
           await prisma.systemSetting.upsert({
             where: { key: AI_SETTING_KEYS.MODE },
             create: { key: AI_SETTING_KEYS.MODE, value: payload.operatingMode },

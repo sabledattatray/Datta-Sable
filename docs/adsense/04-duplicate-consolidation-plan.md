@@ -81,3 +81,4 @@ To prevent any 404 errors for external links, search index entries, or internal 
    - Request to `http://localhost:3000/blog/power-bi-calculation-groups-enterprise-dax-architecture-performance-guide-2026` redirects with HTTP 308 to `/blog/power-bi-calculation-groups-in-2026-enterprise-dax-architecture-dynamic-formatting-model-optimization`.
 2. **Search Console Equity:** Any existing link equity or crawl attempts are seamlessly forwarded to the authoritative guides.
 3. **Database Integrity:** No records were deleted from PostgreSQL. Historical drafts remain intact for auditing.
+

@@ -21,3 +21,4 @@ console.log('Total URLs Audited:', lines.length);
 console.log('Status Counts:', JSON.stringify(statuses, null, 2));
 console.log('Decisions:', JSON.stringify(decisions, null, 2));
 console.log('Severities:', JSON.stringify(severities, null, 2));
+

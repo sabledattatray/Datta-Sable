@@ -103,3 +103,4 @@ Per instructions, **all changes remain strictly on working branch `fix/adsense-c
 **NO deployment to production or AdSense resubmission will take place without explicit approval.**
 
 Ready for Owner Review (Checkpoint B / Checkpoint C).
+

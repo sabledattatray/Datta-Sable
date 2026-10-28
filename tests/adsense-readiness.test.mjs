@@ -55,7 +55,8 @@ test('main sitemap deduplicates real routes and omits invalid or future modifica
  assert.ok(entries.some(x => x.url.endsWith('/products/real-product')));
  assert.ok(entries.every(x => !x.url.endsWith('/products/dummy-product')));
  assert.ok(entries.filter(x => /blog\/(bad-date|future)$/.test(x.url)).every(x => !('lastModified' in x)));
- assert.ok(entries.every(x => !/\/(p|tools|category|lp)\//.test(x.url)));
+ assert.ok(entries.every(x => !/\/(p|category|lp)\//.test(x.url) && (!x.url.includes('/tools/') || ['/tools/open-mis', '/tools/bi-roi-calculator', '/tools/mermaid-forge'].some(t => x.url.endsWith(t)))));
+ assert.ok(entries.some(x => x.url.endsWith('/tools/open-mis')));
 });
 test('analytics consent fails closed without affirmative current-version consent or accessible storage', () => {
  const denied = load('lib/analytics-consent.ts', { window: {}, localStorage: { getItem: () => 'declined' } });

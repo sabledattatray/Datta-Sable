@@ -602,19 +602,20 @@ export default function AiStudioPage() {
               <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Operating Mode for this Draft</label>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
                 {[
-                  { id: 'MANUAL', label: 'Mode A: Manual', desc: 'Manual generation only' },
-                  { id: 'ASSISTED', label: 'Mode B: Assisted (Default)', desc: 'Auto-draft, manual approval' },
-                  { id: 'AUTONOMOUS', label: 'Mode C: Autonomous', desc: 'Auto-publish if score >= 80' },
+                  { id: 'MANUAL', label: 'Mode A: Manual', desc: 'Manual generation only', disabled: false },
+                  { id: 'ASSISTED', label: 'Mode B: Assisted (Default)', desc: 'Auto-draft, manual human approval', disabled: false },
+                  { id: 'AUTONOMOUS', label: 'Mode C: Autonomous (Disabled)', desc: 'Permanently deactivated per quality policy', disabled: true },
                 ].map(m => (
                   <div
                     key={m.id}
-                    onClick={() => setGenMode(m.id as any)}
+                    onClick={() => { if (!m.disabled) setGenMode(m.id as any); }}
                     style={{
                       padding: '12px 14px',
                       borderRadius: '10px',
                       border: `1px solid ${genMode === m.id ? 'var(--accent)' : 'var(--border)'}`,
-                      background: genMode === m.id ? 'color-mix(in srgb, var(--accent) 8%, transparent)' : 'var(--bg)',
-                      cursor: 'pointer',
+                      background: m.disabled ? 'var(--bg-muted, #f1f5f9)' : genMode === m.id ? 'color-mix(in srgb, var(--accent) 8%, transparent)' : 'var(--bg)',
+                      cursor: m.disabled ? 'not-allowed' : 'pointer',
+                      opacity: m.disabled ? 0.6 : 1,
                     }}
                   >
                     <div style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>{m.label}</div>
@@ -820,19 +821,20 @@ export default function AiStudioPage() {
               <label style={{ display: 'block', fontSize: 'var(--text-small)', fontWeight: 600, marginBottom: '8px' }}>Default Operating Mode</label>
               <div style={{ display: 'grid', gap: '10px' }}>
                 {[
-                  { id: 'MANUAL', label: 'Mode A: Manual Approval', desc: 'Admin starts every workflow and reviews every piece of content.' },
-                  { id: 'ASSISTED', label: 'Mode B: Assisted Automation (Recommended)', desc: 'AI automatically researches and drafts articles; admin manually approves publication.' },
-                  { id: 'AUTONOMOUS', label: 'Mode C: Autonomous Publishing', desc: 'Articles meeting quality score >= 80 are scheduled and published automatically (Max 2/day).' },
+                  { id: 'MANUAL', label: 'Mode A: Manual Approval', desc: 'Admin starts every workflow and reviews every piece of content.', disabled: false },
+                  { id: 'ASSISTED', label: 'Mode B: Assisted Automation (Active & Recommended)', desc: 'AI automatically researches and drafts articles; admin manually approves publication.', disabled: false },
+                  { id: 'AUTONOMOUS', label: 'Mode C: Autonomous Publishing (Permanently Disabled)', desc: 'Deactivated per AdSense quality policy. Unattended publishing is forbidden.', disabled: true },
                 ].map(m => (
                   <div
                     key={m.id}
-                    onClick={() => setSettingsMode(m.id)}
+                    onClick={() => { if (!m.disabled) setSettingsMode(m.id); }}
                     style={{
                       padding: '14px',
                       borderRadius: '10px',
                       border: `1px solid ${settingsMode === m.id ? 'var(--accent)' : 'var(--border)'}`,
-                      background: settingsMode === m.id ? 'color-mix(in srgb, var(--accent) 8%, transparent)' : 'var(--bg)',
-                      cursor: 'pointer',
+                      background: m.disabled ? 'var(--bg-muted, #f1f5f9)' : settingsMode === m.id ? 'color-mix(in srgb, var(--accent) 8%, transparent)' : 'var(--bg)',
+                      cursor: m.disabled ? 'not-allowed' : 'pointer',
+                      opacity: m.disabled ? 0.6 : 1,
                     }}
                   >
                     <div style={{ fontSize: 'var(--text-small)', fontWeight: 600 }}>{m.label}</div>
