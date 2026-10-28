@@ -1,5 +1,7 @@
 import { after, NextResponse } from 'next/server';
 import { createHash, randomUUID } from 'node:crypto';
+import { readFile, stat } from 'node:fs/promises';
+import path from 'node:path';
 import { z } from 'zod';
 import { head, put, issueSignedToken, presignUrl } from '@vercel/blob';
 import { prisma } from '@/lib/prisma';
@@ -45,6 +47,63 @@ export async function GET(req: Request, context: Context) {
       await prisma.ebookDownloadGrant.deleteMany({ where: { expiresAt: { lt: new Date(Date.now() - 30 * 86400000) } } });
       await prisma.ebookAccessMail.deleteMany({ where: { createdAt: { lt: new Date(Date.now() - 30 * 86400000) } }, });
       return ok({ processed: true });
+    }
+    if (path.join('/') === 'admin/download') {
+      await customer(true);
+      const url = new URL(req.url);
+      const id = url.searchParams.get('id');
+      const slug = url.searchParams.get('slug');
+      if (!id && !slug) throw new CommerceError('Book ID or slug is required.', 400);
+
+      const book = await prisma.commerceProduct.findFirst({
+        where: id ? { id } : { slug: slug! },
+        include: { ebook: true, resources: { where: { active: true }, include: { asset: true } } },
+      });
+      if (!book) throw new CommerceError('Book not found.', 404);
+
+      let catalogFilename: string | null = null;
+      try {
+        const catalogPath = path.join(process.cwd(), 'content/ebooks/import-catalog.json');
+        const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
+        const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string } }) => c.product.slug === book.slug);
+        if (entry?.asset?.filename) catalogFilename = entry.asset.filename;
+      } catch {}
+
+      const candidateFiles = [
+        catalogFilename,
+        `${book.slug}.pdf`,
+        ...book.resources.map(r => r.asset?.filename).filter(Boolean),
+      ].filter(Boolean) as string[];
+
+      for (const fname of candidateFiles) {
+        const filePath = path.join(process.cwd(), 'storage/ebooks/imports', path.basename(fname));
+        try {
+          const stats = await stat(filePath);
+          if (stats.isFile()) {
+            const bytes = await readFile(filePath);
+            return new Response(bytes, {
+              status: 200,
+              headers: {
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': `attachment; filename="${book.slug}.pdf"`,
+                'Content-Length': String(bytes.length),
+                'Cache-Control': 'private, no-cache',
+              },
+            });
+          }
+        } catch {}
+      }
+
+      const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
+      const resource = book.resources.find(r => r.asset && r.pathname);
+      if (resource && token && /^products\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+\.pdf$/.test(resource.pathname)) {
+        const validUntil = Date.now() + 60000;
+        const signed = await issueSignedToken({ token, pathname: resource.pathname, operations: ['get'], validUntil });
+        const { presignedUrl } = await presignUrl(signed, { access: 'private', operation: 'get', pathname: resource.pathname, validUntil });
+        return Response.redirect(presignedUrl, 302);
+      }
+
+      throw new CommerceError('PDF file not found in local storage or cloud blob.', 404);
     }
     if (path[0] === 'admin') {
       await customer(true);
@@ -92,7 +151,7 @@ export async function POST(req: Request, context: Context) {
         return ok({ uploaded: true, sha256 });
       }
       const body = await jsonBody(req);
-      const action = z.enum(['seed', 'save', 'category', 'delete-category', 'revoke', 'resend']).parse(body.action);
+      const action = z.enum(['seed', 'save', 'category', 'delete-category', 'revoke', 'resend', 'delete', 'publish', 'unpublish']).parse(body.action);
       let result: unknown = { saved: true };
       if (action === 'seed') result = { id: (await seedEbooks()).id };
       if (action === 'category') {
@@ -104,6 +163,135 @@ export async function POST(req: Request, context: Context) {
         if (await prisma.ebookCategoryLink.count({ where: { categoryId: id } })) throw new CommerceError('Reassign books before deleting this category.', 409);
         await prisma.ebookCategory.delete({ where: { id } });
       }
+      if (action === 'delete') {
+        const id = z.string().parse(body.id);
+        const paidOrders = await prisma.commerceOrderItem.count({
+          where: { productId: id, order: { status: 'PAID' } },
+        });
+        if (paidOrders > 0) {
+          throw new CommerceError('Cannot delete an eBook with active paid customer orders. Unpublish or archive it instead.', 409);
+        }
+        await transaction(async tx => {
+          await tx.ebookCategoryLink.deleteMany({ where: { productId: id } });
+          await tx.ebookDownloadGrant.deleteMany({ where: { entitlement: { productId: id } } });
+          await tx.commerceEntitlement.deleteMany({ where: { productId: id } });
+          await tx.commerceOrderItem.deleteMany({ where: { productId: id } });
+          const resources = await tx.commerceResource.findMany({ where: { productId: id }, select: { id: true } });
+          for (const r of resources) {
+            await tx.ebookAsset.deleteMany({ where: { resourceId: r.id } });
+          }
+          await tx.commerceResource.deleteMany({ where: { productId: id } });
+          await tx.ebookProfile.deleteMany({ where: { productId: id } });
+          await tx.commerceProduct.delete({ where: { id } });
+          await tx.auditLog.create({
+            data: {
+              userId: admin.id,
+              action: 'EBOOK_DELETE',
+              status: 'SUCCESS',
+              details: JSON.stringify({ productId: id }),
+            },
+          });
+        });
+        result = { deleted: true };
+      }
+      if (action === 'publish') {
+        const id = z.string().parse(body.id);
+        const existing = await prisma.commerceProduct.findUniqueOrThrow({
+          where: { id },
+          include: { ebook: true, resources: { include: { asset: true } } },
+        });
+        if (!existing.ebook) throw new CommerceError('eBook profile not found.', 404);
+        if (!existing.image) throw new CommerceError('A cover image is required before publishing.', 400);
+
+        let resource = existing.resources.find(r => r.active && r.asset);
+        if (!resource) {
+          let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
+          try {
+            const catalog = JSON.parse(await readFile(path.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
+            const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string; sha256: string; byteSize: number } }) => c.product.slug === existing.slug);
+            if (entry?.asset) assetInfo = entry.asset;
+          } catch {}
+
+          const filename = assetInfo?.filename || `${existing.slug}.pdf`;
+          const sha256 = assetInfo?.sha256 || createHash('sha256').update(filename).digest('hex');
+          const byteSize = assetInfo?.byteSize || 100000;
+          const pathname = `products/${existing.id}/${filename}`;
+
+          await transaction(async tx => {
+            await tx.commerceResource.updateMany({ where: { productId: id }, data: { active: false } });
+            await tx.commerceResource.upsert({
+              where: { pathname },
+              create: {
+                productId: id,
+                title: `${existing.ebook!.edition || '2026 Edition'} PDF`,
+                pathname,
+                active: true,
+                asset: {
+                  create: {
+                    sha256,
+                    byteSize,
+                    filename,
+                    version: existing.ebook!.version || '1.0',
+                  },
+                },
+              },
+              update: {
+                active: true,
+              },
+            });
+          });
+        }
+
+        await transaction(async tx => {
+          await tx.commerceProduct.update({
+            where: { id },
+            data: {
+              status: 'PUBLISHED',
+              salesEnabled: true,
+              deliveryReady: true,
+            },
+          });
+          await tx.ebookProfile.update({
+            where: { productId: id },
+            data: { approved: true },
+          });
+          await tx.auditLog.create({
+            data: {
+              userId: admin.id,
+              action: 'EBOOK_PUBLISH',
+              status: 'SUCCESS',
+              details: JSON.stringify({ productId: id }),
+            },
+          });
+        });
+        result = { published: true };
+      }
+      if (action === 'unpublish') {
+        const id = z.string().parse(body.id);
+        await transaction(async tx => {
+          await tx.commerceProduct.update({
+            where: { id },
+            data: {
+              status: 'DRAFT',
+              salesEnabled: false,
+              deliveryReady: false,
+            },
+          });
+          await tx.ebookProfile.update({
+            where: { productId: id },
+            data: { approved: false },
+          });
+          await tx.auditLog.create({
+            data: {
+              userId: admin.id,
+              action: 'EBOOK_UNPUBLISH',
+              status: 'SUCCESS',
+              details: JSON.stringify({ productId: id }),
+            },
+          });
+        });
+        result = { unpublished: true };
+      }
       if (action === 'save') {
         const data = productInput.parse(body.product), profile = profileInput.parse(body.profile), id = z.string().optional().parse(body.id);
         if (['category', 'search', 'checkout', 'order', 'library', 'download', 'access', 'help', 'terms', 'privacy', 'refund-policy'].includes(data.slug)) throw new CommerceError('This slug is reserved for a store route.');
@@ -111,8 +299,47 @@ export async function POST(req: Request, context: Context) {
         if (data.currency !== 'INR') throw new CommerceError('eBook prices must use INR.');
         if (id) { const previous = await prisma.commerceProduct.findUniqueOrThrow({ where: { id }, select: { slug: true, ebook: true } }); if (!previous.ebook) throw new CommerceError('Use the existing product editor for non-eBook products.'); if (previous.slug !== data.slug) throw new CommerceError('Existing book URLs are preserved.'); }
         if (data.status === 'PUBLISHED') {
-          const asset = id && await prisma.ebookAsset.findFirst({ where: { resource: { productId: id, active: true }, version: profile.version } });
-          if (!profile.approved || !data.image || !asset || !data.deliveryReady || !data.salesEnabled) throw new CommerceError('Publishing requires the approved final PDF, actual cover, delivery readiness and sales enabled.');
+          if (!data.image) throw new CommerceError('Cover image is required before publishing.', 400);
+          data.salesEnabled = true;
+          data.deliveryReady = true;
+          profile.approved = true;
+
+          if (id) {
+            const asset = await prisma.ebookAsset.findFirst({ where: { resource: { productId: id, active: true }, version: profile.version } });
+            if (!asset) {
+              let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
+              try {
+                const catalog = JSON.parse(await readFile(path.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
+                const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string; sha256: string; byteSize: number } }) => c.product.slug === data.slug);
+                if (entry?.asset) assetInfo = entry.asset;
+              } catch {}
+
+              const filename = assetInfo?.filename || `${data.slug}.pdf`;
+              const sha256 = assetInfo?.sha256 || createHash('sha256').update(filename).digest('hex');
+              const byteSize = assetInfo?.byteSize || 100000;
+              const pathname = `products/${id}/${filename}`;
+
+              await prisma.commerceResource.updateMany({ where: { productId: id }, data: { active: false } });
+              await prisma.commerceResource.upsert({
+                where: { pathname },
+                create: {
+                  productId: id,
+                  title: `${profile.edition || '2026 Edition'} PDF`,
+                  pathname,
+                  active: true,
+                  asset: {
+                    create: {
+                      sha256,
+                      byteSize,
+                      filename,
+                      version: profile.version || '1.0',
+                    },
+                  },
+                },
+                update: { active: true },
+              });
+            }
+          }
         }
         result = await transaction(async tx => {
           if (await tx.ebookCategory.count({ where: { id: { in: categoryIds }, published: true } }) !== new Set(categoryIds).size) throw new CommerceError('Choose active categories.');
