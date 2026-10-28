@@ -1,7 +1,7 @@
 import { after, NextResponse } from 'next/server';
 import { createHash, randomUUID } from 'node:crypto';
 import { readFile, stat } from 'node:fs/promises';
-import path from 'node:path';
+import nodePath from 'node:path';
 import { z } from 'zod';
 import { head, put, issueSignedToken, presignUrl } from '@vercel/blob';
 import { prisma } from '@/lib/prisma';
@@ -63,7 +63,7 @@ export async function GET(req: Request, context: Context) {
 
       let catalogFilename: string | null = null;
       try {
-        const catalogPath = path.join(process.cwd(), 'content/ebooks/import-catalog.json');
+        const catalogPath = nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json');
         const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
         const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string } }) => c.product.slug === book.slug);
         if (entry?.asset?.filename) catalogFilename = entry.asset.filename;
@@ -76,7 +76,7 @@ export async function GET(req: Request, context: Context) {
       ].filter(Boolean) as string[];
 
       for (const fname of candidateFiles) {
-        const filePath = path.join(process.cwd(), 'storage/ebooks/imports', path.basename(fname));
+        const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(fname));
         try {
           const stats = await stat(filePath);
           if (stats.isFile()) {
@@ -203,11 +203,11 @@ export async function POST(req: Request, context: Context) {
         if (!existing.ebook) throw new CommerceError('eBook profile not found.', 404);
         if (!existing.image) throw new CommerceError('A cover image is required before publishing.', 400);
 
-        let resource = existing.resources.find(r => r.active && r.asset);
+        const resource = existing.resources.find(r => r.active && r.asset);
         if (!resource) {
           let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
           try {
-            const catalog = JSON.parse(await readFile(path.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
+            const catalog = JSON.parse(await readFile(nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
             const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string; sha256: string; byteSize: number } }) => c.product.slug === existing.slug);
             if (entry?.asset) assetInfo = entry.asset;
           } catch {}
@@ -309,7 +309,7 @@ export async function POST(req: Request, context: Context) {
             if (!asset) {
               let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
               try {
-                const catalog = JSON.parse(await readFile(path.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
+                const catalog = JSON.parse(await readFile(nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
                 const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string; sha256: string; byteSize: number } }) => c.product.slug === data.slug);
                 if (entry?.asset) assetInfo = entry.asset;
               } catch {}
