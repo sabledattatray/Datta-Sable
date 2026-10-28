@@ -307,6 +307,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
             width={1200}
             height={675}
             priority
+            unoptimized={Boolean(post.image && post.image.startsWith('/images/'))}
             style={{ width: '100%', height: 'auto', display: 'block' }}
             sizes="(max-width: 768px) 100vw, 760px"
           />

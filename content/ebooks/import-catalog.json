@@ -654,5 +654,810 @@
     "reviewNotes": [
       "Original guide created at the owner's request. All pages rendered and inspected; worked SQL and Python examples executed. Publication is authorised after final file and delivery checks."
     ]
+  },
+  {
+    "product": {
+      "slug": "azure-databricks-pyspark-lakehouse-2026",
+      "title": "Azure Databricks & PySpark Lakehouse Engineering",
+      "excerpt": "The definitive production manual for designing high-throughput Delta Lake architectures, Unity Catalog governance, Auto Loader ingestion pipelines, and multi-node PySpark tuning.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Azure Databricks & PySpark Lakehouse Engineering. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Data Engineering & Lakehouse",
+      "image": "/images/ebooks/azure-databricks-pyspark-lakehouse-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production PySpark & Delta 3.0 Blueprints"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Azure Databricks & PySpark Lakehouse Engineering | 2026 Edition",
+      "seoDescription": "22-page Azure Databricks and PySpark Lakehouse architecture handbook by Datta Sable. Production Delta Lake 3.0, Unity Catalog, and tuning blueprints."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-ADB-SPK-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Lakehouse Blueprint",
+        "Delta Lake 3.0 & Transaction Log Internals",
+        "Workspace Topology & Serverless Compute",
+        "PySpark Internals: Catalyst & Tungsten",
+        "Ingestion Engineering with Auto Loader",
+        "Bronze Tier Ingestion & Audit Patterns",
+        "Silver Tier Data Cleansing & CDC MERGE",
+        "Gold Tier Star Schemas & Analytical Serving",
+        "Delta Optimization: Liquid Clustering & V-Order",
+        "PySpark Performance: Partitions & Skew Joins"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Azure Databricks & PySpark Lakehouse Engineering",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "data-engineering-lakehouse",
+      "python-automation",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "azure-databricks-pyspark-lakehouse-2026.pdf",
+      "sha256": "55feff35395be9d4c88e4dbf83ecb40b79ba646e78580a1bed59127637429c4e",
+      "byteSize": 444137,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "enterprise-data-modeling-vault-2026",
+      "title": "Enterprise Data Modeling: Star Schema, Snowflake & Data Vault 2.0",
+      "excerpt": "The definitive architecture handbook for designing resilient analytical databases, dimensional star schemas, high-audit Data Vault 2.0 layers, and modern cloud semantic models.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Enterprise Data Modeling: Star Schema, Snowflake & Data Vault 2.0. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Data Modeling & Architecture",
+      "image": "/images/ebooks/enterprise-data-modeling-vault-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Kimball Star Schema & Data Vault 2.0 Blueprints"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Enterprise Data Modeling: Star Schema & Data Vault 2.0 | 2026 Edition",
+      "seoDescription": "22-page Enterprise Data Modeling handbook by Datta Sable. In-depth Kimball star schema, SCD Type 2, and Data Vault 2.0 Hub/Link/Sat architectures."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-MOD-EDM-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Dimensional Evolution",
+        "Core Principles of Kimball Star Schemas",
+        "Fact Table Engineering: 3 Fundamental Types",
+        "Dimension Table Engineering & Conformed Keys",
+        "Slowly Changing Dimensions (SCD Types 0 - 6)",
+        "Degenerate, Junk & Outrigger Dimensions",
+        "Inmon CIF vs. Kimball Dimensional Paradigm",
+        "Introduction to Data Vault 2.0: Core Philosophy",
+        "Hubs, Links & Satellites: The Core Primitives",
+        "Hash Keys, Hash Diffs & Collision Algorithms"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Enterprise Data Modeling: Star Schema, Snowflake & Data Vault 2.0",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "data-modeling-architecture",
+      "sql-databases",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "enterprise-data-modeling-vault-2026.pdf",
+      "sha256": "f03e59e3cb14a9903bb979e225c397739c2224595d711cc2005519bf93535e40",
+      "byteSize": 461963,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "postgresql-performance-tuning-dba-2026",
+      "title": "PostgreSQL High-Performance Tuning & Database Administration",
+      "excerpt": "The comprehensive production manual for database administrators and senior engineers: shared_buffers sizing, autovacuum optimization, EXPLAIN BUFFERS mastery, PgBouncer pooling, and disaster recovery.",
+      "description": "A 22-page practical production handbook by Datta Sable covering PostgreSQL High-Performance Tuning & Database Administration. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "SQL & Databases",
+      "image": "/images/ebooks/postgresql-performance-tuning-dba-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production PostgreSQL 16/17 DBA Runbooks"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "PostgreSQL High-Performance Tuning & Database Administration | 2026 Edition",
+      "seoDescription": "22-page PostgreSQL performance tuning and DBA handbook by Datta Sable. Production autovacuum, memory sizing, PgBouncer, and HA Patroni architectures."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-PG-PERF-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & PostgreSQL Node Topology",
+        "Memory Architecture: shared_buffers & work_mem",
+        "Write-Ahead Logging & Checkpoint Tuning",
+        "Vacuuming, Bloat Mitigation & Autovacuum",
+        "Indexing Deep Dive: B-Tree, GIN, GiST & BRIN",
+        "Covering Indexes, Partial Indexes & Expressions",
+        "EXPLAIN (ANALYZE, BUFFERS) Mastery",
+        "Join Strategies: Nested Loop, Hash & Merge",
+        "Declarative Partitioning: Range, List & Hash",
+        "Connection Pooling: PgBouncer Architecture"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for PostgreSQL High-Performance Tuning & Database Administration",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "sql-databases",
+      "devops-dataops"
+    ],
+    "asset": {
+      "filename": "postgresql-performance-tuning-dba-2026.pdf",
+      "sha256": "f747297c2f045184a1e5e3318f60c03db5ff622105faeb8b31231166ab8587b9",
+      "byteSize": 445735,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "dbt-analytics-engineering-mastery-2026",
+      "title": "dbt & Modern Analytics Engineering: Modular Data Transformation",
+      "excerpt": "The definitive production manual for modular SQL data transformations, dbt Mesh multi-project architectures, automated Slim CI pipelines, and MetricFlow semantic layers.",
+      "description": "A 22-page practical production handbook by Datta Sable covering dbt & Modern Analytics Engineering: Modular Data Transformation. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Analytics Engineering",
+      "image": "/images/ebooks/dbt-analytics-engineering-mastery-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production dbt 1.8+ & dbt Mesh Architecture"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "dbt & Modern Analytics Engineering | 2026 Edition",
+      "seoDescription": "22-page dbt and modern analytics engineering handbook by Datta Sable. In-depth dbt Mesh, incremental models, Slim CI, and MetricFlow semantic modeling."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-DBT-MTR-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Modern Analytics Blueprint",
+        "dbt Core vs. dbt Cloud: Enterprise Architecture",
+        "The Three-Tier Model Architecture",
+        "Materializations: View, Table, Ephemeral & Incremental",
+        "Mastering Incremental Models: Merge Strategies",
+        "Jinja Templating & Enterprise Macros",
+        "Testing Framework: Schema vs. Singular Tests",
+        "Sources & Freshness SLAs: Upstream Defense",
+        "Snapshots: Automating Type 2 SCDs in SQL",
+        "Seeds & Exposures: Bridging the BI Boundary"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for dbt & Modern Analytics Engineering: Modular Data Transformation",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "analytics-engineering",
+      "sql-databases",
+      "devops-dataops"
+    ],
+    "asset": {
+      "filename": "dbt-analytics-engineering-mastery-2026.pdf",
+      "sha256": "7a3efadbd27935736c1d2e46f891e551d01711ad96f22b853f1a7e3eb348e756",
+      "byteSize": 384996,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "snowflake-architecture-finops-2026",
+      "title": "Snowflake Cloud Data Platform Architecture & FinOps",
+      "excerpt": "The definitive production guide to multi-cluster warehouse sizing, micro-partition pruning, continuous Snowpipe streaming, Zero-Copy Cloning, and aggressive FinOps credit governance.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Snowflake Cloud Data Platform Architecture & FinOps. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Cloud Data Platforms",
+      "image": "/images/ebooks/snowflake-architecture-finops-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production Snowflake FinOps & Architecture"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Snowflake Cloud Data Platform Architecture & FinOps | 2026 Edition",
+      "seoDescription": "22-page Snowflake Cloud Data Platform and FinOps handbook by Datta Sable. Production warehouse sizing, micro-partition pruning, Snowpipe, and cost optimization."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-SNOW-FIN-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Snowflake Platform Blueprint",
+        "Virtual Warehouses: Sizing & Multi-Cluster Scaling",
+        "Storage Layer Internals: Micro-Partitions & Pruning",
+        "The Cloud Services Layer: Optimization & Billing",
+        "Continuous Ingestion: Snowpipe & Snowpipe Streaming",
+        "Continuous Data Pipelines: Streams & Tasks",
+        "Zero-Copy Cloning: Sandboxes & Dev Environments",
+        "Time Travel & Fail-Safe: Disaster Protection",
+        "Semi-Structured Data: VARIANT, OBJECT & FLATTEN",
+        "Snowflake FinOps: Credit Quotas & Governance"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Snowflake Cloud Data Platform Architecture & FinOps",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "cloud-data-platforms",
+      "sql-databases",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "snowflake-architecture-finops-2026.pdf",
+      "sha256": "43fe030cf0628d59e0f447b189e8ad90ed9e49d6d7fd03f0da4d93ab1e599112",
+      "byteSize": 442508,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "production-genai-agents-rag-2026",
+      "title": "Production GenAI & Multi-Agent Architecture: RAG & LLM Systems",
+      "excerpt": "The definitive engineering handbook for building enterprise RAG pipelines, autonomous agentic state graphs, vector search retrieval, and production LLM observability.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Production GenAI & Multi-Agent Architecture: RAG & LLM Systems. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "AI & Productivity",
+      "image": "/images/ebooks/production-genai-agents-rag-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production LangGraph, RAG & Multi-Agent Systems"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Production GenAI & Multi-Agent Architecture | 2026 Edition",
+      "seoDescription": "22-page Production GenAI and Multi-Agent Architecture handbook by Datta Sable. In-depth Advanced RAG, LangGraph state machines, pgvector, and LLM evaluation."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-AI-RAG-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & GenAI System Blueprint",
+        "Foundation Model Architectures & Quantization",
+        "Advanced Hybrid RAG: Dense & Sparse Retrieval",
+        "Document Ingestion & Chunking Strategies",
+        "Vector Databases: Qdrant, Pinecone & pgvector",
+        "Re-Ranking Strategies: Cross-Encoders & Cohere",
+        "GraphRAG: Knowledge Graphs & Relational Grounding",
+        "Multi-Agent Architectures: Router & Supervisor",
+        "Tool Use, Function Calling & Sandboxed Execution",
+        "Frameworks: LangGraph State Graphs vs. Semantic Kernel"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Production GenAI & Multi-Agent Architecture: RAG & LLM Systems",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "ai-productivity",
+      "python-automation"
+    ],
+    "asset": {
+      "filename": "production-genai-agents-rag-2026.pdf",
+      "sha256": "70d8dbeccdc795abd9c5c009ee6bbc46c7f031855d8e8f02bd8a67eb1e3d6de8",
+      "byteSize": 453591,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "executive-bi-metrics-okrs-2026",
+      "title": "Executive C-Suite Business Intelligence: Metrics, OKRs & Strategy",
+      "excerpt": "The definitive strategy manual for translating enterprise data into boardroom decisions: KPI trees, SaaS Rule of 40 unit economics, executive dashboard UX, and metric governance.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Executive C-Suite Business Intelligence: Metrics, OKRs & Strategy. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Data Analytics & BI",
+      "image": "/images/ebooks/executive-bi-metrics-okrs-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Executive C-Suite Frameworks & Metric Trees"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Executive C-Suite Business Intelligence & OKRs | 2026 Edition",
+      "seoDescription": "22-page Executive BI and Strategic OKRs handbook by Datta Sable. In-depth C-Suite KPI trees, SaaS Rule of 40 unit economics, executive UX, and data monetization."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-EXEC-BI-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Executive Decision Framework",
+        "The Executive BI Framework: North Star Metric Trees",
+        "Financial BI: The SaaS Rule of 40 & Unit Economics",
+        "Operational BI: Unit Economics & Margins",
+        "Customer Intelligence: Cohort LTV & Churn Decay",
+        "Executive Dashboard UX: The 5-Second Rule",
+        "Leading vs. Lagging Indicators: Early Warnings",
+        "Metric Governance: The Dispute Elimination Framework",
+        "Boardroom Data Storytelling: Context & Variance",
+        "Self-Service vs. Governed BI: Balancing Agility"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Executive C-Suite Business Intelligence: Metrics, OKRs & Strategy",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "data-analytics-bi",
+      "career-certifications"
+    ],
+    "asset": {
+      "filename": "executive-bi-metrics-okrs-2026.pdf",
+      "sha256": "eda9e1470123c956774e87f2462a490629df352ac8db3962464f082118f0b277",
+      "byteSize": 400714,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "cloud-security-zero-trust-data-2026",
+      "title": "Cloud Security & Zero-Trust Architecture for Modern Data Platforms",
+      "excerpt": "The definitive security manual for protecting enterprise data estates: private endpoints, envelope encryption, IAM least privilege, automated PII tokenization, and SIEM threat monitoring.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Cloud Security & Zero-Trust Architecture for Modern Data Platforms. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Cloud Security & Governance",
+      "image": "/images/ebooks/cloud-security-zero-trust-data-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production Zero-Trust Security & SOC2 Blueprints"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Cloud Security & Zero-Trust Architecture for Data Platforms | 2026 Edition",
+      "seoDescription": "22-page Cloud Data Security and Zero-Trust architecture handbook by Datta Sable. In-depth private networking, KMS encryption, PII tokenization, and SOC2 compliance."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-SEC-ZT-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Zero-Trust Security Blueprint",
+        "Zero-Trust Fundamentals: The Three Immutable Tenets",
+        "Identity & Access Management: RBAC, ABAC & JIT",
+        "Multi-Cloud Identity Federation & SCIM Provisioning",
+        "Data Encryption: KMS & Envelope Encryption",
+        "Network Security: Private Endpoints & Egress Controls",
+        "Micro-Segmentation: Isolating Analytical Workloads",
+        "Data Loss Prevention: Automated PII Tokenization",
+        "Differential Privacy in Collaborative Analytics",
+        "Data Masking Strategies: Dynamic vs. Static"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Cloud Security & Zero-Trust Architecture for Modern Data Platforms",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "cloud-security-governance",
+      "career-certifications"
+    ],
+    "asset": {
+      "filename": "cloud-security-zero-trust-data-2026.pdf",
+      "sha256": "ebc792256539cf4386eee4c5889890d66cca84eeaaede36c0aef865e36dc9692",
+      "byteSize": 321323,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "devops-data-engineers-cicd-2026",
+      "title": "DevOps & CI/CD for Data Engineers: Modern DataOps Mastery",
+      "excerpt": "The definitive engineering manual for building robust DataOps pipelines: multi-stage Docker builds, Spark on Kubernetes, Terraform IaC, GitHub Actions CI/CD, and zero-downtime Blue-Green deployments.",
+      "description": "A 22-page practical production handbook by Datta Sable covering DevOps & CI/CD for Data Engineers: Modern DataOps Mastery. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "DevOps & DataOps",
+      "image": "/images/ebooks/devops-data-engineers-cicd-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Production Docker, K8s, Terraform & CI/CD Blueprints"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "DevOps & CI/CD for Data Engineers | 2026 Edition",
+      "seoDescription": "22-page DevOps and CI/CD for Data Engineers handbook by Datta Sable. In-depth DataOps, Docker, Kubernetes Spark, Terraform, and automated GitHub Actions pipelines."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-DEVOPS-DE-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & DataOps Pipeline Blueprint",
+        "Git Branching Strategies for Data Engineering",
+        "Containerization: Multi-Stage Docker Builds",
+        "Kubernetes for Data Pipelines: Spark on K8s",
+        "Infrastructure as Code: Terraform for Data",
+        "CI/CD Pipeline Architecture: GitHub Actions",
+        "Automated Testing: PyTest & Unit Test Mocks",
+        "Data Quality Gates: Great Expectations & Soda",
+        "Environment Strategy: Ephemeral Preview Sandboxes",
+        "Database Versioning: Flyway & Alembic"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for DevOps & CI/CD for Data Engineers: Modern DataOps Mastery",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "devops-dataops",
+      "python-automation"
+    ],
+    "asset": {
+      "filename": "devops-data-engineers-cicd-2026.pdf",
+      "sha256": "0384ba8307de9befe930c6c58023d98b99d69b4b13f31bad5b4fe9babb8256bf",
+      "byteSize": 379911,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
+  },
+  {
+    "product": {
+      "slug": "data-governance-mdm-purview-2026",
+      "title": "Data Governance, Master Data Management & Microsoft Purview",
+      "excerpt": "The authoritative blueprint for enterprise data cataloging, automated lineage extraction, Master Data Management golden records, and unified Microsoft Purview governance.",
+      "description": "A 22-page practical production handbook by Datta Sable covering Data Governance, Master Data Management & Microsoft Purview. Complete architecture blueprints, code walkthroughs, and checklists. PDF handbook only; no companion source code archive supplied.",
+      "category": "Data Governance & MDM",
+      "image": "/images/ebooks/data-governance-mdm-purview-2026.png",
+      "priceMinor": 9900,
+      "currency": "INR",
+      "status": "DRAFT",
+      "salesEnabled": false,
+      "deliveryReady": false,
+      "features": [
+        "22-page PDF",
+        "2026 Edition",
+        "Microsoft Purview & Master Data Management Blueprints"
+      ],
+      "includedResources": [
+        "22-page PDF handbook"
+      ],
+      "deliveryMethod": "ACCOUNT_DOWNLOAD",
+      "seoTitle": "Data Governance, MDM & Microsoft Purview | 2026 Edition",
+      "seoDescription": "22-page Data Governance and Microsoft Purview handbook by Datta Sable. In-depth MDM golden record architectures, Purview automated classification, and data contracts."
+    },
+    "profile": {
+      "sku": "DS-EBOOK-GOV-MDM-2026",
+      "author": "Datta Sable",
+      "edition": "2026 Edition",
+      "pageCount": 22,
+      "language": "English",
+      "version": "1.0",
+      "featured": true,
+      "approved": false,
+      "contents": [
+        "Table of Contents & Enterprise Governance Blueprint",
+        "The Data Governance Operating Model",
+        "Modern Data Cataloging: Metadata & Glossaries",
+        "End-to-End Data Lineage: Impact & Root Cause",
+        "Microsoft Purview Architecture: The Unified Map",
+        "Purview Scanning & Automated ML Classification",
+        "Sensitivity Labels & Information Protection",
+        "Self-Service Access Policies via Purview",
+        "Master Data Management: Golden Records & Matching",
+        "MDM Architectural Styles: Registry vs. Centralized"
+      ],
+      "outcomes": [
+        "Master end-to-end architecture for Data Governance, Master Data Management & Microsoft Purview",
+        "Apply production-grade code, schemas, and configurations",
+        "Review enterprise checklists and troubleshooting runbooks"
+      ],
+      "audience": [
+        "Data Architects",
+        "Analytics Engineers",
+        "Senior Database Engineers",
+        "Technical Leaders"
+      ],
+      "prerequisites": [
+        "Basic familiarity with modern data architectures",
+        "Familiarity with SQL and analytical databases"
+      ],
+      "notIncluded": [
+        "Downloadable companion ZIP source code",
+        "Live cloud environment subscription credentials"
+      ],
+      "license": "Personal learning use only. Redistribution, resale, and public upload are strictly prohibited.",
+      "updatePolicy": "Access includes the purchased PDF version. Future editions are not included unless explicitly stated."
+    },
+    "categorySlugs": [
+      "data-governance-mdm",
+      "career-certifications",
+      "data-analytics-bi"
+    ],
+    "asset": {
+      "filename": "data-governance-mdm-purview-2026.pdf",
+      "sha256": "0973ac9e18a08d9266d5d65ae3b3ed78c7457a739a4f63dfba8a1b92b8d81dc3",
+      "byteSize": 375994,
+      "mimeType": "application/pdf"
+    },
+    "reviewNotes": []
   }
 ]

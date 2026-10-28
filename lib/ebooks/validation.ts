@@ -24,6 +24,10 @@ export const categorySeeds = [
   ['power-bi-dax', 'Power BI & DAX'], ['microsoft-fabric', 'Microsoft Fabric'], ['advanced-excel', 'Advanced Excel'],
   ['sql-databases', 'SQL & Databases'], ['data-analytics-bi', 'Data Analytics & BI'], ['python-automation', 'Python & Automation'],
   ['career-certifications', 'Career & Certifications'], ['ai-productivity', 'AI & Productivity'], ['digital-marketing', 'Digital Marketing'],
+  ['data-engineering-lakehouse', 'Data Engineering & Lakehouse'], ['data-modeling-architecture', 'Data Modeling & Architecture'],
+  ['analytics-engineering', 'Analytics Engineering'], ['cloud-data-platforms', 'Cloud Data Platforms'],
+  ['cloud-security-governance', 'Cloud Security & Governance'], ['devops-dataops', 'DevOps & DataOps'],
+  ['data-governance-mdm', 'Data Governance & MDM'],
 ];
 export const firstBook = {
   slug: 'power-bi-real-world-projects-2026', title: 'Power BI Real-World Projects',
