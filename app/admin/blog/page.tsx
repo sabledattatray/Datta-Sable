@@ -674,6 +674,7 @@ export default function AdminBlog() {
               src={formData.image}
               alt={formData.title}
               fill
+              unoptimized
               style={{ objectFit: 'cover' }}
             />
           </div>
@@ -2717,7 +2718,7 @@ export default function AdminBlog() {
                     }}
                   >
                     {formData.image ? (
-                      <Image src={formData.image} fill style={{ objectFit: 'cover' }} alt="Featured" />
+                      <Image src={formData.image} fill unoptimized style={{ objectFit: 'cover' }} alt="Featured" />
                     ) : (
                       <>
                         <ImageIcon size={22} color={css.muted} style={{ pointerEvents: 'none' }} />
