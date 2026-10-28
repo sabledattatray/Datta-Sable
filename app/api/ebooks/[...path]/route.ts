@@ -35,6 +35,39 @@ async function ownOrder(id: string) {
   if (!order) throw new CommerceError('Order not found.', 404);
   return { order, user };
 }
+async function resolveEbookPdfBytes(req: Request, candidateFiles: string[]): Promise<Buffer | null> {
+  const candidateDirs = [
+    nodePath.join(process.cwd(), 'storage/ebooks/imports'),
+    nodePath.join(process.cwd(), 'public/assets/ebooks'),
+  ];
+  for (const fname of candidateFiles) {
+    const basename = nodePath.basename(fname);
+    for (const dir of candidateDirs) {
+      const filePath = nodePath.join(dir, basename);
+      try {
+        const stats = await stat(filePath);
+        if (stats.isFile()) {
+          return await readFile(filePath);
+        }
+      } catch {}
+    }
+  }
+
+  // Fallback: fetch from edge static public directory
+  for (const fname of candidateFiles) {
+    const basename = nodePath.basename(fname);
+    try {
+      const edgeUrl = new URL(`/assets/ebooks/${basename}`, req.url);
+      const res = await fetch(edgeUrl.toString(), { cache: 'no-store' });
+      if (res.ok) {
+        return Buffer.from(await res.arrayBuffer());
+      }
+    } catch {}
+  }
+
+  return null;
+}
+
 export async function GET(req: Request, context: Context) {
   try {
     const path = (await context.params).path;
@@ -75,36 +108,30 @@ export async function GET(req: Request, context: Context) {
         ...book.resources.map(r => r.asset?.filename).filter(Boolean),
       ].filter(Boolean) as string[];
 
-      for (const fname of candidateFiles) {
-        const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(fname));
-        try {
-          const stats = await stat(filePath);
-          if (stats.isFile()) {
-            const bytes = await readFile(filePath);
-            const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
-            const resource = book.resources.find(r => r.asset && r.pathname);
-            if (token && resource?.pathname) {
-              try {
-                await head(resource.pathname, { token });
-              } catch {
-                try {
-                  await put(resource.pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
-                } catch (e) {
-                  console.error('Blob auto-upload failed:', e);
-                }
-              }
+      const bytes = await resolveEbookPdfBytes(req, candidateFiles);
+      if (bytes) {
+        const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
+        const resource = book.resources.find(r => r.asset && r.pathname);
+        if (token && resource?.pathname) {
+          try {
+            await head(resource.pathname, { token });
+          } catch {
+            try {
+              await put(resource.pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
+            } catch (e) {
+              console.error('Blob auto-upload failed:', e);
             }
-            return new Response(bytes, {
-              status: 200,
-              headers: {
-                'Content-Type': 'application/pdf',
-                'Content-Disposition': `attachment; filename="${book.slug}.pdf"`,
-                'Content-Length': String(bytes.length),
-                'Cache-Control': 'private, no-cache',
-              },
-            });
           }
-        } catch {}
+        }
+        return new Response(bytes, {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': `attachment; filename="${book.slug}.pdf"`,
+            'Content-Length': String(bytes.length),
+            'Cache-Control': 'private, no-cache',
+          },
+        });
       }
 
       const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
@@ -272,16 +299,13 @@ export async function POST(req: Request, context: Context) {
               `${existing.slug}.pdf`,
               resource?.asset?.filename,
             ].filter(Boolean) as string[];
-            for (const fname of candidateFiles) {
-              const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(fname));
+            const bytes = await resolveEbookPdfBytes(req, candidateFiles);
+            if (bytes) {
               try {
-                const stats = await stat(filePath);
-                if (stats.isFile()) {
-                  const bytes = await readFile(filePath);
-                  await put(targetPathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
-                  break;
-                }
-              } catch {}
+                await put(targetPathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
+              } catch (e) {
+                console.error('Blob upload during publish failed:', e);
+              }
             }
           }
         }
@@ -345,49 +369,47 @@ export async function POST(req: Request, context: Context) {
         for (const item of catalog as { product: { slug: string }; profile?: { edition?: string; version?: string }; asset?: { filename: string; sha256: string; byteSize: number } }[]) {
           const filename = item.asset?.filename;
           if (!filename) continue;
-          const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(filename));
-          try {
-            const stats = await stat(filePath);
-            if (!stats.isFile()) continue;
-            const bytes = await readFile(filePath);
-            const book = await prisma.commerceProduct.findFirst({
-              where: { slug: item.product.slug },
-              include: { resources: { where: { active: true }, include: { asset: true } } },
-            });
-            if (!book) continue;
-            const existingResource = book.resources.find(r => r.asset);
-            const pathname = existingResource?.pathname || `products/${book.id}/${filename}`;
-            if (!existingResource) {
-              await transaction(async tx => {
-                await tx.commerceResource.updateMany({ where: { productId: book.id }, data: { active: false } });
-                await tx.commerceResource.upsert({
-                  where: { pathname },
-                  create: {
-                    productId: book.id,
-                    title: `${item.profile?.edition || '2026 Edition'} PDF`,
-                    pathname,
-                    active: true,
-                    asset: {
-                      create: {
-                        sha256: item.asset!.sha256,
-                        byteSize: item.asset!.byteSize,
-                        filename,
-                        version: item.profile?.version || '1.0',
-                      },
+          const candidateFiles = [filename, `${item.product.slug}.pdf`];
+          const bytes = await resolveEbookPdfBytes(req, candidateFiles);
+          if (!bytes) {
+            console.error('Missing PDF bytes for:', item.product.slug);
+            continue;
+          }
+          const book = await prisma.commerceProduct.findFirst({
+            where: { slug: item.product.slug },
+            include: { resources: { where: { active: true }, include: { asset: true } } },
+          });
+          if (!book) continue;
+          const existingResource = book.resources.find(r => r.asset);
+          const pathname = existingResource?.pathname || `products/${book.id}/${filename}`;
+          if (!existingResource) {
+            await transaction(async tx => {
+              await tx.commerceResource.updateMany({ where: { productId: book.id }, data: { active: false } });
+              await tx.commerceResource.upsert({
+                where: { pathname },
+                create: {
+                  productId: book.id,
+                  title: `${item.profile?.edition || '2026 Edition'} PDF`,
+                  pathname,
+                  active: true,
+                  asset: {
+                    create: {
+                      sha256: item.asset!.sha256,
+                      byteSize: item.asset!.byteSize,
+                      filename,
+                      version: item.profile?.version || '1.0',
                     },
                   },
-                  update: { active: true },
-                });
+                },
+                update: { active: true },
               });
-            }
-            try {
-              await head(pathname, { token });
-            } catch {
-              await put(pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
-              synced.push(item.product.slug);
-            }
-          } catch (e) {
-            console.error('Failed to sync book:', item.product.slug, e);
+            });
+          }
+          try {
+            await head(pathname, { token });
+          } catch {
+            await put(pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
+            synced.push(item.product.slug);
           }
         }
         await logAudit({ userId: admin.id, action: 'EBOOK_SYNC_STORAGE', status: 'SUCCESS', details: `Synced: ${synced.join(', ')}` });

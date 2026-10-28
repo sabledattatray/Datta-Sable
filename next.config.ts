@@ -46,7 +46,8 @@ const nextConfig = {
   },
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   outputFileTracingIncludes: {
-    '/api/ebooks/**': ['./storage/ebooks/imports/**'],
+    '/api/ebooks/[...path]': ['./storage/ebooks/imports/**', './public/assets/ebooks/**'],
+    '/**': ['./storage/ebooks/imports/**', './public/assets/ebooks/**'],
   },
   async redirects() {
     return [
