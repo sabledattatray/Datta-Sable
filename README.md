@@ -1,5 +1,5 @@
 # DATTA SABLE
-### Enterprise Business Intelligence · Analytics Engineering · Modern Web Architecture
+### Enterprise Business Intelligence, Power BI, SQL Analytics, Reporting Automation & Digital Products Platform built with Next.js, TypeScript, PostgreSQL and Prisma.
 
 <div align="center">
 
