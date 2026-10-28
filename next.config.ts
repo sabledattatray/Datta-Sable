@@ -45,6 +45,9 @@ const nextConfig = {
     ],
   },
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
+  outputFileTracingIncludes: {
+    '/api/ebooks/**': ['./storage/ebooks/imports/**'],
+  },
   async redirects() {
     return [
       {"source":"/blog/azure-data-factory-vs-microsoft-fabric-data-factory-2026-deep-dive","destination":"/blog/microsoft-fabric-data-factory-vs-azure-data-factory-feature-parity-cost-migration-strategy-in-2026","permanent":true},

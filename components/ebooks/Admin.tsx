@@ -90,6 +90,9 @@ export default function Admin() {
         <button className={s.secondary} disabled={busy} onClick={() => action({ action: 'seed' })}>
           Seed missing categories & draft handbook
         </button>
+        <button className={s.secondary} disabled={busy} onClick={() => action({ action: 'sync-storage' })}>
+          ☁️ Sync PDFs to Cloud Storage
+        </button>
         <button className={s.secondary} onClick={() => setCategory(blankCategory)}>
           Add category
         </button>

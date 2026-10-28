@@ -81,6 +81,19 @@ export async function GET(req: Request, context: Context) {
           const stats = await stat(filePath);
           if (stats.isFile()) {
             const bytes = await readFile(filePath);
+            const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
+            const resource = book.resources.find(r => r.asset && r.pathname);
+            if (token && resource?.pathname) {
+              try {
+                await head(resource.pathname, { token });
+              } catch {
+                try {
+                  await put(resource.pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
+                } catch (e) {
+                  console.error('Blob auto-upload failed:', e);
+                }
+              }
+            }
             return new Response(bytes, {
               status: 200,
               headers: {
@@ -97,10 +110,15 @@ export async function GET(req: Request, context: Context) {
       const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
       const resource = book.resources.find(r => r.asset && r.pathname);
       if (resource && token && /^products\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+\.pdf$/.test(resource.pathname)) {
-        const validUntil = Date.now() + 60000;
-        const signed = await issueSignedToken({ token, pathname: resource.pathname, operations: ['get'], validUntil });
-        const { presignedUrl } = await presignUrl(signed, { access: 'private', operation: 'get', pathname: resource.pathname, validUntil });
-        return Response.redirect(presignedUrl, 302);
+        try {
+          await head(resource.pathname, { token });
+          const validUntil = Date.now() + 60000;
+          const signed = await issueSignedToken({ token, pathname: resource.pathname, operations: ['get'], validUntil });
+          const { presignedUrl } = await presignUrl(signed, { access: 'private', operation: 'get', pathname: resource.pathname, validUntil });
+          return Response.redirect(presignedUrl, 302);
+        } catch (e) {
+          console.error('Blob head check failed for:', resource.pathname, e);
+        }
       }
 
       throw new CommerceError('PDF file not found in local storage or cloud blob.', 404);
@@ -151,7 +169,7 @@ export async function POST(req: Request, context: Context) {
         return ok({ uploaded: true, sha256 });
       }
       const body = await jsonBody(req);
-      const action = z.enum(['seed', 'save', 'category', 'delete-category', 'revoke', 'resend', 'delete', 'publish', 'unpublish']).parse(body.action);
+      const action = z.enum(['seed', 'save', 'category', 'delete-category', 'revoke', 'resend', 'delete', 'publish', 'unpublish', 'sync-storage']).parse(body.action);
       let result: unknown = { saved: true };
       if (action === 'seed') result = { id: (await seedEbooks()).id };
       if (action === 'category') {
@@ -204,6 +222,7 @@ export async function POST(req: Request, context: Context) {
         if (!existing.image) throw new CommerceError('A cover image is required before publishing.', 400);
 
         const resource = existing.resources.find(r => r.active && r.asset);
+        let filename = `${existing.slug}.pdf`;
         if (!resource) {
           let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
           try {
@@ -212,7 +231,7 @@ export async function POST(req: Request, context: Context) {
             if (entry?.asset) assetInfo = entry.asset;
           } catch {}
 
-          const filename = assetInfo?.filename || `${existing.slug}.pdf`;
+          filename = assetInfo?.filename || `${existing.slug}.pdf`;
           const sha256 = assetInfo?.sha256 || createHash('sha256').update(filename).digest('hex');
           const byteSize = assetInfo?.byteSize || 100000;
           const pathname = `products/${existing.id}/${filename}`;
@@ -240,6 +259,31 @@ export async function POST(req: Request, context: Context) {
               },
             });
           });
+        }
+
+        const targetPathname = resource?.pathname || `products/${existing.id}/${filename}`;
+        const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
+        if (token) {
+          try {
+            await head(targetPathname, { token });
+          } catch {
+            const candidateFiles = [
+              filename,
+              `${existing.slug}.pdf`,
+              resource?.asset?.filename,
+            ].filter(Boolean) as string[];
+            for (const fname of candidateFiles) {
+              const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(fname));
+              try {
+                const stats = await stat(filePath);
+                if (stats.isFile()) {
+                  const bytes = await readFile(filePath);
+                  await put(targetPathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
+                  break;
+                }
+              } catch {}
+            }
+          }
         }
 
         await transaction(async tx => {
@@ -291,6 +335,63 @@ export async function POST(req: Request, context: Context) {
           });
         });
         result = { unpublished: true };
+      }
+      if (action === 'sync-storage') {
+        const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
+        if (!token) throw new CommerceError('Private storage token (COMMERCE_BLOB_READ_WRITE_TOKEN) is not configured in environment.', 503);
+        const catalogPath = nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json');
+        const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
+        const synced: string[] = [];
+        for (const item of catalog as { product: { slug: string }; profile?: { edition?: string; version?: string }; asset?: { filename: string; sha256: string; byteSize: number } }[]) {
+          const filename = item.asset?.filename;
+          if (!filename) continue;
+          const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(filename));
+          try {
+            const stats = await stat(filePath);
+            if (!stats.isFile()) continue;
+            const bytes = await readFile(filePath);
+            const book = await prisma.commerceProduct.findFirst({
+              where: { slug: item.product.slug },
+              include: { resources: { where: { active: true }, include: { asset: true } } },
+            });
+            if (!book) continue;
+            const existingResource = book.resources.find(r => r.asset);
+            const pathname = existingResource?.pathname || `products/${book.id}/${filename}`;
+            if (!existingResource) {
+              await transaction(async tx => {
+                await tx.commerceResource.updateMany({ where: { productId: book.id }, data: { active: false } });
+                await tx.commerceResource.upsert({
+                  where: { pathname },
+                  create: {
+                    productId: book.id,
+                    title: `${item.profile?.edition || '2026 Edition'} PDF`,
+                    pathname,
+                    active: true,
+                    asset: {
+                      create: {
+                        sha256: item.asset!.sha256,
+                        byteSize: item.asset!.byteSize,
+                        filename,
+                        version: item.profile?.version || '1.0',
+                      },
+                    },
+                  },
+                  update: { active: true },
+                });
+              });
+            }
+            try {
+              await head(pathname, { token });
+            } catch {
+              await put(pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
+              synced.push(item.product.slug);
+            }
+          } catch (e) {
+            console.error('Failed to sync book:', item.product.slug, e);
+          }
+        }
+        await logAudit({ userId: admin.id, action: 'EBOOK_SYNC_STORAGE', status: 'SUCCESS', details: `Synced: ${synced.join(', ')}` });
+        result = { synced, count: synced.length };
       }
       if (action === 'save') {
         const data = productInput.parse(body.product), profile = profileInput.parse(body.profile), id = z.string().optional().parse(body.id);
