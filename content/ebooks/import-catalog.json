@@ -282,7 +282,7 @@
       "pageCount": 15,
       "language": "English",
       "version": "1.0",
-      "featured": false,
+      "featured": true,
       "approved": false,
       "contents": [
         "Define the metric before the query",
@@ -323,8 +323,8 @@
     ],
     "asset": {
       "filename": "sql-business-analytics-2026.pdf",
-      "sha256": "e3e458bccb769e2df7de87d31743070df7e822d7083d431595dc467bb2c55869",
-      "byteSize": 92278,
+      "sha256": "05ccc0ae3bba3c1326c8cb5d6da658f9ee889f2a88c1bee3b595bdfb8a4981fc",
+      "byteSize": 92284,
       "mimeType": "application/pdf"
     },
     "reviewNotes": [
@@ -364,7 +364,7 @@
       "pageCount": 14,
       "language": "English",
       "version": "1.0",
-      "featured": false,
+      "featured": true,
       "approved": false,
       "contents": [
         "Design the workbook as a reporting system",
@@ -445,7 +445,7 @@
       "pageCount": 15,
       "language": "English",
       "version": "1.0",
-      "featured": false,
+      "featured": true,
       "approved": false,
       "contents": [
         "Choose an automation boundary",
@@ -526,7 +526,7 @@
       "pageCount": 14,
       "language": "English",
       "version": "1.0",
-      "featured": false,
+      "featured": true,
       "approved": false,
       "contents": [
         "Start with the business and service contract",
@@ -607,7 +607,7 @@
       "pageCount": 14,
       "language": "English",
       "version": "1.0",
-      "featured": false,
+      "featured": true,
       "approved": false,
       "contents": [
         "Choose tasks with a clear acceptance test",

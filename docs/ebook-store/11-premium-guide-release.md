@@ -41,4 +41,11 @@ No real payment was charged during preparation. A completed real customer purcha
 
 ## Production verification
 
-Pending final release verification. Update this section after the deployment is ready and the five approved editions have been published.
+- Application deployment `dpl_GTRg8StnbDBJnpusRDhzXqyfir5W` (commit `16579385d108ce536177fa7e82d9793eb47b5ccb`) reached READY with both public domains assigned and no alias error.
+- Published exactly the five new original guides at INR 99 with approved, version-matched private resources, delivery ready and sales enabled. They are featured; the existing three upcoming titles retain disabled draft status. Publication and file approval have transaction-bound audit entries and a private pre-release backup.
+- All five public product URLs returned HTTP 200 with `available=true`, the live Razorpay notice and no upcoming-book notice.
+- The browser displayed eight books: five with Buy for INR 99 links, three with Coming soon. The SQL purchase panel displayed live payment copy, the policy checkbox and guest-access/library link. No policy acceptance or real purchase was performed.
+- Live evidence: [catalog](screenshots/premium-live-catalog.jpg), [SQL product page](screenshots/premium-live-sql.jpg).
+- The final SQL PDF also checks NULL quantities explicitly; its SQL check was executed with an invalid NULL row and caught the defect. The final uploaded resource replaced the unpublished earlier resource; the earlier resource remains inactive for recovery.
+
+The release's paid PDFs remain private. These checks establish publication, file integrity, configuration and UI availability; they do not claim a completed real charge, receipt-inbox verification or a real buyer's completed download.
