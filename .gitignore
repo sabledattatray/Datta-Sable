@@ -65,3 +65,6 @@ messages.json
 *credentials*.json
 *service-account*.json
 gen-lang-*.json
+
+# AdSense audit snapshots and database backups
+docs/adsense/backups/
