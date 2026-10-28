@@ -26,7 +26,7 @@ The supplied *The Complete Digital Marketing Playbook* has 152 actual pages, des
 
 The existing live Razorpay account has an active webhook at `/api/commerce/webhook` for captured payments, failed payments and processed refunds. Production's live credential selection passed the existing live-route configuration check; the separate live-route secret is absent. The eBook module now permits explicit reuse of the existing generic endpoint only when `EBOOK_USE_ACTIVE_LIVE_WEBHOOK=true`, the active key is live and its webhook secret is configured. Test credentials cannot satisfy this path. The separate live webhook remains supported.
 
-The owner explicitly requested direct sale of the five new guides. Production has `EBOOK_PAYMENT_MODE=live`, `EBOOK_LIVE_CHECKOUT_APPROVED=true`, `EBOOK_USE_ACTIVE_LIVE_WEBHOOK=true` and `EBOOK_STORE_NAV_ENABLED=true`. Per-book publication, approval and delivery flags, private assets, provider/email/policy configuration and server-side payment verification still apply. The purchase UI now checks the shared checkout configuration before displaying an available checkout.
+The owner explicitly requested direct sale of the five new guides. Production has `EBOOK_PAYMENT_MODE=live`, `EBOOK_LIVE_CHECKOUT_APPROVED=true`, `EBOOK_USE_ACTIVE_LIVE_WEBHOOK=true` and `EBOOK_STORE_NAV_ENABLED=true`. A cryptographically random server-only `EBOOK_ACCESS_SECRET` was configured for guest email access; supported currencies include both USD and INR. Per-book publication, approval and delivery flags, private assets, provider/email/policy configuration and server-side payment verification still apply. The purchase UI now checks shared checkout and guest-access configuration before displaying an available checkout.
 
 ## Validation evidence
 

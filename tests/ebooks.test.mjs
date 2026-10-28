@@ -104,10 +104,12 @@ test('active commerce webhook satisfies live readiness only with explicit opt-in
 });
 
 test('checkout display refuses incomplete provider configuration even for approved editions',()=>{
- const env={EBOOK_STORE_ENABLED:'true',EBOOK_PAYMENT_MODE:'live',EBOOK_LIVE_CHECKOUT_APPROVED:'true',COMMERCE_BLOB_READ_WRITE_TOKEN:'private-token',RAZORPAY_LIVE_WEBHOOK_SECRET:'webhook-secret'};
+ const env={EBOOK_STORE_ENABLED:'true',EBOOK_ACCESS_SECRET:'a'.repeat(32),EBOOK_PAYMENT_MODE:'live',EBOOK_LIVE_CHECKOUT_APPROVED:'true',COMMERCE_BLOB_READ_WRITE_TOKEN:'private-token',RAZORPAY_LIVE_WEBHOOK_SECRET:'webhook-secret'};
  const failed=load('lib/ebooks/checkout.ts',{'@/lib/commerce/config':{assertCheckout:()=>{throw Error('missing live keys');}}},env);
  assert.equal(failed.ebookCheckoutReady(),false);
  const ready=load('lib/ebooks/checkout.ts',{'@/lib/commerce/config':{assertCheckout:mode=>assert.equal(mode,'live')}},env);
  assert.equal(ready.ebookCheckoutReady(),true);
+ const noGuestAccess=load('lib/ebooks/checkout.ts',{'@/lib/commerce/config':{assertCheckout:()=>{}}},{...env,EBOOK_ACCESS_SECRET:''});
+ assert.equal(noGuestAccess.ebookCheckoutReady(),false);
 });
 

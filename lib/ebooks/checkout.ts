@@ -3,6 +3,7 @@ import { ebookEnabled, ebookPaymentMode, ebookLiveWebhookReady } from './validat
 
 export function ebookCheckoutReady() {
   if (!ebookEnabled()) return false;
+  if (!process.env.EBOOK_ACCESS_SECRET || process.env.EBOOK_ACCESS_SECRET.length < 32) return false;
   if (ebookPaymentMode() === 'live' && (
     process.env.EBOOK_LIVE_CHECKOUT_APPROVED !== 'true' ||
     !process.env.COMMERCE_BLOB_READ_WRITE_TOKEN || !ebookLiveWebhookReady()
