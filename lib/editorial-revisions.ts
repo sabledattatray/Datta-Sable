@@ -10,7 +10,7 @@ export function applyEditorialRevision<T extends EditorialPost>(post: T): T {
   const updated = new Date(post.updatedAt || 0);
   const revised = new Date(revision.reviewedAt);
   return { ...post, title: revision.title, excerpt: revision.excerpt, content: revision.content,
-    image: null, readTime: revision.readTime,
+    image: (post as any).image ?? null, readTime: revision.readTime,
     category: 'Practical Guides',
     updatedAt: Number.isFinite(updated.getTime()) && updated > revised ? post.updatedAt : revision.reviewedAt };
 }
