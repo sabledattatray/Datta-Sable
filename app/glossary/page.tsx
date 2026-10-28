@@ -17,7 +17,7 @@ const RELATED_LEXICON_PATHS = [
   },
   {
     title: 'Gemini SEO Pipelines',
-    href: '/lp/gemini-seo-pipelines-for-marketers',
+    href: '/templates/gemini-research-pipeline',
     label: 'SEO'
   },
   {
@@ -26,7 +26,7 @@ const RELATED_LEXICON_PATHS = [
     label: 'META'
   },
   {
-    title: 'Surgical AI Framework Comparisons',
+    title: 'AI & Analytics Architecture Comparisons',
     href: '/knowledge/comparisons',
     label: 'ANALYSIS'
   }

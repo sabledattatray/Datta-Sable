@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Copyable library entries need an editorial review before search promotion.
   
   return {
-    title: `${template.title} | Surgical AI Blueprint`,
+    title: `${template.title} | Technical Blueprint | Datta Sable`,
     description: template.description,
     robots: { index: false, follow: true },
     alternates: { canonical: `https://dattasable.com/templates/${template.slug}` },

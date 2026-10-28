@@ -118,6 +118,17 @@ export async function approveAndPublishDraft({
     throw new Error(`Draft with ID ${draftId} not found.`);
   }
 
+  // Technical verification safeguard: Prevent malformed or thin content publication
+  if (!draft.title || draft.title.trim().length < 10) {
+    throw new Error(`Technical verification failed: Draft ${draftId} title is too short or missing.`);
+  }
+  if (!draft.content || draft.content.trim().length < 500) {
+    throw new Error(`Technical verification failed: Draft ${draftId} content is under minimum word threshold.`);
+  }
+  if (!draft.slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(draft.slug)) {
+    throw new Error(`Technical verification failed: Draft ${draftId} has an invalid URL slug.`);
+  }
+
   // Idempotency: If already published and promoted post exists, ensure it is active
   if (draft.status === 'PUBLISHED' && draft.promotedPostId) {
     const existingPromoted = await prisma.post.findUnique({
@@ -249,6 +260,17 @@ export async function scheduleDraftForPublishing({
     throw new Error(`Draft with ID ${draftId} not found.`);
   }
 
+  // Technical verification safeguard: Prevent malformed or thin content publication
+  if (!draft.title || draft.title.trim().length < 10) {
+    throw new Error(`Technical verification failed: Draft ${draftId} title is too short or missing.`);
+  }
+  if (!draft.content || draft.content.trim().length < 500) {
+    throw new Error(`Technical verification failed: Draft ${draftId} content is under minimum word threshold.`);
+  }
+  if (!draft.slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(draft.slug)) {
+    throw new Error(`Technical verification failed: Draft ${draftId} has an invalid URL slug.`);
+  }
+
   const schedule = await db.aiPublishingSchedule.upsert({
     where: { draftId },
     create: {
@@ -352,15 +374,15 @@ export async function processDueSchedules(): Promise<{ publishedCount: number; e
 
   for (const item of dueSchedules) {
     // Mode C autonomous publishing safeguard:
-    // If an item is marked AUTONOMOUS, it CANNOT be published unless the system setting is explicitly AUTONOMOUS
-    if (item.mode === 'AUTONOMOUS' && currentSystemMode !== 'AUTONOMOUS') {
-      const msg = `Skipped draft ${item.draftId}: Autonomous Mode C is disabled in system settings. Administrator review required.`;
+    // Autonomous publishing is permanently disabled per editorial quality policy.
+    if (item.mode === 'AUTONOMOUS' || item.mode === 'DISABLED') {
+      const msg = `Skipped draft ${item.draftId}: Autonomous publishing is permanently disabled. Human editorial review and approval required.`;
       errors.push(msg);
       await db.aiPublishingSchedule.update({
         where: { id: item.id },
         data: {
           status: 'PENDING_APPROVAL',
-          lastError: 'Autonomous Mode C disabled in system settings. Admin approval required.',
+          lastError: 'Autonomous publishing is permanently disabled. Administrator review and approval required.',
         },
       }).catch(() => {});
       continue;

@@ -17,8 +17,8 @@ export type AiCategory = (typeof DEFAULT_AI_CATEGORIES)[number] | string;
 
 export const OPERATING_MODES = {
   MANUAL: 'MANUAL',       // Mode A: Admin manually starts every workflow
-  ASSISTED: 'ASSISTED',   // Mode B (Default): Auto-research & draft, admin review & approve
-  AUTONOMOUS: 'AUTONOMOUS', // Mode C: Strict automated publishing within limits
+  ASSISTED: 'ASSISTED',   // Mode B (Default & Sole Mode): Auto-research & draft, human review & approve
+  AUTONOMOUS: 'AUTONOMOUS', // Mode C: Autonomous publishing (Permanently disabled in publisher)
 } as const;
 
 export type OperatingMode = keyof typeof OPERATING_MODES;
@@ -36,7 +36,7 @@ export const DEFAULT_AI_SETTINGS = {
   operatingMode: OPERATING_MODES.ASSISTED as OperatingMode,
   defaultArticleTier: 'COMPREHENSIVE' as ArticleLengthTier,
   maxDailyDrafts: 1,
-  maxDailyAutonomousPublishes: 2,
+  maxDailyAutonomousPublishes: 0, // Autonomous publishing permanently disabled
   monthlyBudgetUsd: 25.00,
   hardBudgetCapUsd: 50.00,
   emergencyPause: false,

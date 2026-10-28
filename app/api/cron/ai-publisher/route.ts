@@ -28,67 +28,9 @@ export async function GET(req: Request) {
     // 1. Process due scheduled drafts
     const scheduleResult = await processDueSchedules();
 
-    // 2. Check if Mode C (Autonomous Publishing) is active
-    const modeSetting = await prisma.systemSetting.findUnique({
-      where: { key: AI_SETTING_KEYS.MODE },
-    });
-
-    let autonomousCount = 0;
-    if (modeSetting?.value === 'AUTONOMOUS') {
-      // Check emergency pause
-      const pauseSetting = await prisma.systemSetting.findUnique({
-        where: { key: AI_SETTING_KEYS.EMERGENCY_PAUSE },
-      });
-
-      if (pauseSetting?.value !== 'true') {
-        // Enforce max 2 autonomous publications per day
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
-
-        const publishedToday = await prisma.aiContentDraft.count({
-          where: {
-            status: 'PUBLISHED',
-            operatingMode: 'AUTONOMOUS',
-            publishedAt: { gte: todayStart },
-          },
-        });
-
-        if (publishedToday < 2) {
-          // Find highest quality pending draft with score >= 80 and zero blockers
-          const candidate = await prisma.aiContentDraft.findFirst({
-            where: {
-              status: 'DRAFT',
-              operatingMode: 'AUTONOMOUS',
-              qualityScore: { gte: 80 },
-              qualityReports: {
-                some: {
-                  factualVerificationStatus: 'PASSED',
-                  duplicateRiskScore: { lt: 30 },
-                },
-              },
-            },
-            orderBy: { qualityScore: 'desc' },
-          });
-
-          if (candidate) {
-            await approveAndPublishDraft({
-              draftId: candidate.id,
-              publishImmediately: true,
-            });
-            autonomousCount++;
-
-            await logAiAudit({
-              action: 'AI_ARTICLE_PUBLISHED',
-              details: {
-                mode: 'AUTONOMOUS',
-                draftId: candidate.id,
-                slug: candidate.slug,
-              },
-            });
-          }
-        }
-      }
-    }
+    // 2. Mode C (Autonomous Publishing) is permanently disabled per editorial quality policy.
+    // All AI-assisted articles require human editorial review and approval before publication.
+    const autonomousCount = 0;
 
     return NextResponse.json({
       success: true,

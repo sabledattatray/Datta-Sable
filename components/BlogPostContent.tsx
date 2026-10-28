@@ -436,9 +436,9 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
           </div>
         </div>
 
-        {/* ── Related Articles Section (EEAT Contextual Clustering) ── */}
+        {/* ── Related Articles Section (Semantic complementary navigation) ── */}
         {relatedPosts && relatedPosts.length > 0 && (
-          <div style={{ marginTop: '5rem', borderTop: '1px solid var(--border)', paddingTop: '4rem' }}>
+          <aside aria-label="Related articles" style={{ marginTop: '5rem', borderTop: '1px solid var(--border)', paddingTop: '4rem' }}>
             <h3 style={{ fontSize: '1.75rem', marginBottom: '2rem', fontFamily: "'Syne', sans-serif" }}>Related <span className="hero-title">Reading</span></h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPosts.map(p => (
@@ -452,16 +452,19 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
                         className="object-cover group-hover:scale-105 transition-transform duration-500" 
                       />
                     </div>
-                    <span className="text-[length:var(--text-small)] text-[var(--muted)] mono uppercase tracking-wider block" style={{ marginBottom: 10 }}>{p.category}</span>
+                    <div className="flex items-center justify-between text-[length:var(--text-small)] text-[var(--muted)] mono uppercase tracking-wider" style={{ marginBottom: 10 }}>
+                      <span>{p.category}</span>
+                      {p.readTime ? <span>{p.readTime} min read</span> : null}
+                    </div>
                     <h4 style={{ fontSize: '1rem', lineHeight: 1.3, color: 'var(--text)', marginBottom: '0.5rem' }}>{p.title}</h4>
-                    <p style={{ color: 'var(--muted)', fontSize: 'var(--text-small)', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
-                      {p.excerpt}
-                    </p>
+                    <span className="mono text-[0.8rem] text-[var(--accent)] group-hover:underline mt-auto pt-2 block">
+                      Read Guide →
+                    </span>
                   </div>
                 </Link>
               ))}
             </div>
-          </div>
+          </aside>
         )}
 
         {/* ── Article Schema (SEO E-E-A-T) ── */}

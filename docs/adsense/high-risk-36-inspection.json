@@ -1,0 +1,178 @@
+[
+  {
+    "idx": 1,
+    "slug": "dp-600-study-guide-2026",
+    "title": "DP-600 Study Plan: Connect the Official Outline to Practical Evidence",
+    "category": "Practical Guides",
+    "words": 345,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Use the current skills outlineOpen Micro..."
+  },
+  {
+    "idx": 2,
+    "slug": "microsoft-fabric-certification-roadmap-2026",
+    "title": "Build a Microsoft Fabric Study Roadmap from Demonstrated Skills",
+    "category": "Practical Guides",
+    "words": 348,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Begin with a task inventoryList the work..."
+  },
+  {
+    "idx": 3,
+    "slug": "edge-first-era-web-performance-2026",
+    "title": "Edge Rendering Decisions: Measure the Slow Part Before Moving Code",
+    "category": "Practical Guides",
+    "words": 332,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Trace a single requestA fictional produc..."
+  },
+  {
+    "idx": 4,
+    "slug": "death-of-static-dashboards-decision-intelligence",
+    "title": "From a Dashboard Alert to a Decision: A Reviewable Workflow",
+    "category": "Practical Guides",
+    "words": 339,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Start with one operational questionA fic..."
+  },
+  {
+    "idx": 5,
+    "slug": "video-fabric-end-to-end",
+    "title": "Fabric Implementation Walkthrough: From a CSV Batch to a Checked Report",
+    "category": "Practical Guides",
+    "words": 369,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Set a small acceptance targetThis is a w..."
+  },
+  {
+    "idx": 6,
+    "slug": "global-data-privacy-regulations-2026",
+    "title": "Build a Data Handling Inventory Before a Privacy Review",
+    "category": "Practical Guides",
+    "words": 372,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Map one complete journeyConsider a ficti..."
+  },
+  {
+    "idx": 7,
+    "slug": "scaling-data-culture-enterprise",
+    "title": "Building Data Champions: A Four-Week Evidence-Based Pilot",
+    "category": "Practical Guides",
+    "words": 352,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Recruit around tasksImagine a fictional ..."
+  },
+  {
+    "idx": 8,
+    "slug": "case-study-context-compression-token-waste",
+    "title": "Context Reduction: Compare Token Cost Without Losing Requirements",
+    "category": "Practical Guides",
+    "words": 282,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Protect the information that determines ..."
+  },
+  {
+    "idx": 9,
+    "slug": "how-to-improve-website-performance-100-gtmetrix",
+    "title": "Improve Website Performance Without Chasing a Perfect Score",
+    "category": "Practical Guides",
+    "words": 269,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Choose the slow user experienceStart wit..."
+  },
+  {
+    "idx": 10,
+    "slug": "financial-bi-impact",
+    "title": "Receivables Reporting: Reconcile Aging Before Claiming Financial Impact",
+    "category": "Practical Guides",
+    "words": 267,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Keep the accounting question explicitA f..."
+  },
+  {
+    "idx": 11,
+    "slug": "live-performance-benchmarking-2025",
+    "title": "Web Performance Benchmarking: A Reproducible Comparison Sheet",
+    "category": "Practical Guides",
+    "words": 250,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.State the task being measuredChoose one ..."
+  },
+  {
+    "idx": 12,
+    "slug": "saas-liquidity-trap-ai-strategy-2026",
+    "title": "AI Feature Unit Economics: Model Variable Cost Before Pricing",
+    "category": "Practical Guides",
+    "words": 357,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Choose a measurable unitA fictional docu..."
+  },
+  {
+    "idx": 13,
+    "slug": "agentic-shift-autonomous-intelligence-2026",
+    "title": "Designing an AI Agent with Read-Only Tools and Approval Boundaries",
+    "category": "Practical Guides",
+    "words": 385,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Choose a bounded jobA fictional support ..."
+  },
+  {
+    "idx": 14,
+    "slug": "video-sql-tuning-live",
+    "title": "SQL Tuning Walkthrough: Preserve Results While Comparing Plans",
+    "category": "Practical Guides",
+    "words": 360,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Create a reproducible baselineThis is a ..."
+  },
+  {
+    "idx": 15,
+    "slug": "data-mesh-adoption-trends-2026",
+    "title": "Data Mesh as an Operating Model: Define One Usable Data Product",
+    "category": "Practical Guides",
+    "words": 350,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Start with a consumer needA fictional fi..."
+  },
+  {
+    "idx": 16,
+    "slug": "power-automate-financial-reporting-workflow",
+    "title": "Power Automate for a Financial Close Pack: Approval and Reconciliation",
+    "category": "Practical Guides",
+    "words": 372,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Define the output and the approverA fict..."
+  },
+  {
+    "idx": 17,
+    "slug": "gartner-magic-quadrant-2026-bi",
+    "title": "How to Evaluate a BI Platform Beyond Analyst Rankings",
+    "category": "Practical Guides",
+    "words": 374,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Understand what is and is not being clai..."
+  },
+  {
+    "idx": 18,
+    "slug": "measuring-bi-roi-financial-framework",
+    "title": "Measuring BI ROI: A Worked Cost and Adoption Model",
+    "category": "Practical Guides",
+    "words": 394,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.State the counterfactualA fictional repo..."
+  },
+  {
+    "idx": 19,
+    "slug": "sql-deadlock-prevention-strategies",
+    "title": "SQL Server Deadlocks: Diagnose a Cycle Before Adding Retries",
+    "category": "Practical Guides",
+    "words": 425,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Separate a wait from a deadlockA blocked..."
+  },
+  {
+    "idx": 20,
+    "slug": "case-study-precision-prompt-architecture-consistency",
+    "title": "Structured AI Extraction: Validate the Schema and the Facts",
+    "category": "Practical Guides",
+    "words": 293,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Define three separate testsA fictional i..."
+  },
+  {
+    "idx": 21,
+    "slug": "case-study-workflow-automation-roi",
+    "title": "Automating an MIS Pack: Reconciliation and Exception Handling",
+    "category": "Practical Guides",
+    "words": 280,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Write the manual process downFor a ficti..."
+  },
+  {
+    "idx": 22,
+    "slug": "data-driven-finance-python-bi-alpha-2026",
+    "title": "Financial CSV Reconciliation in Python: Exact Amounts and Exceptions",
+    "category": "Practical Guides",
+    "words": 301,
+    "preview": "Worked example with fictional data. AI-assisted editorial revision; no client performance results are claimed.Define the import contractA fictional le..."
+  }
+]

@@ -16,7 +16,15 @@ export async function generateMetadata({ params }: Props) {
   if (!ebookEnabled()) return { robots: { index: false } };
   const book = await publishedBook((await params).slug); if (!book) return { title: 'Book not found', robots: { index: false } };
   const title = book.seoTitle || `${book.title} | ${book.ebook?.edition}`, description = book.seoDescription || book.excerpt, url = `https://dattasable.com/ebooks/${book.slug}`;
-  return { title, description, robots: book.status !== 'PUBLISHED' ? { index: false, follow: false } : undefined, alternates: { canonical: url }, openGraph: { title, description, url, type: 'website', ...(book.image ? { images: [{ url: book.image, alt: `${book.title} cover` }] } : {}) }, twitter: { card: 'summary_large_image' as const, title, description, ...(book.image ? { images: [book.image] } : {}) } };
+  const isIndexed = book.status === 'PUBLISHED';
+  return {
+    title,
+    description,
+    robots: isIndexed ? { index: true, follow: true } : { index: false, follow: false },
+    alternates: { canonical: url },
+    openGraph: { title, description, url, type: 'website', ...(book.image ? { images: [{ url: book.image, alt: `${book.title} cover` }] } : {}) },
+    twitter: { card: 'summary_large_image' as const, title, description, ...(book.image ? { images: [book.image] } : {}) }
+  };
 }
 export default async function Page({ params }: Props) {
   if (!ebookEnabled()) notFound();

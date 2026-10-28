@@ -3,6 +3,19 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 
+export const metadata: Metadata = {
+  title: 'World Business & Commercial Intelligence Dashboard | Datta Sable',
+  description: 'Interactive commercial intelligence system auditing 3,000,000 global transactions, $18.72B GMV, and multi-currency metrics across 50 sovereign markets.',
+  alternates: {
+    canonical: 'https://dattasable.com/dashboards/world-business',
+  },
+  openGraph: {
+    title: 'World Business & Commercial Intelligence Dashboard | Datta Sable',
+    description: 'Interactive commercial intelligence system auditing 3,000,000 global transactions and $18.72B GMV.',
+    url: 'https://dattasable.com/dashboards/world-business',
+  },
+};
+
 export default function WorldBusinessDashboardPage() {
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-['Exo_2'] flex flex-col">
@@ -17,9 +30,9 @@ export default function WorldBusinessDashboardPage() {
                 🌐
               </div>
               <div>
-                <div className="font-['Rajdhani'] text-3xl md:text-4xl font-bold tracking-[2px] text-[var(--text)] uppercase">
+                <h1 className="font-['Rajdhani'] text-3xl md:text-4xl font-bold tracking-[2px] text-[var(--text)] uppercase">
                   World Business <span className="text-[#00F0FF]">Intelligence</span>
-                </div>
+                </h1>
                 <div className="text-[length:var(--text-small)] text-[var(--muted)] tracking-[2px] -mt-1 uppercase font-medium">
                   3,000,000 Audited Transactions &bull; $18.72B GMV &bull; 50 Sovereign Markets
                 </div>
