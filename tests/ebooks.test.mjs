@@ -113,3 +113,36 @@ test('checkout display refuses incomplete provider configuration even for approv
  assert.equal(noGuestAccess.ebookCheckoutReady(),false);
 });
 
+test('verified signed-in readers use account identity without requiring guest email verification',async()=>{
+ const user={id:'reader',email:'Reader@example.test',name:'Reader',emailVerified:new Date(),sessionVersion:2};
+ const {buyer}=load('lib/ebooks/access.ts',{
+  'next/headers':{cookies:async()=>({get:()=>undefined,getAll:()=>[]})},
+  'next-auth':{getServerSession:async()=>({user:{id:'reader'}})},
+  '@/lib/auth':{authOptions:{secret:'test-only-secret'}},
+  '@/lib/prisma':{prisma:{user:{findUnique:async()=>user}}},
+ });
+ const identity=await buyer();assert.equal(identity.id,'reader');assert.equal(identity.email,'reader@example.test');
+});
+
+test('account-cookie recovery verifies encryption, expiry, verification and revocation for both cookie names',async()=>{
+ const secret='test-only-encryption-secret-for-library';
+ const {encode}=native('next-auth/jwt');
+ for(const secure of [false,true]){
+  const name=secure?'__Secure-next-auth.session-token':'next-auth.session-token';
+  for(const scenario of ['valid','tampered','expired','revoked','unverified','deleted']){
+   let encrypted=await encode({secret,token:{id:'reader',email:'reader@example.test',sessionVersion:2},maxAge:scenario==='expired'?-3600:3600});
+   if(scenario==='tampered')encrypted=encrypted.slice(0,-8)+'tampered';
+   const user=scenario==='deleted'?null:{id:'reader',email:'reader@example.test',name:'Reader',emailVerified:scenario==='unverified'?null:new Date(),sessionVersion:scenario==='revoked'?3:2};
+   const cookies=[{name:name+'.0',value:encrypted.slice(0,50)},{name:name+'.1',value:encrypted.slice(50)}];
+   const {buyer}=load('lib/ebooks/access.ts',{
+    'next/headers':{cookies:async()=>({get:()=>undefined,getAll:()=>cookies})},
+    'next-auth':{getServerSession:async()=>null},
+    '@/lib/auth':{authOptions:{secret}},
+    '@/lib/prisma':{prisma:{user:{findUnique:async()=>user}}},
+   });
+   if(scenario==='valid')assert.equal((await buyer()).id,'reader');
+   else await assert.rejects(buyer(),error=>error.status===401,`${name}: ${scenario}`);
+  }
+ }
+});
+

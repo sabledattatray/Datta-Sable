@@ -3,6 +3,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { EbookNavigation } from './Providers';
 import Link from 'next/link';
+import LibraryEntryLink from './LibraryEntryLink';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { ArrowUpRight, ArrowRight, ChevronDown, Menu, Plus, User, X } from 'lucide-react';
@@ -103,7 +104,7 @@ export default function Navbar() {
     <header data-site-header ref={root} className={`${styles.header} ${scrolled?styles.scrolled:''} ${open?styles.expanded:''}`} onMouseEnter={cancelClose} onMouseLeave={scheduleClose} onBlur={event=>{if(!mobileOpen&&!event.currentTarget.contains(event.relatedTarget as Node|null))setOpen(null);}}>
       <div className={styles.bar}>
         <Link href="/" className={styles.logo} aria-label="Datta Sable — Home" onClick={closeAll}><BrandLockup /></Link>
-        <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<Link key={link.label} href={link.href} className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={closeAll} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></Link>:<Link key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</Link>)}</nav>
+        <nav className={styles.desktopNav} aria-label="Primary navigation">{navLinks.map(link=>link.mega?<Link key={link.label} href={link.href} className={styles.navLink} aria-expanded={open===link.label} aria-controls={`navigation-panel-${link.label}`} aria-current={pathname===link.href?'page':undefined} onMouseEnter={event=>{cancelClose();lastTrigger.current=event.currentTarget;setOpen(link.label);}} onClick={closeAll} onKeyDown={event=>{if(event.key==='ArrowDown'){event.preventDefault();lastTrigger.current=event.currentTarget;focusPanel(link.label);}}}>{link.label}<ChevronDown size={11}/></Link>:<LibraryEntryLink key={link.label} href={link.href} className={styles.navLink} aria-current={pathname===link.href?'page':undefined} onMouseEnter={()=>setOpen(null)} onClick={closeAll}>{link.label}</LibraryEntryLink>)}</nav>
         <div className={styles.actions}>
           <div className={styles.theme} onFocusCapture={()=>setOpen(null)}><ThemeToggle/></div>
           {session?<div className={styles.headerAccount}><HeaderAccount name={session.user?.name} isAdmin={accountRole?.toUpperCase()==='ADMIN'} onSignOut={()=>signOut()}/></div>:<Link className={styles.signIn} aria-label="Sign in" href={`/sign-in?callbackUrl=${encodeURIComponent(pathname || "/")}`} onClick={closeAll}><User size={14}/><span>Sign in</span></Link>}
@@ -138,7 +139,7 @@ export default function Navbar() {
             {navLinks.map((link, i) => (
               <div className={styles.mobileSection} key={link.label} data-expanded={mobileSection === link.label}>
                 <div className={styles.mobileRow}>
-                  <Link
+                  <LibraryEntryLink
                     href={link.href}
                     className={styles.mobileLink}
                     aria-current={pathname === link.href ? 'page' : undefined}
@@ -146,7 +147,7 @@ export default function Navbar() {
                   >
                     <span className={styles.mobileIndex} aria-hidden="true">0{i + 1}</span>
                     <span className={styles.mobileLabel}>{link.label}</span>
-                  </Link>
+                  </LibraryEntryLink>
                   {link.mega ? (
                     <button
                       type="button"
@@ -163,7 +164,7 @@ export default function Navbar() {
                       <Plus size={15} className={`${styles.expandIcon} ${mobileSection === link.label ? styles.expandedIcon : ''}`} />
                     </button>
                   ) : (
-                    <Link
+                    <LibraryEntryLink
                       href={link.href}
                       className={styles.mobileDirectIcon}
                       onClick={closeAll}
@@ -171,7 +172,7 @@ export default function Navbar() {
                       tabIndex={-1}
                     >
                       <ArrowUpRight size={14} />
-                    </Link>
+                    </LibraryEntryLink>
                   )}
                 </div>
 
