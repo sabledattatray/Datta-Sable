@@ -44,6 +44,26 @@ test('catalog performs bounded pagination and combines public visibility with se
 test('private eBook paths and bearer tokens never enter visit analytics',()=>{
  const {analyticsPath}=load('lib/analytics-url.ts');for(const route of ['/ebooks/library','/ebooks/access','/ebooks/download/access','/ebooks/download/secret','/ebooks/order/secret'])assert.equal(analyticsPath(route),null);assert.equal(analyticsPath('/ebooks/power-bi-real-world-projects-2026?utm_source=linkedin'),'/ebooks/power-bi-real-world-projects-2026');
 });
+
+test('database outages allow development catalog and detail previews with filtering',async()=>{
+ const outage=Object.assign(new Error("Can't reach database server"),{name:'PrismaClientInitializationError'});
+ const fail=async()=>{throw outage;};
+ const draft={id:'local-test',slug:'local-book',title:'Power BI',excerpt:'Reporting',priceMinor:9900,createdAt:new Date(),salesEnabled:false,ebook:{featured:true,categories:[{categoryId:'bi',category:{id:'bi',slug:'bi',name:'BI'}}]}};
+ const mocks={'@/lib/prisma':{prisma:{commerceProduct:{findMany:fail,count:fail,findFirst:fail},ebookCategory:{findMany:fail}}},'./local-catalog':{localBooks:async()=>[draft]}};
+ const preview=load('lib/ebooks/catalog.ts',mocks,{NODE_ENV:'development'});
+ const result=await preview.catalog({q:'Power',category:'bi'});assert.equal(result.localPreview,true);assert.equal(result.count,1);assert.equal(result.books[0].salesEnabled,false);
+ assert.equal((await preview.catalog({q:'unmatched'})).count,0);
+ assert.equal((await preview.publishedBook('local-book')).id,draft.id);
+ assert.equal(await preview.publishedBook('missing'),null);
+ const production=load('lib/ebooks/catalog.ts',mocks,{NODE_ENV:'production'});
+ await assert.rejects(production.catalog({}),/Can't reach database/);await assert.rejects(production.publishedBook('local-book'),/Can't reach database/);
+});
+
+test('development preview does not hide database schema or programming errors',async()=>{
+ const fail=async()=>{throw Object.assign(new Error('invalid schema'),{code:'P2022'});};
+ const preview=load('lib/ebooks/catalog.ts',{'@/lib/prisma':{prisma:{commerceProduct:{findMany:fail,count:fail,findFirst:fail},ebookCategory:{findMany:fail}}}},{NODE_ENV:'development'});
+ await assert.rejects(preview.catalog({}),/invalid schema/);await assert.rejects(preview.publishedBook('book'),/invalid schema/);
+});
 test('additive eBook migration preserves existing commerce and enforces relational/hash uniqueness',async()=>{
  const db=new PGlite();try{
  for(const dir of fs.readdirSync('prisma/migrations').filter(s=>s.startsWith('20')).sort())await db.exec(fs.readFileSync(`prisma/migrations/${dir}/migration.sql`,'utf8'));
