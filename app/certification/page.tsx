@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -332,9 +333,9 @@ export default function CertificationPage() {
           {/* Bottom Footnote matching StartHere */}
           <div className={styles.foot}>
             <span>Official records issued to Datta Sable &bull; Cryptographically bound &amp; tamper-proof.</span>
-            <a href="/portfolio">
+            <Link href="/portfolio">
               Explore project portfolio <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </div>
 
         </div>

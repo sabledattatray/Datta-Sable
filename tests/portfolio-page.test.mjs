@@ -21,8 +21,8 @@ test('portfolio filters narrow the project library and reset page size',()=>{
  const app=portfolio(()=>{});
  const cards=()=>app.render().filter(n=>n.type==='button'&&n.props?.['aria-label']?.startsWith('Inspect '));
  assert.equal(cards().length,6);
- const automation=app.render().find(n=>n.type==='button'&&Array.isArray(n.props?.children)&&n.props.children[0]==='Automation');
- automation.props.onClick();assert.equal(cards().length,data.projects.filter(p=>p.category.toLowerCase().includes('automation')).length);
+ const automation=app.render().find(n=>n.type==='button'&&Array.isArray(n.props?.children)&&n.props.children[0]==='AI & Automation');
+ automation.props.onClick();assert.equal(cards().length,Math.min(6,data.projects.filter(p=>data.matchesProjectCategory(p,'AI & Automation')).length));
  const search=app.render().find(n=>n.props?.['aria-label']==='Search projects');search.props.onChange({target:{value:'no-match-12345'}});assert.equal(cards().length,0);
 });
 test('portfolio pending enquiry prevents duplicate delivery and handles non-JSON failure',async()=>{

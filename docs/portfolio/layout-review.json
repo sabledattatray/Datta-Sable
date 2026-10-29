@@ -1,0 +1,32 @@
+{
+  "cards": [
+    {
+      "slug": "fabric-master",
+      "width": 1330,
+      "height": 446
+    },
+    {
+      "slug": "excel-dashboard-generator",
+      "width": 655,
+      "height": 692
+    },
+    {
+      "slug": "enterprise-n8n-intelligence-automation",
+      "width": 655,
+      "height": 692
+    },
+    {
+      "slug": "enterprise-global-business-analytics-3m",
+      "width": 655,
+      "height": 692
+    },
+    {
+      "slug": "enterprise-power-bi-dashboard",
+      "width": 655,
+      "height": 692
+    }
+  ],
+  "defaultLibrary": "19 projects to explore",
+  "legacyDialog": true,
+  "mobileNavigation": "checked separately; opens and closes"
+}

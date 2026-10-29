@@ -12,7 +12,7 @@ import gallery from './Gallery.module.css';
 import { dashboards, type DashboardItem } from './catalog';
 import { dashboardDestination, dashboardKind, filterDashboards } from './filters';
 import { EXCEL_PROJECTS } from '@/data/excelProjects';
-import PowerBIHeroDashboard from '@/components/dashboards/PowerBIHeroDashboard';
+import ExecutiveDashboard from '@/components/dashboards/ExecutiveDashboard';
 
 const scopes = [{ id: 'built', label: 'Interactive work', icon: LayoutDashboard }, { id: 'excel', label: 'Excel workbooks', icon: FileSpreadsheet }, { id: 'reference', label: 'Community references', icon: Layers }, { id: 'concept', label: 'Concept studies', icon: Grid2X2 }];
 const industries = ['All industries', 'Sales', 'Operations', 'Finance', 'HR', 'Marketing', 'Analytics'];
@@ -65,7 +65,7 @@ export default function DashboardsPage() {
         </div>
       </div>
       <div className={gallery.landscapeDashboardContainer}>
-        <PowerBIHeroDashboard />
+        <ExecutiveDashboard />
       </div>
     </section>
     <div className={styles.indexBar}><span>MADE TO BE OPENED. BUILT TO BE UNDERSTOOD.</span><nav aria-label="Dashboard shortcuts"><a href="#dashboard-gallery">Explore the collection <ArrowDown size={11} /></a><Link href="/portfolio#selected-work">Read the case studies <ArrowUpRight size={11} /></Link><Link href="/portfolio#contact-section">Discuss a project <ArrowUpRight size={11} /></Link></nav></div>

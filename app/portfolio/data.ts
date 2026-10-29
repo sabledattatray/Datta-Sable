@@ -49,6 +49,29 @@ export interface ProjectData {
   github: string;
   live: string;
   statusBadge?: string;
+  categories?: string[];
+  flagship?: FlagshipDetail;
+}
+
+export interface ProjectMedia {
+  src: string;
+  alt: string;
+  classification: 'Real screenshot' | 'Design mockup' | 'Architecture diagram';
+  source: string;
+}
+
+export interface FlagshipDetail {
+  slug: string;
+  order: number;
+  evidence: { value: string; label: string; source: string }[];
+  gallery: ProjectMedia[];
+  architecture: string[];
+  implementation: string[];
+  limitations: string[];
+  sources: { label: string; url: string }[];
+  release?: string;
+  cta: string;
+  verifiedAt: string;
 }
 
 export interface ServiceItem {
@@ -274,7 +297,7 @@ export const featuredProjects: FeaturedProject[] = [
 // 2. PROJECT REPOSITORY / DIRECTORY (Cleaned, Truthful, Defensible Secondary Work)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const projects: ProjectData[] = [
+const establishedProjects: ProjectData[] = [
   {
     id: 19,
     title: 'Hyperlocal Fleet Operations & Rider MIS Dashboard',
@@ -712,3 +735,119 @@ export const processSteps: ProcessStep[] = [
     deliverable: 'Reconciliation Sign-Off & Refresh SOP Manual',
   },
 ];
+
+// Evidence reviewed on 29 October 2026. Repository-reported results are not new local test runs.
+const repo = (name: string) => `https://github.com/sabledattatray/${name}`;
+const media = (name: string, alt: string, classification: ProjectMedia['classification'], source: string): ProjectMedia => ({ src: `/images/portfolio/${name}.webp`, alt, classification, source });
+const fabricRepo = repo('fabric-master');
+const n8nRepo = repo('enterprise-n8n-intelligence-automation');
+const globalRepo = repo('enterprise-global-business-analytics-3m');
+const powerbiRepo = repo('enterprise-power-bi-dashboard');
+
+export const flagshipProjects: ProjectData[] = [
+  {
+    id: 101, title: 'Fabric Master — Microsoft Fabric Engineering & FinOps Platform', category: 'Microsoft Fabric',
+    categories: ['Microsoft Fabric', 'Web Applications', 'SQL & Data Engineering'],
+    image: '/images/portfolio/fabric-home.webp', color: 'var(--accent)', tools: ['React', 'TypeScript', 'Vite', 'Express', 'Microsoft Fabric'], client: 'Independent engineering platform',
+    desc: 'An independent engineering workbench for capacity planning, workload analysis, architecture visualization and explainable FinOps decisions.',
+    problem: 'Architects need to compare Fabric capacity and cost before committing, while understanding how Spark, Data Factory and Power BI workloads compete for compute.',
+    solution: 'A browser workspace connects deterministic workload models, F-SKU comparisons, cost estimates and architecture planning. Scenarios retain visible assumptions rather than presenting estimates as guarantees.',
+    impact: 'A publicly accessible planning platform with 11 F-SKU tiers and a documentation library of 25 guides, as displayed by the live platform on the review date.',
+    live: 'https://fabric.dattasable.com/', github: fabricRepo, statusBadge: 'Live platform · v4.0',
+    flagship: {
+      slug: 'fabric-master', order: 1, verifiedAt: '2026-10-29', cta: 'Explore Live Platform',
+      evidence: [{ value: '11', label: 'F-SKU planning tiers', source: 'https://fabric.dattasable.com/' }, { value: '25', label: 'Published guides', source: 'https://fabric.dattasable.com/documentation' }, { value: 'v4.0', label: 'Live engineering workspace', source: 'https://fabric.dattasable.com/workspace' }],
+      gallery: [media('fabric-home', 'Fabric Master live homepage and capacity preview', 'Real screenshot', 'https://fabric.dattasable.com/'), media('fabric-workspace', 'Fabric Master engineering workspace with saved-scenario tools', 'Real screenshot', 'https://fabric.dattasable.com/workspace'), media('fabric-capacity', 'Fabric Master capacity planning wizard', 'Real screenshot', 'https://fabric.dattasable.com/wizard'), media('fabric-architecture', 'Fabric Master architecture planner', 'Real screenshot', 'https://fabric.dattasable.com/architecture/planner'), media('fabric-cost', 'Fabric Master cost estimation workspace', 'Real screenshot', 'https://fabric.dattasable.com/cost-calculator')],
+      architecture: ['React and TypeScript provide the planning interface; Vite builds the application and Express supplies its server entry point.', 'Workload inputs feed deterministic capacity estimates. Cost comparisons and documented pricing assumptions support scenario evaluation.', 'The engineering workspace stores scenarios in the browser and supports JSON import/export. Architecture tools cover Lakehouse, OneLake and medallion planning.'],
+      implementation: ['Capacity planning across F2–F2048, including Spark and Power BI workload inputs.', 'Pay-as-you-go and reserved-capacity comparisons with visible planning assumptions.', 'Scenario workspace, architecture planner and an engineering documentation library.'],
+      limitations: ['Independent educational planning software; not an official Microsoft product.', 'Estimates require validation with representative workloads and current regional pricing. They are not commercial offers or performance guarantees.', 'The live platform and README differ in recency; the live v4.0 interface supports the displayed counts. The suggested count of eight tools is omitted because the current navigation is broader.'],
+      sources: [{ label: 'Source repository and README', url: fabricRepo }, { label: 'Methodology and limitations', url: 'https://fabric.dattasable.com/about' }, { label: 'Engineering workspace', url: 'https://fabric.dattasable.com/workspace' }],
+    },
+  },
+  {
+    id: 102, title: 'Excel Dashboard Generator — Executive BI Studio', category: 'Excel & MIS', categories: ['Excel & MIS', 'Web Applications'],
+    image: '/images/portfolio/excel-dashboard.webp', color: 'var(--accent2)', tools: ['Excel', 'CSV', 'Browser analytics', 'Workbook export'], client: 'Public analytics application',
+    desc: 'A browser-based analytics studio that turns spreadsheet imports into interactive dashboards and structured Excel reporting workbooks.',
+    problem: 'Analysts need a repeatable way to explore spreadsheet data, validate records and create reporting workbooks without rebuilding every KPI manually.',
+    solution: 'The studio connects CSV/Excel import, template selection, analytical views, source-record inspection and workbook download within a browser workflow.',
+    impact: 'The live application exposes 32 BI templates, import controls and Excel export alongside a sample enterprise model.',
+    live: 'https://excel.dattasable.com/', github: '', statusBadge: 'Live browser application',
+    flagship: {
+      slug: 'excel-dashboard-generator', order: 2, verifiedAt: '2026-10-29', cta: 'Launch Dashboard Generator',
+      evidence: [{ value: '32', label: 'Templates in live gallery', source: 'https://excel.dattasable.com/' }, { value: 'CSV / XLSX', label: 'Spreadsheet import', source: 'https://excel.dattasable.com/' }, { value: '.xlsx', label: 'Reporting workbook export', source: 'https://excel.dattasable.com/' }],
+      gallery: [media('excel-dashboard', 'Excel studio executive dashboard using the built-in synthetic enterprise model', 'Real screenshot', 'https://excel.dattasable.com/'), media('excel-home', 'Excel Dashboard Generator live studio with import and export controls', 'Real screenshot', 'https://excel.dattasable.com/'), media('excel-templates', 'Excel studio template selection gallery', 'Real screenshot', 'https://excel.dattasable.com/')],
+      architecture: ['A browser workspace accepts CSV, XLSX and XLS files through the import interface.', 'The active model powers KPI views, grouped analysis, regional trends and record-validation tools.', 'The export interface generates a structured Excel workbook from the selected model.'],
+      implementation: ['32 template options displayed by the public studio.', 'Import workspace, source records, interactive analytics and data-verification navigation.', 'Excel workbook download and a built-in synthetic enterprise model.'],
+      limitations: ['The interface states that processing occurs in-browser; this review verifies the public workflow, not an independent privacy or security audit.', 'Screenshots use the supplied sample model. No private spreadsheet was uploaded.', 'No public repository was verified, so no source-code CTA is shown.'],
+      sources: [{ label: 'Public analytics studio', url: 'https://excel.dattasable.com/' }],
+    },
+  },
+  {
+    id: 103, title: 'Enterprise Intelligence Automation Platform — n8n', category: 'AI & Automation', categories: ['AI & Automation', 'SQL & Data Engineering', 'Power BI'],
+    image: '/images/portfolio/n8n-architecture.webp', color: 'var(--accent3)', tools: ['n8n', 'FastAPI', 'Python', 'PostgreSQL', 'Docker', 'Power BI integration'], client: 'Local engineering portfolio',
+    desc: 'An event-driven data-to-decision pipeline connecting ingestion, quality quarantine, dimensional analytics, BI refresh orchestration and operational recovery.',
+    problem: 'Fragile ingestion scripts can replay transactions, hide invalid records and leave reporting failures without a clear recovery path.',
+    solution: 'Eight n8n workflows coordinate a FastAPI ingress, PostgreSQL warehouse, validation quarantine, refresh adapters and numerically grounded reporting.',
+    impact: 'The repository documents eight implemented workflows, 51 passing tests and a 1,792 rows/second local synthetic-data benchmark.',
+    live: '', github: n8nRepo, statusBadge: 'Local production-style project',
+    flagship: {
+      slug: 'enterprise-n8n-intelligence-automation', order: 3, verifiedAt: '2026-10-29', cta: 'Explore GitHub Repository', release: `${n8nRepo}/releases/tag/v1.0.0`,
+      evidence: [{ value: '8', label: 'Implemented n8n workflows', source: `${n8nRepo}/blob/main/docs/WORKFLOW_CATALOG.md` }, { value: '51', label: 'Repository-reported tests passed', source: `${n8nRepo}/blob/main/README.md` }, { value: '1,792 rows/s', label: 'Measured local benchmark', source: `${n8nRepo}/blob/main/docs/PERFORMANCE.md` }],
+      gallery: [media('n8n-architecture', 'Data-ingestion architecture derived from actual repository workflow nodes and connections; not an n8n canvas screenshot', 'Architecture diagram', `${n8nRepo}/blob/main/workflows/01-data-ingestion.json`)],
+      architecture: ['FastAPI validates ingress and batch fingerprints before orchestration.', 'n8n coordinates ingestion, precedence-based quality rules, transactional ETL, monitoring and recovery; PostgreSQL holds dimensional and operational state.', 'Power BI and AI adapters default to local mock/template modes. Mailpit provides local email inspection without requiring cloud subscriptions.'],
+      implementation: ['SHA-256 batch fingerprinting and replay protection.', 'Bad-record quarantine, dimensional upserts and operational monitoring.', 'Bounded retries, dead-letter isolation and recovery validation.', 'Grounded reporting with numerical validation and an adapter-based Power BI refresh workflow.'],
+      limitations: ['Local Docker project using deterministic synthetic data. It is not a deployed enterprise cloud service.', 'Default Power BI and AI integrations are mock/template adapters; configured cloud integrations were not verified here.', 'README-linked canvas captures show account setup instead of workflows. They are excluded; the published diagram derives from workflow JSON and is explicitly labeled.', 'The 51 tests and 1,792 rows/s benchmark are repository-reported evidence from a developer workstation, not tests rerun by this website or cloud SLAs.'],
+      sources: [{ label: 'README and implementation scope', url: n8nRepo }, { label: 'Performance methodology', url: `${n8nRepo}/blob/main/docs/PERFORMANCE.md` }, { label: 'Workflow catalog', url: `${n8nRepo}/blob/main/docs/WORKFLOW_CATALOG.md` }],
+    },
+  },
+  {
+    id: 104, title: 'Enterprise Global Business Analytics — 3M Records', category: 'SQL & Data Engineering', categories: ['SQL & Data Engineering', 'Power BI'],
+    image: '/images/portfolio/global-executive.webp', color: 'var(--accent2)', tools: ['SQL Server 2022', 'T-SQL', 'Power BI', 'DAX', 'Kimball star schema'], client: 'Synthetic analytics engineering project',
+    desc: 'An audit-first SQL Server and Power BI foundation built around three million synthetic international transactions and explicit data-quality guardrails.',
+    problem: 'Synthetic international transactions contain mixed currencies, customer-identity collisions and inconsistent product keys that make naive aggregation misleading.',
+    solution: 'A typed SQL staging pipeline, repaired surrogate keys and a Kimball star schema feed currency-gated DAX measures and documented reporting specifications.',
+    impact: 'The repository records 12/12 SQL verification tests on three million rows. Native Power BI visual authoring remains incomplete.',
+    live: '', github: globalRepo, statusBadge: 'Verified model · visuals in progress',
+    flagship: {
+      slug: 'enterprise-global-business-analytics-3m', order: 4, verifiedAt: '2026-10-29', cta: 'Review Engineering Project',
+      evidence: [{ value: '3M', label: 'Synthetic source records', source: globalRepo }, { value: '50', label: 'Countries in the model', source: globalRepo }, { value: '12 / 12', label: 'Repository-reported SQL checks', source: globalRepo }],
+      gallery: [media('global-executive', 'Executive overview design target from the 3M analytics repository; not a completed report screenshot', 'Design mockup', `${globalRepo}/tree/main/assets/screenshots`), media('global-sales', 'Sales performance design target for native Power BI authoring', 'Design mockup', `${globalRepo}/tree/main/assets/screenshots`)],
+      architecture: ['An immutable 49-column raw CSV lands in SQL Server. TRY_CONVERT staging views produce a typed clean table.', 'Product, geography and date dimensions use repaired surrogate keys and trusted foreign-key relationships.', 'A 19-column reporting fact view feeds a Power BI import model. Monetary measures require a single-currency filter.'],
+      implementation: ['Three-million-row SQL pipeline, typed materialization and dimensional model.', 'Currency aggregation guards across 42 local currencies; unreliable unique-customer metrics excluded.', 'Nine reporting-page specifications; repository reports the Executive Overview canvas laid out, while pages 02–09 remain in authoring.'],
+      limitations: ['All source transactions are synthetic. There is no economically meaningful total across the 42 local currencies.', 'The gallery contains design mockups, not proof of nine completed Power BI pages. No authentic model screenshot was available in the reviewed README assets.', 'Distinct from World Business Intelligence in the existing library: that is a DuckDB/web exploration; this project focuses on SQL Server, governance and native Power BI modeling.'],
+      sources: [{ label: 'README and implementation matrix', url: globalRepo }, { label: 'SQL and semantic architecture', url: `${globalRepo}/blob/main/docs/ARCHITECTURE.md` }, { label: 'Data-quality limitations', url: `${globalRepo}/blob/main/docs/DATA_QUALITY_AND_LIMITATIONS.md` }],
+    },
+  },
+  {
+    id: 105, title: 'Enterprise Power BI Dashboard — Nine-Page Analytics Suite', category: 'Power BI', categories: ['Power BI', 'SQL & Data Engineering'],
+    image: '/images/portfolio/powerbi-executive.webp', color: 'var(--accent3)', tools: ['Power BI', 'DAX', 'Power Query', 'Python', 'Excel'], client: 'Synthetic retail analytics blueprint',
+    desc: 'A documented analytics blueprint covering executive reporting, sales, products, customers, regions, profitability, returns and forecast scenarios.',
+    problem: 'A credible BI portfolio needs reconciled data, consistent metric definitions and reproducible visual specifications rather than unexplained dashboard images.',
+    solution: 'A synthetic retail star schema, DAX library, workbook handbook and nine visual build guides form a reproducible report-authoring reference.',
+    impact: 'The README reconciles $12.84M illustrative revenue, 178,200 orders and 46,798 synthetic customers. Visuals are design references, not compiled reports.',
+    live: '', github: powerbiRepo, statusBadge: 'Nine designs · implementation blueprint',
+    flagship: {
+      slug: 'enterprise-power-bi-dashboard', order: 5, verifiedAt: '2026-10-29', cta: 'Explore Power BI Project',
+      evidence: [{ value: '9', label: 'Dashboard design references', source: powerbiRepo }, { value: '178,200', label: 'Synthetic orders', source: powerbiRepo }, { value: '66', label: 'Source-reviewed DAX measures', source: `${powerbiRepo}/blob/main/docs/dax-validation-matrix.md` }],
+      gallery: [media('powerbi-executive', 'Executive overview design reference with synthetic retail figures', 'Design mockup', `${powerbiRepo}/tree/main/assets/dashboards`), media('powerbi-sales', 'Sales performance design reference', 'Design mockup', `${powerbiRepo}/tree/main/assets/dashboards`), media('powerbi-customers', 'Customer insights design reference using synthetic customers', 'Design mockup', `${powerbiRepo}/tree/main/assets/dashboards`), media('powerbi-profitability', 'Profitability design reference', 'Design mockup', `${powerbiRepo}/tree/main/assets/dashboards`), media('powerbi-forecast', 'Forecast scenario design reference, not a statistical confidence interval', 'Design mockup', `${powerbiRepo}/tree/main/assets/dashboards`)],
+      architecture: ['Five relational synthetic-data tables describe orders, customers, products, returns and forecasts.', 'Star-schema relationships, Power Query guidance and 66 documented DAX measures define the semantic layer.', 'Nine visual specifications and an Excel implementation handbook guide construction in Power BI Desktop.'],
+      implementation: ['Nine dashboard designs and field-level visual build guides.', 'Synthetic data reconciled to $12,840,570 in gross sales, 178,200 orders and 46,798 customer records.', 'DAX source, relationship documentation, validation scripts and a reproducible authoring handbook.'],
+      limitations: ['Financial values are synthetic demonstration data, not client revenue.', 'Images are mockups and architectural design references. A compiled PBIX is not included.', 'DAX syntax and schema references are source-reviewed; Power BI Desktop execution remains pending.', 'Forecast ±12% bands are illustrative planning assumptions, not statistical confidence intervals.'],
+      sources: [{ label: 'README and metric reconciliation', url: powerbiRepo }, { label: 'Assumptions and limitations', url: `${powerbiRepo}/blob/main/docs/assumptions-limitations.md` }, { label: 'DAX validation matrix', url: `${powerbiRepo}/blob/main/docs/dax-validation-matrix.md` }],
+    },
+  },
+];
+
+export const projects: ProjectData[] = [...flagshipProjects, ...establishedProjects];
+export const projectCategories = ['All', 'Featured', 'Microsoft Fabric', 'Power BI', 'Excel & MIS', 'SQL & Data Engineering', 'AI & Automation', 'Web Applications', 'Analysis'] as const;
+export function matchesProjectCategory(project: ProjectData, category: string) {
+  if (category === 'All') return true;
+  if (category === 'Featured') return !!project.flagship;
+  if (project.categories?.includes(category)) return true;
+  if (category === 'Power BI') return project.category === 'Dashboard' || project.tools.some(tool => tool.includes('Power BI'));
+  if (category === 'Excel & MIS') return project.category === 'Report' || project.tools.some(tool => tool.includes('Excel'));
+  if (category === 'SQL & Data Engineering' || category === 'SQL & Data') return project.category === 'SQL & Data' || project.tools.some(tool => tool.includes('SQL'));
+  if (category === 'AI & Automation' || category === 'Automation') return project.category.toLowerCase().includes('automation');
+  if (category === 'Web Applications') return project.tools.some(tool => /Next.js|React|JavaScript/.test(tool));
+  return project.category.toLowerCase().includes(category.toLowerCase());
+}

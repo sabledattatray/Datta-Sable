@@ -1,0 +1,146 @@
+{
+  "name": "WF01 - Enterprise Data Ingestion",
+  "source": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/workflows/01-data-ingestion.json",
+  "sha": "44bfb75b017d5e58fe041e3daed4337f4a17685d",
+  "nodes": [
+    {
+      "name": "Manual Trigger",
+      "position": [
+        240,
+        260
+      ],
+      "type": "n8n-nodes-base.manualTrigger"
+    },
+    {
+      "name": "Schedule Trigger (06:00 UTC)",
+      "position": [
+        240,
+        440
+      ],
+      "type": "n8n-nodes-base.scheduleTrigger"
+    },
+    {
+      "name": "Webhook Ingest Trigger",
+      "position": [
+        240,
+        620
+      ],
+      "type": "n8n-nodes-base.webhook"
+    },
+    {
+      "name": "Prepare Ingestion Payload",
+      "position": [
+        520,
+        440
+      ],
+      "type": "n8n-nodes-base.code"
+    },
+    {
+      "name": "Call Ingestion API",
+      "position": [
+        780,
+        440
+      ],
+      "type": "n8n-nodes-base.httpRequest"
+    },
+    {
+      "name": "Check Ingestion Success",
+      "position": [
+        1040,
+        440
+      ],
+      "type": "n8n-nodes-base.if"
+    },
+    {
+      "name": "Trigger Quality Gates (WF02)",
+      "position": [
+        1320,
+        360
+      ],
+      "type": "n8n-nodes-base.httpRequest"
+    },
+    {
+      "name": "Log Replay or Failure",
+      "position": [
+        1320,
+        560
+      ],
+      "type": "n8n-nodes-base.code"
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Ingestion Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger (06:00 UTC)": {
+      "main": [
+        [
+          {
+            "node": "Prepare Ingestion Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Ingest Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Ingestion Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Ingestion Payload": {
+      "main": [
+        [
+          {
+            "node": "Call Ingestion API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Ingestion API": {
+      "main": [
+        [
+          {
+            "node": "Check Ingestion Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Ingestion Success": {
+      "main": [
+        [
+          {
+            "node": "Trigger Quality Gates (WF02)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Replay or Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

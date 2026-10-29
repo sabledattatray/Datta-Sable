@@ -1,0 +1,120 @@
+{
+  "checkedAt": "2026-10-29T10:27:53.582Z",
+  "results": [
+    {
+      "url": "https://fabric.dattasable.com/",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://fabric.dattasable.com/workspace",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://fabric.dattasable.com/about",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/fabric-master",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://fabric.dattasable.com/cost-calculator",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://fabric.dattasable.com/architecture/planner",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://fabric.dattasable.com/wizard",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://fabric.dattasable.com/documentation",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://excel.dattasable.com/",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/docs/PERFORMANCE.md",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/releases/tag/v1.0.0",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/workflows/01-data-ingestion.json",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/docs/WORKFLOW_CATALOG.md",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/README.md",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-global-business-analytics-3m",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-global-business-analytics-3m/blob/main/docs/DATA_QUALITY_AND_LIMITATIONS.md",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-global-business-analytics-3m/blob/main/docs/ARCHITECTURE.md",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-power-bi-dashboard",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-global-business-analytics-3m/tree/main/assets/screenshots",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-power-bi-dashboard/tree/main/assets/dashboards",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-power-bi-dashboard/blob/main/docs/assumptions-limitations.md",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://github.com/sabledattatray/enterprise-power-bi-dashboard/blob/main/docs/dax-validation-matrix.md",
+      "status": 200,
+      "ok": true
+    }
+  ]
+}

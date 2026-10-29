@@ -45,7 +45,7 @@ test('news sitemap uses original publication date, a two-day window and explicit
 test('main sitemap deduplicates real routes and omits invalid or future modification dates', async () => {
  const productDetails = load('lib/commerce/product-details.ts', { zod: createRequire(import.meta.url)('zod') });
  const ready = { id:'ready', slug:'real-product', status:'PUBLISHED', salesEnabled:true, deliveryReady:true, excerpt:'Original resource', resources:[{title:'Real guide'}], updatedAt:new Date() };
- const route = load('app/sitemap.ts', { '@/lib/commerce/product-details': productDetails, '@/lib/commerce/product-settings': { productDetailsMap: async () => new Map([['ready',productDetails.productDetailsSchema.parse({readiness:'READY_FOR_SALE'})]]) }, '@/lib/prisma': { prisma: { commerceProduct: { findMany: async () => [ready,{...ready,id:'test',slug:'dummy-product',excerpt:'TEST ONLY dummy'}] } } }, '@/data/excelProjects': { EXCEL_PROJECTS: [{ slug: 'world-business' }] },
+ const route = load('app/sitemap.ts', { '@/app/portfolio/data': load('app/portfolio/data.ts'), '@/lib/commerce/product-details': productDetails, '@/lib/commerce/product-settings': { productDetailsMap: async () => new Map([['ready',productDetails.productDetailsSchema.parse({readiness:'READY_FOR_SALE'})]]) }, '@/lib/prisma': { prisma: { commerceProduct: { findMany: async () => [ready,{...ready,id:'test',slug:'dummy-product',excerpt:'TEST ONLY dummy'}] } } }, '@/data/excelProjects': { EXCEL_PROJECTS: [{ slug: 'world-business' }] },
  '@/lib/blog-posts': { getPublishedBlogPosts: async () => [
  { slug: 'bad-date', updatedAt: 'bad' }, { slug: 'future', updatedAt: new Date(Date.now()+86400000) } ] } });
  assert.equal(route.dynamic, 'force-dynamic');

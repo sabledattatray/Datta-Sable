@@ -1,0 +1,253 @@
+[
+  {
+    "projectId": "fabric-master",
+    "source": "https://fabric.dattasable.com/workspace",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/fabric-workspace.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/fabric-workspace-640.webp",
+      "/images/portfolio/fabric-workspace-1280.webp",
+      "/images/portfolio/fabric-workspace-1920.webp"
+    ]
+  },
+  {
+    "projectId": "fabric-master",
+    "source": "https://fabric.dattasable.com/wizard",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/fabric-capacity.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/fabric-capacity-640.webp",
+      "/images/portfolio/fabric-capacity-1280.webp",
+      "/images/portfolio/fabric-capacity-1920.webp"
+    ]
+  },
+  {
+    "projectId": "fabric-master",
+    "source": "https://fabric.dattasable.com/architecture/planner",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/fabric-architecture.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/fabric-architecture-640.webp",
+      "/images/portfolio/fabric-architecture-1280.webp",
+      "/images/portfolio/fabric-architecture-1920.webp"
+    ]
+  },
+  {
+    "projectId": "fabric-master",
+    "source": "https://fabric.dattasable.com/cost-calculator",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/fabric-cost.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/fabric-cost-640.webp",
+      "/images/portfolio/fabric-cost-1280.webp",
+      "/images/portfolio/fabric-cost-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-global-business-analytics-3m",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-global-business-analytics-3m/main/assets/screenshots/Executive%20Business%20Analytics%20Dashboard.png",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/global-executive.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/global-executive-640.webp",
+      "/images/portfolio/global-executive-1280.webp",
+      "/images/portfolio/global-executive-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-global-business-analytics-3m",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-global-business-analytics-3m/main/assets/screenshots/Global%20Sales%20Performance%20Dashboard.png",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/global-sales.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/global-sales-640.webp",
+      "/images/portfolio/global-sales-1280.webp",
+      "/images/portfolio/global-sales-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-power-bi-dashboard",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-power-bi-dashboard/main/assets/dashboards/01-executive-overview.webp",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/powerbi-executive.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/powerbi-executive-640.webp",
+      "/images/portfolio/powerbi-executive-1280.webp",
+      "/images/portfolio/powerbi-executive-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-power-bi-dashboard",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-power-bi-dashboard/main/assets/dashboards/02-sales-performance.webp",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/powerbi-sales.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/powerbi-sales-640.webp",
+      "/images/portfolio/powerbi-sales-1280.webp",
+      "/images/portfolio/powerbi-sales-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-power-bi-dashboard",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-power-bi-dashboard/main/assets/dashboards/04-customer-insights.webp",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/powerbi-customers.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/powerbi-customers-640.webp",
+      "/images/portfolio/powerbi-customers-1280.webp",
+      "/images/portfolio/powerbi-customers-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-power-bi-dashboard",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-power-bi-dashboard/main/assets/dashboards/07-profitability-analysis.webp",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/powerbi-profitability.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/powerbi-profitability-640.webp",
+      "/images/portfolio/powerbi-profitability-1280.webp",
+      "/images/portfolio/powerbi-profitability-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-power-bi-dashboard",
+    "source": "https://raw.githubusercontent.com/sabledattatray/enterprise-power-bi-dashboard/main/assets/dashboards/09-forecast-analysis.webp",
+    "captureDate": null,
+    "assetPath": "/images/portfolio/powerbi-forecast.webp",
+    "width": 1536,
+    "height": 1024,
+    "classification": "design mockup",
+    "retrievedDate": "2026-10-29",
+    "note": "Authentic repository design asset. Original creation date not established; retrieved and reviewed 29 October 2026.",
+    "responsiveVariants": [
+      "/images/portfolio/powerbi-forecast-640.webp",
+      "/images/portfolio/powerbi-forecast-1280.webp",
+      "/images/portfolio/powerbi-forecast-1920.webp"
+    ]
+  },
+  {
+    "projectId": "fabric-master",
+    "source": "https://fabric.dattasable.com/",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/fabric-home.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/fabric-home-640.webp",
+      "/images/portfolio/fabric-home-1280.webp",
+      "/images/portfolio/fabric-home-1920.webp"
+    ]
+  },
+  {
+    "projectId": "excel-dashboard-generator",
+    "source": "https://excel.dattasable.com/",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/excel-home.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/excel-home-640.webp",
+      "/images/portfolio/excel-home-1280.webp",
+      "/images/portfolio/excel-home-1920.webp"
+    ]
+  },
+  {
+    "projectId": "enterprise-n8n-intelligence-automation",
+    "source": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/workflows/01-data-ingestion.json",
+    "sourceRevision": "44bfb75b017d5e58fe041e3daed4337f4a17685d",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/n8n-architecture.webp",
+    "width": 1600,
+    "height": 1000,
+    "classification": "architecture diagram",
+    "note": "Rendered from actual node names, positions and connections; not a canvas screenshot.",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/n8n-architecture-640.webp",
+      "/images/portfolio/n8n-architecture-1280.webp",
+      "/images/portfolio/n8n-architecture-1920.webp"
+    ]
+  },
+  {
+    "projectId": "excel-dashboard-generator",
+    "source": "https://excel.dattasable.com/",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/excel-dashboard.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "note": "Executive Overview using the built-in synthetic sample",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/excel-dashboard-640.webp",
+      "/images/portfolio/excel-dashboard-1280.webp",
+      "/images/portfolio/excel-dashboard-1920.webp"
+    ]
+  },
+  {
+    "projectId": "excel-dashboard-generator",
+    "source": "https://excel.dattasable.com/",
+    "captureDate": "2026-10-29",
+    "assetPath": "/images/portfolio/excel-templates.webp",
+    "width": 1440,
+    "height": 1000,
+    "classification": "real screenshot",
+    "note": "Template selection gallery",
+    "retrievedDate": "2026-10-29",
+    "responsiveVariants": [
+      "/images/portfolio/excel-templates-640.webp",
+      "/images/portfolio/excel-templates-1280.webp",
+      "/images/portfolio/excel-templates-1920.webp"
+    ]
+  }
+]

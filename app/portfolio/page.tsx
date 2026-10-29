@@ -1,93 +1,23 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import PortfolioClientPage from './PortfolioClientPage';
+import { PortfolioHero, FeaturedProjectShowcase } from '@/components/portfolio/PortfolioShowcase';
+import { flagshipProjects } from './data';
 
+const title = 'Datta Sable Portfolio | Microsoft Fabric, Power BI, Excel & AI Automation Projects';
+const description = "Explore Datta Sable's engineering portfolio featuring Microsoft Fabric capacity tools, Excel dashboard automation, n8n workflows, SQL Server analytics and Power BI case studies.";
 export const metadata: Metadata = {
-  title: 'MIS & Power BI Portfolio | Excel Dashboards & Business Reporting — Datta Sable',
-  description:
-    "Explore Datta Sable's MIS reporting, Advanced Excel, Power BI dashboards, SQL analysis, and business reporting projects. View demonstrable case studies and enquire about a reporting solution.",
+  title: { absolute: title }, description,
   alternates: { canonical: 'https://dattasable.com/portfolio' },
-  openGraph: {
-    title: 'MIS & Power BI Portfolio | Excel Dashboards & Business Reporting — Datta Sable',
-    description:
-      'Explore demonstrable projects in Advanced Excel, Power BI, SQL Server, and portfolio risk management by MIS Manager Datta Sable.',
-    url: 'https://dattasable.com/portfolio',
-    type: 'website',
-  },
+  openGraph: { title, description, type: 'website', url: 'https://dattasable.com/portfolio', images: [{ url: 'https://dattasable.com/images/portfolio/fabric-home.webp', width: 1440, height: 1000, alt: 'Fabric Master engineering platform, a featured Datta Sable project' }] },
+  twitter: { card: 'summary_large_image', title, description, images: ['https://dattasable.com/images/portfolio/fabric-home.webp'] },
 };
-
-const jsonLd = {
+const portfolioStructuredData = {
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'Person',
-      '@id': 'https://dattasable.com/#person',
-      name: 'Datta Sable',
-      jobTitle: 'Business Intelligence & MIS Manager',
-      url: 'https://dattasable.com',
-      sameAs: [
-        'https://www.linkedin.com/in/dattasable/',
-        'https://github.com/sabledattatray',
-      ],
-      knowsAbout: [
-        'Power BI',
-        'Advanced Excel',
-        'DAX',
-        'SQL Server',
-        'Power Query',
-        'MIS Reporting',
-        'Delinquency Portfolio Management',
-        'Financial Close Automation',
-      ],
-    },
-    {
-      '@type': 'CollectionPage',
-      '@id': 'https://dattasable.com/portfolio#collection',
-      url: 'https://dattasable.com/portfolio',
-      name: 'MIS & Power BI Portfolio — Datta Sable',
-      description:
-        'Demonstrable analytics case studies in Advanced Excel, Power BI, SQL Server, and risk portfolio reporting.',
-      author: { '@id': 'https://dattasable.com/#person' },
-      mainEntity: {
-        '@type': 'ItemList',
-        itemListElement: [
-          {
-            '@type': 'CreativeWork',
-            position: 1,
-            name: 'Telecom Collection & Delinquency Intelligence',
-            description:
-              'Postpaid Portfolio Aging, Roll-Rate Analysis & Tele-Caller Allocation Engine built in Power BI & SQL.',
-            url: 'https://dattasable.com/dashboards/collection-intelligence',
-          },
-          {
-            '@type': 'CreativeWork',
-            position: 2,
-            name: 'Executive B2B Sales Pipeline & Revenue Velocity Dashboard',
-            description:
-              'Deal Stage Conversion, Sales Velocity Modeling & Risk-Adjusted Revenue Forecasting in Power BI.',
-            url: 'https://dattasable.com/dashboards/sales-pipeline',
-          },
-          {
-            '@type': 'CreativeWork',
-            position: 3,
-            name: 'Enterprise P&L & Financial Close Reconciliation Pack',
-            description:
-              'Month-End Close Automation, Budget Variance & Executive Time Intelligence (MTD / LMTD) in Excel & Power BI.',
-            url: 'https://dattasable.com/portfolio',
-          },
-        ],
-      },
-    },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dattasable.com' }, { '@type': 'ListItem', position: 2, name: 'Portfolio', item: 'https://dattasable.com/portfolio' }] },
+    { '@type': 'CollectionPage', '@id': 'https://dattasable.com/portfolio#collection', name: title, description, url: 'https://dattasable.com/portfolio', author: { '@type': 'Person', name: 'Datta Sable', url: 'https://dattasable.com' }, mainEntity: { '@type': 'ItemList', itemListElement: flagshipProjects.map((project,index) => ({ '@type': 'ListItem', position: index+1, item: { '@type': 'CreativeWork', name: project.title, description: project.desc, url: `https://dattasable.com/portfolio/${project.flagship!.slug}` } })) } },
   ],
 };
-
 export default function PortfolioPage() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <PortfolioClientPage />
-    </>
-  );
+  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioStructuredData).replace(/</g, '\\u003c') }} /><PortfolioClientPage hero={<PortfolioHero />} showcase={<FeaturedProjectShowcase />} /></>;
 }

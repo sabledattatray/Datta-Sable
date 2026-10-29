@@ -1,3 +1,4 @@
+import { flagshipProjects } from '@/app/portfolio/data';
 import { MetadataRoute } from 'next';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
 import { EXCEL_PROJECTS } from '@/data/excelProjects';
@@ -29,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const indexableProducts = products.filter(p => productReadiness(p, details.get(p.id) || defaultProductDetails()) === 'READY_FOR_SALE');
   const urls: MetadataRoute.Sitemap = [
     ...routes.map(route => ({ url: baseUrl + route })),
+    ...flagshipProjects.map(project => ({ url: `${baseUrl}/portfolio/${project.flagship!.slug}` })),
     ...EXCEL_PROJECTS.map(project => ({ url: baseUrl + '/dashboards/' + project.slug })),
     ...indexableProducts.map(p => {
       const date = new Date(p.updatedAt);

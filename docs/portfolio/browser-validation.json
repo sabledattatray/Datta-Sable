@@ -1,0 +1,22 @@
+{
+  "base": "http://localhost:3000",
+  "checkedAt": "2026-10-29T10:38:41.512Z",
+  "checks": [
+    "Five flagship entries rendered",
+    "375px screenshot and no horizontal overflow",
+    "768px screenshot and no horizontal overflow",
+    "1440px screenshot and no horizontal overflow",
+    "1920px screenshot and no horizontal overflow",
+    "Featured filter",
+    "Search, empty state and reset",
+    "Multi-category and tool filtering",
+    "fabric-master: 200, content, images, schema, canonical",
+    "excel-dashboard-generator: 200, content, images, schema, canonical",
+    "enterprise-n8n-intelligence-automation: 200, content, images, schema, canonical",
+    "enterprise-global-business-analytics-3m: 200, content, images, schema, canonical",
+    "enterprise-power-bi-dashboard: 200, content, images, schema, canonical",
+    "Keyboard focus reaches interactive content",
+    "No browser page errors"
+  ],
+  "errors": []
+}

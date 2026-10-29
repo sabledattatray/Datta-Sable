@@ -46,3 +46,42 @@
  .cardContent .tags>span:nth-child(n+3) { display:none; }
  .featureCopy>p { -webkit-line-clamp:1; }
 }
+
+/* v2 library: retain the original entries, improve the reading space and media. */
+.grid { gap:22px; }
+.workCard { grid-template-columns:1fr; }
+.cardMedia { aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--border); }
+.cardMedia>div { aspect-ratio:16/10; }
+.cardMedia img { object-fit:contain; object-position:center; }
+.cardContent { padding:22px; }
+.cardContent h3 { display:block; -webkit-line-clamp:unset; font-size:20px; }
+.cardContent>p { display:block; -webkit-line-clamp:unset; font-size:12px; line-height:1.85; }
+.cardContent .tags>span:nth-child(n+3) { display:inline; }
+.toolbar { align-items:flex-start; flex-direction:column; padding:18px; }
+.search { width:100%; max-width:430px; }
+.filterChips button { min-height:40px; font-size:11px; }
+.workCard :is(a,button):focus-visible { outline:2px solid var(--accent); outline-offset:-3px; }
+@media(max-width:650px) { .grid { grid-template-columns:1fr; } .workCard { grid-template-columns:1fr; } .cardMedia { aspect-ratio:16/10; min-height:0; } .cardContent { padding:20px; } .cardContent h3 { font-size:20px; } .cardContent>p { display:block; -webkit-line-clamp:unset; } .cardFooter { flex-wrap:wrap; } .cardFooter :is(a,button) { min-height:42px; } .filterChips button { min-height:44px; } }
+
+/* Established work stays compact and appears only once by default. */
+.workCard { grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); }
+.cardMedia { height:100%; aspect-ratio:auto; border-right:1px solid var(--border); border-bottom:0; }
+.cardMedia>div { height:100%; aspect-ratio:auto; }
+.cardContent { padding:19px; }
+.cardContent h3 { font-size:17px; }
+.cardContent>p { font-size:11px; line-height:1.8; }
+.principles { margin-top:22px; }
+@media(max-width:900px) { .grid { grid-template-columns:1fr; } }
+@media(max-width:650px) { .workCard { grid-template-columns:1fr; } .cardMedia { aspect-ratio:16/8; height:auto; border-right:0; border-bottom:1px solid var(--border); } .cardMedia>div { aspect-ratio:16/8; } .cardContent h3 { font-size:19px; } .cardContent>p { font-size:12px; } }
+
+/* Library previews use the entire card width as well. */
+.grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.workCard { display:flex; flex-direction:column; }
+.cardMedia { width:100%; height:auto; aspect-ratio:16/10; border-right:0; border-bottom:1px solid var(--border); }
+.cardMedia>div { width:100%; height:100%; aspect-ratio:16/10; }
+.cardMedia img { object-fit:cover; object-position:top center; }
+.cardContent { padding:19px; flex:1; }
+.cardContent h3 { font-size:17px; }
+.cardContent>p { font-size:11px; }
+@media(max-width:1100px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:650px) { .grid { grid-template-columns:1fr; } .cardMedia,.cardMedia>div { aspect-ratio:16/10; } .cardContent h3 { font-size:19px; } .cardContent>p { font-size:12px; } }

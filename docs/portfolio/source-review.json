@@ -1,0 +1,26 @@
+[
+  {
+    "repository": "sabledattatray/fabric-master",
+    "readme": "https://github.com/sabledattatray/fabric-master/blob/main/README.md",
+    "revision": "52c33a18d3c97402b17b60b6ce4cdc2d92dfe203",
+    "reviewedDate": "2026-10-29"
+  },
+  {
+    "repository": "sabledattatray/enterprise-n8n-intelligence-automation",
+    "readme": "https://github.com/sabledattatray/enterprise-n8n-intelligence-automation/blob/main/README.md",
+    "revision": "dea4745f7d029f98907ced5ad629a619d08448d0",
+    "reviewedDate": "2026-10-29"
+  },
+  {
+    "repository": "sabledattatray/enterprise-global-business-analytics-3m",
+    "readme": "https://github.com/sabledattatray/enterprise-global-business-analytics-3m/blob/main/README.md",
+    "revision": "21c63dfb96eb9437b08c1eb791c9cda97fef735e",
+    "reviewedDate": "2026-10-29"
+  },
+  {
+    "repository": "sabledattatray/enterprise-power-bi-dashboard",
+    "readme": "https://github.com/sabledattatray/enterprise-power-bi-dashboard/blob/main/README.md",
+    "revision": "73265099410dd68d4c6b9c52da9698e5bda91e8c",
+    "reviewedDate": "2026-10-29"
+  }
+]
