@@ -3,6 +3,7 @@ import { LayoutDashboard, FileText, Briefcase, Layers, Users, Building2, CreditC
 export const adminNavigation = [
   { label: 'Workspace', items: [
     { label: 'Overview', href: '/admin', icon: LayoutDashboard },
+    { label: 'Resume management', href: '/admin/resumes', icon: FileText },
     { label: 'Content studio', icon: FileText, children: [
       { label: 'AI Content Studio', href: '/admin/ai-studio' },
       { label: 'Blog articles', href: '/admin/blog' }, { label: 'Website pages', href: '/admin/pages' },

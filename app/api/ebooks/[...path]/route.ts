@@ -35,37 +35,24 @@ async function ownOrder(id: string) {
   if (!order) throw new CommerceError('Order not found.', 404);
   return { order, user };
 }
-async function resolveEbookPdfBytes(req: Request, candidateFiles: string[]): Promise<Buffer | null> {
-  const candidateDirs = [
-    nodePath.join(process.cwd(), 'storage/ebooks/imports'),
-    nodePath.join(process.cwd(), 'public/assets/ebooks'),
-  ];
-  for (const fname of candidateFiles) {
-    const basename = nodePath.basename(fname);
-    for (const dir of candidateDirs) {
-      const filePath = nodePath.join(dir, basename);
-      try {
-        const stats = await stat(filePath);
-        if (stats.isFile()) {
-          return await readFile(filePath);
-        }
-      } catch {}
-    }
+async function resolveEbookPdfBytes(_req: Request, candidateFiles: string[]): Promise<Buffer | null> {
+  // Local repair only. Production PDFs belong exclusively in private Blob storage.
+  if (process.env.NODE_ENV !== 'development') return null;
+  for (const filename of candidateFiles) {
+    const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(filename));
+    try { if ((await stat(filePath)).isFile()) return await readFile(filePath); } catch {}
   }
-
-  // Fallback: fetch from edge static public directory
-  for (const fname of candidateFiles) {
-    const basename = nodePath.basename(fname);
-    try {
-      const edgeUrl = new URL(`/assets/ebooks/${basename}`, req.url);
-      const res = await fetch(edgeUrl.toString(), { cache: 'no-store' });
-      if (res.ok) {
-        return Buffer.from(await res.arrayBuffer());
-      }
-    } catch {}
-  }
-
   return null;
+}
+async function verifyPrivatePdf(resource: { pathname: string; asset: { byteSize: number; version: string } | null } | undefined, version: string) {
+  const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
+  if (!token || !resource?.asset || resource.asset.version !== version || !/^products\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+\.pdf$/.test(resource.pathname)) {
+    throw new CommerceError('Upload a version-matched PDF to private storage before publishing.', 409);
+  }
+  const blob = await head(resource.pathname, { token });
+  if (!new URL(blob.url).hostname.endsWith('.private.blob.vercel-storage.com') || blob.size !== resource.asset.byteSize || blob.contentType !== 'application/pdf') {
+    throw new CommerceError('Private PDF verification failed. Check the uploaded file and asset metadata.', 409);
+  }
 }
 
 export async function GET(req: Request, context: Context) {
@@ -249,66 +236,7 @@ export async function POST(req: Request, context: Context) {
         if (!existing.image) throw new CommerceError('A cover image is required before publishing.', 400);
 
         const resource = existing.resources.find(r => r.active && r.asset);
-        let filename = `${existing.slug}.pdf`;
-        if (!resource) {
-          let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
-          try {
-            const catalog = JSON.parse(await readFile(nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
-            const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string; sha256: string; byteSize: number } }) => c.product.slug === existing.slug);
-            if (entry?.asset) assetInfo = entry.asset;
-          } catch {}
-
-          filename = assetInfo?.filename || `${existing.slug}.pdf`;
-          const sha256 = assetInfo?.sha256 || createHash('sha256').update(filename).digest('hex');
-          const byteSize = assetInfo?.byteSize || 100000;
-          const pathname = `products/${existing.id}/${filename}`;
-
-          await transaction(async tx => {
-            await tx.commerceResource.updateMany({ where: { productId: id }, data: { active: false } });
-            await tx.commerceResource.upsert({
-              where: { pathname },
-              create: {
-                productId: id,
-                title: `${existing.ebook!.edition || '2026 Edition'} PDF`,
-                pathname,
-                active: true,
-                asset: {
-                  create: {
-                    sha256,
-                    byteSize,
-                    filename,
-                    version: existing.ebook!.version || '1.0',
-                  },
-                },
-              },
-              update: {
-                active: true,
-              },
-            });
-          });
-        }
-
-        const targetPathname = resource?.pathname || `products/${existing.id}/${filename}`;
-        const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
-        if (token) {
-          try {
-            await head(targetPathname, { token });
-          } catch {
-            const candidateFiles = [
-              filename,
-              `${existing.slug}.pdf`,
-              resource?.asset?.filename,
-            ].filter(Boolean) as string[];
-            const bytes = await resolveEbookPdfBytes(req, candidateFiles);
-            if (bytes) {
-              try {
-                await put(targetPathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
-              } catch (e) {
-                console.error('Blob upload during publish failed:', e);
-              }
-            }
-          }
-        }
+        await verifyPrivatePdf(resource, existing.ebook.version);
 
         await transaction(async tx => {
           await tx.commerceProduct.update({
@@ -361,59 +289,13 @@ export async function POST(req: Request, context: Context) {
         result = { unpublished: true };
       }
       if (action === 'sync-storage') {
-        const token = process.env.COMMERCE_BLOB_READ_WRITE_TOKEN;
-        if (!token) throw new CommerceError('Private storage token (COMMERCE_BLOB_READ_WRITE_TOKEN) is not configured in environment.', 503);
-        const catalogPath = nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json');
-        const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
-        const synced: string[] = [];
-        for (const item of catalog as { product: { slug: string }; profile?: { edition?: string; version?: string }; asset?: { filename: string; sha256: string; byteSize: number } }[]) {
-          const filename = item.asset?.filename;
-          if (!filename) continue;
-          const candidateFiles = [filename, `${item.product.slug}.pdf`];
-          const bytes = await resolveEbookPdfBytes(req, candidateFiles);
-          if (!bytes) {
-            console.error('Missing PDF bytes for:', item.product.slug);
-            continue;
-          }
-          const book = await prisma.commerceProduct.findFirst({
-            where: { slug: item.product.slug },
-            include: { resources: { where: { active: true }, include: { asset: true } } },
-          });
-          if (!book) continue;
-          const existingResource = book.resources.find(r => r.asset);
-          const pathname = existingResource?.pathname || `products/${book.id}/${filename}`;
-          if (!existingResource) {
-            await transaction(async tx => {
-              await tx.commerceResource.updateMany({ where: { productId: book.id }, data: { active: false } });
-              await tx.commerceResource.upsert({
-                where: { pathname },
-                create: {
-                  productId: book.id,
-                  title: `${item.profile?.edition || '2026 Edition'} PDF`,
-                  pathname,
-                  active: true,
-                  asset: {
-                    create: {
-                      sha256: item.asset!.sha256,
-                      byteSize: item.asset!.byteSize,
-                      filename,
-                      version: item.profile?.version || '1.0',
-                    },
-                  },
-                },
-                update: { active: true },
-              });
-            });
-          }
-          try {
-            await head(pathname, { token });
-          } catch {
-            await put(pathname, bytes, { token, access: 'private', contentType: 'application/pdf', addRandomSuffix: false });
-            synced.push(item.product.slug);
-          }
+        const books = await prisma.commerceProduct.findMany({ where: { ebook: { isNot: null } }, include: { ebook: true, resources: { where: { active: true }, include: { asset: true } } } });
+        const missing: string[] = [];
+        for (const book of books) {
+          try { await verifyPrivatePdf(book.resources.find(r => r.asset), book.ebook!.version); }
+          catch { missing.push(book.slug); }
         }
-        await logAudit({ userId: admin.id, action: 'EBOOK_SYNC_STORAGE', status: 'SUCCESS', details: `Synced: ${synced.join(', ')}` });
-        result = { synced, count: synced.length };
+        result = { checked: books.length, missing, message: missing.length ? 'Private PDFs need attention: ' + missing.join(', ') + '. Upload through the book editor or run npm run ebooks:storage -- --apply locally with database and private Blob credentials.' : 'All book PDFs verified in private storage.' };
       }
       if (action === 'save') {
         const data = productInput.parse(body.product), profile = profileInput.parse(body.profile), id = z.string().optional().parse(body.id);
@@ -422,47 +304,12 @@ export async function POST(req: Request, context: Context) {
         if (data.currency !== 'INR') throw new CommerceError('eBook prices must use INR.');
         if (id) { const previous = await prisma.commerceProduct.findUniqueOrThrow({ where: { id }, select: { slug: true, ebook: true } }); if (!previous.ebook) throw new CommerceError('Use the existing product editor for non-eBook products.'); if (previous.slug !== data.slug) throw new CommerceError('Existing book URLs are preserved.'); }
         if (data.status === 'PUBLISHED') {
-          if (!data.image) throw new CommerceError('Cover image is required before publishing.', 400);
+          if (!data.image || !id) throw new CommerceError('Save the draft and upload a private PDF before publishing.', 409);
+          const resource = await prisma.commerceResource.findFirst({ where: { productId: id, active: true, asset: { version: profile.version } }, include: { asset: true } });
+          await verifyPrivatePdf(resource || undefined, profile.version);
           data.salesEnabled = true;
           data.deliveryReady = true;
           profile.approved = true;
-
-          if (id) {
-            const asset = await prisma.ebookAsset.findFirst({ where: { resource: { productId: id, active: true }, version: profile.version } });
-            if (!asset) {
-              let assetInfo: { filename: string; sha256: string; byteSize: number } | null = null;
-              try {
-                const catalog = JSON.parse(await readFile(nodePath.join(process.cwd(), 'content/ebooks/import-catalog.json'), 'utf8'));
-                const entry = catalog.find((c: { product: { slug: string }; asset?: { filename: string; sha256: string; byteSize: number } }) => c.product.slug === data.slug);
-                if (entry?.asset) assetInfo = entry.asset;
-              } catch {}
-
-              const filename = assetInfo?.filename || `${data.slug}.pdf`;
-              const sha256 = assetInfo?.sha256 || createHash('sha256').update(filename).digest('hex');
-              const byteSize = assetInfo?.byteSize || 100000;
-              const pathname = `products/${id}/${filename}`;
-
-              await prisma.commerceResource.updateMany({ where: { productId: id }, data: { active: false } });
-              await prisma.commerceResource.upsert({
-                where: { pathname },
-                create: {
-                  productId: id,
-                  title: `${profile.edition || '2026 Edition'} PDF`,
-                  pathname,
-                  active: true,
-                  asset: {
-                    create: {
-                      sha256,
-                      byteSize,
-                      filename,
-                      version: profile.version || '1.0',
-                    },
-                  },
-                },
-                update: { active: true },
-              });
-            }
-          }
         }
         result = await transaction(async tx => {
           if (await tx.ebookCategory.count({ where: { id: { in: categoryIds }, published: true } }) !== new Set(categoryIds).size) throw new CommerceError('Choose active categories.');

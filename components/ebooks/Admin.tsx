@@ -60,7 +60,7 @@ export default function Admin() {
       const result = await r.json();
       if (!r.ok) throw new Error(result.error);
       await refresh();
-      setNotice('Action completed successfully.');
+      setNotice(result.message || 'Action completed successfully.');
       return result;
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Action failed.');
@@ -91,7 +91,7 @@ export default function Admin() {
           Seed missing categories & draft handbook
         </button>
         <button className={s.secondary} disabled={busy} onClick={() => action({ action: 'sync-storage' })}>
-          ☁️ Sync PDFs to Cloud Storage
+          Verify private PDF storage
         </button>
         <button className={s.secondary} onClick={() => setCategory(blankCategory)}>
           Add category

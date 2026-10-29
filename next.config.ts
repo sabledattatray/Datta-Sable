@@ -46,8 +46,10 @@ const nextConfig = {
   },
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   outputFileTracingIncludes: {
-    '/api/ebooks/[...path]': ['./storage/ebooks/imports/**', './public/assets/ebooks/**'],
-    '/**': ['./storage/ebooks/imports/**', './public/assets/ebooks/**'],
+    '/Dattatray_Sable_Resume.pdf': ['./public/resume/master.pdf'],
+  },
+  outputFileTracingExcludes: {
+    '/**': ['./storage/ebooks/imports/**', './public/assets/ebooks/**', './storage/resumes/**', './resume-system/output/**', './resume-system/source/**', './resume-system/previews/**'],
   },
   async redirects() {
     return [

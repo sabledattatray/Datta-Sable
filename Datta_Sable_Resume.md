@@ -1,18 +1,35 @@
 # DATTATRAY SABLE
-**SENIOR MIS & REPORTING ANALYST**
+**SENIOR MIS & BUSINESS INTELLIGENCE ANALYST**
 Badlapur East, Thane, Maharashtra, India | +91 8010803756 | resume@dattasable.com
 [Website](https://www.dattasable.com) | [LinkedIn](https://www.linkedin.com/in/dattasable/)
 
 ## Professional Summary
-Senior MIS and reporting professional with 10+ years of experience across BFSI operations, collections analytics, portfolio monitoring and management reporting. Background includes Excel reporting models, SQL Server analysis, Power BI dashboards and Power Query data consolidation. Experienced in PAN-India portfolio oversight, KPI reporting, reconciliation, stakeholder coordination and operational team leadership. Combines financial services knowledge with structured data preparation and reporting automation to support reliable management information and recurring business reviews.
+Senior MIS and business intelligence professional with 10+ years of experience across BFSI operations, collections analytics, portfolio monitoring and management reporting. Experienced in Power BI dashboards, SQL Server analysis, Advanced Excel and Power Query workflows for recurring reporting, validation and reconciliation. Background includes PAN-India portfolio oversight, agency coordination and operational team leadership. Independent technical projects extend this experience into dimensional modeling, DAX and Microsoft Fabric planning concepts, with project work distinguished from employer responsibilities.
 
-## Core Competencies
-MIS reporting | KPI reporting | Advanced Excel | Power Query | Power Pivot | Pivot Tables | SQL Server | Dashboard development | Data validation | Reconciliation | Reporting automation | Portfolio monitoring | Variance analysis | Stakeholder management | Team leadership
+## Technical Skills
+- **MIS and business intelligence:** Recurring management reports, Power BI dashboards, KPI scorecards, variance analysis and stakeholder reporting.
+- **SQL and Excel:** SQL Server, SSMS, T-SQL joins and aggregations, MS Access, Power Query, Power Pivot, Pivot Tables, XLOOKUP, INDEX/MATCH and SUMIFS.
+- **BFSI and enterprise reporting:** Delinquency, NPA and write-off reporting, aging, roll rates, SAP data consolidation, validation and reconciliation.
+- **Independent technical work:** DAX measures, fact/dimension modeling and star schemas in portfolio projects; Microsoft Fabric architecture and capacity-planning exposure.
+
+## Selected Technical Projects
+
+### Enterprise Global Business Analytics — Independent portfolio
+Independent SQL Server and Power BI portfolio project using a three-million-row demonstration dataset; covers data validation, fact and dimension modeling, DAX measures and business KPI dashboards. Dataset figures are illustrative, not employer results.
+[Project](https://github.com/sabledattatray/enterprise-global-business-analytics-3m)
+
+### Excel Dashboard & Automation Platform — Independent portfolio
+Independent browser-based Excel and CSV analytics project supporting dataset analysis, dashboard automation, KPI reporting and downloadable reports.
+[Project](https://excel.dattasable.com)
+
+### Microsoft Fabric Engineering Workspace — Independent portfolio
+Independent technical portfolio exploring Fabric analytics architecture, capacity planning and scenario modeling. Demonstrates project-based exposure rather than an employer implementation.
+[Project](https://fabric.dattasable.com)
 
 ## Professional Experience
 
 ### MIS Manager
-DBS Mintek Pvt. Ltd. | Maharashtra, India | June 2025 – September 2026
+DBS Mintek Pvt. Ltd. | Mumbai, Maharashtra, India | June 2025 – September 2026
 
 - Managed daily, weekly and monthly MIS reporting using Excel, SQL Server, Power BI and SAP data to support operational and management reviews.
 - Developed Power Query workflows to consolidate multi-source datasets for recurring reporting, data preparation and reconciliation.
@@ -21,7 +38,7 @@ DBS Mintek Pvt. Ltd. | Maharashtra, India | June 2025 – September 2026
 - Performed data cleansing, validation and analytical modeling to support consistent collections reporting and recovery analysis.
 
 ### Information System Analyst
-SASCO | Maharashtra, India | October 2023 – May 2025
+SASCO | Mumbai, Maharashtra, India | October 2023 – May 2025
 
 - Analyzed multi-source operational data to prepare management reports and executive MIS dashboards for business performance reviews.
 - Used SQL, Excel and business intelligence tools to monitor KPIs, operational trends and reporting variances.
@@ -45,24 +62,8 @@ HDFC Bank Ltd. | Mumbai, India | August 2015 – January 2020
 - Maintained portfolio tracking and recovery reports to monitor slippage, delinquency movement and management-review priorities.
 - Supported audit and compliance processes through portfolio monitoring, data validation and adherence to established reporting procedures.
 
-## Technical Skills
-- **Excel and automation:** Power Query, Power Pivot, Pivot Tables, XLOOKUP, INDEX/MATCH, SUMIFS and recurring reporting workflows.
-- **SQL and business intelligence:** SQL Server, SSMS, T-SQL joins and aggregations, MS Access, Power BI dashboards and KPI scorecards.
-- **Enterprise and BFSI reporting:** SAP data reporting, multi-system consolidation, validation, reconciliation, aging, delinquency and portfolio analysis.
-
-## Selected Technical Projects
-
-### Excel Dashboard & Automation Platform — Independent portfolio
-Independent browser-based Excel and CSV analytics project supporting dataset analysis, dashboard automation, KPI reporting and downloadable reports.
-[Project](https://excel.dattasable.com)
-
-### Enterprise Global Business Analytics — Independent portfolio
-Independent SQL Server and Power BI portfolio project using a three-million-row demonstration dataset; covers data validation, fact and dimension modeling, DAX measures and business KPI dashboards. Dataset figures are illustrative, not employer results.
-[Project](https://github.com/sabledattatray/enterprise-global-business-analytics-3m)
-
 ## Education
 Bachelor of Science (B.Sc.) | 2005
 Dr. Babasaheb Ambedkar Marathwada University, Aurangabad, Maharashtra
 
----
-[Download default PDF](/Dattatray_Sable_Resume.pdf) | [All resume formats](resume-system/README.md)
+[Public Master PDF](/Dattatray_Sable_Resume.pdf) | Specialized documents are managed privately at /admin/resumes.

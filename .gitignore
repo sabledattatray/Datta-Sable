@@ -73,3 +73,9 @@ gen-lang-*.json
 
 # AdSense audit snapshots and database backups
 docs/adsense/backups/
+
+# Keep paid PDFs as local import sources only; never publish static copies.
+/public/assets/ebooks/
+
+# Generated local PDF.js worker; copied by dev/build scripts.
+/public/resume-worker/

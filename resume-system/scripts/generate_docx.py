@@ -98,9 +98,11 @@ def main():
     if not c['dbs_end_date'] or exp[0]['end'] != c['dbs_end_date']: raise SystemExit('Confirm DBS end date before final generation.')
     out = ROOT / 'output'; out.mkdir(exist_ok=True)
     for key, v in VARIANTS.items():
+        selected = next((arg.split('=', 1)[1] for arg in sys.argv if arg.startswith('--profile=')), None)
+        if selected and key != selected: continue
         doc = setup(); doc.core_properties.title = c['name'] + ' - ' + v['headline']; header(doc, c, v)
         heading(doc, 'Professional Summary'); doc.add_paragraph(v['summary'])
-        if key == 'power_bi_analyst':
+        if key in ('master', 'power_bi_analyst'):
             skills(doc, v); projects(doc, v, projs); doc.add_page_break()
             heading(doc, 'Professional Experience'); jobs(doc, exp, [0, 1, 2, 3]); education(doc, c)
         else:

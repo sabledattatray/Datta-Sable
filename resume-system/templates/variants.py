@@ -1,4 +1,18 @@
 VARIANTS = {
+    'master': {
+        'filename': 'Dattatray_Sable_Master_Professional_Resume',
+        'headline': 'SENIOR MIS & BUSINESS INTELLIGENCE ANALYST',
+        'tagline': 'Power BI | SQL Server | Advanced Excel | BFSI Analytics | Reporting Automation',
+        'summary': 'Senior MIS and business intelligence professional with 10+ years of experience across BFSI operations, collections analytics, portfolio monitoring and management reporting. Experienced in Power BI dashboards, SQL Server analysis, Advanced Excel and Power Query workflows for recurring reporting, validation and reconciliation. Background includes PAN-India portfolio oversight, agency coordination and operational team leadership. Independent technical projects extend this experience into dimensional modeling, DAX and Microsoft Fabric planning concepts, with project work distinguished from employer responsibilities.',
+        'competencies': '',
+        'projects': ['global', 'excel', 'fabric'],
+        'skills': [
+            ('MIS and business intelligence', 'Recurring management reports, Power BI dashboards, KPI scorecards, variance analysis and stakeholder reporting.'),
+            ('SQL and Excel', 'SQL Server, SSMS, T-SQL joins and aggregations, MS Access, Power Query, Power Pivot, Pivot Tables, XLOOKUP, INDEX/MATCH and SUMIFS.'),
+            ('BFSI and enterprise reporting', 'Delinquency, NPA and write-off reporting, aging, roll rates, SAP data consolidation, validation and reconciliation.'),
+            ('Independent technical work', 'DAX measures, fact/dimension modeling and star schemas in portfolio projects; Microsoft Fabric architecture and capacity-planning exposure.')
+        ]
+    },
     'senior_mis': {
         'filename': 'Dattatray_Sable_Senior_MIS_Reporting_Analyst',
         'headline': 'SENIOR MIS & REPORTING ANALYST',

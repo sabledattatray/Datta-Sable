@@ -1,11 +1,11 @@
-param([string]$OutputDirectory = (Join-Path $PSScriptRoot '../output'))
+param([string]$OutputDirectory = (Join-Path $PSScriptRoot '../output'), [string]$Name = '*.docx')
 $ErrorActionPreference = 'Stop'
 $taskOutput = (Resolve-Path -LiteralPath $OutputDirectory).Path
 $taskWord = New-Object -ComObject Word.Application
 $taskWord.Visible = $false
 $taskWord.DisplayAlerts = 0
 try {
-  Get-ChildItem -LiteralPath $taskOutput -Filter '*.docx' -File | ForEach-Object {
+  Get-ChildItem -LiteralPath $taskOutput -Filter $Name -File | ForEach-Object {
     $taskDocument = $null
     try {
       $taskDocument = $taskWord.Documents.Open($_.FullName, $false, $true)

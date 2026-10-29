@@ -37,3 +37,7 @@ The previous Markdown/profile copy contained unsupported 40% effort reduction, 1
 Browser QA also found an active site-wide footer asserting Microsoft certification. The rendered certification badge and unsupported claim were replaced with an analytics icon and source-supported MIS/BI wording. The dormant static-page synchronization script no longer seeds unsupported professional certifications.
 
 No critical employment, education or contact field remains unresolved. LinkedIn live verification remains limited by the service's automated-request restriction; the established project URL is retained without claiming independent profile ownership verification.
+
+## Latest confirmed corrections and visibility
+
+The candidate confirmed Mumbai, Maharashtra, India for DBS Mintek and SASCO on 29 October 2026. This correction is in canonical experience data and all four current PDF/DOCX profiles. One Master Professional Resume is now the local public default; the three specialized versions and all editable masters are managed privately. Local verification does not authorize production deployment.

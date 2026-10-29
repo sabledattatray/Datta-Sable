@@ -1,5 +1,32 @@
 [
   {
+    "variant": "master",
+    "file": "Dattatray_Sable_Master_Professional_Resume",
+    "pages": 2,
+    "links": [
+      "tel:+918010803756",
+      "mailto:resume@dattasable.com",
+      "https://www.dattasable.com/",
+      "https://www.linkedin.com/in/dattasable/",
+      "https://github.com/sabledattatray/enterprise-global-business-analytics-3m",
+      "https://excel.dattasable.com/",
+      "https://fabric.dattasable.com/"
+    ],
+    "checks": "PASS",
+    "page_stats": [
+      {
+        "page": 1,
+        "words": 288,
+        "min_font_pt": 8.04
+      },
+      {
+        "page": 2,
+        "words": 388,
+        "min_font_pt": 8.04
+      }
+    ]
+  },
+  {
     "variant": "senior_mis",
     "file": "Dattatray_Sable_Senior_MIS_Reporting_Analyst",
     "pages": 2,
@@ -15,7 +42,7 @@
     "page_stats": [
       {
         "page": 1,
-        "words": 331,
+        "words": 333,
         "min_font_pt": 8.04
       },
       {
@@ -47,7 +74,7 @@
       },
       {
         "page": 2,
-        "words": 386,
+        "words": 388,
         "min_font_pt": 8.04
       }
     ]
@@ -68,7 +95,7 @@
     "page_stats": [
       {
         "page": 1,
-        "words": 338,
+        "words": 340,
         "min_font_pt": 8.04
       },
       {

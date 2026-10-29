@@ -1,6 +1,8 @@
+The public default is the Master Professional Resume, titled Senior MIS & Business Intelligence Analyst. Use it for a broad view of verified MIS, BI, SQL, Excel and BFSI experience.
+
 # Choosing and tailoring a resume
 
-Use **Senior MIS & Reporting Analyst** for general MIS, reporting, reporting automation, reporting lead and MIS management applications. This is the default website download.
+Use **Senior MIS & Reporting Analyst** for general MIS, reporting, reporting automation, reporting lead and MIS management applications. This is a private specialist profile.
 
 Use **Power BI & Business Intelligence Analyst** for Power BI, SQL reporting, business intelligence and dashboard roles. The project and technical sections come first; employment history remains complete. Preserve the distinction between total professional tenure and tool-specific/project experience.
 
@@ -17,4 +19,4 @@ Use **BFSI Risk & Collections Analytics** for portfolio, collections, delinquenc
 
 `data/` is the shared factual source. `templates/variants.py` controls positioning and section choices. `styles/design_tokens.py` controls shared visual tokens. The generated Markdown resume and website employment history must be updated when canonical facts change.
 
-Use PDF unless the application explicitly requests Word. Keep the editable DOCX master for future edits. Public downloads are available under `/resumes/`; the existing `/Dattatray_Sable_Resume.pdf` URL continues to serve the Senior MIS PDF so earlier links keep working.
+Use PDF unless the application explicitly requests Word. Keep the editable DOCX master for future edits. Only the Master Professional Resume is public at `/Dattatray_Sable_Resume.pdf`. The three specialized profiles and all Word masters are managed privately at `/admin/resumes`.

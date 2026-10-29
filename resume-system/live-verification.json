@@ -1,0 +1,64 @@
+{
+  "commit": "046024814c25d683f718585ccd4b5ac3a8784493",
+  "deployment": "dpl_GsUNW99gp62bqu8rqWPzHCEm6JRw",
+  "status": "READY",
+  "checks": [
+    {
+      "path": "/resumes/Dattatray_Sable_Senior_MIS_Reporting_Analyst.pdf",
+      "status": 200,
+      "sha256": "38d4ce21f91da610f59514837f0b9c0fb567ea8a14d025fbd0fc2719a96f7f7f",
+      "bytes": 116437,
+      "verified": true
+    },
+    {
+      "path": "/resumes/Dattatray_Sable_Senior_MIS_Reporting_Analyst.docx",
+      "status": 200,
+      "sha256": "6aaec96e95b87911c376585525ff58a47c3c73cfc8280c80f5569b2ab3afd443",
+      "bytes": 40188,
+      "verified": true
+    },
+    {
+      "path": "/resumes/Dattatray_Sable_Power_BI_Business_Intelligence_Analyst.pdf",
+      "status": 200,
+      "sha256": "0b9d4dd3655108992a18922226cfee0d019d453488d3f00b34f5aaa1c65b1748",
+      "bytes": 117803,
+      "verified": true
+    },
+    {
+      "path": "/resumes/Dattatray_Sable_Power_BI_Business_Intelligence_Analyst.docx",
+      "status": 200,
+      "sha256": "8a0af05f7a352a655ca12b7effb0bb308e2874920f9cedb82a98eb01cbfd59ed",
+      "bytes": 40330,
+      "verified": true
+    },
+    {
+      "path": "/resumes/Dattatray_Sable_BFSI_Risk_Collections_Analytics.pdf",
+      "status": 200,
+      "sha256": "002cf5bc684acf0d977328226ebe1bc241842eed14740c674d7738b9dfd66d10",
+      "bytes": 116441,
+      "verified": true
+    },
+    {
+      "path": "/resumes/Dattatray_Sable_BFSI_Risk_Collections_Analytics.docx",
+      "status": 200,
+      "sha256": "4f43ab82ba5197d4c1e32bde25e2d34b23f97740b55a701a4b569891c4899943",
+      "bytes": 40202,
+      "verified": true
+    },
+    {
+      "path": "/Dattatray_Sable_Resume.pdf",
+      "status": 200,
+      "verified": true
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "verified": true
+    },
+    {
+      "path": "/portfolio",
+      "status": 200,
+      "verified": true
+    }
+  ]
+}

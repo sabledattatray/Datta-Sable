@@ -1,6 +1,6 @@
 # PDF and text validation
 
-All three variants passed `scripts/validate_outputs.py` on 29 October 2026. Machine-readable results are in `validation-results.json`.
+All four profiles passed `scripts/validate_outputs.py` on 29 October 2026. Machine-readable results are in `validation-results.json`.
 
 | Check | Senior MIS | Power BI / BI | BFSI |
 |---|---|---|---|
@@ -21,3 +21,5 @@ All three variants passed `scripts/validate_outputs.py` on 29 October 2026. Mach
 The exporter normalizes root hyperlinks with a trailing slash. Validation treats equivalent root URLs consistently.
 
 Text extraction, paragraph checks, bounding-box checks and full visual review establish the tested properties, not a universal ATS guarantee. No ATS score is asserted. A prospective employer's parser may behave differently.
+
+The Master Professional Resume passed the same complete validation set as the three specialized profiles. All four current versions also pass the explicit check for two occurrences of Mumbai, Maharashtra, India, corresponding to DBS Mintek and SASCO. See validation-results.json for the four-profile run.

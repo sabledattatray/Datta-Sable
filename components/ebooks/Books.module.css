@@ -2,3 +2,41 @@
 @media(max-width:1000px){.hero{gap:35px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.strip{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}.detail{gap:30px}}
 @media(max-width:600px){.page{padding:95px 18px 50px}.hero{grid-template-columns:1fr;padding:40px 0;gap:30px}.feature{padding:25px}.grid,.steps,.detail,.columns{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.strip{gap:22px}.section{padding-top:45px}.purchase{position:static}.admin{padding:15px}.actions{gap:10px}.button,.secondary{min-height:44px}.detail{padding:35px 0}.top{font-size:12px}.cover{max-width:200px}.card{padding:20px}}
 @media(prefers-reduced-motion:reduce){.page *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Editorial storefront: quiet colour, generous cover displays and aligned details. */
+.card{padding:0;overflow:hidden;border-radius:16px;display:flex;flex-direction:column;box-shadow:0 6px 24px #0b122008;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.card:hover,.card:focus-within{transform:translateY(-4px);border-color:#aa873d;box-shadow:0 18px 38px #0b122014}
+.cardArtwork{position:relative;padding:55px 28px 22px;background:radial-gradient(ellipse at 50% 15%,#24384d,#101c2c 75%);border-bottom:1px solid #c9a44b33;text-align:center}
+.cardArtwork>a{display:block;width:fit-content;margin:auto}
+.card .cover{width:175px;max-width:100%;border-color:#ffffff25;border-radius:2px 6px 6px 2px;box-shadow:-5px 4px 0 #b9ad8a55,0 18px 24px #0006;transition:transform .25s ease}
+.card:hover .cover{transform:rotate(-2deg)}
+.bookBadge{position:absolute;top:17px;left:20px;padding:4px 9px;border:1px solid #c9a44b55;border-radius:30px;color:#e2c77f;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.artworkCaption{display:block;color:#9aa9bb;letter-spacing:.2em;font-size:8px;margin-top:25px}
+.cardBody{padding:25px;display:flex;flex-direction:column;flex:1}
+.cardBody>.eyebrow{margin:0;color:var(--muted);font-size:10px;letter-spacing:.12em}
+.card h3{margin:10px 0 12px;font-size:21px;letter-spacing:-.025em;line-height:1.35}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.cardExcerpt{margin:0 0 22px;line-height:1.75}
+.card .meta{margin:auto 0 0;padding:17px 0;border-bottom:1px solid var(--border);font-size:11px;justify-content:space-between;gap:8px}
+.card .meta span:first-child{display:inline-flex;align-items:center;gap:6px}
+.cardFooter{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:19px 0}
+.card .price{font-size:30px;line-height:1.2}
+.priceCaption{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.cardDetails{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;text-underline-offset:4px}
+.cardBody>.button{width:100%;margin-top:0;border-radius:8px;min-height:46px;justify-content:space-between}
+.cardUpcoming{display:flex;align-items:center;justify-content:center;min-height:46px;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:12px}
+.hero{gap:56px;padding:64px 0}
+.hero h1{font-size:clamp(36px,4.5vw,60px);line-height:1.1}
+.feature{border-radius:18px;padding:32px;background:radial-gradient(ellipse at top right,#29415a,#0b1220 75%);box-shadow:0 18px 40px #0b122018}
+.feature h2{font-size:25px;letter-spacing:-.025em;margin-bottom:10px}
+.feature .cover{box-shadow:0 16px 35px #0005}
+.feature .actions{margin-bottom:0;justify-content:space-between;align-items:center}
+.strip{gap:24px;padding:28px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.strip svg{color:#ab812c}
+.categories{gap:10px}.category{flex:1 1 180px;border-radius:10px;background:var(--surface);transition:border-color .2s ease}.category:hover{border-color:#ab812c}
+.filters{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;align-items:end}
+.filters .secondary{min-height:46px}.section h2{margin-bottom:24px}.steps>div{padding:25px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+@media(max-width:1000px){.hero{gap:30px}.cardBody{padding:22px}}
+@media(max-width:600px){.hero{padding:36px 0;gap:28px}.strip{padding:22px;gap:22px 16px}.card{padding:0}.cardArtwork{padding-top:55px}.cardBody{padding:24px}.feature{padding:26px}.filters{padding:16px}.card:hover,.card:focus-within{transform:none}}
+@media(prefers-reduced-motion:reduce){.card:hover,.card:focus-within,.card:hover .cover{transform:none}}

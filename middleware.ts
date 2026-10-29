@@ -2,6 +2,10 @@ import { NextResponse, NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  // Retired specialized downloads must not fall through to static files or custom pages.
+  if (path.toLowerCase() === '/resumes' || path.toLowerCase().startsWith('/resumes/')) {
+    return new NextResponse('This document is no longer publicly available.', { status: 410, headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow, noarchive' } });
+  }
   
   // Early return for standard SEO-critical files
   if (['/ads.txt', '/robots.txt', '/sitemap.xml'].includes(path)) {
@@ -52,6 +56,10 @@ export function middleware(request: NextRequest) {
       headers: requestHeaders,
     },
   });
+  if (path === '/admin/resumes' || path.startsWith('/admin/resumes/')) {
+    response.headers.set('Cache-Control', 'private, no-store');
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  }
 
   // 1. Content Security Policy (CSP)
   const cspHeader = `

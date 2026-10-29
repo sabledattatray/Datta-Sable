@@ -18,3 +18,12 @@ coverage/
 .vscode/
 .github/
 surgical-forge-lab/
+
+# Full ebook files are delivered exclusively through private Blob.
+public/assets/ebooks/
+
+# Private resume sources and historical versions never enter deployment assets.
+resume-system/output/
+resume-system/source/
+resume-system/previews/
+public/resumes/

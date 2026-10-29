@@ -31,6 +31,7 @@ def validate():
         assert text.count('resume@dattasable.com') == 1
         assert 'gmail.com' not in text and 'Present' not in text and 'END DATE' not in text
         assert '2005' in text and 'September 2026' in text and 'CASCO' not in text
+        assert text.count('Mumbai, Maharashtra, India') == 2, f'{stem}: latest two role locations must match the candidate correction'
         for job in jobs:
             assert text.count(job['employer']) == 1
             assert normalized(f"{job['start']} - {job['end']}") in normal
@@ -40,7 +41,7 @@ def validate():
             assert normalized(paragraph) in normal, f'{stem}: DOCX/PDF mismatch: {paragraph}'
         meaningful = [normalized(p) for p in paragraphs if len(p) > 90]
         assert all(n == 1 for n in Counter(meaningful).values()), f'{stem}: duplicated paragraphs'
-        expected_headings = ['PROFESSIONAL SUMMARY', 'TECHNICAL SKILLS', 'SELECTED TECHNICAL PROJECTS', 'PROFESSIONAL EXPERIENCE', 'EDUCATION'] if key == 'power_bi_analyst' else ['PROFESSIONAL SUMMARY', 'CORE COMPETENCIES', 'PROFESSIONAL EXPERIENCE', 'TECHNICAL SKILLS', 'SELECTED TECHNICAL PROJECTS', 'EDUCATION']
+        expected_headings = ['PROFESSIONAL SUMMARY', 'TECHNICAL SKILLS', 'SELECTED TECHNICAL PROJECTS', 'PROFESSIONAL EXPERIENCE', 'EDUCATION'] if key in ('master', 'power_bi_analyst') else ['PROFESSIONAL SUMMARY', 'CORE COMPETENCIES', 'PROFESSIONAL EXPERIENCE', 'TECHNICAL SKILLS', 'SELECTED TECHNICAL PROJECTS', 'EDUCATION']
         offsets = [text.index(h) for h in expected_headings]; assert offsets == sorted(offsets)
         ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         with ZipFile(docx_path) as z:

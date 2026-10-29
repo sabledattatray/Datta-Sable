@@ -1,0 +1,67 @@
+# Resume implementation file inventory
+
+Current resume-related working changes are listed below. Existing earlier ebook changes are preserved and excluded from this inventory. No current implementation changes have been committed or deployed.
+
+- `.gitignore` — updated
+- `.vercelignore` — updated
+- `Datta_Sable_Resume.md` — updated
+- `app/api/admin/documents/route.ts` — updated
+- `app/portfolio/PortfolioClientPage.tsx` — updated
+- `components/AboutContent.tsx` — updated
+- `components/ResumeDownloads.tsx` — updated
+- `components/admin/navigation.ts` — updated
+- `middleware.ts` — updated
+- `next.config.ts` — updated
+- `package-lock.json` — updated
+- `package.json` — updated
+- `public/Dattatray_Sable_Resume.pdf` — moved from public storage; original bytes preserved privately
+- `public/resumes/Dattatray_Sable_BFSI_Risk_Collections_Analytics.docx` — moved from public storage; original bytes preserved privately
+- `public/resumes/Dattatray_Sable_BFSI_Risk_Collections_Analytics.pdf` — moved from public storage; original bytes preserved privately
+- `public/resumes/Dattatray_Sable_Power_BI_Business_Intelligence_Analyst.docx` — moved from public storage; original bytes preserved privately
+- `public/resumes/Dattatray_Sable_Power_BI_Business_Intelligence_Analyst.pdf` — moved from public storage; original bytes preserved privately
+- `public/resumes/Dattatray_Sable_Senior_MIS_Reporting_Analyst.docx` — moved from public storage; original bytes preserved privately
+- `public/resumes/Dattatray_Sable_Senior_MIS_Reporting_Analyst.pdf` — moved from public storage; original bytes preserved privately
+- `resume-system/README.md` — updated
+- `resume-system/Resume_ATS_Validation_Report.md` — updated
+- `resume-system/Resume_Content_Verification_Report.md` — updated
+- `resume-system/Resume_Customization_Guide.md` — updated
+- `resume-system/Resume_Design_QA_Report.md` — updated
+- `resume-system/data/experience.json` — updated
+- `resume-system/data/verification_status.json` — updated
+- `resume-system/publication-manifest.json` — updated
+- `resume-system/scripts/export_pdf.ps1` — updated
+- `resume-system/scripts/generate_docx.py` — updated
+- `resume-system/scripts/publish_local.py` — updated
+- `resume-system/scripts/validate_outputs.py` — updated
+- `resume-system/templates/variants.py` — updated
+- `resume-system/validation-results.json` — updated
+- `app/Dattatray_Sable_Resume.pdf/route.ts` — new local file
+- `app/admin/resumes/page.tsx` — new local file
+- `app/api/admin/resumes/[[...path]]/route.ts` — new local file
+- `components/MasterResume.module.css` — new local file
+- `components/MasterResume.tsx` — new local file
+- `components/admin/ResumeManager.module.css` — new local file
+- `components/admin/ResumeManager.tsx` — new local file
+- `components/admin/ResumePdfPreview.tsx` — new local file
+- `lib/resumes/audit-build.mjs` — new local file
+- `lib/resumes/files.ts` — new local file
+- `lib/resumes/http.ts` — new local file
+- `lib/resumes/model.ts` — new local file
+- `lib/resumes/service.ts` — new local file
+- `lib/resumes/storage.ts` — new local file
+- `lib/resumes/sync-worker.mjs` — new local file
+- `public/resume/master-preview.png` — new local file
+- `public/resume/master.pdf` — new local file
+- `resume-system/IMPLEMENTATION_REPORT.md` — new local file
+- `resume-system/MODIFIED_FILES.md` — new local file
+- `resume-system/PRODUCTION_CHECKLIST.md` — new local file
+- `resume-system/final-document-checksums.json` — new local file
+- `resume-system/live-verification.json` — new local file
+- `resume-system/local-http-verification.json` — new local file
+- `scripts/init-private-resumes.ts` — new local file
+- `scripts/resume-ui-fixture.mjs` — new local file
+- `tests/helpers/resume-docx-fixture.mjs` — new local file
+- `tests/helpers/resume-harness.mjs` — new local file
+- `tests/resume-management.test.mjs` — new local file
+
+Git-ignored private files are in `storage/resumes/`. Generated editable masters, PDFs and screenshots are in the ignored local output and previews directories.

@@ -24,6 +24,12 @@ export async function GET(req: NextRequest) {
     if (!fileParam) {
       return NextResponse.json({ message: "Missing file parameter" }, { status: 400 });
     }
+    // Resume profiles have a dedicated version-aware, no-store API. Do not let
+    // this legacy applicant-document fallback provide an alternate file path.
+    const normalizedDocument = path.posix.normalize('/' + fileParam.replace(/\\/g, '/'));
+    if (normalizedDocument === '/resumes' || normalizedDocument.startsWith('/resumes/')) {
+      return NextResponse.json({ message: 'Not found' }, { status: 404, headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow, noarchive' } });
+    }
 
     // 1. Try to find the document in the database first
     const applicant = await prisma.applicant.findFirst({

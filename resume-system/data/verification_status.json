@@ -57,7 +57,7 @@
     "reason": "No candidate-confirmed start date or notice period"
   },
   "employment_locations": {
-    "status": "SOURCE_DOCUMENT",
-    "source": "Maharashtra for DBS and SASCO; Mumbai for Kissht and HDFC"
+    "status": "VERIFIED",
+    "source": "Candidate confirmed Mumbai, Maharashtra, India for DBS Mintek and SASCO in chat on 29 October 2026; other roles retain original locations"
   }
 }

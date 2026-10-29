@@ -2,8 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import MasterResume from '@/components/MasterResume';
 import ResumeDownloads from '@/components/ResumeDownloads';
-import { ArrowUpRight, ArrowRight, MapPin, Layers, Database, Workflow, BarChart3, Compass, ShieldCheck, ScanLine, BookOpen, FileText, Plus, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, MapPin, Layers, Database, Workflow, BarChart3, Compass, ShieldCheck, ScanLine, BookOpen, Plus, Sparkles } from 'lucide-react';
 import styles from './AboutContent.module.css';
 
 const experience = [
@@ -66,7 +67,7 @@ export default function AboutContent() {
         </div>
       </div></section>
 
-      <section id="my-journey" className={styles.section} aria-labelledby="journey-title"><div className="container"><div className={styles.journeyGrid}><div className={styles.journeyIntro}><span className={styles.eyebrow}>03 / THE JOURNEY</span><h2 className={styles.heading} id="journey-title">Built through<br/><span>real experience.</span></h2><p>A path from banking operations to analytics and reporting systems. Each role added a different way to see the same problem.</p><a href="/Dattatray_Sable_Resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondary}>View my résumé <FileText size={15}/></a><ResumeDownloads/><div className={styles.journeyArt} aria-hidden="true"><span>OPERATIONS</span><i/><span>ANALYTICS</span><i/><span>CONNECTED SYSTEMS</span></div></div>
+      <section id="my-journey" className={styles.section} aria-labelledby="journey-title"><div className="container"><div className={styles.journeyGrid}><div className={styles.journeyIntro}><span className={styles.eyebrow}>03 / THE JOURNEY</span><h2 className={styles.heading} id="journey-title">Built through<br/><span>real experience.</span></h2><p>A path from banking operations to analytics and reporting systems. Each role added a different way to see the same problem.</p><MasterResume/><div className={styles.journeyArt} aria-hidden="true"><span>OPERATIONS</span><i/><span>ANALYTICS</span><i/><span>CONNECTED SYSTEMS</span></div></div>
         <ol className={styles.timeline}>{experience.map(({date,role,company,desc,tags},i)=><li key={company}><span className={`${styles.timelineDot} ${i===0?styles.current:''}`}/><div className={styles.timelineTop}><span>{date}</span>{i===0&&<span className={styles.present}>MOST RECENT ROLE</span>}</div><h3>{role}</h3><span className={styles.company}>{company}</span><p>{desc}</p><div className={styles.tags}>{tags.map(t=><span key={t}>{t}</span>)}</div></li>)}</ol></div></div></section>
 
       <section className={styles.section} aria-labelledby="principles-title"><div className="container"><div className={styles.sectionHeading}><div><span className={styles.eyebrow}>THE CONSTANTS</span><h2 id="principles-title" className={styles.heading}>Tools change.<br/><span>These principles stay.</span></h2></div><p>The quiet decisions behind the work.</p></div><div className={styles.principles}>{[{icon:ShieldCheck,title:'Trust the foundation.',desc:'Question the source. Check the calculation. Make the path from input to insight easier to follow.',word:'INTEGRITY'},{icon:Compass,title:'Design for a person.',desc:'A clear hierarchy, a useful measure, and a thoughtful interaction matter more than another layer of decoration.',word:'EMPATHY'},{icon:Workflow,title:'Simplify with intention.',desc:'Automate the repeatable. Keep review where it adds value. Make the system easier to understand and maintain.',word:'PURPOSE'}].map(({icon:Icon,title,desc,word},i)=><article className={styles.principle} key={word}><div><span>0{i+1}</span><Icon size={23} strokeWidth={1.4}/></div><h3>{title}</h3><p>{desc}</p><span className={styles.principleWord}>{word}</span></article>)}</div></div></section>

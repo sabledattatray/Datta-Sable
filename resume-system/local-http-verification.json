@@ -1,0 +1,75 @@
+[
+  {
+    "path": "/about",
+    "status": 200,
+    "cache": "no-store, must-revalidate",
+    "robots": null,
+    "type": "text/html; charset=utf-8",
+    "specializedLinks": false
+  },
+  {
+    "path": "/portfolio",
+    "status": 200,
+    "cache": "no-store, must-revalidate",
+    "robots": null,
+    "type": "text/html; charset=utf-8",
+    "specializedLinks": false
+  },
+  {
+    "path": "/Dattatray_Sable_Resume.pdf?download=1",
+    "status": 200,
+    "cache": "no-store",
+    "robots": null,
+    "type": "application/pdf",
+    "matchesMaster": true
+  },
+  {
+    "path": "/api/admin/resumes",
+    "status": 401,
+    "cache": "private, no-store, max-age=0",
+    "robots": "noindex, nofollow, noarchive",
+    "type": "application/json"
+  },
+  {
+    "path": "/api/admin/resumes/power_bi_analyst/file?format=docx",
+    "status": 401,
+    "cache": "private, no-store, max-age=0",
+    "robots": "noindex, nofollow, noarchive",
+    "type": "application/json"
+  },
+  {
+    "path": "/admin/resumes",
+    "status": 200,
+    "cache": "no-store, must-revalidate",
+    "robots": "noindex, nofollow, noarchive",
+    "type": "text/html; charset=utf-8"
+  },
+  {
+    "path": "/resumes/Dattatray_Sable_Senior_MIS_Reporting_Analyst.pdf",
+    "status": 410,
+    "cache": "private, no-store",
+    "robots": "noindex, nofollow, noarchive",
+    "type": "text/plain;charset=UTF-8"
+  },
+  {
+    "path": "/resumes/Dattatray_Sable_BFSI_Risk_Collections_Analytics.docx",
+    "status": 410,
+    "cache": "private, no-store",
+    "robots": "noindex, nofollow, noarchive",
+    "type": "text/plain;charset=UTF-8"
+  },
+  {
+    "path": "/storage/resumes/manifest.json",
+    "status": 404,
+    "cache": "no-store, must-revalidate",
+    "robots": null,
+    "type": "text/html; charset=utf-8"
+  },
+  {
+    "path": "/resume-system/output/Dattatray_Sable_Senior_MIS_Reporting_Analyst.pdf",
+    "status": 404,
+    "cache": "no-store, must-revalidate",
+    "robots": null,
+    "type": "text/html; charset=utf-8"
+  }
+]
