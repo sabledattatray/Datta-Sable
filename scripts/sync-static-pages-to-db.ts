@@ -6,18 +6,14 @@ const prisma = new PrismaClient();
 
 // Static datasets to pre-render JSX loops
 const timeline = [
-  { year: '2025—PRES', role: 'MIS MANAGER', company: 'DBS MINTEK PVT. LTD.', desc: 'Developing automated Power BI & SQL dashboards, reducing manual effort by 40% through Power Query.' },
-  { year: '2023—2025', role: 'INFORMATION SYSTEM ANALYST', company: 'CASCO', desc: 'Analyzing business data to support decision-making via optimized MIS and SQL reporting systems.' },
-  { year: '2020—2023', role: 'ASSISTANT MANAGER – MIS & ANALYTICS', company: 'KISSHT FINANCE LTD.', desc: 'Managed PAN-India risk portfolios and supervised 60+ callers with performance analytics and Excel dashboards.' },
-  { year: '2015—2020', role: 'DEPUTY MANAGER', company: 'HDFC BANK LTD.', desc: 'Managed Credit Card Write-off & NPA portfolios for Mumbai region. Ensured strict audit compliance and slippage control.' },
+  { year: 'Jun 2025—Sep 2026', role: 'MIS MANAGER', company: 'DBS MINTEK PVT. LTD.', desc: 'Developed Power BI and SQL reporting with Power Query data consolidation and reconciliation.' },
+  { year: 'Oct 2023—May 2025', role: 'INFORMATION SYSTEM ANALYST', company: 'SASCO', desc: 'Prepared management reports, KPI dashboards and SQL analysis for operational reviews.' },
+  { year: 'Jan 2020—Sep 2023', role: 'ASSISTANT MANAGER – MIS & ANALYTICS', company: 'KISSHT FINANCE LTD.', desc: 'Managed PAN-India collections MIS and supervised approximately 60–70 callers and 3–4 team leaders.' },
+  { year: 'Aug 2015—Jan 2020', role: 'DEPUTY MANAGER', company: 'HDFC BANK LTD.', desc: 'Managed credit-card delinquency and NPA portfolios in Mumbai, coordinated six agencies and supported audit reporting.' },
 ];
 
-const certifications = [
-  { name: 'Microsoft Certified: Power BI Data Analyst Associate (PL-300)', issuer: 'Microsoft', year: '2024' },
-  { name: 'Microsoft Certified: Azure Data Engineer Associate (DP-203)', issuer: 'Microsoft', year: '2025' },
-  { name: 'Tableau Desktop Certified Associate', issuer: 'Tableau Software', year: '2023' },
-  { name: 'AWS Cloud Practitioner', issuer: 'Amazon Web Services', year: '2024' },
-];
+// No earned professional certification is asserted without supporting evidence.
+const certifications: { name: string; issuer: string; year: string }[] = [];
 
 const credentials = [
   { title: 'Generative AI for Marketers', issuer: 'LinkedIn Learning', file: 'CertificateOfCompletion_Generative AI for Digital Marketers.pdf' },

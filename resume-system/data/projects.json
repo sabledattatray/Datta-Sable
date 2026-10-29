@@ -1,0 +1,23 @@
+[
+  {
+    "id": "excel",
+    "title": "Excel Dashboard & Automation Platform",
+    "url": "https://excel.dattasable.com",
+    "description": "Independent browser-based Excel and CSV analytics project supporting dataset analysis, dashboard automation, KPI reporting and downloadable reports.",
+    "evidence": "Original resume and PRD; HTTPS live page returned HTTP 200 on 29 October 2026"
+  },
+  {
+    "id": "global",
+    "title": "Enterprise Global Business Analytics",
+    "url": "https://github.com/sabledattatray/enterprise-global-business-analytics-3m",
+    "description": "Independent SQL Server and Power BI portfolio project using a three-million-row demonstration dataset; covers data validation, fact and dimension modeling, DAX measures and business KPI dashboards. Dataset figures are illustrative, not employer results.",
+    "evidence": "GitHub repository and main README inspected 29 October 2026: 3M synthetic transactions, SQL pipeline, star-schema model, DAX libraries; Executive page implemented, remaining native report pages in progress"
+  },
+  {
+    "id": "fabric",
+    "title": "Microsoft Fabric Engineering Workspace",
+    "url": "https://fabric.dattasable.com",
+    "description": "Independent technical portfolio exploring Fabric analytics architecture, capacity planning and scenario modeling. Demonstrates project-based exposure rather than an employer implementation.",
+    "evidence": "Live Fabric Master page inspected and HTTPS returned HTTP 200 on 29 October 2026"
+  }
+]

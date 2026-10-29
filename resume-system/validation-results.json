@@ -1,0 +1,81 @@
+[
+  {
+    "variant": "senior_mis",
+    "file": "Dattatray_Sable_Senior_MIS_Reporting_Analyst",
+    "pages": 2,
+    "links": [
+      "tel:+918010803756",
+      "mailto:resume@dattasable.com",
+      "https://www.dattasable.com/",
+      "https://www.linkedin.com/in/dattasable/",
+      "https://excel.dattasable.com/",
+      "https://github.com/sabledattatray/enterprise-global-business-analytics-3m"
+    ],
+    "checks": "PASS",
+    "page_stats": [
+      {
+        "page": 1,
+        "words": 331,
+        "min_font_pt": 8.04
+      },
+      {
+        "page": 2,
+        "words": 332,
+        "min_font_pt": 8.04
+      }
+    ]
+  },
+  {
+    "variant": "power_bi_analyst",
+    "file": "Dattatray_Sable_Power_BI_Business_Intelligence_Analyst",
+    "pages": 2,
+    "links": [
+      "tel:+918010803756",
+      "mailto:resume@dattasable.com",
+      "https://www.dattasable.com/",
+      "https://www.linkedin.com/in/dattasable/",
+      "https://github.com/sabledattatray/enterprise-global-business-analytics-3m",
+      "https://excel.dattasable.com/",
+      "https://fabric.dattasable.com/"
+    ],
+    "checks": "PASS",
+    "page_stats": [
+      {
+        "page": 1,
+        "words": 296,
+        "min_font_pt": 8.04
+      },
+      {
+        "page": 2,
+        "words": 386,
+        "min_font_pt": 8.04
+      }
+    ]
+  },
+  {
+    "variant": "bfsi_analytics",
+    "file": "Dattatray_Sable_BFSI_Risk_Collections_Analytics",
+    "pages": 2,
+    "links": [
+      "tel:+918010803756",
+      "mailto:resume@dattasable.com",
+      "https://www.dattasable.com/",
+      "https://www.linkedin.com/in/dattasable/",
+      "https://excel.dattasable.com/",
+      "https://github.com/sabledattatray/enterprise-global-business-analytics-3m"
+    ],
+    "checks": "PASS",
+    "page_stats": [
+      {
+        "page": 1,
+        "words": 338,
+        "min_font_pt": 8.04
+      },
+      {
+        "page": 2,
+        "words": 334,
+        "min_font_pt": 8.04
+      }
+    ]
+  }
+]

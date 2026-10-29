@@ -1,0 +1,63 @@
+{
+  "name": {
+    "status": "VERIFIED",
+    "source": "Supplied resume and PRD"
+  },
+  "phone": {
+    "status": "SOURCE_DOCUMENT",
+    "source": "Supplied resume: +91 8010803756"
+  },
+  "email": {
+    "status": "VERIFIED",
+    "source": "PRD correction: resume@dattasable.com"
+  },
+  "location": {
+    "status": "VERIFIED",
+    "source": "Supplied resume and PRD"
+  },
+  "employment_names_titles_dates": {
+    "status": "SOURCE_DOCUMENT",
+    "source": "Supplied resume and PRD, except DBS end date"
+  },
+  "dbs_end_date": {
+    "status": "VERIFIED",
+    "value": "September 2026",
+    "source": "Candidate confirmation in chat, 29 October 2026"
+  },
+  "dbs_status": {
+    "status": "VERIFIED",
+    "source": "PRD: former employee"
+  },
+  "graduation": {
+    "status": "VERIFIED",
+    "source": "PRD and supplied PDF: B.Sc., 2005"
+  },
+  "linkedin": {
+    "status": "SOURCE_DOCUMENT",
+    "source": "Consistent profile URL in Contact page, layout schema, Footer and README; server returns HTTP 999 to automated check, live ownership not independently confirmed"
+  },
+  "professional_skills": {
+    "status": "SOURCE_DOCUMENT",
+    "source": "Original resume; no production Fabric, RLS, gateway or deployment-pipeline claims added"
+  },
+  "portfolio": {
+    "status": "VERIFIED",
+    "source": "Existing source PDF, PRD, inspected GitHub README and live HTTP 200 checks; see projects.json"
+  },
+  "quantified_responsibilities": {
+    "status": "SOURCE_DOCUMENT",
+    "source": "Original: 60-70 callers, 3-4 team leaders, six agencies; no invented performance metrics"
+  },
+  "certifications": {
+    "status": "OMIT",
+    "reason": "Not required; avoid treating training or planned exams as earned qualifications"
+  },
+  "availability": {
+    "status": "OMIT",
+    "reason": "No candidate-confirmed start date or notice period"
+  },
+  "employment_locations": {
+    "status": "SOURCE_DOCUMENT",
+    "source": "Maharashtra for DBS and SASCO; Mumbai for Kissht and HDFC"
+  }
+}

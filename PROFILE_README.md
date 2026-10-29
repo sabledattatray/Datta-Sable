@@ -4,8 +4,8 @@
   <a href="https://dattasable.com" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-dattasable.com-000000?style=for-the-badge&logo=vercel" alt="Portfolio" />
   </a>
-  <a href="mailto:sabledattatray@gmail.com">
-    <img src="https://img.shields.io/badge/Email-sabledattatray@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  <a href="mailto:resume@dattasable.com">
+    <img src="https://img.shields.io/badge/Email-resume@dattasable.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
   </a>
   <a href="https://linkedin.com/in/dattasable" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn" />
@@ -42,15 +42,15 @@ A synchronized native Android application built with Capacitor, delivering live 
 ---
 
 ### 💼 Professional Experience Overview
-*   **MIS Manager @ DBS Mintek Pvt. Ltd.** *(2025 – Present)*
-    * Architect daily executive dashboards across Power BI, SQL Server, and SAP.
-    * Automated reporting pipelines using Power Query and SQL, reducing manual effort by 40%.
-*   **Information System Analyst @ CASCO** *(2023 – 2025)*
+*   **MIS Manager @ DBS Mintek Pvt. Ltd.** *(June 2025 – September 2026)*
+    * Managed recurring MIS reporting using Power BI, SQL Server, Excel and SAP data.
+    * Developed Power Query and SQL workflows for data consolidation, validation and reconciliation.
+*   **Information System Analyst @ SASCO** *(October 2023 – May 2025)*
     * Partnered with technical teams to elevate data accuracy and streamline C-suite reporting efficiency.
-*   **Assistant Manager (MIS & Analytics) @ Kissht Finance Ltd.** *(2020 – 2023)*
-    * Spearheaded structured MIS oversight for PAN-India portfolios and managed performance analytics for 70+ tele-callers.
-*   **Deputy Manager @ HDFC Bank Ltd.** *(2015 – 2020)*
-    * Managed highly sensitive Credit Card Write-off portfolios and ensured 100% audit compliance.
+*   **Assistant Manager (MIS & Analytics) @ Kissht Finance Ltd.** *(January 2020 – September 2023)*
+    * Spearheaded structured MIS oversight for PAN-India portfolios and supervised approximately 60–70 tele-callers and 3–4 team leaders.
+*   **Deputy Manager @ HDFC Bank Ltd.** *(August 2015 – January 2020)*
+    * Managed highly sensitive Credit Card Write-off portfolios and supported audit and compliance reporting.
 
 ---
 <p align="center">
