@@ -5,7 +5,6 @@ import BrandLockup from './BrandLockup';
 import styles from './Footer.module.css';
 import { ArrowUpRight, ChevronDown, Mail, MapPin, Phone, BarChart3, BookOpen, LayoutDashboard, Zap, BrainCircuit, PieChart, Database, Code2, User, MessageSquare, Users, GitBranch, LucideIcon, Globe, PenTool, Sparkles, Activity, Library, Search, Shield, Layers, ShieldCheck } from 'lucide-react';
 import {
-  MicrosoftCertifiedBadge,
   SslSecurityBadge,
   ConfidentialityBadge,
   QualityAssuranceBadge,
@@ -32,10 +31,10 @@ interface TrustPillar {
 
 const TRUST_PILLARS: TrustPillar[] = [
   {
-    badgeComponent: MicrosoftCertifiedBadge,
-    title: 'Certified BI Specialist',
-    desc: 'Microsoft Certified Power BI & Data Analyst with 10+ years delivering production-grade enterprise intelligence.',
-    badge: 'Microsoft Certified',
+    badgeComponent: BarChart3,
+    title: 'MIS & BI Professional',
+    desc: '10+ years across BFSI operations, portfolio monitoring and management reporting, supported by independent analytics projects.',
+    badge: 'Reporting & Analytics',
   },
   {
     badgeComponent: SslSecurityBadge,
@@ -203,11 +202,11 @@ export default function Footer() {
             {/* Brand Card Trust Badge */}
             <div className={styles.brandTrustBadge}>
               <div className={styles.brandTrustIcon}>
-                <MicrosoftCertifiedBadge size={32} />
+                <BarChart3 size={32} aria-hidden="true" />
               </div>
               <div className={styles.brandTrustText}>
-                <strong>Verified BI &amp; Analytics Practice</strong>
-                <span>Microsoft Certified · End-to-End SSL Protection</span>
+                <strong>Independent BI &amp; Analytics Practice</strong>
+                <span>MIS &amp; Reporting · Portfolio Projects</span>
               </div>
             </div>
 

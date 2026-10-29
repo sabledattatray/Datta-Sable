@@ -34,4 +34,6 @@ The PDF has two visible pages, but extracted text contains repeated page-two con
 
 The previous Markdown/profile copy contained unsupported 40% effort reduction, 100% compliance and inconsistent workforce/employer wording. These were replaced with source-supported responsibilities in the current resume-related project sources. Historical audit records were retained as historical evidence.
 
+Browser QA also found an active site-wide footer asserting Microsoft certification. The rendered certification badge and unsupported claim were replaced with an analytics icon and source-supported MIS/BI wording. The dormant static-page synchronization script no longer seeds unsupported professional certifications.
+
 No critical employment, education or contact field remains unresolved. LinkedIn live verification remains limited by the service's automated-request restriction; the established project URL is retained without claiming independent profile ownership verification.
