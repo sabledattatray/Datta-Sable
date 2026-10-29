@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ReactECharts from 'echarts-for-react';
+import dynamic from 'next/dynamic';
 import { useTheme } from '@/components/ThemeProvider';
 import { 
   TrendingUp, 
@@ -20,6 +20,12 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+// Keep ECharts in an async browser chunk instead of the route's main bundle.
+const ReactECharts = dynamic(() => import('echarts-for-react'), {
+  ssr: false,
+  loading: () => <div aria-label="Loading chart" className="h-full min-h-[240px]" />,
+});
 
 // --- Types & Data ---
 
