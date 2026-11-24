@@ -115,5 +115,16 @@
     "next-auth": {
       "nodemailer": "$nodemailer"
     }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@prisma/client",
+      "@prisma/engines",
+      "bcrypt",
+      "esbuild",
+      "prisma",
+      "sharp"
+    ]
   }
 }
