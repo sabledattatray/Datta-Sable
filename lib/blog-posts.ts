@@ -9,8 +9,13 @@ type BlogPost = (typeof staticPosts)[number] | Record<string, any>;
 
 function serializeDbPost(dbPost: any) {
   if (!dbPost) return null;
+  let image = dbPost.image;
+  if (image === '/uploads/media-11925dcb-9fc1-4366-848c-8a71917d5179.webp') {
+    image = '/images/blog/power-bi-calculation-groups-in-2026.webp';
+  }
   return {
     ...dbPost,
+    image,
     createdAt: dbPost.createdAt instanceof Date ? dbPost.createdAt.toISOString() : dbPost.createdAt,
     updatedAt: dbPost.updatedAt instanceof Date ? dbPost.updatedAt.toISOString() : dbPost.updatedAt,
   };

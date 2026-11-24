@@ -50,7 +50,8 @@ surgical-forge-lab/public/staging/*.csv
 /scratch/
 
 # User uploads
-/public/uploads/
+/public/uploads/*
+!/public/uploads/media-11925dcb-9fc1-4366-848c-8a71917d5179.webp
 /storage/*
 !/storage/ebooks/
 /storage/ebooks/*
