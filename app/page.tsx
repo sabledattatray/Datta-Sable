@@ -45,8 +45,64 @@ export default async function HomePage() {
     date,
   }));
 
+  const homepageOfferSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Datta Sable',
+    url: 'https://dattasable.com',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Datta Sable Services and Digital Products',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Product',
+            name: 'Power BI & Microsoft Fabric Engineering eBooks',
+            description: 'Comprehensive digital practical guides on calculation groups, DAX architecture, and semantic models.',
+            url: 'https://dattasable.com/ebooks',
+          },
+          price: '499',
+          priceCurrency: 'INR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://dattasable.com/pricing',
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: '1:1 BI & Data Engineering Mentorship',
+            description: 'Personalized 60-minute technical session on Power BI, SQL, and Fabric.',
+            url: 'https://dattasable.com/mentorship',
+          },
+          price: '1499',
+          priceCurrency: 'INR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://dattasable.com/pricing',
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Power BI & Microsoft Fabric Architecture Audit',
+            description: 'Diagnostic performance and semantic model architecture review.',
+            url: 'https://dattasable.com/services',
+          },
+          price: '14999',
+          priceCurrency: 'INR',
+          availability: 'https://schema.org/InStock',
+          url: 'https://dattasable.com/pricing',
+        },
+      ],
+    },
+  };
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageOfferSchema) }}
+      />
       <Navbar />
 
       <div className="boxed-wrapper" style={{ position: 'relative', marginBottom: '40px' }}>

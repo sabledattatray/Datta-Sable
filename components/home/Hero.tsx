@@ -15,6 +15,7 @@ export default function Hero() {
           <div className={styles.actions}>
             <Link href="/dashboards" className="btn-primary">Explore my work <ArrowUpRight size={17} /></Link>
             <Link href="/blog" className={styles.secondary}>Read the guides <ArrowUpRight size={16} /></Link>
+            <Link href="/pricing" className={styles.secondary}>Pricing &amp; Plans <ArrowUpRight size={16} /></Link>
           </div>
           <div className={styles.expertise} aria-label="Areas of expertise">
             <span><Database size={15} /> Microsoft Fabric</span>

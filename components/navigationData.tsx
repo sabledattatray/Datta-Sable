@@ -10,6 +10,7 @@ import {
 export const navLinks = [
   { label: 'Start Here', href: '/start-here' },
   { label: 'Services',   href: '/services',   mega: true },
+  { label: 'Pricing',    href: '/pricing' },
   { label: 'Portfolio',  href: '/portfolio',  mega: true },
   { label: 'Products',   href: '/products' },
   { label: 'Dashboards', href: '/dashboards', mega: true },

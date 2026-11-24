@@ -13,7 +13,6 @@ import {
 interface NavLink {
   label: string;
   href: string;
-  icon: LucideIcon;
   external?: boolean;
 }
 
@@ -60,79 +59,81 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Work',
     links: [
-      { label: 'Start Here',    href: '/start-here', icon: Sparkles },
-      { label: 'Portfolio',     href: '/portfolio', icon: BarChart3 },
-      { label: 'Digital Products', href: '/products', icon: Sparkles },
-      { label: 'Certifications',  href: '/certification', icon: Sparkles },
-      { label: 'Case Studies',  href: '/portfolio?category=Analysis', icon: BookOpen },
-      { label: 'Dashboards',    href: '/portfolio?category=Dashboard', icon: LayoutDashboard },
-      { label: 'Automation',    href: '/portfolio?category=Automation', icon: Zap },
+      { label: 'Start Here',    href: '/start-here' },
+      { label: 'Pricing & Plans', href: '/pricing' },
+      { label: 'Portfolio',     href: '/portfolio' },
+      { label: 'Digital Products', href: '/products' },
+      { label: 'Certifications',  href: '/certification' },
+      { label: 'Case Studies',  href: '/portfolio?category=Analysis' },
+      { label: 'Dashboards',    href: '/portfolio?category=Dashboard' },
+      { label: 'Automation',    href: '/portfolio?category=Automation' },
     ],
   },
   {
     heading: 'Services',
     links: [
-      { label: 'Pricing & Plans',      href: '/services#pricing', icon: Sparkles },
-      { label: 'BI Consulting',      href: '/services/consulting', icon: BrainCircuit },
-      { label: 'Dashboard Design',   href: '/services/dashboards', icon: PieChart },
-      { label: 'Web Solutions',      href: '/services/web-solutions', icon: Globe },
-      { label: 'Graphic Design',     href: '/services/graphic-design', icon: PenTool },
-      { label: 'SEO Optimization',   href: '/services/seo-optimization', icon: Sparkles },
-      { label: 'Automation Solutions', href: '/services/automation', icon: Zap },
+      { label: 'Pricing & Plans',      href: '/pricing' },
+      { label: 'BI Consulting',      href: '/services/consulting' },
+      { label: 'Dashboard Design',   href: '/services/dashboards' },
+      { label: 'Web Solutions',      href: '/services/web-solutions' },
+      { label: 'Graphic Design',     href: '/services/graphic-design' },
+      { label: 'SEO Optimization',   href: '/services/seo-optimization' },
+      { label: 'Automation Solutions', href: '/services/automation' },
     ],
   },
   {
     heading: 'Workspace',
     links: [
-      { label: 'Aura FinTech BI (Excel)', href: '/dashboards/aura-capital-sales', icon: BarChart3 },
-      { label: 'Open MIS Tool',    href: '/tools/open-mis',         icon: BarChart3 },
-      { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', icon: BarChart3, external: true },
-      { label: 'Surgical Tools',   href: '/tools',                  icon: Zap },
-      { label: 'Templates Hub',    href: '/templates',              icon: Library },
-      { label: 'Workflow Chains',  href: '/chains',                 icon: GitBranch },
-      { label: 'Knowledge Hub',    href: '/knowledge',              icon: BookOpen },
-      { label: 'Infrastructure Hub', href: '/infrastructure',       icon: Layers },
+      { label: 'Aura FinTech BI (Excel)', href: '/dashboards/aura-capital-sales' },
+      { label: 'Open MIS Tool',    href: '/tools/open-mis' },
+      { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', external: true },
+      { label: 'Surgical Tools',   href: '/tools' },
+      { label: 'Templates Hub',    href: '/templates' },
+      { label: 'Workflow Chains',  href: '/chains' },
+      { label: 'Knowledge Hub',    href: '/knowledge' },
+      { label: 'Infrastructure Hub', href: '/infrastructure' },
     ],
   },
   {
     heading: 'Connect',
     links: [
-      { label: 'About',       href: '/about',                                   icon: User },
-      { label: 'Contact',     href: '/contact',                                 icon: MessageSquare },
-      { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/dattasable/',  icon: Users,          external: true },
-      { label: 'Twitter / X', href: 'https://x.com/sabledattatray',             icon: MessageSquare,  external: true },
-      { label: 'GitHub',      href: 'https://github.com/sabledattatray',        icon: Code2,          external: true },
-      { label: 'YouTube',     href: 'https://www.youtube.com/@sabledatttatray', icon: Globe,          external: true },
+      { label: 'About',       href: '/about' },
+      { label: 'Contact',     href: '/contact' },
+      { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/dattasable/',  external: true },
+      { label: 'Twitter / X', href: 'https://x.com/sabledattatray',             external: true },
+      { label: 'GitHub',      href: 'https://github.com/sabledattatray',        external: true },
+      { label: 'YouTube',     href: 'https://www.youtube.com/@sabledatttatray', external: true },
     ],
   },
   {
     heading: 'Explore',
     links: [
-      { label: 'Live Feed',      href: '/analytics-live', icon: Activity },
-      { label: 'Technical Blog', href: '/blog',           icon: BookOpen },
-      { label: 'AI Glossary',    href: '/glossary',       icon: Search },
-      { label: 'Editorial Policy', href: '/editorial-policy', icon: Shield },
-      { label: 'Disclaimer',     href: '/disclaimer',     icon: Shield },
-      { label: 'HTML Sitemap',   href: '/sitemap',        icon: Globe },
+      { label: 'Live Feed',      href: '/analytics-live' },
+      { label: 'Technical Blog', href: '/blog' },
+      { label: 'AI Glossary',    href: '/glossary' },
+      { label: 'Editorial Policy', href: '/editorial-policy' },
+      { label: 'Disclaimer',     href: '/disclaimer' },
+      { label: 'HTML Sitemap',   href: '/sitemap' },
     ],
   },
   {
     heading: 'Resources',
     links: [
-      { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', icon: BarChart3, external: true },
-      { label: 'n8n Automation',   href: 'https://n8n.io',             icon: Zap,       external: true },
-      { label: 'Live Analytics',    href: '/analytics-live',            icon: Activity },
-      { label: 'Microsoft BI',     href: 'https://powerbi.microsoft.com/', icon: Database, external: true },
-      { label: 'Next.js 15',       href: 'https://nextjs.org/',        icon: Code2,     external: true },
-      { label: 'Vercel Cloud',     href: 'https://vercel.com/',        icon: Globe,     external: true },
+      { label: 'Pricing & Rates',  href: '/pricing' },
+      { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', external: true },
+      { label: 'n8n Automation',   href: 'https://n8n.io', external: true },
+      { label: 'Live Analytics',    href: '/analytics-live' },
+      { label: 'Microsoft BI',     href: 'https://powerbi.microsoft.com/', external: true },
+      { label: 'Next.js 15',       href: 'https://nextjs.org/', external: true },
+      { label: 'Vercel Cloud',     href: 'https://vercel.com/', external: true },
     ],
   },
 ];
 
 function FooterNavLink({ link }: { link: NavLink }) {
-  const Icon = link.icon;
   return <li><Link href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
-    <span className={styles.navLinkIcon}><Icon size={12} aria-hidden="true" /></span><span className={styles.navLinkLabel}>{link.label}</span><ArrowUpRight size={11} className={link.external ? styles.externalArrow : styles.linkArrow} aria-hidden="true" />
+    <span className={styles.navLinkLabel}>{link.label}</span>
+    {link.external && <span className={styles.externalArrow} aria-hidden="true">↗</span>}
   </Link></li>;
 }
 
@@ -224,18 +225,12 @@ export default function Footer() {
           </div>
 
           <div className={styles.directory}><div className={styles.directoryHeading}><span>EXPLORE THE ECOSYSTEM</span><span>Work. Learn. Connect.</span></div><nav className={styles.navigation} aria-label="Footer navigation">
-            {NAV_LINKS.map(section => {
-              const SectionIcon = section.links[0].icon;
-              return (
+            {NAV_LINKS.map(section => (
               <div key={section.heading} className={styles.column}>
-                <div className={styles.columnHeading}><span className={styles.columnIcon}><SectionIcon size={15} aria-hidden="true" /></span><h3>{section.heading}</h3><span className={styles.linkCount} aria-hidden="true">{String(section.links.length).padStart(2, '0')}</span></div>
+                <div className={styles.columnHeading}><h3>{section.heading}</h3><span className={styles.linkCount} aria-hidden="true">{String(section.links.length).padStart(2, '0')}</span></div>
                 <ul>{section.links.map(link => <FooterNavLink key={link.label} link={link} />)}</ul>
               </div>
-            ); })}
-            {NAV_LINKS.map(section => {
-              const SectionIcon = section.links[0].icon;
-              return <details key={`mobile-${section.heading}`} className={`${styles.column} ${styles.mobileColumn}`}><summary><span className={styles.columnIcon}><SectionIcon size={15} aria-hidden="true" /></span><strong>{section.heading}</strong><ChevronDown size={14} aria-hidden="true" /></summary><ul>{section.links.map(link => <FooterNavLink key={link.label} link={link} />)}</ul></details>;
-            })}
+            ))}
           </nav></div>
         </div>
 
