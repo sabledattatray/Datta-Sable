@@ -729,3 +729,21 @@
 @media(max-width:360px) { .trackPills { display:none; }.trackCard:has(.readingDetails[open]) .trackPills { display:flex; } }
 @media(max-width:600px) { .trackPills { display:none; }.trackCard:has(.readingDetails[open]) .trackPills { display:flex; } }
 @media(max-width:360px) { .learningMap { display:none; }.trackCard:has(.readingDetails[open]) .learningMap { display:block; } }
+
+.foundationsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .foundationsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .foundationsGrid {
+    grid-template-columns: 1fr;
+  }
+}

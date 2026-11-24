@@ -488,7 +488,7 @@ export default function StartHerePage() {
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '20px' }}>
+              <div className={styles.foundationsGrid}>
                 {foundationalGuides.map((guide) => (
                   <Link
                     key={guide.href}
