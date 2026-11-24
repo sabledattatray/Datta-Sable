@@ -1,11 +1,8 @@
-# Public pages stay crawlable so search engines can read their noindex metadata.
-# Indexing exclusions belong in page robots metadata, not crawler blocks.
+# Public pages stay crawlable so search engines and AI agents can read their content and metadata.
 # robots.txt is not access control; private routes still require authentication.
+
+# Standard Search & Web Crawlers
 User-agent: *
-User-agent: Mediapartners-Google
-User-agent: Google-Display-Ads-Bot
-User-agent: AdsBot-Google
-User-agent: AdsBot-Google-Mobile
 Allow: /
 Disallow: /api/
 Disallow: /admin$
@@ -15,5 +12,45 @@ Disallow: /dashboard/
 Disallow: /preview$
 Disallow: /preview/
 
+# Google Ads & Media Partners
+User-agent: Mediapartners-Google
+User-agent: Google-Display-Ads-Bot
+User-agent: AdsBot-Google
+User-agent: AdsBot-Google-Mobile
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /preview/
+
+# AI Search, Retrieval & LLM Knowledge Crawlers
+# OpenAI (ChatGPT & SearchGPT)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+# Anthropic (Claude & Claude-Web)
+User-agent: ClaudeBot
+User-agent: Claude-Web
+# Perplexity AI Search & Citations
+User-agent: PerplexityBot
+# Google Gemini & Extended AI Models
+User-agent: Google-Extended
+# Apple Intelligence (Siri & Spotlight)
+User-agent: Applebot
+User-agent: Applebot-Extended
+# Amazon Bedrock & Rufus
+User-agent: Amazonbot
+# Cohere AI
+User-agent: cohere-ai
+# Meta AI
+User-agent: meta-externalagent
+# Mistral AI
+User-agent: MistralBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /preview/
+
+# Sitemaps & Machine-Readable Context
 Sitemap: https://dattasable.com/sitemap.xml
 Sitemap: https://dattasable.com/sitemap-index.xml

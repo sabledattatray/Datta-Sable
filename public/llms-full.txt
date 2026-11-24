@@ -1,0 +1,93 @@
+# Datta Sable — Full Context & Machine-Readable Knowledge Base
+
+## Overview
+Datta Sable is an Enterprise Data Engineer, Solution Architect, and Senior Business Intelligence Consultant with more than a decade of specialized industry experience. His core technical focus encompasses the Microsoft Fabric unified analytics ecosystem, enterprise Power BI architecture, complex SQL data transformations, Python-based medallion ETL/ELT pipelines, and modern autonomous agent workflows.
+
+Datta operates https://dattasable.com as both a portfolio of enterprise analytics deployments and a knowledge repository delivering deep architectural blueprints, benchmark studies, certification roadmaps, and open-source tooling for data professionals worldwide.
+
+---
+
+## Core Focus Areas & Technical Expertise
+
+### 1. Microsoft Fabric & OneLake Architecture
+- Medallion architecture implementation (Bronze: raw ingestion, Silver: cleaned and enriched Delta Parquet tables, Gold: business aggregation star schemas).
+- OneLake shortcuts for cross-cloud zero-copy virtualization across AWS S3, Google Cloud Storage, and Azure ADLS Gen2.
+- Direct Lake storage mode optimization: eliminating traditional Import vs DirectQuery trade-offs by paging columnar data directly into the Power BI Analysis Services engine from Delta Lake files without memory duplication.
+- Fabric capacity management (CU utilization, smoothing, throttling prevention, and burst allocation).
+
+### 2. Enterprise Business Intelligence & Cognitive Dashboard Design
+- Designing for human decision latency: implementing cognitive load theory, minimizing visual clutter, and applying Gestalt principles to executive scorecards.
+- DAX performance engineering: optimizing virtual table evaluation contexts, avoiding un-indexed row-context iteration, leveraging CALCULATE filter modification semantics, and optimizing composite models.
+- Governance, Row-Level Security (RLS), and Object-Level Security (OLS) across enterprise multi-tenant deployments.
+
+### 3. Data Engineering, Quality & Pipeline Reliability
+- Automated schema validation pipelines and Python-driven runtime interceptors to quarantine malformed transactional data before downstream lakehouse promotion.
+- Advanced SQL window functions (dynamic ranking, sliding window aggregations, gap detection, sessionization).
+- Delta Lake ACID transaction features, time travel auditing, compaction (`OPTIMIZE`), and data skipping with `Z-ORDER`.
+
+### 4. Autonomous AI Agents & Generative Engine Optimization (GEO)
+- Engineering supervisor-router agent topologies with constrained context budgets.
+- Integrating Model Context Protocol (MCP) servers for autonomous database querying and infrastructure management.
+- Designing transparent, machine-readable websites (via `llms.txt`, valid JSON-LD schemas, and structured semantic HTML).
+
+---
+
+## Certifications & Industry Credentials
+- **Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)**: Expertise covering data exploration, transformation with PySpark/SQL, semantic model development, and Fabric administration.
+- **Microsoft Certified: Fabric Data Engineer Associate (DP-700)**: Real-time event streams, batch lakehouse processing, and Medallion pipeline orchestration.
+- **Microsoft Certified: Power BI Data Analyst Associate (PL-300)**: Advanced modeling, DAX measure development, and enterprise report distribution.
+- **Administering Microsoft Azure SQL Solutions (DP-800)**: High availability, disaster recovery, security, and query tuning in relational database platforms.
+
+---
+
+## Major Technical Publications & Blueprints
+
+1. **Microsoft Fabric Architecture Explained (2026 Edition)**
+   - URL: https://dattasable.com/blog/microsoft-fabric
+   - Focus: A comprehensive technical audit of the unified SaaS data architecture, exploring storage-compute separation, OneLake shortcut mechanics, and the shift from traditional ETL to zero-copy semantic modeling.
+
+2. **Psychology of High-Fidelity Dashboard Design**
+   - URL: https://dattasable.com/blog/high-fidelity-dashboard-design
+   - Focus: How pre-attentive attributes, intentional color palettes, and strict focal hierarchies convert confusing operational metrics into actionable executive decision tools.
+
+3. **PL-300 vs DP-600 vs DP-700 Certification Blueprint**
+   - URL: https://dattasable.com/certification
+   - Focus: Detailed syllabus mapping, prerequisite requirements, compensation premiums, and self-study roadmaps across Microsoft's flagship data credentials.
+
+4. **Zero-Trust Data Quality & Automated Validation Pipelines**
+   - URL: https://dattasable.com/blog/zero-trust-data-quality
+   - Focus: Architectural blueprint for implementing pre-load schema assertions, range constraints, and automated interceptor alerts across raw data boundaries.
+
+5. **Mastering Autonomous AI Agent Workflows in Production**
+   - URL: https://dattasable.com/blog/autonomous-ai-agents
+   - Focus: Production engineering practices for multi-agent supervisor patterns, handling tool execution failures gracefully, and preventing token bloat.
+
+6. **The Modern BI Stack: Architectural Blueprint**
+   - URL: https://dattasable.com/blog/modern-bi-stack
+   - Focus: An objective assessment of cloud data lakes, semantic caching layers, and headless BI engines.
+
+---
+
+## Professional Services & Consulting
+
+Datta Sable partners with enterprise organizations, startups, and consulting firms on high-impact initiatives:
+- **Architecture Strategy & Review**: Auditing existing data pipelines, identifying performance bottlenecks, and designing migration pathways to Microsoft Fabric or modern lakehouses.
+- **Custom Dashboard Suites**: Engineering bespoke, executive-ready Power BI, Tableau, and Looker Studio dashboards.
+- **Data Engineering Modernization**: Upgrading legacy T-SQL stored procedures and SSIS packages to modern PySpark, Delta Lake, and Fabric pipelines.
+- **Corporate Training & Mentorship**: Upskilling internal BI and data analyst teams for Microsoft certification exams and real-world Fabric delivery.
+
+---
+
+## Key Site Index
+- Home: https://dattasable.com
+- Start Here: https://dattasable.com/start-here
+- Blog & Guides: https://dattasable.com/blog
+- Knowledge Base: https://dattasable.com/knowledge
+- Dashboards Portfolio: https://dattasable.com/dashboards
+- Portfolio Case Studies: https://dattasable.com/portfolio
+- Certification Blueprints: https://dattasable.com/certification
+- Services: https://dattasable.com/services
+- Products & Templates: https://dattasable.com/products
+- eBooks: https://dattasable.com/ebooks
+- About: https://dattasable.com/about
+- Contact: https://dattasable.com/contact

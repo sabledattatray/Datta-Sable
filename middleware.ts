@@ -7,8 +7,8 @@ export function middleware(request: NextRequest) {
     return new NextResponse('This document is no longer publicly available.', { status: 410, headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow, noarchive' } });
   }
   
-  // Early return for standard SEO-critical files
-  if (['/ads.txt', '/robots.txt', '/sitemap.xml'].includes(path)) {
+  // Early return for standard SEO & AI machine-readable files
+  if (['/ads.txt', '/robots.txt', '/sitemap.xml', '/sitemap-index.xml', '/llms.txt', '/llms-full.txt'].includes(path)) {
     return NextResponse.next();
   }
 
@@ -126,8 +126,8 @@ export const config = {
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico, favicon.svg, ads.txt, robots.txt, sitemap.xml, images/assets.
+     * - favicon.ico, favicon.svg, ads.txt, robots.txt, sitemap.xml, llms.txt, llms-full.txt, images/assets.
      */
-    '/((?!api/|_next/static/|_next/image/|favicon.ico|favicon.svg|ads.txt|robots.txt|sitemap.xml|.*\\.png|.*\\.jpg|.*\\.webp).*)',
+    '/((?!api/|_next/static/|_next/image/|favicon.ico|favicon.svg|ads.txt|robots.txt|sitemap.xml|llms.txt|llms-full.txt|.*\\.png|.*\\.jpg|.*\\.webp).*)',
   ],
 };

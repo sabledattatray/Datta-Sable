@@ -1,0 +1,50 @@
+# Datta Sable
+> Senior Business Intelligence Developer, Enterprise Data Engineer & Data Strategy Consultant specializing in Microsoft Fabric, Power BI, SQL, Python data engineering, and autonomous AI workflows.
+
+Datta Sable provides production-grade architectural blueprints, deep-dive technical tutorials, and enterprise consulting for modern data and analytics stacks. With over 10 years of experience designing and deploying scalable analytics infrastructure, Datta helps organizations transform raw transactional and operational data into high-fidelity, decision-ready analytics pipelines.
+
+- Website: https://dattasable.com
+- Location: India (Consulting Globally)
+- Core Competencies: Microsoft Fabric, Power BI, Synapse Data Engineering, Delta Lake, OneLake, DAX Optimization, SQL Window Functions, Python Data Pipelines, Autonomous AI Agents, SEO Architecture.
+- Certifications: DP-600 (Fabric Analytics Engineer Associate), DP-700 (Fabric Data Engineer Associate), PL-300 (Power BI Data Analyst Associate), DP-800.
+
+## Essential Foundations & Guides
+- [Start Here - Top 6 Architectural Foundations](https://dattasable.com/start-here): Hand-picked deep dives establishing core architectural intuition across data engineering and BI.
+- [Microsoft Fabric Architecture Explained](https://dattasable.com/blog/microsoft-fabric): End-to-end exploration of OneLake, Lakehouse engines, Polaris SQL Warehouses, and Direct Lake semantic modeling.
+- [Psychology of High-Fidelity Dashboard Design](https://dattasable.com/blog/high-fidelity-dashboard-design): Applying cognitive load theory, pre-attentive attributes, and focal hierarchy to turn cluttered reports into decision tools.
+- [PL-300 vs DP-600 vs DP-700 Certification Blueprint](https://dattasable.com/certification): Comprehensive breakdown of syllabus, exam strategies, and career roadmaps across Power BI and Fabric.
+- [Zero-Trust Data Quality & Automated Validation](https://dattasable.com/blog/zero-trust-data-quality): Implementing automated schema assertions, range validations, and Python interceptors before data hits production.
+- [Mastering Autonomous AI Agent Workflows](https://dattasable.com/blog/autonomous-ai-agents): Constructing supervisor-router agent topologies, preventing infinite API failure loops, and managing token context budgets.
+- [The Modern BI Stack Blueprint](https://dattasable.com/blog/modern-bi-stack): Objective architectural evaluation of cloud data lakes, semantic caching layers, and decoupled visualization stacks.
+
+## Articles & Technical Knowledge Base
+- [All Blog Posts & Guides](https://dattasable.com/blog): Searchable technical library spanning data engineering, Fabric, SQL, DAX, Python, and web architecture.
+- [Knowledge Hub](https://dattasable.com/knowledge): Curated conceptual reference sheets, quick-start guides, and cheat sheets for engineers.
+- [SQL Window Functions Masterclass](https://dattasable.com/blog/sql-window-functions): Deep dive with real-world business queries, partitioning patterns, running totals, and performance tuning.
+
+## Enterprise Dashboards & Portfolio
+- [Interactive Dashboard Showcase](https://dattasable.com/dashboards): Live, interactive Power BI, Tableau, and Looker Studio dashboards designed for executive reporting.
+- [Flagship Portfolio Projects](https://dattasable.com/portfolio): Case studies and production implementations delivered for global clients.
+- [World Business & Financial Intelligence](https://dattasable.com/dashboards/world-business): Multi-currency global trade, inflation, and macro-economic metrics dashboard.
+- [Aura Capital Sales & Revenue Analytics](https://dattasable.com/dashboards/aura-capital-sales): Executive revenue pipeline, customer churn, and cohort retention modeling.
+
+## Services & Commercial Deliverables
+- [Services Overview](https://dattasable.com/services): Enterprise BI, data pipeline development, custom dashboard engineering, and digital growth consulting.
+- [Enterprise BI & Fabric Consulting](https://dattasable.com/services/consulting): Architectural reviews, migration from legacy SQL Server to Fabric/OneLake, and team upskilling.
+- [Executive Dashboard Design](https://dattasable.com/services/dashboards): Bespoke Power BI and Tableau report suites tailored for C-suite and VP decision-making.
+- [Web Solutions & Next.js Architecture](https://dattasable.com/services/web-solutions): High-performance, SEO-optimized web applications with edge caching and zero-CLS design.
+
+## Tools, Products & eBooks
+- [Products & Digital Blueprints](https://dattasable.com/products): Production-ready templates, DAX calculation libraries, and architectural schematics.
+- [Technical eBooks Library](https://dattasable.com/ebooks): In-depth manuals and downloadable PDFs for data engineering and BI mastery.
+- [Open MIS](https://dattasable.com/tools/open-mis): Lightweight management information system for tracking operations.
+- [BI ROI Calculator](https://dattasable.com/tools/bi-roi-calculator): Interactive modeling tool to quantify the operational cost savings of modernizing legacy reporting.
+- [Mermaid Forge](https://dattasable.com/tools/mermaid-forge): Visual system architecture and data lineage generator for engineers.
+
+## Author & Verification
+- [About Datta Sable](https://dattasable.com/about): Career background, technical philosophy, and speaking history.
+- [Contact & Inquiries](https://dattasable.com/contact): Direct contact form for consulting engagements, speaking, and collaboration.
+- LinkedIn: https://www.linkedin.com/in/dattasable/
+- GitHub: https://github.com/sabledattatray
+- X (Twitter): https://x.com/sabledattatray
+- Microsoft Fabric Community: https://community.fabric.microsoft.com/t5/user/viewprofilepage/user-id/1594798

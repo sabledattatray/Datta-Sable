@@ -19,6 +19,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dattasable.com'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     template: '%s | Datta Sable',
     default: 'Datta Sable — Data Engineering, Microsoft Fabric & SEO',
@@ -37,6 +40,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Datta Sable — Data Engineering, Microsoft Fabric & SEO",
     description: "Practical guides on Microsoft Fabric, Power BI, SQL, Data Engineering, Next.js, and SEO strategies.",
+    url: "https://dattasable.com",
+    siteName: "Datta Sable",
+    locale: "en_US",
     type: "website",
     images: [
       {
@@ -82,6 +88,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content="ca-pub-4242010382827250" />
+        {/* Machine-readable AI / LLM Context Discovery */}
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />
+        <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="Full LLM Context" />
         {/* Preload the default site's above-the-fold fonts. Other fonts load when used. */}
         <link rel="preload" href="/fonts/syne-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/syne-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
