@@ -36,8 +36,6 @@ async function ownOrder(id: string) {
   return { order, user };
 }
 async function resolveEbookPdfBytes(_req: Request, candidateFiles: string[]): Promise<Buffer | null> {
-  // Local repair only. Production PDFs belong exclusively in private Blob storage.
-  if (process.env.NODE_ENV !== 'development') return null;
   for (const filename of candidateFiles) {
     const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(filename));
     try { if ((await stat(filePath)).isFile()) return await readFile(filePath); } catch {}
