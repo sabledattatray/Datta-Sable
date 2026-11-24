@@ -54,8 +54,8 @@
     "framer-motion": "^12.38.0",
     "lodash.merge": "^4.6.2",
     "lru-cache": "^11.3.5",
-    "lucide-react": "^1.11.0",
-    "marked": "^18.0.14",
+    "lucide-react": "1.78.0",
+    "marked": "18.2.1",
     "mermaid": "^12.2.0",
     "next": "^15.5.15",
     "next-auth": "^4.24.10",
@@ -116,26 +116,12 @@
     "minimatch": "^11.0.9",
     "glob": "^14.0.6",
     "follow-redirects": "^1.16.2",
+    "caniuse-lite": "1.0.30001827",
+    "prosemirror-view": "1.43.1",
+    "lucide-react": "1.78.0",
+    "marked": "18.2.1",
     "next-auth": {
       "nodemailer": "$nodemailer"
-    }
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@prisma/client",
-      "@prisma/engines",
-      "bcrypt",
-      "esbuild",
-      "prisma",
-      "sharp"
-    ],
-    "overrides": {
-      "zod": "^4.6.7",
-      "postcss": "^8.5.33",
-      "minimatch": "^11.0.9",
-      "glob": "^14.0.6",
-      "follow-redirects": "^1.16.2"
     }
   }
 }
