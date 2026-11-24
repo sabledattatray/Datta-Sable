@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import AboutContent from '@/components/AboutContent';
 
+export const revalidate = 3600;
+
 
 export const metadata: Metadata = {
   title: "About Datta Sable | BI & Data Strategy Expert",

@@ -4,6 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Check, ArrowRight, ShieldCheck, Zap, BookOpen, UserCheck, Layers, HelpCircle } from 'lucide-react';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Pricing & Plans — Transparent Rates for BI, Mentorship & eBooks | Datta Sable',
   description: 'Transparent pricing for Power BI architecture audits, Microsoft Fabric consulting, 1:1 technical mentorship, and practical engineering eBooks by Datta Sable.',

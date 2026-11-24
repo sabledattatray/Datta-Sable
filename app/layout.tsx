@@ -6,8 +6,6 @@ import type { Viewport } from 'next';
 import { Providers } from "@/components/Providers";
 import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
-import { headers } from 'next/headers';
-import { getPublishedBlogPost } from '@/lib/blog-posts';
 import { getPublicTypography } from '@/lib/site-typography-store';
 import PublicTypography from '@/components/PublicTypography';
 import WebMcpProvider from '@/components/WebMcpProvider';
@@ -74,18 +72,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const headerList = await headers();
-  const nonce = headerList.get('x-nonce') || undefined;
-  const pathname = headerList.get('x-pathname') || '';
   const typography = await getPublicTypography();
-  const articleMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
   const adsEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
-  const adArticle = adsEnabled && articleMatch ? await getPublishedBlogPost(articleMatch[1]) : null;
-  // Explicitly enable serving only after approval and CMP/account configuration.
-  const serveAds = adsEnabled && Boolean(adArticle);
 
   return (
-    <html lang="en" suppressHydrationWarning className="dark" nonce={nonce}>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="google-adsense-account" content="ca-pub-4242010382827250" />
@@ -100,7 +91,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preload" href="/fonts/jetbrains-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
         <script
-          nonce={nonce}
           id="json-ld"
           type="application/ld+json"
           suppressHydrationWarning
@@ -241,7 +231,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
         <script
-          nonce={nonce}
           id="theme-init"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
@@ -266,14 +255,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Third-Party Integrations preconnect and dns-prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        {serveAds && <script
-          async nonce={nonce}
+        {adsEnabled && <script
+          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
           crossOrigin="anonymous"
         />}
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
-        <PublicTypography settings={typography} nonce={nonce} />
+        <PublicTypography settings={typography} />
         <Providers ebooksEnabled={process.env.EBOOK_STORE_ENABLED === 'true' && process.env.EBOOK_STORE_NAV_ENABLED === 'true'}>
           <WebMcpProvider />
           <ThemeProvider>
@@ -286,7 +275,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <PerformanceOptimizer
               googleAnalyticsId="G-Q4GEY4N9WN"
               googleSignInClientId={process.env.GOOGLE_ID || ""}
-              nonce={nonce}
             />
           </ThemeProvider>
         </Providers>

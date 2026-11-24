@@ -49,15 +49,12 @@ export function middleware(request: NextRequest) {
   requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('x-pathname', path);
 
-  const isDev = process.env.NODE_ENV === 'development';
   // Razorpay permissions are confined to checkout-capable pages.
   const isCommerce = path.startsWith('/products') || path.startsWith('/ebooks') || path.startsWith('/account/orders') || path.startsWith('/checkout');
   const paymentScript = isCommerce ? ' https://checkout.razorpay.com' : '';
   const paymentConnect = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com https://lumberjack.razorpay.com https://lumberjack-cx.razorpay.com' : '';
   const paymentFrame = isCommerce ? ' https://api.razorpay.com https://checkout.razorpay.com' : '';
-  const scriptCsp = (isDev || isCommerce)
-    ? `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${paymentScript} https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google https://*.googleadservices.com https://*.googletagmanager.com;`
-    : `script-src 'self' 'nonce-${nonce}' 'unsafe-eval' https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google https://*.googleadservices.com https://*.googletagmanager.com;`;
+  const scriptCsp = `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${paymentScript} https://cdnjs.cloudflare.com https://*.tableau.com https://*.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google https://*.googleadservices.com https://*.googletagmanager.com;`;
 
   const response = NextResponse.next({
     request: {
@@ -123,6 +120,22 @@ export function middleware(request: NextRequest) {
     response.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
   }
   response.headers.set('Cross-Origin-Resource-Policy', 'same-origin');
+
+  // 8. Cache Headers for Public Static & Incremental Routes (LiteSpeed & Edge CDN)
+  const isPublicRoute =
+    request.method === 'GET' &&
+    !path.startsWith('/admin') &&
+    !path.startsWith('/api') &&
+    !path.startsWith('/account') &&
+    !path.startsWith('/checkout') &&
+    !path.startsWith('/ebooks/library') &&
+    !path.startsWith('/ebooks/access') &&
+    !path.startsWith('/ebooks/download');
+
+  if (isPublicRoute) {
+    response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
+    response.headers.set('X-LiteSpeed-Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
+  }
 
   return response;
 }

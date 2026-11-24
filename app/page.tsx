@@ -6,6 +6,8 @@ import Hero from '@/components/home/Hero';
 import BelowTheFold from '@/components/home/BelowTheFold';
 import { getPublishedBlogPosts } from '@/lib/blog-posts';
 
+export const revalidate = 3600; // Cache and revalidate every 1 hour
+
 export const metadata: Metadata = {
   title: 'Datta Sable — BI Expert, Data Engineer & Content Creator',
   description: 'Datta Sable — Business Intelligence Expert based in Mumbai. Tutorials on Power BI, Tableau, SQL, Python data engineering, Microsoft Fabric, and AI workflows.',

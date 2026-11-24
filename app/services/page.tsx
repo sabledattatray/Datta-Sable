@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import ServicesContent from '@/components/ServicesContent';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Enterprise BI, Dashboard & Data Automation Services | Datta Sable',
   description: 'Senior Business Intelligence consultant & data engineer specializing in Power BI, Tableau, Python ETL pipelines, SQL optimization, and full-stack data platforms. 100% mathematical reconciliation guaranteed.',

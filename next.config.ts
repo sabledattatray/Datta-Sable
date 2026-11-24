@@ -124,6 +124,19 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/((?!api/|admin/|account/|checkout/|ebooks/library|ebooks/access|ebooks/download).*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'X-LiteSpeed-Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      {
         source: '/:path*',
         headers: [
           {
