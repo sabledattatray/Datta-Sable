@@ -10,6 +10,7 @@ import { headers } from 'next/headers';
 import { getPublishedBlogPost } from '@/lib/blog-posts';
 import { getPublicTypography } from '@/lib/site-typography-store';
 import PublicTypography from '@/components/PublicTypography';
+import WebMcpProvider from '@/components/WebMcpProvider';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -148,6 +149,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 "@id": "https://dattasable.com/#organization",
                 "name": "Datta Sable | BI & Analytics Consulting",
                 "url": "https://dattasable.com",
+                "telephone": "+918010803756",
+                "email": "info@dattasable.com",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Mumbai",
+                  "addressLocality": "Mumbai",
+                  "addressRegion": "Maharashtra",
+                  "postalCode": "400001",
+                  "addressCountry": "IN"
+                },
                 "logo": {
                   "@type": "ImageObject",
                   "url": "https://dattasable.com/favicon.svg",
@@ -156,6 +167,42 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 },
                 "image": "https://dattasable.com/images/dattasable.com.webp",
                 "founder": { "@id": "https://dattasable.com/#person" },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Consulting & Analytics Services",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "name": "Enterprise BI & Microsoft Fabric Architecture Consulting",
+                      "description": "Architectural reviews, migration from legacy SQL Server to Fabric/OneLake, and team upskilling.",
+                      "url": "https://dattasable.com/services/consulting",
+                      "price": "150.00",
+                      "priceCurrency": "USD",
+                      "availability": "https://schema.org/InStock",
+                      "priceValidUntil": "2026-12-31"
+                    },
+                    {
+                      "@type": "Offer",
+                      "name": "Executive Dashboard Suite Engineering",
+                      "description": "Bespoke Power BI and Tableau report suites tailored for C-suite and VP decision-making.",
+                      "url": "https://dattasable.com/services/dashboards",
+                      "price": "2500.00",
+                      "priceCurrency": "USD",
+                      "availability": "https://schema.org/InStock",
+                      "priceValidUntil": "2026-12-31"
+                    },
+                    {
+                      "@type": "Offer",
+                      "name": "Power BI & Fabric Masterclass Technical eBooks",
+                      "description": "Comprehensive downloadable guides and architectural blueprints.",
+                      "url": "https://dattasable.com/ebooks",
+                      "price": "29.00",
+                      "priceCurrency": "USD",
+                      "availability": "https://schema.org/InStock",
+                      "priceValidUntil": "2026-12-31"
+                    }
+                  ]
+                },
                 "sameAs": [
                   "https://www.linkedin.com/in/dattasable/",
                   "https://github.com/sabledattatray"
@@ -228,6 +275,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <PublicTypography settings={typography} nonce={nonce} />
         <Providers ebooksEnabled={process.env.EBOOK_STORE_ENABLED === 'true' && process.env.EBOOK_STORE_NAV_ENABLED === 'true'}>
+          <WebMcpProvider />
           <ThemeProvider>
             <main id="main-content">
               {children}

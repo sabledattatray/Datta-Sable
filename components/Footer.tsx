@@ -72,6 +72,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Services',
     links: [
+      { label: 'Pricing & Plans',      href: '/services#pricing', icon: Sparkles },
       { label: 'BI Consulting',      href: '/services/consulting', icon: BrainCircuit },
       { label: 'Dashboard Design',   href: '/services/dashboards', icon: PieChart },
       { label: 'Web Solutions',      href: '/services/web-solutions', icon: Globe },

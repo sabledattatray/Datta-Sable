@@ -1,0 +1,25 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server-card/v1.0",
+  "version": "1.0",
+  "protocolVersion": "2025-06-18",
+  "serverInfo": {
+    "name": "dattasable-mcp",
+    "title": "Datta Sable Portfolio & Knowledge MCP Server",
+    "version": "1.0.0",
+    "description": "Official Model Context Protocol server for Datta Sable — providing AI agents with search tools, architectural blueprints, Microsoft Fabric guides, and consulting services."
+  },
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://dattasable.com/api/mcp"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false
+    },
+    "prompts": {}
+  }
+}

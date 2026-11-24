@@ -1,6 +1,9 @@
 # Public pages stay crawlable so search engines and AI agents can read their content and metadata.
 # robots.txt is not access control; private routes still require authentication.
 
+# Content Signals (AI usage & training policy)
+Content-Signal: search=yes, ai-train=no
+
 # Standard Search & Web Crawlers
 User-agent: *
 Allow: /

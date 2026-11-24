@@ -27,9 +27,20 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const posts = await getPublishedBlogPosts().catch(() => []);
-  // Send card metadata only; category tabs need more than the latest six posts.
-  const insightPosts = posts.map(({ slug, title, category, excerpt, image, readTime, date }) => ({
-    slug, title, category, excerpt, image,
+
+  // Optimize token budget: pass only the top posts required by the homepage tabs (latest, bi, ai)
+  const biPosts = posts.filter(post => /\bfabric\b|power bi|\bdax\b|\bonelake\b/i.test(`${post.title} ${post.category}`)).slice(0, 6);
+  const aiPosts = posts.filter(post => /\bai\b|automation|\bn8n\b|\bllm\b|prompt|agent|workflow/i.test(`${post.title} ${post.category}`)).slice(0, 6);
+  const latestPosts = posts.slice(0, 6);
+
+  const selectedPosts = [...new Map([...latestPosts, ...biPosts, ...aiPosts].map(p => [p.slug, p])).values()];
+
+  const insightPosts = selectedPosts.map(({ slug, title, category, excerpt, image, readTime, date }) => ({
+    slug,
+    title,
+    category,
+    excerpt: excerpt?.length > 180 ? `${excerpt.slice(0, 180)}...` : excerpt,
+    image,
     readTime: typeof readTime === 'number' || typeof readTime === 'string' ? readTime : null,
     date,
   }));

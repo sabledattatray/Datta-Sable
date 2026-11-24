@@ -7,9 +7,17 @@ export function middleware(request: NextRequest) {
     return new NextResponse('This document is no longer publicly available.', { status: 410, headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow, noarchive' } });
   }
   
-  // Early return for standard SEO & AI machine-readable files
-  if (['/ads.txt', '/robots.txt', '/sitemap.xml', '/sitemap-index.xml', '/llms.txt', '/llms-full.txt'].includes(path)) {
+  // Early return for standard SEO & AI machine-readable files and well-known endpoints
+  if (path.startsWith('/.well-known/') || ['/ads.txt', '/robots.txt', '/sitemap.xml', '/sitemap-index.xml', '/llms.txt', '/llms-full.txt'].includes(path)) {
     return NextResponse.next();
+  }
+
+  // Serve Markdown representation when an AI agent requests Accept: text/markdown
+  const acceptHeader = request.headers.get('accept') || '';
+  if (acceptHeader.includes('text/markdown')) {
+    const markdownUrl = new URL('/api/markdown', request.url);
+    markdownUrl.searchParams.set('path', path);
+    return NextResponse.rewrite(markdownUrl);
   }
 
   const userAgent = request.headers.get('user-agent') || '';
@@ -126,8 +134,9 @@ export const config = {
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
+     * - .well-known (MCP server cards, security, etc.)
      * - favicon.ico, favicon.svg, ads.txt, robots.txt, sitemap.xml, llms.txt, llms-full.txt, images/assets.
      */
-    '/((?!api/|_next/static/|_next/image/|favicon.ico|favicon.svg|ads.txt|robots.txt|sitemap.xml|llms.txt|llms-full.txt|.*\\.png|.*\\.jpg|.*\\.webp).*)',
+    '/((?!api/|_next/static/|_next/image/|\\.well-known/|favicon.ico|favicon.svg|ads.txt|robots.txt|sitemap.xml|llms.txt|llms-full.txt|.*\\.png|.*\\.jpg|.*\\.webp).*)',
   ],
 };
