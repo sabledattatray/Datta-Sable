@@ -37,8 +37,16 @@ async function ownOrder(id: string) {
 }
 async function resolveEbookPdfBytes(_req: Request, candidateFiles: string[]): Promise<Buffer | null> {
   for (const filename of candidateFiles) {
-    const filePath = nodePath.join(process.cwd(), 'storage/ebooks/imports', nodePath.basename(filename));
-    try { if ((await stat(filePath)).isFile()) return await readFile(filePath); } catch {}
+    const base = nodePath.basename(filename);
+    const searchDirs = [
+      nodePath.join(process.cwd(), 'storage/ebooks/imports'),
+      nodePath.join(process.cwd(), '.next/standalone/storage/ebooks/imports'),
+      nodePath.join(process.cwd(), 'public/assets/ebooks'),
+    ];
+    for (const dir of searchDirs) {
+      const filePath = nodePath.join(dir, base);
+      try { if ((await stat(filePath)).isFile()) return await readFile(filePath); } catch {}
+    }
   }
   return null;
 }

@@ -1,5 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  output: 'standalone',
   distDir: process.env.NEXT_BUILD_DIR || ".next",
   reactStrictMode: true,
   poweredByHeader: false,
@@ -47,9 +49,10 @@ const nextConfig = {
   transpilePackages: ['html-encoding-sniffer', '@exodus/bytes'],
   outputFileTracingIncludes: {
     '/Dattatray_Sable_Resume.pdf': ['./public/resume/master.pdf'],
+    '/api/ebooks/:path*': ['./storage/ebooks/imports/*'],
   },
   outputFileTracingExcludes: {
-    '/**': ['./storage/ebooks/imports/**', './public/assets/ebooks/**', './storage/resumes/**', './resume-system/output/**', './resume-system/source/**', './resume-system/previews/**'],
+    '/**': ['./storage/resumes/**', './resume-system/output/**', './resume-system/source/**', './resume-system/previews/**'],
   },
   async redirects() {
     return [
@@ -66,15 +69,15 @@ const nextConfig = {
         destination: '/certification',
         permanent: true,
       },
-{
+      {
         source: '/fabric-roadmap',
         destination: '/blog/microsoft-fabric-career-roadmap-2026',
-        statusCode: 301,
+        permanent: true,
       },
       {
         source: '/fabric2026',
         destination: '/blog/free-microsoft-certifications-fabric-data-days-2026',
-        statusCode: 301,
+        permanent: true,
       },
       {
         source: '/blog/python-engineering-2026',
