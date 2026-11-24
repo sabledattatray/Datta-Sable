@@ -88,6 +88,19 @@ export const authOptions: NextAuthOptions = {
 
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      const liveUrl = process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")
+        ? process.env.NEXTAUTH_URL
+        : "https://dattasable.com";
+      const base = process.env.NODE_ENV === "production" ? liveUrl : baseUrl;
+
+      if (url.startsWith("/")) return `${base}${url}`;
+      try {
+        const parsed = new URL(url);
+        if (parsed.origin === base || parsed.hostname.endsWith("dattasable.com")) return url;
+      } catch {}
+      return base;
+    },
     async jwt({ token, user, account }) {
       const now = Math.floor(Date.now() / 1000);
 
