@@ -307,7 +307,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
             width={1200}
             height={675}
             priority
-            unoptimized={Boolean(post.image && post.image.startsWith('/images/'))}
+            unoptimized={Boolean(post.image && (post.image.startsWith('/images/') || post.image.startsWith('/uploads/') || post.image.startsWith('http')))}
             style={{ width: '100%', height: 'auto', display: 'block' }}
             sizes="(max-width: 768px) 100vw, 760px"
           />
@@ -450,6 +450,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
                         src={p.image || '/images/dattasable.com.webp'} 
                         alt={p.title} 
                         fill 
+                        unoptimized={Boolean(p.image && (p.image.startsWith('/images/') || p.image.startsWith('/uploads/') || p.image.startsWith('http')))}
                         className="object-cover group-hover:scale-105 transition-transform duration-500" 
                       />
                     </div>

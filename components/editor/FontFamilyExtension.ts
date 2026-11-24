@@ -40,7 +40,7 @@ export const FontFamily = Extension.create({
       unsetFontFamily:
         () =>
         ({ chain }) => {
-          return chain().setMark('textStyle', { fontFamily: null }).removeEmptyTextStyle().run();
+          return (chain() as any).setMark('textStyle', { fontFamily: null }).removeEmptyTextStyle().run();
         },
     };
   },
