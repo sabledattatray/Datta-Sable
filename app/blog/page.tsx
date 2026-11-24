@@ -27,10 +27,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default async function BlogPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
-  const resolvedParams = await searchParams;
-  const category = resolvedParams.category || 'All';
-
+export default async function BlogPage() {
   let posts: PublicBlogPost[] = [];
   try {
     posts = await getPublishedBlogPosts();
@@ -42,11 +39,11 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
       <main className="boxed-wrapper" style={{ overflow: 'clip', minHeight: '80vh' }}>
-        <BlogList key={category} initialPosts={posts.map(post => ({
+        <BlogList initialPosts={posts.map(post => ({
           slug: post.slug, title: post.title, category: post.category, excerpt: post.excerpt,
           image: post.image, tags: post.tags, date: post.date,
           readTime: typeof post.readTime === 'number' || typeof post.readTime === 'string' ? post.readTime : null,
-        }))} initialCategory={category} />
+        }))} />
       </main>
       <Footer />
     </div>
