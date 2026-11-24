@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import Navbar from '@/components/Navbar';
@@ -195,11 +196,13 @@ export default async function ProductsPage() {
           {/* ----------------------------------------------------------------
               Marketplace Interactive Explorer (Categories, Search, Grid)
               ---------------------------------------------------------------- */}
-          <MarketplaceExplorer
-            initialProducts={serializedProducts}
-            categoryCounts={categoryCounts}
-            unavailable={unavailable}
-          />
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <MarketplaceExplorer
+              initialProducts={serializedProducts}
+              categoryCounts={categoryCounts}
+              unavailable={unavailable}
+            />
+          </Suspense>
 
           {/* ----------------------------------------------------------------
               Educational Content Integration ("Learn Before You Buy")

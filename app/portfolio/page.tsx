@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import PortfolioClientPage from './PortfolioClientPage';
 import { PortfolioHero, FeaturedProjectShowcase } from '@/components/portfolio/PortfolioShowcase';
 import { flagshipProjects } from './data';
@@ -19,5 +20,15 @@ const portfolioStructuredData = {
   ],
 };
 export default function PortfolioPage() {
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioStructuredData).replace(/</g, '\\u003c') }} /><PortfolioClientPage hero={<PortfolioHero />} showcase={<FeaturedProjectShowcase />} /></>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioStructuredData).replace(/</g, '\\u003c') }}
+      />
+      <Suspense fallback={<div className="min-h-screen bg-[#07090e]" />}>
+        <PortfolioClientPage hero={<PortfolioHero />} showcase={<FeaturedProjectShowcase />} />
+      </Suspense>
+    </>
+  );
 }
