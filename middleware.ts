@@ -137,6 +137,12 @@ export function middleware(request: NextRequest) {
     response.headers.set('X-LiteSpeed-Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
   }
 
+  // 9. RFC 8288 Link header for Agentic AI, llms.txt and Markdown discovery
+  response.headers.set(
+    'Link',
+    '</llms.txt>; rel="alternate"; type="text/markdown", </llms.txt>; rel="describedby", </llms-full.txt>; rel="alternate"; type="text/markdown"'
+  );
+
   return response;
 }
 

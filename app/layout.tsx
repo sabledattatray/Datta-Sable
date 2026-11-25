@@ -82,6 +82,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Machine-readable AI / LLM Context Discovery */}
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />
         <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="Full LLM Context" />
+        <link rel="describedby" href="/llms.txt" title="LLM Site Overview" />
         {/* Preload the default site's above-the-fold fonts. Other fonts load when used. */}
         <link rel="preload" href="/fonts/syne-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/syne-latin-600-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
