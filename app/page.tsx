@@ -59,7 +59,7 @@ export default async function HomePage() {
         {
           '@type': 'Offer',
           itemOffered: {
-            '@type': 'Product',
+            '@type': 'Service',
             name: 'Power BI & Microsoft Fabric Engineering eBooks',
             description: 'Comprehensive digital practical guides on calculation groups, DAX architecture, and semantic models.',
             url: 'https://dattasable.com/ebooks',

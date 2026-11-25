@@ -142,7 +142,7 @@ export default function PricingPage() {
       '@type': 'Offer',
       position: index + 1,
       itemOffered: {
-        '@type': plan.id === 'ebooks' ? 'Product' : 'Service',
+        '@type': 'Service',
         name: plan.name,
         description: plan.description,
         url: `https://dattasable.com${plan.ctaHref}`,

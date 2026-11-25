@@ -35,7 +35,27 @@ export default async function ProductPage({params}:Props){
   const url='https://dattasable.com/products/'+p.slug;
   const jsonLd={'@context':'https://schema.org','@graph':[
     {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:'https://dattasable.com'},{'@type':'ListItem',position:2,name:'Digital products',item:'https://dattasable.com/products'},{'@type':'ListItem',position:3,name:p.title,item:url}]},
-    ...(readiness==='READY_FOR_SALE'?[{'@type':'Product',name:p.title,description:p.excerpt,url,...(p.image?{image:p.image}:{}),brand:{'@type':'Brand',name:'Datta Sable'}}]:[]),
+    ...(readiness==='READY_FOR_SALE'?[{
+      '@type':'Product',
+      name:p.title,
+      description:p.excerpt,
+      url,
+      image: p.image || 'https://dattasable.com/images/og-main.webp',
+      brand:{'@type':'Brand',name:'Datta Sable'},
+      offers: {
+        '@type': 'Offer',
+        price: (p.priceMinor / 100).toFixed(2),
+        priceCurrency: p.currency || 'INR',
+        availability: 'https://schema.org/InStock',
+        url,
+        priceValidUntil: '2027-12-31',
+        seller: {
+          '@type': 'Person',
+          name: 'Datta Sable',
+          url: 'https://dattasable.com',
+        },
+      },
+    }]:[]),
   ]};
   return <><Navbar/><main className={styles.pageWrapper}><div className={styles.container}><nav className={styles.topNav} aria-label="Breadcrumb"><div className={styles.breadcrumbs}><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/products">Digital products</Link><span aria-hidden="true">/</span><span className={styles.current} aria-current="page">{p.title}</span></div><div className={styles.accountLinks}><Link href="/account/orders">My Orders</Link><Link href="/account/purchases">My Purchases</Link></div></nav>
     {p.status!=='PUBLISHED'&&<p role="note">Administrator preview · {p.status} · hidden from public catalog.</p>}
