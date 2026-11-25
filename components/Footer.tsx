@@ -64,9 +64,9 @@ const NAV_LINKS: NavSection[] = [
       { label: 'Portfolio',     href: '/portfolio' },
       { label: 'Digital Products', href: '/products' },
       { label: 'Certifications',  href: '/certification' },
-      { label: 'Case Studies',  href: '/portfolio?category=Analysis' },
-      { label: 'Dashboards',    href: '/portfolio?category=Dashboard' },
-      { label: 'Automation',    href: '/portfolio?category=Automation' },
+      { label: 'Case Studies',       href: '/portfolio?category=Analysis' },
+      { label: 'Dashboard Projects', href: '/portfolio?category=Dashboard' },
+      { label: 'Automation',         href: '/portfolio?category=Automation' },
     ],
   },
   {
@@ -119,7 +119,7 @@ const NAV_LINKS: NavSection[] = [
   {
     heading: 'Resources',
     links: [
-      { label: 'Pricing & Rates',  href: '/pricing' },
+      { label: 'Pricing & Plans',  href: '/pricing' },
       { label: 'Excel Dashboard Generator', href: 'https://excel.dattasable.com/', external: true },
       { label: 'n8n Automation',   href: 'https://n8n.io', external: true },
       { label: 'Live Analytics',    href: '/analytics-live' },
@@ -220,7 +220,7 @@ export default function Footer() {
             <div className={styles.socials} aria-label="Follow Datta Sable">
               <a href="https://www.linkedin.com/in/dattasable/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a>
               <a href="https://github.com/sabledattatray" target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={13} aria-hidden="true" /></a>
-              <a href="https://www.youtube.com/@sabledatttatray?sub_confirmation=1" target="_blank" rel="noopener noreferrer">YouTube <ArrowUpRight size={13} aria-hidden="true" /></a>
+              <a href="https://www.youtube.com/@sabledatttatray" target="_blank" rel="noopener noreferrer">YouTube <ArrowUpRight size={13} aria-hidden="true" /></a>
             </div>
           </div>
 
