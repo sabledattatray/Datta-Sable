@@ -10,6 +10,15 @@ import { emailConfiguration, sendEmail, DeliveryError } from '@/lib/email-delive
 export const runtime='nodejs';
 export const maxDuration=300;
 const isAdmin=async()=>{const session=await getServerSession(authOptions);return (session?.user as {role?:string}|undefined)?.role==='ADMIN';};
+function sameOrigin(req:Request){
+ const origin=req.headers.get('origin');if(!origin)return false;
+ try{
+  const actual=new URL(origin),requestUrl=new URL(req.url),forwardedHost=req.headers.get('x-forwarded-host')?.split(',')[0].trim(),host=forwardedHost||req.headers.get('host')?.split(',')[0].trim()||requestUrl.host,forwardedProto=req.headers.get('x-forwarded-proto')?.split(',')[0].trim();
+  const proto=forwardedProto||(host.toLowerCase()!==requestUrl.host.toLowerCase()&&!/^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i.test(host)?'https':requestUrl.protocol.slice(0,-1));
+  if(actual.origin===new URL(`${proto}://${host}`).origin||actual.origin===requestUrl.origin)return true;
+  const configured=process.env.NEXTAUTH_URL?.trim();return Boolean(configured&&actual.origin===new URL(configured).origin);
+ }catch{return false;}
+}
 async function publishedPosts(){
  const db=await prisma.post.findMany({where:{published:true},select:{slug:true,title:true,category:true,excerpt:true,image:true,readTime:true,date:true},orderBy:{createdAt:'desc'}});
  const map=new Map(staticPosts.map(p=>[p.slug,{slug:p.slug,title:p.title,category:p.category||'Engineering',excerpt:p.excerpt||'',image:p.image||null,readTime:undefined as number|undefined,date:p.date}]));
@@ -24,7 +33,7 @@ export async function GET(){
 }
 export async function POST(req:Request){
  if(!await isAdmin())return NextResponse.json({error:'Unauthorized'},{status:403});
- if(req.headers.get('origin')!==new URL(req.url).origin)return NextResponse.json({error:'Invalid request origin'},{status:403});
+ if(!sameOrigin(req))return NextResponse.json({error:'Invalid request origin'},{status:403});
  try{
   const raw=await req.text();if(raw.length>24000)return NextResponse.json({error:'Campaign is too large.'},{status:413});
   const body=JSON.parse(raw),action=z.enum(['preview','test','broadcast','resume']).parse(body.action);
