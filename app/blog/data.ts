@@ -1,3 +1,4 @@
+import { microsoftFabricFreeCertificationVoucher2026Post } from "./posts/microsoft-fabric-free-certification-voucher-2026";
 import { microsoftFabricRealTimeIntelligenceGuidePost } from "./posts/microsoft-fabric-real-time-intelligence-guide";
 import { microsoftFabricGovernancePurviewGuide2026Post } from "./posts/microsoft-fabric-governance-purview-guide-2026";
 import { microsoftFabricPricingGuide2026Post } from "./posts/microsoft-fabric-pricing-guide-2026";
@@ -56,6 +57,7 @@ import { pl300VsDp600VsDp700MicrosoftCertificationGuide2026Post } from "./posts/
 import { cybersecurityCloudSecurityGuide2026Post } from "./posts/cybersecurity-cloud-security-guide-2026";
 import { sqlWindowFunctionsExplainedGuidePost } from "./posts/sql-window-functions-explained-guide";
 export const posts = [
+  microsoftFabricFreeCertificationVoucher2026Post,
   sqlWindowFunctionsExplainedGuidePost,
   microsoftFabricRealTimeIntelligenceGuidePost,
   cybersecurityCloudSecurityGuide2026Post,
