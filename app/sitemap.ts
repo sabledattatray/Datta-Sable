@@ -28,6 +28,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
   const details = await productDetailsMap(products.map(p => p.id)).catch(() => new Map());
   const indexableProducts = products.filter(p => productReadiness(p, details.get(p.id) || defaultProductDetails()) === 'READY_FOR_SALE');
+  const retiredOrRedirectedSlugs = new Set([
+    'video-fabric-end-to-end',
+    'video-sql-tuning-live',
+    'data-mesh-adoption-trends-2026',
+    'global-data-privacy-regulations-2026',
+    'cdo-playbook-2026-strategy',
+    'self-healing-etl-pipelines',
+    'video-building-c-suite-dashboard',
+    'gartner-magic-quadrant-2026-bi',
+    'azure-data-factory-vs-microsoft-fabric-data-factory-2026-deep-dive',
+    'power-bi-calculation-groups-enterprise-dax-architecture-performance-guide-2026',
+    'microsoft-fabric-architecture-explained-complete-2026-guide',
+    'dp-600-study-guide-2026-fabric-analytics-engineer',
+    'microsoft-fabric-capacity-sizing-2026',
+    'microsoft-fabric-governance-guide',
+    'case-study-surgical-prompt-architecture-consistency',
+    'surgical-prompt-architecture-framework',
+  ]);
   const urls: MetadataRoute.Sitemap = [
     ...routes.map(route => ({ url: baseUrl + route })),
     ...flagshipProjects.map(project => ({ url: `${baseUrl}/portfolio/${project.flagship!.slug}` })),
@@ -39,11 +57,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...(Number.isFinite(date.getTime()) && date.getTime() <= Date.now() ? { lastModified: date } : {}),
       };
     }),
-    ...posts.map(post => {
-      const date = new Date(post.updatedAt || post.date || post.createdAt || '');
-      return { url: baseUrl + '/blog/' + post.slug,
-        ...(Number.isFinite(date.getTime()) && date.getTime() <= Date.now() ? { lastModified: date } : {}) };
-    }),
+    ...posts
+      .filter(post => {
+        if (retiredOrRedirectedSlugs.has(post.slug)) return false;
+        if (post.content) {
+          const words = post.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').length;
+          if (words < 550) return false;
+        }
+        return true;
+      })
+      .map(post => {
+        const date = new Date(post.updatedAt || post.date || post.createdAt || '');
+        return { url: baseUrl + '/blog/' + post.slug,
+          ...(Number.isFinite(date.getTime()) && date.getTime() <= Date.now() ? { lastModified: date } : {}) };
+      }),
   ];
   if (typeof process !== 'undefined' && process.env.EBOOK_STORE_ENABLED === 'true') {
     try {

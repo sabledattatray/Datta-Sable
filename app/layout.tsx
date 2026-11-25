@@ -73,7 +73,6 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const typography = await getPublicTypography();
-  const adsEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
 
   return (
     <html lang="en" suppressHydrationWarning className="dark">
@@ -255,11 +254,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Third-Party Integrations preconnect and dns-prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        {adsEnabled && <script
+        {/* Google AdSense Site Verification & Ad Engine */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4242010382827250"
           crossOrigin="anonymous"
-        />}
+        />
       </head>
       <body suppressHydrationWarning style={{ background: 'var(--bg)' }}>
         <PublicTypography settings={typography} />

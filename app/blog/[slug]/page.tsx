@@ -76,9 +76,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     seoDesc = `${seoDesc} Read the full technical breakdown, system architecture benchmarks, and implementation strategies.`.slice(0, 155);
   }
 
+  const articleContent = (post as any).content || '';
+  const articleWords = articleContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').length;
+  const isThinArticle = articleWords < 550;
+
   return {
     title: { absolute: finalTitle },
     description: seoDesc,
+    robots: isThinArticle
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
     alternates: {
       canonical: `${baseUrl}/blog/${slug}`,
     },

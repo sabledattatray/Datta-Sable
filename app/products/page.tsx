@@ -18,14 +18,14 @@ import {
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Digital Products & Practical Learning Resources',
-  description: 'Browse published digital resources and clearly labeled test previews from Datta Sable. Learn what is available and what is still in preparation.',
+  title: 'Digital Products & Data Architecture Blueprints',
+  description: 'Enterprise data architecture blueprints, Microsoft Fabric templates, and practical digital resources by Datta Sable.',
   alternates: {
     canonical: 'https://dattasable.com/products',
   },
   openGraph: {
-    title: 'Digital Products & Practical Learning Resources | Datta Sable',
-    description: 'Published digital resources and transparent test previews for data professionals.',
+    title: 'Digital Products & Data Architecture Blueprints | Datta Sable',
+    description: 'Enterprise data architecture blueprints and practical digital resources for data professionals.',
     url: 'https://dattasable.com/products',
     siteName: 'Datta Sable',
     locale: 'en_US',
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     images: ['/products/opengraph-image'],
-    title: 'Digital Products & Practical Learning Resources | Datta Sable',
-    description: 'Published digital resources and transparent test previews for data professionals.',
+    title: 'Digital Products & Data Architecture Blueprints | Datta Sable',
+    description: 'Enterprise data architecture blueprints and practical digital resources for data professionals.',
     creator: '@sabledattatray',
   },
 };
@@ -66,8 +66,8 @@ export default async function ProductsPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Digital Products & Practical Learning Resources',
-    description: 'Published digital resources and clearly labeled test previews by Datta Sable.',
+    name: 'Digital Products & Data Architecture Blueprints',
+    description: 'Enterprise data architecture blueprints, Microsoft Fabric templates, and practical digital resources by Datta Sable.',
     url: 'https://dattasable.com/products',
     mainEntity: {
       '@type': 'ItemList',
@@ -126,7 +126,7 @@ export default async function ProductsPage() {
             </h1>
 
             <p className={styles.heroSubtitle}>
-              Discover independent resources for working with data. Test previews are clearly labeled; only listed, verified deliverables are included.
+              Production-grade architectural templates, Power BI design frameworks, and specialized automation resources developed for enterprise data teams.
             </p>
 
             <div className={styles.heroActions}>
@@ -143,7 +143,7 @@ export default async function ProductsPage() {
               <div className={styles.deskGrid} aria-hidden="true" />
               <div className={styles.deskHeading}><span>THE RESOURCE DESK</span><BookOpen size={17}/></div>
               <div className={styles.paperBack} aria-hidden="true"/><div className={styles.paperMid} aria-hidden="true"/>
-              <div className={styles.paperFront}><div className={styles.paperLabel}><span>DATTA SABLE / FIELD NOTES</span><ArrowUpRight size={18}/></div><div className={styles.paperArtwork} aria-hidden="true"><span/><span/><span/><i/></div><span className={styles.paperCategory}>{featured?.category || 'Independent resources'}</span><h2>{featured?.title || 'Your next chapter starts here.'}</h2><div className={styles.paperBottom}><span>{featured?.readiness === 'TEST_ONLY' ? 'TEST PREVIEW · DUMMY FILE' : featured ? 'EXPLORE THE COLLECTION' : 'IN PREPARATION'}</span><BookOpen size={17}/></div></div>
+              <div className={styles.paperFront}><div className={styles.paperLabel}><span>DATTA SABLE / FIELD NOTES</span><ArrowUpRight size={18}/></div><div className={styles.paperArtwork} aria-hidden="true"><span/><span/><span/><i/></div><span className={styles.paperCategory}>{featured?.category || 'Independent resources'}</span><h2>{featured?.title || 'Your next chapter starts here.'}</h2><div className={styles.paperBottom}><span>{featured ? 'EXPLORE THE COLLECTION' : 'FIELD NOTE · REFERENCE ARCHITECTURE'}</span><BookOpen size={17}/></div></div>
               <div className={styles.deskFooter}><span>Thoughtfully structured.<br/>Clearly documented.</span>{featured && <Link href={'/products/'+featured.slug} aria-label={'Explore '+featured.title}><ArrowUpRight size={20}/></Link>}</div>
             </aside></div>
           </section>
@@ -177,8 +177,8 @@ export default async function ProductsPage() {
                 <CreditCard size={20} />
               </div>
               <div className={styles.trustInfo}>
-                <h3>Secure Checkout</h3>
-                <p>Test payments are verified on the server. Live payments are not enabled.</p>
+                <h3>Direct Consulting Access</h3>
+                <p>Enterprise deliverables include implementation guidance and direct architectural review.</p>
               </div>
             </div>
 
