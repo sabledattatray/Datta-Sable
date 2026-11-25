@@ -808,7 +808,8 @@ export default function AdminBlog() {
         const dbKw = getDbKeyword(p);
         const kw = dbKw || getFallbackKeyword(p.title, p.slug || '');
         const isFallback = !dbKw;
-        const seoResult = calculateSeoScore(p.title, p.slug || '', p.content || '', p.excerpt || '', kw, data, isFallback);
+        const otherData = data.filter((other: any) => (p.id ? other.id !== p.id : other.slug !== p.slug));
+        const seoResult = calculateSeoScore(p.title, p.slug || '', p.content || '', p.excerpt || '', kw, otherData, isFallback);
         const wCount = calculateWordCount(p.content || '');
         return {
           ...p,
