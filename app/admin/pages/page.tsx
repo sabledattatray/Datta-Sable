@@ -12,7 +12,7 @@ export default function PagesManager() {
   const [sortBy, setSortBy] = useState<'title' | 'wordCount' | 'seoScore' | 'published' | 'updatedAt'>('updatedAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  
+
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -60,7 +60,62 @@ export default function PagesManager() {
       const res = await fetch('/api/admin/pages');
       if (res.ok) {
         const data = await res.json();
-        setPages(data);
+        const systemRoutes = [
+          { path: '/services', keyword: 'BI services' },
+          { path: '/start-here', keyword: 'data learning' },
+          { path: '/portfolio', keyword: 'portfolio case studies' },
+          { path: '/faq', keyword: 'BI consulting FAQ' },
+          { path: '/editorial-policy', keyword: 'editorial policy' },
+          { path: '/disclaimer', keyword: 'legal disclaimer' },
+          { path: '/cookies', keyword: 'cookie policy' },
+          { path: '/terms', keyword: 'terms of service' },
+          { path: '/privacy', keyword: 'privacy policy' },
+          { path: '/contact', keyword: 'contact Datta Sable' },
+          { path: '/about', keyword: 'Datta Sable' },
+          { path: '/careers', keyword: 'careers Datta Sable' },
+          { path: '/p/refund-policy', keyword: 'refund policy test mode' },
+          { path: '/p/delivery-policy', keyword: 'delivery policy test mode' },
+        ];
+        const routePages = await Promise.all(systemRoutes.map(async ({ path, keyword }) => {
+          try {
+            const routeResponse = await fetch(path, { cache: 'no-store' });
+            const markup = await routeResponse.text();
+            const doc = new DOMParser().parseFromString(markup, 'text/html');
+            const title = doc.querySelector('meta[property="og:title"]')?.getAttribute('content')
+              || doc.title.replace(/\s*[|—-]\s*Datta Sable.*$/i, '').trim()
+              || path;
+            const excerpt = doc.querySelector('meta[name="description"]')?.getAttribute('content')
+              || doc.querySelector('meta[property="og:description"]')?.getAttribute('content')
+              || '';
+            const content = routeResponse.ok ? (doc.querySelector('main')?.innerHTML
+              || doc.querySelector('[role="main"]')?.innerHTML
+              || doc.querySelector('.container')?.innerHTML
+              || doc.body.innerHTML) : '';
+            const robots = doc.querySelector('meta[name="robots"]')?.getAttribute('content') || '';
+            const noindex = /noindex/i.test(robots);
+            const analysis = analyzeSeoContent({ title, slug: path.split('/').filter(Boolean).pop() || '', content, excerpt, keyword });
+            return {
+              id: `system:${path}`,
+              title,
+              slug: path.split('/').filter(Boolean).pop() || '',
+              route: path,
+              excerpt,
+              content,
+              focusedKeyword: keyword,
+              published: routeResponse.ok,
+              noindex,
+              isSystemRoute: true,
+              unavailable: !routeResponse.ok,
+              wordCount: analysis.wordCount,
+              seoScore: analysis.score,
+              updatedAt: '',
+            };
+          } catch (error) {
+            console.warn(`Could not audit system route ${path}:`, error);
+            return null;
+          }
+        }));
+        setPages([...data, ...routePages.filter(Boolean)]);
       } else {
         setMessage({ type: 'error', text: 'Failed to fetch custom pages.' });
       }
@@ -141,7 +196,7 @@ export default function PagesManager() {
   });
 
   const publishedCount = pages.filter(p => p.published).length;
-  const totalWords = pages.reduce((acc, p) => acc + countSeoWords(p.content, p.excerpt || ''), 0);
+  const totalWords = pages.reduce((acc, p) => acc + (p.wordCount ?? countSeoWords(p.content, p.excerpt || '')), 0);
 
   return (
     <div className={adminStyles.page}>
@@ -157,15 +212,15 @@ export default function PagesManager() {
               Are you sure you want to permanently delete this page? This action cannot be undone.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
-              <button 
-                onClick={() => { setShowDeleteModal(false); setDeleteId(null); }} 
+              <button
+                onClick={() => { setShowDeleteModal(false); setDeleteId(null); }}
                 className={adminStyles.secondary}
                 style={{ flex: 1 }}
               >
                 Cancel
               </button>
-              <button 
-                onClick={handleDelete} 
+              <button
+                onClick={handleDelete}
                 className={adminStyles.danger}
                 style={{ flex: 1 }}
               >
@@ -194,10 +249,10 @@ export default function PagesManager() {
         <div className={adminStyles.headerActions}>
           <div className={adminStyles.searchBar} style={{ minWidth: 200 }}>
             <Search size={14} style={{ color: 'var(--muted)', flexShrink: 0 }} />
-            <input 
-              type="text" 
-              placeholder="Search custom pages..." 
-              value={search} 
+            <input
+              type="text"
+              placeholder="Search custom pages..."
+              value={search}
               onChange={e => setSearch(e.target.value)}
             />
           </div>
@@ -272,8 +327,8 @@ export default function PagesManager() {
       <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8, marginBottom: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '0 10px', minHeight: 36 }}>
           <span style={{ fontSize: 'var(--text-small)', fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
-          <select 
-            value={sortBy} 
+          <select
+            value={sortBy}
             onChange={e => setSortBy(e.target.value as any)}
             style={{ background: 'transparent', border: 'none', outline: 'none', fontSize: 'var(--text-small)', color: 'var(--text)', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}
           >
@@ -284,7 +339,7 @@ export default function PagesManager() {
             <option value="published">Status</option>
           </select>
         </div>
-        <button 
+        <button
           onClick={() => setSortOrder(o => o === 'asc' ? 'desc' : 'asc')}
           className={adminStyles.secondary}
           style={{ minHeight: 36, padding: '0 10px', fontSize: 'var(--text-small)' }}
@@ -312,11 +367,11 @@ export default function PagesManager() {
                   { key: 'updatedAt', label: 'Last Updated' },
                   { key: 'actions', label: 'Actions', sortable: false }
                 ].map(h => (
-                  <th 
+                  <th
                     key={h.label}
                     className={adminStyles.th}
                     onClick={() => h.sortable !== false && handleSort(h.key as any)}
-                    style={{ 
+                    style={{
                       cursor: h.sortable !== false ? 'pointer' : 'default',
                       userSelect: 'none'
                     }}
@@ -342,9 +397,9 @@ export default function PagesManager() {
                 </tr>
               ) : (
                 sorted.map(page => {
-                  const updateDate = new Date(page.updatedAt).toLocaleDateString('en-US', {
-                    day: 'numeric', month: 'short', year: 'numeric'
-                  });
+                  const updateDate = page.isSystemRoute
+                    ? page.noindex ? 'System route · noindex' : 'System route'
+                    : new Date(page.updatedAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
 
                   return (
                     <tr key={page.id} className={adminStyles.tr}>
@@ -354,38 +409,40 @@ export default function PagesManager() {
                       </td>
                       <td className={adminStyles.td} style={{ color: 'var(--muted)', fontFamily: 'monospace', fontSize: 'var(--text-small)' }}>
                         <span style={{ background: 'var(--surface2)', padding: '2px 6px', borderRadius: 4, color: 'var(--accent)', border: '1px solid var(--border)' }}>
-                          {['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? '' : '/p'}/{page.slug}
+                          {page.route || (['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? `/${page.slug}` : `/p/${page.slug}`)}
                         </span>
                       </td>
                       <td className={adminStyles.td} style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 500, color: 'var(--text)' }}>
                           {page.wordCount.toLocaleString()} words
                       </td>
                       <td className={adminStyles.td}>
-                        <span style={{ 
+                        <span style={{
                           display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-small)', fontWeight: 600,
                           background: page.seoScore === null ? 'var(--surface2)' : page.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
                           color: page.seoScore === null ? 'var(--muted)' : page.seoScore >= 80 ? '#34d399' : page.seoScore >= 60 ? '#fbbf24' : '#f87171',
                           border: `1px solid ${page.seoScore === null ? 'var(--border)' : page.seoScore >= 80 ? 'rgba(16,185,129,0.25)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`,
                           padding: '2px 8px', borderRadius: 999
                         }}>
-                          {page.seoScore === null ? 'Set focus keyword' : `${page.seoScore}/100`}
+                          {page.unavailable ? 'Not found' : page.seoScore === null ? 'Set focus keyword' : `${page.seoScore}/100`}
                         </span>
                       </td>
                       <td className={adminStyles.td}>
-                        {page.published ? (
-                          <span 
-                            onClick={() => togglePublish(page.id, page.published)}
+                        {page.isSystemRoute && page.unavailable ? (
+                          <span className={adminStyles.badgeNeutral}>404 / unavailable</span>
+                        ) : page.published ? (
+                          <span
+                            onClick={() => !page.isSystemRoute && togglePublish(page.id, page.published)}
                             className={adminStyles.badge}
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: page.isSystemRoute ? 'default' : 'pointer' }}
                             title="Click to toggle Draft"
                           >
                             <span className={adminStyles.badgeLiveDot} /> Published
                           </span>
                         ) : (
-                          <span 
-                            onClick={() => togglePublish(page.id, page.published)}
+                          <span
+                            onClick={() => !page.isSystemRoute && togglePublish(page.id, page.published)}
                             className={adminStyles.badgeNeutral}
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: page.isSystemRoute ? 'default' : 'pointer' }}
                             title="Click to toggle Published"
                           >
                             Draft
@@ -397,25 +454,25 @@ export default function PagesManager() {
                       </td>
                       <td className={adminStyles.td}>
                         <div style={{ display: 'flex', gap: 6 }}>
-                          <button 
+                          {!page.isSystemRoute && <button
                             onClick={() => togglePublish(page.id, page.published)}
                             title={page.published ? 'Unpublish (Set to Draft)' : 'Publish Page'}
                             className={adminStyles.secondary}
                             style={{ minHeight: 30, padding: '4px 8px' }}
                           >
                             {page.published ? <EyeOff size={13} style={{ color: '#fbbf24' }} /> : <Globe size={13} style={{ color: 'var(--accent)' }} />}
-                          </button>
-                          <Link 
+                          </button>}
+                          {!page.isSystemRoute && <Link
                             href={`/admin/pages/editor?id=${page.id}`}
                             title="Edit"
                             className={adminStyles.secondary}
                             style={{ minHeight: 30, padding: '4px 8px' }}
                           >
                             <Edit2 size={13} />
-                          </Link>
+                          </Link>}
                           {page.published && (
-                            <a 
-                              href={['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? `/${page.slug}` : `/p/${page.slug}`} 
+                            <a
+                              href={page.route || (['about', 'services', 'careers', 'contact', 'privacy', 'terms', 'cookies', 'disclaimer', 'editorial-policy', 'faq', 'portfolio', 'infrastructure', 'start-here'].includes(page.slug) ? `/${page.slug}` : `/p/${page.slug}`)}
                               target="_blank"
                               rel="noopener noreferrer"
                               title="View Page"
@@ -425,14 +482,14 @@ export default function PagesManager() {
                               <Eye size={13} />
                             </a>
                           )}
-                          <button 
+                          {!page.isSystemRoute && <button
                             onClick={() => { setDeleteId(page.id); setShowDeleteModal(true); }}
                             title="Delete"
                             className={adminStyles.danger}
                             style={{ minHeight: 30, padding: '4px 8px' }}
                           >
                             <Trash2 size={13} />
-                          </button>
+                          </button>}
                         </div>
                       </td>
                     </tr>
