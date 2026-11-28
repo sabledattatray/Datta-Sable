@@ -33,6 +33,7 @@ function BlogCardImage({ src, alt, fill, priority, sizes }: { src?: string | nul
       fill={fill}
       priority={priority}
       sizes={sizes}
+      style={{ objectFit: 'cover' }}
       unoptimized={Boolean(currentSrc && (currentSrc.startsWith('/images/') || currentSrc.startsWith('/uploads/') || currentSrc.endsWith('.svg')))}
       onError={() => {
         if (currentSrc !== '/images/editorial-placeholder.svg') {
