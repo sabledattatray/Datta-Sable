@@ -7,250 +7,17 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import FullEditor from '@/components/editor/FullEditor';
 import ThemeToggle from '@/components/ThemeToggle';
+import { analyzeSeoContent, countSeoWords } from '@/lib/admin/seo-analysis';
 
-function calculateWordCount(content: string): number {
-  if (!content) return 0;
-  let textContent = '';
-  if (typeof document !== 'undefined') {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
-    textContent = tempDiv.textContent || tempDiv.innerText || '';
-  } else {
-    textContent = content.replace(/<[^>]*>/g, ' ');
-  }
-  return textContent.trim().split(/\s+/).filter(Boolean).length;
-}
-
-function getFallbackKeyword(title: string, slug: string): string {
-  const cleanTitle = title.toLowerCase();
-  const cleanSlug = slug.toLowerCase();
-
-  if (cleanTitle.includes('dp-600')) return 'DP-600';
-  if (cleanTitle.includes('dp-700')) return 'DP-700';
-  if (cleanTitle.includes('dp-800')) return 'DP-800';
-  if (cleanTitle.includes('microsoft fabric') || cleanSlug.includes('fabric')) return 'Microsoft Fabric';
-  if (cleanTitle.includes('power bi') || cleanSlug.includes('power-bi')) return 'Power BI';
-  if (cleanTitle.includes('columnstore')) return 'Columnstore Indexes';
-  if (cleanTitle.includes('sql server') || cleanSlug.includes('sql-server')) return 'SQL Server';
-  if (cleanTitle.includes('sql') || cleanSlug.includes('sql')) return 'SQL';
-  if (cleanTitle.includes('n8n') || cleanSlug.includes('n8n')) return 'n8n';
-  if (cleanTitle.includes('next.js') || cleanSlug.includes('nextjs')) return 'Next.js';
-  if (cleanTitle.includes('ai agent') || cleanTitle.includes('ai-agent') || cleanSlug.includes('ai-agent')) return 'AI Agents';
-  if (cleanTitle.includes('generative ai') || cleanTitle.includes('gen ai')) return 'Generative AI';
-  if (cleanTitle.includes('compound ai')) return 'Compound AI Systems';
-  if (cleanTitle.includes('ai') || cleanSlug.includes('ai')) return 'AI';
-  if (cleanTitle.includes('python') || cleanSlug.includes('python')) return 'Python';
-  if (cleanTitle.includes('prompt architecture')) return 'Prompt Architecture';
-  if (cleanTitle.includes('context compression')) return 'Context Compression';
-  if (cleanTitle.includes('intent mapping')) return 'Intent Mapping';
-  if (cleanTitle.includes('data mesh') || cleanSlug.includes('data-mesh')) return 'Data Mesh';
-  if (cleanTitle.includes('data privacy')) return 'Data Privacy';
-  if (cleanTitle.includes('dashboard') || cleanSlug.includes('dashboard')) return 'Dashboard';
-  if (cleanTitle.includes('tableau') || cleanSlug.includes('tableau')) return 'Tableau';
-  if (cleanTitle.includes('saas') || cleanSlug.includes('saas')) return 'SaaS';
-  if (cleanTitle.includes('wordpress') || cleanSlug.includes('wordpress')) return 'WordPress';
-  if (cleanTitle.includes('keyboard') || cleanSlug.includes('keyboard')) return 'Keyboard';
-
-  const words = title.split(/\s+/).filter(w => {
-    const lw = w.toLowerCase();
-    return lw.length > 2 && !['the', 'and', 'for', 'with', 'your', 'how', 'why', 'what', 'here', 'from'].includes(lw);
+const calculateSeoScore = (title: string, slug: string, content: string, excerpt: string, keyword: string, otherPages: any[] = []) =>
+  analyzeSeoContent({
+    title,
+    slug,
+    content,
+    excerpt,
+    keyword,
+    otherKeywords: otherPages.map((page) => page.focusedKeyword || ''),
   });
-  if (words.length >= 2) {
-    return words.slice(0, 2).join(' ');
-  }
-  return title;
-}
-
-function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, otherPages: any[] = [], isFallback: boolean = false) {
-  if (!keyword) return {
-    score: 0,
-    categories: {
-      basic: [],
-      additional: [],
-      title: [],
-      content: []
-    }
-  };
-
-  const basicChecks: any[] = [];
-  const additionalChecks: any[] = [];
-  const titleChecks: any[] = [];
-  const contentChecks: any[] = [];
-  
-  let earnedPoints = 0;
-  let maxPoints = 0;
-  
-  const kw = keyword.toLowerCase().trim();
-  const cleanTitle = title.toLowerCase();
-  const cleanSlug = slug.toLowerCase();
-  
-  let textContent = '';
-  if (typeof document !== 'undefined') {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
-    textContent = tempDiv.textContent || tempDiv.innerText || '';
-  } else {
-    textContent = content.replace(/<[^>]*>/g, ' ');
-  }
-  const cleanContent = textContent.toLowerCase();
-  const cleanExcerpt = excerpt.toLowerCase();
-  const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
-  
-  const addCheck = (category: 'basic' | 'additional' | 'title' | 'content', id: string, label: string, passed: boolean, pts: number) => {
-    const checkItem = { id, label, passed, pts };
-    if (category === 'basic') basicChecks.push(checkItem);
-    else if (category === 'additional') additionalChecks.push(checkItem);
-    else if (category === 'title') titleChecks.push(checkItem);
-    else if (category === 'content') contentChecks.push(checkItem);
-    
-    maxPoints += pts;
-    if (passed) earnedPoints += pts;
-  };
-
-  // 1. BASIC SEO CATEGORY (60 pts)
-  const kwInTitle = cleanTitle.includes(kw);
-  addCheck('basic', 'title_kw', 'Focus keyword in SEO title', kwInTitle, 15);
-
-  const formattedKwSlug = kw.replace(/\s+/g, '-');
-  const kwInSlug = isFallback ? true : cleanSlug.includes(formattedKwSlug);
-  addCheck('basic', 'slug_kw', 'Focus keyword in URL slug', kwInSlug, 10);
-
-  const kwInExcerpt = isFallback ? true : cleanExcerpt.includes(kw);
-  addCheck('basic', 'excerpt_kw', 'Focus keyword in meta description', kwInExcerpt, 10);
-
-  const cleanText = textContent.trim();
-  const firstParagraph = cleanText.split('\n')[0] || '';
-  const first300Chars = cleanText.slice(0, 300);
-  const kwInBeginning = isFallback ? true : (firstParagraph.toLowerCase().includes(kw) || first300Chars.toLowerCase().includes(kw));
-  addCheck('basic', 'beginning_kw', 'Focus keyword at beginning of content', kwInBeginning, 15);
-
-  const wordCountOk = wordCount >= 600;
-  addCheck('basic', 'word_count', `Content length (${wordCount} words, ideal 600+)`, wordCountOk, 10);
-
-  // 2. ADDITIONAL CATEGORY (35 pts)
-  const subheadingRegex = /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi;
-  let matches;
-  let kwInSubheading = false;
-  while ((matches = subheadingRegex.exec(content)) !== null) {
-    const text = matches[1].replace(/<[^>]*>/g, '').toLowerCase();
-    if (text.includes(kw)) {
-      kwInSubheading = true;
-      break;
-    }
-  }
-  addCheck('additional', 'subheading_kw', 'Focus keyword in H2/H3 subheadings', isFallback ? true : kwInSubheading, 10);
-
-  const imgRegex = /<img([^>]+)>/gi;
-  let imgMatch;
-  let hasImages = false;
-  let kwInAlt = false;
-  while ((imgMatch = imgRegex.exec(content)) !== null) {
-    hasImages = true;
-    const attributes = imgMatch[1];
-    const altMatch = /alt=["']([^"']*)["']/i.exec(attributes);
-    if (altMatch && altMatch[1].toLowerCase().includes(kw)) {
-      kwInAlt = true;
-    }
-  }
-  addCheck('additional', 'image_alt_kw', hasImages ? 'Focus keyword found in image ALT attributes' : 'Add images with focus keyword in ALT text', isFallback ? true : (hasImages && kwInAlt), 5);
-
-  let densityOk = false;
-  let densityMsg = 'Keyword density (ideal 0.5% - 2.5%)';
-  if (wordCount > 0 && cleanContent.includes(kw)) {
-    const matchesCount = cleanContent.split(kw).length - 1;
-    const density = (matchesCount / wordCount) * 100;
-    densityOk = density >= 0.5 && density <= 2.5;
-    densityMsg = `Keyword density: ${density.toFixed(2)}% (ideal 0.5% - 2.5%)`;
-  }
-  addCheck('additional', 'density', densityMsg, isFallback ? true : densityOk, 5);
-
-  const linkRegex = /href=["']([^"']*)["']/gi;
-  let hasInternalLink = false;
-  let hasExternalLink = false;
-  let linkMatch;
-  while ((linkMatch = linkRegex.exec(content)) !== null) {
-    const url = linkMatch[1];
-    if (url.startsWith('/') || url.includes('dattasable.com') || url.startsWith('#')) {
-      if (!url.startsWith('#')) {
-        hasInternalLink = true;
-      }
-    } else if (url.startsWith('http://') || url.startsWith('https://')) {
-      hasExternalLink = true;
-    }
-  }
-  addCheck('additional', 'internal_link', 'Contains at least one internal link', hasInternalLink, 5);
-  addCheck('additional', 'external_link', 'Contains at least one external outbound link', hasExternalLink, 5);
-
-  const isUnique = !otherPages.some(p => {
-    const otherKwStr = p.focusedKeyword || '';
-    return otherKwStr.toLowerCase().split(',').map((s: string) => s.trim()).includes(kw);
-  });
-  addCheck('additional', 'unique_kw', 'Keyword is unique (not used in other pages)', isUnique, 5);
-
-  // 3. TITLE READABILITY CATEGORY (20 pts)
-  const kwStartsTitle = cleanTitle.startsWith(kw) || cleanTitle.indexOf(kw) < 15;
-  addCheck('title', 'title_start', 'Focus keyword at beginning of title', kwInTitle && kwStartsTitle, 5);
-
-  const sentimentWords = [
-    'best', 'great', 'easy', 'simple', 'ultimate', 'perfect', 'top', 'amazing', 'awesome', 'guide',
-    'master', 'successful', 'build', 'high', 'performance', 'smart', 'clean', 'power', 'premium',
-    'worst', 'bad', 'fix', 'avoid', 'mistake', 'error', 'warning', 'problem', 'fail', 'critical',
-    'failure', 'issue', 'bottleneck', 'threat', 'risky', 'hard', 'difficult', 'troubleshooting',
-    'tuning', 'comparison', 'choose', 'opportunities', 'career', 'roadmap', 'pass', 'exam', 'certification',
-    'how'
-  ];
-  const hasSentiment = sentimentWords.some(word => cleanTitle.includes(word));
-  addCheck('title', 'title_sentiment', 'Title has positive or negative sentiment', hasSentiment, 5);
-
-  const powerWords = [
-    'proven', 'guaranteed', 'powerful', 'secret', 'hack', 'ultimate', 'expert', 'advanced',
-    'breakthrough', 'shocking', 'magic', 'instant', 'free', 'today', 'now', 'masterclass',
-    'professional', 'enterprise', 'production-grade', 'architecting', 'reliability', 'troubleshooting',
-    'tuning', 'complete', 'pass', 'preparation', 'questions', 'scenarios', 'certified', 'optimization',
-    'guide', 'roadmap', 'mastery', 'manifesto'
-  ];
-  const hasPowerWord = powerWords.some(word => cleanTitle.includes(word));
-  addCheck('title', 'title_power_word', 'Title contains at least one power word', hasPowerWord, 5);
-
-  const hasNumber = /\d+/.test(title);
-  addCheck('title', 'title_number', 'Title contains a number', hasNumber, 5);
-
-  // 4. CONTENT READABILITY CATEGORY (15 pts)
-  const hasTocLabel = cleanContent.includes('table of contents') || cleanContent.includes('toc') || cleanContent.includes('what we will cover');
-  const hasAnchorLinks = /href=["']#[a-z0-9-_]+["']/i.test(content);
-  const hasToc = hasTocLabel || (hasAnchorLinks && (content.includes('<ul>') || content.includes('<ol>')));
-  addCheck('content', 'content_toc', 'Content includes a Table of Contents', hasToc, 5);
-
-  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
-  let pMatch;
-  let paragraphCount = 0;
-  let longParagraphCount = 0;
-  while ((pMatch = pRegex.exec(content)) !== null) {
-    paragraphCount++;
-    const text = pMatch[1].replace(/<[^>]*>/g, '').trim();
-    const words = text.split(/\s+/).filter(Boolean).length;
-    if (words > 120) {
-      longParagraphCount++;
-    }
-  }
-  const shortParagraphsOk = paragraphCount === 0 || (longParagraphCount / paragraphCount) <= 0.2;
-  addCheck('content', 'content_short_paragraphs', 'Content uses short paragraphs (< 120 words)', shortParagraphsOk, 5);
-
-  const hasMedia = content.includes('<img') || content.includes('<video') || content.includes('<iframe');
-  addCheck('content', 'content_media', 'Content contains images, videos or interactive frames', hasMedia, 5);
-
-  const score = maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0;
-
-  return {
-    score,
-    categories: {
-      basic: basicChecks,
-      additional: additionalChecks,
-      title: titleChecks,
-      content: contentChecks
-    }
-  };
-}
 
 function EditorContent() {
   const { theme } = useTheme();
@@ -281,6 +48,7 @@ function EditorContent() {
   const [pagesList, setPagesList] = useState<any[]>([]);
   const [slugError, setSlugError] = useState('');
   const [isSlugManual, setIsSlugManual] = useState(false);
+  const wordCount = countSeoWords(content, excerpt);
 
   // Auto-generate slug from title if not manual
   useEffect(() => {
@@ -710,6 +478,10 @@ function EditorContent() {
                     </span>
                   </div>
 
+                  <div style={{ padding: '10px 12px', borderRadius: 10, background: css.surface2, color: css.muted, fontSize: 'var(--text-small)', lineHeight: 1.5 }}>
+                    Real page word count: <strong style={{ color: css.text }}>{wordCount.toLocaleString()}</strong>. Page text and its search description count; HTML tags, scripts, and styles do not.
+                  </div>
+
                   {/* Focus Keyword Input */}
                   <div>
                     <label style={labelStyle}>Focus Keyword(s)</label>
@@ -758,8 +530,9 @@ function EditorContent() {
 
                     const radius = 26;
                     const circumference = 2 * Math.PI * radius;
-                    const strokeDashoffset = circumference - (activeAnalysis.analysis.score / 100) * circumference;
-                    const scoreColor = activeAnalysis.analysis.score >= 80 ? '#10b981' : activeAnalysis.analysis.score >= 50 ? '#f59e0b' : '#ef4444';
+                    const score = activeAnalysis.analysis.score ?? 0;
+                    const strokeDashoffset = circumference - (score / 100) * circumference;
+                    const scoreColor = score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
 
                     return (
                       <>
@@ -771,8 +544,8 @@ function EditorContent() {
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                             {keywordAnalyses.map((item, idx) => {
                               const isActive = idx === activeIdx;
-                              const score = item.analysis.score;
-                              const tagScoreColor = score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
+                              const itemScore = item.analysis.score ?? 0;
+                              const tagScoreColor = itemScore >= 80 ? '#10b981' : itemScore >= 50 ? '#f59e0b' : '#ef4444';
                               const tagBg = isActive ? `${tagScoreColor}20` : css.surface2;
                               const tagBorder = `1px solid ${isActive ? tagScoreColor : css.border}`;
                               return (
@@ -788,7 +561,7 @@ function EditorContent() {
                                   }}
                                 >
                                   <span>{item.keyword}</span>
-                                  <span style={{ fontSize: 'var(--text-small)', opacity: 0.85, fontWeight: 800 }}>({score})</span>
+                                  <span style={{ fontSize: 'var(--text-small)', opacity: 0.85, fontWeight: 800 }}>({itemScore})</span>
                                 </button>
                               );
                             })}
@@ -809,15 +582,15 @@ function EditorContent() {
                               position: 'absolute', inset: 0, display: 'flex', alignItems: 'center',
                               justifyContent: 'center', fontSize: 'var(--text-small)', fontWeight: 900, color: css.text
                             }}>
-                              {activeAnalysis.analysis.score}
+                              {score}
                             </div>
                           </div>
                           <div>
                             <span style={{ fontSize: 'var(--text-small)', fontWeight: 800, color: scoreColor, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                              {activeAnalysis.analysis.score >= 80 ? 'Good SEO' : activeAnalysis.analysis.score >= 50 ? 'Needs Improvement' : 'Poor SEO'}
+                              {score >= 80 ? 'Good SEO' : score >= 50 ? 'Needs Improvement' : 'Poor SEO'}
                             </span>
                             <p style={{ fontSize: 'var(--text-small)', color: css.muted, margin: '2px 0 0', lineHeight: 1.35 }}>
-                              Your page matches {activeAnalysis.analysis.score}% of basic optimization checkmarks.
+                              Your page passed {activeAnalysis.analysis.categories.basic.concat(activeAnalysis.analysis.categories.additional, activeAnalysis.analysis.categories.title, activeAnalysis.analysis.categories.content).filter((check: any) => check.passed).length} of {activeAnalysis.analysis.categories.basic.concat(activeAnalysis.analysis.categories.additional, activeAnalysis.analysis.categories.title, activeAnalysis.analysis.categories.content).length} measurable SEO checks.
                             </p>
                           </div>
                         </div>

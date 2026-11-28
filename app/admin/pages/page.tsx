@@ -3,107 +3,7 @@ import { useState, useEffect } from 'react';
 import { Plus, Search, Edit2, Trash2, Eye, X, Layers, AlertCircle, CheckCircle2, Globe, EyeOff, FileText, CheckCheck, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import adminStyles from '@/components/admin/AdminCommon.module.css';
-
-function calculateWordCount(content: string): number {
-  if (!content) return 0;
-  let textContent = '';
-  if (typeof document !== 'undefined') {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
-    textContent = tempDiv.textContent || tempDiv.innerText || '';
-  } else {
-    textContent = content.replace(/<[^>]*>/g, ' ');
-  }
-  return textContent.trim().split(/\s+/).filter(Boolean).length;
-}
-
-function getFallbackKeyword(title: string, slug: string): string {
-  const cleanTitle = title.toLowerCase();
-  const cleanSlug = slug.toLowerCase();
-
-  if (cleanTitle.includes('dp-600')) return 'DP-600';
-  if (cleanTitle.includes('dp-700')) return 'DP-700';
-  if (cleanTitle.includes('dp-800')) return 'DP-800';
-  if (cleanTitle.includes('microsoft fabric') || cleanSlug.includes('fabric')) return 'Microsoft Fabric';
-  if (cleanTitle.includes('power bi') || cleanSlug.includes('power-bi')) return 'Power BI';
-  if (cleanTitle.includes('columnstore')) return 'Columnstore Indexes';
-  if (cleanTitle.includes('sql server') || cleanSlug.includes('sql-server')) return 'SQL Server';
-  if (cleanTitle.includes('sql') || cleanSlug.includes('sql')) return 'SQL';
-  if (cleanTitle.includes('n8n') || cleanSlug.includes('n8n')) return 'n8n';
-  if (cleanTitle.includes('next.js') || cleanSlug.includes('nextjs')) return 'Next.js';
-  if (cleanTitle.includes('ai agent') || cleanTitle.includes('ai-agent') || cleanSlug.includes('ai-agent')) return 'AI Agents';
-  if (cleanTitle.includes('generative ai') || cleanTitle.includes('gen ai')) return 'Generative AI';
-  if (cleanTitle.includes('compound ai')) return 'Compound AI Systems';
-  if (cleanTitle.includes('ai') || cleanSlug.includes('ai')) return 'AI';
-  if (cleanTitle.includes('python') || cleanSlug.includes('python')) return 'Python';
-  if (cleanTitle.includes('prompt architecture')) return 'Prompt Architecture';
-  if (cleanTitle.includes('context compression')) return 'Context Compression';
-  if (cleanTitle.includes('intent mapping')) return 'Intent Mapping';
-  if (cleanTitle.includes('data mesh') || cleanSlug.includes('data-mesh')) return 'Data Mesh';
-  if (cleanTitle.includes('data privacy')) return 'Data Privacy';
-  if (cleanTitle.includes('dashboard') || cleanSlug.includes('dashboard')) return 'Dashboard';
-  if (cleanTitle.includes('tableau') || cleanSlug.includes('tableau')) return 'Tableau';
-  if (cleanTitle.includes('saas') || cleanSlug.includes('saas')) return 'SaaS';
-  if (cleanTitle.includes('wordpress') || cleanSlug.includes('wordpress')) return 'WordPress';
-  if (cleanTitle.includes('keyboard') || cleanSlug.includes('keyboard')) return 'Keyboard';
-
-  const words = title.split(/\s+/).filter(w => {
-    const lw = w.toLowerCase();
-    return lw.length > 2 && !['the', 'and', 'for', 'with', 'your', 'how', 'why', 'what', 'here', 'from'].includes(lw);
-  });
-  if (words.length >= 2) {
-    return words.slice(0, 2).join(' ');
-  }
-  return title;
-}
-
-function calculateSeoScore(title: string, slug: string, content: string, excerpt: string, keyword: string, isFallback: boolean = true) {
-  if (!keyword) return { score: 0 };
-
-  let earnedPoints = 0;
-  let maxPoints = 0;
-  
-  const kw = keyword.toLowerCase().trim();
-  const cleanTitle = title.toLowerCase();
-  const cleanSlug = slug.toLowerCase();
-  
-  let textContent = '';
-  if (typeof document !== 'undefined') {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
-    textContent = tempDiv.textContent || tempDiv.innerText || '';
-  } else {
-    textContent = content.replace(/<[^>]*>/g, '');
-  }
-  const cleanContent = textContent.toLowerCase();
-  const cleanExcerpt = excerpt.toLowerCase();
-  const wordCount = textContent.trim().split(/\s+/).filter(Boolean).length;
-  
-  const addCheck = (category: 'basic' | 'additional' | 'title' | 'content', id: string, label: string, passed: boolean, pts: number) => {
-    maxPoints += pts;
-    if (passed) earnedPoints += pts;
-  };
-
-  const kwInTitle = cleanTitle.includes(kw);
-  addCheck('basic', 'title_kw', 'Focus keyword in SEO title', kwInTitle, 15);
-
-  const formattedKwSlug = kw.replace(/\s+/g, '-');
-  const kwInSlug = isFallback ? true : cleanSlug.includes(formattedKwSlug);
-  addCheck('basic', 'slug_kw', 'Focus keyword in URL slug', kwInSlug, 10);
-
-  const kwInExcerpt = isFallback ? true : cleanExcerpt.includes(kw);
-  addCheck('basic', 'excerpt_kw', 'Focus keyword in meta description', kwInExcerpt, 10);
-
-  const kwCount = (cleanContent.match(new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
-  const kwDensity = wordCount > 0 ? (kwCount / wordCount) * 100 : 0;
-  addCheck('basic', 'kw_density', 'Focus Keyword Density', kwDensity >= 0.8 && kwDensity <= 2.5, 10);
-
-  addCheck('content', 'word_count', 'Content Word Count', wordCount >= 600, 15);
-
-  return {
-    score: maxPoints > 0 ? Math.round((earnedPoints / maxPoints) * 100) : 0,
-  };
-}
+import { analyzeSeoContent, countSeoWords } from '@/lib/admin/seo-analysis';
 
 export default function PagesManager() {
   const [pages, setPages] = useState<any[]>([]);
@@ -198,13 +98,18 @@ export default function PagesManager() {
   };
 
   const processedPages = pages.map(page => {
-    const wordCount = calculateWordCount(page.content);
-    const keyword = getFallbackKeyword(page.title, page.slug);
-    const seoResult = calculateSeoScore(page.title, page.slug, page.content, page.excerpt || '', keyword);
+    const analysis = analyzeSeoContent({
+      title: page.title,
+      slug: page.slug,
+      content: page.content,
+      excerpt: page.excerpt || '',
+      keyword: page.focusedKeyword || '',
+      otherKeywords: pages.filter((other) => other.id !== page.id).map((other) => other.focusedKeyword || ''),
+    });
     return {
       ...page,
-      wordCount,
-      seoScore: seoResult.score,
+      wordCount: analysis.wordCount,
+      seoScore: analysis.score,
     };
   });
 
@@ -236,7 +141,7 @@ export default function PagesManager() {
   });
 
   const publishedCount = pages.filter(p => p.published).length;
-  const totalWords = pages.reduce((acc, p) => acc + calculateWordCount(p.content), 0);
+  const totalWords = pages.reduce((acc, p) => acc + countSeoWords(p.content, p.excerpt || ''), 0);
 
   return (
     <div className={adminStyles.page}>
@@ -453,17 +358,17 @@ export default function PagesManager() {
                         </span>
                       </td>
                       <td className={adminStyles.td} style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 500, color: 'var(--text)' }}>
-                        {page.wordCount} words
+                          {page.wordCount.toLocaleString()} words
                       </td>
                       <td className={adminStyles.td}>
                         <span style={{ 
                           display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-small)', fontWeight: 600,
-                          background: page.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)', 
-                          color: page.seoScore >= 80 ? '#34d399' : page.seoScore >= 60 ? '#fbbf24' : '#f87171', 
-                          border: `1px solid ${page.seoScore >= 80 ? 'rgba(16,185,129,0.25)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`, 
+                          background: page.seoScore === null ? 'var(--surface2)' : page.seoScore >= 80 ? 'rgba(16,185,129,0.1)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
+                          color: page.seoScore === null ? 'var(--muted)' : page.seoScore >= 80 ? '#34d399' : page.seoScore >= 60 ? '#fbbf24' : '#f87171',
+                          border: `1px solid ${page.seoScore === null ? 'var(--border)' : page.seoScore >= 80 ? 'rgba(16,185,129,0.25)' : page.seoScore >= 60 ? 'rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.25)'}`,
                           padding: '2px 8px', borderRadius: 999
                         }}>
-                          {page.seoScore}/100
+                          {page.seoScore === null ? 'Set focus keyword' : `${page.seoScore}/100`}
                         </span>
                       </td>
                       <td className={adminStyles.td}>
