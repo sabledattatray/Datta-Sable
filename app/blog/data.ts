@@ -56,8 +56,10 @@ import { microsoftFabricVsDatabricks2026Post } from "./posts/microsoft-fabric-vs
 import { pl300VsDp600VsDp700MicrosoftCertificationGuide2026Post } from "./posts/pl-300-vs-dp-600-vs-dp-700-microsoft-certification-guide-2026";
 import { cybersecurityCloudSecurityGuide2026Post } from "./posts/cybersecurity-cloud-security-guide-2026";
 import { sqlWindowFunctionsExplainedGuidePost } from "./posts/sql-window-functions-explained-guide";
+import { buildingEnterpriseMcpServersPost } from "./posts/building-enterprise-mcp-servers";
 import { apacheIcebergVsDeltaLakeUniformGuide2026Post } from "./posts/apache-iceberg-vs-delta-lake-uniform-guide-2026";
 export const posts = [
+  buildingEnterpriseMcpServersPost,
   apacheIcebergVsDeltaLakeUniformGuide2026Post,
   microsoftFabricFreeCertificationVoucher2026Post,
   sqlWindowFunctionsExplainedGuidePost,
