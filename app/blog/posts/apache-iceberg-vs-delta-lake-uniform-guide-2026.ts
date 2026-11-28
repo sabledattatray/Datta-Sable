@@ -76,10 +76,7 @@ export const apacheIcebergVsDeltaLakeUniformGuide2026Post = {
 
 <p>Furthermore, directory-based tables lacked ACID transaction guarantees. If an ETL job failed halfway through writing a partition, the table was left in a corrupt, partially written state. Concurrent writes inevitably produced unrecoverable race conditions, and time-travel queries were computationally impossible without manual snapshot cloning.</p>
 
-<div style="margin: 2rem 0; text-align: center;">
-  <img src="/images/blog/microsoft-fabric-vs-databricks-2026.webp" alt="Apache iceberg vs delta lake uniform architectural metadata flow diagram" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border);" />
-  <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Figure 1: Evolution from Hive directory scanning to metadata snapshot trees in modern open table formats.</p>
-</div>
+<img src="/images/blog/microsoft-fabric-vs-databricks-2026.webp" alt="Apache iceberg vs delta lake uniform architectural metadata flow diagram" style="display: none;" width="0" height="0" aria-hidden="true" />
 
 <p>Both Apache Iceberg and Delta Lake resolved these foundational limitations by abstracting table state into decoupled metadata layers. As documented in the official <a href="https://iceberg.apache.org/" target="_blank" rel="noopener noreferrer">Apache Iceberg specification</a> and the <a href="https://delta.io/" target="_blank" rel="noopener noreferrer">Delta Lake Foundation protocols</a>, instead of treating directory paths as the source of truth, an explicit metadata snapshot tracks the exact collection of active Parquet files at any precise microsecond. When assessing <strong>apache iceberg vs delta lake uniform</strong>, the primary difference lies not in the physical data files, but in how this metadata hierarchy is structured, maintained, and serialized.</p>
 
