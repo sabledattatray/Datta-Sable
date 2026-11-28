@@ -10,8 +10,14 @@ type BlogPost = (typeof staticPosts)[number] | Record<string, any>;
 function serializeDbPost(dbPost: any) {
   if (!dbPost) return null;
   let image = dbPost.image;
-  if (image === '/uploads/media-11925dcb-9fc1-4366-848c-8a71917d5179.webp') {
-    image = '/images/blog/power-bi-calculation-groups-in-2026.webp';
+  // Fallback to static post canonical image if DB image is missing or is an ephemeral /uploads/ link
+  if (!image || image.startsWith('/uploads/')) {
+    const staticPost = staticPosts.find((p) => p.slug === dbPost.slug);
+    if (staticPost && (staticPost as any).image && !(staticPost as any).image.startsWith('/uploads/')) {
+      image = (staticPost as any).image;
+    } else if (image === '/uploads/media-11925dcb-9fc1-4366-848c-8a71917d5179.webp') {
+      image = '/images/blog/power-bi-calculation-groups-in-2026.webp';
+    }
   }
   return {
     ...dbPost,

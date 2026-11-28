@@ -24,6 +24,25 @@ function Metadata({ post, card = false }: { post: BlogListingPost; card?: boolea
   return <div className={styles.metadata}>{duration && <span className={card ? styles.mobileDuration : undefined}><Clock3 size={12} />{duration}</span>}{date && <time dateTime={date.dateTime}>{date.label}</time>}</div>;
 }
 
+function BlogCardImage({ src, alt, fill, priority, sizes }: { src?: string | null; alt: string; fill?: boolean; priority?: boolean; sizes?: string }) {
+  const [currentSrc, setCurrentSrc] = useState(src || '/images/editorial-placeholder.svg');
+  return (
+    <Image
+      src={currentSrc}
+      alt={alt}
+      fill={fill}
+      priority={priority}
+      sizes={sizes}
+      unoptimized={Boolean(currentSrc && (currentSrc.startsWith('/images/') || currentSrc.startsWith('/uploads/') || currentSrc.endsWith('.svg')))}
+      onError={() => {
+        if (currentSrc !== '/images/editorial-placeholder.svg') {
+          setCurrentSrc('/images/editorial-placeholder.svg');
+        }
+      }}
+    />
+  );
+}
+
 export default function BlogList({ initialPosts, initialCategory = 'All', showHero = true }: { initialPosts: BlogListingPost[]; initialCategory?: string; showHero?: boolean }) {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState(initialCategory);
@@ -74,12 +93,12 @@ export default function BlogList({ initialPosts, initialCategory = 'All', showHe
       </aside>
       <div className={styles.main}>
         {!isFiltered && sort === 'newest' && featured && <section className={styles.featuredSection} aria-labelledby="featured-label"><div className={styles.sectionLabel} id="featured-label"><span><Sparkles size={13} /> IN THE SPOTLIGHT</span><span>THE LATEST PERSPECTIVE</span></div><Link href={`/blog/${featured.slug}`} className={styles.featured}>
-          <div className={styles.featureImage}><Image src={featured.image || '/images/editorial-placeholder.svg'} alt="" fill priority sizes="(max-width: 800px) 90vw, 45vw" /><span className={styles.featureBadge}><BookOpen size={12} /> FEATURED READ</span></div><div className={styles.featureBody}><span className={styles.category}>{featured.category}</span><h2>{featured.title}</h2><p>{featured.excerpt}</p><Metadata post={featured} /><span className={styles.featureAction}>Read the story <ArrowUpRight size={17} /></span></div>
+          <div className={styles.featureImage}><BlogCardImage src={featured.image} alt={featured.title} fill priority sizes="(max-width: 800px) 90vw, 45vw" /><span className={styles.featureBadge}><BookOpen size={12} /> FEATURED READ</span></div><div className={styles.featureBody}><span className={styles.category}>{featured.category}</span><h2>{featured.title}</h2><p>{featured.excerpt}</p><Metadata post={featured} /><span className={styles.featureAction}>Read the story <ArrowUpRight size={17} /></span></div>
         </Link></section>}
         <section aria-labelledby="library-title">
           <div className={styles.toolbar}><div><span className={styles.eyebrow}>THE COLLECTION</span><h2 id="library-title">{category === 'All' ? 'All perspectives' : category}<span aria-live="polite" aria-atomic="true">{filtered.length} {filtered.length === 1 ? 'article' : 'articles'}</span></h2></div><label className={styles.sort}>Sort by<select aria-label="Sort articles" value={sort} onChange={event => { setSort(event.target.value as Sort); setVisible(12); }}><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="shortest">Shortest reads</option><option value="title">Title A–Z</option></select></label></div>
           {isFiltered && <div className={styles.activeFilters}><span>Filtered by</span>{category !== 'All' && <button type="button" onClick={() => chooseCategory('All')}>{category}<X size={12} /></button>}{search.trim() && <button type="button" onClick={() => { setSearch(''); setVisible(12); }}>“{search.trim()}”<X size={12} /></button>}{duration !== 'all' && <button type="button" onClick={() => { setDuration('all'); setVisible(12); }}>{duration === 'quick' ? 'Quick reads' : 'Deeper dives'}<X size={12} /></button>}</div>}
-          <div className={styles.grid}>{filtered.slice(0, visible).map(post => <article key={post.slug}><Link href={`/blog/${post.slug}`} className={styles.card} aria-labelledby={`blog-${post.slug}`}><div className={styles.cardImage}>{formatReadTime(post.readTime) && <span className={styles.imageDuration}><Clock3 size={11} />{formatReadTime(post.readTime)}</span>}<div className={styles.thumbnail}><Image src={post.image || '/images/editorial-placeholder.svg'} alt="" fill sizes="(max-width: 540px) 108px, (max-width: 1200px) 28vw, 190px" /></div><span className={styles.imageArrow} aria-hidden="true"><ArrowUpRight size={15} /></span></div><div className={styles.cardBody}><span className={styles.category}>{post.category}</span><h3 id={`blog-${post.slug}`}>{post.title}</h3><p>{post.excerpt}</p><div className={styles.cardFooter}><Metadata post={post} card /><span className={styles.readLabel}>Read article</span></div></div></Link></article>)}</div>
+          <div className={styles.grid}>{filtered.slice(0, visible).map(post => <article key={post.slug}><Link href={`/blog/${post.slug}`} className={styles.card} aria-labelledby={`blog-${post.slug}`}><div className={styles.cardImage}>{formatReadTime(post.readTime) && <span className={styles.imageDuration}><Clock3 size={11} />{formatReadTime(post.readTime)}</span>}<div className={styles.thumbnail}><BlogCardImage src={post.image} alt={post.title} fill sizes="(max-width: 540px) 108px, (max-width: 1200px) 28vw, 190px" /></div><span className={styles.imageArrow} aria-hidden="true"><ArrowUpRight size={15} /></span></div><div className={styles.cardBody}><span className={styles.category}>{post.category}</span><h3 id={`blog-${post.slug}`}>{post.title}</h3><p>{post.excerpt}</p><div className={styles.cardFooter}><Metadata post={post} card /><span className={styles.readLabel}>Read article</span></div></div></Link></article>)}</div>
           {!filtered.length && <div className={styles.empty}><Search size={30} strokeWidth={1.2} /><h3>No reads found. Yet.</h3><p>Try a broader search or explore a different topic.</p><button type="button" onClick={reset}>Explore all articles <ArrowRight size={15} /></button></div>}
           {filtered.length > 0 && <div className={styles.pagination}><span role="status">Showing {Math.min(visible, filtered.length)} of {filtered.length} articles</span>{visible < filtered.length ? <button type="button" onClick={() => setVisible(value => value + 12)}>Discover more articles <ArrowRight size={15} /></button> : <span>You’re all caught up.</span>}</div>}
         </section>
