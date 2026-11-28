@@ -5,6 +5,17 @@ import Link from 'next/link';
 import adminStyles from '@/components/admin/AdminCommon.module.css';
 import { analyzeSeoContent, countSeoWords } from '@/lib/admin/seo-analysis';
 
+const KEYWORD_STOP_WORDS = new Set([
+  'the', 'and', 'for', 'with', 'your', 'how', 'why', 'what', 'here', 'from',
+  'about', 'into', 'this', 'that', 'are', 'you', 'our', 'all', 'more',
+]);
+
+function inferFocusKeyword(title: string): string {
+  const terms = title.match(/[\p{L}\p{N}+#.]+/gu) ?? [];
+  const relevant = terms.filter(term => term.length > 2 && !KEYWORD_STOP_WORDS.has(term.toLocaleLowerCase()));
+  return relevant.slice(0, 2).join(' ') || terms.slice(0, 1).join(' ');
+}
+
 export default function PagesManager() {
   const [pages, setPages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -87,10 +98,17 @@ export default function PagesManager() {
             const excerpt = doc.querySelector('meta[name="description"]')?.getAttribute('content')
               || doc.querySelector('meta[property="og:description"]')?.getAttribute('content')
               || '';
-            const content = routeResponse.ok ? (doc.querySelector('main')?.innerHTML
-              || doc.querySelector('[role="main"]')?.innerHTML
-              || doc.querySelector('.container')?.innerHTML
-              || doc.body.innerHTML) : '';
+            // Some pages have an empty outer <main> and put their actual page
+            // content in a nested main/article/container. Select the most
+            // populated semantic content region instead of trusting the first
+            // matching element returned by querySelector.
+            const contentRegion = Array.from(doc.querySelectorAll('main, article, [role="main"], .container'))
+              .map(element => ({ element, textLength: element.textContent?.trim().length ?? 0 }))
+              .filter(candidate => candidate.textLength > 0)
+              .sort((a, b) => b.textLength - a.textLength)[0]?.element;
+            const content = routeResponse.ok
+              ? (contentRegion?.innerHTML || doc.body.innerHTML)
+              : '';
             const robots = doc.querySelector('meta[name="robots"]')?.getAttribute('content') || '';
             const noindex = /noindex/i.test(robots);
             const analysis = analyzeSeoContent({ title, slug: path.split('/').filter(Boolean).pop() || '', content, excerpt, keyword });
@@ -158,7 +176,9 @@ export default function PagesManager() {
       slug: page.slug,
       content: page.content,
       excerpt: page.excerpt || '',
-      keyword: page.focusedKeyword || '',
+      // Keep the Pages list useful for older entries that predate the
+      // explicit focus-keyword field, while preferring a saved keyword.
+      keyword: page.focusedKeyword?.trim() || inferFocusKeyword(page.title),
       otherKeywords: pages.filter((other) => other.id !== page.id).map((other) => other.focusedKeyword || ''),
     });
     return {
