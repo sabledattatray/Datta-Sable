@@ -17,7 +17,7 @@ import ExecutiveDashboard from '@/components/dashboards/ExecutiveDashboard';
 const scopes = [{ id: 'built', label: 'Interactive work', icon: LayoutDashboard }, { id: 'excel', label: 'Excel workbooks', icon: FileSpreadsheet }, { id: 'reference', label: 'Community references', icon: Layers }, { id: 'concept', label: 'Concept studies', icon: Grid2X2 }];
 const industries = ['All industries', 'Sales', 'Operations', 'Finance', 'HR', 'Marketing', 'Analytics'];
 const tools = ['All tools', 'Excel', 'Power BI', 'Tableau', 'Looker', 'Python'];
-function previewImage(item: DashboardItem) { return item.id === 7 ? '/images/showcase/pipeline-interface.png' : item.image; }
+function previewImage(item: DashboardItem) { return item.id === 7 ? '/images/showcase/pipeline-interface.webp' : item.image; }
 function toolLabel(item: DashboardItem) { return item.tool === 'Internal' ? 'Web dashboard' : item.tool; }
 function title(item: DashboardItem) { return item.title.replace(/ — Executive Sales Dashboard$/, '').replace(/ & FinTech Group/, ' FinTech'); }
 function workbook(item: DashboardItem) { return EXCEL_PROJECTS.find(project => dashboardDestination(item) === `/dashboards/${project.slug}`); }
