@@ -2730,6 +2730,25 @@ export default function AdminBlog() {
                     )}
                   </div>
                   <input id="featured-image-input" type="file" hidden accept="image/*" onChange={handleImageUpload} />
+                  <div style={{ marginTop: 8 }}>
+                    <input
+                      type="text"
+                      placeholder="Or image path (e.g. /images/blog/...)"
+                      value={formData.image || ''}
+                      onChange={e => setFormData(f => ({ ...f, image: e.target.value }))}
+                      style={{
+                        width: '100%',
+                        background: css.inputBg,
+                        border: `1px solid ${css.border}`,
+                        color: css.text,
+                        padding: '6px 10px',
+                        borderRadius: 8,
+                        fontSize: '0.78rem',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                      }}
+                    />
+                  </div>
                   {formData.image && (
                     <button
                       onClick={() => setFormData(f => ({ ...f, image: '' }))}
