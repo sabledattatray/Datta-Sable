@@ -8,7 +8,7 @@ export const buildingEnterpriseMcpServersPost = {
   "readTime": 26,
   "color": "var(--accent)",
   "icon": "🤖",
-  "image": undefined,
+  "image": "/images/blog/building-enterprise-mcp-servers.webp",
   "tags": undefined,
   "published": true,
   "blocks": {
