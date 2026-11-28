@@ -19,9 +19,23 @@ function serializeDbPost(dbPost: any) {
       image = '/images/blog/power-bi-calculation-groups-in-2026.webp';
     }
   }
+
+  let blocks = dbPost.blocks;
+  if (typeof blocks === 'string') {
+    try {
+      const parsed = JSON.parse(blocks);
+      blocks = Array.isArray(parsed) ? parsed : undefined;
+    } catch {
+      blocks = undefined;
+    }
+  } else if (!Array.isArray(blocks)) {
+    blocks = undefined;
+  }
+
   return {
     ...dbPost,
     image,
+    blocks,
     createdAt: dbPost.createdAt instanceof Date ? dbPost.createdAt.toISOString() : dbPost.createdAt,
     updatedAt: dbPost.updatedAt instanceof Date ? dbPost.updatedAt.toISOString() : dbPost.updatedAt,
   };

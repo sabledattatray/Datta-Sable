@@ -9,7 +9,7 @@ interface BlockRendererProps {
 }
 
 export default function BlockRenderer({ blocks }: BlockRendererProps) {
-  if (!blocks || blocks.length === 0) return null;
+  if (!Array.isArray(blocks) || blocks.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto py-8">

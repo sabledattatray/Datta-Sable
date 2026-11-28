@@ -350,7 +350,7 @@ export default function BlogPostContent({ post, relatedPosts }: { post: Post; re
         </div>
 
         <div ref={contentRef} className={articleStyles.content}>
-        {post.blocks && post.blocks.length > 0 ? (
+        {Array.isArray(post.blocks) && post.blocks.length > 0 ? (
           <BlockRenderer blocks={post.blocks} />
         ) : (
           <div className="blog-content" suppressHydrationWarning>

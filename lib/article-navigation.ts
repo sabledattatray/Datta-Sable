@@ -17,7 +17,7 @@ function isContentsTitle(text: string) {
 // Normalize the rendered copy only. Stored articles and their authored anchors
 // are retained; the navigator is derived from the headings actually displayed.
 export function prepareArticleNavigation<T extends ArticleInput>(post: T): T & { headings: ArticleHeading[] } {
-  const hasBlocks = Boolean(post.blocks?.length);
+  const hasBlocks = Array.isArray(post.blocks) && post.blocks.length > 0;
   let rawContent = post.content || '';
 
   // Only parse markdown if the content is NOT already HTML.
