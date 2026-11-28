@@ -6,7 +6,11 @@ export function extractSeoText(content: string): string {
   if (!content) return '';
   const $ = load(content, null, false);
   $('script, style, noscript, template').remove();
-  return $('body').text().replace(/\s+/g, ' ').trim();
+  $('br').replaceWith(' ');
+  $('address, article, blockquote, div, dl, fieldset, footer, form, h1, h2, h3, h4, h5, h6, header, li, main, nav, ol, p, section, table, tr, ul').each((_, element) => {
+    $(element).prepend(' ').append(' ');
+  });
+  return $.root().text().replace(/\s+/g, ' ').trim();
 }
 
 export function countSeoWords(content: string, excerpt = ''): number {
