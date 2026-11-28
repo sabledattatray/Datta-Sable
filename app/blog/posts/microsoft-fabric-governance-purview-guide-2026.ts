@@ -1,9 +1,9 @@
 export const microsoftFabricGovernancePurviewGuide2026Post = {
   id: "cmqr_fabric_gov_2026_08_16",
   slug: "microsoft-fabric-governance-purview-guide-2026",
-  title: "Microsoft Fabric Governance & Purview: Enterprise Security & Compliance Guide 2026",
+  title: "Microsoft Fabric Governance & Purview: Complete 2026 Enterprise Security & Compliance Guide",
   category: "Architecture & BI",
-  excerpt: "The complete enterprise guide to securing and governing Microsoft Fabric. Learn how to design domains, implement Zero Trust, and integrate Microsoft Purview.",
+  excerpt: "Implement Microsoft Fabric Governance in 2026 with Microsoft Purview, automated data lineage, sensitivity labels, and federated domain ownership.",
   date: "August 16, 2026",
   readTime: 45,
   color: "var(--accent)",

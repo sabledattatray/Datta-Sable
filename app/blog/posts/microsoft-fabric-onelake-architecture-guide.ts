@@ -1,9 +1,9 @@
 export const microsoftFabricOneLakeArchitectureGuidePost = {
   id: "microsoft-fabric-onelake-architecture-guide",
   slug: "microsoft-fabric-onelake-architecture-guide",
-  title: "OneLake Explained: The Complete Microsoft Fabric OneLake Architecture Guide (2026 Edition)",
+  title: "Microsoft Fabric OneLake Architecture Guide: The Complete 2026 Enterprise Blueprint",
   category: "Microsoft Fabric",
-  excerpt: "The definitive architecture guide to Microsoft Fabric OneLake — covering Delta Lake, V-Order, Shortcuts, Mirroring, Direct Lake, security, governance, migration, troubleshooting, and certification tips for DP-600 and DP-700.",
+  excerpt: "The complete Microsoft Fabric OneLake Architecture guide for 2026: master single-copy data architecture, cross-cloud shortcuts, and Delta Lake security.",
   readTime: 42,
   date: "July 15, 2026",
   icon: "🌊",

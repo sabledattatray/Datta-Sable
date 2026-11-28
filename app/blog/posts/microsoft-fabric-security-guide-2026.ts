@@ -1,9 +1,9 @@
 export const microsoftFabricSecurityGuide2026Post = {
   id: "cmw_sec_1029384756abcdef",
   slug: "microsoft-fabric-security-guide-2026",
-  title: "Microsoft Fabric Security Guide (2026): Private Endpoints, Zero Trust, Networking & Enterprise Best Practices",
+  title: "Microsoft Fabric Security Guide 2026: Complete Zero Trust & Enterprise Best Practices Blueprint",
   category: "Architecture",
-  excerpt: "The definitive enterprise guide on Microsoft Fabric Security. Learn how to architect Zero Trust, configure Private Endpoints, implement Row-Level Security (RLS), and integrate Microsoft Entra ID for compliance and governance.",
+  excerpt: "Your Microsoft Fabric Security Guide 2026: master Private Endpoints, OneLake data access control, managed VNets, and Zero Trust enterprise architecture.",
   date: "August 4, 2026",
   readTime: 55,
   color: "var(--accent)",

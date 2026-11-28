@@ -1,9 +1,9 @@
 export const microsoftFabricArchitectureExplained2026Post = {
   id: "microsoft-fabric-architecture-explained-2026",
   slug: "microsoft-fabric-architecture-explained-2026",
-  title: "Microsoft Fabric Architecture Explained: The Complete 2026 Guide",
+  title: "Microsoft Fabric Architecture Explained: The Complete 2026 Enterprise Guide",
   category: "Architecture & BI",
-  excerpt: "A complete technical guide to Microsoft Fabric architecture: OneLake, Lakehouse, Warehouse, Direct Lake, governance, security, and certification paths.",
+  excerpt: "Microsoft Fabric Architecture Explained for 2026: comprehensive deep dive into OneLake, Direct Lake, Synapse compute engines, and unified governance.",
   date: "June 27, 2026",
   icon: "🏗️",
   image: "/images/blog/microsoft-fabric-architecture-explained-2026.webp",

@@ -1,9 +1,9 @@
 export const caseStudyPrecisionPromptArchitectureConsistencyPost = {
   id: "case-study-prompt-precision-2026",
   slug: "case-study-precision-prompt-architecture-consistency",
-  title: "Case Study: Achieving 99.8% Output Consistency via Precision Prompt Architecture™",
+  title: "Precision Prompt Architecture Consistency: High-Performance 99.8% Enterprise Case Study (2026)",
   category: "Case Study",
-  excerpt: "How we eliminated hallucination and stabilized output schemas for a high-volume content automation pipeline using proprietary structural constraints.",
+  excerpt: "Achieve 99.8% output consistency with our Precision Prompt Architecture Consistency enterprise guide and real-world case study for 2026 AI systems.",
   date: "May 14, 2026",
   icon: "📊",
   image: "/images/blog/case_study_prompt_architecture.webp",
